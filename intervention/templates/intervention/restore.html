@@ -1,0 +1,14 @@
+<html>
+<body>
+  <!--NOTE: This should mirror content in /media/js/static_auth/admin.js:writeDocument() -->
+  <h2>Save this file</h2>
+  <p>From the <b>File</b> menu, click <b>Save Page As</b> and make sure the file location is on your portable drive which you will upload from the computer with an Internet connection.  It will save as <b>restore.html</b> but you can change this to something else.
+  </p>
+  <p>If for some reason, you need to restore a backup, put this file in the My Documents folder naming it <b>restore.html</b>, and run the Restore shortcut from your Desktop.  Then you can go into the admin interface and restore from there.</p>
+  <h2>Data</h2>
+  <div id="data">{{restoral_data}}</div>
+  {%if restoral_data%}
+  <script type="text/javascript">globalStorage[location.hostname]["BACKUP_{{date_string}}"] = document.getElementById("data").innerHTML;globalStorage[location.hostname]["RESTORE"]="BACKUP_{{date_string}}";</script>
+  {%endif%}
+</body>
+</html>

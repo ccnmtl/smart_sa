@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {{ block.super }}
+
+    {% if intervention %}
+
+    <!--div>{{ intervention }}</div-->
+    
+     {% if perms.intervention.add_clientsession %}
+        <div>
+	  <a class="admin_link" href="/intervention_admin/{{intervention.id}}/">Edit</a>
+	</div>
+      {% endif %}
+      
+    <div id="titlearea"> 
+      <h1>Session List</h1>
+    </div> 
+    <div id="content-singlecolumn">
+        <p class="instructions">Click on a session number to continue with the intervention.  The suggested next session is highlighted.</p>
+        
+        {% if intervention.clientsession_set.count %}        
+	  {% for session in intervention.clientsession_set.all %}
+	    <a id="session{{session.id }}" class="subitem session session_off" href="session{{session.id }}_agenda">
+	      <span class="titletext">  Session: {{ session.short_title }}:<br /> {{session.long_title}}</span>
+	    </a>
+	  {% endfor %}
+
+	  <!--
+	      <a id="session2" class="session_next" 
+	                       href="session2_agenda.html">
+	      Session 2
+	      </a>
+	      <a id="session3" class="session_complete" 
+	                       href="session3_agenda.html">
+	      Session 3
+	      </a>
+	  -->
+
+	{% else  %}
+	  <p>No sessions defined for this intervention.</p>
+	{% endif %}
+	<script type="text/javascript">
+	  if (typeof(Intervention) != 'undefined') {
+	      Intervention.init_intervention();
+	  }
+	</script>
+    </div>	
+     
+    <div id="messaging">
+      {{messages}}
+    </div>	
+
+    {% else %}
+      <p>No intervention defined...</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block breadcrumbs %}
+
+
+
+    {%if session %}
+      <li><a href="intervention{{session.intervention.id}}_intro">Session List</a></li>
+    {%endif%}  
+{% endblock %}
+
+
+{% block content %}
+    {{ block.super }}
+    
+     {% if perms.intervention.add_clientsession %}
+        <div>
+	  <a class="admin_link" href="/intervention_admin/session/{{session.id}}/">Edit session activities</a>
+	  <a class="admin_link" href="/intervention_admin/{{session.intervention.id}}/#session{{session.id}}">Edit session title/overview</a>
+	</div>
+      {% endif %}
+    
+    
+    
+    {% if session %}
+    <div id="titlearea"> 
+      <h1 id="session{{session.id}}" class="sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h1>
+       <h2>Agenda</h2>
+    </div> 
+    <div id="content-singlecolumn">
+      {% if session.introductory_copy %}
+	<p class="instructions">{{session.introductory_copy|safe}}</p><hr />
+      {% endif %}
+      {% if activities %}       
+        <p class="instructions">
+	  Click on an activity to continue with this session.  
+	  The suggested next activity is highlighted.
+	</p>
+
+        {% for activity in activities %}
+	   <a id="activity{{activity.id }}" class="subitem activity session_off" href="activity{{activity.id }}_overview">
+	     <span class="titletext"> Activity {{forloop.counter}}: <br />{{ activity.short_title }}</span>
+	    </a>
+        {% endfor %}
+	<script type="text/javascript">
+	  if (typeof(Intervention) != 'undefined') {
+	      Intervention.init_session();
+	  }
+	</script>
+
+       {% else  %}
+         <p>No activities defined for this session.</p>
+       {% endif %}
+       <br style="clear: both;" />
+<hr />
+         <p>
+	   <a id="complete" class="off_right" 
+	      href="intervention{{session.intervention.id}}_intro"
+	      onclick="Intervention.complete_session()"
+	      >
+	     Complete Session
+	   </a>
+	 </p>
+     
+<br style="clear: both;" /> 
+       <div id="messaging">
+	 Your wish is my command
+       </div>	
+    </div>
+{% else %}
+    <p>No session defined.</p>
+{% endif %}
+
+{% endblock %}

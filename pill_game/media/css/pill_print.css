@@ -1,0 +1,99 @@
+body
+{
+	background-color: #fff;
+	font-family: "lucida grande";
+}
+
+h2 {display: none;}
+
+img#the_background { display: none; }
+
+img#pillbox { display: none; }
+
+img#day_image { display: none; }
+
+.pill_image { display: none; }
+
+img#night_image { display: none; }
+
+#masthead #logo a img { border: 0; }
+
+#masthead #topnav { display: none; }
+
+#navbar { display: none; }
+
+a#complete { display: none; }
+
+.cent_or { display: none; }
+
+a.off { display: none; }
+
+#container-content { margin: 1em; }
+
+#logo {border-bottom: 1px solid #ccc;}
+select
+{
+	background-color: #fff;
+	border: 0;
+}
+
+/* Box that goes behind each pill on the left side of page 3: */
+.page_3_pill_info
+{
+	font-weight: bold;
+	border: 1px red solid;
+	margin-left: -140px;
+	width: 200px;
+	display: inline;
+}
+
+/*NOTE: the actual left and top values are still set in the javascript, relative to the placement of each pill.
+
+    To change them, edit:
+
+    box_offset_from_pill_x = -40;
+    box_offset_from_pill_y = -40;
+   
+    in Pill.prototype.draw_box function toward the bottom of file drop_into_bins.js    
+    
+*/
+
+/* Box enclosing dosage (600 mg.) and frequency (Every 24 hrs.) on the left side of page 3: */
+.page_3_pill_info_fact
+{
+	font-weight: normal;
+}
+
+.mg_fact:before { content: ""; }
+
+.mg_fact:after { content: " mg."; }
+
+/*Dosage offset relatve to the page_3_pill_info that encloses it:*/
+.mg_fact
+{
+	left: -15px;
+	top: 23px;
+}
+
+.hrs_fact:before { content: "Every "; }
+
+.hrs_fact:after { content: " hrs."; }
+
+/*Frequency offset relatve to the page_3_pill_info that encloses it:*/
+.hrs_fact
+{
+	left: -15px;
+	top: 50px;
+}
+
+
+select#day_pills_time {display: none;}
+
+select#night_pills_time {display: none;}
+
+select#day_pills_time_print, select#night_pills_time_print  {color: #000; font-weight: bold;}
+
+select#night_pills_time {display: none;}
+
+#nightarv {color: blue;}
+#dayarv {color: green;}

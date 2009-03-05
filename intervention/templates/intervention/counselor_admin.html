@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block js %}
+  <script type="text/javascript" src="{{relative_root}}site_media/js/static_auth/ecmascrypt_v003.js"></script>
+  <script type="text/javascript" src="{{relative_root}}site_media/js/static_auth/admin.js"></script>
+  <script type="application/x-javascript" src="chrome://global/content/contentAreaUtils.js"></script>
+  <script type="text/javascript">
+    var encrypt_key = '{{hexkey}}';
+    var encrypt_iv = '{{hexiv}}';
+  </script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <h2>Add Clients</h2>
+    <form name="mass_user_add" id="mass_user_add" action="javascript:UserAdmin.multi_user_add()">
+      <h3>Format: "Last Name, First Name, Patient #,Gender"
+       <br />Example:
+      </h3>
+      
+      <pre>
+Smith,John,42,M
+...</pre>
+      <textarea name="users" rows="5" cols="60">Smith, John, 42,M
+Day, Liz, 18,F
+Duveen, Schuyler, 30,M
+Rowe, Jess, 100,F
+</textarea>
+      <input type="submit" value="Save" />
+      <input type="button" onclick="EphemeralSession.destroyEverything()"
+	     value="destroy all account data on this computer" />
+    </form>
+
+    <h2>Clients</h2>
+    <input id="show_clients_button" type="button" onclick="UserAdmin.showClients()" value="Show Clients" />
+    <div id="clients">
+      <ul id="client-list"></ul>
+      <div>
+	Disabling a client, means the login will fail, 
+	but the data will continue to be stored on the laptop.
+      </div>
+    </div>
+    <form name="single_user_add" id="single_user_add" action="javascript:UserAdmin.addUser()">
+      <ul>
+	<li>
+	  <label for="firstname">First Name</label>
+	  <input type="text" name="firstname" />
+	</li>
+	<li>
+	  <label for="lastname">Last Name</label>
+	  <input type="text" name="lastname" />
+	</li>
+	<li>
+	  <label for="patientnumber">Patient Number</label>
+	  <input type="text" name="patientnumber" />
+	</li>
+	<li>
+	  <label for="gender">Gender</label>
+	  <input id="gender_m" type="radio" name="gender" value="M" />
+	  <label for="gender_m">Male</label>
+	  <input id="gender_f" type="radio" name="gender" value="F" />
+	  <label for="gender_m">Female</label>
+	</li>
+	<li>
+	  <input type="submit" value="Add" />
+	</li>
+      </ul>
+    </form>
+
+
+    <h2>File Backup</h2>
+    <form name="html_form" action="javascript:showElement('backing-up-please-wait');UserAdmin.save_to_file()">
+      <input type="submit" value="Create Backup File" />
+      <br />
+      <span id="backing-up-please-wait" style="display:none;">
+	Backing up data, please wait. .
+	<iframe id="filebackup" width="0" height="0"></iframe>
+      </span>
+    </form>
+    <!--
+    <h2>Direct Internet Backup</h2>
+    <form name="backup_form" action="javascript:UserAdmin.send_to_server()">
+      <div id="mother-server">{{request.META.HTTP_HOST}}</div>
+      <p>Only usable with Internet access</p>
+
+      <input type="submit" value="Backup to server" />
+    </form>
+    -->
+    <h2>Restore from backup</h2>
+    <input id="show_backups" type="button" value="Show available backups" onclick="UserAdmin.showRestorals()" />
+    <div id="restorals" style="display:none;">
+      <div id="no-restorals">No available backups to restore.</div>
+      <ul id="restoral-list">
+      </ul>
+    </div>
+
+
+
+{% endblock %}

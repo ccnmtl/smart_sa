@@ -1,0 +1,50 @@
+{% extends "intervention/game.html" %}
+{% block game_js %}
+          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/MochiKit.js"></script>
+          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/DragAndDrop.js"></script> 
+          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/pills_2.js"></script> 
+          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/bucket.js"></script> 
+<!--
+          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}ssnmtree_game/js/ssnmtree.js"></script> 
+-->
+{% endblock %}
+{% block game_css %}
+  <!--
+  <link href="{{INTERVENTION_MEDIA}}ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
+-->
+{% endblock %}
+
+
+{% block game_content %}
+
+        <!-- Background -->
+        <!-- Move the background, everything else in the picture moves along with it, as it's defined as the "background" of the pillbox and the buckets. -->
+        <img src="{{INTERVENTION_MEDIA}}pill_game/images/background.jpg" id="the_background" height = "500" width ="500"/>
+        
+        <img src="{{INTERVENTION_MEDIA}}pill_game/images/pillbox.png" id="pillbox" />
+
+
+        <span id = "image_root" >{{INTERVENTION_MEDIA}}pill_game/</span>
+        <span class = "pill_images_container" id="pill_images_container" ></span>
+        <!-- DAY BUCKET -->
+        <span
+            class="bucket"
+            id="day"
+            background_element_id="the_background"
+            image_offset_x="350" image_offset_y="5"
+            image_path = "{{INTERVENTION_MEDIA}}pill_game/images/bucket_day.png"
+        />
+        
+        
+        <!-- NIGHT BUCKET -->        
+        <span
+            class="bucket"
+            id="night"
+            background_element_id="the_background"
+            image_offset_x="350" image_offset_y="225" 
+            image_path   = "{{INTERVENTION_MEDIA}}pill_game/images/bucket_eve.png"
+        />
+   
+{% endblock %}
+
+

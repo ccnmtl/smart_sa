@@ -1,0 +1,279 @@
+body
+{
+	background-color: #fff;
+	font-family: "lucida grande";
+}
+
+h2 {display: none;}
+
+
+#masthead #logo a img { border: 0; }
+
+#masthead #topnav { display: none; }
+
+#navbar { display: none; }
+
+a#complete { display: none; }
+
+.cent_or { display: none; }
+
+a.off { display: none; }
+
+#container-content { margin: 1em; }
+
+table { display: none; }
+
+#next-game-part-link { display: none; }
+
+
+
+
+
+
+/*DEFAULTS*/
+
+.issue { display: none; }
+
+#isthisanissue { display: none; }
+
+#formworkthrough { display: none; }
+
+.issuetext
+{
+	font-size: 13px;
+	text-align: center;
+	margin: 10px;
+	font-weight: bold;
+	font-style: oblique;
+	color: #666;
+}
+
+.issuetext:before { content: '\201C'; }
+
+.issuetext:after { content: '\201D'; }
+
+.issueimage { text-align: center; }
+
+.issueimage img
+{
+	width: 306px;
+	height: 280px;
+	background-image: url(../images/ps_issue1.png);
+}
+
+.issue.currentissue { text-align: center; }
+
+/*PART I: My Issues*/
+
+.my_issues .currentissue,
+.my_issues #isthisanissue { display: block; }
+
+/*PART II: Choose One*/
+.choose_one .issue.picked
+{
+	/* This controls all of the listed issues in part 2*/
+	width: 159px;
+	height: 200px;
+	display: inline-block;
+	text-align: center;
+	margin: 5px;
+	position: relative;
+}
+
+.choose_one .picked,
+.problemsolve_one .chosen-issue { position: relative; }
+
+/*we need to flip .issuetext and .issueimage */
+.choose_one .picked .issuetext,
+.problemsolve_one  .issuetext
+{
+	position: absolute;
+	bottom: 6px;
+	height: 3em;
+	font-size: 11px;
+	font-weight: normal;
+	display: block;
+	left: -5px;
+	max-width: 150px;
+}
+
+.choose_one .picked .issueimage,
+.problemsolve_one .issueimage
+{
+	position: absolute;
+	top: 0px;
+}
+
+.choose_one .picked img,
+.problemsolve_one img
+{
+	width: 160px;
+	height: 146px;
+	background-image: url(../images/ps_issue1_sm.png);
+}
+
+.choose_one .completed .issuetext:after
+{
+	display: block;
+	content: "done: click to review";
+	margin-top: 10px;
+	color: red;
+}
+
+.chosen-issue { }
+
+.chosen-issue .issuetext { }
+
+#issue-list { margin-left: 15px; }
+
+/* PART IV: Problem-Solve One */
+.problemsolve_one #issue-list
+{
+	float: left;
+	width: 160px;
+	padding: 20px;
+	background-color: #999;
+	height: 455px;
+	margin: 0 20px 0 -20px;
+	text-align: center;
+}
+
+.problemsolve_one .chosen-issue
+{
+	width: 100%;
+	background-color: #CCCCCC;
+	padding: 10px;
+}
+
+.problemsolve_one .chosen-issue .issuetext { }
+
+.problemsolve_one .chosen-issue .issueimage
+{
+	top: 0px;
+	left: 0px;
+}
+
+.problemsolve_one #formworkthrough { display: block; }
+
+.problemsolve-field
+{
+	display: none;
+	width: 100%;
+	padding: 10px 0 15px 0;
+}
+
+/*  These rules are for the program */
+div.problemsolve-field:target,
+#gamephase:target div.problemsolve-field { display: block; }
+#gamephase:target #videobox { display: none; }
+#gamephase:target #form-continue { display: none; }
+
+#formworkthrough  label
+{
+	display: block;
+	width: 100%;
+	font-weight: bold;
+	font-size: 2em;
+}
+
+#formworkthrough label:first-letter { color: orange; }
+#formworkthrough input,
+#formworkthrough textarea { width: 300px; }
+
+/*Liz: make it beautiful!*/
+input.issuetext { top: 139px; }
+
+.choose_one .picked.chosen-issue
+{
+	background-image: url(../images/chosen_issue.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+
+.problemsolve_one .chosen-issue
+{
+	background-image: url(../images/chosen_issue.png);
+	background-repeat: no-repeat;
+	display: block;
+	height: 180px;
+	width: 139px;
+	background-color: #999;
+	text-align: center;
+	margin-left: 10px;
+}
+
+#issueyesno
+{
+	background-color: #ccc;
+	text-transform: uppercase;
+	margin: 5px 20px 20px 115px;
+	border: 1px solid #999;
+	padding: 1px 5px 7px 5px;
+	text-align: center;
+	width: 302px;
+}
+
+input.yes
+{
+	background-image: url(../images/yes_button.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	background-color: #ccc;
+	width: 72px;
+	height: 27px;
+	display: inline-block;
+	color: #fff;
+	border: none;
+	margin: -2px 5px 2px 0px;
+	cursor: pointer;
+}
+
+input.no
+{
+	background-image: url(../images/no_button.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	background-color: #ccc;
+	width: 72px;
+	height: 27px;
+	display: inline-block;
+	color: #fff;
+	border: none;
+	margin: -2px 5px 2px 0px;
+	cursor: pointer;
+}
+
+a.return { margin: 15px; }
+
+#game-content
+{
+	overflow: auto;
+	height: auto;
+	min-height: 455px;
+}
+
+#videobox
+{
+	text-align: center;
+	margin-top: 5px;
+}
+
+
+a.problemsolve-continue
+{
+	background-image: url(../../images/button_short_gray.png);
+	width: 190px;
+	height: 35px;
+	display: block;
+	margin-left: 260px;
+	text-align: center;
+	color: #fff;
+	text-decoration: none;
+	background-repeat: no-repeat;
+	padding-top: 10px;
+}
+
+a.problemsolve-continue:hover
+{
+	background-image: url(../../images/button_short_gray_over.png);
+}

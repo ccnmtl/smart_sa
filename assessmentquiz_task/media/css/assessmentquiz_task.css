@@ -1,0 +1,49 @@
+#game-content
+{ 
+  overflow:auto;
+ }
+
+h3
+{ 
+  margin-bottom:0;
+ }
+
+.inrange
+{ 
+  background-color:yellow;
+ }
+
+.note 
+{ 
+  font-weight:bold;
+  margin-left: -20px;
+ }
+
+ol.a { 
+       counter-reset:mycounter -1;
+       padding-left:20px;
+}
+
+ol.a li:before
+{ 
+  display:marker;
+  content:"(" counter(mycounter,decimal) ")""";
+  counter-increment: mycounter;
+ }
+ol.a li { 
+          list-style:none;
+ }
+
+#interpretation_range .script
+{ 
+  display:none; /*initial state*/
+
+  background-color:white;
+  padding:1em 1em 1em 4em;
+  border:1px solid black;
+ }
+
+#interpretation_range li.inrange .script
+{ 
+  display:block;
+ }

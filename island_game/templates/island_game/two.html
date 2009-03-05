@@ -1,0 +1,137 @@
+{% extends "intervention/game.html" %}
+
+{% block game_js %}
+
+	<script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/MochiKit.js"></script> 
+	<script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/DragAndDrop.js"></script> 
+	<script type="text/javascript" src="{{INTERVENTION_MEDIA}}island_game/js/slider.js"></script> 
+	<script type="text/javascript" src="{{INTERVENTION_MEDIA}}island_game/js/island_two.js"></script> 
+	
+	<style type="text/css">
+	
+	/*this style dims out all of the non-adherence slider components */
+	#label-oi, #label-vl, #label-cd, #bad1_moving, #bad1_fixed, #bad2_moving, #bad2_fixed, #good2_moving, #good2_fixed
+	{
+		filter: alpha(opacity=50);
+		opacity: 0.5;
+		-moz-opacity: 0.5;
+	}
+	
+	/*this style chokes the island graphic back up into the content div and prevents overlap */
+	img#dude_fixed
+	{
+		width: 545px;
+		height: 455px;
+	}
+	</style>
+		 
+{% endblock %}
+
+{% block game_content %}
+
+	<div style="position:relative;height:465px;width:100%">
+	
+        <!-- SKY -->
+        
+        <!-- Move the sky, everything else in the picture moves along with it, as it's defined as the "background" of the sliders on this page. -->
+        
+        <img src="{{INTERVENTION_MEDIA}}island_game/images/backround_part1.jpg" id="sky" />
+        
+		<p style="font-size: 10px; left:20px; top:-5px;position:absolute;z-index:1;color:#444444">
+			adherence
+		</p>
+		<p id="label-oi" style="font-size: 10px; left:81px; top:-5px;position:absolute;z-index:1;color:#444444">
+			oi
+		</p>
+		<p id="label-vl" style="font-size: 10px; left:102px; top:-5px;position:absolute;z-index:1;color:#444444">
+			viral load
+		</p>
+		<p id="label-cd" style="font-size: 10px; left:160px; top:-5px;position:absolute;z-index:1;color:#444444">
+			cd4
+		</p>
+		<p style="left:250px; top:400px;position:absolute;z-index:1;color:#FFFFFF">
+			ON ARVS
+		</p>
+		
+		<div id="media-base" data-image-base="{{INTERVENTION_MEDIA}}island_game/"></div>
+		
+			<!-- DUDE -->
+			<span
+				id="dude"
+				class="slider"
+				background_element_id="sky"
+				image_offset_x="0" image_offset_y="0"
+				start_offset_x="180" start_offset_y="70" end_offset_x="400" end_offset_y="10"
+				min_value = "0" max_value = "10" starting_value = "10"
+				fixed_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/island_part2.png"
+				moving_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/woman/xhosawoman1.gif"
+			/>
+			
+			<!-- WATER -->
+			<span
+				id="water"
+				class="slider"
+				background_element_id="sky" 
+				image_offset_x="0" image_offset_y="150"
+				start_offset_x="0" start_offset_y="250"
+				end_offset_x="0" end_offset_y="130"
+				min_value = "0" max_value = "10" starting_value = "0"
+				moving_image_path  = "{{INTERVENTION_MEDIA}}island_game/images/water.png" 
+			/>
+			
+			
+			<!-- FOUR SLIDERS: -->
+			
+			<!-- this controls the rest of them : -->
+			
+			<span
+				id="good"
+				class="slider" 
+				background_element_id="sky" 
+				image_offset_x="40" image_offset_y="20"
+				start_offset_x="40" start_offset_y="120"
+				end_offset_x="40" end_offset_y="20"
+				min_value = "0" max_value = "10" starting_value = "10"
+				fixed_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/slider_bar.png"
+				moving_image_path  = "{{INTERVENTION_MEDIA}}island_game/images/slider_handle.png"
+			/>
+			
+			<span
+				id="bad1"
+				class="slider"
+				background_element_id="sky" 
+				image_offset_x="80" image_offset_y="20"
+				start_offset_x="80" start_offset_y="120"
+				end_offset_x="80" end_offset_y="20"
+				min_value = "0" max_value = "10" starting_value = "0"
+				fixed_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/slider_bar.png"
+				moving_image_path  = "{{INTERVENTION_MEDIA}}island_game/images/slider_handle.png"
+			/>
+			
+			<span
+				id="bad2"
+				class="slider"
+				background_element_id="sky" 
+				image_offset_x="120" image_offset_y="20"
+				start_offset_x="120" start_offset_y="120"
+				end_offset_x="120" end_offset_y="20"
+				min_value = "0" max_value = "10" starting_value = "0"
+				fixed_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/slider_bar.png"
+				moving_image_path  = "{{INTERVENTION_MEDIA}}island_game/images/slider_handle.png"
+			/>
+			
+			<span
+				id="good2"
+				class="slider" 
+				background_element_id="sky" 
+				image_offset_x="160" image_offset_y="20"
+				start_offset_x="160" start_offset_y="120"
+				end_offset_x="160" end_offset_y="20"
+				min_value = "0" max_value = "10" starting_value = "10"
+				fixed_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/slider_bar.png"
+				moving_image_path  = "{{INTERVENTION_MEDIA}}island_game/images/slider_handle.png"
+			/>
+			
+		</div>
+	
+{% endblock %}

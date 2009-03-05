@@ -1,0 +1,159 @@
+{% extends "intervention/game.html" %}
+
+{% block game_js %}
+  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}assessmentquiz_task/js/quiz.js"></script> 
+{% endblock %}
+{% block game_css %}
+  <link href="{{INTERVENTION_MEDIA}}assessmentquiz_task/css/assessmentquiz_task.css" rel="stylesheet" type="text/css" /-->
+{% endblock %}
+
+{% block game_content %}
+   <div>
+     <p>
+       During the past month, that is, from <span id="monthago">last month</span> to yesterday,
+       about how often did you feel:
+     </p>
+     <form id="assessmentquiz">
+       <input type="hidden" name="section" value="kten" />
+       <table>
+	 <thead>
+	   <td colspan="2"></td>
+	   <th>None of the time
+	   </th>
+	   <th>A little of the time
+	   </th>
+	   <th>Some of the time
+	   </th>
+	   <th>Most of the time
+	   </th>
+	   <th>All of the time
+	   </th>
+	 </thead>
+	 <tbody>
+	   <tr>
+	     <td>1.</td>
+	     <td>Tired out for no good reason?
+	     </td>
+	     <td><input name="q1" type="radio" value="1" />1</td>
+	     <td><input name="q1" type="radio" value="2" />2</td>
+	     <td><input name="q1" type="radio" value="3" />3</td>
+	     <td><input name="q1" type="radio" value="4" />4</td>
+	     <td><input name="q1" type="radio" value="5" />5</td>
+	   </tr>
+	   <tr>
+	     <td>2.</td>
+	     <td>Nervous?
+	     </td>
+	     <td><input name="q2" type="radio" value="1" />1</td>
+	     <td><input name="q2" type="radio" value="2" />2</td>
+	     <td><input name="q2" type="radio" value="3" />3</td>
+	     <td><input name="q2" type="radio" value="4" />4</td>
+	     <td><input name="q2" type="radio" value="5" />5</td>
+	   </tr>
+	   <tr>
+	     <td>3.</td>
+	     <td>So nervous that nothing could calm you down?
+	     </td>
+	     <td><input name="q3" type="radio" value="1" />1</td>
+	     <td><input name="q3" type="radio" value="2" />2</td>
+	     <td><input name="q3" type="radio" value="3" />3</td>
+	     <td><input name="q3" type="radio" value="4" />4</td>
+	     <td><input name="q3" type="radio" value="5" />5</td>
+	   </tr>
+	   <tr>
+	     <td>4.</td>
+	     <td>Hopeless?
+	     </td>
+	     <td><input name="q4" type="radio" value="1" />1</td>
+	     <td><input name="q4" type="radio" value="2" />2</td>
+	     <td><input name="q4" type="radio" value="3" />3</td>
+	     <td><input name="q4" type="radio" value="4" />4</td>
+	     <td><input name="q4" type="radio" value="5" />5</td>
+	   </tr>
+	   <tr>
+	     <td>5.</td>
+	     <td>Restless or fidgety?
+	     </td>
+	     <td><input name="q5" type="radio" value="1" />1</td>
+	     <td><input name="q5" type="radio" value="2" />2</td>
+	     <td><input name="q5" type="radio" value="3" />3</td>
+	     <td><input name="q5" type="radio" value="4" />4</td>
+	     <td><input name="q5" type="radio" value="5" />5</td>
+	   </tr>
+	   <tr>
+	     <td>6.</td>
+	     <td>So restless you could not sit still?
+	     </td>
+	     <td><input name="q6" type="radio" value="1" />1</td>
+	     <td><input name="q6" type="radio" value="2" />2</td>
+	     <td><input name="q6" type="radio" value="3" />3</td>
+	     <td><input name="q6" type="radio" value="4" />4</td>
+	     <td><input name="q6" type="radio" value="5" />5</td>
+	   </tr>
+	   <tr>
+	     <td>7.</td>
+	     <td>Sad or depressed?
+	     </td>
+	     <td><input name="q7" type="radio" value="1" />1</td>
+	     <td><input name="q7" type="radio" value="2" />2</td>
+	     <td><input name="q7" type="radio" value="3" />3</td>
+	     <td><input name="q7" type="radio" value="4" />4</td>
+	     <td><input name="q7" type="radio" value="5" />5</td>
+	   </tr>
+	   <tr>
+	     <td>8.</td>
+	     <td>So depressed that nothing could cheer you up?
+	     </td>
+	     <td><input name="q8" type="radio" value="1" />1</td>
+	     <td><input name="q8" type="radio" value="2" />2</td>
+	     <td><input name="q8" type="radio" value="3" />3</td>
+	     <td><input name="q8" type="radio" value="4" />4</td>
+	     <td><input name="q8" type="radio" value="5" />5</td>
+	   </tr>
+	   <tr>
+	     <td>9.</td>
+	     <td>That everything was an effort?
+	     </td>
+	     <td><input name="q9" type="radio" value="1" />1</td>
+	     <td><input name="q9" type="radio" value="2" />2</td>
+	     <td><input name="q9" type="radio" value="3" />3</td>
+	     <td><input name="q9" type="radio" value="4" />4</td>
+	     <td><input name="q9" type="radio" value="5" />5</td>
+	   </tr>
+	   <tr>
+	     <td>10.</td>
+	     <td>Worthless?
+	     </td>
+	     <td><input name="q10" type="radio" value="1" />1</td>
+	     <td><input name="q10" type="radio" value="2" />2</td>
+	     <td><input name="q10" type="radio" value="3" />3</td>
+	     <td><input name="q10" type="radio" value="4" />4</td>
+	     <td><input name="q10" type="radio" value="5" />5</td>
+	   </tr>
+	 </tbody>
+       </table>
+     </form>
+     <div id="interpretation">
+       <h3>Interpretation of Total Score</h3>
+       <ul id="interpretation_range">
+	 <li id="r10">10-19: No significant distress
+	 </li>
+	 <li id="r20">20-24: Mild distress consistent with mild depression and/or anxiety
+	   <div class="script">
+	     "It seems like you are experiencing some stress. Have you ever thought about talking to a mental health professional? Talking to one might help you with your stress. If you're interested, I can give you information to schedule an appointment with a mental health professional. Would you like that?"
+	   </div>
+	 </li>
+	 <li id="r25">25-29: Moderate distress consistent with moderate depression and/or anxiety
+	   <div class="script">
+	     "It seems like you are experiencing a lot of stress. Have you ever thought about talking to a mental health professional? Talking to one might help you with your stress. Would you like information about how you can schedule an appointment with a mental health professional?"
+	   </div>
+	 </li>
+	 <li id="r30">30-50: Severe distress consistent with severe depression and/or anxiety
+	   <div class="script">
+	     "It seems like you're really under a lot of stress and having some difficulties. I'm going to give you a referral to a mental health professional who can help you. You don't have to contact him or her, but I highly recommend it because he or she could really help you feel better." 
+	   </div>
+	 </li>
+       </ul>
+     </div>
+   </div>
+{% endblock %}

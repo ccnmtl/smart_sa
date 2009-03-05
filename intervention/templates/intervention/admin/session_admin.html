@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block js %}
+  <script type="text/javascript" src="/site_media/js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+  <script type="text/javascript" src="/site_media/js/simple_tinymce.js"></script>
+{% endblock %}
+
+
+{% block breadcrumbs %}
+    {%if clientsession %}
+      <li><a href="/intervention_admin/{{clientsession.intervention.id}}/">Edit Session List</a></li>
+    {%endif%}  
+{% endblock %}
+
+
+{% block content %}
+    {{ block.super }}
+
+    {% if messages %}
+      <div class="messaging">
+	 {{messages}}
+      </div>
+    {% endif %}
+{% if clientsession %}
+    <div>
+      <h1>Edit Session {{clientsession.index}}: {{clientsession.long_title}}</h1>
+      <a class="admin_link"  href="/session{{clientsession.id}}_agenda">See client view of session</a>
+      <a class="admin_link"  href="#new" class="jumpnew">Jump to new activity</a>
+    </div>
+    <div>  <h2>Jump to Activities:</h2></div>
+    {% if clientsession.activity_set.count %}
+        <ul>
+        {% for activity in clientsession.activity_set.all %}
+            <li><a href = "/intervention_admin/activity/{{activity.id }}/">{{ activity }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else  %}
+        <p>No activities defined for this session.</p>
+    {% endif %}
+   
+     <h2>Activity details:</h2>
+   <form id="subitem-management" method="POST" action="">
+      <input type="submit" value="Save" />
+    {{ formset.management_form }}
+      <ul class="form-list">
+        {% for form in formset.forms %}
+	  <li {%if form.instance.id %}
+ 	        id="activity{{form.instance.id}}"
+	      {%else%}
+	        id="new"
+	      {%endif%}
+	      >
+	    <ul class="field-list">
+	      {{ form.as_ul }}
+	    </ul>
+	  </li>
+        {% endfor %}
+      </ul>
+      <input type="submit" value="Save" />
+    </form>
+
+
+{% else %}
+    <p>No session defined...</p>
+{% endif %}
+{% endblock %}

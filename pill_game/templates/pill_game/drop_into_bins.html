@@ -1,0 +1,152 @@
+{% extends "intervention/game.html" %}
+
+{% block game_js %}
+
+  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/MochiKit.js"></script>
+  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/DragAndDrop.js"></script> 
+  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/pill_common.js"></script> 
+  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/medication_details.js"></script> 
+  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/drop_into_bins.js"></script> 
+  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/bucket.js"></script> 
+  
+{% endblock %}
+
+{% block game_css %}
+<link href="{{INTERVENTION_MEDIA}}pill_game/css/pill.css" rel="stylesheet" type="text/css" media="screen" />
+<link id="print_css_link" href="{{INTERVENTION_MEDIA}}pill_game/css/pill_print.css" rel="stylesheet" type="text/css" media="print" />
+
+{% endblock %}
+
+{% block game_content %}
+
+        <!-- Background -->
+        
+        <!-- Move the background, everything else in the picture moves along with it, as it's defined as the "background" of the pillbox and the buckets. -->
+        <!--
+		<p style="font-size: 10px; color:#444; margin: 0; padding: 0; text-align: center;">
+			Drag your pills to the containers. Set your times when you are done.
+		</p>
+        -->
+        
+        <img src="{{INTERVENTION_MEDIA}}pill_game/images/background.jpg" id="the_background" height = "450" width ="500"/>
+        
+        <img src="{{INTERVENTION_MEDIA}}pill_game/images/pillbox.png" id="pillbox" background="the_background" x_offset_from_the_background="5" y_offset_from_the_background="5" />
+
+
+        <span id = "image_root" >{{INTERVENTION_MEDIA}}pill_game/</span>
+        
+        <span class = "pill_images_container" id="pill_images_container" ></span>
+        
+        
+        <!-- DAY BUCKET -->
+        <span
+            id="day"
+            class="bucket"
+            background="the_background"
+            x_offset_from_the_background="344"
+            y_offset_from_the_background="10"
+            image_path = "{{INTERVENTION_MEDIA}}pill_game/images/bucket_day.png"
+        >
+        </span>
+        
+   
+        <select id="day_pills_time"
+            background="day_image"
+            x_offset_from_day_image="64"
+            y_offset_from_day_image="180"
+        >
+            <option name="00:00" value="00:00">00:00</option>
+            <option name="01:00" value="01:00">01:00</option>
+            <option name="02:00" value="02:00">02:00</option>
+            <option name="03:00" value="03:00">03:00</option>
+            <option name="04:00" value="04:00">04:00</option>
+            <option name="05:00" value="05:00">05:00</option>
+            <option name="06:00" value="06:00">06:00</option>
+            <option name="07:00" value="07:00">07:00</option>
+            <option name="08:00" value="08:00">08:00</option>
+            <option name="09:00" value="09:00">09:00</option>
+            <option name="10:00" value="10:00">10:00</option>
+            <option name="11:00" value="11:00">11:00</option>
+        </select>
+        
+       <!--print version-->
+       <h3 class="arv" id="dayarv">Day ARVs</h2>
+       <div id="day_pill_info_text">
+       Inline Pill Info
+       </div>
+       <label for="day_pills_time_print">Time:
+       <select id="day_pills_time_print" size="1" disabled>
+            <option name="00:00" value="00:00">00:00</option>
+            <option name="01:00" value="01:00">01:00</option>
+            <option name="02:00" value="02:00">02:00</option>
+            <option name="03:00" value="03:00">03:00</option>
+            <option name="04:00" value="04:00">04:00</option>
+            <option name="05:00" value="05:00">05:00</option>
+            <option name="06:00" value="06:00">06:00</option>
+            <option name="07:00" value="07:00">07:00</option>
+            <option name="08:00" value="08:00">08:00</option>
+            <option name="09:00" value="09:00">09:00</option>
+            <option name="10:00" value="10:00">10:00</option>
+            <option name="11:00" value="11:00">11:00</option>
+        </select>
+        </label>
+       <!--print version-->
+        
+        <!-- NIGHT BUCKET -->        
+        <span
+            class="bucket"
+            id="night"
+            background="the_background"
+            x_offset_from_the_background="344"
+            y_offset_from_the_background="235"
+            image_path   = "{{INTERVENTION_MEDIA}}pill_game/images/bucket_eve.png"
+        >        
+        </span>
+        
+                
+        <select
+            id="night_pills_time"
+            background="night_image"
+            x_offset_from_night_image="64"
+            y_offset_from_night_image="180"
+        >
+            <option name="12:00" value="12:00">12:00</option>
+            <option name="13:00" value="13:00">13:00</option>
+            <option name="14:00" value="14:00">14:00</option>
+            <option name="15:00" value="15:00">15:00</option>
+            <option name="16:00" value="16:00">16:00</option>
+            <option name="17:00" value="17:00">17:00</option>
+            <option name="18:00" value="18:00">18:00</option>
+            <option name="19:00" value="19:00">19:00</option>
+            <option name="20:00" value="20:00">20:00</option>
+            <option name="21:00" value="21:00">21:00</option>
+            <option name="22:00" value="22:00">22:00</option>
+            <option name="23:00" value="23:00">23:00</option>
+            <option name="24:00" value="24:00">24:00</option>
+        </select>
+        
+       <!--print version-->
+       <h3 class="arv" id="nightarv">Night ARVs</h2>
+       <div id="night_pill_info_text">
+       Inline Pill Info
+       </div>
+       <label for="night_pills_time_print">Time:
+       <select id="night_pills_time_print" size="1" disabled>
+            <option name="12:00" value="12:00">12:00</option>
+            <option name="13:00" value="13:00">13:00</option>
+            <option name="14:00" value="14:00">14:00</option>
+            <option name="15:00" value="15:00">15:00</option>
+            <option name="16:00" value="16:00">16:00</option>
+            <option name="17:00" value="17:00">17:00</option>
+            <option name="18:00" value="18:00">18:00</option>
+            <option name="19:00" value="19:00">19:00</option>
+            <option name="20:00" value="20:00">20:00</option>
+            <option name="21:00" value="21:00">21:00</option>
+            <option name="22:00" value="22:00">22:00</option>
+            <option name="23:00" value="23:00">23:00</option>
+            <option name="24:00" value="24:00">24:00</option>
+        </select>
+        </label>
+   
+{% endblock %}
+

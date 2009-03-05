@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block js %}
+   <script>
+     var game_variables = {{activity.variables|safe}};
+   </script>
+{% endblock %}
+{% block breadcrumbs %}
+    {%if activity %}
+      <li><a href="intervention{{activity.clientsession.intervention.id}}_intro">Session List</a></li>
+    <!--  <li><a href="session{{activity.clientsession.id}}_agenda"
+	     id="session{{activity.clientsession.id}}"
+	     >
+	Session {{ activity.clientsession.index }} Agenda
+      </a></li>-->
+    {%endif%}  
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    
+          {% if perms.intervention.add_clientsession %}
+        <div>
+	  <a class="admin_link" href="/intervention_admin/activity/{{activity.id}}/">Edit Procedure</a>
+	  <a class="admin_link" href="/intervention_admin/session/{{activity.clientsession.id}}/#activity{{activity.id}}">Edit Activity Title/Overview</a>
+	</div>
+      {% endif %}
+
+    {% if activity %}
+    <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
+
+    <div id="titlearea"> 
+      <h1 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h1>
+        </div> 
+         {%if activity.game %}
+      <div id="content-right" >
+	<h2 class="flag">This activity has a client task</h2>
+	{% if activity.pages %}
+	  <p>
+	    {% if not test %}
+	      <a id="tasklink" class="hilite" href="{{relative_root}}.{% url intervention.views.game activity.game,activity.gamepage_set.all.0.id,activity.pages.0 %}">START</a>
+	      <ul id="all-task-pages">
+		{%for taskpage in activity.gamepage_set.all %}
+		<li><a id="taskpage-{{taskpage.page_name}}" 
+		       href="{{relative_root}}.{% url intervention.views.game activity.game,taskpage.id,taskpage.page_name %}">
+		  {{taskpage.page_name}}
+		</a></li>
+		{%endfor%}
+	      </ul>
+	    {%else%}
+	      <a id="tasklink" class="hilite" href="{{relative_root}}.{% url intervention.views.game activity.game,activity.pages.0 %}">START</a>
+	      <ul id="all-task-pages">
+		{%for taskpage in activity.pages %}
+		<li><a id="taskpage-{{taskpage}}" 
+		       href="{{relative_root}}.{% url intervention.views.game activity.game,taskpage %}">
+		  {{taskpage}}
+		</a></li>
+		{%endfor%}
+	      </ul>
+	    {%endif%}	    
+	  </p>
+
+	{%endif%}
+      </div>      
+      {%endif%}
+      <script>
+	if (typeof(Intervention) != 'undefined') {
+	      Intervention.init_activity();
+	}
+      </script>
+    {% else %}
+      <p>No activity defined.</p>
+    {% endif %}
+
+	
+    <div id="messaging">
+       Your wish is my command
+    </div>	
+     
+     
+
+ 
+          
+    <div id="content-singlecolumn">
+     <h2>Objective(s)</h2>
+        <div class="objective">
+	  {{activity.objective_copy|safe}}
+	</div>
+	<h2>Procedure</h2>
+	{% if not test and activity.instruction_set.count %}
+ 
+	 {% for instruction in activity.instruction_set.all %}
+           <ul>
+	     <li>
+	       {%if instruction.title %}
+	         <h3>{{instruction.title}}</h3> 
+	       {%endif%}
+
+	       {%if instruction.image %}
+	         <img src="{{instruction.image.url}}" />
+		 <br />
+	       {%endif%}
+
+	    <!--   {%if instruction.style %}
+	         <span class="instruction_style">{{instruction.style}}:</span> 
+	       {%endif%}-->
+		 
+	      <div class="{{instruction.style}}"> {{ instruction.instruction_text|safe }}</div>
+	     </li>
+	   </ul>
+	 {% endfor %}
+	{% else  %}
+	  <p>No content instructions defined for this activity.</p>
+	{% endif %}
+	{% if not activity.game %}
+	 <!-- if we have a game, the complete button is on the last game page-->
+      <br />  <hr />
+         <p>
+	   <a id="complete" class="hilite_right" 
+	      href="session{{activity.clientsession.id}}_agenda"
+	      onclick="Intervention.complete_activity()"
+	      >
+	     Complete Activity
+	   </a><br style="clear: both;" /> 
+	 </p>
+	
+	{% endif %}
+ 
+    </div>
+  
+
+{% endblock %}

@@ -1,0 +1,40 @@
+#game-content { background-image: url(../images/background-island.jpg); }
+
+#lifegoalsbox { position: relative; }
+
+#lifegoals label {color: #666; font-size: 10px;}
+
+#goal
+{
+	position: absolute;
+	top: 20px;
+	left: 340px;
+}
+
+#step1
+{
+	position: absolute;
+	top: 280px;
+	left: 20px;
+}
+
+#step2
+{
+	position: absolute;
+	top: 200px;
+	left: 60px;
+}
+
+#step3
+{
+	position: absolute;
+	top: 136px;
+	left: 160px;
+}
+
+#step4
+{
+	position: absolute;
+	top: 80px;
+	left: 240px;
+}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {{ block.super }}
+    {%if errors %}
+      <b style="font-size:14px;color:red;">{{errors}}</b>
+    {%endif%}
+    <h1>Upload Backup File to Server</h1>
+    <p>
+      From the admin screen of your laptop, you should have been able to 
+      save a special 'Backup File,' which you can upload here in
+      case you need to restore it later.
+    </p>
+    <p>
+      The contents of the backup file are encrypted, so no one spying on this
+      connection should be able to read the contents.
+    </p>
+    <form enctype="multipart/form-data" method="POST">
+      <input type="file" name="backup" />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <h2>Previous Backups</h2>
+    <ul>
+    {%for b in backups %}
+      <li>
+	{{b.created}} <a href="restore?id={{b.id}}">download restore file</a>
+      </li>
+    {%endfor%}
+    </ul>
+    <h3>Instructions for restoral</h3>
+    <ol>
+      <li>Save the appropriate download here as <b>restore.html</b></li>
+      <li>Copy it to the laptop, putting it in your "My Documents" folder.  
+      NOTE: You may have to overwrite the current file there
+      </li>
+      <li>Do <b>NOT</b> open the file directly</li>
+      <li>Instead, on your desktop, there is a <b>Restore Masivukeni Data</b> icon on your Desktop.  Double-click that icon.</li>
+      <li>Once the restoral file opens, open Masivukeni from the normal desktop icon.</li>
+      <li>Go to the admin page, and run the restoral</li>
+    </ol>
+
+{% endblock %}

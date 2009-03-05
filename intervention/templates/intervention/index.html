@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {{ block.super }}
+    <ul>
+      <li><a href="/client_login">Login to Masivukeni</a></li>
+
+      <li><h2>For Internet Site</h2>
+        <ul>
+	  <li><a href="/intervention_admin/1/">Administer Intervention Content</a></li>
+	  <li><a href="/intervention_admin/save_backup">Backup and Restore client data</a></li>
+	  <li><a href="/intervention1_intro">Demo</a> (without login or state)</li>
+	  <li><a href="/site_media/selenium/TestRunner.html">Run Selenium Tests</a></li>
+	</ul>
+      </li>
+
+      <li><h2>Desktop Links</h2>
+        <ul>
+	  <li><a href="../../restore.html">Go to restore.html file in "My Documents" to restore a backup</a></li>
+	</ul>
+      </li>
+
+    </ul>
+{% endblock %}

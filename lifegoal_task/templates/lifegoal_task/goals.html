@@ -1,0 +1,29 @@
+{% extends "intervention/game.html" %}
+
+{% block game_js %}
+  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}lifegoal_task/js/goals.js"></script> 
+{% endblock %}
+
+{% block game_css %}
+  <link href="{{INTERVENTION_MEDIA}}lifegoal_task/css/lifegoal.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block game_content %}
+   <div id="lifegoalsbox">
+   
+     <form id="lifegoals">
+ 
+		<div class="step" id="step1"><label>step 1 <input type="text" name="step1" /></label></div>
+		
+		<div class="step" id="step2"><label>step 2 <label><input type="text" name="step2" /></label></div>
+		
+		<div class="step" id="step3"><label>step 3 <label><input type="text"" name="step3" /></label></div>
+		
+		<div class="step" id="step4"><label>step 4 <label><input type="text" name="step4" /></label></div>
+		
+		<div class="step" id="goal"><label>goal <label><input type="text" name="goal" /></label></div>
+       
+     </form>
+     
+   </div>
+{% endblock %}
