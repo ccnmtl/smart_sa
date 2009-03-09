@@ -56,13 +56,17 @@ function Slider (settings) {
     }
     
     
-    //set up our draggable:
-    this.draggable = Draggable (this.moving, { snap : function (x, y) {
-            return sliders[this.slider_id].snap(x, y);
-        }
-    });
-    this.draggable.options.slider_id = this.id
-    this.onchange = this.draggable.options.onchange;
+    this.draggable_by_user = (its("draggable_by_user") != "false")
+	if ( this.draggable_by_user) {
+	    logDebug (this.id + "is draggable by user. Setting up draggable.");
+        //set up our draggable:
+        this.draggable = Draggable (this.moving, { snap : function (x, y) {
+                return sliders[this.slider_id].snap(x, y);
+            }
+        });
+        this.draggable.options.slider_id = this.id
+        this.onchange = this.draggable.options.onchange;
+    }
     
     // set to requested starting value:
     this.set ( this.starting_value);
