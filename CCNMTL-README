@@ -1,3 +1,45 @@
+0. DETAILS/REQUIREMENTS/INSTALLATION
+  #  Project Title: 
+        Multimedia Social Support Intervention: 
+           Adherence to HIV Care in South Africa.
+  # Project Summary: 
+     Intervention intended to support South African people on an HIV drug
+     treatment plan. Intervention will promote adherence to the drug's
+     requirements and coping with side effects. Problem solving to get past
+     barriers to adherence is a major theme. Patients will identify one or
+     more support people to attend some sessions with them. The
+     intervention will use the Social Support Network Map.
+  # Project Page:
+      http://ccnmtl.columbia.edu/portfolio/medicine_and_health/smart_sa.html
+  # Public Code Repository:
+      http://github.com/ccnmtl/smart_sa/tree/master
+  # Public Instance:
+      http://smartsa.ccnmtl.columbia.edu/
+
+  # Requirements:
+      * Python (see http://www.djangoproject.com/ for deployment details)
+                e.g. for Apache mod_wsgi, etc.
+      * Python virtualenv  http://pypi.python.org/pypi/virtualenv
+      * Postgres
+      * Firefox (for client use)
+  # Installation:
+      1. $ python create-ve.py
+         $ python bootstrap.py
+         $ createdb smart_sa #create postgres database
+         $ ./manage.py syncdb
+         $ ./manage.py runserver <IP Address>:80
+
+  # Code Details:
+    This project includes an editor to construct Interventions.  Server
+    logins are required for the administrators of the content.  The final
+    product is meant to live, possibly, as a static copy on a computer
+    with no Internet access.  All client data is stored locally on the
+    hard-drive (by Firefox) using DOMStorage:
+    	       https://developer.mozilla.org/en/DOM/Storage
+    The server can save backup files and deliver restoral files (the same
+    HTML file, actually) for backups made on the client from an local
+    client admin page.
+
 I. Make sure the directory you checked trunk out into is called
 'smart_sa' (not 'smart' or anything else).
   If you do not do this, python will be unable to import things properly that
@@ -10,7 +52,7 @@ II. Deployment:
   2b. run ./static-copy.sh to generate snapshots/Masivukeni.zip which 
      will be extracted in ~/My Documents/ on the client's laptop
 
-III. HOW TO MAKE A GAME
+III. HOW TO DEVELOP A GAME
  A. Start the Django App
    1. ./manage.py startapp myawesome_game #creates directory
    #decent example
