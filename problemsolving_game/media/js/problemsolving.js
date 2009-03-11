@@ -52,6 +52,18 @@
 	    self.intervention.saveState();	
 	}
 
+	if (mode=='choose_one') {
+	    if(!hasAttr(self.game_state,'chosen-issue')) {
+		//not connect, because that can't RETURN FALSE
+		$('next-game-part-link').onclick = function() {
+		    if (!self.game_state['chosen-issue']) {
+			alert('Please select an issue to problem solve.');
+			return false;
+		    }
+		}
+	    }
+	}
+
 	if (mode=='problemsolve_one') {
 	    var workthrough_form = document.forms['workthrough_form'];
 	    if (hasAttr(self.game_state,'chosen-issue')) {
