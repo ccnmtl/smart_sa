@@ -8,7 +8,9 @@
     function loadGoalTask() {
 	workform = $('lifegoals');
 	for (a in goal_state) {
-	    workform.elements[a].value = goal_state[a];
+	    if (hasAttr(workform.elements,a)) {
+		workform.elements[a].value = goal_state[a];
+	    }
 	}
 	connect(workform,'onchange',saveForm);
 	connect(window,'onunload',saveForm);
