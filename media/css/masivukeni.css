@@ -528,11 +528,11 @@ a.session_complete:hover
 	text-align: left;
 	font-size: 13px;
 	color: #fff;
-	margin:  18px 18px 18px 18px;
+	margin:  13px 18px 13px 18px;
 	position: absolute;
 	max-height:3.75em;
-	overflow:hidden;
 	text-transform: capitalize;
+	line-height: 1.25em;
 	
 }
 
@@ -556,7 +556,7 @@ a.session_complete .titletext
 {
 
 	width: 138px;
-	margin:  18px 38px 18px 18px;
+	margin:  13px 38px 13px 18px;
 
 }
 

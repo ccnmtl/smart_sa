@@ -44,7 +44,7 @@
 	height: 200px;
 	display: inline-block;
 	text-align: center;
-	margin: 5px;
+	margin: 5px 5px 15px 5px;
 	position: relative;
 }
 
@@ -95,6 +95,7 @@
 	content: "done: click to review";
 	margin-top: 10px;
 	color: red;
+
 }
 
 .chosen-issue { }
