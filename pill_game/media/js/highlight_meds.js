@@ -41,6 +41,7 @@ function draw_group(group) {
     }
     group_div =  DIV(attrs, group_label);
     forEach (pills, partial(draw_pill, group_div));
+    appendChildNodes(group_div, BR( {'clear':'all'}));
     
     appendChildNodes($('game-content'),group_div)
     
@@ -51,9 +52,11 @@ function draw_pill (group_div, pill) {
         id: pill.smart_id,
         class:'page_2_pill'
     }
+    
     new_pill_div = DIV (  attrs,  pill_image_div(pill), pill__label_fact_div ( 'pill_label', pill), pill_mg_fact_div ( 'dose_mg', pill) )
     appendChildNodes(group_div, new_pill_div)
     connect (new_pill_div, 'onclick', partial (pill_clicked, pill) );   
+    
 }
 
 function pill_clicked (pill) {
