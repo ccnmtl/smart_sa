@@ -223,7 +223,11 @@ input.no
 	cursor: pointer;
 }
 
-a.return { margin: 15px; }
+a.return 
+{ 
+  margin: 15px; 
+  display:none; /*original state*/
+}
 
 #game-content
 {

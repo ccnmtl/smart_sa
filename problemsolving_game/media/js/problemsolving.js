@@ -98,16 +98,23 @@
     }
     ProblemSolveGame.prototype.previousIssue=function() {    
 	var cur_issue = getFirstElementByTagAndClassName(null,'currentissue','issue-list');
-	var prev_issue = cur_issue.previousSibling;
-	while (prev_issue != null) {
-	    if (prev_issue.nodeType==1) {
-		break;//we found the next issue
+	function getPreviousIssue(cur_issue) {
+	    var prev_issue = cur_issue.previousSibling;
+	    while (prev_issue != null) {
+		if (prev_issue.nodeType==1) {
+		    break;//we found the next issue
+		}
+		prev_issue = prev_issue.previousSibling;
 	    }
-	    prev_issue = prev_issue.previousSibling;
+	    return prev_issue;
 	}
+	var prev_issue = getPreviousIssue(cur_issue);
 	if (prev_issue != null) {
 	    removeElementClass(cur_issue,'currentissue');
 	    addElementClass(prev_issue,'currentissue');
+	    if (getPreviousIssue(prev_issue) == null) {
+		hideElement('prev-issue-link');
+	    }		
 	} else {
 	    hideElement('prev-issue-link');
 	}
