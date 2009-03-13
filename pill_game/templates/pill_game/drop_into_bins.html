@@ -29,7 +29,7 @@
         
         <img src="{{INTERVENTION_MEDIA}}pill_game/images/background.jpg" id="the_background" height = "450" width ="500"/>
         
-        <img src="{{INTERVENTION_MEDIA}}pill_game/images/pillbox.png" id="pillbox" background="the_background" x_offset_from_the_background="5" y_offset_from_the_background="5" />
+        <img src="{{INTERVENTION_MEDIA}}pill_game/images/pillbox.png" id="pillbox_img"/>
 
 
         <span id = "image_root" >{{INTERVENTION_MEDIA}}pill_game/</span>
@@ -50,9 +50,6 @@
         
    
         <select id="day_pills_time"
-            background="day_image"
-            x_offset_from_day_image="64"
-            y_offset_from_day_image="180"
         >
             <option name="00:00" value="00:00">00:00</option>
             <option name="01:00" value="01:00">01:00</option>
@@ -105,9 +102,6 @@
                 
         <select
             id="night_pills_time"
-            background="night_image"
-            x_offset_from_night_image="64"
-            y_offset_from_night_image="180"
         >
             <option name="12:00" value="12:00">12:00</option>
             <option name="13:00" value="13:00">13:00</option>

@@ -110,6 +110,37 @@ width:124px;
 	padding: 5px;
 }
 
+
+#pillbox_img {
+    left : 128px;
+    top : 193px;
+    position: absolute;
+}
+
+#day_pills_time {
+    left: 524px;
+    top : 378px;
+    position: absolute;
+}
+
+#night_pills_time {
+    left: 524px;
+    top : 603px;
+    position: absolute;
+}
+
+#day_image {
+    left: 460px;
+    top: 198px;
+    position:absolute
+}
+
+#night_image {
+    left: 460px;
+    top: 423px;
+    position:absolute
+}
+
 /*NOTE: the actual left and top values are still set in the javascript, relative to the placement of each pill.
 
     To change them, edit:
@@ -156,6 +187,20 @@ width:124px;
 {
 	left: -15px;
 	top: 50px;
+}
+
+
+.pill_image {
+    z-index: 3;
+    position: absolute;
+}
+
+#day_pills_time {
+    z-index: 1;
+}
+
+#night_pills_time {
+    z-index: 1;
 }
 
 
