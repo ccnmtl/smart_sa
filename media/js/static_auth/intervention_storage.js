@@ -65,23 +65,32 @@ current_user = {
 	    this.current_user = global.EphemeralSession.currentUser();
 	    this.initTimeLog();
 	    this.current_task = {};
-	    if (this.current_user) {
-		addLoadEvent(bind(this.showLoginInfo,this));
-	    }
 	} catch(e) {/*never mind*/}
 	this.session_blueprint = function(){return {'STATUS':'inprogress'};}
+	addLoadEvent(bind(this.onLoad,this));
     }
+    InterventionSmart.prototype.onLoad = function() {
+	this.showLoginInfo();
+	if (location.protocol == 'file:') {
+	    hideElement('home-remote');
+	} else {
+	    hideElement('home-desktop');
+	}
+    }    
 
     InterventionSmart.prototype.showLoginInfo = function() {
+	///Show login Info
 	var displayed_user = getElement('username');
-	if (this.current_user
-	    && displayed_user  
-	    && !/\w/.test(displayed_user.innerHTML)) 
+	var no_remote_user = (displayed_user && !/\w/.test(displayed_user.innerHTML));
+	if (this.current_user && no_remote_user) 
 	{
 	    displayed_user.innerHTML = this.current_user.firstname;
 	    hideElement(getFirstElementByTagAndClassName(null,'loginlogout-remote'));
 	    setDisplayForElement('inline',
 				 getFirstElementByTagAndClassName(null,'loginlogout-local'));
+	}
+	if (this.current_user || !no_remote_user) {
+	    setDisplayForElement('inline','logged-in-prefix');
 	}
     }
 
@@ -95,9 +104,8 @@ current_user = {
 	//won't work if we reorder the fields
 
 	//TEMPORARY FOR QA
-	if (form_vals[0]=='admin') {
-	    this.session.setAdmin(true);
-	    location = getElement('admin_link').href;
+	if (form_vals[0]=='admin' && form_vals[1]=='robertremien') {
+	    this.jumpToAdmin();
 	    return;
 	}
 	this.session.login(form_vals[0], 
@@ -114,11 +122,11 @@ current_user = {
 	    alert('Login failed!');
 	    return;
 	}
+	self.current_user = global.EphemeralSession.currentUser();
 	if (hasAttr(self.current_user,'admin')
 	    && self.current_user['admin']) {
 	    logDebug('Admin Login');
-	    self.session.setAdmin(true);
-	    location = getElement('admin_link').href;
+	    self.jumpToAdmin();
 	}
 	else {
 	    location = getElement('login_link').href;
@@ -128,8 +136,10 @@ current_user = {
          * is appended.
          */
     }
-    
-    
+    InterventionSmart.prototype.jumpToAdmin = function() {    
+	this.session.setAdmin(true);
+	location = getElement('admin_link').href;
+    }
     InterventionSmart.prototype.login_confirm = function() {
 	if (hasAttr(this,'current_user')) {
 	    for (key in this.current_user) {

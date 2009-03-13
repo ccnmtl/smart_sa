@@ -19,9 +19,11 @@
       
       <div id="topnav">
 	<ul>
+	  <!-- commenting out until we actually have content for these
 	  <li><a href="{{relative_root}}about">About</a></li>
 	  <li><a href="{{relative_root}}help">Help</a></li>
 	  <li><a href="{{relative_root}}contact">Contact</a></li>
+	  -->
 	  {% block nav %}{% endblock %}
 	</ul> 	
       </div>
@@ -29,7 +31,7 @@
   
     <div id="navbar">
       <ul>
-	<li>Logged in as 
+	<li><span id="logged-in-prefix">Logged in as </span>
 	  <span id="username"
 	    {% if user.is_authenticated %}
 	        class="logged_in"

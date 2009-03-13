@@ -49,12 +49,17 @@ http://www.josh-davis.org/pythonAES
     }
     UserAdmin.prototype.addUser = function() {
 	var fields = formContents('single_user_add')[1];
+
 	var user = {
 	    'firstname':fields[0],
 	    'fullname':fields[0]+' '+fields[1],
 	    'patientnumber':fields[2],
-	    'gender':String(fields[3]).toUpperCase().substr(0,1)
+	    'gender':String(fields[3]).toUpperCase().substr(0,1),
 	};
+	if (fields[4] && //is Admin
+	    confirm('Are you sure you want this user to be a Intervention Administrator (with access to this page)?')) {
+	    user['admin'] = fields[4];
+	}
 	var user_key = this.session.createUser(user.firstname,
 	    user.patientnumber,user);
 	if (user_key) {
@@ -64,7 +69,9 @@ http://www.josh-davis.org/pythonAES
     }
     UserAdmin.prototype.showUser = function(user_key) {
 	var user = evalJSON(this.session.permStor[user_key].value);
-	getElement('client-list').appendChild(LI(null,user.firstname));
+	getElement('client-list').appendChild(LI(null,user.firstname,
+						 SPAN(user.admin?' (ADMIN: Non-client) ':'')
+						));
     }
     UserAdmin.prototype.showClients = function() {
 	var self = this;

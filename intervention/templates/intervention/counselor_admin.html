@@ -14,31 +14,22 @@
     {{ block.super }}
     <h2>Add Clients</h2>
     <form name="mass_user_add" id="mass_user_add" action="javascript:UserAdmin.multi_user_add()">
-      <h3>Format: "Last Name, First Name, Patient #,Gender"
+      <h3>Format: Last Name, First Name, Patient #,Gender
        <br />Example:
       </h3>
       
       <pre>
 Smith,John,42,M
+Doe,Jane,18,F
 ...</pre>
-      <textarea name="users" rows="5" cols="60">Smith, John, 42,M
-Day, Liz, 18,F
-Duveen, Schuyler, 30,M
-Rowe, Jess, 100,F
-</textarea>
+      <textarea name="users" rows="5" cols="60"></textarea>
       <input type="submit" value="Save" />
-      <input type="button" onclick="EphemeralSession.destroyEverything()"
-	     value="destroy all account data on this computer" />
     </form>
 
     <h2>Clients</h2>
     <input id="show_clients_button" type="button" onclick="UserAdmin.showClients()" value="Show Clients" />
     <div id="clients">
       <ul id="client-list"></ul>
-      <div>
-	Disabling a client, means the login will fail, 
-	but the data will continue to be stored on the laptop.
-      </div>
     </div>
     <form name="single_user_add" id="single_user_add" action="javascript:UserAdmin.addUser()">
       <ul>
@@ -62,6 +53,10 @@ Rowe, Jess, 100,F
 	  <label for="gender_m">Female</label>
 	</li>
 	<li>
+	  <label for="admin">Intervention Administrator (Never true for clients, gives access to this page)</label>	 
+	  <input type="checkbox" name="admin" /> 
+	</li>
+	<l>i
 	  <input type="submit" value="Add" />
 	</li>
       </ul>
@@ -94,6 +89,9 @@ Rowe, Jess, 100,F
       </ul>
     </div>
 
+    <h2>Start from Scratch</h2>
+      <input type="button" onclick="EphemeralSession.destroyEverything()"
+	     value="destroy all account data on this computer" />
 
 
 {% endblock %}
