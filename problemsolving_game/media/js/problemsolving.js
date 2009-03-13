@@ -72,7 +72,14 @@
 		    workthrough_form.elements[field].value = problemsolve_state[field];
 		}
 	    }
-	    connect(workthrough_form,'onchange',self,'saveProblemSolveForm')
+
+	    connect(workthrough_form,'onchange',self,'saveProblemSolveForm');
+	    forEach(getElementsByTagAndClassName('textarea'),function(elt) {
+		logDebug('foo');
+		connect(elt,'onchange',self,'resizeTextArea');
+		self.resizeTextArea({'src':function(){return elt}});
+	    });
+
 
 	    ///field phase framework
 	    var continue_link = $('form-continue');
@@ -193,6 +200,14 @@
 	$('video_src').setAttribute('value',video_href);
 	$('video_embed').setAttribute('src',video_href);
 
+    }
+
+    ProblemSolveGame.prototype.resizeTextArea = function(evt) {
+	var src = evt.src();
+	var lines_array = String(src.value).match(/\n/g);
+	if (lines_array) {
+	    src.rows = lines_array.length;
+	}
     }
     ProblemSolveGame.prototype.saveProblemSolveForm = function(evt) {
 	var self = this;

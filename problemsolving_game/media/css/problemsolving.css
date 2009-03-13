@@ -138,13 +138,14 @@
 	display: none;
 	width: 100%;
 	padding: 10px 0 15px 0;
+  margin-left:200px;/*for case where printing goes past image on left*/
 }
 
 /*  These rules are for the program */
 div.problemsolve-field:target,
-#gamephase:target div.problemsolve-field { display: block; }
-#gamephase:target #videobox { display: none; }
-#gamephase:target #form-continue { display: none; }
+#gamephase.problemsolve_one div.problemsolve-field { display: block; }
+#gamephase.problemsolve_one #videobox { display: none; }
+#gamephase.problemsolve_one #form-continue { display: none; }
 
 #formworkthrough  label
 {
@@ -261,4 +262,14 @@ a.problemsolve-continue
 a.problemsolve-continue:hover
 {
 	background-image: url(../../images/button_short_gray_over.png);
+}
+
+#gamephase textarea { overflow:visible;
+             height:auto !important;
+                      clip:none;
+             }
+@media print 
+{ 
+ 
+  
 }

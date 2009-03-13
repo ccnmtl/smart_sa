@@ -1,5 +1,8 @@
 @charset "ISO-8859-1";
 
+
+/*begin screen and defaults*/
+
 body
 {
 	background-color: #b5dcc1;
@@ -641,3 +644,11 @@ p.instructions { margin-bottom: 35px;}
  
  .game_instructions {margin: 0 0 20px 5px; }
 
+@media print 
+{ 
+  #content-right.game  { display:none; }
+  #container-main  { border:none; }
+  #game-content  { border:none;  }
+  #navbar { display:none; }
+  body { background:none; }
+ }/*end @media print*/

@@ -114,3 +114,7 @@ table {
 #middle3-fruit {left:288px;top:105px;}
 #bottom1-fruit {left:70px;top:176px;}
 #bottom2-fruit {left:203px;top:188px;}
+
+@media print { 
+  #controls { display:none; }
+ }
