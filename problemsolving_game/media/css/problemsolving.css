@@ -64,7 +64,7 @@
 	left: -5px;
 	max-width: 150px;
   /*explicit for the textarea/input tags with monospace default*/
-  font-family:"Lucida Sans","Trebuchet MS",Arial,sans-serif;
+  font-family:"Lucida Sans",Arial,sans-serif;
 }
 
 .my_issues .editable-issue .issuetext

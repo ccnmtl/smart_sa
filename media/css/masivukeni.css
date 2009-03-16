@@ -4,7 +4,7 @@
 body
 {
 	background-color: #b5dcc1;
-	font-family: "Lucida Sans", "Trebuchet MS", Arial, sans-serif;
+	font-family: "Lucida Sans", Arial, sans-serif;
 	font-size: 12px;
 	background-image: url(../images/page_bg.jpg);
 	background-repeat: repeat-x;
@@ -336,7 +336,7 @@ input.hilite
 {
 	border: none;
 	background-color: transparent;
-	font-family: "Lucida Sans", "Trebuchet MS", Arial, sans-serif;
+	font-family: "Lucida Sans", Arial, sans-serif;
 	padding-bottom: 10px;
 }
 
