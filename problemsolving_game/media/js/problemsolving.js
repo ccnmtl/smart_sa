@@ -74,10 +74,10 @@
 	    }
 
 	    connect(workthrough_form,'onchange',self,'saveProblemSolveForm');
+
+	    self.resizeTextAreas();
 	    forEach(getElementsByTagAndClassName('textarea'),function(elt) {
-		logDebug('foo');
-		connect(elt,'onchange',self,'resizeTextArea');
-		self.resizeTextArea({'src':function(){return elt}});
+		connect(elt,'onchange',self,'resizeTextAreas');
 	    });
 
 
@@ -91,9 +91,10 @@
 			self.field_phases.push(elt.id);
 		    });
 	    self.field_phases.push('gamephase');//final summary
-	    if (location.hash == '') {
+	    switch(location.hash) {
+	    case '':
+	    case '#gamephase':
 		self.nextField();
-		///TODO:if we want to change the video out based on this, then we should run it anyway
 	    }
 	}
 
@@ -193,21 +194,29 @@
 	var hash = String(global.location.hash).substr(1);
 	var index = findValue(this.field_phases,hash);
 	var next = this.field_phases[index+1];
-	global.location = '#'+next;
+	if (next) {
+	    global.location = '#'+next;
+	}
+	//new value
+	hash = String(global.location.hash).substr(1);
 	///switch out video after we have these
-	var video_href=getFirstElementByTagAndClassName('a','videolink',next).href;
+	var video_href=getFirstElementByTagAndClassName('a','videolink',hash).href;
 	
 	$('video_src').setAttribute('value',video_href);
 	$('video_embed').setAttribute('src',video_href);
-
+	(hash=='gamephase')?addElementClass('gamephase','general'):removeElementClass('gamephase','general');
+	this.resizeTextAreas();
     }
 
-    ProblemSolveGame.prototype.resizeTextArea = function(evt) {
-	var src = evt.src();
-	var lines_array = String(src.value).match(/\n/g);
-	if (lines_array) {
-	    src.rows = lines_array.length;
-	}
+    ProblemSolveGame.prototype.resizeTextAreas = function() {
+	if (!hasElementClass('gamephase','general')) return;
+	forEach(getElementsByTagAndClassName('textarea'),function(src) {
+	    //var src = evt.src();
+	    var lines_array = String(src.value).match(/\n/g);
+	    if (lines_array) {
+		src.rows = lines_array.length+1;
+	    }
+	});
     }
     ProblemSolveGame.prototype.saveProblemSolveForm = function(evt) {
 	var self = this;
