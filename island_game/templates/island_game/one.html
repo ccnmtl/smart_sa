@@ -5,6 +5,12 @@
           <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/DragAndDrop.js"></script> 
           <script type="text/javascript" src="{{INTERVENTION_MEDIA}}island_game/js/slider.js"></script> 
           <script type="text/javascript" src="{{INTERVENTION_MEDIA}}island_game/js/island_one.js"></script> 
+		<style type="text/css">
+			@media print 
+			{ 
+			#game-content  { position: relative; top:20px; left: 100px; border: 1px red;}
+			}
+		</style>
 {% endblock %}
 
 <div id="game_content">
