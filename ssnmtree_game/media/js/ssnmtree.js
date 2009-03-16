@@ -1,3 +1,9 @@
+/*
+games:{'ssnmtree':{
+  '#firstfinished':false,
+  '<div ID e.g. "bottom2-fruit">':{'name':'','disclosure':false,'support':false}
+}}
+*/
 /*wrap code with module pattern*/
 (function() {
     var global = this;
@@ -71,6 +77,12 @@
 		connect(complete_button,'onclick',self,'firstComplete')
 	    }
 	}
+	$('next-game-part-link').onclick = function() {
+	    if (!self.anyNames()) {
+		alert('Please enter at least one name.');
+		return false;
+	    }
+	}
 
     }
     SSNMTree.prototype.firstComplete = function(evt) {
@@ -139,6 +151,17 @@
 	    self.game_state[id].name = input_elt.value
 	    self.intervention.saveState();
 	}
+    }
+
+    SSNMTree.prototype.anyNames = function() {
+	for (a in this.game_state) {
+	    if (typeof(this.game_state[a])=='object'
+		&& this.game_state[a].name
+	       ) {
+		return true;
+	    }
+	}
+	return false;
     }
 
     SSNMTree.prototype.clickListener = function(evt) {

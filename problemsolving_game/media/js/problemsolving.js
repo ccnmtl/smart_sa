@@ -52,6 +52,14 @@
 	    self.intervention.saveState();	
 	}
 
+	if (mode=='my_issues') {
+	    $('next-game-part-link').onclick = function() {
+		if (!self.anyIssues()) {
+		    alert('Please go back and select at least one issue');
+		    return false;
+		}
+	    }
+	}
 	if (mode=='choose_one') {
 	    if(!hasAttr(self.game_state,'chosen-issue')) {
 		//not connect, because that can't RETURN FALSE
@@ -182,6 +190,12 @@
 	  rv = other;
 	}
 	return rv;
+    }
+    ProblemSolveGame.prototype.anyIssues = function() {
+	for (a in this.game_state.my_issues) {
+	    return true;
+	}
+	return false;
     }
     ProblemSolveGame.prototype.getIssueText = function(issue) {
 	var text_dom = getFirstElementByTagAndClassName(null,'issuetext',issue);
