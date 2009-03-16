@@ -65,8 +65,6 @@ width:475px;
 .page_2_pill_group:before { content: "Group: "; }
 */
 
-
-
 .page_2_pill
 {
 background-color:#FFFFFF;
@@ -98,47 +96,14 @@ width:124px;
 .page_3_pill_info
 {
 	text-align: center;
-	height: 90px;
-	width: 90px;
+	height: 100px;
+	width: 100px;
 	font-weight: bold;
 	z-index: 1;
 	position: absolute;
 	background-image: url(../images/pillboxsingle.png);
 	background-repeat: no-repeat;
-	background-position: 0px 0px;
-	font-size: 11px;
-	padding: 5px;
-}
-
-
-#pillbox_img {
-    left : 128px;
-    top : 193px;
-    position: absolute;
-}
-
-#day_pills_time {
-    left: 524px;
-    top : 378px;
-    position: absolute;
-}
-
-#night_pills_time {
-    left: 524px;
-    top : 603px;
-    position: absolute;
-}
-
-#day_image {
-    left: 460px;
-    top: 198px;
-    position:absolute
-}
-
-#night_image {
-    left: 460px;
-    top: 423px;
-    position:absolute
+	background-position: center center;
 }
 
 /*NOTE: the actual left and top values are still set in the javascript, relative to the placement of each pill.
@@ -187,20 +152,6 @@ width:124px;
 {
 	left: -15px;
 	top: 50px;
-}
-
-
-.pill_image {
-    z-index: 3;
-    position: absolute;
-}
-
-#day_pills_time {
-    z-index: 1;
-}
-
-#night_pills_time {
-    z-index: 1;
 }
 
 
