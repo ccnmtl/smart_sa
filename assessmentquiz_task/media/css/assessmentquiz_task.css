@@ -1,6 +1,8 @@
 #game-content
 { 
   overflow:auto;
+  padding: 0 10px 0 10px;
+  width: 525px;
  }
 
 h3
