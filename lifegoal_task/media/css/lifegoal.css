@@ -2,7 +2,11 @@
 
 #lifegoalsbox { position: relative; }
 
-#lifegoals label {color: #666; font-size: 10px;}
+#lifegoals label
+{
+	color: #666;
+	font-size: 10px;
+}
 
 #goal
 {
@@ -37,4 +41,17 @@
 	position: absolute;
 	top: 80px;
 	left: 240px;
+}
+
+img#printable { display: none; }
+
+@media print
+{
+	img#printable
+	{
+		display: block;
+		width: 600px;
+	}
+	
+	#game-content { width: 600px; }
 }
