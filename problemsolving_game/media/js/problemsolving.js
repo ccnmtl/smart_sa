@@ -218,6 +218,12 @@
 	
 	$('video_src').setAttribute('value',video_href);
 	$('video_embed').setAttribute('src',video_href);
+	/*//explicit use of QT calls alternative
+	video_embed.SetURL(video_href);
+	video_embed.SetRectangle('0,0,320,196');
+	video_embed.SetControllerVisible(true);
+        */
+
 	(hash=='gamephase')?addElementClass('gamephase','general'):removeElementClass('gamephase','general');
 	this.resizeTextAreas();
     }

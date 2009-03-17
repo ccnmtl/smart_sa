@@ -9,7 +9,7 @@ class ProblemSolvingGame(GameInterface):
 
     def template(self,page_id):
         game_context = {'mode':page_id,
-                        'video':'video/problem_solving_complete.mov',
+                        'video':'video/problem_solving01.mov',
                         'width':320,
                         'height':196,
                         'needsvideo':(page_id in ('video','problemsolve_one')),
@@ -21,6 +21,7 @@ class ProblemSolvingGame(GameInterface):
 
                         }
         if page_id == 'video':
+            game_context['video'] = 'video/problem_solving_complete.mov'
             game_context['width'] = 426
             game_context['height'] = 256
         return ('problemsolving_game/my_issues.html',game_context)
