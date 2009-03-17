@@ -40,9 +40,9 @@
 		    for (b in self.game_state.my_issues[a]) {
 			filled_out_form = true; break;//not empty dict
 		    }
-		    if (filled_out_form) {
-			addElementClass(issue,'completed');
-		    }
+		    (filled_out_form) ? addElementClass(issue,'completed')
+			:removeElementClass(issue,'completed');
+
 		    connect(issue,'onclick',bind(self.chooseOneIssue,self,null,issue,filled_out_form));
 		}
 	    }

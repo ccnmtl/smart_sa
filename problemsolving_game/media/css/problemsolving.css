@@ -89,14 +89,25 @@
 	background-image: url(../images/ps_issue1_sm.png);
 }
 
-.choose_one .completed .issuetext:after
+.choose_one .completed .issuetext:after,
+.choose_one .completed .done-click
 {
 	display: block;
 	content: "done: click to review";
-	margin-top: 5px;
+	margin-top: 12px;
 	color: red;
 
 }
+
+.done-click 
+{ 
+  display:none;/*default*/
+  position:absolute;
+  top:179px;
+  width:100%;
+  font-style:oblique;
+  font-size:11px;
+  }
 
 .chosen-issue { }
 
