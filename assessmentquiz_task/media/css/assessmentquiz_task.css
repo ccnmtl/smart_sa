@@ -35,6 +35,16 @@ ol.a li:before
 ol.a li { 
           list-style:none;
  }
+ 
+#interpretation_range li
+{ 
+  	padding: 5px;
+  	margin: 2px;
+  	  	font-size: 13px;
+  	font-weight: bold;
+
+
+ }
 
 #interpretation_range .script
 { 
@@ -43,9 +53,36 @@ ol.a li {
   background-color:white;
   padding:1em 1em 1em 4em;
   border:1px solid black;
+  margin: 5px;
+    	font-size: 11px;
+  	font-weight: normal;
+  	padding-left: 15px;
+ }
+ 
+  #interpretation_range .script ul
+{ 
+  	margin-top: -15px;
+  	  	padding-bottom: 5px;
+ }
+ 
+ #interpretation_range .script li
+{ 
+    font-size: 11px;
+  	font-weight: normal;
+  	margin-bottom: -25px;
  }
 
 #interpretation_range li.inrange .script
 { 
   display:block;
  }
+ 
+ div.script {
+ 
+ 	font-style: italic;
+ }
+ 
+.yes {font-size: 12px; font-weight: bold; color: green; margin: 2px;}
+.no {font-size: 12px; font-weight: bold; color: red; margin: 2px;}
+
+.indent {margin-left: -20px;}
