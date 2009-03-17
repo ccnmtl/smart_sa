@@ -96,14 +96,36 @@ width:124px;
 .page_3_pill_info
 {
 	text-align: center;
+	
+	
+	
+	/*
+	
+	last minute change 1:
+	
 	height: 100px;
 	width: 100px;
+	*/
+	height: 90px;
+	width: 90px;
+	
+	
 	font-weight: bold;
 	z-index: 1;
 	position: absolute;
 	background-image: url(../images/pillboxsingle.png);
 	background-repeat: no-repeat;
-	background-position: center center;
+	
+	
+	/*
+	last minute change 2:
+	
+	background-position: center center; */
+	background-position: 0px 0px;
+    font-size: 11px; 
+    
+    
+    padding: 5px; 
 }
 
 /*NOTE: the actual left and top values are still set in the javascript, relative to the placement of each pill.
