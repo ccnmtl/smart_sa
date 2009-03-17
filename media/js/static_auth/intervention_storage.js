@@ -72,6 +72,7 @@ current_user = {
     InterventionSmart.prototype.onLoad = function() {
 	this.showLoginInfo();
 	if (location.protocol == 'file:') {
+	    hideElement(getFirstElementByTagAndClassName(null,'loginlogout-remote'));
 	    hideElement('home-remote');
 	} else {
 	    hideElement('home-desktop');

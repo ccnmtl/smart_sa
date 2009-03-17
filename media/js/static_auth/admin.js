@@ -91,7 +91,7 @@ http://www.josh-davis.org/pythonAES
 
 	restorals = false;
 	function makeRestoralLink(name,hilite) {
-	    name = A({'id':name,'href':'#'+name+'','onclick':"showElement('restoring-please-wait');UserAdmin.restore('"+name+"')"},name);
+	    name = A({'id':name,'href':'#'+name+'','onclick':"UserAdmin.restore('"+name+"')"},name);
 	    var attrs = null;
 	    if (hilite) {
 		//attrs = {'class':'hilite'};
@@ -224,6 +224,7 @@ http://www.josh-davis.org/pythonAES
 		mydoc.close();
 	    }
 	    var doc;
+	    hideElement('backing-up-please-wait');
 	    try {
 		doc = getElement('filebackup').contentDocument;
 		netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
@@ -248,21 +249,24 @@ http://www.josh-davis.org/pythonAES
     UserAdmin.prototype.restore = function(backup_key) {
 	var self = this;
 	if(confirm('This will delete all current client/account data, and replace it with the restoring data. Are you sure?')) {
-	    var backup_string = self.session.permStor[backup_key].value;
-	    var plaintext = self.decrypt(backup_string);
-	    var the_package = evalJSON(plaintext);
-	    ///DELETE old data
-	    for (a in self.session.permStor) {
-		if (RegExp('^'+self.session.nsUSER).test(a)) {
-		    delete self.session.permStor[a];
+	    showElement('restoring-please-wait');
+	    setTimeout(function(){
+		var backup_string = self.session.permStor[backup_key].value;
+		var plaintext = self.decrypt(backup_string);
+		var the_package = evalJSON(plaintext);
+		///DELETE old data
+		for (a in self.session.permStor) {
+		    if (RegExp('^'+self.session.nsUSER).test(a)) {
+			delete self.session.permStor[a];
+		    }
 		}
-	    }
-	    ///RESTORE old data
-	    for (a in the_package) {
-		self.session.permStor[a] = the_package[a];
-	    }
-	    hideElement('restoring-please-wait');
-	    alert('Data successfully restored from backup!');
+		///RESTORE old data
+		for (a in the_package) {
+		    self.session.permStor[a] = the_package[a];
+		}
+		hideElement('restoring-please-wait');
+		alert('Data successfully restored from backup!');
+	    },150);
 	}
     }
 
