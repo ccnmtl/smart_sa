@@ -3,12 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>BuildUp</title>
+<link rel="selenium.base" href="" />
+<title>Login</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">BuildUp</td></tr>
+<tr><td rowspan="1" colspan="3">Login</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -23,47 +24,7 @@
 <tr>
 	<td>type</td>
 	<td>firstname</td>
-	<td>admin</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>patientnumber</td>
-	<td>robertremien</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>login</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>firstname</td>
-	<td>Test</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lastname</td>
-	<td>test</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>patientnumber</td>
-	<td>goodpassword</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//input[@value='Add']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>firstname</td>
 	<td>TestPatient</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>lastname</td>
-	<td>test</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -71,14 +32,19 @@
 	<td>123</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//input[@value='Add']</td>
+	<td>clickAndWait</td>
+	<td>login_link</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//img[@alt='Masivukeni Logo']</td>
+	<td>assertTextPresent</td>
+	<td>123</td>
 	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>user_fullname</td>
+	<td>TestPatient test</td>
 </tr>
 
 </tbody></table>
