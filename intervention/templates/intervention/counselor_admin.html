@@ -68,8 +68,9 @@ Doe,Jane,18,F
       <input type="submit" value="Create Backup File" />
       <br />
       <span id="backing-up-please-wait" style="display:none;">
-	Backing up data, please wait. .
+	Backing up data, please wait. . 
 	<iframe id="filebackup" width="0" height="0"></iframe>
+	<img src="{{relative_root}}site_media/images/spinner.gif" />
       </span>
     </form>
     <!--
@@ -83,6 +84,10 @@ Doe,Jane,18,F
     -->
     <h2>Restore from backup</h2>
     <input id="show_backups" type="button" value="Show available backups" onclick="UserAdmin.showRestorals()" />
+    <span id="restoring-please-wait" style="display:none;">
+      Restoring data, please wait. . .
+      <img src="{{relative_root}}site_media/images/spinner.gif" />
+    </span>
     <div id="restorals" style="display:none;">
       <div id="no-restorals">No available backups to restore.</div>
       <ul id="restoral-list">
