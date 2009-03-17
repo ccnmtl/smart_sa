@@ -214,13 +214,13 @@ http://www.josh-davis.org/pythonAES
 	    function writeDocument(mydoc) {
 		var my_filename = String(location.pathname).split('/').pop();
 		///NOTE: this should mirror the content in intervention/templates/intervention/restore.html
-		mydoc.write('<h2>Save this file</h2>');
-		mydoc.write('<p>From the <b>File</b> menu, click <b>Save Page As</b> and make sure the file location is on your portable drive which you will upload from the computer with an Internet connection.  It will save as <b>'+my_filename+'</b> but you can change this to something else.</p>');
-		mydoc.write('<p>If for some reason, you need to restore a backup, put this file in the My Documents folder naming it <b>restore.html</b>, and run the Restore shortcut from your Desktop.  Then you can go into the admin interface and restore from there.</p>');
+		mydoc.write('<h2>This is a Masivukeni Restore File</h2>');
+		mydoc.write('<p>To complete the restoral process, click the link below and login as an administrator</p>');
+		mydoc.write('<p><a href="Masivukeni/Masivukeni/client_login.html">Login as administrator</a></p>');
 		mydoc.write('<h2>Data</h2><div id="data">');
 		mydoc.write(backup_string);
 		mydoc.write('</div>');
-		mydoc.write('<script type="text/javascript">globalStorage[location.hostname]["'+nsBACKUP+date_string+'"] = document.getElementById("data").innerHTML;globalStorage[location.hostname]["RESTORE"]="'+nsBACKUP+date_string+'";</script>');
+		mydoc.write('<script type="text/javascript">if(!location.hostname){alert("This file cannot be opened directly to work.  Close the browser, and open the Masivukeni site.  Then click the link [Go to restore.html...]")};globalStorage[location.hostname]["'+nsBACKUP+date_string+'"] = document.getElementById("data").innerHTML;globalStorage[location.hostname]["RESTORE"]="'+nsBACKUP+date_string+'";</script>');
 		mydoc.close();
 	    }
 	    var doc;

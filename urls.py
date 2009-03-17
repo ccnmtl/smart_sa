@@ -61,6 +61,7 @@ urlpatterns = patterns('',
         (r'^intervention_admin/activity/(?P<activity_id>\d+)/$', 'smart_sa.intervention.views.activity_admin'), # page 12
         (r'^intervention_admin/task/(?P<activity_id>\d+)/$', 'smart_sa.intervention.views.gamepage_admin'), # page 12                       
 
+        (r'^Masivukeni/Masivukeni/client_login.html', 'django.views.generic.simple.redirect_to', {'url':'/client_login.html'}),
 
         #semi-static help pages, etc.
         #(r'^background/(?P<content_label>\d+)/$', 'smart_sa.intervention.views.background'),
