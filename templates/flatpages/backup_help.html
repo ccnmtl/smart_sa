@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}
+  How To install, backup and restore Masivukeni Software and Data on a Disconnected Computer
+{% endblock %}
+
+{% block content %}
+<a name="Instructions_on_installing_Masivukeni_on_a_laptop_from_scratch"></a><h2>Instructions on installing Masivukeni on a laptop from scratch</h2>
+
+<ol><li>copy Masivukeni.zip to your My Documents folder.
+<ul><li> open the file (double click on the folder with the zipper)
+</li><li> click the 'extract all files' link on the left (Mac behavior may be slightly different)
+</li><li> answer yes to all the defaults.  If it asks if you want to overwrite a file, click 'Yes to All'
+<ul><li> this should place the extracted copy in C:/Documents and Settings/Administrator/My Documents/Masivukeni/Masivukeni/
+</li></ul>
+</li></ul>
+</li><li> Open Firefox (in order to change settings)
+<ul><li> In the address bar, type: 'file://localhost/C:/Documents and Settings/Administrator/My Documents/Masivukeni/Masivukeni/home.html'
+</li><li> From the menu, click Tools->Options.  
+
+</li><li> Set to the Default Homepage:
+<ul><li> Click the Main tab, and then click the button 'Use Current Page.'
+</li></ul>
+</li><li> Do not remember form data (for privacy reasons across users)
+<ul><li> Click the Privacy tab, and then UNCHECK 'Remember what I enter in forms and the search bar'
+</li></ul>
+</li><li> Click OK
+</li></ul>
+</li><li> Login as admin and click Create Backup.
+<ul><li> The first time it will give a security warning, confirm, and check 'make permanent'--this is to make it possible to open the Save As window for the backup file.
+
+</li></ul>
+</li><li>Follow the restore procedure below to restore accounts and data.
+</li></ol>
+<a name="To_update_your_Masivukeni_software_.28while_keeping_data.29"></a><h2>To update your Masivukeni software (while keeping data)</h2>
+<p>This scenario is if we need to update the tasks or content, after the site has been deployed.
+</p>
+<ol><li> CCNMTL will provide a Masivukeni.zip file.  This file will be the same as the one described above
+<ul><li> EXCEPT that it will not include the video directory contents (for file size reasons)
+</li></ul>
+</li><li> BACKUP your data a final time before updating
+
+</li><li> Follow step #1 above (in installing Masivukeni from scratch)
+</li><li> Look in the directory <code>My Documents/Masivukeni/Masivukeni/multimedia/video/</code>
+<ul><li> If you see several video files there, then you are finished
+</li><li> If there are no files in that directory, copy the files in <code>My Documents/multimedia/video/</code> to this folder
+</li></ul>
+</li></ol>
+<a name="To_Restore_data_to_a_newly_installed_version_of_Masivukeni"></a><h2>To Restore data to a newly installed version of Masivukeni</h2>
+
+<ol><li> (from a CD or thumbdrive) copy the backup file to your My Documents folder.  Rename this file restore.html.
+</li></ol>
+<p>or
+</p>
+<ol><li> (from an online download) Go to <a href="http://smartsa.ccnmtl.columbia.edu" class="external free" title="http://smartsa.ccnmtl.columbia.edu" rel="nofollow">http://smartsa.ccnmtl.columbia.edu</a>.
+<ul><li>click back up and restore client data
+</li><li> Look for the list of available backups. click the name of the most recent backup to download to your desktop 
+</li><li> This file will be named restore.html.  Put it in your My Documents folder.
+</li></ul>
+</li><li> Open Masivukeni as usual.  Do not log in.  Click the 'restore' link.  This will open the restore file.  It is necessary to open this file once before going through the rest of the restore procedure.
+
+</li><li> Click the link to 'Masivukeni Administrator Log In'
+</li><li> log in with the administrative password (call CCNMTL to get this password)
+</li><li> Look for Restore From Backup and click the button that says 'show available backups'.  You should see a link that includes today's date.  Click this link.  The restore process will now begin.  This may take up to two minutes.  A message will appear after the restoral is complete.  Do not leave the page, or close the browser until it is finished.
+</li></ol>
+<a name="To_erase_corrupted_data_and_restore_from_a_recent_backup"></a><h2>To erase corrupted data and restore from a recent backup</h2>
+<ol><li> go to <a href="http://smartsa.ccnmtl.columbia.edu" class="external free" title="http://smartsa.ccnmtl.columbia.edu" rel="nofollow">http://smartsa.ccnmtl.columbia.edu</a>.
+<ul><li>click back up and restore client data
+
+</li><li> Look for the list of available backups. click the name of the most recent backup to download to your desktop 
+</li><li> This file will be named restore.html.  Put it in your My Documents folder. 
+</li></ul>
+</li><li> open Masivukeni as usual
+</li><li> do not log in.  click 'go to restore.html fil in 'My Documents' to restore from a backup'
+</li></ol>
+<p>This will open the restore file.  It is necessary to open this file once before going through the rest of the restore procedure.
+</p>
+<ol><li> Click the link to 'Masivukeni Administrator Log In'
+</li><li> log in with your password 
+</li><li> Look for Restore From Backup and click the button that says 'show available backups'.  You should see a link that includes today's date.  Click this link.  The restore process will now begin.  This may take up to two minutes.  A message will appear after the restoral is complete. Do not leave the page, or close the browser until it is finished.
+
+</li></ol>
+<a name="To_create_and_upload_a_backup"></a><h2>To create and upload a backup</h2>
+<ol><li>log into Masivukeni
+</li><li>look for 'File Backup' and click 'Create Backup File.'
+</li><li>The document save dialog box will open.  Leave the default name for the file.  Note where it is being saved and click save.
+</li><li>when you are connected to the intenet, go to <a href="http://smartsa.ccnmtl.columbia.edu" class="external free" title="http://smartsa.ccnmtl.columbia.edu" rel="nofollow">http://smartsa.ccnmtl.columbia.edu</a>
+</li><li>click back up and restore client data
+</li><li>click 'browse' and navigate to your backup file
+</li><li>click submit
+</li><li>when the file transmission is complete a message will appear at the top of the screen that says 'Successfully saved the backup file'
+</li></ol>
+
+{% endblock %}

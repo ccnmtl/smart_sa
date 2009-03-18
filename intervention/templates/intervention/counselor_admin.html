@@ -12,7 +12,8 @@
 
 {% block content %}
     {{ block.super }}
-    <h2>Add Clients</h2>
+    <h2>Client Management</h2>
+    <h3>Add Clients</h3>
     <form name="mass_user_add" id="mass_user_add" action="javascript:UserAdmin.multi_user_add()">
       <h3>Format: Last Name, First Name, Patient #,Gender
        <br />Example:
@@ -26,7 +27,7 @@ Doe,Jane,18,F
       <input type="submit" value="Save" />
     </form>
 
-    <h2>Clients</h2>
+    <h3>Clients</h3>
     <input id="show_clients_button" type="button" onclick="UserAdmin.showClients()" value="Show Clients" />
     <div id="clients">
       <ul id="client-list"></ul>
@@ -62,8 +63,9 @@ Doe,Jane,18,F
       </ul>
     </form>
 
-
-    <h2>File Backup</h2>
+    <h2>Backup and Restore</h2>
+    <p><a href="{{relative_root}}help/backup.html">Installation, Backup and Restore Instructions</a></p>
+    <h3>File Backup</h3>
     <form name="html_form" action="javascript:showElement('backing-up-please-wait');UserAdmin.save_to_file()">
       <input type="submit" value="Create Backup File" />
       <br />
@@ -74,7 +76,7 @@ Doe,Jane,18,F
       </span>
     </form>
     <!--
-    <h2>Direct Internet Backup</h2>
+    <h3>Direct Internet Backup</h3>
     <form name="backup_form" action="javascript:UserAdmin.send_to_server()">
       <div id="mother-server">{{request.META.HTTP_HOST}}</div>
       <p>Only usable with Internet access</p>
@@ -82,7 +84,7 @@ Doe,Jane,18,F
       <input type="submit" value="Backup to server" />
     </form>
     -->
-    <h2>Restore from backup</h2>
+    <h3>Restore from backup</h3>
     <input id="show_backups" type="button" value="Show available backups" onclick="UserAdmin.showRestorals()" />
     <span id="restoring-please-wait" style="display:none;">
       Restoring data, please wait. . .
@@ -94,7 +96,7 @@ Doe,Jane,18,F
       </ul>
     </div>
 
-    <h2>Start from Scratch</h2>
+    <h3>Start from Scratch</h3>
       <input type="button" onclick="EphemeralSession.destroyEverything()"
 	     value="destroy all account data on this computer" />
 

@@ -38,6 +38,7 @@ urlpatterns = patterns('',
         (r'^client_login_confirm(?:.html)?$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login_confirm.html'}),# login confirmation, p.2
 
         (r'^masivukeni_admin_data(?:.html)?$', 'smart_sa.intervention.views.smart_data'),
+        (r'^help/backup(?:.html)?$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),
 
         ########
         # TEST
