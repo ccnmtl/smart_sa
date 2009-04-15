@@ -21,9 +21,10 @@
 	<ul>
 	  <!-- commenting out until we actually have content for these
 	  <li><a href="{{relative_root}}about">About</a></li>
-	  <li><a href="{{relative_root}}help">Help</a></li>
-	  <li><a href="{{relative_root}}contact">Contact</a></li>
-	  -->
+	  <li><a href="{{relative_root}}help">Credits</a></li>-->
+	  <li><a href="http://ccnmtl.columbia.edu" target="blank">Credits</a></li>
+	  <li><a href="mailto:jr2502@columbia.edu">Contact</a></li>
+	  
 	  {% block nav %}{% endblock %}
 	</ul> 	
       </div>
@@ -31,7 +32,7 @@
   
     <div id="navbar">
       <ul>
-	<li><span id="logged-in-prefix">Logged in as </span>
+	<li><span id="logged-in-prefix">Logged in as:</span>
 	  <span id="username"
 	    {% if user.is_authenticated %}
 	        class="logged_in"
@@ -41,19 +42,19 @@
 		{{user}}
 		{% endif %}
 	  </span> 
-	  |
+	  
 	  {% if user.is_authenticated %}
 	  <a class="loginlogout loginlogout-remote" 
 	     href="{{relative_root}}logout">Logout</a>
 	  {% else %}
 	  <a class="loginlogout loginlogout-remote" 
-	     href="{{relative_root}}accounts/login/{% ifnotequal request.path "/logout" %}?next={{request.path}}{% endifnotequal %}">Login</a>
+	     href="{{relative_root}}accounts/login/{% ifnotequal request.path "/logout" %}?next={{request.path}}{% endifnotequal %}">Administrative Login</a>&nbsp;
 	  <a class="loginlogout loginlogout-local" 
 	     href="{{relative_root}}client_login"
 	     onclick="Intervention.logout()"
 	     >Logout</a>
 	  {% endif %}
-	</li>
+	
 	{% block breadcrumbs %}{% endblock %}
       </ul>
     </div>

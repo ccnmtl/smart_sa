@@ -1,25 +1,44 @@
 {% extends "base.html" %}
 
+{% block title %}Welcome!{% endblock %}
+
+   
 {% block content %}
     {{ block.super }}
-    <ul>
-      <li><a href="/client_login">Login to Masivukeni</a></li>
-
-      <li id="home-remote"><!--h2> For Internet Site</h2 -->
-        <ul>
-	  <li><a href="/intervention_admin/1/">Administer Intervention Content</a></li>
-	  <li><a href="/intervention_admin/save_backup">Backup and Restore client data</a></li>
-	  <lh>--</lh>
-	  <li><a href="/intervention1_intro">Demo</a> (without login or state)</li>
-	  <li><a href="/site_media/selenium/TestRunner.html">Run Selenium Tests</a></li>
-	</ul>
-      </li>
-
-      <li id="home-desktop"><!--h2>Desktop Links</h2-->
-        <ul>
-	  <li><a href="file://localhost/C:/Documents and Settings/Administrator/My Documents/restore.html">Go to restore.html file in "My Documents" to restore a backup</a></li>
-	</ul>
-      </li>
+    
+     <h1>  Welcome to Masivukeni! </h1>
+    
+     <div id="content-right" class="game" >
+     <br/><ul style="list-style-type:none;">
+		  <li><a href="/client_login">Demo (Login Required)</a></li>
+	
+		  <li id="home-remote"><!--h2> For Internet Site</h2 -->
+			<ul style="display: none;">
+		  <li><a href="/intervention_admin/1/">Administer Intervention Content</a></li>
+		  <li><a href="/intervention_admin/save_backup">Backup and Restore client data</a></li>
+		  <lh>--</lh>
+		  <li><a href="/intervention1_intro">Demo</a> (without login or state)</li>
+		  <li><a href="/site_media/selenium/TestRunner.html">Run Selenium Tests</a></li>
+		</ul>
+		  </li>
+	
+		  <li id="home-desktop"><!--h2>Desktop Links</h2-->
+			<ul>
+		  <li><a href="file://localhost/C:/Documents and Settings/Administrator/My Documents/restore.html">Go to restore.html file in "My Documents" to restore a backup</a></li>
+		</ul>
+		  </li>
 
     </ul>
+     </div>
+     
+ <div id="game-content" style="padding: 15px; width: 510px; height: 425px;">
+
+ 
+SMART+SA will support counselors at health clinics in Cape Town, South Africa in assisting HIV-positive adults to adhere to their antiretroviral drug regimens through a combination of education and social support. CCNMTL will work with a consortium of researchers and Cape Town community members to determine the appropriate role of technology within the project. One aspect of that work will be to adapt the Social Support Network Map, an interactive tool that CCNMTL developed previously for use in the Columbia University School of Social Work. In early sessions of the intervention, study participants and their counselors will use the tool to map the participant's social support network in order to help them identify individuals whom they can rely on -- relatives, friends, community members -- to participate with them in the program. In later sessions, the map will also be used to help participants increase family and community support and help them overcome barriers to adherence, including addressing HIV status disclosure, mental health needs, and sustained long term adherence to HIV care. 
+ 
+</div>
+
+
+  
+   
 {% endblock %}
