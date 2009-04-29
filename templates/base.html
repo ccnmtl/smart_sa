@@ -12,7 +12,7 @@
   {% block feeds %}{% endblock %}
 </head>
 
-<body class="{% block bodyclass %}{% endblock %}">
+<body class="{% if user.is_authenticated %}logged-in {% endif %}{% block bodyclass %}{% endblock %}">
   <div id="container-main">
     <div id="masthead">
       <div id="logo"><a href="{{relative_root}}home"><img src="{{relative_root}}site_media/images/logo_small.png" alt="Masivukeni Logo" /></a></div>	
@@ -37,7 +37,7 @@
 	    {% if user.is_authenticated %}
 	        class="logged_in"
 	    {% endif %}
-		>
+	    >
 		{% if user.is_authenticated %}
 		{{user}}
 		{% endif %}
@@ -54,7 +54,7 @@
 	     onclick="Intervention.logout()"
 	     >Logout</a>
 	  {% endif %}
-	
+	</li>
 	{% block breadcrumbs %}{% endblock %}
       </ul>
     </div>

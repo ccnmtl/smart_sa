@@ -124,6 +124,7 @@ games:{'ssnmtree':{
 	}
     }
     SSNMTree.prototype.setEditMode = function(mode_or_evt) {
+	logDebug('setEditMode');
 	var mode;
 	if (typeof(mode_or_evt)=='string') {
 	    mode = mode_or_evt;
@@ -137,12 +138,16 @@ games:{'ssnmtree':{
 	forEach(getElementsByTagAndClassName('input',null,'fruittree'), function(elt) {
 	    ///to make them read-only we make them buttons
 	    ///if we set disabled=true, then it drowns click events
+	    ///need to rewrite the value due to Firefox (SUX) weirdness 
+	    var curvalue = elt.value;
 	    elt.type = (mode=='names')?'text':'button';
+	    elt.value = curvalue;
 	});
 	getElement('edit-'+mode).checked = true;
     }
 
     SSNMTree.prototype.namechangeListener = function(evt) {
+	logDebug('namechangeListener');
 	var self = this;
 	var input_elt = evt.src();
 	var id = input_elt.parentNode.id;

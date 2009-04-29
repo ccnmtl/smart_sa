@@ -193,6 +193,22 @@ table#login_form td.button { 12px 12px 12px 90px: ; }
 	min-height: 460px;
 }
 
+#home-remote { display:none; }
+
+body.logged-in #home-remote
+{ 
+  display:block;
+ }
+
+#home-content
+{ 
+	border: 1px solid #ccc;
+	overflow: hidden;
+  padding: 15px; 
+  width: 510px; 
+  height: 425px;
+ }
+
 #game-content
 {
 	border: 1px solid #ccc;
@@ -524,6 +540,11 @@ p.instructions { margin-bottom: 35px; }
 	margin: 0px;
 	list-style-type: disc;
 }
+
+.no-bullets > li
+{ 
+  list-style-type:none;
+ }
 
 .game_instructions { margin: 0 0 20px 5px; }
 
