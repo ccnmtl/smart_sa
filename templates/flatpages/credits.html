@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Credits{% endblock %}
+
+   
+{% block content %}
+    {{ block.super }}
+    
+     <h1>  Credits </h1>
+    
+     <div id="content-right" class="game" >
+     <br/>
+     <ul class="no-bullets">
+       <li></li>
+       <!--This is NOT just a Demo link: This is the link that users of the Intervention click on-->
+       <li><a href="/client_login">Begin Masivukeni Intervention (Login Required)</a></li>
+	
+       <li id="home-remote"><!--h2> For Internet Site</h2 -->
+	 <ul>
+	   <li><a href="/intervention_admin/save_backup">Backup and Restore client data</a></li>
+	   <li><a href="/intervention_admin/1/">Administer Intervention Content</a></li>
+	   <li><a href="/site_media/selenium/TestRunner.html">Run Selenium Tests</a></li>
+	 </ul>
+       </li>
+	
+       <li id="home-desktop"><!--h2>Desktop Links</h2-->
+	 <ul class="no-bullets">
+	   <li><a href="file://localhost/C:/Documents and Settings/Administrator/My Documents/restore.html">Go to restore.html file in "My Documents" to restore a backup</a></li>
+	 </ul>
+       </li>
+     </ul>
+     </div>
+     
+ <div id="home-content">
+
+ 
+Faculty Partners: HIV Center for Clinical and Behavioral Studies
+
+    Dr. Robert Remien
+
+    Research Project Manager
+    Jenifar Chowdhury 
+
+    CCNMTL Production Team
+
+    Executive Directors
+    Frank Moretti
+    Maurice Matiz
+
+    Project Manager
+    Jessica Rowe
+
+    Video Production
+    Stephanie Ogden
+    Gerard Zoehfeld
+
+    Design
+    Elizabeth Day
+    Marc Raymond
+
+    Programming
+    Schuyler Duveen
+    Eddie Rubeiz 
+
+
+  
+   
+{% endblock %}
