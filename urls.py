@@ -39,6 +39,7 @@ urlpatterns = patterns('',
 
         (r'^masivukeni_admin_data(?:.html)?$', 'smart_sa.intervention.views.smart_data'),
         (r'^help/backup(?:.html)?$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),
+        (r'^help/credits(?:.html)?$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/credits.html'}),
 
         ########
         # TEST
