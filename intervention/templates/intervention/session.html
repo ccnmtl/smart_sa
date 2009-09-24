@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "intervention/offlineable_base.html" %}
 
 {% block breadcrumbs %}
 
 
 
     {%if session %}
-      <li><a href="intervention{{session.intervention.id}}_intro">Session List</a></li>
+      <li><a href="intervention{{session.intervention.id}}_intro.html">Session List</a></li>
     {%endif%}  
 {% endblock %}
 
@@ -38,7 +38,7 @@
 	</p>
 
         {% for activity in activities %}
-	   <a id="activity{{activity.id }}" class="subitem activity session_off" href="activity{{activity.id }}_overview">
+	   <a id="activity{{activity.id }}" class="subitem activity session_off" href="activity{{activity.id }}_overview.html">
 	     <span class="titletext"> Activity {{forloop.counter}}: <br />{{ activity.short_title }}</span>
 	    </a>
         {% endfor %}
@@ -55,7 +55,7 @@
 <hr />
          <p>
 	   <a id="complete" class="off_right" 
-	      href="intervention{{session.intervention.id}}_intro"
+	      href="intervention{{session.intervention.id}}_intro.html"
 	      onclick="Intervention.complete_session()"
 	      >
 	     Complete Session

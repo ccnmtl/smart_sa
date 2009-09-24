@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "intervention/offlineable_base.html" %}
 
 {% block content %}
     {{ block.super }}
@@ -21,7 +21,7 @@
         
         {% if intervention.clientsession_set.count %}        
 	  {% for session in intervention.clientsession_set.all %}
-	    <a id="session{{session.id }}" class="subitem session session_off" href="session{{session.id }}_agenda">
+	    <a id="session{{session.id }}" class="subitem session session_off" href="session{{session.id }}_agenda.html">
 	      <span class="titletext">  Session {{ session.short_title }}:<br /> {{session.long_title}}</span>
 	    </a>
 	  {% endfor %}

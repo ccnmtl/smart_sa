@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "intervention/offlineable_base.html" %}
 {% block js %}
    <script>
      var game_variables = {{activity.variables|safe}};
@@ -6,7 +6,7 @@
 {% endblock %}
 {% block breadcrumbs %}
     {%if activity %}
-      <li><a href="intervention{{activity.clientsession.intervention.id}}_intro">Session List</a></li>
+      <li><a href="intervention{{activity.clientsession.intervention.id}}_intro.html">Session List</a></li>
     <!--  <li><a href="session{{activity.clientsession.id}}_agenda"
 	     id="session{{activity.clientsession.id}}"
 	     >
@@ -116,7 +116,7 @@
       <br />  <hr />
          <p>
 	   <a id="complete" class="hilite_right" 
-	      href="session{{activity.clientsession.id}}_agenda"
+	      href="session{{activity.clientsession.id}}_agenda.html"
 	      onclick="Intervention.complete_activity()"
 	      >
 	     Complete Activity
