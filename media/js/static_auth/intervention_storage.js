@@ -109,6 +109,15 @@ current_user = {
 	    this.jumpToAdmin();
 	    return;
 	}
+	//DEMO USER
+	if (form_vals[0]=='demo' && form_vals[1]=='demo') {
+	    this.session.createUser('demo','demo',
+				    {'firstname':'John',
+				     'fullname':'John Smith',
+				     'patientnumber':'demo',
+				     'gender':'M'
+				    });
+	}
 	this.session.login(form_vals[0], 
 			   form_vals[1],
 			   bind(this.login_response,this));
