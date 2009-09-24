@@ -39,7 +39,7 @@ function draw_group(group) {
         id:'container_for' + group_label,
         class:'page_2_pill_group'
     }
-    group_div =  DIV(attrs, group_label);
+    group_div =  DIV(attrs, DIV(null,group_label));
     forEach (pills, partial(draw_pill, group_div));
     appendChildNodes(group_div, BR( {'clear':'all'}));
     
