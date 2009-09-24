@@ -16,42 +16,68 @@ function hasAttr(obj,key) {
     var global = this;
     var M = MochiKit.Base;
 
+    function StorageWrapper(stor) {
+
+	this.KEYS_KEY = 'KEYS';
+	this.hasKey = function(key) {
+	    return (stor.getItem(key) != null);
+	}
+	this.get = function(key,default_val) {
+	    return (this.hasKey(key) ? stor.getItem(key) : default_val);
+	}
+	var key_dict = M.evalJSON(this.get(this.KEYS_KEY,'{}'));
+	this.set = function(key,value) {
+	    stor.setItem(key,value);
+	    key_dict[key]=1;
+	    stor.setItem(this.KEYS_KEY,M.serializeJSON(key_dict));
+	}
+
+	///actually returns a dict in the form {key1:1,key2:1,...}
+	this.keyDict = function() {
+	    return M.clone(key_dict);
+	}
+	this.del = function(key) {
+	    delete stor[key];
+	    delete key_dict[key];
+	    stor.setItem(this.KEYS_KEY,M.serializeJSON(key_dict));
+	}
+    }
+
     function LocalFirefoxSession() {
-	this.permStor = global.globalStorage[location.hostname];
-	this.sessStor = global.sessionStorage;
+	this.permStor = new StorageWrapper(hasAttr(global,'localStorage')?global.localStorage:global.globalStorage[location.hostname]);
+	this.sessStor = new StorageWrapper(global.sessionStorage);
 	this.nsUSER = 'USER_';
 	this.nsBACKUP = 'BACKUP_';
 	this.RESTORE_KEY = 'RESTORE';
     }
-    
     /* @return
     */
     LocalFirefoxSession.prototype.login=function(username, credential, callback) {
 	var self = this;
 	var user_key = self.nsUSER + self.hash(username,credential);
 	self.setAdmin(false);
-
-	if (!hasAttr(self.permStor,user_key)) {
+	if (!self.permStor.hasKey(user_key)) {
 	    //LOGIN FAILED
 	    logDebug('login failed', user_key);
 	    if (typeof(callback) == 'function') callback(false);
 	}
 	else {
-	    self.sessStor.user = user_key;
+	    self.sessStor.set('user',user_key);
 	    var user = self.currentUser();
 	    if (typeof(callback) == 'function') callback(user);
 	}
 	return; //if you want something, use @arg callback
     }
     LocalFirefoxSession.prototype.logout=function(callback) {
-	delete this.sessStor.user;
-	delete this.sessStor.admin;
+	this.sessStor.del('user');
+	this.sessStor.del('admin');
     }
     LocalFirefoxSession.prototype.isAdmin=function() {
-	return (hasAttr(this.sessStor,'admin') &&this.sessStor['admin'].value);
+	var is_admin = this.sessStor.get('admin');
+	return (is_admin == 'true');
     }
     LocalFirefoxSession.prototype.setAdmin=function(is_admin) {
-	this.sessStor['admin'] = (is_admin)?'true':'';
+	this.sessStor.set('admin', (is_admin?'true':'') );
     }
     LocalFirefoxSession.prototype.hash=function() {
 	var my_hash = 'HASH';
@@ -60,12 +86,24 @@ function hasAttr(obj,key) {
 	}
 	return sha1Hash(my_hash);
     }
-    LocalFirefoxSession.prototype.currentUser=function() {
-	if (hasAttr(this.sessStor,'user')) {
-	    return M.evalJSON(this.permStor[ this.sessStor['user'].value ].value);
-	} else {
-	    return false;
+    LocalFirefoxSession.prototype.getUserData=function(user_key) {
+	return M.evalJSON(this.permStor.get(user_key,'false'));
+    }
+    LocalFirefoxSession.prototype.userList=function() {
+	var userkeys = {};
+	for (a in this.permStor.keyDict()) {
+	    if (RegExp('^'+this.nsUSER).test(a)) {
+		userkeys[a]=1;
+	    }
 	}
+	return userkeys;
+    }
+    LocalFirefoxSession.prototype.currentUserKey=function() {
+	return this.sessStor.get('user',false);
+    }
+    LocalFirefoxSession.prototype.currentUser=function() {
+	var userkey = this.currentUserKey();
+	return this.getUserData(userkey);
     }	    
     LocalFirefoxSession.prototype.createUser=function(username, credential, more_info) {
 	var self = this;
@@ -76,7 +114,7 @@ function hasAttr(obj,key) {
 	}
 	var user_key = this.nsUSER+user_hash;
 	///only save if they don't already exist
-	if (!hasAttr(this.permStor,user_key)) {
+	if (!this.permStor.hasKey(user_key)) {
 	    this.saveUser(user_info,false,user_key);
 	}
 	return user_key;
@@ -84,26 +122,64 @@ function hasAttr(obj,key) {
 
     /*defaults to save user_info to current user*/
     LocalFirefoxSession.prototype.saveUser=function(user_info,/*optional:*/ callback, user_key) {
-	var which_user = (user_key) ? 
-	    user_key 
-	    : ((hasAttr(this.sessStor,'user')) ? this.sessStor['user'].value : false);
+	var which_user = (user_key) ? user_key : this.currentUserKey();
 	if (which_user) {
-	    this.permStor[which_user] = M.serializeJSON(user_info);
+	    this.permStor.set(which_user, M.serializeJSON(user_info));
 	}
 	if (callback) {
 	    var response = (which_user) ?  callback(user_info) : callback(false);
 	}
     }
+    //backup stuff
+    LocalFirefoxSession.prototype.restoreKey=function(set_val) {
+	return (set_val ? set_val : this.permStor.get(this.RESTORE_KEY,false));
+    }
 
+    LocalFirefoxSession.prototype.backupList=function() {
+	var backupkeys = {};
+	for (a in this.permStor.keyDict()) {
+	    if (RegExp('^'+this.nsBACKUP).test(a)) {
+		backupkeys[a]=1;
+	    }
+	}
+	return backupkeys;
+    }
+    LocalFirefoxSession.prototype.backupObject=function() {
+	var keystobackup = {};
+	for (a in this.permStor.keyDict()) {
+	    if (RegExp('^'+this.nsUSER).test(a)) {
+		keystobackup[a]=this.permStor.get(a);
+	    }
+	}
+	return keystobackup;
+    }
+    LocalFirefoxSession.prototype.backup=function(backupkey,backupJSONstring) {
+	this.permStor.set(this.nsBACKUP+backupkey,backupJSONstring);
+    }
+    LocalFirefoxSession.prototype.getBackupString=function(backupkey) {
+	return this.permStor.get(backupkey);
+    }
+
+    LocalFirefoxSession.prototype.restore=function(blob) {
+	for (a in blob) {
+	    this.permStor.set(a,blob[a]);
+	}
+    }
+
+    LocalFirefoxSession.prototype.destroyAllUsers=function() {
+	for (a in this.userList()) {
+	    this.permStor.del(a);
+	}
+    }
     LocalFirefoxSession.prototype.destroyEverything=function() {
 	var self = this;
 	if (confirm('This will delete all data relating to clients and your own admin account.  Are you sure?')) {
-	    for (a in self.sessStor) {
-		delete self.sessStor[a];
+	    for (a in self.sessStor.keyDict()) {
+		self.sessStor.del(a);
 	    }
-	    for (a in self.permStor) {
+	    for (a in self.permStor.keyDict()) {
 		if (!RegExp('^'+self.nsBACKUP).test(a)) {
-		    delete self.permStor[a];
+		    self.permStor.del(a);
 		}
 	    }
 	}

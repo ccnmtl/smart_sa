@@ -68,7 +68,7 @@ http://www.josh-davis.org/pythonAES
 	}
     }
     UserAdmin.prototype.showUser = function(user_key) {
-	var user = evalJSON(this.session.permStor[user_key].value);
+	var user = this.session.getUserData(user_key);
 	getElement('client-list').appendChild(LI(null,user.firstname,
 						 SPAN(user.admin?' (ADMIN: Non-client) ':'')
 						));
@@ -76,10 +76,8 @@ http://www.josh-davis.org/pythonAES
     UserAdmin.prototype.showClients = function() {
 	var self = this;
 	removeElement('show_clients_button');
-	for (a in self.session.permStor) {
-	    if (RegExp('^'+self.session.nsUSER).test(a)) {
-		this.showUser(a);
-	    }
+	for (a in self.session.userList()) {
+	    this.showUser(a);
 	}
     }
 
@@ -100,14 +98,13 @@ http://www.josh-davis.org/pythonAES
 	    var r = LI(attrs,name);
 	    getElement('restoral-list').appendChild(r);
 	}
-	if (hasAttr(self.session.permStor,self.session.RESTORE_KEY)) {
-	    makeRestoralLink(self.session.permStor[self.session.RESTORE_KEY].value,true);
+	var restore_key = self.session.restoreKey();
+	if (restore_key) {
+	    makeRestoralLink(restore_key,true);
 	}
-	for (a in self.session.permStor) {
-	    if (RegExp('^'+self.session.nsBACKUP).test(a)) {
-		restorals = true;
-		makeRestoralLink(a);
-	    }
+	for (a in self.session.backupList()) {
+	    restorals = true;
+	    makeRestoralLink(a);
 	}
 	if (restorals) hideElement('no-restorals');
 	showElement('restorals');
@@ -116,14 +113,7 @@ http://www.josh-davis.org/pythonAES
 
     UserAdmin.prototype.backup_string = function() {
 	var self = this;
-	var the_object = self.session.permStor;
-	var the_package = {};
-	for (a in the_object) {
-	    //only non-backup strings
-	    if (RegExp('^'+self.session.nsUSER).test(a)) {
-		the_package[a] = the_object[a].value;
-	    }
-	}
+	var the_package = self.session.backupObject();
 	var plaintext = serializeJSON(the_package);
 	if (typeof(encrypt_key) == 'string') {
 	    return self.encrypt(plaintext);
@@ -210,7 +200,7 @@ http://www.josh-davis.org/pythonAES
 	    var now = new Date();
 	    var date_string = [now.getFullYear(),now.getMonth()+1,now.getDate(),now.getSeconds()].join('-');
 	    //save it in session data -- who knows how useful this will be.
-	    self.session.permStor[nsBACKUP+date_string] = backup_string;
+	    self.session.backup(date_string, backup_string);
 	    function writeDocument(mydoc) {
 		var my_filename = String(location.pathname).split('/').pop();
 		///NOTE: this should mirror the content in intervention/templates/intervention/restore.html
@@ -251,19 +241,18 @@ http://www.josh-davis.org/pythonAES
 	if(confirm('This will delete all current client/account data, and replace it with the restoring data. Are you sure?')) {
 	    showElement('restoring-please-wait');
 	    setTimeout(function(){
-		var backup_string = self.session.permStor[backup_key].value;
-		var plaintext = self.decrypt(backup_string);
-		var the_package = evalJSON(plaintext);
+		var backup_string = self.session.getBackupString(backup_key);
+		var the_package = null;
+		try {
+		    the_package = evalJSON(backup_string);
+		} catch(e) {
+		    var plaintext = self.decrypt(backup_string);
+		    the_package = evalJSON(self.decrypt(backup_string))
+		}
 		///DELETE old data
-		for (a in self.session.permStor) {
-		    if (RegExp('^'+self.session.nsUSER).test(a)) {
-			delete self.session.permStor[a];
-		    }
-		}
+		self.session.destroyAllUsers();
 		///RESTORE old data
-		for (a in the_package) {
-		    self.session.permStor[a] = the_package[a];
-		}
+		self.session.restore(the_package);
 		hideElement('restoring-please-wait');
 		alert('Data successfully restored from backup!');
 	    },150);
