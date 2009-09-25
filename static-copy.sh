@@ -31,6 +31,10 @@ wget --quiet \
     --domains="${ADMIN_DOMAIN}" \
     $ADMIN_URL
 
+find .  -type f |grep -v svn |grep -v /accounts/ |grep -v /selenium/ |grep -v /mochikit/scripts/ |grep -v /mochikit/tests/ |grep -v /mochikit/doc/ |grep -v /accounts/ |sed -e 's/^\.//g' >site_media/cache-manifest.txt
+
+cp site_media/cache-manifest.txt ../../media/
+
 cd ..
 ../windows-link.py $DOWNLOAD_DIR > ${DOWNLOAD_DIR}/SMART.bat
 
