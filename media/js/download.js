@@ -11,6 +11,10 @@ def.addCallback(function(xhr) {
     }
     var iframe_string = '';
     forEach(files,function(line) {
+	if (/\.pdf$/.test(line)) {
+	    --count;
+	    return;
+	}
 	iframe_string += '<iframe src="'+line+'" onload="updateCount()" width="1" height="1"></iframe>';
     });
     $("iframe-dumping-ground").innerHTML = iframe_string;
@@ -22,4 +26,8 @@ def.addCallback(function(xhr) {
 /mochikit/tests/
 /mochikit/scripts/
 /selenium/
+
+*~
+*.pdf
+*.zip
 */
