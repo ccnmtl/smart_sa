@@ -7,10 +7,12 @@
   <p>Steps to download the site.</p>
   <ol>
     <li>Firefox should be prompting you to 'store data on your computer for offline use' above.  Choose <b>Allow</b>.</li>
+    <li>When you are ready to download all the pages <button onclick="downloadAllPages()">Click to Download (after step #1)</button></li>
     <li>Any popups that prompt you to download, click Cancel (and alert the system administrator).</li>
-    <li>Stay on this page until this box turns green: 
-      <div id="done" style="width:20px;height:12px;background-color:red;"></div>
-      (or until it stops saying 'Transferring ' in the status bar at the bottom).
+    <li>Stay on this page until both boxes turn green: 
+      <div id="pagesDone" style="width:20px;height:12px;background-color:red;"></div>
+      <div id="cacheDone" style="width:20px;height:12px;background-color:red;"></div>
+      <p>Actually, this is still experimental, so just wait a really long time.  It's 150 Megabytes!</p>
     </li>
     <li>Bookmark this page: <a href="/client_login.html">Masivukeni Start</a></li>
     <li>Go to the Firefox File menu, and choose 'Work Offline.'</li>
