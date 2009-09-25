@@ -1,10 +1,11 @@
 var def = doXHR('cache-manifest.txt');
+var file_count;
 def.addCallback(function(xhr) {
     var files = xhr.responseText.split("\n");
-    var count = files.length;
+    var file_count = files.length;
     window.updateCount = function() {
-	--count;
-	if (count==0) {
+	--file_count;
+	if (file_count==0) {
 	    $('done').style.backgroundColor = 'green';
 	    alert('All Done!  You can go offline now.');
 	}
@@ -12,7 +13,7 @@ def.addCallback(function(xhr) {
     var iframe_string = '';
     forEach(files,function(line) {
 	if (/\.pdf$/.test(line)) {
-	    --count;
+	    --file_count;
 	    return;
 	}
 	iframe_string += '<iframe src="'+line+'" onload="updateCount()" width="1" height="1"></iframe>';
