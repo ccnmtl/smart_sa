@@ -1,3 +1,6 @@
+CACHE MANIFEST
+# v1
+
 /activity28_overview.html
 /activity25_overview.html
 /activity42_overview.html
