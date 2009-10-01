@@ -18,7 +18,7 @@
 <body class="{% if user.is_authenticated %}logged-in {% endif %}{% block bodyclass %}{% endblock %}">
   <div id="container-main">
     <div id="masthead">
-      <div id="logo"><a href="{{relative_root}}home"><img src="{{relative_root}}site_media/images/logo_small.png" alt="Masivukeni Logo" /></a></div>	
+      <div id="logo"><a href="{{relative_root}}home.html"><img src="{{relative_root}}site_media/images/logo_small.png" alt="Masivukeni Logo" /></a></div>	
       
       <div id="topnav">
 	<ul>
@@ -52,7 +52,7 @@
 	  <a class="loginlogout loginlogout-remote" 
 	     href="{{relative_root}}accounts/login/{% ifnotequal request.path "/logout" %}?next={{request.path}}{% endifnotequal %}">Administrative Login</a>&nbsp;
 	  <a class="loginlogout loginlogout-local" 
-	     href="{{relative_root}}client_login"
+	     href="{{relative_root}}client_login.html"
 	     onclick="Intervention.logout()"
 	     >Logout</a>
 	  {% endif %}

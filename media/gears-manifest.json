@@ -1,6 +1,6 @@
 {
   "betaManifestVersion":1,
-  "version":"testing1",
+  "version":"testing5",
   "entries": [
       {"url":"/activity28_overview.html"},
       {"url":"/activity25_overview.html"},
@@ -23,7 +23,6 @@
       {"url":"/site_media/images/button_short_gray.png"},
       {"url":"/site_media/images/button_tall_green_over.png"},
       {"url":"/site_media/images/button_short_orange.png"},
-      {"url":"/site_media/images/nacl_paper.pdf"},
       {"url":"/site_media/images/button_tall_gray.png"},
       {"url":"/site_media/images/button_tall_gray_over.png"},
       {"url":"/site_media/images/client_task_icon.gif"},
@@ -86,7 +85,6 @@
       {"url":"/site_media/tests/LoginPatient.html"},
       {"url":"/site_media/tests/Login.html"},
       {"url":"/site_media/tests/BuildUp.html"},
-      {"url":"/site_media/tests/foo.html"},
       {"url":"/site_media/js/mochikit/include/css/documentation.css"},
       {"url":"/site_media/js/mochikit/include/css/general.css"},
       {"url":"/site_media/js/mochikit/include/_img/g_logo_doc.gif"},
@@ -426,7 +424,6 @@
       {"url":"/site_media/pill_game/images/navirapine200_aspen.png"},
       {"url":"/site_media/pill_game/css/pill.css"},
       {"url":"/site_media/pill_game/css/pill_print.css"},
-      {"url":"/site_media/pill_game/js/our_choose.js"},
       {"url":"/site_media/pill_game/js/choose_treatment_line.js"},
       {"url":"/site_media/pill_game/js/medication_details.js"},
       {"url":"/site_media/pill_game/js/highlight_meds.js"},
