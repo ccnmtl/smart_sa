@@ -20,6 +20,15 @@ function NOT(bool) {
     var global = this;
     var M = MochiKit.Base;
 
+    function GearsWrapper(stor) {
+	var db = google.gears.factory.create('beta.database');
+	db.open('database-smart');
+	db.execute('create table if not exists Smart (Key text, Value text)');
+	
+
+
+    }
+
     function StorageWrapper(stor) {
 
 	this.KEYS_KEY = 'KEYS';
