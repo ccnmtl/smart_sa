@@ -32,6 +32,21 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <script type="text/javascript" src="js/gears_init.js"></script>
 <script type="text/javascript" src="js/gears_go_offline.js"></script>
+<script type="text/javascript">
+  function startCapture() {
+      var textOut = document.getElementById('textOut');
+      if (! /You must install Gears first/.test(textOut.innerHTML)) {
+         textOut.innerHTML = 'Downloading... Please wait and stay on this page while all the media for Masivukeni downloads to your computer.  This will take a while--it includes several videos.';
+      }
+      createStore();
+  }
+  function initMasivukeni() {
+     if (/smartsa/.test(document.location.host)) {
+        document.location = 'http://masivukeni.ccnmtl.columbia.edu/site_media/gears_offline.html';
+     }
+  }
+</script>
+
 
 <title>Enable Offline Usage</title>
 <style type="text/css">
@@ -51,9 +66,8 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 </style>
 </head>
 
-<body onload="init()">
+<body onload="init();initMasivukeni();">
 <h2>Getting offline-enabled documents with Gears </h2>
-<p>&nbsp;</p>
 <div>
   <p class="style1">Status Message: <span id="textOut" class="style3"></span></p>
 </div>
@@ -62,7 +76,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <p><strong>Q:</strong> I want to see these documents when I'm not online! What must I do?<br />
 <strong>A:</strong> <a href="http://gears.google.com/">Install Gears</a> on your computer and then click &quot;Capture&quot; to store the documents to your computer. You can then access the URLs without a network connection. </p>
 <p>
-  <button onclick="createStore()" > Capture </button>
+  <button onclick="startCapture()" > Capture </button>
  </p>
 
 
@@ -71,5 +85,16 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <p>
   <button onclick="removeStore()" > Erase </button>
 </p>
+
+<h2>Steps for Masivukeni</h2>
+<ol>
+  <li>Use Firefox 3.1+</li>
+  <li><a href="http://gears.google.com/">Install Google Gears</a> (you should see your status above)</li>
+  <li>Click the Capture button above.</li>
+  <li>Bookmark this link to <a href="http://masivukeni.ccnmtl.columbia.edu/home.html">Masivukeni Offline</a>/home.html</li>
+  <li>After Gears reports you've successfully downloaded the site, test the connection by going Offline (disconnect from the Internet or go to <b>File > Go Offline</b>)</li>
+  <li>Go to your bookmark, and browse the site (you can login with First name="demo" and Patient Number="demo").</li>
+</ol>
+
 </body>
 </html>
