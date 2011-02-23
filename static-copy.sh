@@ -1,7 +1,11 @@
 #!/bin/bash
 
+ADMIN_PORT=""
 ADMIN_DOMAIN="smartsa.ccnmtl.columbia.edu"
-ADMIN_URL="http://${ADMIN_DOMAIN}"
+#ADMIN_PORT=":8000" #debug
+#ADMIN_DOMAIN="localhost"
+ADMIN_URL="http://${ADMIN_DOMAIN}${ADMIN_PORT}"
+
 
 STAMP=`date +%Y%m%d_%H%M`
 DOWNLOAD_PATH="snapshots"
