@@ -74,6 +74,6 @@ urlpatterns = patterns('',
 
         # Uncomment the next line to enable the admin:
         (r'^admin/(.*)', admin.site.root),
-        ('','smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
+        ('^$','smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
                        
 )

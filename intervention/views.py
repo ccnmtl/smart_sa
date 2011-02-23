@@ -1,7 +1,7 @@
 # Create your views here.
-from django.template import RequestContext, loader
+from django.template import RequestContext, loader, TemplateDoesNotExist
 from django.shortcuts import get_object_or_404, render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.forms.models import modelformset_factory,inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
@@ -123,7 +123,10 @@ def test_task(request, game_name, page_id):
     my_game.page_id = page_id
 
     template,game_context = my_game.template(page_id)
-    t = loader.get_template(template)
+    try:
+        t = loader.get_template(template)
+    except TemplateDoesNotExist:
+        raise Http404('no template')
     c = RequestContext(request,{
         'game' :  my_game,
         'game_context' : game_context,
