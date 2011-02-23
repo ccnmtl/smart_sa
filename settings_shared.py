@@ -71,6 +71,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     'sorl.thumbnail',
     'django.contrib.admin',
+    'sentry.client',
     'smart_sa.assessmentquiz_task',    
     'smart_sa.lifegoal_task',    
     'smart_sa.pill_game',

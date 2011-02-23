@@ -2,3 +2,4 @@
 requirements/src/djangowind-0.9.8.tar.gz
 requirements/src/sorl-3.1.tar.gz
 
+requirements/src/django-sentry-1.5.4.tar.gz
