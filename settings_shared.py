@@ -5,9 +5,7 @@ DEBUG = True
 INTERNAL_IPS = ('128.59.153.16',)
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    ('CCNMTL', 'ccnmtl-sysadmin@columbia.edu'),
-)
+ADMINS = tuple()
 
 MANAGERS = ADMINS
 
