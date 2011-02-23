@@ -1,0 +1,10 @@
+._*
+*~
+*.pyc
+ve
+.svn
+\#*
+settings_production.py
+pip-log.txt
+snapshots
+ve-bootstrap.py
