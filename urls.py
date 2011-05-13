@@ -34,6 +34,7 @@ urlpatterns = patterns('',
         (r'^task/(?P<game_name>[-\w]+?)/(?P<game_id>\d+)?(?P<page_id>\w+).html$', 'smart_sa.intervention.views.game'),
 
         (r'^home.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
+        (r'^index.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
         (r'^client_login.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login.html'}),
         (r'^client_login_confirm.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login_confirm.html'}),# login confirmation, p.2
 
