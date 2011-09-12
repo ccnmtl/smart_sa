@@ -1,4 +1,4 @@
-# Django settings for smart_sa project.
+# Django settings for smart_sa clone - masivukeni2 
 import os.path
 
 DEBUG = True
@@ -10,7 +10,7 @@ ADMINS = tuple()
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'postgresql_psycopg2' # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'smart_sa' # Or path to database file if using sqlite3.
+DATABASE_NAME = 'masivukeni2' # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3. AND NOT USED ON PRODUCTION
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
@@ -49,14 +49,14 @@ FAKE_INTERVENTION_BACKUP_IV = "209b8b7cea877f069df46a0994af20c36d86bbcd33cb4b79b
 INTERVENTION_BACKUP_HEXKEY = "f8bb022b420b66ab585065366073eed24705932289279be63ee20896c335a1aa"
 INTERVENTION_BACKUP_IV = "209b8b7cea877f069df46a0994af20c36d86bbcd33cb4b79bde43dee55fc9c85"
 
-ROOT_URLCONF = 'smart_sa.urls'
+ROOT_URLCONF = 'masivukeni2.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     # Put application templates before these fallback ones:
-    "/var/www/smart_sa/templates/",
+    "/var/www/masivukeni2/templates/",
     os.path.join(os.path.dirname(__file__),"templates"),
 )
 
@@ -70,20 +70,20 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'django.contrib.admin',
     'sentry.client',
-    'smart_sa.assessmentquiz_task',    
-    'smart_sa.lifegoal_task',    
-    'smart_sa.pill_game',
-    'smart_sa.island_game',
-    'smart_sa.ssnmtree_game',
-    'smart_sa.watchvideo_game',
-    'smart_sa.problemsolving_game',
-    'smart_sa.intervention',
+    'masivukeni2.assessmentquiz_task',    
+    'masivukeni2.lifegoal_task',    
+    'masivukeni2.pill_game',
+    'masivukeni2.island_game',
+    'masivukeni2.ssnmtree_game',
+    'masivukeni2.watchvideo_game',
+    'masivukeni2.problemsolving_game',
+    'masivukeni2.intervention',
 )
 
 THUMBNAIL_SUBDIR = "thumbs"
-EMAIL_SUBJECT_PREFIX = "[smart_sa] "
+EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
 EMAIL_HOST = 'localhost'
-SERVER_EMAIL = "smart_sa@ccnmtl.columbia.edu"
+SERVER_EMAIL = "masivukeni2@ccnmtl.columbia.edu"
 
 # WIND settings
 
