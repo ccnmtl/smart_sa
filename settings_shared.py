@@ -49,7 +49,7 @@ FAKE_INTERVENTION_BACKUP_IV = "209b8b7cea877f069df46a0994af20c36d86bbcd33cb4b79b
 INTERVENTION_BACKUP_HEXKEY = "f8bb022b420b66ab585065366073eed24705932289279be63ee20896c335a1aa"
 INTERVENTION_BACKUP_IV = "209b8b7cea877f069df46a0994af20c36d86bbcd33cb4b79bde43dee55fc9c85"
 
-ROOT_URLCONF = 'masivukeni2.urls'
+ROOT_URLCONF = 'smart_sa.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -70,14 +70,14 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'django.contrib.admin',
     'sentry.client',
-    'masivukeni2.assessmentquiz_task',    
-    'masivukeni2.lifegoal_task',    
-    'masivukeni2.pill_game',
-    'masivukeni2.island_game',
-    'masivukeni2.ssnmtree_game',
-    'masivukeni2.watchvideo_game',
-    'masivukeni2.problemsolving_game',
-    'masivukeni2.intervention',
+    'smart_sa.assessmentquiz_task',    
+    'smart_sa.lifegoal_task',    
+    'smart_sa.pill_game',
+    'smart_sa.island_game',
+    'smart_sa.ssnmtree_game',
+    'smart_sa.watchvideo_game',
+    'smart_sa.problemsolving_game',
+    'smart_sa.intervention',
 )
 
 THUMBNAIL_SUBDIR = "thumbs"
