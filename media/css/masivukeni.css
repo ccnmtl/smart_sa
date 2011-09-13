@@ -3,10 +3,10 @@
 /*begin screen and defaults*/
 body
 {
-	background-color: #b5dcc1;
+	background-color: #F7941E;
 	font-family: "Lucida Sans", Arial, sans-serif;
 	font-size: 12px;
-	background-image: url(../images/page_bg.jpg);
+	/* background-image: url(../images/page_bg.jpg); */
 	background-repeat: repeat-x;
 }
 
