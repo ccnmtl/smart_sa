@@ -232,7 +232,7 @@ def intervention_admin(request, intervention_id):
                     formset.cleaned_data[-1]['ORDER']=9999999
 
             #after save, so we can order new elements
-            new_order = [x.get('id') for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
+            new_order = [x.get('id').id for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
             intervention.set_clientsession_order(new_order)
     formset = ClientSessionFormSet(instance=intervention)
     c = RequestContext(request,{'intervention' : intervention,'formset' : formset,})
@@ -259,7 +259,7 @@ def session_admin(request, session_id):
                     formset.cleaned_data[-1]['ORDER']=9999999
                     
             #after save, so we can order new elements
-            new_order = [x.get('id') for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
+            new_order = [x.get('id').id for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
             clientsession.set_activity_order(new_order)
             #refresh
             formset = ActivityFormSet(instance=clientsession)
@@ -302,7 +302,7 @@ def activity_admin(request, activity_id):
                     new_forms[i]['ORDER']=9999999+new_object.id
 
             #after save, so we can order new elements
-            new_order = [x.get('id') for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
+            new_order = [x.get('id').id for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
             activity.set_instruction_order(new_order)
             #refresh
             formset = InstructionFormSet(instance=activity)            
