@@ -227,7 +227,7 @@ def intervention_admin(request, intervention_id):
             formset.save()
             #prepare new objects for ordering
             if formset.new_objects:
-                formset.cleaned_data[-1]['id'] = formset.new_objects[0].id
+                formset.cleaned_data[-1]['id'] = formset.new_objects[0]
                 if formset.cleaned_data[-1]['ORDER'] is None:
                     formset.cleaned_data[-1]['ORDER']=9999999
 
@@ -254,7 +254,7 @@ def session_admin(request, session_id):
             formset.save()
             #prepare new objects for ordering
             if formset.new_objects:
-                formset.cleaned_data[-1]['id'] = formset.new_objects[0].id
+                formset.cleaned_data[-1]['id'] = formset.new_objects[0]
                 if formset.cleaned_data[-1]['ORDER'] is None:
                     formset.cleaned_data[-1]['ORDER']=9999999
                     
@@ -297,7 +297,7 @@ def activity_admin(request, activity_id):
             #more complicated than session,intervention because we have 3
             new_forms = [f.cleaned_data for f in formset.forms[-3:] if f.has_changed()]
             for i,new_object in enumerate(formset.new_objects):
-                new_forms[i]['id'] = new_object.id
+                new_forms[i]['id'] = new_object
                 if new_forms[i]['ORDER'] is None:
                     new_forms[i]['ORDER']=9999999+new_object.id
 
