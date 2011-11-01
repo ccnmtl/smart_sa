@@ -8,20 +8,9 @@ requirements/src/PasteScript-1.7.3.tar.gz
 requirements/src/cdap-1.0.tar.gz
 requirements/src/httplib2-0.6.0.tar.gz
 requirements/src/restclient-0.9.9.tar.gz
-# anders modified this to remove the stupid ez_setup requirement from setup.py
 requirements/src/pyenchant-1.5.1.tar.gz 
 requirements/src/simplejson-2.0.9.tar.gz
 requirements/src/smartypants-1.6.0.2.tar.gz
 requirements/src/uuid-1.30.tar.gz
+requirements/src/psycopg2-2.4-no-mx.tar.gz
 
-# these will probably be installed globally, but i'll list them anyway for completeness
-# ..actually it's because i'm using py2.6 on ubuntu 9.04, where virtualenv's use of site
-# packages is kind of broken since lib/python/site-packages has apparently been renamed
-# to dist-packages. so on my system i'm actually downloading and installing them locally
-# during bootstrap
-psycopg2
-
-#MySQLdb #this doesn't seem to work--just make sure it's in site-packages globally
-
-# for functional testing
-#requirements/src/flunc-0.6-dev.tar.gz
