@@ -80,7 +80,7 @@ INSTALLED_APPS = (
     'smart_sa.intervention',
     'south',
 )
-
+SOUTH_AUTO_FREEZE_APP = True
 THUMBNAIL_SUBDIR = "thumbs"
 EMAIL_SUBJECT_PREFIX = "[smart_sa] "
 EMAIL_HOST = 'localhost'
