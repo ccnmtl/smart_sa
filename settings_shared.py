@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'smart_sa.watchvideo_game',
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
+    'south',
 )
 
 THUMBNAIL_SUBDIR = "thumbs"
