@@ -1,4 +1,4 @@
-# Django settings for smart_sa project.
+# Django settings for smart_sa clone - masivukeni2 
 import os.path
 
 DEBUG = True
@@ -10,7 +10,7 @@ ADMINS = tuple()
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'postgresql_psycopg2' # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'smart_sa' # Or path to database file if using sqlite3.
+DATABASE_NAME = 'masivukeni2' # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3. AND NOT USED ON PRODUCTION
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
@@ -56,7 +56,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     # Put application templates before these fallback ones:
-    "/var/www/smart_sa/templates/",
+    "/var/www/masivukeni2/templates/",
     os.path.join(os.path.dirname(__file__),"templates"),
 )
 
@@ -82,9 +82,9 @@ INSTALLED_APPS = (
 )
 SOUTH_AUTO_FREEZE_APP = True
 THUMBNAIL_SUBDIR = "thumbs"
-EMAIL_SUBJECT_PREFIX = "[smart_sa] "
+EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
 EMAIL_HOST = 'localhost'
-SERVER_EMAIL = "smart_sa@ccnmtl.columbia.edu"
+SERVER_EMAIL = "masivukeni2@ccnmtl.columbia.edu"
 
 # WIND settings
 
