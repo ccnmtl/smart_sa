@@ -5,6 +5,9 @@ from django.http import HttpResponse, Http404
 from django.forms.models import modelformset_factory,inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
+from zipfile import ZipFile
+from cStringIO import StringIO
+from simplejson import dumps,loads
 
 from aes_v001 import AESModeOfOperation,toNumbers,fromNumbers
 
@@ -332,3 +335,28 @@ def gamepage_admin(request, activity_id):
     c = RequestContext(request,{'activity' : activity,'formset' : formset,})
     return HttpResponse(t.render(c))
 
+
+
+
+
+def content_sync(request):
+    """ give the user a zip file of all the content for the intervention
+    this means Intervention, ClientSession, etc objects in json format as well
+    as all the images/videos that have been uploaded. 
+
+    It does NOT include user data. 
+
+    This is to enable a "pull content from production" command to update
+    a developer's or staging database. Doing this since a lot of the functionality
+    of the site is closely tied to content in the database.
+    """
+
+    buffer = StringIO()
+    zipfile = ZipFile(buffer,"w")
+    zipfile.writestr("version.txt", "1")
+    zipfile.writestr("interventions.json",dumps(dict(interventions=[i.as_dict() for i in Intervention.objects.all()])))
+    zipfile.close()
+
+    resp = HttpResponse(buffer.getvalue())
+    resp['Content-Disposition'] = "attachment; filename=masivukeni.zip" 
+    return resp
