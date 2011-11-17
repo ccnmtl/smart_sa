@@ -372,3 +372,13 @@ def content_sync(request):
     resp = HttpResponse(buffer.getvalue())
     resp['Content-Disposition'] = "attachment; filename=masivukeni.zip" 
     return resp
+
+def list_uploads(request):
+    urls = []
+    root_len = len(settings.MEDIA_ROOT)
+    for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+        archive_root = os.path.abspath(root)[root_len:]
+        for f in files:
+            url = "http://" + request.get_host() + os.path.join(settings.MEDIA_URL,archive_root,f)
+            urls.append(url)
+    return HttpResponse("\n".join(urls),content_type="text/plain")
