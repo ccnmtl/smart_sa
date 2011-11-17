@@ -8,6 +8,8 @@ from django.conf import settings
 from zipfile import ZipFile
 from cStringIO import StringIO
 from simplejson import dumps,loads
+import os
+import os.path
 
 from aes_v001 import AESModeOfOperation,toNumbers,fromNumbers
 
@@ -354,7 +356,16 @@ def content_sync(request):
     buffer = StringIO()
     zipfile = ZipFile(buffer,"w")
     zipfile.writestr("version.txt", "1")
-    zipfile.writestr("interventions.json",dumps(dict(interventions=[i.as_dict() for i in Intervention.objects.all()])))
+    zipfile.writestr("interventions.json",
+                     dumps(dict(interventions=[i.as_dict() for i in Intervention.objects.all()])))
+
+    root_len = len(settings.MEDIA_ROOT)
+    for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+        archive_root = os.path.abspath(root)[root_len:]
+        for f in files:
+            fullpath = os.path.join(root, f)
+            archive_name = os.path.join("uploads",archive_root, f)
+            zipfile.write(fullpath, archive_name)    
     zipfile.close()
 
     resp = HttpResponse(buffer.getvalue())
