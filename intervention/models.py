@@ -22,6 +22,13 @@ class Intervention(models.Model):
     def __unicode__(self):
         return self.name
 
+    def as_dict(self):
+        return dict(
+            name=self.name,
+            general_instructions=self.general_instructions,
+            clientsessions=[cs.as_dict() for cs in self.clientsession_set.all()],
+            )
+
 class ClientSession (models.Model):
     """One day of activities for a client"""
     intervention = models.ForeignKey(Intervention)
@@ -43,6 +50,16 @@ class ClientSession (models.Model):
             return 1+self.intervention.get_clientsession_order().index(self.id)
         else:
             return 1
+
+    def as_dict(self):
+        return dict(
+            short_title=self.short_title,
+            long_title=self.long_title,
+            introductory_copy=self.introductory_copy,
+            created=str(self.created),
+            modified=str(self.modified),
+            activities=[a.as_dict() for a in self.activity_set.all()],
+            )
 
 class Activity(models.Model):
     """Contains one or more pairs of instructions, and zero or one game.
@@ -110,6 +127,18 @@ class Activity(models.Model):
         if self.game:
             return InstalledGames.variables(self.game,page_id) or []
         return []
+
+    def as_dict(self):
+        return dict(
+            short_title=self.short_title,
+            long_title=self.long_title,
+            objective_copy=self.objective_copy,
+            created=str(self.created),
+            modified=str(self.modified),
+            game=self.game,
+            gamepages=[gp.as_dict() for gp in self.gamepage_set.all()],
+            instructions=[i.as_dict() for i in self.instruction_set.all()],
+        )
 
 class GamePage (models.Model):
     """A javascript 'game' associated with an activity."""
@@ -182,6 +211,14 @@ class GamePage (models.Model):
     def variables(self, page_id=None):
         return InstalledGames.variables(self.activity.game,page_id)
 
+    def as_dict(self):
+        return dict(
+            title=self.title,
+            subtitle=self.subtitle,
+            description=self.description,
+            instructions=self.instructions,
+            )
+
 class Instruction (models.Model):
     """A unit of interaction between facilitator and client
     Multiple per activity
@@ -208,6 +245,17 @@ class Instruction (models.Model):
     def index(self):
         return 1+self.activity.get_instruction_order().index(self.id)
 
+    def as_dict(self):
+        return dict(title=self.title,
+                    style=self.style,
+                    instruction_text=self.instruction_text,
+                    help_copy=self.help_copy,
+                    notes=self.notes,
+                    image=str(self.image),
+                    created=str(self.created),
+                    modified=str(self.modified)
+                    )
+
 class Backup (models.Model):
     json_data = models.TextField(blank=True)
     created = models.DateTimeField('date created', auto_now_add=True)
@@ -218,6 +266,10 @@ class Backup (models.Model):
         #except ValueError:
         
         super(Backup, self).save(*args, **kwargs)
+
+    def as_dict(self):
+        return dict(json_data=self.json_data,
+                    created=str(self.created))
 
 class Fact (models.Model):
     """a piece of information connected to a client"""
@@ -230,3 +282,11 @@ class Fact (models.Model):
     #activities = models.DateTimeField('date modified')
     def __unicode__(self):
         return self.fact_key
+
+    def as_dict(self):
+        return dict(fact_key=self.fact_key,
+                    fact_value=self.fact_value,
+                    help_copy=self.help_copy,
+                    created=str(self.created),
+                    modified=str(self.modified),
+                    )
