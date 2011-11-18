@@ -79,12 +79,17 @@ INSTALLED_APPS = (
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
     'south',
+    'lettuce.django',
 )
 SOUTH_AUTO_FREEZE_APP = True
 THUMBNAIL_SUBDIR = "thumbs"
 EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
 EMAIL_HOST = 'localhost'
 SERVER_EMAIL = "masivukeni2@ccnmtl.columbia.edu"
+
+LETTUCE_APPS = (
+    'intervention',
+)
 
 # WIND settings
 
