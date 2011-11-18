@@ -8,3 +8,4 @@ settings_production.py
 pip-log.txt
 snapshots
 ve-bootstrap.py
+local_settings.py
