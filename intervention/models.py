@@ -29,6 +29,22 @@ class Intervention(models.Model):
             clientsessions=[cs.as_dict() for cs in self.clientsession_set.all()],
             )
 
+    def from_dict(self,d):
+        self.name = d['name']
+        self.general_instructions = d['general_instructions']
+        self.save()
+        self.clientsession_set.all().delete()
+        for c in d['clientsessions']:
+            cs = ClientSession.objects.create(
+                intervention=self,
+                short_title=c['short_title'],
+                long_title=c['long_title'],
+                introductory_copy=c['introductory_copy'],
+                created=c['created'],
+                modified=c['modified'],
+                )
+            cs.from_dict(c)
+
 class ClientSession (models.Model):
     """One day of activities for a client"""
     intervention = models.ForeignKey(Intervention)
@@ -60,6 +76,26 @@ class ClientSession (models.Model):
             modified=str(self.modified),
             activities=[a.as_dict() for a in self.activity_set.all()],
             )
+
+    def from_dict(self,d):
+        self.short_title = d['short_title']
+        self.long_title = d['long_title']
+        self.introductory_copy=d['introductory_copy']
+        self.created = d['created']
+        self.modified = d['modified']
+        self.save()
+        self.activity_set.all().delete()
+        for a in d['activities']:
+            na = Activity.objects.create(
+                clientsession=self,
+                short_title=a['short_title'],
+                long_title=a['long_title'],
+                objective_copy=a['objective_copy'],
+                created=a['created'],
+                modified=a['modified'],
+                game=a['game'],
+                )
+            na.from_dict(a)
 
 class Activity(models.Model):
     """Contains one or more pairs of instructions, and zero or one game.
@@ -139,6 +175,38 @@ class Activity(models.Model):
             gamepages=[gp.as_dict() for gp in self.gamepage_set.all()],
             instructions=[i.as_dict() for i in self.instruction_set.all()],
         )
+    def from_dict(self,d):
+        self.short_title = d['short_title']
+        self.long_title = d['long_title']
+        self.objective_copy = d['objective_copy']
+        self.created = d['created']
+        self.modified = d['modified']
+        self.game = d['game']
+        self.save()
+        self.gamepage_set.all().delete()
+        for gp in d['gamepages']:
+            ngp = GamePage.objects.create(
+                activity=self,
+                title=gp['title'],
+                subtitle=gp['subtitle'],
+                description=gp['description'],
+                instructions=gp['instructions'],
+                )
+            ngp.from_dict(gp)
+        self.instruction_set.all().delete()
+        for i in d['instructions']:
+            ni = Instruction.objects.create(
+                activity=self,
+                title=i['title'],
+                style=i['style'],
+                instruction_text=i['instruction_text'],
+                help_copy=i['help_copy'],
+                notes=i['notes'],
+                image=i['image'],
+                created=i['created'],
+                modified=i['modified'],
+                )
+            ni.from_dict(i)
 
 class GamePage (models.Model):
     """A javascript 'game' associated with an activity."""
@@ -219,6 +287,13 @@ class GamePage (models.Model):
             instructions=self.instructions,
             )
 
+    def from_dict(self,d):
+        self.title = d['title']
+        self.subtitle = d['subtitle']
+        self.description = d['description']
+        self.instructions = d['instructions']
+        self.save()
+
 class Instruction (models.Model):
     """A unit of interaction between facilitator and client
     Multiple per activity
@@ -255,6 +330,16 @@ class Instruction (models.Model):
                     created=str(self.created),
                     modified=str(self.modified)
                     )
+    def from_dict(self,d):
+        self.title = d['title']
+        self.style = d['style']
+        self.instruction_text = d['instruction_text']
+        self.help_copy = d['help_copy']
+        self.notes = d['notes']
+        self.image = d['image']
+        self.created = d['created']
+        self.modified = d['modified']
+        self.save()
 
 class Backup (models.Model):
     json_data = models.TextField(blank=True)

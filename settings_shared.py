@@ -105,3 +105,5 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
                                "django.core.context_processors.request",
                                "intervention.views.relative_root",
                                )
+
+PROD_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/"
