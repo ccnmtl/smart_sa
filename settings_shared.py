@@ -88,7 +88,7 @@ EMAIL_HOST = 'localhost'
 SERVER_EMAIL = "masivukeni2@ccnmtl.columbia.edu"
 
 LETTUCE_APPS = (
-    'intervention',
+    'smart_sa.intervention',
 )
 
 # WIND settings
