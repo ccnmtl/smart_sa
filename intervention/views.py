@@ -1,4 +1,5 @@
 # Create your views here.
+from annoying.decorators import render_to
 from django.template import RequestContext, loader, TemplateDoesNotExist
 from django.shortcuts import get_object_or_404, render_to_response
 from django.http import HttpResponse, Http404
@@ -38,26 +39,19 @@ def no_vars(request, template_name='intervention/blank.html'):
     c = RequestContext(request)
     return HttpResponse(t.render(c))
 
+@render_to('intervention/intervention.html')
 def intervention(request, intervention_id):
-    t = loader.get_template('intervention/intervention.html')
-    c = RequestContext(request,{
-        'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id)
-    })
-    return HttpResponse(t.render(c))
-  
+    return {'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id)}
+
+@render_to('intervention/session.html')  
 def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     activities = session.activity_set.all()
-    return render_to_response('intervention/session.html',
-                              {'session' : session, 'activities':activities},
-                              context_instance=RequestContext(request))
+    return {'session' : session, 'activities':activities}
 
+@render_to('intervention/activity.html')
 def activity(request, activity_id):
-    t = loader.get_template('intervention/activity.html')
-    c = RequestContext(request,{
-        'activity' : get_object_or_404(Activity, pk=activity_id)
-    })
-    return HttpResponse(t.render(c))
+    return { 'activity' : get_object_or_404(Activity, pk=activity_id) }
 
 def game(request, game_name, page_id, game_id=None):
     if not game_id:#for testing
@@ -73,6 +67,7 @@ def game(request, game_name, page_id, game_id=None):
     })
     return HttpResponse(t.render(c))
 
+@render_to('intervention/session.html')
 def test_session(request):
     intervention = Intervention(name='Test Intervention')
     session = ClientSession(intervention=intervention,
@@ -80,14 +75,13 @@ def test_session(request):
                             long_title = 'Test',
                             )
     activities = [{'id':'Test'+game_name,'short_title':label} for game_name,label in InstalledGames]
-    t = loader.get_template('intervention/session.html')
-    c = RequestContext(request,{
+    return {
         'session' : session,
         'test':True,
         'activities':activities,
-    })
-    return HttpResponse(t.render(c))
+    }
 
+@render_to('intervention/activity.html')
 def test_activity(request, game_name):
     intervention = Intervention(name='Test Intervention')
     session = ClientSession(intervention=intervention,
@@ -100,12 +94,10 @@ def test_activity(request, game_name):
                         long_title = game_name,
                         clientsession = session
                         )
-    t = loader.get_template('intervention/activity.html')
-    c = RequestContext(request,{
+    return { 
         'activity' : activity,
         'test':True,
-    })
-    return HttpResponse(t.render(c))
+    }
 
 def test_task(request, game_name, page_id):
     intervention = Intervention(name='Test Intervention')
@@ -146,12 +138,11 @@ def test_task(request, game_name, page_id):
 #####################################
 
 #no login required.
+@render_to('intervention/counselor_admin.html')
 def smart_data(request):
-    t = loader.get_template('intervention/counselor_admin.html')
-    c = RequestContext(request,{'hexkey':settings.FAKE_INTERVENTION_BACKUP_HEXKEY,
+    return {'hexkey':settings.FAKE_INTERVENTION_BACKUP_HEXKEY,
                                 'hexiv':settings.FAKE_INTERVENTION_BACKUP_IV
-                                })
-    return HttpResponse(t.render(c))
+            }
 
 @permission_required('intervention.add_backup')
 def store_backup(request):
@@ -186,8 +177,8 @@ def restore_from_backup(request):
 
 
 @permission_required('intervention.add_backup')
+@render_to('intervention/upload_backup.html')
 def save_backup_htmlupload(request):
-    t = loader.get_template('intervention/upload_backup.html')
     errors = ''
 
     if request.method == 'POST':
@@ -207,18 +198,17 @@ def save_backup_htmlupload(request):
 
     previous_backups = Backup.objects.all()
             
-    c = RequestContext(request,{'errors':errors,
-                                'backups':previous_backups,
-                                })
-    return HttpResponse(t.render(c))    
+    return {'errors':errors,
+            'backups':previous_backups,
+            }
 
 #####################################
 # ADMIN pages
 #####################################
 
 @permission_required('intervention.add_clientsession')
+@render_to('intervention/admin/intervention_admin.html')
 def intervention_admin(request, intervention_id):
-    t = loader.get_template('intervention/admin/intervention_admin.html')
     intervention = get_object_or_404(Intervention, pk=intervention_id)
     ClientSessionFormSet = inlineformset_factory(Intervention, ClientSession,
                                                  can_delete=True,
@@ -240,12 +230,11 @@ def intervention_admin(request, intervention_id):
             new_order = [x.get('id').id for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
             intervention.set_clientsession_order(new_order)
     formset = ClientSessionFormSet(instance=intervention)
-    c = RequestContext(request,{'intervention' : intervention,'formset' : formset,})
-    return HttpResponse(t.render(c))
+    return {'intervention' : intervention,'formset' : formset,}
 
 @permission_required('intervention.add_clientsession')
+@render_to('intervention/admin/session_admin.html')
 def session_admin(request, session_id):
-    t = loader.get_template('intervention/admin/session_admin.html')
     clientsession = get_object_or_404(ClientSession, pk=session_id)
     ActivityFormSet = inlineformset_factory(ClientSession, Activity,
                                             can_delete=True,
@@ -270,9 +259,7 @@ def session_admin(request, session_id):
             formset = ActivityFormSet(instance=clientsession)
     else:
         formset = ActivityFormSet(instance=clientsession)
-    c = RequestContext(request,{'clientsession' : clientsession,'formset' : formset,})
-    return HttpResponse(t.render(c))
-
+    return {'clientsession' : clientsession,'formset' : formset,}
 
 #def as_sky(self):
 #    "Returns this form rendered as HTML <p>s."
@@ -280,8 +267,8 @@ def session_admin(request, session_id):
 
 
 @permission_required('intervention.add_clientsession')
+@render_to('intervention/admin/activity_admin.html')
 def activity_admin(request, activity_id):
-    t = loader.get_template('intervention/admin/activity_admin.html')
     activity = get_object_or_404(Activity, pk=activity_id)
     InstructionFormSet = inlineformset_factory(Activity, Instruction,
                                         can_delete=True,
@@ -313,12 +300,11 @@ def activity_admin(request, activity_id):
             formset = InstructionFormSet(instance=activity)            
     else:
         formset = InstructionFormSet(instance=activity)
-    c = RequestContext(request,{'activity' : activity,'formset' : formset,})
-    return HttpResponse(t.render(c))
+    return {'activity' : activity,'formset' : formset,}
 
 @permission_required('intervention.add_clientsession')
+@render_to('intervention/admin/gamepage_admin.html')
 def gamepage_admin(request, activity_id):
-    t = loader.get_template('intervention/admin/gamepage_admin.html')
     activity = get_object_or_404(Activity, pk=activity_id)
     
     InstructionFormSet = inlineformset_factory(Activity, GamePage,
@@ -334,12 +320,7 @@ def gamepage_admin(request, activity_id):
             formset.save()
     else:
         formset = InstructionFormSet(instance=activity)
-    c = RequestContext(request,{'activity' : activity,'formset' : formset,})
-    return HttpResponse(t.render(c))
-
-
-
-
+    return {'activity' : activity,'formset' : formset,}
 
 def content_sync(request):
     """ give the user a zip file of all the content for the intervention
