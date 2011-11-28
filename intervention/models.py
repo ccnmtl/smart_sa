@@ -17,6 +17,7 @@ Facts
 class Intervention(models.Model):
     """SMART is an intervention--i.e. the top object"""
     name = models.CharField(max_length=200)
+    intervention_id = models.CharField(max_length=8,default="1")
     general_instructions = models.TextField(blank=True)
     
     def __unicode__(self):
@@ -25,6 +26,7 @@ class Intervention(models.Model):
     def as_dict(self):
         return dict(
             name=self.name,
+            intervention_id=self.intervention_id,
             general_instructions=self.general_instructions,
             clientsessions=[cs.as_dict() for cs in self.clientsession_set.all()],
             )
@@ -32,6 +34,7 @@ class Intervention(models.Model):
     def from_dict(self,d):
         self.name = d['name']
         self.general_instructions = d['general_instructions']
+        self.intervention_id = d.get('intervention_id',str(self.id))
         self.save()
         self.clientsession_set.all().delete()
         for c in d['clientsessions']:

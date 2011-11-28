@@ -41,7 +41,7 @@ def no_vars(request, template_name='intervention/blank.html'):
 def intervention(request, intervention_id):
     t = loader.get_template('intervention/intervention.html')
     c = RequestContext(request,{
-        'intervention' : get_object_or_404(Intervention, pk=intervention_id)
+        'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id)
     })
     return HttpResponse(t.render(c))
   

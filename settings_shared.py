@@ -37,6 +37,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
 )
+APPEND_SLASH = False
 
 #generate these most easily by going to:
 #http://www.josh-davis.org/ecmaScrypt
