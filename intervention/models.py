@@ -97,7 +97,7 @@ class ClientSession (models.Model):
                 created=a['created'],
                 modified=a['modified'],
                 game=a['game'],
-                collect_notes=a['collect_notes'],
+                collect_notes=a.get('collect_notes',False),
                 )
             na.from_dict(a)
 
@@ -188,7 +188,7 @@ class Activity(models.Model):
         self.created = d['created']
         self.modified = d['modified']
         self.game = d['game']
-        self.collect_notes = d['collect_notes']
+        self.collect_notes = d.get('collect_notes',False)
         self.save()
         self.gamepage_set.all().delete()
         for gp in d['gamepages']:
