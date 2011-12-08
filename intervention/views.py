@@ -209,7 +209,7 @@ def save_backup_htmlupload(request):
 @permission_required('intervention.add_clientsession')
 @render_to('intervention/admin/intervention_admin.html')
 def intervention_admin(request, intervention_id):
-    intervention = get_object_or_404(Intervention, pk=intervention_id)
+    intervention = get_object_or_404(Intervention, intervention_id=intervention_id)
     ClientSessionFormSet = inlineformset_factory(Intervention, ClientSession,
                                                  can_delete=True,
                                                  can_order=True,
