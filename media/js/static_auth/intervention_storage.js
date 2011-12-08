@@ -1,7 +1,7 @@
 /**************
 InterventionSmart() sets itself to global object Intervention.
 This will control the specific user object variables connected with
-each activity/game, and the user's progress.  
+each activity/game, and the user's progress.
 
 InterventionSmart DEPENDS ON MochiKit (more than Base?)
 and EphemeralSession (e.g. local_session.js)
@@ -15,18 +15,20 @@ current_user = {
   ///no key/object exists until the client begins
   'sessions':
      {
-        'session5': 
+        'session5':
            {
                'STATUS':'complete',
+               'counselor_notes':'',
                'activity1':
                    {
                       ///NOTE:current ASSUMPTION: no other vars here
                       'STATUS':'complete'
                    }
            }
-        'session7': 
+        'session7':
            {
                'STATUS':'inprogress',
+               'counselor_notes':'',
                'activity3':
                    {
                       'STATUS':'complete'
@@ -37,7 +39,7 @@ current_user = {
                    }
            }
      },
-  'games': 
+  'games':
      {
         'game_var_blah':{'json':'objects are Okay',
                          //magic-but non-required field that can change
@@ -66,7 +68,8 @@ current_user = {
 	    this.initTimeLog();
 	    this.current_task = {};
 	} catch(e) {/*never mind*/}
-	this.session_blueprint = function(){return {'STATUS':'inprogress'};}
+	  this.session_blueprint = function(){return {'STATUS':'inprogress',
+						      'counselor_notes' : ''};}
 	addLoadEvent(bind(this.onLoad,this));
     }
     InterventionSmart.prototype.onLoad = function() {
@@ -77,13 +80,13 @@ current_user = {
 	} else {
 	    hideElement('home-desktop');
 	}
-    }    
+    }
 
     InterventionSmart.prototype.showLoginInfo = function() {
 	///Show login Info
 	var displayed_user = getElement('username');
 	var no_remote_user = (displayed_user && !/\w/.test(displayed_user.innerHTML));
-	if (this.current_user && no_remote_user) 
+	if (this.current_user && no_remote_user)
 	{
 	    displayed_user.innerHTML = this.current_user.firstname;
 	    hideElement(getFirstElementByTagAndClassName(null,'loginlogout-remote'));
@@ -118,7 +121,7 @@ current_user = {
 				     'gender':'M'
 				    });
 	}
-	this.session.login(form_vals[0], 
+	this.session.login(form_vals[0],
 			   form_vals[1],
 			   bind(this.login_response,this));
 	///NOTE: don't return anything here, since it seems
@@ -146,7 +149,7 @@ current_user = {
          * is appended.
          */
     }
-    InterventionSmart.prototype.jumpToAdmin = function() {    
+    InterventionSmart.prototype.jumpToAdmin = function() {
 	this.session.setAdmin(true);
 	location = getElement('admin_link').href;
     }
@@ -190,7 +193,7 @@ current_user = {
     /*******************************************
      Init Intervention/Session Pages
     *******************************************/
-    InterventionSmart.prototype.init_intervention = function() {    
+    InterventionSmart.prototype.init_intervention = function() {
 	var self = this;
 	if (!hasAttr(this.current_user, 'sessions')) {
 	    this.current_user.sessions = {};
@@ -198,12 +201,12 @@ current_user = {
 	    this.session.saveUser(this.current_user);
 	}
 	self.init_subitems( function (session_id) {
-	    return (hasAttr(self.current_user.sessions,session_id) 
+	    return (hasAttr(self.current_user.sessions,session_id)
 		    && self.current_user.sessions[session_id].STATUS == 'complete');
 	});
     }
 
-    InterventionSmart.prototype.init_session = function() {    
+    InterventionSmart.prototype.init_session = function() {
 	var self = this;
 	if (!hasAttr(self.current_user,'sessions')) {
 	    self.init_intervention();
@@ -216,7 +219,7 @@ current_user = {
 	    this.session.saveUser(this.current_user);
 	}
 	self.init_subitems( function(activity_id) {
-	    return (hasAttr(self.current_user.sessions[session_id],activity_id) 
+	    return (hasAttr(self.current_user.sessions[session_id],activity_id)
 		    && self.current_user.sessions[session_id][activity_id].STATUS == 'complete');
 	});
     }
@@ -236,7 +239,7 @@ current_user = {
 	return this.current_user.sessions[session_id][activity_id];
 
     }
-    InterventionSmart.prototype.init_activity = function() {    
+    InterventionSmart.prototype.init_activity = function() {
 	if (global.game_variables
 	    && hasAttr(this.current_user.games,global.game_variables[0])
 	    && hasAttr(this.current_user.games[global.game_variables[0]],'default_page'))
@@ -245,9 +248,19 @@ current_user = {
 	    var href = getElement('taskpage-'+def_page).href;
 	    $('tasklink').href = href;
 	}
+
     }
 
-    InterventionSmart.prototype.init_subitems = function(subitem_complete) {    
+   InterventionSmart.prototype.init_notes = function() {
+     	var notesTextArea = $('counselor-notes');
+	if (notesTextArea) {
+	  var session_id = getFirstElementByTagAndClassName(null,'parentsession').id;
+	  var notes = this.current_user.sessions[session_id].counselor_notes;
+	  notesTextArea.value = notes;
+	}
+   }
+
+    InterventionSmart.prototype.init_subitems = function(subitem_complete) {
 	var next_session = false; //will be DOM object
 	forEach(
 	    getElementsByTagAndClassName('a','subitem'),
@@ -294,6 +307,12 @@ current_user = {
 	}
     }
 
+   InterventionSmart.prototype.saveCounselorNotes = function(notes) {
+     var session_id = getFirstElementByTagAndClassName(null,'parentsession').id;
+     this.current_user.sessions[session_id].counselor_notes = notes;
+     this.session.saveUser(this.current_user);
+   }
+
     /*******************************************
      Game Variables
     *******************************************/
@@ -308,7 +327,7 @@ current_user = {
 	    this.current_user.games[key] = default_value;
 	}
 	this.current_task[key] = default_value;
-	return this.current_user.games[key];	
+	return this.current_user.games[key];
     }
     InterventionSmart.prototype.resetGame = function() {
 	for (key in this.current_task) {
@@ -339,7 +358,7 @@ current_user = {
 
 	if (!hasAttr(this.current_user, 'timelog')) {
 	    this.current_user['timelog'] = {};
-	} 
+	}
 	if (!hasAttr(this.current_user.timelog, date_string)) {
 	    this.current_user.timelog[date_string] = [];
 	}

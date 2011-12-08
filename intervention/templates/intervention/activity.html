@@ -114,6 +114,16 @@
 	{% if not activity.game %}
 	 <!-- if we have a game, the complete button is on the last game page-->
       <br />  <hr />
+
+      {% if activity.collect_notes %}
+      <h2>Counselor Notes</h2>
+      <textarea name="counselor_notes" rows="5" cols="70" id="counselor-notes"
+		onchange="Intervention.saveCounselorNotes(this.value)"
+		></textarea>
+      <script>Intervention.init_notes()</script>
+      {% endif %}
+
+
          <p>
 	   <a id="complete" class="hilite_right" 
 	      href="session{{activity.clientsession.id}}_agenda.html"
