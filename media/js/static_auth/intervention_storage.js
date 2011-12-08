@@ -256,7 +256,9 @@ current_user = {
 	if (notesTextArea) {
 	  var session_id = getFirstElementByTagAndClassName(null,'parentsession').id;
 	  var notes = this.current_user.sessions[session_id].counselor_notes;
-	  notesTextArea.value = notes;
+	  if (notes) {
+	    notesTextArea.value = notes;
+	  }
 	}
    }
 
