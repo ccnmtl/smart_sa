@@ -97,6 +97,7 @@ class ClientSession (models.Model):
                 created=a['created'],
                 modified=a['modified'],
                 game=a['game'],
+                collect_notes=a['collect_notes'],
                 )
             na.from_dict(a)
 
@@ -113,6 +114,7 @@ class Activity(models.Model):
     short_title = models.CharField(max_length=512)
     long_title = models.CharField(max_length=512)
     objective_copy = models.TextField(blank=True)
+    collect_notes = models.BooleanField(default=False)
     
     created = models.DateTimeField('date created', auto_now_add=True)
     modified = models.DateTimeField('date modified', auto_now=True)
@@ -175,6 +177,7 @@ class Activity(models.Model):
             created=str(self.created),
             modified=str(self.modified),
             game=self.game,
+            collect_notes=self.collect_notes,
             gamepages=[gp.as_dict() for gp in self.gamepage_set.all()],
             instructions=[i.as_dict() for i in self.instruction_set.all()],
         )
@@ -185,6 +188,7 @@ class Activity(models.Model):
         self.created = d['created']
         self.modified = d['modified']
         self.game = d['game']
+        self.collect_notes = d['collect_notes']
         self.save()
         self.gamepage_set.all().delete()
         for gp in d['gamepages']:
