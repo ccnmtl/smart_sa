@@ -17,7 +17,28 @@
 
 {% block content %}
     {{ block.super }}
-    
+		<div id="side">
+			<h2 id="sessioninfo" class="incomplete">
+				Session 1: Getting Started 
+			</h2>
+			<div id="nav-side">
+				<ul>
+					<li><a class="complete first" href="index.html">One</a></li>
+					<li><a class="incomplete current" href="index.html">Two</a><span class="task">+Task</span></li>
+					<li><a class="activity current" href="index.html">Task: Island Game</a></li>
+					<li><a class="incomplete" href="index.html">Three</a></li>
+					<li><a class="incomplete" href="index.html">Four</a></li>
+					<li><a class="incomplete" href="index.html">Five</a><span class="task">+Task</span></li>
+					<li><a class="incomplete" href="index.html">Six</a></li>
+					<li><a class="incomplete" href="index.html">Seven</a><span class="task">+Task</span></li>
+					<li><a class="incomplete" href="index.html">Eight</a></li>
+					<li><a class="incomplete" href="index.html">Nine</a><span class="task">+Task</span></li>
+					<li><a class="incomplete last" href="index.html">Ten</a><span class="task">+Task</span></li>
+				</ul>
+			</div>
+
+		</div>
+		<div id="content">
           {% if perms.intervention.add_clientsession %}
         <div>
 	  <a class="admin_link" href="/intervention_admin/activity/{{activity.id}}/">Edit Procedure</a>
@@ -28,12 +49,15 @@
     {% if activity %}
     <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
 
-    <div id="titlearea"> 
-      <h1 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h1>
-        </div> 
+
+      <h3 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h3>
+
+			<div class="nav-lateral" id="top-nav-lateral">
+				<a href="index.html">Next &rarr;</a> <a href="index.html">&larr; Previous</a> 
+			</div>
+
          {%if activity.game %}
-      <div id="content-right" >
-	<h2 class="flag">This activity has a client task</h2>
+	<h4 class="flag">This activity has a client task</h4>
 	{% if activity.pages %}
 	  <p>
 	    {% if not test %}
@@ -60,7 +84,6 @@
 	  </p>
 
 	{%endif%}
-      </div>      
       {%endif%}
       <script>
 	if (typeof(Intervention) != 'undefined') {
@@ -80,19 +103,18 @@
 
  
           
-    <div id="content-singlecolumn">
-     <h2>Objective(s)</h2>
+     <h4>Objective(s)</h4>
         <div class="objective">
 	  {{activity.objective_copy|safe}}
 	</div>
-	<h2>Procedure</h2>
+	<h4>Procedure</h4>
 	{% if not test and activity.instruction_set.count %}
  
 	 {% for instruction in activity.instruction_set.all %}
            <ul>
 	     <li>
 	       {%if instruction.title %}
-	         <h3>{{instruction.title}}</h3> 
+	         <h5>{{instruction.title}}</h5> 
 	       {%endif%}
 
 	       {%if instruction.image %}
@@ -116,7 +138,7 @@
       <br />  <hr />
 
       {% if activity.collect_notes %}
-      <h2>Counselor Notes</h2>
+      <h4>Counselor Notes</h4>
       <textarea name="counselor_notes" rows="5" cols="70" id="counselor-notes"
 		onchange="Intervention.saveCounselorNotes(this.value)"
 		></textarea>
@@ -135,7 +157,10 @@
 	
 	{% endif %}
  
-    </div>
-  
+			<div class="nav-lateral" id="bottom-nav-lateral">
+				<a id="top" href="#pagestart">&uarr; Back to Top</a> <a href="index.html">Next &rarr;</a> <a href="index.html">&larr; Previous</a> 
+			</div>
+
+</div>  
 
 {% endblock %}

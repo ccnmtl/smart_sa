@@ -1,9 +1,6 @@
 {% extends "intervention/offlineable_base.html" %}
 
 {% block breadcrumbs %}
-
-
-
     {%if session %}
       <li><a href="intervention{{session.intervention.id}}_intro.html">Session List</a></li>
     {%endif%}  
@@ -23,11 +20,8 @@
     
     
     {% if session %}
-    <div id="titlearea"> 
-      <h1 id="session{{session.id}}" class="sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h1>
-       <h2>Agenda</h2>
-    </div> 
-    <div id="content-singlecolumn">
+
+			<h3 id="session{{session.id}}" class="incomplete">Session {{ session.index }}: {{ session.long_title }}</h3>
       {% if session.introductory_copy %}
 	<p class="instructions">{{session.introductory_copy|safe}}</p><hr />
       {% endif %}
@@ -37,11 +31,18 @@
 	  The suggested next activity is highlighted.
 	</p>
 
+
+	<div id="navigator">
+	  <ul class="primary">
         {% for activity in activities %}
-	   <a id="activity{{activity.id }}" class="subitem activity session_off" href="activity{{activity.id }}_overview.html">
+	   <li><a id="activity{{activity.id }}" class="subitem activity session_off" href="activity{{activity.id }}_overview.html">
 	     <span class="titletext"> Activity {{forloop.counter}}: <br />{{ activity.short_title }}</span>
-	    </a>
+	    </a></li>
         {% endfor %}
+	  </ul>
+	  <ul class="secondary">
+	  </ul>
+	</div>
 	<script type="text/javascript">
 	  if (typeof(Intervention) != 'undefined') {
 	      Intervention.init_session();
