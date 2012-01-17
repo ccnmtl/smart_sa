@@ -508,3 +508,26 @@ p
 	text-align: center;
 	line-height: 14px;
 }
+
+#all-task-pages
+{
+         display: none;
+         /*not for public consumption--just for programming*/
+}
+
+#messaging, .messaging
+{
+         background-color: #f9f5d2;
+         padding: 10px;
+         border: 1px solid #f7941e;
+}
+ 
+#messaging
+{
+         width: 190px;
+         float: right;
+         margin-right: -210px;
+         position: relative;
+         min-height: 402px;
+         display: none;
+}
