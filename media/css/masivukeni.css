@@ -531,3 +531,29 @@ p
          min-height: 402px;
          display: none;
 }
+
+
+#game-content
+{
+         border: 1px solid #ccc;
+         width: 545px;
+         overflow: hidden;
+         height: 455px;
+}
+
+#game-content .video
+{
+         text-align: center;
+         margin-top: 5px;
+}
+
+.game_instructions { margin: 0 0 20px 5px; }
+
+@media print
+{
+         #content-right.game { display: none; }
+         #container-main { border: none; }
+         #game-content { border: none; }
+         #navbar { display: none; }
+         body { background: none; }
+}
