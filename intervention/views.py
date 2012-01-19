@@ -41,17 +41,20 @@ def no_vars(request, template_name='intervention/blank.html'):
 
 @render_to('intervention/intervention.html')
 def intervention(request, intervention_id):
-    return {'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id)}
+    return {'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id),
+            'offlineable' : True}
 
 @render_to('intervention/session.html')  
 def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     activities = session.activity_set.all()
-    return {'session' : session, 'activities':activities}
+    return {'session' : session, 'activities':activities,
+            'offlineable' : True}
 
 @render_to('intervention/activity.html')
 def activity(request, activity_id):
-    return { 'activity' : get_object_or_404(Activity, pk=activity_id) }
+    return { 'activity' : get_object_or_404(Activity, pk=activity_id) ,
+             'offlineable' : True}
 
 def game(request, game_name, page_id, game_id=None):
     if not game_id:#for testing
@@ -64,6 +67,7 @@ def game(request, game_name, page_id, game_id=None):
     c = RequestContext(request,{
         'game' :  my_game,
         'game_context' : game_context,
+        'offlineable' : True,
     })
     return HttpResponse(t.render(c))
 
@@ -363,3 +367,52 @@ def list_uploads(request):
             url = "http://" + request.get_host() + os.path.join(settings.MEDIA_URL,archive_root,f)
             urls.append(url)
     return HttpResponse("\n".join(urls),content_type="text/plain")
+
+def manifest(request):
+    media_dir = os.path.join(os.path.dirname(__file__),"../media/")
+    media_files = []
+    for root, dirs, files in os.walk(media_dir):
+        if "selenium" in root \
+                or "mochikit/scripts" in root\
+                or "mochikit/tests" in root\
+                or "mochikit/doc" in root\
+                or "mochikit/examples" in root\
+                or "newskin" in root:
+            continue
+        for f in files:
+            if f.endswith("~"):
+                continue
+            if "#" in f:
+                continue
+            if f.startswith("."):
+                continue
+            fullpath = os.path.join(root,f)
+            path = "/site_media/" + fullpath[len(media_dir):]
+            media_files.append(path)
+
+    for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+        for f in files:
+            if f.endswith("~"):
+                continue
+            if "#" in f:
+                continue
+            if f.startswith("."):
+                continue
+            fullpath = os.path.join(root,f)
+            path = "/multimedia/" + fullpath[len(settings.MEDIA_ROOT):]
+            media_files.append(path)
+
+    dynamic_paths = ["/index.html","/home.html","/client_login.html",
+                     "/help/credits.html","/help/backup.html",
+                     "/masivukeni_admin_data.html"]
+    for activity in Activity.objects.all():
+        dynamic_paths.append("/activity%d_overview.html" % activity.id)
+        for taskpage in activity.gamepage_set.all():
+            dynamic_paths.append("/task/%s/%d%s.html" % (activity.game,taskpage.id,taskpage.page_name()))
+
+    for session in ClientSession.objects.all():
+        dynamic_paths.append("/session%d_agenda.html" % session.id)
+
+    return HttpResponse("CACHE MANIFEST\n" + "\n".join(media_files + dynamic_paths),
+                        content_type="text/cache-manifest")
+

@@ -2,8 +2,10 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" 
       xml:lang="en" lang="en"
-      {% block tophtmltagattrs %}{% endblock %}
-      >
+      {% if offlineable %}
+      manifest="/cache.manifest"
+      {% endif %}
+>
 <head>
   <title>Masivukeni: {% block title %}{% endblock %}</title>
   <link href="{{relative_root}}site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
