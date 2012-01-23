@@ -15,6 +15,7 @@ virtualenv_support_dir = os.path.abspath(os.path.join(pwd, "requirements", "virt
 
 ret = subprocess.call(["python", "virtualenv.py", 
                        "--extra-search-dir=%s" % virtualenv_support_dir,
+                       "--no-site-packages",
                        "--never-download",
                        vedir])
 if ret: exit(ret)
