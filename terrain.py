@@ -1,7 +1,7 @@
 from lettuce import *
 from lettuce.django import django_url
 from selenium import selenium
-
+ 
 #@before.harvest
 #def prepare_browser_driver(variables):
 #    if variables.get('run_server', False) is True:
