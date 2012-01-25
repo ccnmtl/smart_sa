@@ -420,6 +420,7 @@ def manifest(request):
 
     dynamic_paths = ["/index.html","/home.html","/client_login.html",
                      "/help/credits.html","/help/backup.html",
+                     "/client_login_confirm.html",
                      "/masivukeni_admin_data.html"]
     for activity in Activity.objects.all():
         dynamic_paths.append("/activity%d_overview.html" % activity.id)
