@@ -408,11 +408,11 @@ def manifest(request):
                 continue
             if f.startswith("."):
                 continue
-            if settings.DEBUG:
-                # don't want the browser trying to download movies 
-                # from the dev server
-                if f.endswith("mov"):
-                    continue
+            # HTML5 appcache limits things to 5MB,
+            # which our videos totally exceed.
+            # need to find a way around this later, but for now:
+            if f.endswith("mov"):
+                continue
 
             fullpath = os.path.join(root,f)
             path = "/multimedia/" + fullpath[len(settings.MEDIA_ROOT):]
