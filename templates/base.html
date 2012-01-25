@@ -12,6 +12,7 @@
   <script type="text/javascript" src="{{relative_root}}site_media/js/mochikit/MochiKit/MochiKit.js"></script>
   <script type="text/javascript" src="{{relative_root}}site_media/js/static_auth/local_session.js"></script>
   <script type="text/javascript" src="{{relative_root}}site_media/js/static_auth/intervention_storage.js"></script>    
+  <script type="text/javascript" src="{{relative_root}}site_media/js/appcache_status.js"></script>
   {% block js %}{% endblock %}
   {% block feeds %}{% endblock %}
 </head>
@@ -78,6 +79,7 @@
     <!--BEGIN FOOTER-->  
     <div id="footer">
 		<p>
+		  <span id="cache-status-footer">cache status</span>
 			Footer <a href="index.html">info</a> 
     {% block footer %}{% endblock %}
 		</p>
