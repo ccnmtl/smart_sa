@@ -11,6 +11,7 @@ from cStringIO import StringIO
 from simplejson import dumps,loads
 import os
 import os.path
+import random
 
 from aes_v001 import AESModeOfOperation,toNumbers,fromNumbers
 
@@ -32,6 +33,15 @@ def relative_root(request):
     return {'relative_root':relative_root_path,
             'INTERVENTION_MEDIA': relative_root_path + 'site_media/'
             }
+
+def manifest_version(request):
+    """ on development, we want to make sure the manifest gets updated every time. """
+    if settings.DEBUG:
+        return {'manifest_version': str(random.randint(0,320000))}
+    else:
+        # for production, we probably want a per-release kind of thing?
+        # not really sure. will figure this out later.
+        return {}
 
 #VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
@@ -398,6 +408,12 @@ def manifest(request):
                 continue
             if f.startswith("."):
                 continue
+            if settings.DEBUG:
+                # don't want the browser trying to download movies 
+                # from the dev server
+                if f.endswith("mov"):
+                    continue
+
             fullpath = os.path.join(root,f)
             path = "/multimedia/" + fullpath[len(settings.MEDIA_ROOT):]
             media_files.append(path)
