@@ -115,7 +115,7 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
 
 PROD_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/"
 PROD_MEDIA_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/multimedia/"
-
+ 
 try:
     from release_id import LAST_GIT_HEAD
 except ImportError:
