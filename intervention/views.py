@@ -39,9 +39,8 @@ def manifest_version(request):
     if settings.DEBUG:
         return {'manifest_version': str(random.randint(0,320000))}
     else:
-        # for production, we probably want a per-release kind of thing?
-        # not really sure. will figure this out later.
-        return {}
+        # for production, we bump the manifest version on every git commit
+        return {'manifest_version': settings.LAST_GIT_HEAD}
 
 #VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
