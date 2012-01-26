@@ -32,7 +32,7 @@ urlpatterns = patterns('',
         # page 6,7, 15
         (r'^activity(?P<activity_id>\d+)_overview.html$', 'smart_sa.intervention.views.activity'), # page 12
         #game names can have a '-' e.g. video
-        (r'^task/(?P<game_name>[-\w]+?)/(?P<game_id>\d+)?(?P<page_id>\w+).html$', 'smart_sa.intervention.views.game'),
+        (r'^task/(?P<game_name>[-\w]+?)/(?P<game_id>\d+)(?P<page_id>\w+).html$', 'smart_sa.intervention.views.game'),
 
         (r'^home.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
         (r'^index.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
@@ -42,12 +42,6 @@ urlpatterns = patterns('',
         (r'^masivukeni_admin_data.html$', 'smart_sa.intervention.views.smart_data'),
         (r'^help/backup.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),
         (r'^help/credits.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/credits.html'}),
-
-        ########
-        # TEST
-        ########
-        (r'^sessionNone_agenda.html$', 'smart_sa.intervention.views.test_session'),                       
-        (r'^activityTest(?P<game_name>[-\w]+?)_overview.html$', 'smart_sa.intervention.views.test_activity'), # page 12
 
         ########
         # SERVER VIEW

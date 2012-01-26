@@ -66,8 +66,6 @@ def activity(request, activity_id):
              'offlineable' : True}
 
 def game(request, game_name, page_id, game_id=None):
-    if not game_id:#for testing
-        return test_task(request, game_name, page_id)
     my_game = get_object_or_404(GamePage, pk=game_id)
     if not my_game.activity:
         """ for some reason, the database is littered with GamePage
@@ -92,72 +90,6 @@ def game(request, game_name, page_id, game_id=None):
         'offlineable' : True,
     })
     return HttpResponse(t.render(c))
-
-@render_to('intervention/session.html')
-def test_session(request):
-    intervention = Intervention(name='Test Intervention')
-    session = ClientSession(intervention=intervention,
-                            short_title = 'Test',
-                            long_title = 'Test',
-                            )
-    activities = [{'id':'Test'+game_name,'short_title':label} for game_name,label in InstalledGames]
-    return {
-        'session' : session,
-        'test':True,
-        'activities':activities,
-    }
-
-@render_to('intervention/activity.html')
-def test_activity(request, game_name):
-    intervention = Intervention(name='Test Intervention')
-    session = ClientSession(intervention=intervention,
-                            short_title = 'Test '+game_name,
-                            long_title = 'Test '+game_name,
-                            )
-    activity = Activity(id='Test'+game_name,
-                        game=game_name,
-                        short_title = game_name,
-                        long_title = game_name,
-                        clientsession = session
-                        )
-    return { 
-        'activity' : activity,
-        'test':True,
-    }
-
-def test_task(request, game_name, page_id):
-    intervention = Intervention(name='Test Intervention')
-    session = ClientSession(intervention=intervention,
-                            short_title = 'Test '+game_name,
-                            long_title = 'Test '+game_name,
-                            )
-    activity = Activity(id='Test'+game_name,
-                        game=game_name,
-                        short_title = game_name+' '+page_id,
-                        long_title = game_name+' '+page_id,
-                        clientsession = session
-                        )
-    my_game = GamePage(activity=activity,
-                       title = 'Test Game Page '+page_id,
-                       subtitle = 'Subtitle',
-                       description = 'Ipso Lorem Description',
-                       instructions = 'Ipso Lorem Instructions',
-                       )
-    my_game.page_id = page_id
-
-    template,game_context = my_game.template(page_id)
-    try:
-        t = loader.get_template(template)
-    except TemplateDoesNotExist:
-        raise Http404('no template')
-    c = RequestContext(request,{
-        'game' :  my_game,
-        'game_context' : game_context,
-        'test':True,
-    })
-    return HttpResponse(t.render(c))
-    
-
 
 #####################################
 # BACKUP/RESTORE pages
