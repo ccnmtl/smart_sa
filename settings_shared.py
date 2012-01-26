@@ -1,5 +1,6 @@
 # Django settings for smart_sa clone - masivukeni2 
 import os.path
+import sys
 
 DEBUG = True
 INTERNAL_IPS = ('128.59.153.16',)
@@ -81,7 +82,15 @@ INSTALLED_APPS = (
     'smart_sa.intervention',
     'south',
     'lettuce.django',
+    'django_nose',
 )
+
+if 'test' in sys.argv:
+    DATABASE_ENGINE = 'sqlite3'
+
+SOUTH_TESTS_MIGRATE = False
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
 SOUTH_AUTO_FREEZE_APP = True
 THUMBNAIL_SUBDIR = "thumbs"
 EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
