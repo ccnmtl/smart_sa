@@ -109,7 +109,6 @@ def store_backup(request):
             Backup.objects.create(json_data=request.POST['backup'])
             return HttpResponse('ok')
         except ValueError:
-            print 'not json'
             return HttpResponse('FAIL!')
         return HttpResponse('FAIL!')
     else:
