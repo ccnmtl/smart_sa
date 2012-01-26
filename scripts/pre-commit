@@ -1,0 +1,6 @@
+#!/bin/sh
+# link me into your git hooks like so:
+# ln -s scripts/pre-commit .git/hooks/pre-commit
+./manage.py test
+echo "LAST_GIT_HEAD = \"`cat .git/refs/heads/master`\"" > release_id.py
+git add release_id.py
