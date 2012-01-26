@@ -69,6 +69,19 @@ def game(request, game_name, page_id, game_id=None):
     if not game_id:#for testing
         return test_task(request, game_name, page_id)
     my_game = get_object_or_404(GamePage, pk=game_id)
+    if not my_game.activity:
+        """ for some reason, the database is littered with GamePage
+         objects that don't have an activity associated with them 
+         (and are therefore inaccessible normally) and googlebot 
+         occasionally manages to pull them up, generating an exception
+         I don't yet know if it's OK for these orphan gamepages to be in there
+         so I'm hesitant to just delete them. In the meantime,
+         if there is no referer (ie, probably googlebot or similar),
+         we can silently ignore this exception 
+         -Anders
+         """
+        if not request.META.get('HTTP_REFERER',None):
+            return HttpResponse("orphan gamepage. please contact developers if you are seeing this")
     my_game.page_id = page_id
     template,game_context = my_game.template(page_id)
     
