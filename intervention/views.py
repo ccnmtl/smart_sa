@@ -279,6 +279,22 @@ def gamepage_admin(request, activity_id):
         formset = InstructionFormSet(instance=activity)
     return {'activity' : activity,'formset' : formset,}
 
+def all_uploads():
+    root_len = len(settings.MEDIA_ROOT)
+    for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+        archive_root = os.path.abspath(root)[root_len:]
+        for f in files:
+            if f.endswith("~"):
+                continue
+            if "#" in f:
+                continue
+            if f.startswith("."):
+                continue
+            fullpath = os.path.join(root, f)
+            archive_name = os.path.join("uploads",archive_root, f)
+            public_path = os.path.join(settings.MEDIA_URL,archive_root,f)
+            yield fullpath,f,archive_name,public_path
+
 def content_sync(request):
     """ give the user a zip file of all the content for the intervention
     this means Intervention, ClientSession, etc objects in json format as well
@@ -298,13 +314,8 @@ def content_sync(request):
                      dumps(dict(interventions=[i.as_dict() for i in Intervention.objects.all()])))
 
     if request.GET.get('include_uploads',False):
-        root_len = len(settings.MEDIA_ROOT)
-        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
-            archive_root = os.path.abspath(root)[root_len:]
-            for f in files:
-                fullpath = os.path.join(root, f)
-                archive_name = os.path.join("uploads",archive_root, f)
-                zipfile.write(fullpath, archive_name)    
+        for fullpath,f,archive_name,public_path in all_uploads():
+            zipfile.write(fullpath, archive_name)                
     zipfile.close()
 
     resp = HttpResponse(buffer.getvalue())
@@ -313,12 +324,9 @@ def content_sync(request):
 
 def list_uploads(request):
     urls = []
-    root_len = len(settings.MEDIA_ROOT)
-    for root, dirs, files in os.walk(settings.MEDIA_ROOT):
-        archive_root = os.path.abspath(root)[root_len:]
-        for f in files:
-            url = "http://" + request.get_host() + os.path.join(settings.MEDIA_URL,archive_root,f)
-            urls.append(url)
+    for fullpath,f,archive_name,public_path in all_uploads():
+        url = "http://" + request.get_host() + public_path
+        urls.append(url)
     return HttpResponse("\n".join(urls),content_type="text/plain")
 
 def manifest(request):
@@ -343,23 +351,13 @@ def manifest(request):
             path = "/site_media/" + fullpath[len(media_dir):]
             media_files.append(path)
 
-    for root, dirs, files in os.walk(settings.MEDIA_ROOT):
-        for f in files:
-            if f.endswith("~"):
-                continue
-            if "#" in f:
-                continue
-            if f.startswith("."):
-                continue
+    for fullpath,f,archive_name,public_path in all_uploads():
+        if f.endswith("mov"):
             # HTML5 appcache limits things to 5MB,
             # which our videos totally exceed.
             # need to find a way around this later, but for now:
-            if f.endswith("mov"):
-                continue
-
-            fullpath = os.path.join(root,f)
-            path = "/multimedia/" + fullpath[len(settings.MEDIA_ROOT):]
-            media_files.append(path)
+            continue
+        media_files.append(public_path)
 
     dynamic_paths = ["/index.html","/home.html","/client_login.html",
                      "/help/credits.html","/help/backup.html",
