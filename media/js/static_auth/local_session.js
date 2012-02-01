@@ -19,9 +19,9 @@ function NOT(bool) {
 (function() {
     var global = this;
     var M = MochiKit.Base;
-
+//   console.log("here");
     function StorageWrapper(stor) {
-
+//      console.log("StorageWrapper");
 	this.KEYS_KEY = 'KEYS';
 	this.hasKey = function(key) {
 	    return (stor.getItem(key) != null);
@@ -29,6 +29,7 @@ function NOT(bool) {
 	this.get = function(key,default_val) {
 	    return (this.hasKey(key) ? stor.getItem(key) : default_val);
 	}
+//      console.log("StorageWrapper 1", this.KEYS_KEY);
 	var key_dict = M.evalJSON(this.get(this.KEYS_KEY,'{}'));
 	this.set = function(key,value) {
 	    stor.setItem(key,value);
@@ -48,6 +49,7 @@ function NOT(bool) {
     }
 
     function LocalFirefoxSession() {
+//      console.log("LocalFirefoxSession");
 	this.permStor = new StorageWrapper(hasAttr(global,'localStorage')?global.localStorage:global.globalStorage[location.hostname]);
 	this.sessStor = new StorageWrapper(global.sessionStorage);
 	this.nsUSER = 'USER_';
@@ -91,6 +93,7 @@ function NOT(bool) {
 	return sha1Hash(my_hash);
     }
     LocalFirefoxSession.prototype.getUserData=function(user_key) {
+//      console.log("LocalFirefoxSession.getUserData", user_key);
 	return M.evalJSON(this.permStor.get(user_key,'false'));
     }
     LocalFirefoxSession.prototype.userList=function() {
@@ -188,6 +191,8 @@ function NOT(bool) {
 	    }
 	}
     }
+
+//   console.log("in local_session.js");
 
     if ( NOT( hasAttr(global,'EphemeralSession'))) {
 	if (hasAttr(global,'sessionStorage')

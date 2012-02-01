@@ -62,6 +62,7 @@ current_user = {
 (function() {
     var global = this;
     function InterventionSmart() {
+//      console.log("InterventionSmart constructor");
 	try {
 	    this.session = global.EphemeralSession;
 	    this.current_user = global.EphemeralSession.currentUser();
@@ -73,6 +74,8 @@ current_user = {
 	addLoadEvent(bind(this.onLoad,this));
     }
     InterventionSmart.prototype.onLoad = function() {
+//      console.log("InterventionSmart.onLoad");
+//      console.log(this.current_user);
 	this.showLoginInfo();
 	if (location.protocol == 'file:') {
 	    hideElement(getFirstElementByTagAndClassName(null,'loginlogout-remote'));
@@ -114,6 +117,7 @@ current_user = {
 	}
 	//DEMO USER
 	if (form_vals[0]=='demo' && form_vals[1]=='demo') {
+//	  console.log("creating user");
 	    this.session.createUser('demo','demo',
 				    {'firstname':'John',
 				     'fullname':'John Smith',
@@ -186,6 +190,7 @@ current_user = {
 	}
     }
     InterventionSmart.prototype.logout = function() {
+//      console.log("InterventionSmart.logout");
 	this.logTime();
 	this.session.logout();
 	this.current_user = false;
@@ -206,6 +211,15 @@ current_user = {
 	});
     }
 
+   InterventionSmart.prototype.findSessionId = function() {
+     var e = getFirstElementByTagAndClassName('h3','sessiontitle');
+     if (e) {
+       return e.id;
+     } else {
+       return getFirstElementByTagAndClassName('h1','sessiontitle').id;
+     }
+   }
+
     InterventionSmart.prototype.init_session = function() {
 	var self = this;
 	if (!hasAttr(self.current_user,'sessions')) {
@@ -213,7 +227,7 @@ current_user = {
 	    //OK, since init_subitems() is run again for activities below
 	}
 	var user_sessions = self.current_user.sessions;
-	var session_id = getFirstElementByTagAndClassName('h1','sessiontitle').id;
+	var session_id = this.findSessionId();
 	if (!hasAttr(user_sessions, session_id)) {
 	    user_sessions[session_id] = self.session_blueprint();
 	    this.session.saveUser(this.current_user);
@@ -375,6 +389,7 @@ current_user = {
      INIT Global Instantiation
      **************/
     if (!hasAttr(global,'Intervention')) {
+//      console.log("setting up new InterventionSmart");
 	global.Intervention = new InterventionSmart();
     }
 })();
