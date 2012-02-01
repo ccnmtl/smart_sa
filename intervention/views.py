@@ -37,10 +37,12 @@ def relative_root(request):
 def manifest_version(request):
     """ on development, we want to make sure the manifest gets updated every time. """
     if settings.DEBUG:
-        return {'manifest_version': str(random.randint(0,320000))}
+        return {'manifest_version': str(random.randint(0,320000)),
+                'disable_offline' : settings.DISABLE_OFFLINE }
     else:
         # for production, we bump the manifest version on every git commit
-        return {'manifest_version': settings.LAST_GIT_HEAD}
+        return {'manifest_version': settings.LAST_GIT_HEAD,
+                'disable_offline': False}
 
 #VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
