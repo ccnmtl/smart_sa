@@ -54,7 +54,20 @@
       <h3 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h3>
 
 			<div class="nav-lateral" id="top-nav-lateral">
-				<a href="index.html">Next &rarr;</a> <a href="index.html">&larr; Previous</a> 
+			  {% with activity.next as next_activity %}
+			     {% if next_activity %}
+				<a href="activity{{next_activity.id }}_overview.html">Next &rarr;</a> 
+                             {% else %}
+				Next &rarr;
+                             {% endif %}
+			  {% endwith %}
+			  {% with activity.prev as prev_activity %}
+				{% if prev_activity %}
+				<a href="activity{{prev_activity.id }}_overview.html">&larr; Previous</a> 
+				{% else %}
+				&larr; Previous
+				{% endif %}
+			  {% endwith %}
 			</div>
 
          {%if activity.game %}
@@ -159,7 +172,21 @@
 	{% endif %}
  
 			<div class="nav-lateral" id="bottom-nav-lateral">
-				<a id="top" href="#pagestart">&uarr; Back to Top</a> <a href="index.html">Next &rarr;</a> <a href="index.html">&larr; Previous</a> 
+			  <a id="top" href="#pagestart">&uarr; Back to Top</a>
+			  {% with activity.next as next_activity %}
+			     {% if next_activity %}
+				<a href="activity{{next_activity.id }}_overview.html">Next &rarr;</a> 
+                             {% else %}
+				Next &rarr;
+                             {% endif %}
+			  {% endwith %}
+			  {% with activity.prev as prev_activity %}
+				{% if prev_activity %}
+				<a href="activity{{prev_activity.id }}_overview.html">&larr; Previous</a> 
+				{% else %}
+				&larr; Previous
+				{% endif %}
+			  {% endwith %}
 			</div>
 
 </div>  

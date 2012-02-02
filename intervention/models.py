@@ -157,6 +157,18 @@ class Activity(models.Model):
         else:
             return 1
 
+    def next(self):
+        try:
+            return self.get_next_in_order()
+        except Activity.DoesNotExist:
+            return None
+
+    def prev(self):
+        try:
+            return self.get_previous_in_order()
+        except Activity.DoesNotExist:
+            return None
+
     #GAME code, we LOVE delegation!
     def pages(self):
         if self.game:
