@@ -24,17 +24,16 @@
 			</h2>
 			<div id="nav-side">
 				<ul>
-					<li><a class="complete first" href="index.html">One</a></li>
-					<li><a class="incomplete current" href="index.html">Two</a><span class="task">+Task</span></li>
-					<li><a class="activity current" href="index.html">Task: Island Game</a></li>
-					<li><a class="incomplete" href="index.html">Three</a></li>
-					<li><a class="incomplete" href="index.html">Four</a></li>
-					<li><a class="incomplete" href="index.html">Five</a><span class="task">+Task</span></li>
-					<li><a class="incomplete" href="index.html">Six</a></li>
-					<li><a class="incomplete" href="index.html">Seven</a><span class="task">+Task</span></li>
-					<li><a class="incomplete" href="index.html">Eight</a></li>
-					<li><a class="incomplete" href="index.html">Nine</a><span class="task">+Task</span></li>
-					<li><a class="incomplete last" href="index.html">Ten</a><span class="task">+Task</span></li>
+{% for a in activity.clientsession.activity_set.all %}
+<li><a class="incomplete
+{% if forloop.first %}first{% endif %}
+{% if forloop.last %}last{% endif %}
+{% ifequal a.id activity.id %}current{% endifequal %}
+" href="activity{{a.id }}_overview.html">{{a.long_title}}</a>
+{% if a.game %}<span class="task">+Task</span>{% endif %}
+</li>
+{% endfor %}
+
 				</ul>
 			</div>
 
