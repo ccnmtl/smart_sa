@@ -19,6 +19,7 @@ function NOT(bool) {
 (function() {
     var global = this;
     var MB = MochiKit.Base;
+    var ML = MochiKit.Logging;
     function StorageWrapper(stor) {
 	this.KEYS_KEY = 'KEYS';
 	this.hasKey = function(key) {
@@ -60,7 +61,7 @@ function NOT(bool) {
 	self.setAdmin(false);
 	if (NOT(self.permStor.hasKey(user_key))) {
 	    //LOGIN FAILED
-	    logDebug('login failed', user_key);
+	    ML.logDebug('login failed', user_key);
 	    if (typeof(callback) == 'function') callback(false);
 	}
 	else {
@@ -89,7 +90,6 @@ function NOT(bool) {
 	return sha1Hash(my_hash);
     }
     LocalFirefoxSession.prototype.getUserData=function(user_key) {
-//      console.log("LocalFirefoxSession.getUserData", user_key);
 	return MB.evalJSON(this.permStor.get(user_key,'false'));
     }
     LocalFirefoxSession.prototype.userList=function() {
@@ -187,8 +187,6 @@ function NOT(bool) {
 	    }
 	}
     }
-
-//   console.log("in local_session.js");
 
     if ( NOT( hasAttr(global,'EphemeralSession'))) {
 	if (hasAttr(global,'sessionStorage')
