@@ -19,7 +19,7 @@ http://www.josh-davis.org/pythonAES
     var MB = MochiKit.Base;
     var MA = MochiKit.Async;
     var ML = MochiKit.Logging;
-    var MS = MochiKit.Signals;
+    var MS = MochiKit.Signal;
     function UserAdmin() {
 	try {
 	    this.session = global.EphemeralSession;

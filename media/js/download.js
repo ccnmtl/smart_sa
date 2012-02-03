@@ -1,7 +1,7 @@
 (function () {
 var file_count;
 var donedone = -1;
-   var MS = MochiKit.Signals;
+   var MS = MochiKit.Signal;
    var MD = MochiKit.DOM;
    var MA = MochiKit.Async;
    var MI = MochiKit.Iter;
