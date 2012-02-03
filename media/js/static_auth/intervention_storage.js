@@ -61,8 +61,12 @@ current_user = {
 /*wrap code with module pattern*/
 (function() {
     var global = this;
+   var MD = MochiKit.DOM;
+   var MB = MochiKit.Base;
+   var ML = MochiKit.Logging;
+   var MI = MochiKit.Iter;
+   var MS = MochiKit.Signal;
     function InterventionSmart() {
-//      console.log("InterventionSmart constructor");
 	try {
 	    this.session = global.EphemeralSession;
 	    this.current_user = global.EphemeralSession.currentUser();
@@ -71,33 +75,32 @@ current_user = {
 	} catch(e) {/*never mind*/}
 	  this.session_blueprint = function(){return {'STATUS':'inprogress',
 						      'counselor_notes' : ''};}
-	addLoadEvent(bind(this.onLoad,this));
+	MD.addLoadEvent(MB.bind(this.onLoad,this));
     }
     InterventionSmart.prototype.onLoad = function() {
-//      console.log("InterventionSmart.onLoad");
-//      console.log(this.current_user);
+      console.log("InterventionSmart.onLoad");
 	this.showLoginInfo();
 	if (location.protocol == 'file:') {
-	    hideElement(getFirstElementByTagAndClassName(null,'loginlogout-remote'));
-	    hideElement('home-remote');
+	    MD.hideElement(MD.getFirstElementByTagAndClassName(null,'loginlogout-remote'));
+	    MD.hideElement('home-remote');
 	} else {
-	    hideElement('home-desktop');
+	    MD.hideElement('home-desktop');
 	}
     }
 
     InterventionSmart.prototype.showLoginInfo = function() {
 	///Show login Info
-	var displayed_user = getElement('username');
+	var displayed_user = MD.getElement('username');
 	var no_remote_user = (displayed_user && !/\w/.test(displayed_user.innerHTML));
 	if (this.current_user && no_remote_user)
 	{
 	    displayed_user.innerHTML = this.current_user.firstname;
-	    hideElement(getFirstElementByTagAndClassName(null,'loginlogout-remote'));
-	    setDisplayForElement('inline',
-				 getFirstElementByTagAndClassName(null,'loginlogout-local'));
+	    MD.hideElement(getFirstElementByTagAndClassName(null,'loginlogout-remote'));
+	    MD.setDisplayForElement('inline',
+				 MD.getFirstElementByTagAndClassName(null,'loginlogout-local'));
 	}
 	if (this.current_user || !no_remote_user) {
-	    setDisplayForElement('inline','logged-in-prefix');
+	    MD.setDisplayForElement('inline','logged-in-prefix');
 	}
     }
 
@@ -107,7 +110,7 @@ current_user = {
     InterventionSmart.prototype.login = function() {
 	if (this.current_user) { this.logout(); }
 
-	var form_vals = formContents('form_for_login')[1];
+	var form_vals = MD.formContents('form_for_login')[1];
 	//won't work if we reorder the fields
 
 	//TEMPORARY FOR QA
@@ -117,7 +120,6 @@ current_user = {
 	}
 	//DEMO USER
 	if (form_vals[0]=='demo' && form_vals[1]=='demo') {
-//	  console.log("creating user");
 	    this.session.createUser('demo','demo',
 				    {'firstname':'John',
 				     'fullname':'John Smith',
@@ -127,7 +129,7 @@ current_user = {
 	}
 	this.session.login(form_vals[0],
 			   form_vals[1],
-			   bind(this.login_response,this));
+			   MB.bind(this.login_response,this));
 	///NOTE: don't return anything here, since it seems
 	///to break the form-submit
     }
@@ -142,11 +144,11 @@ current_user = {
 	self.current_user = global.EphemeralSession.currentUser();
 	if (hasAttr(self.current_user,'admin')
 	    && self.current_user['admin']) {
-	    logDebug('Admin Login');
+	    ML.logDebug('Admin Login');
 	    self.jumpToAdmin();
 	}
 	else {
-	    location = getElement('login_link').href;
+	    location = MD.getElement('login_link').href;
 	}
 	/* we don't do the location explicitly, so
          * the static copy will still work (e.g. when '.html'
@@ -155,7 +157,7 @@ current_user = {
     }
     InterventionSmart.prototype.jumpToAdmin = function() {
 	this.session.setAdmin(true);
-	location = getElement('admin_link').href;
+	location = MD.getElement('admin_link').href;
     }
     InterventionSmart.prototype.login_confirm = function() {
 	if (hasAttr(this,'current_user')) {
@@ -163,11 +165,11 @@ current_user = {
 		switch(key) {
 		case 'firstname':
 		    if (this.current_user['firstname']=='Test') {
-			getElement('login').href = 'sessionNone_agenda';
+			MD.getElement('login').href = 'sessionNone_agenda';
 		    }                //nobreak
 		case 'fullname':     //nobreak
 		case 'patientnumber':
-		    getElement('user_'+key).innerHTML = this.current_user[key];
+		    MD.getElement('user_'+key).innerHTML = this.current_user[key];
 		    break;
 		}
 	    }
@@ -181,11 +183,11 @@ current_user = {
 		}
 	    }
 	    if (session_count) {
-		getElement('user_sessions_completed').innerHTML = session_count;
-		if (session_count==1) getElement('user_sessions_plural').innerHTML =''
+		MD.getElement('user_sessions_completed').innerHTML = session_count;
+		if (session_count==1) MD.getElement('user_sessions_plural').innerHTML =''
 	    }
 	    else {
-		getElement('user_has_completed').innerHTML = 'is just getting started!';
+		MD.getElement('user_has_completed').innerHTML = 'is just getting started!';
 	    }
 	}
     }
@@ -212,11 +214,11 @@ current_user = {
     }
 
    InterventionSmart.prototype.findSessionId = function() {
-     var e = getFirstElementByTagAndClassName('h3','sessiontitle');
+     var e = MD.getFirstElementByTagAndClassName('h3','sessiontitle');
      if (e) {
        return e.id;
      } else {
-       return getFirstElementByTagAndClassName('h1','sessiontitle').id;
+       return MD.getFirstElementByTagAndClassName('h1','sessiontitle').id;
      }
    }
 
@@ -239,8 +241,8 @@ current_user = {
     }
 
     InterventionSmart.prototype.current_activity = function() {
-	var session_id = getFirstElementByTagAndClassName(null,'parentsession').id;
-	var activity_id = getFirstElementByTagAndClassName(null,'activitytitle').id;
+	var session_id = MD.getFirstElementByTagAndClassName(null,'parentsession').id;
+	var activity_id = MD.getFirstElementByTagAndClassName(null,'activitytitle').id;
 	if (!session_id || !activity_id) {
 	    return false;
 	}
@@ -259,16 +261,16 @@ current_user = {
 	    && hasAttr(this.current_user.games[global.game_variables[0]],'default_page'))
 	{
 	    var def_page = this.current_user.games[global.game_variables[0]].default_page;
-	    var href = getElement('taskpage-'+def_page).href;
-	    $('tasklink').href = href;
+	    var href = MD.getElement('taskpage-'+def_page).href;
+	    MD.getElement('tasklink').href = href;
 	}
 
     }
 
    InterventionSmart.prototype.init_notes = function() {
-     	var notesTextArea = $('counselor-notes');
+     	var notesTextArea = MD.getElement('counselor-notes');
 	if (notesTextArea) {
-	  var session_id = getFirstElementByTagAndClassName(null,'parentsession').id;
+	  var session_id = MD.getFirstElementByTagAndClassName(null,'parentsession').id;
 	  var notes = this.current_user.sessions[session_id].counselor_notes;
 	  if (notes) {
 	    notesTextArea.value = notes;
@@ -278,14 +280,14 @@ current_user = {
 
     InterventionSmart.prototype.init_subitems = function(subitem_complete) {
 	var next_session = false; //will be DOM object
-	forEach(
-	    getElementsByTagAndClassName('a','subitem'),
+	MI.forEach(
+	    MD.getElementsByTagAndClassName('a','subitem'),
 	    function(elt) {
 		var subitem_id = elt.id;
 		var is_complete = subitem_complete(subitem_id);
 		if (is_complete) {
-		    addElementClass(elt,'session_complete');
-		    removeElementClass(elt,'session_off');
+		    MD.addElementClass(elt,'session_complete');
+		    MD.removeElementClass(elt,'session_off');
 		} else if (!next_session) {
 		    next_session = elt;
 		}
@@ -293,8 +295,8 @@ current_user = {
 	    }
 	);
 	if (next_session) {
-	    addElementClass(next_session,'session_next');
-	    removeElementClass(next_session,'session_off');
+	    MD.addElementClass(next_session,'session_next');
+	    MD.removeElementClass(next_session,'session_off');
 	}
 	return next_session;
     }
@@ -303,7 +305,7 @@ current_user = {
      Completion
     *******************************************/
     InterventionSmart.prototype.complete_session = function() {
-	var session_id = getFirstElementByTagAndClassName('h1','sessiontitle').id;
+	var session_id = MD.getFirstElementByTagAndClassName('h1','sessiontitle').id;
 
 	this.current_user.sessions[session_id].STATUS = 'complete';
 	this.session.saveUser(this.current_user);
@@ -324,7 +326,7 @@ current_user = {
     }
 
    InterventionSmart.prototype.saveCounselorNotes = function(notes) {
-     var session_id = getFirstElementByTagAndClassName(null,'parentsession').id;
+     var session_id = MD.getFirstElementByTagAndClassName(null,'parentsession').id;
      this.current_user.sessions[session_id].counselor_notes = notes;
      this.session.saveUser(this.current_user);
    }
@@ -362,7 +364,7 @@ current_user = {
 	var self = this;
 	if (self.current_user) {
 	    self.start_time = new Date();
-	    connect(window,'onunload',self,'logTime');
+	    MS.connect(window,'onunload',self,'logTime');
 	}
     }
     InterventionSmart.prototype.logTime = function() {

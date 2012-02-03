@@ -6,11 +6,11 @@ var handleCacheError = function (e) {
 };
 
 var handleCacheEvent = function (e) {
-  MD("cache-status-footer").style.background = "yellow";
+  MD.getElement("cache-status-footer").style.background = "yellow";
 };
 
 var finishedCacheUpdate = function(e) {
-  MD('cache-status-footer').style.background = "green";
+  MD.getElement('cache-status-footer').style.background = "green";
 };
 
 // Fired after the first cache of the manifest.
