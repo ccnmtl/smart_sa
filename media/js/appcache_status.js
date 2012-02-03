@@ -1,14 +1,16 @@
+(function () {
 var appCache = window.applicationCache;
+var MD = MochiKit.DOM;
 var handleCacheError = function (e) {
-  $("cache-status-footer").style.background = "red";
+  MD.getElement("cache-status-footer").style.background = "red";
 };
 
 var handleCacheEvent = function (e) {
-  $("cache-status-footer").style.background = "yellow";
+  MD("cache-status-footer").style.background = "yellow";
 };
 
 var finishedCacheUpdate = function(e) {
-  $('cache-status-footer').style.background = "green";
+  MD('cache-status-footer').style.background = "green";
 };
 
 // Fired after the first cache of the manifest.
@@ -35,4 +37,5 @@ appCache.addEventListener('obsolete', handleCacheEvent, false);
 appCache.addEventListener('progress', handleCacheEvent, false);
 
 // Fired when the manifest resources have been newly redownloaded.
-appCache.addEventListener('updateready', finishedCacheUpdate, false);
+	      appCache.addEventListener('updateready', finishedCacheUpdate, false);
+})();
