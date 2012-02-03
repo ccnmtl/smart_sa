@@ -19,6 +19,7 @@ http://www.josh-davis.org/pythonAES
     var MB = MochiKit.Base;
     var MA = MochiKit.Async;
     var ML = MochiKit.Logging;
+    var MS = MochiKit.Signals;
     function UserAdmin() {
 	try {
 	    this.session = global.EphemeralSession;
@@ -27,7 +28,7 @@ http://www.josh-davis.org/pythonAES
 		return;
 	    }
 	} catch(e) {/*never mind*/}
-	connect(window,'onload',this,'onLoad');
+	MS.connect(window,'onload',this,'onLoad');
     }
 
     UserAdmin.prototype.onLoad = function() {
