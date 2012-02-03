@@ -6,22 +6,24 @@
     CD 4 contains position of dude.
     He moves on a diagonal up the hill.
     His icon does change according to his altitude.
-    
+
 */
 
-
+(function () {
+   var MI = MochiKit.Iter;
+   var MD = MochiKit.DOM;
 function init() {
 
     game_state = Intervention.getGameVar('island_game_state', default_state);
 
-    forEach (getElementsByTagAndClassName('span', 'slider'),
+    MI.forEach (MD.getElementsByTagAndClassName('span', 'slider'),
         function (a) { new Slider (a) }
     );
-    
+
     if (game_state.page_2_good != null) {
         sliders['good'].set( game_state.page_2_good);
     }
-    
+
     /*
     sliders['bad1'].draggable.options.onchange = recalc ;
     sliders['bad2'].draggable.options.onchange = recalc ;
@@ -29,9 +31,9 @@ function init() {
     */
     sliders['good'].draggable.options.onchange = recalc ;
     mystery_factor = 20; // where does this come from?
-    bottom_of_game = elementDimensions($('sky')).h  + elementPosition($('sky')).y - mystery_factor;
+    bottom_of_game = MD.elementDimensions(MD.getElement('sky')).h  + MD.elementPosition(MD.getElement('sky')).y - mystery_factor;
     recalc();
-    
+
 }
 
 
@@ -47,19 +49,19 @@ function recalc() {
     sliders['bad2'].set( 10 - health);
     sliders['dude'].set(health);
     sliders['good2'].set( health);
-    setStyle( 'dude_moving', {
+    MD.setStyle( 'dude_moving', {
         'height': '184px',
         'width': '110px'
     } );
     //pick an image for the dude:
-    
+
     dude_images = (Intervention.current_user.gender == "M") ? man_images : woman_images;
-    $('dude_moving').src = pick_image (sliders['dude'].getfraction(), dude_images);
-    
-    clip_image ($('water_moving'), 600, bottom_of_game);
+    MD.getElement('dude_moving').src = pick_image (sliders['dude'].getfraction(), dude_images);
+
+    clip_image (MD.getElement('water_moving'), 600, bottom_of_game);
 }
 
-addLoadEvent(init);
+MD.addLoadEvent(init);
 
 //this function snaps the graphics back into place on browser window resize
 //from http://forums.port80.asn.au/archive/index.php/t-8475.html
@@ -70,3 +72,4 @@ function reloadme(){ //or whatver else you have
     save_state();
     setTimeout("window.location.reload()",1); //
 }
+ })();
