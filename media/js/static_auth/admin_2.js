@@ -5,7 +5,7 @@ http://www.csie.ntu.edu.tw/~piaip/docs/CreateMozApp/mozilla-chp-12-sect-7.html
 
 for encryption details see:
 http://www.josh-davis.org/ecmascrypt
-which will work with python version 
+which will work with python version
 http://www.josh-davis.org/pythonAES
 
  */
@@ -14,7 +14,11 @@ http://www.josh-davis.org/pythonAES
 ///JS module pattern
 (function() {
     var global = this;
-
+    var MD = MochiKit.DOM;
+    var MI = MochiKit.Iter;
+    var MB = MochiKit.Base;
+    var MA = MochiKit.Async;
+    var ML = MochiKit.Logging;
     function UserAdmin() {
 	try {
 	    this.session = global.EphemeralSession;
@@ -25,15 +29,15 @@ http://www.josh-davis.org/pythonAES
 	} catch(e) {/*never mind*/}
 	connect(window,'onload',this,'onLoad');
     }
-    
+
     UserAdmin.prototype.onLoad = function() {
     }
 
     UserAdmin.prototype.multi_user_add = function() {
 	var self = this;
-	var form_vals = formContents('mass_user_add')[1];
+	var form_vals = MD.formContents('mass_user_add')[1];
 	var users = form_vals[0].split(/\n|\r/);
-	forEach(users, function(user_line) {
+	MI.forEach(users, function(user_line) {
 	    var fields = user_line.split(/\s*,\s*/);
 	    var user = {
 		'firstname':fields[1],
@@ -48,13 +52,13 @@ http://www.josh-davis.org/pythonAES
 	alert('The names are saved!');
     }
     UserAdmin.prototype.addUser = function() {
-	var fields = formContents('single_user_add')[1];
+	var fields = MD.formContents('single_user_add')[1];
 
 	var user = {
 	    'firstname':fields[0],
 	    'fullname':fields[0]+' '+fields[1],
 	    'patientnumber':fields[2],
-	    'gender':String(fields[3]).toUpperCase().substr(0,1),
+	    'gender':String(fields[3]).toUpperCase().substr(0,1)
 	};
 	if (fields[4] && //is Admin
 	    confirm('Are you sure you want this user to be a Intervention Administrator (with access to this page)?')) {
@@ -63,19 +67,19 @@ http://www.josh-davis.org/pythonAES
 	var user_key = this.session.createUser(user.firstname,
 	    user.patientnumber,user);
 	if (user_key) {
-	    $('single_user_add').reset();
+	    MD.getElement('single_user_add').reset();
 	    this.showUser(user_key);
 	}
     }
     UserAdmin.prototype.showUser = function(user_key) {
 	var user = this.session.getUserData(user_key);
-	getElement('client-list').appendChild(LI(null,user.firstname,
-						 SPAN(user.admin?' (ADMIN: Non-client) ':'')
+	MD.getElement('client-list').appendChild(MD.LI(null,user.firstname,
+						 MD.SPAN(user.admin?' (ADMIN: Non-client) ':'')
 						));
     }
     UserAdmin.prototype.showClients = function() {
 	var self = this;
-	removeElement('show_clients_button');
+	MD.removeElement('show_clients_button');
 	for (a in self.session.userList()) {
 	    this.showUser(a);
 	}
@@ -89,14 +93,14 @@ http://www.josh-davis.org/pythonAES
 
 	restorals = false;
 	function makeRestoralLink(name,hilite) {
-	    name = A({'id':name,'href':'#'+name+'','onclick':"UserAdmin.restore('"+name+"')"},name);
+	    name = MD.A({'id':name,'href':'#'+name+'','onclick':"UserAdmin.restore('"+name+"')"},name);
 	    var attrs = null;
 	    if (hilite) {
 		//attrs = {'class':'hilite'};
-		name = SPAN(null,SPAN(null,name),': Most recent backup that you loaded in to restore');
+		name = MD.SPAN(null,MD.SPAN(null,name),': Most recent backup that you loaded in to restore');
 	    }
-	    var r = LI(attrs,name);
-	    getElement('restoral-list').appendChild(r);
+	    var r = MD.LI(attrs,name);
+	    MD.getElement('restoral-list').appendChild(r);
 	}
 	var restore_key = self.session.restoreKey();
 	if (restore_key) {
@@ -106,21 +110,21 @@ http://www.josh-davis.org/pythonAES
 	    restorals = true;
 	    makeRestoralLink(a);
 	}
-	if (restorals) hideElement('no-restorals');
-	showElement('restorals');
-	hideElement('show_backups');
+	if (restorals) MD.hideElement('no-restorals');
+	MD.showElement('restorals');
+	MD.hideElement('show_backups');
     }
 
     UserAdmin.prototype.backup_string = function() {
 	var self = this;
 	var the_package = self.session.backupObject();
-	var plaintext = serializeJSON(the_package);
+	var plaintext = MB.serializeJSON(the_package);
 	if (typeof(encrypt_key) == 'string') {
 	    return self.encrypt(plaintext);
 	}
 	else return plaintext;
     }
-    
+
     UserAdmin.prototype.cryptArgs = function() {
 	///see http://www.josh-davis.org/ecmascrypt
 	var mode = 0; //OFB
@@ -141,7 +145,7 @@ http://www.josh-davis.org/pythonAES
 	    outhex += ecmaScrypt.toHex(ciph.cipher.charCodeAt(i));
 	}
 	return outhex;
-    }    
+    }
     UserAdmin.prototype.decrypt = function(ciphtext) {
 	var self = this;
 	var crypt_args = self.cryptArgs();
@@ -154,11 +158,11 @@ http://www.josh-davis.org/pythonAES
 	var plaintext = ecmaScrypt.decrypt.apply(ecmaScrypt,crypt_args);
 	return plaintext;
     }
-    ///whether from local file system or on the server, 
+    ///whether from local file system or on the server,
     ///backup the client data on the server
     UserAdmin.prototype.send_to_server = function() {
-	var self = this;	
-	self.destination = getElement('mother-server').innerHTML;
+	var self = this;
+	self.destination = MD.getElement('mother-server').innerHTML;
 	var full_destination = 'http://'+self.destination+'/store_backup'
 
 	var myXMLHTTPRequest = new XMLHttpRequest();
@@ -169,34 +173,34 @@ http://www.josh-davis.org/pythonAES
 		alert('You are about to be prompted for security access to the Internet, so we can backup the application data to the server.');
 		netscape.security.PrivilegeManager.enablePrivilege( "UniversalBrowserRead" );
 
-		///we have to do this here, because the request has to 
+		///we have to do this here, because the request has to
 		///come from the same file that requests the privilege
 		myXMLHTTPRequest.open("POST",full_destination , false);
-		myXMLHTTPRequest.send(queryString({'backup':backup_string}));
+		myXMLHTTPRequest.send(MB.queryString({'backup':backup_string}));
 		global.sky = myXMLHTTPRequest; //debug
 	    } catch(e) {///*FAIL!!!
 		alert('Unable to access the server for backup');
-		logError(e);
+		ML.logError(e);
 		return;
 	    }
 	}
 	else {
-	    var d = doXHR(full_destination, 
+	    var d = MA.doXHR(full_destination,
 		{
 		    'method':'POST',
-		    'sendContent':queryString({'backup':backup_string})
+		    'sendContent':MB.queryString({'backup':backup_string})
 		});
 	    global.sky = d; //debug
         }
     }
-    
+
     UserAdmin.prototype.save_to_file = function() {
 	var self = this;
 	setTimeout(function() {
 	    var nsBACKUP = self.session.nsBACKUP;
 
 	    var backup_string = self.backup_string();
-	    
+
 	    var now = new Date();
 	    var date_string = [now.getFullYear(),now.getMonth()+1,now.getDate(),now.getSeconds()].join('-');
 	    //save it in session data -- who knows how useful this will be.
@@ -214,22 +218,22 @@ http://www.josh-davis.org/pythonAES
 		mydoc.close();
 	    }
 	    var doc;
-	    hideElement('backing-up-please-wait');
+	    MD.hideElement('backing-up-please-wait');
 	    try {
-		doc = getElement('filebackup').contentDocument;
+		doc = MD.getElement('filebackup').contentDocument;
 		netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
 		writeDocument(doc);
-		
+
 		var filename = 'backup-'+date_string+'.html';
-		
+
 		///call to function in chrome://global/content/contentAreaUtils.js
-		internalSave(doc.location.href, doc, null, 
+		internalSave(doc.location.href, doc, null,
 			     'attachment; filename='+filename,
 			     doc.contentType, false, null, null,
 			     doc.referrer ? makeURI(doc.referrer) : null,
 			     false);
 	    } catch(e) {
-		logError('cannot trigger SaveAs');
+		ML.logError('cannot trigger SaveAs');
 		doc = document;
 		writeDocument(doc);
 	    }
@@ -239,21 +243,21 @@ http://www.josh-davis.org/pythonAES
     UserAdmin.prototype.restore = function(backup_key) {
 	var self = this;
 	if(confirm('This will delete all current client/account data, and replace it with the restoring data. Are you sure?')) {
-	    showElement('restoring-please-wait');
+	    MD.showElement('restoring-please-wait');
 	    setTimeout(function(){
 		var backup_string = self.session.getBackupString(backup_key);
 		var the_package = null;
 		try {
-		    the_package = evalJSON(backup_string);
+		    the_package = MB.evalJSON(backup_string);
 		} catch(e) {
 		    var plaintext = self.decrypt(backup_string);
-		    the_package = evalJSON(self.decrypt(backup_string))
+		    the_package = MB.evalJSON(self.decrypt(backup_string))
 		}
 		///DELETE old data
 		self.session.destroyAllUsers();
 		///RESTORE old data
 		self.session.restore(the_package);
-		hideElement('restoring-please-wait');
+		MD.hideElement('restoring-please-wait');
 		alert('Data successfully restored from backup!');
 	    },150);
 	}
