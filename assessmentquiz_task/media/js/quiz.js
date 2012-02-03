@@ -11,11 +11,16 @@
     var workform = null;
     var section = '';
 
+   var MD = MochiKit.DOM;
+   var MS = MochiKit.Signal;
+   var ML = MochiKit.Logging;
+   var MI = MochiKit.Iter;
+
     function loadGoalTask() {
-	workform = $('assessmentquiz');
+	workform = MD.getElement('assessmentquiz');
 	section = workform.elements['section'].value;
-	connect(workform,'onchange',saveForm);
-	connect(window,'onunload',saveForm);
+	MS.connect(workform,'onchange',saveForm);
+	MS.connect(window,'onunload',saveForm);
 
 	if (hasAttr(goal_state,section)) {
 	    for (a in goal_state[section]) {
@@ -33,8 +38,8 @@
 			workform.elements[a].value = goal_state[section][a];
 		    }
 		} else {///radio -- TODO:might need to do the same for <select>
-		    logDebug(form_elt,a);
-		    forEach(form_elt, function(selection) {
+		    ML.logDebug(form_elt,a);
+		    MI.forEach(form_elt, function(selection) {
 			if (selection.value == goal_state[section][a]) {
 			    selection.checked = true;
 			}
@@ -43,7 +48,7 @@
 	    }
 	}
     }
-    addLoadEvent(loadGoalTask);
+    MD.addLoadEvent(loadGoalTask);
 
     function saveForm() {
 	if (!hasAttr(goal_state,section)) {
@@ -51,7 +56,7 @@
 	}
 	var all_form_fields = {};
 	var total = 0;
-	forEach(workform.elements,function(elt) {
+	MI.forEach(workform.elements,function(elt) {
 	    if (elt.type != 'radio' || elt.checked) {
 		goal_state[section][elt.name] = elt.value;
 		all_form_fields[elt.name] = true;
@@ -70,8 +75,8 @@
 			 || 1*gs['q2'] + 1*gs['q3'] == 0
 			) && hasAttr(gs,'q9') && hasAttr(gs,'q10')
 			);
-	    logDebug(gs['q1'] == 0, 1*gs['q2'] + 1*gs['q3'] == 0, hasAttr(gs,'q9'), hasAttr(gs,'q10'));
-	    logDebug(all_done);
+	    ML.logDebug(gs['q1'] == 0, 1*gs['q2'] + 1*gs['q3'] == 0, hasAttr(gs,'q9'), hasAttr(gs,'q10'));
+	    ML.logDebug(all_done);
 	}
 	if (all_done) {
 	    goal_state[section]['total'] = total;
@@ -81,16 +86,16 @@
     }
 
     function showTotal(total) {
-	logDebug('showTotal',total);
-	var ranges = list($('interpretation_range').getElementsByTagName('li'));
+	ML.logDebug('showTotal',total);
+	var ranges = list(MD.getElement('interpretation_range').getElementsByTagName('li'));
 	var i = ranges.length;
 	var found = false;
 	while (--i >= 0) {
 	    var range = parseInt(ranges[i].id.substr(1));
 	    if (total >= range && !found) {
 		found = true;
-		addElementClass(ranges[i],'inrange');
-	    } else removeElementClass(ranges[i],'inrange');
+		MD.addElementClass(ranges[i],'inrange');
+	    } else MD.removeElementClass(ranges[i],'inrange');
 	}
     }
 
