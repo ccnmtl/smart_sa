@@ -42,68 +42,10 @@ function hasAttr(obj,key) {
 	    var response = callback(user_info);
 	}
     }
-    
-    /*
-       DOESN"T WORK YET!
- 
-    TestSession.prototype.login=function(username, credential, callback) {
-	var self = this;
-	var user_key = self.nsUSER + self.hash(username,credential);
-	self.setAdmin(false);
 
-	if (!hasAttr(self.permStor,user_key)) {
-	    //LOGIN FAILED
-	    logDebug('login failed', user_key);
-	    if (typeof(callback) == 'function') callback(false);
-	}
-	else {
-	    self.sessStor.user = user_key;
-	    var user = self.currentUser();
-	    if (typeof(callback) == 'function') callback(user);
-	}
-	return; //if you want something, use @arg callback
-    }
-    TestSession.prototype.logout=function(callback) {
-	delete this.sessStor.user;
-	delete this.sessStor.admin;
-    }
-    TestSession.prototype.isAdmin=function() {
-	return (hasAttr(this.sessStor,'admin') &&this.sessStor['admin'].value);
-    }
-    TestSession.prototype.setAdmin=function(is_admin) {
-	this.sessStor['admin'] = (is_admin)?'true':'';
-    }
-    TestSession.prototype.createUser=function(username, credential, more_info) {
-	var self = this;
-	var user_hash = this.hash(username, credential);
-	var user_info = {};
-	if (arguments.length > 2) {
-	    update(user_info,more_info)
-	}
-	var user_key = this.nsUSER+user_hash;
-	///only save if they don't already exist
-	if (!hasAttr(this.permStor,user_key)) {
-	    this.saveUser(user_info,false,user_key);
-	}
-	return user_key;
-    }
-    TestSession.prototype.destroyEverything=function() {
-	var self = this;
-	if (confirm('This will delete all data relating to clients and your own admin account.  Are you sure?')) {
-	    for (a in self.sessStor) {
-		delete self.sessStor[a];
-	    }
-	    for (a in self.permStor) {
-		if (!RegExp('^'+self.nsBACKUP).test(a)) {
-		    delete self.permStor[a];
-		}
-	    }
-	}
-    }
-    */
     if (!hasAttr(global,'EphemeralSession')) {
 	if (hasAttr(global,'sessionStorage')
-	    && hasAttr(global,'globalStorage')) 
+	    && hasAttr(global,'globalStorage'))
         {
 	    if (location.hostname != '') {
 		global.EphemeralSession = new TestSession();
