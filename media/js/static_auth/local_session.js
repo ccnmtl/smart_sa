@@ -18,10 +18,8 @@ function NOT(bool) {
 /*wrap code with module pattern*/
 (function() {
     var global = this;
-    var M = MochiKit.Base;
-//   console.log("here");
+    var MB = MochiKit.Base;
     function StorageWrapper(stor) {
-//      console.log("StorageWrapper");
 	this.KEYS_KEY = 'KEYS';
 	this.hasKey = function(key) {
 	    return (stor.getItem(key) != null);
@@ -29,27 +27,25 @@ function NOT(bool) {
 	this.get = function(key,default_val) {
 	    return (this.hasKey(key) ? stor.getItem(key) : default_val);
 	}
-//      console.log("StorageWrapper 1", this.KEYS_KEY);
-	var key_dict = M.evalJSON(this.get(this.KEYS_KEY,'{}'));
+	var key_dict = MB.evalJSON(this.get(this.KEYS_KEY,'{}'));
 	this.set = function(key,value) {
 	    stor.setItem(key,value);
 	    key_dict[key]=1;
-	    stor.setItem(this.KEYS_KEY,M.serializeJSON(key_dict));
+	    stor.setItem(this.KEYS_KEY,MB.serializeJSON(key_dict));
 	}
 
 	///actually returns a dict in the form {key1:1,key2:1,...}
 	this.keyDict = function() {
-	    return M.clone(key_dict);
+	    return MB.clone(key_dict);
 	}
 	this.del = function(key) {
 	    delete stor[key];
 	    delete key_dict[key];
-	    stor.setItem(this.KEYS_KEY,M.serializeJSON(key_dict));
+	    stor.setItem(this.KEYS_KEY,MB.serializeJSON(key_dict));
 	}
     }
 
     function LocalFirefoxSession() {
-//      console.log("LocalFirefoxSession");
 	this.permStor = new StorageWrapper(hasAttr(global,'localStorage')?global.localStorage:global.globalStorage[location.hostname]);
 	this.sessStor = new StorageWrapper(global.sessionStorage);
 	this.nsUSER = 'USER_';
@@ -94,7 +90,7 @@ function NOT(bool) {
     }
     LocalFirefoxSession.prototype.getUserData=function(user_key) {
 //      console.log("LocalFirefoxSession.getUserData", user_key);
-	return M.evalJSON(this.permStor.get(user_key,'false'));
+	return MB.evalJSON(this.permStor.get(user_key,'false'));
     }
     LocalFirefoxSession.prototype.userList=function() {
 	var userkeys = {};
@@ -131,7 +127,7 @@ function NOT(bool) {
     LocalFirefoxSession.prototype.saveUser=function(user_info,/*optional:*/ callback, user_key) {
 	var which_user = (user_key) ? user_key : this.currentUserKey();
 	if (which_user) {
-	    this.permStor.set(which_user, M.serializeJSON(user_info));
+	    this.permStor.set(which_user, MB.serializeJSON(user_info));
 	}
 	if (callback) {
 	    var response = (which_user) ?  callback(user_info) : callback(false);
