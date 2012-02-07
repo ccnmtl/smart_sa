@@ -1,5 +1,5 @@
 // how high  the guy is standing on the island
-guy_on_island_offset = 150;
+var guy_on_island_offset = 150;
 
 
 function init() {
@@ -14,10 +14,10 @@ function init() {
 
 
     if (game_state.page_1_bad1 !== null) {
-        logDebug ("yo");
-        sliders.bad1.set(game_state.page_1_bad1);
-        sliders.bad2.set(game_state.page_1_bad2);
-        sliders.good.set(game_state.page_1_good);
+      logDebug ("yo");
+      sliders.bad1.set(game_state.page_1_bad1);
+      sliders.bad2.set(game_state.page_1_bad2);
+      sliders.good.set(game_state.page_1_good);
     }
 
     sliders.bad1.draggable.options.onchange = recalc ;
@@ -26,14 +26,14 @@ function init() {
     mystery_factor = 20; // where does this come from?
     bottom_of_game = elementDimensions($('sky')).h  + elementPosition($('sky')).y - mystery_factor;
     recalc();
-}
+  }
 
 function save_state() {
     game_state.page_1_bad1 = sliders.bad1.get();
     game_state.page_1_bad2 = sliders.bad2.get();
     game_state.page_1_good = sliders.good.get();
     Intervention.saveState();
-}
+  }
 
 function recalc() {
     //adjust water level:
@@ -49,7 +49,7 @@ function recalc() {
 
     //pick an image for the dude:
     dude_images = (Intervention.current_user.gender == "M") ? man_images : woman_images;
-    altitude = 0.5 + (sliders.island.getfraction() - sliders.water.getfraction())/2;
+    altitude = 0.5 + (sliders.island.getfraction() - sliders.water.getfraction()) / 2;
     $('dude').src = pick_image (altitude, dude_images);
 
     //adjust the dude
@@ -59,11 +59,11 @@ function recalc() {
         'position':'absolute',
         'height': '184px',
         'width': '110px'
-    } );
+      } );
 
     clip_image ($('island_moving'), 600, bottom_of_game);
     clip_image ($('water_moving'), 600, bottom_of_game);
-}
+  }
 
 addLoadEvent(init);
 
@@ -74,4 +74,4 @@ window.onresize= reloadme;
 function reloadme(){ //or whatver else you have
     save_state();
     setTimeout(function () {window.location.reload();},1); //
-}
+  }
