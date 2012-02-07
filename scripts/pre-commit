@@ -2,6 +2,6 @@
 # link me into your git hooks like so:
 # ln -s `pwd`/scripts/pre-commit `pwd`/.git/hooks/pre-commit
 ./manage.py test
-find media -name '*.js' | grep -v tinymce | grep -v media/js/mochikit | grep -v media/selenium/ | xargs jshint
+find -L media -name '*.js' | grep -v tinymce | grep -v media/js/mochikit | grep -v media/selenium/ | xargs jshint
 echo "LAST_GIT_HEAD = \"`cat .git/refs/heads/master`\"" > release_id.py
 git add release_id.py
