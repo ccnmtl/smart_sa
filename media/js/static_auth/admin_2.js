@@ -32,7 +32,7 @@ http://www.josh-davis.org/pythonAES
     }
 
     UserAdmin.prototype.onLoad = function() {
-    }
+    };
 
     UserAdmin.prototype.multi_user_add = function() {
         var self = this;
@@ -51,7 +51,7 @@ http://www.josh-davis.org/pythonAES
             }
         });
         alert('The names are saved!');
-    }
+    };
     UserAdmin.prototype.addUser = function() {
         var fields = MD.formContents('single_user_add')[1];
 
@@ -63,7 +63,7 @@ http://www.josh-davis.org/pythonAES
         };
         if (fields[4] && //is Admin
             confirm('Are you sure you want this user to be a Intervention Administrator (with access to this page)?')) {
-            user['admin'] = fields[4];
+            user.admin = fields[4];
         }
         var user_key = this.session.createUser(user.firstname,
             user.patientnumber,user);
@@ -71,20 +71,20 @@ http://www.josh-davis.org/pythonAES
             MD.getElement('single_user_add').reset();
             this.showUser(user_key);
         }
-    }
+    };
     UserAdmin.prototype.showUser = function(user_key) {
         var user = this.session.getUserData(user_key);
         MD.getElement('client-list').appendChild(MD.LI(null,user.firstname,
                                                  MD.SPAN(user.admin?' (ADMIN: Non-client) ':'')
                                                 ));
-    }
+    };
     UserAdmin.prototype.showClients = function() {
         var self = this;
         MD.removeElement('show_clients_button');
-        for (a in self.session.userList()) {
+        for (var a in self.session.userList()) {
             this.showUser(a);
         }
-    }
+    };
 
     /***********************
      BACKUP
@@ -107,14 +107,14 @@ http://www.josh-davis.org/pythonAES
         if (restore_key) {
             makeRestoralLink(restore_key,true);
         }
-        for (a in self.session.backupList()) {
+        for (var a in self.session.backupList()) {
             restorals = true;
             makeRestoralLink(a);
         }
         if (restorals) MD.hideElement('no-restorals');
         MD.showElement('restorals');
         MD.hideElement('show_backups');
-    }
+    };
 
     UserAdmin.prototype.backup_string = function() {
         var self = this;
@@ -124,7 +124,7 @@ http://www.josh-davis.org/pythonAES
             return self.encrypt(plaintext);
         }
         else return plaintext;
-    }
+    };
 
     UserAdmin.prototype.cryptArgs = function() {
         ///see http://www.josh-davis.org/ecmascrypt
@@ -133,7 +133,7 @@ http://www.josh-davis.org/pythonAES
         var hexkey = global.encrypt_key;
         var iv_hexvalue = global.encrypt_iv;
         return [mode,ecmaScrypt.toNumbers(hexkey),keysize,ecmaScrypt.toNumbers(iv_hexvalue)];
-    }
+    };
 
     UserAdmin.prototype.encrypt = function(plaintext) {
         var self = this;
@@ -146,7 +146,7 @@ http://www.josh-davis.org/pythonAES
             outhex += ecmaScrypt.toHex(ciph.cipher.charCodeAt(i));
         }
         return outhex;
-    }
+    };
     UserAdmin.prototype.decrypt = function(ciphtext) {
         var self = this;
         var crypt_args = self.cryptArgs();
@@ -158,13 +158,13 @@ http://www.josh-davis.org/pythonAES
         crypt_args.unshift(ciph_string,0);
         var plaintext = ecmaScrypt.decrypt.apply(ecmaScrypt,crypt_args);
         return plaintext;
-    }
+    };
     ///whether from local file system or on the server,
     ///backup the client data on the server
     UserAdmin.prototype.send_to_server = function() {
         var self = this;
         self.destination = MD.getElement('mother-server').innerHTML;
-        var full_destination = 'http://'+self.destination+'/store_backup'
+        var full_destination = 'http://'+self.destination+'/store_backup';
 
         var myXMLHTTPRequest = new XMLHttpRequest();
 
@@ -193,7 +193,7 @@ http://www.josh-davis.org/pythonAES
                 });
             global.sky = d; //debug
         }
-    }
+    };
 
     UserAdmin.prototype.save_to_file = function() {
         var self = this;
@@ -239,7 +239,7 @@ http://www.josh-davis.org/pythonAES
                 writeDocument(doc);
             }
         },10);
-    }
+    };
 
     UserAdmin.prototype.restore = function(backup_key) {
         var self = this;
@@ -252,7 +252,7 @@ http://www.josh-davis.org/pythonAES
                     the_package = MB.evalJSON(backup_string);
                 } catch(e) {
                     var plaintext = self.decrypt(backup_string);
-                    the_package = MB.evalJSON(self.decrypt(backup_string))
+                    the_package = MB.evalJSON(self.decrypt(backup_string));
                 }
                 ///DELETE old data
                 self.session.destroyAllUsers();
@@ -262,7 +262,7 @@ http://www.josh-davis.org/pythonAES
                 alert('Data successfully restored from backup!');
             },150);
         }
-    }
+    };
 
     /**************
      Init Global Instantiation

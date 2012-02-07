@@ -37,5 +37,5 @@ appCache.addEventListener('obsolete', handleCacheEvent, false);
 appCache.addEventListener('progress', handleCacheEvent, false);
 
 // Fired when the manifest resources have been newly redownloaded.
-	      appCache.addEventListener('updateready', finishedCacheUpdate, false);
+appCache.addEventListener('updateready', finishedCacheUpdate, false);
 })();

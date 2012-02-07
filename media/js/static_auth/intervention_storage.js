@@ -160,12 +160,13 @@ current_user = {
     };
     InterventionSmart.prototype.login_confirm = function() {
         if (hasAttr(this,'current_user')) {
-            for (key in this.current_user) {
+            for (var key in this.current_user) {
                 switch(key) {
                 case 'firstname':
                     if (this.current_user.firstname=='Test') {
                         MD.getElement('login').href = 'sessionNone_agenda';
-                    }                //nobreak
+                    }
+                    break;
                 case 'fullname':     //nobreak
                 case 'patientnumber':
                     MD.getElement('user_'+key).innerHTML = this.current_user[key];
@@ -174,7 +175,7 @@ current_user = {
             }
             var session_count = 0;
             if (typeof(this.current_user.sessions) == 'object') {
-                for (a in this.current_user.sessions) {
+                for (var a in this.current_user.sessions) {
                     if (hasAttr(this.current_user.sessions[a],'STATUS') && this.current_user.sessions[a].STATUS =='complete') {
                         ++session_count;
                     }
@@ -342,7 +343,7 @@ current_user = {
         return this.current_user.games[key];
     };
     InterventionSmart.prototype.resetGame = function() {
-        for (key in this.current_task) {
+        for (var key in this.current_task) {
             this.current_user.games[key] = this.current_task[key];
         }
         this.saveState();

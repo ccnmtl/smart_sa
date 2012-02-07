@@ -28,26 +28,25 @@ function hasAttr(obj,key) {
             this.sessStor[this.nsUSER] = '{}';
         }
     }
-    TestSession.prototype.currentUser=function() {
+    TestSession.prototype.currentUser = function() {
         if (hasAttr(this.sessStor,this.nsUSER)) {
             return M.evalJSON(this.sessStor[this.nsUSER].value);
         } else {
             this.sessStor[this.nsUSER] = '{}';
             return {};
         }
-    }
-    TestSession.prototype.saveUser=function(user_info,/*optional:*/ callback, user_key) {
+    };
+    TestSession.prototype.saveUser = function(user_info,/*optional:*/ callback, user_key) {
         this.sessStor[this.nsUSER] = M.serializeJSON(user_info);
         if (callback) {
             var response = callback(user_info);
         }
-    }
+    };
 
     if (!hasAttr(global,'EphemeralSession')) {
-        if (hasAttr(global,'sessionStorage')
-            && hasAttr(global,'globalStorage'))
+        if (hasAttr(global,'sessionStorage') && hasAttr(global,'globalStorage'))
         {
-            if (location.hostname != '') {
+            if (location.hostname !== '') {
                 global.EphemeralSession = new TestSession();
                 //for easy debug access
                 global.e = global.EphemeralSession;
