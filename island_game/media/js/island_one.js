@@ -5,8 +5,8 @@ guy_on_island_offset = 150;
 function init() {
     game_state = Intervention.getGameVar('island_game_state', default_state);
 
-    forEach (getElementsByTagAndClassName('span', 'slider'),
-             function (a) { new Slider (a); }
+    forEach(getElementsByTagAndClassName('span', 'slider'),
+             function (a) { new Slider(a); }
     );
 
     logDebug (serializeJSON(game_state));
