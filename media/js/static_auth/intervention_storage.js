@@ -74,7 +74,7 @@ current_user = {
             this.current_task = {};
         } catch(e) {/*never mind*/}
           this.session_blueprint = function(){return {'STATUS':'inprogress',
-                                                      'counselor_notes' : ''};}
+                                                      'counselor_notes' : ''};};
         MD.addLoadEvent(MB.bind(this.onLoad,this));
     }
     InterventionSmart.prototype.onLoad = function() {
@@ -86,7 +86,7 @@ current_user = {
         } else {
             MD.hideElement('home-desktop');
         }
-    }
+    };
 
     InterventionSmart.prototype.showLoginInfo = function() {
         ///Show login Info
@@ -102,7 +102,7 @@ current_user = {
         if (this.current_user || !no_remote_user) {
             MD.setDisplayForElement('inline','logged-in-prefix');
         }
-    }
+    };
 
     /*******************************************
      Login/logout
@@ -132,7 +132,7 @@ current_user = {
                            MB.bind(this.login_response,this));
         ///NOTE: don't return anything here, since it seems
         ///to break the form-submit
-    }
+    };
 
     //callback for EphemeralSession.login()
     InterventionSmart.prototype.login_response = function(response) {
@@ -142,8 +142,7 @@ current_user = {
             return;
         }
         self.current_user = global.EphemeralSession.currentUser();
-        if (hasAttr(self.current_user,'admin')
-            && self.current_user['admin']) {
+        if (hasAttr(self.current_user,'admin') && self.current_user.admin) {
             ML.logDebug('Admin Login');
             self.jumpToAdmin();
         }
@@ -154,17 +153,17 @@ current_user = {
          * the static copy will still work (e.g. when '.html'
          * is appended.
          */
-    }
+    };
     InterventionSmart.prototype.jumpToAdmin = function() {
         this.session.setAdmin(true);
         location = MD.getElement('admin_link').href;
-    }
+    };
     InterventionSmart.prototype.login_confirm = function() {
         if (hasAttr(this,'current_user')) {
             for (key in this.current_user) {
                 switch(key) {
                 case 'firstname':
-                    if (this.current_user['firstname']=='Test') {
+                    if (this.current_user.firstname=='Test') {
                         MD.getElement('login').href = 'sessionNone_agenda';
                     }                //nobreak
                 case 'fullname':     //nobreak
@@ -176,27 +175,26 @@ current_user = {
             var session_count = 0;
             if (typeof(this.current_user.sessions) == 'object') {
                 for (a in this.current_user.sessions) {
-                    if (hasAttr(this.current_user.sessions[a],'STATUS')
-                       && this.current_user.sessions[a].STATUS =='complete') {
+                    if (hasAttr(this.current_user.sessions[a],'STATUS') && this.current_user.sessions[a].STATUS =='complete') {
                         ++session_count;
                     }
                 }
             }
             if (session_count) {
                 MD.getElement('user_sessions_completed').innerHTML = session_count;
-                if (session_count==1) MD.getElement('user_sessions_plural').innerHTML =''
+              if (session_count==1) MD.getElement('user_sessions_plural').innerHTML ='';
             }
             else {
                 MD.getElement('user_has_completed').innerHTML = 'is just getting started!';
             }
         }
-    }
+    };
     InterventionSmart.prototype.logout = function() {
 //      console.log("InterventionSmart.logout");
         this.logTime();
         this.session.logout();
         this.current_user = false;
-    }
+    };
     /*******************************************
      Init Intervention/Session Pages
     *******************************************/
@@ -208,10 +206,9 @@ current_user = {
             this.session.saveUser(this.current_user);
         }
         self.init_subitems( function (session_id) {
-            return (hasAttr(self.current_user.sessions,session_id)
-                    && self.current_user.sessions[session_id].STATUS == 'complete');
+            return (hasAttr(self.current_user.sessions,session_id) && self.current_user.sessions[session_id].STATUS == 'complete');
         });
-    }
+    };
 
    InterventionSmart.prototype.findSessionId = function() {
      var e = MD.getFirstElementByTagAndClassName('h3','sessiontitle');
@@ -220,7 +217,7 @@ current_user = {
      } else {
        return MD.getFirstElementByTagAndClassName('h1','sessiontitle').id;
      }
-   }
+   };
 
     InterventionSmart.prototype.init_session = function() {
         var self = this;
@@ -235,10 +232,9 @@ current_user = {
             this.session.saveUser(this.current_user);
         }
         self.init_subitems( function(activity_id) {
-            return (hasAttr(self.current_user.sessions[session_id],activity_id)
-                    && self.current_user.sessions[session_id][activity_id].STATUS == 'complete');
+            return (hasAttr(self.current_user.sessions[session_id],activity_id) && self.current_user.sessions[session_id][activity_id].STATUS == 'complete');
         });
-    }
+    };
 
     InterventionSmart.prototype.current_activity = function() {
         var session_id = MD.getFirstElementByTagAndClassName(null,'parentsession').id;
@@ -254,18 +250,16 @@ current_user = {
         }
         return this.current_user.sessions[session_id][activity_id];
 
-    }
+    };
     InterventionSmart.prototype.init_activity = function() {
-        if (global.game_variables
-            && hasAttr(this.current_user.games,global.game_variables[0])
-            && hasAttr(this.current_user.games[global.game_variables[0]],'default_page'))
+        if (global.game_variables && hasAttr(this.current_user.games,global.game_variables[0]) && hasAttr(this.current_user.games[global.game_variables[0]],'default_page'))
         {
             var def_page = this.current_user.games[global.game_variables[0]].default_page;
             var href = MD.getElement('taskpage-'+def_page).href;
             MD.getElement('tasklink').href = href;
         }
 
-    }
+    };
 
    InterventionSmart.prototype.init_notes = function() {
         var notesTextArea = MD.getElement('counselor-notes');
@@ -276,7 +270,7 @@ current_user = {
             notesTextArea.value = notes;
           }
         }
-   }
+   };
 
     InterventionSmart.prototype.init_subitems = function(subitem_complete) {
         var next_session = false; //will be DOM object
@@ -299,7 +293,7 @@ current_user = {
             MD.removeElementClass(next_session,'session_off');
         }
         return next_session;
-    }
+    };
 
     /*******************************************
      Completion
@@ -309,13 +303,13 @@ current_user = {
 
         this.current_user.sessions[session_id].STATUS = 'complete';
         this.session.saveUser(this.current_user);
-    }
+    };
 
     InterventionSmart.prototype.complete_activity = function(extra_data) {
         extra_data = (typeof(extra_data)=='object')?extra_data:{};
-        extra_data['STATUS'] = 'complete';
+        extra_data.STATUS = 'complete';
         this.update_activity(extra_data);
-    }
+    };
 
     InterventionSmart.prototype.update_activity = function(extra_data) {
         var activity_data = this.current_activity();
@@ -323,13 +317,13 @@ current_user = {
             update(activity_data,extra_data);
             this.session.saveUser(this.current_user);
         }
-    }
+    };
 
    InterventionSmart.prototype.saveCounselorNotes = function(notes) {
      var session_id = MD.getFirstElementByTagAndClassName(null,'parentsession').id;
      this.current_user.sessions[session_id].counselor_notes = notes;
      this.session.saveUser(this.current_user);
-   }
+   };
 
     /*******************************************
      Game Variables
@@ -346,16 +340,16 @@ current_user = {
         }
         this.current_task[key] = default_value;
         return this.current_user.games[key];
-    }
+    };
     InterventionSmart.prototype.resetGame = function() {
         for (key in this.current_task) {
             this.current_user.games[key] = this.current_task[key];
         }
         this.saveState();
-    }
+    };
     InterventionSmart.prototype.saveState = function() {
         this.session.saveUser(this.current_user);
-    }
+    };
 
     /*******************************************
      Time Log
@@ -366,16 +360,16 @@ current_user = {
             self.start_time = new Date();
             MS.connect(window,'onunload',self,'logTime');
         }
-    }
+    };
     InterventionSmart.prototype.logTime = function() {
         if (!this.current_user) {return;} //logged out
         var now = new Date();
         var timespent = Math.round((now - this.start_time) / 1000);
         var date_string = [now.getFullYear(),now.getMonth()+1,now.getDate()].join('-');
-        var file_name = location.pathname.split('/').pop().split('.html').shift()
+        var file_name = location.pathname.split('/').pop().split('.html').shift();
 
         if (!hasAttr(this.current_user, 'timelog')) {
-            this.current_user['timelog'] = {};
+            this.current_user.timelog = {};
         }
         if (!hasAttr(this.current_user.timelog, date_string)) {
             this.current_user.timelog[date_string] = [];
@@ -384,7 +378,7 @@ current_user = {
                                                      'time':timespent
                                                     });
         this.saveState();
-    }
+    };
 
 
     /**************
