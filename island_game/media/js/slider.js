@@ -23,17 +23,17 @@ function Slider (settings) {
         logDebug ("Setting " + this.id + " to " + this.z_index );
         setStyle(this.moving, {'z-index': this.z_index});
     }
-    
+
     //register this slider
     sliders[this.id] = this
     this.background_position = getElementPosition(this.background_element_id);
-    
+
     //draw fixed and moving components:
-    
-    
+
+
     var doc = currentDocument();
-    
-    
+
+
     this.fixed_image_path = its('fixed_image_path');
     if (this.fixed_image_path != null) {
         logDebug (this.id);
@@ -43,19 +43,19 @@ function Slider (settings) {
             this.image_offset.x + this.background_position.x,
             this.image_offset.y + this.background_position.y
         );
-        
+
         setStyle(this.fixed, {'z-index': this.z_index});
     }
     appendChildNodes(doc.body, this.moving);
-    
+
     // precalculate some values:
     range = this.max_value - this.min_value;
     this.unit = {
-        x: (this.end_offset.x - this.start_offset.x) / range, 
+        x: (this.end_offset.x - this.start_offset.x) / range,
         y: (this.end_offset.y - this.start_offset.y) / range,
     }
-    
-    
+
+
     this.draggable_by_user = (its("draggable_by_user") != "false")
 	if ( this.draggable_by_user) {
 	    logDebug (this.id + "is draggable by user. Setting up draggable.");
@@ -67,11 +67,11 @@ function Slider (settings) {
         this.draggable.options.slider_id = this.id
         this.onchange = this.draggable.options.onchange;
     }
-    
+
     // set to requested starting value:
     this.set ( this.starting_value);
     return true;
-    
+
 }
 
 Slider.prototype.val = function (x, y) {
@@ -128,7 +128,7 @@ function pick_image (v, images) {
     }
     else {
     logDebug ("yo");
-    
+
         //eh.
     }
     return media_path+images[0];
@@ -157,13 +157,13 @@ default_state = {
     ,'page_1_bad2' : null
     ,'page_1_good' : null
     ,'page_2_good' : null
-}
+};
 
-var game_state; 
+var game_state;
 
 function clip_image (image, width, floor) {
     // sets the 'clip' style on an image so that any portion of the image below y value 'floor' is hidden.
-    hide = floor  - elementPosition(image).y
-    setStyle(image, { 'clip': 'rect(0 ' + width + 'px ' + hide + 'px 0)' })
+    hide = floor  - elementPosition(image).y;
+    setStyle(image, { 'clip': 'rect(0 ' + width + 'px ' + hide + 'px 0)' });
 }
 
