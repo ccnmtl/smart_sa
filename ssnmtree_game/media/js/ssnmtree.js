@@ -7,6 +7,7 @@ games:{'ssnmtree':{
 /*wrap code with module pattern*/
 (function () {
     var global = this;
+    var M = MochiKit;
 
     function SSNMTree() {
         this.game_state = null;
@@ -22,17 +23,17 @@ games:{'ssnmtree':{
     SSNMTree.prototype.__init__ = function () {
         this.intervention = global.Intervention;
         this.game_state = this.intervention.getGameVar('ssnmtree', {'#firstfinished': false});
-        connect(window, 'onload', this, 'onLoad');
+        M.Signals.connect(window, 'onload', this, 'onLoad');
       };
 
     SSNMTree.prototype.onLoad = function () {
         var self = this;
-        forEach(getElementsByTagAndClassName(null, 'fruit', 'fruittree'), function (elt) {
-            connect(elt, 'onclick', self, 'clickListener');
-            var input = getFirstElementByTagAndClassName(input, null, elt);
+        M.Iter.forEach(M.DOM.getElementsByTagAndClassName(null, 'fruit', 'fruittree'), function (elt) {
+            M.Signals.connect(elt, 'onclick', self, 'clickListener');
+            var input = M.DOM.getFirstElementByTagAndClassName(input, null, elt);
 
-            connect(input, 'onchange', self, 'namechangeListener');
-            connect(input, 'onkeypress', self, 'namechangeListener');
+            M.Signals.connect(input, 'onchange', self, 'namechangeListener');
+            M.Signals.connect(input, 'onkeypress', self, 'namechangeListener');
 
             if (!hasAttr(self.game_state, elt.id)) {
               self.game_state[elt.id] = {'name': '', 'disclosure': false, 'support': false};
@@ -41,14 +42,14 @@ games:{'ssnmtree':{
               input.setAttribute('value', self.game_state[elt.id].name);
             }
           });
-        forEach(getElementsByTagAndClassName('input', 'editmode'), function (elt) {
-            connect(elt, 'onchange', self, 'setEditMode');
+        M.Iter.forEach(M.DOM.getElementsByTagAndClassName('input', 'editmode'), function (elt) {
+            M.Signals.connect(elt, 'onchange', self, 'setEditMode');
           });
 
-        connect('show-disclosure', 'onchange', self, 'showDisclosure');
-        connect('show-support', 'onchange', self, 'showSupport');
+        M.Signals.connect('show-disclosure', 'onchange', self, 'showDisclosure');
+        M.Signals.connect('show-support', 'onchange', self, 'showSupport');
 
-        self.game_mode = getElement('game-mode').getAttribute('data-game-mode');
+        self.game_mode = M.DOM.getElement('game-mode').getAttribute('data-game-mode');
         self.setEditMode('view'); //default
 
         var first_finished = self.game_state['#firstfinished'];
@@ -58,23 +59,23 @@ games:{'ssnmtree':{
 
           switch (self.game_mode) {
           case 'addnames':
-            hideElement('controls');
+            M.Style.hideElement('controls');
             break;
           case 'editdisclosure':
-            hideElement('support-controls', 'view-controls');
+            M.Style.hideElement('support-controls', 'view-controls');
             self.showDisclosure();
             break;
           case 'editsupport':
-            hideElement('view-controls');
+            M.Style.hideElement('view-controls');
             self.showDisclosure();
             self.showSupport();
             break;
           case 'review':
             return; //skip last step!!!!
           }
-          var complete_button = getElement('complete');
+          var complete_button = M.DOM.getElement('complete');
           if (complete_button) {
-            connect(complete_button, 'onclick', self, 'firstComplete');
+            M.Signals.connect(complete_button, 'onclick', self, 'firstComplete');
           }
         }
         $('next-game-part-link').onclick = function () {
@@ -92,38 +93,38 @@ games:{'ssnmtree':{
     SSNMTree.prototype.showDisclosure = function (evt) {
         var self = this;
         var show = (evt) ? evt.src().checked : true;
-        forEach(getElementsByTagAndClassName(null, 'fruit', 'fruittree'), function (elt) {
-            var toggle_func = (show && self.game_state[elt.id].disclosure) ? addElementClass : removeElementClass;
-            toggle_func(getFirstElementByTagAndClassName(null, 'ripe', elt), 'turned-on');
+        M.Iter.forEach(M.DOM.getElementsByTagAndClassName(null, 'fruit', 'fruittree'), function (elt) {
+            var toggle_func = (show && self.game_state[elt.id].disclosure) ? M.DOM.addElementClass : M.DOM.removeElementClass;
+            toggle_func(M.DOM.getFirstElementByTagAndClassName(null, 'ripe', elt), 'turned-on');
           });
 
-        getElement('show-disclosure').checked = show;
+        M.DOM.getElement('show-disclosure').checked = show;
         if (show) {
-          showElement('edit-disclosure');
+          M.Style.showElement('edit-disclosure');
         } else {
-          hideElement('edit-disclosure');
-          if (getElement('edit-disclosure').checked) { self.setEditMode('view'); }
-          getElement('edit-disclosure').checked = false;
+          M.Style.hideElement('edit-disclosure');
+          if (M.DOM.getElement('edit-disclosure').checked) { self.setEditMode('view'); }
+          M.DOM.getElement('edit-disclosure').checked = false;
         }
       };
     SSNMTree.prototype.showSupport = function (evt) {
         var self = this;
         var show = (evt) ? evt.src().checked : true;
-        forEach(getElementsByTagAndClassName(null, 'fruit', 'fruittree'), function (elt) {
-            var toggle_func = (show && self.game_state[elt.id].support) ? addElementClass : removeElementClass;
-            toggle_func(getFirstElementByTagAndClassName(null, 'circle', elt), 'turned-on');
+        M.Iter.forEach(M.DOM.getElementsByTagAndClassName(null, 'fruit', 'fruittree'), function (elt) {
+            var toggle_func = (show && self.game_state[elt.id].support) ? M.DOM.addElementClass : M.DOM.removeElementClass;
+            toggle_func(M.DOM.getFirstElementByTagAndClassName(null, 'circle', elt), 'turned-on');
           });
-        getElement('show-support').checked = show;
+        M.DOM.getElement('show-support').checked = show;
         if (show) {
-          showElement('edit-support');
+          M.Style.showElement('edit-support');
         } else {
-          hideElement('edit-support');
-          if (getElement('edit-support').checked) { self.setEditMode('view'); }
-          getElement('edit-support').checked = false;
+          M.Style.hideElement('edit-support');
+          if (M.DOM.getElement('edit-support').checked) { self.setEditMode('view'); }
+          M.DOM.getElement('edit-support').checked = false;
         }
       };
     SSNMTree.prototype.setEditMode = function (mode_or_evt) {
-        logDebug('setEditMode');
+        M.Logging.logDebug('setEditMode');
         var mode;
         if (typeof(mode_or_evt) === 'string') {
           mode = mode_or_evt;
@@ -134,7 +135,7 @@ games:{'ssnmtree':{
         }
         this.edit_mode = mode;
         //disable/enable input boxes
-        forEach(getElementsByTagAndClassName('input', null, 'fruittree'), function (elt) {
+        M.Iter.forEach(M.DOM.getElementsByTagAndClassName('input', null, 'fruittree'), function (elt) {
             ///to make them read-only we make them buttons
             ///if we set disabled=true, then it drowns click events
             ///need to rewrite the value due to Firefox (SUX) weirdness
@@ -142,11 +143,11 @@ games:{'ssnmtree':{
             elt.type = (mode === 'names') ? 'text' : 'button';
             elt.value = curvalue;
           });
-        getElement('edit-' + mode).checked = true;
+        M.DOM.getElement('edit-' + mode).checked = true;
       };
 
     SSNMTree.prototype.namechangeListener = function (evt) {
-        logDebug('namechangeListener');
+        M.Logging.logDebug('namechangeListener');
         var self = this;
         var input_elt = evt.src();
         var id = input_elt.parentNode.id;
@@ -175,19 +176,19 @@ games:{'ssnmtree':{
         case 'names':
           return; //DO nothing
         case 'support':
-          elt = getFirstElementByTagAndClassName(null, 'circle', id);
+          elt = M.DOM.getFirstElementByTagAndClassName(null, 'circle', id);
           turned_on = self.game_state[id].support = !self.game_state[id].support;
           break;
         case 'disclosure':
-          elt = getFirstElementByTagAndClassName(null, 'ripe', id);
+          elt = M.DOM.getFirstElementByTagAndClassName(null, 'ripe', id);
           turned_on = self.game_state[id].disclosure = !self.game_state[id].disclosure;
           break;
         }
         self.intervention.saveState();
         if (turned_on) {
-          addElementClass(elt, 'turned-on');
+          M.DOM.addElementClass(elt, 'turned-on');
         } else {
-          removeElementClass(elt, 'turned-on');
+          M.DOM.removeElementClass(elt, 'turned-on');
         }
       };
 
