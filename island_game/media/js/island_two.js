@@ -37,7 +37,7 @@
     }
 
     function recalc() {
-      health = sliders.good.get();
+      var health = sliders.good.get();
       sliders.water.set(10 - health);
       sliders.bad1.set(10 - health);
       sliders.bad2.set(10 - health);
@@ -49,7 +49,7 @@
       });
       //pick an image for the dude:
 
-      dude_images = (Intervention.current_user.gender === "M") ? man_images : woman_images;
+      var dude_images = (Intervention.current_user.gender === "M") ? man_images : woman_images;
       MD.getElement('dude_moving').src = pick_image(sliders.dude.getfraction(), dude_images);
 
       clip_image(MD.getElement('water_moving'), 600, bottom_of_game);
