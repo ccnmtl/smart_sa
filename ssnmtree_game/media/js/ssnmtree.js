@@ -102,30 +102,30 @@ games:{'ssnmtree':{
           showElement('edit-disclosure');
         } else {
           hideElement('edit-disclosure');
-          if (getElement('edit-disclosure').checked) self.setEditMode('view');
+          if (getElement('edit-disclosure').checked) { self.setEditMode('view'); }
           getElement('edit-disclosure').checked = false;
         }
-      }
+      };
     SSNMTree.prototype.showSupport = function (evt) {
-        var self = this
+        var self = this;
         var show = (evt) ? evt.src().checked : true;
         forEach(getElementsByTagAndClassName(null, 'fruit', 'fruittree'), function (elt) {
             var toggle_func = (show && self.game_state[elt.id].support) ? addElementClass : removeElementClass;
             toggle_func(getFirstElementByTagAndClassName(null, 'circle', elt), 'turned-on');
           });
         getElement('show-support').checked = show;
-        if (show)
+        if (show) {
           showElement('edit-support');
-        else {
+        } else {
           hideElement('edit-support');
-          if (getElement('edit-support').checked) self.setEditMode('view');
+          if (getElement('edit-support').checked) { self.setEditMode('view'); }
           getElement('edit-support').checked = false;
         }
-      }
+      };
     SSNMTree.prototype.setEditMode = function (mode_or_evt) {
         logDebug('setEditMode');
         var mode;
-        if (typeof(mode_or_evt) == 'string') {
+        if (typeof(mode_or_evt) === 'string') {
           mode = mode_or_evt;
         } else if (mode_or_evt.src().checked) {
           mode = mode_or_evt.src().value;
@@ -139,11 +139,11 @@ games:{'ssnmtree':{
             ///if we set disabled=true, then it drowns click events
             ///need to rewrite the value due to Firefox (SUX) weirdness
             var curvalue = elt.value;
-            elt.type = (mode == 'names') ? 'text' : 'button';
+            elt.type = (mode === 'names') ? 'text' : 'button';
             elt.value = curvalue;
           });
         getElement('edit-' + mode).checked = true;
-      }
+      };
 
     SSNMTree.prototype.namechangeListener = function (evt) {
         logDebug('namechangeListener');
@@ -151,20 +151,20 @@ games:{'ssnmtree':{
         var input_elt = evt.src();
         var id = input_elt.parentNode.id;
 
-        if (self.game_state[id].name != input_elt.value) {
-          self.game_state[id].name = input_elt.value
+        if (self.game_state[id].name !== input_elt.value) {
+          self.game_state[id].name = input_elt.value;
           self.intervention.saveState();
         }
-      }
+      };
 
     SSNMTree.prototype.anyNames = function () {
-        for (a in this.game_state) {
-          if (typeof(this.game_state[a]) == 'object' && this.game_state[a].name) {
+        for (var a in this.game_state) {
+          if (typeof(this.game_state[a]) === 'object' && this.game_state[a].name) {
             return true;
           }
         }
         return false;
-      }
+      };
 
     SSNMTree.prototype.clickListener = function (evt) {
         var self = this;
@@ -184,8 +184,12 @@ games:{'ssnmtree':{
           break;
         }
         self.intervention.saveState();
-        (turned_on) ? addElementClass(elt, 'turned-on') : removeElementClass(elt, 'turned-on');
-      }
+        if (turned_on) {
+          addElementClass(elt, 'turned-on');
+        } else {
+          removeElementClass(elt, 'turned-on');
+        }
+      };
 
     if (!hasAttr(global, 'SSNMTree')) {
       global.SSNMTree = new SSNMTree();
