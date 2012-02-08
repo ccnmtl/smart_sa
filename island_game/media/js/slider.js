@@ -10,7 +10,7 @@ function Slider(settings) {
     if (its(n) === null) {
       return null;
     }
-    return parseInt(its(n));
+    return parseInt(its(n),10);
   };
   this.id = its('id');
   this.background_element_id = its("background_element_id");

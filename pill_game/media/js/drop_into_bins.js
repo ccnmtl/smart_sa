@@ -88,8 +88,8 @@ function place_from_offset(item_id, image_to_place) {
     background_id = getNodeAttribute(item_id, 'background');
     x_offset_name = "x_offset_from_" + background_id;
     y_offset_name = "y_offset_from_" + background_id;
-    x_offset_value =  parseInt(getNodeAttribute(item_id, x_offset_name));
-    y_offset_value =  parseInt(getNodeAttribute(item_id, y_offset_name));
+    x_offset_value =  parseInt(getNodeAttribute(item_id, x_offset_name),10);
+    y_offset_value =  parseInt(getNodeAttribute(item_id, y_offset_name),10);
     setposwrt(image_to_place, x_offset_value, y_offset_value, background_id);
   }
 
@@ -275,7 +275,7 @@ function Bucket(settings) {
       if (its(n) === null) {
         return null;
       }
-      return parseInt(its(n));
+      return parseInt(its(n),10);
     };
     this.id = its('id');
     this.image_path = its('image_path');
@@ -315,7 +315,7 @@ function Pill(settings) {
       if (its(n) === null) {
         return null;
       }
-      return parseInt(its(n));
+      return parseInt(its(n),10);
     };
     this.id = its('id');
     this.x_offset = its('x_offset');

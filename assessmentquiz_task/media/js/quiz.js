@@ -60,7 +60,7 @@
 	    if (elt.type != 'radio' || elt.checked) {
 		goal_state[section][elt.name] = elt.value;
 		all_form_fields[elt.name] = true;
-		total += parseInt(elt.value)||0; //in case NaN
+                total += parseInt(elt.value,10)||0; //in case NaN
 	    } else if (!hasAttr(all_form_fields,elt.name)) {
 		all_form_fields[elt.name] = false;
 	    }
