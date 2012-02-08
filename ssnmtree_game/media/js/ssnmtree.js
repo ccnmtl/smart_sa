@@ -78,7 +78,7 @@ games:{'ssnmtree':{
             M.Signals.connect(complete_button, 'onclick', self, 'firstComplete');
           }
         }
-        $('next-game-part-link').onclick = function () {
+        M.DOM.getElement('next-game-part-link').onclick = function () {
             if (!self.anyNames()) {
               alert('Please enter at least one name.');
               return false;

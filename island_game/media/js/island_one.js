@@ -20,19 +20,19 @@ var recalc = function () {
     //pick an image for the dude:
     var dude_images = (Intervention.current_user.gender === "M") ? man_images : woman_images;
     var altitude = 0.5 + (sliders.island.getfraction() - sliders.water.getfraction()) / 2;
-    $('dude').src = pick_image(altitude, dude_images);
+    M.DOM.getElement('dude').src = pick_image(altitude, dude_images);
 
     //adjust the dude
     M.DOM.setStyle('dude', {
-        "left":  ($('dude').x) + 'px',
+        "left":  (M.DOM.getElement('dude').x) + 'px',
         "top" : (island_height - guy_on_island_offset) + 'px',
         'position': 'absolute',
         'height': '184px',
         'width': '110px'
       });
 
-    clip_image($('island_moving'), 600, bottom_of_game);
-    clip_image($('water_moving'), 600, bottom_of_game);
+    clip_image(M.DOM.getElement('island_moving'), 600, bottom_of_game);
+    clip_image(M.DOM.getElement('water_moving'), 600, bottom_of_game);
   };
 
 function init() {
@@ -56,7 +56,7 @@ function init() {
     sliders.bad2.draggable.options.onchange = recalc;
     sliders.good.draggable.options.onchange = recalc;
     var mystery_factor = 20; // where does this come from?
-    bottom_of_game = M.DOM.elementDimensions($('sky')).h  + M.DOM.elementPosition($('sky')).y - mystery_factor;
+    bottom_of_game = M.DOM.elementDimensions(M.DOM.getElement('sky')).h  + M.DOM.elementPosition(M.DOM.getElement('sky')).y - mystery_factor;
     recalc();
   }
 
