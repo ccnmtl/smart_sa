@@ -3,6 +3,8 @@ var guy_on_island_offset = 150;
 var game_state;
 var bottom_of_game;
 
+var M = MochiKit;
+
 var recalc = function () {
     //adjust water level:
     var water_level = (
@@ -21,7 +23,7 @@ var recalc = function () {
     $('dude').src = pick_image(altitude, dude_images);
 
     //adjust the dude
-    setStyle('dude', {
+    M.DOM.setStyle('dude', {
         "left":  ($('dude').x) + 'px',
         "top" : (island_height - guy_on_island_offset) + 'px',
         'position': 'absolute',
@@ -36,15 +38,15 @@ var recalc = function () {
 function init() {
     game_state = Intervention.getGameVar('island_game_state', default_state);
 
-    forEach(getElementsByTagAndClassName('span', 'slider'),
+    M.Iter.forEach(MochiKit.D.getElementsByTagAndClassName('span', 'slider'),
              function (a) { new Slider(a); }
     );
 
-    logDebug(serializeJSON(game_state));
-    logDebug(game_state.page_1_bad1);
+    M.Logging.logDebug(M.Base.serializeJSON(game_state));
+    M.Logging.logDebug(game_state.page_1_bad1);
 
     if (game_state.page_1_bad1 !== null) {
-      logDebug("yo");
+      M.Logging.logDebug("yo");
       sliders.bad1.set(game_state.page_1_bad1);
       sliders.bad2.set(game_state.page_1_bad2);
       sliders.good.set(game_state.page_1_good);
@@ -54,7 +56,7 @@ function init() {
     sliders.bad2.draggable.options.onchange = recalc;
     sliders.good.draggable.options.onchange = recalc;
     var mystery_factor = 20; // where does this come from?
-    bottom_of_game = elementDimensions($('sky')).h  + elementPosition($('sky')).y - mystery_factor;
+    bottom_of_game = M.DOM.elementDimensions($('sky')).h  + M.DOM.elementPosition($('sky')).y - mystery_factor;
     recalc();
   }
 
@@ -66,7 +68,7 @@ function save_state() {
   }
 
 
-addLoadEvent(init);
+M.DOM.addLoadEvent(init);
 
 
 //this function snaps the graphics back into place on browser window resize
