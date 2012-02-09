@@ -15,32 +15,35 @@
   var MS = MochiKit.Signal;
   var ML = MochiKit.Logging;
   var MI = MochiKit.Iter;
+  var MB = MochiKit.Base;
 
   function loadGoalTask() {
     workform = MD.getElement('assessmentquiz');
-    section = workform.elements['section'].value;
+    section = workform.elements.section.value;
     MS.connect(workform, 'onchange', saveForm);
     MS.connect(window, 'onunload', saveForm);
 
     if (hasAttr(goal_state, section)) {
-      for (a in goal_state[section]) {
+      for (var a in goal_state[section]) {
         if (a === 'total') {
           showTotal(goal_state[section][a]);
           continue;
         }
         var form_elt = workform.elements[a];
-        if (!form_elt) continue;
+        if (!form_elt) {
+          continue;
+        }
 
         if (hasAttr(form_elt, 'type')) {
-          if (form_elt.type != 'checkbox') {
-            workform.elements[a].checked = goal_state[section][a] == workform.elements[a].value;
+          if (form_elt.type !== 'checkbox') {
+            workform.elements[a].checked = goal_state[section][a] === workform.elements[a].value;
           } else {
             workform.elements[a].value = goal_state[section][a];
           }
         } else {///radio -- TODO:might need to do the same for <select>
           ML.logDebug(form_elt, a);
           MI.forEach(form_elt, function (selection) {
-            if (selection.value == goal_state[section][a]) {
+            if (selection.value === goal_state[section][a]) {
               selection.checked = true;
             }
           });
@@ -57,7 +60,7 @@
     var all_form_fields = {};
     var total = 0;
     MI.forEach(workform.elements, function (elt) {
-      if (elt.type != 'radio' || elt.checked) {
+      if (elt.type !== 'radio' || elt.checked) {
         goal_state[section][elt.name] = elt.value;
         all_form_fields[elt.name] = true;
         total += parseInt(elt.value, 10) || 0; //in case NaN
@@ -66,17 +69,17 @@
       }
     });
     var all_done = true;
-    for (a in all_form_fields) {
+    for (var a in all_form_fields) {
       all_done &= all_form_fields[a];
     }
-    if (section == 'audit' && !all_done) {
+    if (section === 'audit' && !all_done) {
       var gs = goal_state[section];
-      all_done = ((gs['q1'] == 0 || 1 * gs['q2'] + 1 * gs['q3'] == 0) && hasAttr(gs, 'q9') && hasAttr(gs, 'q10'));
-      ML.logDebug(gs['q1'] == 0, 1 * gs['q2'] + 1 * gs['q3'] == 0, hasAttr(gs, 'q9'), hasAttr(gs, 'q10'));
+      all_done = ((gs.q1 === 0 || 1 * gs.q2 + 1 * gs.q3 === 0) && hasAttr(gs, 'q9') && hasAttr(gs, 'q10'));
+      ML.logDebug(gs.q1 === 0, 1 * gs.q2 + 1 * gs.q3 === 0, hasAttr(gs, 'q9'), hasAttr(gs, 'q10'));
       ML.logDebug(all_done);
     }
     if (all_done) {
-      goal_state[section]['total'] = total;
+      goal_state[section].total = total;
       showTotal(total);
     }
     intervention.saveState();
@@ -84,16 +87,18 @@
 
   function showTotal(total) {
     ML.logDebug('showTotal', total);
-    var ranges = list(MD.getElement('interpretation_range').getElementsByTagName('li'));
+    var ranges = MB.list(MD.getElement('interpretation_range').getElementsByTagName('li'));
     var i = ranges.length;
     var found = false;
     while (--i >= 0) {
-      var range = parseInt(ranges[i].id.substr(1));
+      var range = parseInt(ranges[i].id.substr(1), 10);
       if (total >= range && !found) {
         found = true;
         MD.addElementClass(ranges[i], 'inrange');
-      } else MD.removeElementClass(ranges[i], 'inrange');
+      } else {
+        MD.removeElementClass(ranges[i], 'inrange');
+      }
     }
   }
 
-})();
+}());
