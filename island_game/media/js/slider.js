@@ -137,7 +137,7 @@ global.pick_image = function (v, images) {
     M.Logging.logDebug("yo");
   }
   return media_path + images[0];
-}
+};
 
 /// Other common code:
 global.man_images = [
@@ -166,9 +166,9 @@ global.default_state = {
 
 global.game_state;
 
-function clip_image(image, width, floor) {
+global.clip_image = function (image, width, floor) {
   // sets the 'clip' style on an image so that any portion of the image below y value 'floor' is hidden.
   var hide = floor - M.DOM.elementPosition(image).y;
   M.Style.setStyle(image, { 'clip': 'rect(0 ' + width + 'px ' + hide + 'px 0)' });
-}
+};
 

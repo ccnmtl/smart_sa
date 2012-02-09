@@ -29,8 +29,8 @@ var recalc = function () {
         'width': '110px'
       });
 
-    clip_image(M.DOM.getElement('island_moving'), 600, global.bottom_of_game);
-    clip_image(M.DOM.getElement('water_moving'), 600, global.bottom_of_game);
+    global.clip_image(M.DOM.getElement('island_moving'), 600, global.bottom_of_game);
+    global.clip_image(M.DOM.getElement('water_moving'), 600, global.bottom_of_game);
   };
 
 function init() {
