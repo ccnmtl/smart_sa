@@ -18,7 +18,7 @@ var recalc = function () {
     //pick an image for the dude:
     var dude_images = (global.Intervention.current_user.gender === "M") ? global.man_images : global.woman_images;
     var altitude = 0.5 + (global.sliders.island.getfraction() - global.sliders.water.getfraction()) / 2;
-    M.DOM.getElement('dude').src = pick_image(altitude, dude_images);
+    M.DOM.getElement('dude').src = global.pick_image(altitude, dude_images);
 
     //adjust the dude
     M.DOM.setStyle('dude', {

@@ -51,7 +51,7 @@
       //pick an image for the dude:
 
       var dude_images = (global.Intervention.current_user.gender === "M") ? global.man_images : global.woman_images;
-      MD.getElement('dude_moving').src = pick_image(global.sliders.dude.getfraction(), dude_images);
+      MD.getElement('dude_moving').src = global.pick_image(global.sliders.dude.getfraction(), dude_images);
 
       clip_image(MD.getElement('water_moving'), 600, global.bottom_of_game);
     }

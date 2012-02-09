@@ -124,7 +124,7 @@ Slider.prototype.snap = function (x, y) {
   return this.pos(this.val(x, y));
 };
 
-function pick_image(v, images) {
+global.pick_image = function (v, images) {
   var media_path = M.DOM.getElement('media-base').getAttribute('data-image-base');
 
   var n = images.length;
