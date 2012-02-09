@@ -1,8 +1,7 @@
-var game_state;
-
 var brand_groups = {};
 var group_by = 'group';
 var M = MochiKit;
+var global = this;
 
 //TODO: un-hardcode this:
 var image_path = '../../site_media/pill_game/images/';
@@ -18,7 +17,7 @@ function toggle_select(pill_smart_id) {
 }
 
 function save_state() {
-  game_state.selected_meds = M.Base.map(itemgetter('id'), M.DOM.getElementsByTagAndClassName(null, 'page_2_selected_pill'));
+  global.pill_game.game_state.selected_meds = M.Base.map(itemgetter('id'), M.DOM.getElementsByTagAndClassName(null, 'page_2_selected_pill'));
   Intervention.saveState();
 }
 
@@ -69,21 +68,21 @@ function draw_group(group) {
 }
 
 function draw_medicine_types(line) {
-  var my_line = M.Base.filter(function (m) { return m.line === line; }, arv_pill_types);
+  var my_line = M.Base.filter(function (m) { return m.line === line; }, global.arv_pill_types);
   my_line.sort(keyComparator(group_by));
   var group_list =  groupby_as_array(my_line, itemgetter(group_by));
   M.Iter.forEach(group_list, draw_group);
 }
 
 function init() {
-  game_state = Intervention.getGameVar('pill_game_state',  default_state);
-  if (game_state.treatment_line === null) {
+  global.pill_game.game_state = Intervention.getGameVar('pill_game_state',  global.pill_game.default_state);
+  if (global.pill_game.game_state.treatment_line === null) {
     alert("Please go back to the previous page and choose your line of medication.");
     return;
   }
-  draw_medicine_types(game_state.treatment_line);
-  if (game_state.selected_meds !== null) {
-    M.Base.map(set_selected, game_state.selected_meds);
+  draw_medicine_types(global.pill_game.game_state.treatment_line);
+  if (global.pill_game.game_state.selected_meds !== null) {
+    M.Base.map(set_selected, global.pill_game.game_state.selected_meds);
   }
 }
 

@@ -2,8 +2,9 @@ var M = MochiKit;
 
 var buckets = {};
 var pills = {};
-
-
+var global = this;
+var pillbox_grid_positions = {};
+var dragged_pill = {};
 
 /// THESE ARE CURRENTLY HARDWIRED.
 
@@ -52,8 +53,8 @@ function add_print_med_div(info, how_many, where) {
 
 function adjust_for_print() {
   if (!viewing_print()) { return; }
-  var day_pill_tally = tally_keys(day_pills(), 'pill_type');
-  var night_pill_tally = tally_keys(night_pills(), 'pill_type');
+  var day_pill_tally = tally_keys(pills_in_bucket("day"), 'pill_type');
+  var night_pill_tally = tally_keys(pills_in_bucket("night"), 'pill_type');
   M.Logging.logDebug("ADJUSTING STYLES FOR PRINT");
   M.Base.map(function (a) { }, M.DOM.getElementsByTagAndClassName('div', 'page_3_pill_info'));
   M.Base.map(function (a) { var p = pills[a]; if (p.still_in_box) { M.Style.hideElement(p.image); }}, M.Base.keys(pills));
@@ -64,14 +65,14 @@ function adjust_for_print() {
     if (a.smart_id in day_pill_tally) {
       add_print_med_div(a, day_pill_tally[a.smart_id], 'day_pill_info_text');
     }
-  }, M.Base.values(arv_pill_types)
+  }, M.Base.values(global.arv_pill_types)
   );
 
   M.Base.map(function (a) {
     if (a.smart_id in night_pill_tally) {
       add_print_med_div(a, night_pill_tally[a.smart_id], 'night_pill_info_text');
     }
-  }, M.Base.values(arv_pill_types)
+  }, M.Base.values(global.arv_pill_types)
   );
 }
 function setpos(thing, x, y) {
@@ -124,7 +125,7 @@ function pill_from_info(info) {
   }
 
 function image_from_pill(smart_pill_id) {
-  return M.Base.filter(function (a) { return a.smart_id === smart_pill_id; }, arv_pill_types)[0].image;
+  return M.Base.filter(function (a) { return a.smart_id === smart_pill_id; }, global.arv_pill_types)[0].image;
 }
 
 function build_pill(medication_label) {
@@ -157,32 +158,32 @@ function draw_page() {
 
 
     //figure out where pills go in the box:
-    var positions = grid(M.DOM.getElement('pillbox'), patient_meds.length);
+    var positions = grid(M.DOM.getElement('pillbox'), global.pill_game.patient_meds.length);
     kill_pills();
     pills = {};
 
     //build pills in box:
-    M.Iter.forEach(M.Iter.list(M.Iter.range(patient_meds.length)),
-        function (a) { pillbox_grid_positions[patient_meds[a]] = positions[a]; }
+    M.Iter.forEach(M.Iter.list(M.Iter.range(global.pill_game.patient_meds.length)),
+        function (a) { pillbox_grid_positions[global.pill_game.patient_meds[a]] = positions[a]; }
     );
-    M.Iter.forEach(patient_meds, build_pill);
+    M.Iter.forEach(global.pill_game.patient_meds, build_pill);
 
     //build pills in bins:
-    M.Iter.forEach(M.Base.values(game_state.day_pills), pill_from_info);
-    M.Iter.forEach(M.Base.values(game_state.night_pills), pill_from_info);
+    M.Iter.forEach(M.Base.values(global.pill_game.game_state.day_pills), pill_from_info);
+    M.Iter.forEach(M.Base.values(global.pill_game.game_state.night_pills), pill_from_info);
     adjust_for_print();
   }
 
 function save_state() {
     var day_pill_info = {};
     var night_pill_info = {};
-    M.Iter.forEach(day_pills(),   function (pill) { day_pill_info[pill.id] =  pill.info(); });
-    M.Iter.forEach(night_pills(), function (pill) { night_pill_info[pill.id] =  pill.info(); });
-    game_state.day_pills = day_pill_info;
-    game_state.night_pills = night_pill_info;
-    game_state.day_pills_time_menu_selected_index = M.DOM.getElement('day_pills_time').selectedIndex;
-    game_state.night_pills_time_menu_selected_index = M.DOM.getElement('night_pills_time').selectedIndex;
-    Intervention.saveState();
+    M.Iter.forEach(pills_in_bucket("day"),   function (pill) { day_pill_info[pill.id] =  pill.info(); });
+    M.Iter.forEach(pills_in_bucket("night"), function (pill) { night_pill_info[pill.id] =  pill.info(); });
+    global.pill_game.game_state.day_pills = day_pill_info;
+    global.pill_game.game_state.night_pills = night_pill_info;
+    global.pill_game.game_state.day_pills_time_menu_selected_index = M.DOM.getElement('day_pills_time').selectedIndex;
+    global.pill_game.game_state.night_pills_time_menu_selected_index = M.DOM.getElement('night_pills_time').selectedIndex;
+    global.Intervention.saveState();
   }
 
 function time_menu_changed() {
@@ -190,23 +191,23 @@ function time_menu_changed() {
   }
 
 function set_time_menus() {
-    if (game_state.day_pills_time_menu_selected_index !== null) {
-      M.DOM.getElement('day_pills_time').selectedIndex = game_state.day_pills_time_menu_selected_index;
+    if (global.pill_game.game_state.day_pills_time_menu_selected_index !== null) {
+      M.DOM.getElement('day_pills_time').selectedIndex = global.pill_game.game_state.day_pills_time_menu_selected_index;
     }
-    if (game_state.night_pills_time_menu_selected_index !== null) {
-      M.DOM.getElement('night_pills_time').selectedIndex = game_state.night_pills_time_menu_selected_index;
+    if (global.pill_game.game_state.night_pills_time_menu_selected_index !== null) {
+      M.DOM.getElement('night_pills_time').selectedIndex = global.pill_game.game_state.night_pills_time_menu_selected_index;
     }
   }
 
 
 function init() {
-    if (typeof(Intervention) === "undefined") {
+    if (typeof(global.Intervention) === "undefined") {
       alert("Log in as a client to play this game.");
       return;
     }
     M.Style.hideElement(M.DOM.getElement('image_root'));
-    game_state = Intervention.getGameVar('pill_game_state',  default_state);
-    patient_meds = game_state.selected_meds;
+    global.pill_game.game_state = global.Intervention.getGameVar('pill_game_state',  global.pill_game.default_state);
+    global.pill_game.patient_meds = global.pill_game.game_state.selected_meds;
     M.Iter.forEach(M.DOM.getElementsByTagAndClassName('span', 'bucket'),
       function (a) { new Bucket(a); }
     );
@@ -223,21 +224,15 @@ M.DOM.addLoadEvent(init);
 
 
 function axe_state() {
-    game_state.day_pills = {};
-    game_state.night_pills = {};
-    Intervention.saveState();
+    global.pill_game.game_state.day_pills = {};
+    global.pill_game.game_state.night_pills = {};
+    global.Intervention.saveState();
     window.location.reload();
   }
 
 function pills_in_bucket(which) {
     return M.Base.filter(function (a) {return a.where === which; }, M.Base.values(pills));
   }
-
-day_pills   = M.Base.partial(pills_in_bucket, "day");
-night_pills  = M.Base.partial(pills_in_bucket, "night");
-
-
-
 
 
 function pill_from_image(pill_image) {
@@ -247,7 +242,7 @@ function pill_from_image(pill_image) {
 function pill_dropped(pill_image, where) {
     dragged_pill =  pill_from_image(pill_image);
     /// Create a new pill in the dropped position -- the user *thinks* this is the pill that was dragged.
-    new_settings = {
+    var new_settings = {
         id:                 dragged_pill.pill_type + (Math.random() + "").substring(2, 6),
         pill_type :         dragged_pill.pill_type,
         image_path :        dragged_pill.image_path,
@@ -353,34 +348,21 @@ Pill.prototype.info = function () {
     return update_keys(this, ['id', 'where', 'pill_type', 'image_path', 'offset_image', 'x_offset', 'y_offset']);
   };
 
-
-
 Pill.prototype.remove = function () {
     M.DOM.removeElement(this.image);
     delete pills[this.id];
     return;
   };
 
-
 Pill.prototype.arv_info = function () {
     var me = this;
-    return M.Base.filter(function (a) { return a.smart_id === me.pill_type; }, arv_pill_types)[0];
+    return M.Base.filter(function (a) { return a.smart_id === me.pill_type; }, global.arv_pill_types)[0];
   };
-
-
-
-
-pillbox_grid_positions = {};
-
 
 function nbs(n) {
   // the smallest number b for which b^2 > n.
   return  Math.ceil(Math.sqrt(n)) + 1;
 }
-
-
-
-
 
 function setpos_center(thing, x, y) {
     /// this positions the thing so its CENTER rather than its TOP LEFT is at the specified coordinates.
@@ -389,7 +371,6 @@ function setpos_center(thing, x, y) {
         y - (M.Style.getElementDimensions(thing).h / 2)
     );
   }
-
 
 ///wrt is the id of either the pillbox, the day or the night bin IMAGE.
 Pill.prototype.set_wrt = function (x, y, wrt) {
@@ -424,7 +405,7 @@ Pill.prototype.set_to_original_position = function () {
 
 Pill.prototype.draw_box = function () {
     var pill_id = this.id;
-    var this_pill_info = M.Base.filter(function (a) {return a.smart_id === pill_id; }, arv_pill_types)[0];
+    var this_pill_info = M.Base.filter(function (a) {return a.smart_id === pill_id; }, global.arv_pill_types)[0];
 
     //TODO:
     // THESE NEED TO BE MOVED TO CSS BUT FOR NOW WE ARE PUTTING THEM HERE.

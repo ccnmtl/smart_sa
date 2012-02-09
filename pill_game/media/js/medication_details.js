@@ -26,8 +26,8 @@
 */
 
 
-
-var arv_pill_types = [
+var global = this;
+global.arv_pill_types = [
   //// L I N E     O N E  :
   //STAVUDINE / d4T:
   {
