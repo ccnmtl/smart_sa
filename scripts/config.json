@@ -18,7 +18,8 @@
     "dojo"          : false,
 
     "predef"        : [  // Custom globals.
-       "MochiKit"
+       "MochiKit",
+       "alert"
         //"exampleVar",
         //"anotherCoolGlobal",
         //"iLoveDouglas"
