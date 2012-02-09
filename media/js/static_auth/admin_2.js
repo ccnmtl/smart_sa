@@ -259,7 +259,7 @@ http://www.josh-davis.org/pythonAES
   /**************
   Init Global Instantiation
   **************/
-  if (!hasAttr(global, 'UserAdmin')) {
+  if (!window.hasAttr(global, 'UserAdmin')) {
     global.UserAdmin = new UserAdmin();
   }
 }());

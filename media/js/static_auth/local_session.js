@@ -5,15 +5,15 @@
  */
 
 
-function hasAttr(obj, key) {
+window.hasAttr = function (obj, key) {
   try {
     return (typeof(obj[key]) !== 'undefined');
   } catch (e) { return false; }
-}
+};
 
-function NOT(bool) {
+window.NOT = function (bool) {
   return !bool;
-}
+};
 
 /*wrap code with module pattern*/
 (function () {
@@ -47,7 +47,7 @@ function NOT(bool) {
   }
 
   function LocalFirefoxSession() {
-    this.permStor = new StorageWrapper(hasAttr(global, 'localStorage') ? global.localStorage : global.globalStorage[location.hostname]);
+    this.permStor = new StorageWrapper(window.hasAttr(global, 'localStorage') ? global.localStorage : global.globalStorage[location.hostname]);
     this.sessStor = new StorageWrapper(global.sessionStorage);
     this.nsUSER = 'USER_';
     this.nsBACKUP = 'BACKUP_';
@@ -59,7 +59,7 @@ function NOT(bool) {
     var self = this;
     var user_key = self.nsUSER + self.hash(username, credential);
     self.setAdmin(false);
-    if (NOT(self.permStor.hasKey(user_key))) {
+    if (window.NOT(self.permStor.hasKey(user_key))) {
       //LOGIN FAILED
       ML.logDebug('login failed', user_key);
       if (typeof(callback) === 'function') { callback(false); }
@@ -125,7 +125,7 @@ function NOT(bool) {
     }
     var user_key = this.nsUSER + user_hash;
     ///only save if they don't already exist
-    if (NOT(this.permStor.hasKey(user_key))) {
+    if (window.NOT(this.permStor.hasKey(user_key))) {
       this.saveUser(user_info, false, user_key);
     }
     return user_key;
@@ -193,15 +193,15 @@ function NOT(bool) {
         self.sessStor.del(a);
       }
       for (var a2 in self.permStor.keyDict()) {
-        if (NOT(RegExp('^' + self.nsBACKUP).test(a2))) {
+        if (window.NOT(RegExp('^' + self.nsBACKUP).test(a2))) {
           self.permStor.del(a2);
         }
       }
     }
   };
 
-  if (NOT(hasAttr(global, 'EphemeralSession'))) {
-    if (hasAttr(global, 'sessionStorage') && (hasAttr(global, 'localStorage') || hasAttr(global, 'globalStorage'))) {
+  if (window.NOT(window.hasAttr(global, 'EphemeralSession'))) {
+    if (window.hasAttr(global, 'sessionStorage') && (window.hasAttr(global, 'localStorage') || window.hasAttr(global, 'globalStorage'))) {
       if (location.hostname !== '') {
         global.EphemeralSession = new LocalFirefoxSession();
         //for easy debug access

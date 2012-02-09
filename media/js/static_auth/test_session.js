@@ -24,12 +24,12 @@ function hasAttr(obj, key) {
     this.nsUSER = 'USER_';
     this.nsBACKUP = 'BACKUP_';
     this.RESTORE_KEY = 'RESTORE';
-    if (!hasAttr(this.sessStor, this.nsUSER)) {
+    if (!window.hasAttr(this.sessStor, this.nsUSER)) {
       this.sessStor[this.nsUSER] = '{}';
     }
   }
   TestSession.prototype.currentUser = function () {
-    if (hasAttr(this.sessStor, this.nsUSER)) {
+    if (window.hasAttr(this.sessStor, this.nsUSER)) {
       return M.evalJSON(this.sessStor[this.nsUSER].value);
     } else {
       this.sessStor[this.nsUSER] = '{}';
@@ -43,8 +43,8 @@ function hasAttr(obj, key) {
     }
   };
 
-  if (!hasAttr(global, 'EphemeralSession')) {
-    if (hasAttr(global, 'sessionStorage') && hasAttr(global, 'globalStorage')) {
+  if (!window.hasAttr(global, 'EphemeralSession')) {
+    if (window.hasAttr(global, 'sessionStorage') && window.hasAttr(global, 'globalStorage')) {
       if (location.hostname !== '') {
         global.EphemeralSession = new TestSession();
         //for easy debug access

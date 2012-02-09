@@ -8,7 +8,7 @@
   function loadGoalTask() {
     workform = MochiKit.DOM.getElement('lifegoals');
     for (var a in goal_state) {
-      if (hasAttr(workform.elements, a)) {
+      if (window.hasAttr(workform.elements, a)) {
         workform.elements[a].value = goal_state[a];
       }
     }

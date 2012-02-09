@@ -141,7 +141,7 @@ current_user = {
       return;
     }
     self.current_user = global.EphemeralSession.currentUser();
-    if (hasAttr(self.current_user, 'admin') && self.current_user.admin) {
+    if (window.hasAttr(self.current_user, 'admin') && self.current_user.admin) {
       ML.logDebug('Admin Login');
       self.jumpToAdmin();
     } else {
@@ -157,7 +157,7 @@ current_user = {
     location.href = MD.getElement('admin_link').href;
   };
   InterventionSmart.prototype.login_confirm = function () {
-    if (hasAttr(this, 'current_user')) {
+    if (window.hasAttr(this, 'current_user')) {
       for (var key in this.current_user) {
         switch (key) {
         case 'firstname':
@@ -174,7 +174,7 @@ current_user = {
       var session_count = 0;
       if (typeof(this.current_user.sessions) === 'object') {
         for (var a in this.current_user.sessions) {
-          if (hasAttr(this.current_user.sessions[a], 'STATUS') && this.current_user.sessions[a].STATUS === 'complete') {
+          if (window.hasAttr(this.current_user.sessions[a], 'STATUS') && this.current_user.sessions[a].STATUS === 'complete') {
             ++session_count;
           }
         }
@@ -200,13 +200,13 @@ current_user = {
    *******************************************/
   InterventionSmart.prototype.init_intervention = function () {
     var self = this;
-    if (!hasAttr(this.current_user, 'sessions')) {
+    if (!window.hasAttr(this.current_user, 'sessions')) {
       this.current_user.sessions = {};
       this.current_user.games = {};
       this.session.saveUser(this.current_user);
     }
     self.init_subitems(function (session_id) {
-      return (hasAttr(self.current_user.sessions, session_id) && self.current_user.sessions[session_id].STATUS === 'complete');
+      return (window.hasAttr(self.current_user.sessions, session_id) && self.current_user.sessions[session_id].STATUS === 'complete');
     });
   };
 
@@ -221,18 +221,18 @@ current_user = {
 
   InterventionSmart.prototype.init_session = function () {
     var self = this;
-    if (!hasAttr(self.current_user, 'sessions')) {
+    if (!window.hasAttr(self.current_user, 'sessions')) {
       self.init_intervention();
       //OK, since init_subitems() is run again for activities below
     }
     var user_sessions = self.current_user.sessions;
     var session_id = this.findSessionId();
-    if (!hasAttr(user_sessions, session_id)) {
+    if (!window.hasAttr(user_sessions, session_id)) {
       user_sessions[session_id] = self.session_blueprint();
       this.session.saveUser(this.current_user);
     }
     self.init_subitems(function (activity_id) {
-      return (hasAttr(self.current_user.sessions[session_id], activity_id) && self.current_user.sessions[session_id][activity_id].STATUS === 'complete');
+      return (window.hasAttr(self.current_user.sessions[session_id], activity_id) && self.current_user.sessions[session_id][activity_id].STATUS === 'complete');
     });
   };
 
@@ -242,16 +242,16 @@ current_user = {
     if (!session_id || !activity_id) {
       return false;
     }
-    if (!hasAttr(this.current_user.sessions, session_id)) {
+    if (!window.hasAttr(this.current_user.sessions, session_id)) {
       this.current_user.sessions[session_id] = this.session_blueprint();
     }
-    if (!hasAttr(this.current_user.sessions[session_id], activity_id)) {
+    if (!window.hasAttr(this.current_user.sessions[session_id], activity_id)) {
       this.current_user.sessions[session_id][activity_id] = {};
     }
     return this.current_user.sessions[session_id][activity_id];
   };
   InterventionSmart.prototype.init_activity = function () {
-    if (global.game_variables && hasAttr(this.current_user.games, global.game_variables[0]) && hasAttr(this.current_user.games[global.game_variables[0]], 'default_page')) {
+    if (global.game_variables && window.hasAttr(this.current_user.games, global.game_variables[0]) && window.hasAttr(this.current_user.games[global.game_variables[0]], 'default_page')) {
       var def_page = this.current_user.games[global.game_variables[0]].default_page;
       var href = MD.getElement('taskpage-' + def_page).href;
       MD.getElement('tasklink').href = href;
@@ -330,9 +330,9 @@ current_user = {
       ///this way we can return the pointer, and the original updates
       throw "devault_value required and must be an array or dictionary";
     }
-    if (!hasAttr(this.current_user, 'games')) { this.current_user.games = {}; }
+    if (!window.hasAttr(this.current_user, 'games')) { this.current_user.games = {}; }
 
-    if (!hasAttr(this.current_user.games, key)) {
+    if (!window.hasAttr(this.current_user.games, key)) {
       this.current_user.games[key] = default_value;
     }
     this.current_task[key] = default_value;
@@ -365,10 +365,10 @@ current_user = {
     var date_string = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('-');
     var file_name = location.pathname.split('/').pop().split('.html').shift();
 
-    if (!hasAttr(this.current_user, 'timelog')) {
+    if (!window.hasAttr(this.current_user, 'timelog')) {
       this.current_user.timelog = {};
     }
-    if (!hasAttr(this.current_user.timelog, date_string)) {
+    if (!window.hasAttr(this.current_user.timelog, date_string)) {
       this.current_user.timelog[date_string] = [];
     }
     this.current_user.timelog[date_string].push({'page': file_name,
@@ -381,7 +381,7 @@ current_user = {
   /**************
   INIT Global Instantiation
   **************/
-  if (!hasAttr(global, 'Intervention')) {
+  if (!window.hasAttr(global, 'Intervention')) {
 //      console.log("setting up new InterventionSmart");
     global.Intervention = new InterventionSmart();
   }

@@ -23,7 +23,7 @@
     MS.connect(workform, 'onchange', saveForm);
     MS.connect(window, 'onunload', saveForm);
 
-    if (hasAttr(goal_state, section)) {
+    if (window.hasAttr(goal_state, section)) {
       for (var a in goal_state[section]) {
         if (a === 'total') {
           showTotal(goal_state[section][a]);
@@ -34,7 +34,7 @@
           continue;
         }
 
-        if (hasAttr(form_elt, 'type')) {
+        if (window.hasAttr(form_elt, 'type')) {
           if (form_elt.type !== 'checkbox') {
             workform.elements[a].checked = goal_state[section][a] === workform.elements[a].value;
           } else {
@@ -54,7 +54,7 @@
   MD.addLoadEvent(loadGoalTask);
 
   function saveForm() {
-    if (!hasAttr(goal_state, section)) {
+    if (!window.hasAttr(goal_state, section)) {
       goal_state[section] = {};
     }
     var all_form_fields = {};
@@ -64,7 +64,7 @@
         goal_state[section][elt.name] = elt.value;
         all_form_fields[elt.name] = true;
         total += parseInt(elt.value, 10) || 0; //in case NaN
-      } else if (!hasAttr(all_form_fields, elt.name)) {
+      } else if (!window.hasAttr(all_form_fields, elt.name)) {
         all_form_fields[elt.name] = false;
       }
     });
@@ -74,8 +74,8 @@
     }
     if (section === 'audit' && !all_done) {
       var gs = goal_state[section];
-      all_done = ((gs.q1 === 0 || 1 * gs.q2 + 1 * gs.q3 === 0) && hasAttr(gs, 'q9') && hasAttr(gs, 'q10'));
-      ML.logDebug(gs.q1 === 0, 1 * gs.q2 + 1 * gs.q3 === 0, hasAttr(gs, 'q9'), hasAttr(gs, 'q10'));
+      all_done = ((gs.q1 === 0 || 1 * gs.q2 + 1 * gs.q3 === 0) && window.hasAttr(gs, 'q9') && window.hasAttr(gs, 'q10'));
+      ML.logDebug(gs.q1 === 0, 1 * gs.q2 + 1 * gs.q3 === 0, window.hasAttr(gs, 'q9'), window.hasAttr(gs, 'q10'));
       ML.logDebug(all_done);
     }
     if (all_done) {

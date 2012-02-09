@@ -65,7 +65,7 @@
       };
     }
     if (mode === 'choose_one') {
-      if (!hasAttr(self.game_state, 'chosen-issue')) {
+      if (!window.hasAttr(self.game_state, 'chosen-issue')) {
         M.DOM.getElement('next-game-part-link').onclick = function () {
           if (!self.game_state['chosen-issue']) {
             alert('Please select an issue to problem solve.');
@@ -77,7 +77,7 @@
 
     if (mode === 'problemsolve_one') {
       var workthrough_form = document.forms.workthrough_form;
-      if (hasAttr(self.game_state, 'chosen-issue')) {
+      if (window.hasAttr(self.game_state, 'chosen-issue')) {
         var problemsolve_state = self.game_state.my_issues[self.game_state['chosen-issue']];
         for (var field in problemsolve_state) {
           workthrough_form.elements[field].value = problemsolve_state[field];
@@ -108,7 +108,7 @@
       }
     }
 
-    if (hasAttr(self.game_state, 'chosen-issue')) {
+    if (window.hasAttr(self.game_state, 'chosen-issue')) {
       var issue2 = self.getIssueByText(self.game_state['chosen-issue']);
       self.chooseOneIssue(null, issue2);
     }
@@ -145,7 +145,7 @@
     var issue_text = self.getIssueText(cur_issue);
     if (is_an_issue && issue_text) {
       //if already there, leave it alone:
-      if (!hasAttr(self.game_state.my_issues, issue_text)) {
+      if (!window.hasAttr(self.game_state.my_issues, issue_text)) {
         self.game_state.my_issues[issue_text] = {};
       }
     } else {

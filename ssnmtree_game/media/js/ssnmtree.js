@@ -35,7 +35,7 @@ games:{'ssnmtree':{
             M.Signals.connect(input, 'onchange', self, 'namechangeListener');
             M.Signals.connect(input, 'onkeypress', self, 'namechangeListener');
 
-            if (!hasAttr(self.game_state, elt.id)) {
+            if (!window.hasAttr(self.game_state, elt.id)) {
               self.game_state[elt.id] = {'name': '', 'disclosure': false, 'support': false};
             }
             else {
@@ -192,7 +192,7 @@ games:{'ssnmtree':{
         }
       };
 
-    if (!hasAttr(global, 'SSNMTree')) {
+    if (!window.hasAttr(global, 'SSNMTree')) {
       global.SSNMTree = new SSNMTree();
     }
 
