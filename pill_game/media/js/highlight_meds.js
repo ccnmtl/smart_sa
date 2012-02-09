@@ -2,22 +2,23 @@ var game_state;
 
 var brand_groups = {};
 var group_by = 'group';
+var M = MochiKit;
 
 //TODO: un-hardcode this:
 var image_path = '../../site_media/pill_game/images/';
 
 function set_selected(div) {
-  if ($(div) !== null) {
-    addElementClass(div, 'page_2_selected_pill');
+  if (M.DOM.getElement(div) !== null) {
+    M.DOM.addElementClass(div, 'page_2_selected_pill');
   }
 }
 
 function toggle_select(pill_smart_id) {
-  toggleElementClass('page_2_selected_pill', pill_smart_id);
+  M.DOM.toggleElementClass('page_2_selected_pill', pill_smart_id);
 }
 
 function save_state() {
-  game_state.selected_meds = map(itemgetter('id'), getElementsByTagAndClassName(null, 'page_2_selected_pill'));
+  game_state.selected_meds = M.Base.map(itemgetter('id'), M.DOM.getElementsByTagAndClassName(null, 'page_2_selected_pill'));
   Intervention.saveState();
 }
 
@@ -27,51 +28,51 @@ function pill_clicked(pill) {
 }
 
 function pill_image_div(pill) {
-  img = IMG({src: image_path + pill.image},  null);
-  return DIV({class: 'pill_image_div'}, img);
+  var img = M.DOM.IMG({src: image_path + pill.image},  null);
+  return M.DOM.DIV({'class': 'pill_image_div'}, img);
 }
 
 function pill_fact_div(fact, pill) {
-  return DIV({class: 'pill_fact_div'}, pill[fact]);
+  return M.DOM.DIV({'class': 'pill_fact_div'}, pill[fact]);
 }
 
 function pill_mg_fact_div(fact, pill) {
-  return DIV({class: 'pill_fact_div mg_fact'}, pill[fact]);
+  return M.DOM.DIV({'class': 'pill_fact_div mg_fact'}, pill[fact]);
 }
 
 function pill__label_fact_div(fact, pill) {
-  return DIV({class: 'pill_fact_div'}, pill[fact]);
+  return M.DOM.DIV({'class': 'pill_fact_div'}, pill[fact]);
 }
 
 function draw_pill(group_div, pill) {
-  attrs = {
+  var attrs = {
     id: pill.smart_id,
     'class': 'page_2_pill'
   };
 
-  new_pill_div = DIV(attrs, pill_image_div(pill), pill__label_fact_div('pill_label', pill), pill_mg_fact_div('dose_mg', pill));
-  appendChildNodes(group_div, new_pill_div);
-  connect(new_pill_div, 'onclick', partial(pill_clicked, pill));
+  var new_pill_div = M.DOM.DIV(attrs, pill_image_div(pill), pill__label_fact_div('pill_label', pill), pill_mg_fact_div('dose_mg', pill));
+  M.DOM.appendChildNodes(group_div, new_pill_div);
+  M.Signals.connect(new_pill_div, 'onclick', M.Base.partial(pill_clicked, pill));
 }
 
 function draw_group(group) {
-  group_label = group[0];
-  pills = group[1];
-  attrs = {
+  var group_label = group[0];
+  var pills = group[1];
+  var attrs = {
     id: 'container_for' + group_label,
     'class': 'page_2_pill_group'
   };
-  var group_div = DIV(attrs, DIV(null, group_label));
-  forEach(pills, partial(draw_pill, group_div));
-  appendChildNodes(group_div, BR({'clear': 'all'}));
-  appendChildNodes($('game-content'), group_div);
+  var group_div = M.DOM.DIV(attrs, M.DOM.DIV(null, group_label));
+  M.Iter.forEach(pills, M.Base.partial(draw_pill, group_div));
+  M.DOM.appendChildNodes(group_div, M.DOM.BR({'clear': 'all'}));
+  M.DOM.appendChildNodes(M.DOM.getElement('game-content'), group_div);
 }
 
 function draw_medicine_types(line) {
-  my_line = filter(function (m) { return m.line === line; }, arv_pill_types);
+  var my_line = M.Base.filter(function (m) { return m.line === line; }, arv_pill_types);
   my_line.sort(keyComparator(group_by));
-  group_list =  groupby_as_array(my_line, itemgetter(group_by));
-  forEach(group_list, draw_group);
+  var group_list =  groupby_as_array(my_line, itemgetter(group_by));
+  M.Iter.forEach(group_list, draw_group);
 }
 
 function init() {
@@ -82,9 +83,9 @@ function init() {
   }
   draw_medicine_types(game_state.treatment_line);
   if (game_state.selected_meds !== null) {
-    map(set_selected, game_state.selected_meds);
+    M.Base.map(set_selected, game_state.selected_meds);
   }
 }
 
-addLoadEvent(init);
+M.DOM.addLoadEvent(init);
 
