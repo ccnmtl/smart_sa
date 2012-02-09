@@ -15,25 +15,25 @@
     var global = this;
     function init() {
 
-      game_state = global.Intervention.getGameVar('island_game_state', default_state);
+      global.game_state = global.Intervention.getGameVar('island_game_state', global.default_state);
 
       MI.forEach(MD.getElementsByTagAndClassName('span', 'slider'),
         function (a) { new Slider(a); }
       );
 
-      if (game_state.page_2_good !== null) {
-        global.sliders.good.set(game_state.page_2_good);
+      if (global.game_state.page_2_good !== null) {
+        global.sliders.good.set(global.game_state.page_2_good);
       }
 
       global.sliders.good.draggable.options.onchange = recalc;
       var mystery_factor = 20; // where does this come from?
-      bottom_of_game = MD.elementDimensions(MD.getElement('sky')).h  + MD.elementPosition(MD.getElement('sky')).y - mystery_factor;
+      global.bottom_of_game = MD.elementDimensions(MD.getElement('sky')).h  + MD.elementPosition(MD.getElement('sky')).y - mystery_factor;
       recalc();
     }
 
 
     function save_state() {
-      game_state.page_2_good = global.sliders.good.get();
+      global.game_state.page_2_good = global.sliders.good.get();
       global.Intervention.saveState();
     }
 
@@ -50,10 +50,10 @@
       });
       //pick an image for the dude:
 
-      var dude_images = (global.Intervention.current_user.gender === "M") ? man_images : woman_images;
+      var dude_images = (global.Intervention.current_user.gender === "M") ? global.man_images : global.woman_images;
       MD.getElement('dude_moving').src = pick_image(global.sliders.dude.getfraction(), dude_images);
 
-      clip_image(MD.getElement('water_moving'), 600, bottom_of_game);
+      clip_image(MD.getElement('water_moving'), 600, global.bottom_of_game);
     }
 
     MD.addLoadEvent(init);

@@ -140,7 +140,7 @@ function pick_image(v, images) {
 }
 
 /// Other common code:
-var man_images = [
+global.man_images = [
   'images/man/xhosaman4.png',
   'images/man/xhosaman3.png',
   'images/man/xhosaman2.png',
@@ -149,7 +149,7 @@ var man_images = [
 ];
 
 
-var woman_images = [
+global.woman_images = [
   'images/woman/xhosawoman4.gif',
   'images/woman/xhosawoman3.gif',
   'images/woman/xhosawoman2.gif',
@@ -157,14 +157,14 @@ var woman_images = [
   'images/woman/xhosawoman.gif'
 ];
 
-var default_state = {
+global.default_state = {
   'page_1_bad1' : null,
   'page_1_bad2' : null,
   'page_1_good' : null,
   'page_2_good' : null
 };
 
-var game_state;
+global.game_state;
 
 function clip_image(image, width, floor) {
   // sets the 'clip' style on an image so that any portion of the image below y value 'floor' is hidden.
