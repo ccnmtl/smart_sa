@@ -3,7 +3,8 @@ var M = MochiKit;
 function setpos(thing, x, y) {
   M.Style.setStyle(thing,  { "left":  (x) + 'px', "top": (y) + 'px', 'position': 'absolute'});
 }
-var sliders = {};
+var global = this;
+global.sliders = {};
 
 function Slider(settings) {
   //setup
@@ -32,7 +33,7 @@ function Slider(settings) {
   }
 
   //register this slider
-  sliders[this.id] = this;
+  global.sliders[this.id] = this;
   this.background_position = M.DOM.getElementPosition(this.background_element_id);
 
   //draw fixed and moving components:
@@ -68,7 +69,7 @@ function Slider(settings) {
     M.Logging.logDebug(this.id + "is draggable by user. Setting up draggable.");
     //set up our draggable:
     this.draggable = M.DragAndDrop.Draggable(this.moving, { snap : function (x, y) {
-                        return sliders[this.slider_id].snap(x, y);
+                        return global.sliders[this.slider_id].snap(x, y);
                       }
     });
     this.draggable.options.slider_id = this.id;

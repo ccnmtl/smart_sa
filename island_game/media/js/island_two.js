@@ -12,19 +12,20 @@
 (function () {
     var MI = MochiKit.Iter;
     var MD = MochiKit.DOM;
+    var global = this;
     function init() {
 
-      game_state = Intervention.getGameVar('island_game_state', default_state);
+      game_state = global.Intervention.getGameVar('island_game_state', default_state);
 
       MI.forEach(MD.getElementsByTagAndClassName('span', 'slider'),
         function (a) { new Slider(a); }
       );
 
       if (game_state.page_2_good !== null) {
-        sliders.good.set(game_state.page_2_good);
+        global.sliders.good.set(game_state.page_2_good);
       }
 
-      sliders.good.draggable.options.onchange = recalc;
+      global.sliders.good.draggable.options.onchange = recalc;
       var mystery_factor = 20; // where does this come from?
       bottom_of_game = MD.elementDimensions(MD.getElement('sky')).h  + MD.elementPosition(MD.getElement('sky')).y - mystery_factor;
       recalc();
@@ -32,25 +33,25 @@
 
 
     function save_state() {
-      game_state.page_2_good = sliders.good.get();
-      Intervention.saveState();
+      game_state.page_2_good = global.sliders.good.get();
+      global.Intervention.saveState();
     }
 
     function recalc() {
-      var health = sliders.good.get();
-      sliders.water.set(10 - health);
-      sliders.bad1.set(10 - health);
-      sliders.bad2.set(10 - health);
-      sliders.dude.set(health);
-      sliders.good2.set(health);
+      var health = global.sliders.good.get();
+      global.sliders.water.set(10 - health);
+      global.sliders.bad1.set(10 - health);
+      global.sliders.bad2.set(10 - health);
+      global.sliders.dude.set(health);
+      global.sliders.good2.set(health);
       MD.setStyle('dude_moving', {
         'height': '184px',
         'width': '110px'
       });
       //pick an image for the dude:
 
-      var dude_images = (Intervention.current_user.gender === "M") ? man_images : woman_images;
-      MD.getElement('dude_moving').src = pick_image(sliders.dude.getfraction(), dude_images);
+      var dude_images = (global.Intervention.current_user.gender === "M") ? man_images : woman_images;
+      MD.getElement('dude_moving').src = pick_image(global.sliders.dude.getfraction(), dude_images);
 
       clip_image(MD.getElement('water_moving'), 600, bottom_of_game);
     }
