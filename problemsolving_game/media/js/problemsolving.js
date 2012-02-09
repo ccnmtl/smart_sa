@@ -11,6 +11,7 @@
 */
 
 (function () {
+  var M = MochiKit;
   var global = this;
   var custom_elts = 0;
   function ProblemSolveGame() {
@@ -22,18 +23,18 @@
   ProblemSolveGame.prototype.__init__ = function () {
     this.intervention = global.Intervention;
     this.game_state = this.intervention.getGameVar('problemsolving', { 'my_issues': {} });
-    connect(window, 'onload', this, 'onLoad');
+    M.Signals.connect(window, 'onload', this, 'onLoad');
   };
   ProblemSolveGame.prototype.onLoad = function () {
     var self = this;
-    var mode = getElement('gamephase').className;
+    var mode = M.DOM.getElement('gamephase').className;
 
     var start_at_choose_one = false;
     //which ones picked
     for (var a in self.game_state.my_issues) {
       var issue = self.getIssueByText(a);
       if (issue) {
-        addElementClass(issue, 'picked');
+        M.DOM.addElementClass(issue, 'picked');
         if (mode === 'choose_one') {
           start_at_choose_one = true;
           var filled_out_form = false;
@@ -42,11 +43,11 @@
             break;//not empty dict
           }
           if (filled_out_form) {
-            addElementClass(issue, 'completed');
+            M.DOM.addElementClass(issue, 'completed');
           } else {
-            removeElementClass(issue, 'completed');
+            M.DOM.removeElementClass(issue, 'completed');
           }
-          connect(issue, 'onclick', bind(self.chooseOneIssue, self, null, issue, filled_out_form));
+          M.Signals.connect(issue, 'onclick', M.Base.bind(self.chooseOneIssue, self, null, issue, filled_out_form));
         }
       }
     }
@@ -56,7 +57,7 @@
     }
 
     if (mode === 'my_issues') {
-      $('next-game-part-link').onclick = function () {
+      M.DOM.getElement('next-game-part-link').onclick = function () {
         if (!self.anyIssues()) {
           alert('Please go back and select at least one issue');
           return false;
@@ -65,7 +66,7 @@
     }
     if (mode === 'choose_one') {
       if (!hasAttr(self.game_state, 'chosen-issue')) {
-        $('next-game-part-link').onclick = function () {
+        M.DOM.getElement('next-game-part-link').onclick = function () {
           if (!self.game_state['chosen-issue']) {
             alert('Please select an issue to problem solve.');
             return false;
@@ -83,19 +84,19 @@
         }
       }
 
-      connect(workthrough_form, 'onchange', self, 'saveProblemSolveForm');
+      M.Signals.connect(workthrough_form, 'onchange', self, 'saveProblemSolveForm');
 
       self.resizeTextAreas();
-      forEach(getElementsByTagAndClassName('textarea'), function (elt) {
-        connect(elt, 'onchange', self, 'resizeTextAreas');
+      M.Iter.forEach(M.DOM.getElementsByTagAndClassName('textarea'), function (elt) {
+        M.Signals.connect(elt, 'onchange', self, 'resizeTextAreas');
       });
 
       ///field phase framework
-      var continue_link = $('form-continue');
+      var continue_link = M.DOM.getElement('form-continue');
       continue_link.setAttribute('onclick', 'return false;');//disable the href
-      connect(continue_link, 'onclick', self, 'nextField');
+      M.Signals.connect(continue_link, 'onclick', self, 'nextField');
 
-      forEach(getElementsByTagAndClassName('div', 'problemsolve-field', workthrough_form),
+      M.Iter.forEach(M.DOM.getElementsByTagAndClassName('div', 'problemsolve-field', workthrough_form),
         function (elt) {
           self.field_phases.push(elt.id);
         });
@@ -113,7 +114,7 @@
     }
   };
   ProblemSolveGame.prototype.previousIssue = function () {
-    var cur_issue = getFirstElementByTagAndClassName(null, 'currentissue', 'issue-list');
+    var cur_issue = M.DOM.getFirstElementByTagAndClassName(null, 'currentissue', 'issue-list');
     function getPreviousIssue(cur_issue) {
       var prev_issue = cur_issue.previousSibling;
       while (prev_issue !== null) {
@@ -126,20 +127,20 @@
     }
     var prev_issue = getPreviousIssue(cur_issue);
     if (prev_issue !== null) {
-      removeElementClass(cur_issue, 'currentissue');
-      addElementClass(prev_issue, 'currentissue');
+      M.DOM.removeElementClass(cur_issue, 'currentissue');
+      M.DOM.addElementClass(prev_issue, 'currentissue');
       if (getPreviousIssue(prev_issue) === null) {
-        hideElement('prev-issue-link');
+        M.DOM.hideElement('prev-issue-link');
       }
     } else {
-      hideElement('prev-issue-link');
+      M.DOM.hideElement('prev-issue-link');
     }
     return false;
   };
 
   ProblemSolveGame.prototype.answerIssue = function (is_an_issue) {
     var self = this;
-    var cur_issue = getFirstElementByTagAndClassName(null, 'currentissue', 'issue-list');
+    var cur_issue = M.DOM.getFirstElementByTagAndClassName(null, 'currentissue', 'issue-list');
 
     var issue_text = self.getIssueText(cur_issue);
     if (is_an_issue && issue_text) {
@@ -160,20 +161,20 @@
       next_issue = next_issue.nextSibling;
     }
     if (next_issue !== null) {
-      removeElementClass(cur_issue, 'currentissue');
-      addElementClass(next_issue, 'currentissue');
-      showElement('prev-issue-link');
+      M.DOM.removeElementClass(cur_issue, 'currentissue');
+      M.DOM.addElementClass(next_issue, 'currentissue');
+      M.DOM.showElement('prev-issue-link');
     } else {
-      location.assign(getElement("next-game-part-link").href);
+      location.assign(M.DOM.getElement("next-game-part-link").href);
     }
   };
 
   ProblemSolveGame.prototype.getIssueByText = function (text) {
     var self = this;
-    var issues = getElementsByTagAndClassName(null, 'issue', 'issue-list');
-    var other = getFirstElementByTagAndClassName(null, 'editable-issue', 'issue-list');
+    var issues = M.DOM.getElementsByTagAndClassName(null, 'issue', 'issue-list');
+    var other = M.DOM.getFirstElementByTagAndClassName(null, 'editable-issue', 'issue-list');
     var rv = false;
-    forEach(issues, function (elt) {
+    M.Iter.forEach(issues, function (elt) {
       if (self.getIssueText(elt) === text) {
         rv = elt;
       }
@@ -183,9 +184,9 @@
       ++custom_elts;
       if (custom_elts > 1) {
         other = other.cloneNode(true);
-        appendChildNodes('issue-list', other);
+        M.DOM.appendChildNodes('issue-list', other);
       }
-      var custom_elt = getFirstElementByTagAndClassName(null, 'issuetext', other);
+      var custom_elt = M.DOM.getFirstElementByTagAndClassName(null, 'issuetext', other);
       custom_elt.value = text;
       rv = other;
     }
@@ -198,7 +199,7 @@
     return false;
   };
   ProblemSolveGame.prototype.getIssueText = function (issue) {
-    var text_dom = getFirstElementByTagAndClassName(null, 'issuetext', issue);
+    var text_dom = M.DOM.getFirstElementByTagAndClassName(null, 'issuetext', issue);
     var issue_text = (String(text_dom.tagName).toLowerCase() in {'input': 1, 'textarea': 1}) ? text_dom.value : text_dom.innerHTML;
     return issue_text;
   };
@@ -212,10 +213,10 @@
     //new value
     hash = String(global.location.hash).substr(1);
     ///switch out video after we have these
-    var video_href = getFirstElementByTagAndClassName('a', 'videolink', hash).href;
+    var video_href = M.DOM.getFirstElementByTagAndClassName('a', 'videolink', hash).href;
 
-    $('video_src').setAttribute('value', video_href);
-    $('video_embed').setAttribute('src', video_href);
+    M.DOM.getElement('video_src').setAttribute('value', video_href);
+    M.DOM.getElement('video_embed').setAttribute('src', video_href);
     /*//explicit use of QT calls alternative
      video_embed.SetURL(video_href);
      video_embed.SetRectangle('0,0,320,196');
@@ -223,16 +224,16 @@
      */
 
     if (hash === 'gamephase') {
-      addElementClass('gamephase', 'general');
+      M.DOM.addElementClass('gamephase', 'general');
     } else {
-      removeElementClass('gamephase', 'general');
+      M.DOM.removeElementClass('gamephase', 'general');
     }
     this.resizeTextAreas();
   };
 
   ProblemSolveGame.prototype.resizeTextAreas = function () {
-    if (!hasElementClass('gamephase', 'general')) { return; }
-    forEach(getElementsByTagAndClassName('textarea'), function (src) {
+    if (!M.DOM.hasElementClass('gamephase', 'general')) { return; }
+    M.Iter.forEach(M.DOM.getElementsByTagAndClassName('textarea'), function (src) {
       //var src = evt.src();
       var lines_array = String(src.value).match(/\n/g);
       if (lines_array) {
@@ -244,7 +245,7 @@
     var self = this;
     var problemsolve_state = self.game_state.my_issues[self.game_state['chosen-issue']];
 
-    forEach(document.forms.workthrough_form.elements, function (elt) {
+    M.Iter.forEach(document.forms.workthrough_form.elements, function (elt) {
               problemsolve_state[elt.name] = elt.value;
             });
     self.intervention.saveState();
@@ -252,19 +253,19 @@
   ProblemSolveGame.prototype.chooseOneIssue = function (evt, issue, immediately_advance) {
     var self = this;
     issue = (issue) ? issue : evt.src();
-    var cur_chosen = getFirstElementByTagAndClassName(null, 'chosen-issue', 'issue-list');
+    var cur_chosen = M.DOM.getFirstElementByTagAndClassName(null, 'chosen-issue', 'issue-list');
     if (cur_chosen) {
-      removeElementClass(cur_chosen, 'chosen-issue');
+      M.DOM.removeElementClass(cur_chosen, 'chosen-issue');
     }
 
-    addElementClass(issue, 'chosen-issue');
+    M.DOM.addElementClass(issue, 'chosen-issue');
     var issue_text = self.getIssueText(issue);
 
     self.game_state['chosen-issue'] = issue_text;
     self.intervention.saveState();
 
     if (immediately_advance) {
-      global.location = $('next-game-part-link').href + "#gamephase";
+      global.location = M.DOM.getElement('next-game-part-link').href + "#gamephase";
     }
   };
 
