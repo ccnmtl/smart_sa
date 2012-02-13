@@ -23,17 +23,17 @@ games:{'ssnmtree':{
     SSNMTree.prototype.__init__ = function () {
         this.intervention = global.Intervention;
         this.game_state = this.intervention.getGameVar('ssnmtree', {'#firstfinished': false});
-        M.Signals.connect(window, 'onload', this, 'onLoad');
+        M.Signal.connect(window, 'onload', this, 'onLoad');
       };
 
     SSNMTree.prototype.onLoad = function () {
         var self = this;
         M.Iter.forEach(M.DOM.getElementsByTagAndClassName(null, 'fruit', 'fruittree'), function (elt) {
-            M.Signals.connect(elt, 'onclick', self, 'clickListener');
+            M.Signal.connect(elt, 'onclick', self, 'clickListener');
             var input = M.DOM.getFirstElementByTagAndClassName(input, null, elt);
 
-            M.Signals.connect(input, 'onchange', self, 'namechangeListener');
-            M.Signals.connect(input, 'onkeypress', self, 'namechangeListener');
+            M.Signal.connect(input, 'onchange', self, 'namechangeListener');
+            M.Signal.connect(input, 'onkeypress', self, 'namechangeListener');
 
             if (!window.hasAttr(self.game_state, elt.id)) {
               self.game_state[elt.id] = {'name': '', 'disclosure': false, 'support': false};
@@ -43,11 +43,11 @@ games:{'ssnmtree':{
             }
           });
         M.Iter.forEach(M.DOM.getElementsByTagAndClassName('input', 'editmode'), function (elt) {
-            M.Signals.connect(elt, 'onchange', self, 'setEditMode');
+            M.Signal.connect(elt, 'onchange', self, 'setEditMode');
           });
 
-        M.Signals.connect('show-disclosure', 'onchange', self, 'showDisclosure');
-        M.Signals.connect('show-support', 'onchange', self, 'showSupport');
+        M.Signal.connect('show-disclosure', 'onchange', self, 'showDisclosure');
+        M.Signal.connect('show-support', 'onchange', self, 'showSupport');
 
         self.game_mode = M.DOM.getElement('game-mode').getAttribute('data-game-mode');
         self.setEditMode('view'); //default
@@ -75,7 +75,7 @@ games:{'ssnmtree':{
           }
           var complete_button = M.DOM.getElement('complete');
           if (complete_button) {
-            M.Signals.connect(complete_button, 'onclick', self, 'firstComplete');
+            M.Signal.connect(complete_button, 'onclick', self, 'firstComplete');
           }
         }
         M.DOM.getElement('next-game-part-link').onclick = function () {

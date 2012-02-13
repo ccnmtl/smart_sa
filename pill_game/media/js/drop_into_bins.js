@@ -212,11 +212,11 @@ function init() {
       function (a) { new Bucket(a); }
     );
     draw_page();
-    M.Signals.connect('day_pills_time', 'onchange', time_menu_changed);
-    M.Signals.connect('night_pills_time', 'onchange', time_menu_changed);
+    M.Signal.connect('day_pills_time', 'onchange', time_menu_changed);
+    M.Signal.connect('night_pills_time', 'onchange', time_menu_changed);
     // put pills from state into the buckets...
     set_time_menus();
-    M.Signals.connect(window, "onresize", draw_page);
+    M.Signal.connect(window, "onresize", draw_page);
     //test();
   }
 

@@ -23,7 +23,7 @@
   ProblemSolveGame.prototype.__init__ = function () {
     this.intervention = global.Intervention;
     this.game_state = this.intervention.getGameVar('problemsolving', { 'my_issues': {} });
-    M.Signals.connect(window, 'onload', this, 'onLoad');
+    M.Signal.connect(window, 'onload', this, 'onLoad');
   };
   ProblemSolveGame.prototype.onLoad = function () {
     var self = this;
@@ -50,7 +50,7 @@
             } else {
               M.DOM.removeElementClass(issue, 'completed');
             }
-            M.Signals.connect(issue, 'onclick', M.Base.bind(self.chooseOneIssue, self, null, issue, filled_out_form));
+            M.Signal.connect(issue, 'onclick', M.Base.bind(self.chooseOneIssue, self, null, issue, filled_out_form));
           }
         }
       }
@@ -90,17 +90,17 @@
         }
       }
 
-      M.Signals.connect(workthrough_form, 'onchange', self, 'saveProblemSolveForm');
+      M.Signal.connect(workthrough_form, 'onchange', self, 'saveProblemSolveForm');
 
       self.resizeTextAreas();
       M.Iter.forEach(M.DOM.getElementsByTagAndClassName('textarea'), function (elt) {
-        M.Signals.connect(elt, 'onchange', self, 'resizeTextAreas');
+        M.Signal.connect(elt, 'onchange', self, 'resizeTextAreas');
       });
 
       ///field phase framework
       var continue_link = M.DOM.getElement('form-continue');
       continue_link.setAttribute('onclick', 'return false;');//disable the href
-      M.Signals.connect(continue_link, 'onclick', self, 'nextField');
+      M.Signal.connect(continue_link, 'onclick', self, 'nextField');
 
       M.Iter.forEach(M.DOM.getElementsByTagAndClassName('div', 'problemsolve-field', workthrough_form),
         function (elt) {

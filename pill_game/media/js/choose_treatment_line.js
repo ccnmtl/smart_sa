@@ -31,8 +31,8 @@ function init() {
   if (global.pill_game.game_state.treatment_line !== "") {
     select_line(global.pill_game.game_state.treatment_line);
   }
-  MochiKit.Signals.connect('select_line_1', 'onclick', MochiKit.Base.partial(select_line, 1));
-  MochiKit.Signals.connect('select_line_2', 'onclick', MochiKit.Base.partial(select_line, 2));
+  MochiKit.Signal.connect('select_line_1', 'onclick', MochiKit.Base.partial(select_line, 1));
+  MochiKit.Signal.connect('select_line_2', 'onclick', MochiKit.Base.partial(select_line, 2));
 }
 
 

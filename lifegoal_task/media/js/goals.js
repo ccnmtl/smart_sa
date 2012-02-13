@@ -12,8 +12,8 @@
         workform.elements[a].value = goal_state[a];
       }
     }
-    MochiKit.Signals.connect(workform, 'onchange', saveForm);
-    MochiKit.Signals.connect(window, 'onunload', saveForm);
+    MochiKit.Signal.connect(workform, 'onchange', saveForm);
+    MochiKit.Signal.connect(window, 'onunload', saveForm);
   }
   MochiKit.DOM.addLoadEvent(loadGoalTask);
 

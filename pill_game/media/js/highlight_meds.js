@@ -51,7 +51,7 @@ function draw_pill(group_div, pill) {
 
   var new_pill_div = M.DOM.DIV(attrs, pill_image_div(pill), pill__label_fact_div('pill_label', pill), pill_mg_fact_div('dose_mg', pill));
   M.DOM.appendChildNodes(group_div, new_pill_div);
-  M.Signals.connect(new_pill_div, 'onclick', M.Base.partial(pill_clicked, pill));
+  M.Signal.connect(new_pill_div, 'onclick', M.Base.partial(pill_clicked, pill));
 }
 
 function draw_group(group) {
