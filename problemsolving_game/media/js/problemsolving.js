@@ -32,22 +32,26 @@
     var start_at_choose_one = false;
     //which ones picked
     for (var a in self.game_state.my_issues) {
-      var issue = self.getIssueByText(a);
-      if (issue) {
-        M.DOM.addElementClass(issue, 'picked');
-        if (mode === 'choose_one') {
-          start_at_choose_one = true;
-          var filled_out_form = false;
-          for (var b in self.game_state.my_issues[a]) {
-            filled_out_form = true;
-            break;//not empty dict
+      if (self.game_state.my_issues.hasOwnProperty(a)) {
+        var issue = self.getIssueByText(a);
+        if (issue) {
+          M.DOM.addElementClass(issue, 'picked');
+          if (mode === 'choose_one') {
+            start_at_choose_one = true;
+            var filled_out_form = false;
+            for (var b in self.game_state.my_issues[a]) {
+              if (self.game_state.my_issues[a].hasOwnProperty(b)) {
+                filled_out_form = true;
+                break;//not empty dict
+              }
+            }
+            if (filled_out_form) {
+              M.DOM.addElementClass(issue, 'completed');
+            } else {
+              M.DOM.removeElementClass(issue, 'completed');
+            }
+            M.Signals.connect(issue, 'onclick', M.Base.bind(self.chooseOneIssue, self, null, issue, filled_out_form));
           }
-          if (filled_out_form) {
-            M.DOM.addElementClass(issue, 'completed');
-          } else {
-            M.DOM.removeElementClass(issue, 'completed');
-          }
-          M.Signals.connect(issue, 'onclick', M.Base.bind(self.chooseOneIssue, self, null, issue, filled_out_form));
         }
       }
     }
@@ -80,7 +84,9 @@
       if (window.hasAttr(self.game_state, 'chosen-issue')) {
         var problemsolve_state = self.game_state.my_issues[self.game_state['chosen-issue']];
         for (var field in problemsolve_state) {
-          workthrough_form.elements[field].value = problemsolve_state[field];
+          if (problemsolve_state.hasOwnProperty(field)) {
+            workthrough_form.elements[field].value = problemsolve_state[field];
+          }
         }
       }
 
@@ -194,7 +200,9 @@
   };
   ProblemSolveGame.prototype.anyIssues = function () {
     for (var a in this.game_state.my_issues) {
-      return true;
+      if (this.game_state.my_issues.hasOwnProperty(a)) {
+        return true;
+      }
     }
     return false;
   };
@@ -205,7 +213,7 @@
   };
   ProblemSolveGame.prototype.nextField = function (evt) {
     var hash = String(global.location.hash).substr(1);
-    var index = findValue(this.field_phases, hash);
+    var index = M.Base.findValue(this.field_phases, hash);
     var next = this.field_phases[index + 1];
     if (next) {
       global.location = '#' + next;
