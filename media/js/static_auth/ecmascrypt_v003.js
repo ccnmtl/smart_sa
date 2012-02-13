@@ -13,7 +13,7 @@
  * Distributed under the BSD License
  */
 
-var ecmaScrypt = {
+window.ecmaScrypt = {
   // encodes a unicode string to UTF8 (8 bit characters are critical to AES functioning properly)
   encode_utf8: function (s)
   {

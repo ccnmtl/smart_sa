@@ -130,7 +130,7 @@ http://www.josh-davis.org/pythonAES
     var keysize = 32; //for 256
     var hexkey = global.encrypt_key;
     var iv_hexvalue = global.encrypt_iv;
-    return [mode, ecmaScrypt.toNumbers(hexkey), keysize, ecmaScrypt.toNumbers(iv_hexvalue)];
+    return [mode, window.ecmaScrypt.toNumbers(hexkey), keysize, window.ecmaScrypt.toNumbers(iv_hexvalue)];
   };
 
   UserAdmin.prototype.encrypt = function (plaintext) {
@@ -138,23 +138,23 @@ http://www.josh-davis.org/pythonAES
     var crypt_args = self.cryptArgs();
     crypt_args.unshift(plaintext);
 
-    var ciph = ecmaScrypt.encrypt.apply(ecmaScrypt, crypt_args);
+    var ciph = window.ecmaScrypt.encrypt.apply(window.ecmaScrypt, crypt_args);
     var outhex = '';
     for (var i = 0; i < ciph.cipher.length; i++) {
-      outhex += ecmaScrypt.toHex(ciph.cipher.charCodeAt(i));
+      outhex += window.ecmaScrypt.toHex(ciph.cipher.charCodeAt(i));
     }
     return outhex;
   };
   UserAdmin.prototype.decrypt = function (ciphtext) {
     var self = this;
     var crypt_args = self.cryptArgs();
-    var innumbers = ecmaScrypt.toNumbers(ciphtext);
+    var innumbers = window.ecmaScrypt.toNumbers(ciphtext);
     var ciph_string = '';
     for (var i = 0;i < innumbers.length; i++) {
       ciph_string += String.fromCharCode(innumbers[i]);
     }
     crypt_args.unshift(ciph_string, 0);
-    var plaintext = ecmaScrypt.decrypt.apply(ecmaScrypt, crypt_args);
+    var plaintext = window.ecmaScrypt.decrypt.apply(window.ecmaScrypt, crypt_args);
     return plaintext;
   };
   ///whether from local file system or on the server,
