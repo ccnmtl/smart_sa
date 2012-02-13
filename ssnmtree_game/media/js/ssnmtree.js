@@ -78,12 +78,14 @@ games:{'ssnmtree':{
             M.Signal.connect(complete_button, 'onclick', self, 'firstComplete');
           }
         }
-        M.DOM.getElement('next-game-part-link').onclick = function () {
+        if (M.DOM.getElement('next-game-part-link')) {
+          M.DOM.getElement('next-game-part-link').onclick = function () {
             if (!self.anyNames()) {
               alert('Please enter at least one name.');
               return false;
             }
           };
+        }
       };
     SSNMTree.prototype.firstComplete = function (evt) {
         var self = this;
@@ -196,4 +198,4 @@ games:{'ssnmtree':{
       global.SSNMTree = new SSNMTree();
     }
 
-  })();
+  }());
