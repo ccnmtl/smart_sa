@@ -89,7 +89,7 @@ http://www.josh-davis.org/pythonAES
   UserAdmin.prototype.showRestorals = function () {
     var self = this;
 
-    restorals = false;
+    var restorals = false;
     function makeRestoralLink(name, hilite) {
       name = MD.A({'id' : name, 'href' : '#' + name + '', 'onclick' : "UserAdmin.restore('" + name + "')"}, name);
       var attrs = null;
