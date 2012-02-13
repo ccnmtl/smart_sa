@@ -87,7 +87,7 @@
 
   function showTotal(total) {
     ML.logDebug('showTotal', total);
-    var ranges = MB.list(MD.getElement('interpretation_range').getElementsByTagName('li'));
+    var ranges = MI.list(MD.getElement('interpretation_range').getElementsByTagName('li'));
     var i = ranges.length;
     var found = false;
     while (--i >= 0) {
