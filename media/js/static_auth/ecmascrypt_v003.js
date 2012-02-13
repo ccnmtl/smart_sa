@@ -32,13 +32,16 @@ var ecmaScrypt = {
   toHex: function ()
   {
     var array = [];
-    if (arguments.length == 1 && arguments[0].constructor == Array)
+    if (arguments.length === 1 && arguments[0].constructor === Array) {
       array = arguments[0];
-    else
+    }
+    else {
       array = arguments;
+    }
     var ret = '';
-    for (var i = 0; i < array.length; i++)
+    for (var i = 0; i < array.length; i++) {
       ret += (array[i] < 16 ? '0' : '') + array[i].toString(16);
+    }
     return ret.toLowerCase();
   },
 
@@ -55,20 +58,24 @@ var ecmaScrypt = {
   // get a random number in the range [min,max]
   getRandom: function (min, max)
   {
-    if (min === null)
+    if (min === null) {
       min = 0;
-    if (max === null)
+    }
+    if (max === null) {
       max = 1;
+    }
     return Math.round(Math.random() * max) + min;
   },
 
   generateSharedKey: function (len)
   {
-    if (len === null)
+    if (len === null) {
       len = 16;
+    }
     var key = [];
-    for (var i = 0; i < len * 2; i++)
+    for (var i = 0; i < len * 2; i++) {
       key.push(this.getRandom(0, 255));
+    }
     return key;
   },
 
@@ -98,13 +105,13 @@ var ecmaScrypt = {
     core_sha256: function (m, l)
     {
       var K = [0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5, 0x3956C25B, 0x59F111F1, 0x923F82A4, 0xAB1C5ED5,
-	0xD807AA98, 0x12835B01, 0x243185BE, 0x550C7DC3, 0x72BE5D74, 0x80DEB1FE, 0x9BDC06A7, 0xC19BF174,
-	0xE49B69C1, 0xEFBE4786, 0xFC19DC6, 0x240CA1CC, 0x2DE92C6F, 0x4A7484AA, 0x5CB0A9DC, 0x76F988DA,
-	0x983E5152, 0xA831C66D, 0xB00327C8, 0xBF597FC7, 0xC6E00BF3, 0xD5A79147, 0x6CA6351, 0x14292967,
-	0x27B70A85, 0x2E1B2138, 0x4D2C6DFC, 0x53380D13, 0x650A7354, 0x766A0ABB, 0x81C2C92E, 0x92722C85,
-	0xA2BFE8A1, 0xA81A664B, 0xC24B8B70, 0xC76C51A3, 0xD192E819, 0xD6990624, 0xF40E3585, 0x106AA070,
-	0x19A4C116, 0x1E376C08, 0x2748774C, 0x34B0BCB5, 0x391C0CB3, 0x4ED8AA4A, 0x5B9CCA4F, 0x682E6FF3,
-	0x748F82EE, 0x78A5636F, 0x84C87814, 0x8CC70208, 0x90BEFFFA, 0xA4506CEB, 0xBEF9A3F7, 0xC67178F2];
+        0xD807AA98, 0x12835B01, 0x243185BE, 0x550C7DC3, 0x72BE5D74, 0x80DEB1FE, 0x9BDC06A7, 0xC19BF174,
+        0xE49B69C1, 0xEFBE4786, 0xFC19DC6, 0x240CA1CC, 0x2DE92C6F, 0x4A7484AA, 0x5CB0A9DC, 0x76F988DA,
+        0x983E5152, 0xA831C66D, 0xB00327C8, 0xBF597FC7, 0xC6E00BF3, 0xD5A79147, 0x6CA6351, 0x14292967,
+        0x27B70A85, 0x2E1B2138, 0x4D2C6DFC, 0x53380D13, 0x650A7354, 0x766A0ABB, 0x81C2C92E, 0x92722C85,
+        0xA2BFE8A1, 0xA81A664B, 0xC24B8B70, 0xC76C51A3, 0xD192E819, 0xD6990624, 0xF40E3585, 0x106AA070,
+        0x19A4C116, 0x1E376C08, 0x2748774C, 0x34B0BCB5, 0x391C0CB3, 0x4ED8AA4A, 0x5B9CCA4F, 0x682E6FF3,
+        0x748F82EE, 0x78A5636F, 0x84C87814, 0x8CC70208, 0x90BEFFFA, 0xA4506CEB, 0xBEF9A3F7, 0xC67178F2];
       var HASH = [0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19];
       var W = [];
       var a, b, c, d, e, f, g, h, i, j;
@@ -125,10 +132,12 @@ var ecmaScrypt = {
         h = HASH[7];
 
         for (var j = 0; j < 64; j++) {
-          if (j < 16)
+          if (j < 16) {
             W[j] = m[j + i];
-          else
+          }
+          else {
             W[j] = this.safe_add(this.safe_add(this.safe_add(this.Gamma1256(W[j - 2]), W[j - 7]), this.Gamma0256(W[j - 15])), W[j - 16]);
+          }
 
           T1 = this.safe_add(this.safe_add(this.safe_add(this.safe_add(h, this.Sigma1256(e)), this.Ch(e, f, g)), K[j]), W[j]);
           T2 = this.safe_add(this.Sigma0256(a), this.Maj(a, b, c));
@@ -159,8 +168,9 @@ var ecmaScrypt = {
     {
       var bin = [];
       var mask = (1 << this.chrsz) - 1;
-      for (var i = 0; i < str.length * this.chrsz; i += this.chrsz)
+      for (var i = 0; i < str.length * this.chrsz; i += this.chrsz) {
         bin[i >> 5] |= (str.charCodeAt(i / this.chrsz) & mask) << (24 - i % 32);
+      }
       return bin;
     },
 
@@ -168,8 +178,9 @@ var ecmaScrypt = {
     {
       var str = "";
       var mask = (1 << this.chrsz) - 1;
-      for (var i = 0; i < bin.length * 32; i += this.chrsz)
+      for (var i = 0; i < bin.length * 32; i += this.chrsz) {
         str += String.fromCharCode((bin[i >> 5] >>> (24 - i % 32)) & mask);
+      }
       return str;
     },
 
@@ -177,8 +188,9 @@ var ecmaScrypt = {
     {
       var array = [];
       var mask = (1 << this.chrsz) - 1;
-      for (var i = 0; i < bin.length * 32; i += this.chrsz)
+      for (var i = 0; i < bin.length * 32; i += this.chrsz) {
         array.push((bin[i >> 5] >>> (24 - i % 32)) & mask);
+      }
       return array;
     },
 
@@ -254,8 +266,9 @@ var ecmaScrypt = {
     rotate: function (word)
                 {
                         var c = word[0];
-                        for (var i = 0; i < 3; i++)
+                        for (var i = 0; i < 3; i++) {
                           word[i] = word[i + 1];
+                        }
                         word[3] = c;
 
                         return word;
@@ -291,8 +304,9 @@ var ecmaScrypt = {
                         /* rotate the 32-bit word 8 bits to the left */
                         word = this.rotate(word);
                         /* apply S-Box substitution on all 4 parts of the 32-bit word */
-                        for (var i = 0; i < 4; ++i)
+                        for (var i = 0; i < 4; ++i) {
                           word[i] = this.sbox[word[i]];
+                        }
                         /* XOR the output of the rcon operation with i to the first part (leftmost) only */
                         word[0] = word[0] ^ this.Rcon[iteration];
                         return word;
@@ -312,30 +326,37 @@ var ecmaScrypt = {
                         var t = [];   // temporary 4-byte variable
 
                         var expandedKey = [];
-                        for (var i = 0;i < expandedKeySize;i++)
+                        for (var i = 0;i < expandedKeySize;i++) {
                           expandedKey[i] = 0;
+                        }
+
 
                         /* set the 16, 24,32 bytes of the expanded key to the input key */
-                        for (var j = 0; j < size; j++)
+                        for (var j = 0; j < size; j++) {
                           expandedKey[j] = key[j];
+                        }
                         currentSize += size;
 
                         while (currentSize < expandedKeySize)
                         {
                                 /* assign the previous 4 bytes to the temporary value t */
-                          for (var k = 0; k < 4; k++)
+                          for (var k = 0; k < 4; k++) {
                             t[k] = expandedKey[(currentSize - 4) + k];
+                          }
 
                           /* every 16, 24,32 bytes we apply the core schedule to t
                           * and increment rconIteration afterwards
                           */
-                          if (currentSize % size == 0)
+                          if (currentSize % size === 0) {
                             t = this.core(t, rconIteration++);
+                          }
 
                           /* For 256-bit keys, we add an extra sbox to the calculation */
-                          if (size == this.keySize.SIZE_256 && ((currentSize % size) == 16))
-                            for (var l = 0; l < 4; l++)
+                          if (size === this.keySize.SIZE_256 && ((currentSize % size) === 16)) {
+                            for (var l = 0; l < 4; l++) {
                               t[l] = this.sbox[t[l]];
+                            }
+                          }
 
                                 /* We XOR t with the four-byte block 16, 24,32 bytes before the new expanded key.
                                  * This becomes the next four bytes in the expanded key.
@@ -351,8 +372,9 @@ var ecmaScrypt = {
                 // Adds (XORs) the round key to the state
     addRoundKey: function (state, roundKey)
                 {
-                        for (var i = 0; i < 16; i++)
+                        for (var i = 0; i < 16; i++) {
                           state[i] ^= roundKey[i];
+                        }
                         return state;
                       },
 
@@ -361,9 +383,11 @@ var ecmaScrypt = {
     createRoundKey: function (expandedKey, roundKeyPointer)
                 {
                         var roundKey = [];
-                        for (var i = 0; i < 4; i++)
-                          for (var j = 0; j < 4; j++)
+                        for (var i = 0; i < 4; i++) {
+                          for (var j = 0; j < 4; j++) {
                             roundKey[j * 4 + i] = expandedKey[roundKeyPointer + i * 4 + j];
+                          }
+                        }
                         return roundKey;
                       },
 
@@ -373,17 +397,19 @@ var ecmaScrypt = {
                         var p = 0;
                         for (var counter = 0; counter < 8; counter++)
                         {
-                          if ((b & 1) == 1)
+                          if ((b & 1) === 1) {
                             p ^= a;
-                          if (p > 0x100) p ^= 0x100;
+                          }
+                          if (p > 0x100) { p ^= 0x100; }
                           var hi_bit_set = (a & 0x80); //keep p 8 bit
                           a <<= 1;
-                          if (a > 0x100) a ^= 0x100; //keep a 8 bit
-                          if (hi_bit_set == 0x80)
+                          if (a > 0x100) { a ^= 0x100; }//keep a 8 bit
+                          if (hi_bit_set === 0x80) {
                             a ^= 0x1b;
-                          if (a > 0x100) a ^= 0x100; //keep a 8 bit
+                          }
+                          if (a > 0x100) { a ^= 0x100; } //keep a 8 bit
                           b >>= 1;
-                          if (b > 0x100) b ^= 0x100; //keep b 8 bit
+                          if (b > 0x100) { b ^= 0x100; }//keep b 8 bit
                         }
                         return p;
                       },
@@ -393,16 +419,18 @@ var ecmaScrypt = {
                  */
     subBytes: function (state, isInv)
                 {
-                        for (var i = 0; i < 16; i++)
+                        for (var i = 0; i < 16; i++) {
                           state[i] = isInv ? this.rsbox[state[i]] : this.sbox[state[i]];
+                        }
                         return state;
                       },
 
                 /* iterate over the 4 rows and call shiftRow() with that row */
     shiftRows: function (state, isInv)
                 {
-                        for (var i = 0; i < 4; i++)
+                        for (var i = 0; i < 4; i++) {
                           state = this.shiftRow(state, i * 4, i, isInv);
+                        }
                         return state;
                       },
 
@@ -414,15 +442,18 @@ var ecmaScrypt = {
                           if (isInv)
                           {
                             var tmp = state[statePointer + 3];
-                            for (var j = 3; j > 0; j--)
+                            for (var j = 3; j > 0; j--) {
                               state[statePointer + j] = state[statePointer + j - 1];
+                            }
+
                             state[statePointer] = tmp;
                           }
                           else
                           {
                             var tmp = state[statePointer];
-                            for (var j = 0; j < 3; j++)
+                            for (var j = 0; j < 3; j++) {
                               state[statePointer + j] = state[statePointer + j + 1];
+                            }
                             state[statePointer + 3] = tmp;
                           }
                         }
@@ -437,13 +468,15 @@ var ecmaScrypt = {
                         for (var i = 0; i < 4; i++)
                         {
                           /* construct one column by iterating over the 4 rows */
-                          for (var j = 0; j < 4; j++)
+                          for (var j = 0; j < 4; j++) {
                             column[j] = state[(j * 4) + i];
+                          }
                               /* apply the mixColumn on one column */
                           column = this.mixColumn(column, isInv);
                           /* put the values back into the state */
-                          for (var k = 0; k < 4; k++)
+                          for (var k = 0; k < 4; k++) {
                             state[(k * 4) + i] = column[k];
+                          }
                         }
                         return state;
                       },
@@ -452,13 +485,16 @@ var ecmaScrypt = {
     mixColumn: function (column, isInv)
                 {
                         var mult = [];
-                        if (isInv)
+                        if (isInv) {
                           mult = [14, 9, 13, 11];
-                        else
+                        }
+                        else {
                           mult = [2, 1, 1, 3];
+                        }
                         var cpy = [];
-                        for (var i = 0; i < 4; i++)
+                        for (var i = 0; i < 4; i++) {
                           cpy[i] = column[i];
+                        }
 
                         column[0] =     this.galois_multiplication(cpy[0], mult[0]) ^
                                         this.galois_multiplication(cpy[3], mult[1]) ^
@@ -506,8 +542,9 @@ var ecmaScrypt = {
     main: function (state, expandedKey, nbrRounds)
                 {
                         state = this.addRoundKey(state, this.createRoundKey(expandedKey, 0));
-                        for (var i = 1; i < nbrRounds; i++)
+                        for (var i = 1; i < nbrRounds; i++) {
                           state = this.round(state, this.createRoundKey(expandedKey, 16 * i));
+                        }
                         state = this.subBytes(state, false);
                         state = this.shiftRows(state, false);
                         state = this.addRoundKey(state, this.createRoundKey(expandedKey, 16 * nbrRounds));
@@ -521,8 +558,9 @@ var ecmaScrypt = {
     invMain: function (state, expandedKey, nbrRounds)
                 {
                         state = this.addRoundKey(state, this.createRoundKey(expandedKey, 16 * nbrRounds));
-                        for (var i = nbrRounds - 1; i > 0; i--)
+                        for (var i = nbrRounds - 1; i > 0; i--) {
                           state = this.invRound(state, this.createRoundKey(expandedKey, 16 * i));
+                        }
                         state = this.shiftRows(state, true);
                         state = this.subBytes(state, true);
                         state = this.addRoundKey(state, this.createRoundKey(expandedKey, 0));
@@ -559,17 +597,20 @@ var ecmaScrypt = {
                          * a3, 0 a3, 1 a3, 2 a3, 3
                          * the mapping order is a0, 0 a1, 0 a2, 0 a3, 0 a0, 1 a1, 1 ... a2, 3 a3, 3
                          */
-                        for (var i = 0; i < 4; i++) /* iterate over the columns */
-                          for (var j = 0; j < 4; j++) /* iterate over the rows */
+                        for (var i = 0; i < 4; i++) { /* iterate over the columns */
+                          for (var j = 0; j < 4; j++) { /* iterate over the rows */
                             block[(i + (j * 4))] = input[(i * 4) + j];
-
+                          }
+                        }
                         /* expand the key into an 176, 208, 240 bytes key */
                         var expandedKey = this.expandKey(key, size, expandedKeySize); /* the expanded key */
                         /* encrypt the block using the expandedKey */
                         block = this.main(block, expandedKey, nbrRounds);
-                        for (var k = 0; k < 4; k++) /* unmap the block again into the output */
-                          for (var l = 0; l < 4; l++) /* iterate over the rows */
+                        for (var k = 0; k < 4; k++) {/* unmap the block again into the output */
+                          for (var l = 0; l < 4; l++) {/* iterate over the rows */
                             output[(k * 4) + l] = block[(k + (l * 4))];
+                          }
+                        }
                         return output;
                       },
 
@@ -603,16 +644,20 @@ var ecmaScrypt = {
                          * a3, 0 a3, 1 a3, 2 a3, 3
                          * the mapping order is a0, 0 a1, 0 a2, 0 a3, 0 a0, 1 a1, 1 ... a2, 3 a3, 3
                          */
-                        for (var i = 0; i < 4; i++) /* iterate over the columns */
-                          for (var j = 0; j < 4; j++) /* iterate over the rows */
+                        for (var i = 0; i < 4; i++) {/* iterate over the columns */
+                          for (var j = 0; j < 4; j++) {/* iterate over the rows */
                             block[(i + (j * 4))] = input[(i * 4) + j];
+                          }
+                        }
                         /* expand the key into an 176, 208, 240 bytes key */
                         var expandedKey = this.expandKey(key, size, expandedKeySize);
                         /* decrypt the block using the expandedKey */
                         block = this.invMain(block, expandedKey, nbrRounds);
-                        for (var k = 0; k < 4; k++)/* unmap the block again into the output */
-                          for (var l = 0; l < 4; l++)/* iterate over the rows */
+                        for (var k = 0; k < 4; k++) {/* unmap the block again into the output */
+                          for (var l = 0; l < 4; l++) {/* iterate over the rows */
                             output[(k * 4) + l] = block[(k + (l * 4))];
+                          }
+                        }
                         return output;
                       }
   },
@@ -633,12 +678,15 @@ var ecmaScrypt = {
         // converts a 16 character string into a number array;
   convertString: function (string, start, end, mode)
         {
-                if (end - start > 16)
+                if (end - start > 16) {
                   end = start + 16;
-                if (mode == this.modeOfOperation.CBC)
+                }
+                if (mode === this.modeOfOperation.CBC) {
                   var array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                else
+                }
+                else {
                   var array = [];
+                }
                 var j = 0;
                 for (var i = start; i < end; i++)
                 {
@@ -682,48 +730,57 @@ var ecmaScrypt = {
                   {
                     var start = j * 16;
                     var end = j * 16 + 16;
-                    if (j * 16 + 16 > stringIn.length)
+                    if (j * 16 + 16 > stringIn.length) {
                       end = stringIn.length;
+                    }
                     plaintext = this.convertString(stringIn, start, end, mode);
-                    if (mode == this.modeOfOperation.CFB)
+                    if (mode === this.modeOfOperation.CFB)
                     {
                       if (firstRound)
                       {
                         output = this.aes.encrypt(iv, key, size);
                         firstRound = false;
                       }
-                      else
+                      else {
                         output = this.aes.encrypt(input, key, size);
-                      for (var i = 0; i < 16; i++)
+                      }
+                      for (var i = 0; i < 16; i++) {
                         ciphertext[i] = plaintext[i] ^ output[i];
-                      for (var k = 0; k < end - start; k++)
+                      }
+                      for (var k = 0; k < end - start; k++) {
                         cipherOut += String.fromCharCode(ciphertext[k]);
+                      }
                       input = ciphertext;
                     }
-                    else if (mode == this.modeOfOperation.OFB)
+                    else if (mode === this.modeOfOperation.OFB)
                     {
                       if (firstRound)
                       {
                         output = this.aes.encrypt(iv, key, size);
                         firstRound = false;
                       }
-                      else
+                      else {
                         output = this.aes.encrypt(input, key, size);
-                      for (var i = 0; i < 16; i++)
+                      }
+                      for (var i = 0; i < 16; i++) {
                         ciphertext[i] = plaintext[i] ^ output[i];
-                      for (var k = 0; k < end - start; k++)
+                      }
+                      for (var k = 0; k < end - start; k++) {
                         cipherOut += String.fromCharCode(ciphertext[k]);
+                      }
                       input = output;
                     }
-                    else if (mode == this.modeOfOperation.CBC)
+                    else if (mode === this.modeOfOperation.CBC)
                     {
-                      for (var i = 0; i < 16; i++)
+                      for (var i = 0; i < 16; i++) {
                         input[i] = plaintext[i] ^ ((firstRound) ? iv[i] : ciphertext[i]);
+                      }
                       firstRound = false;
                       ciphertext = this.aes.encrypt(input, key, size);
                       // always 16 bytes because of the padding for CBC
-                      for (var k = 0; k < 16; k++)
+                      for (var k = 0; k < 16; k++) {
                         cipherOut += String.fromCharCode(ciphertext[k]);
+                      }
                     }
                   }
                 }
@@ -765,51 +822,63 @@ var ecmaScrypt = {
                   {
                     var start = j * 16;
                     var end = j * 16 + 16;
-                    if (j * 16 + 16 > cipherIn.length)
+                    if (j * 16 + 16 > cipherIn.length) {
                       end = cipherIn.length;
+                    }
                     ciphertext = this.convertString(cipherIn, start, end, mode);
-                    if (mode == this.modeOfOperation.CFB)
+                    if (mode === this.modeOfOperation.CFB)
                     {
                       if (firstRound)
                       {
                         output = this.aes.encrypt(iv, key, size);
                         firstRound = false;
                       }
-                      else
+                      else {
                         output = this.aes.encrypt(input, key, size);
-                      for (i = 0; i < 16; i++)
+                      }
+                      for (var i = 0; i < 16; i++) {
                         plaintext[i] = output[i] ^ ciphertext[i];
-                      for (var k = 0;k < end - start; k++)
+                      }
+                      for (var k = 0;k < end - start; k++) {
                         stringOut += String.fromCharCode(plaintext[k]);
+                      }
                       input = ciphertext;
                     }
-                    else if (mode == this.modeOfOperation.OFB)
+                    else if (mode === this.modeOfOperation.OFB)
                     {
                       if (firstRound)
                       {
                         output = this.aes.encrypt(iv, key, size);
                         firstRound = false;
                       }
-                      else
+                      else {
                         output = this.aes.encrypt(input, key, size);
-                      for (i = 0; i < 16; i++)
+                      }
+                      for (var i = 0; i < 16; i++) {
                         plaintext[i] = output[i] ^ ciphertext[i];
-                      for (var k = 0; k < end - start; k++)
+                      }
+                      for (var k = 0; k < end - start; k++) {
                         stringOut += String.fromCharCode(plaintext[k]);
+                      }
                       input = output;
                     }
-                    else if (mode == this.modeOfOperation.CBC)
+                    else if (mode === this.modeOfOperation.CBC)
                     {
                       output = this.aes.decrypt(ciphertext, key, size);
-                      for (i = 0; i < 16; i++)
+                      for (var i = 0; i < 16; i++) {
                         plaintext[i] = ((firstRound) ? iv[i] : input[i]) ^ output[i];
+                      }
                       firstRound = false;
-                      if (originalsize < end)
-                        for (var k = 0; k < originalsize - start; k++)
+                      if (originalsize < end) {
+                        for (var k = 0; k < originalsize - start; k++) {
                           stringOut += String.fromCharCode(plaintext[k]);
-                      else
-                        for (var k = 0; k < end - start; k++)
+                        }
+                      }
+                      else {
+                        for (var k = 0; k < end - start; k++) {
                           stringOut += String.fromCharCode(plaintext[k]);
+                        }
+                      }
                       input = ciphertext;
                     }
                   }
