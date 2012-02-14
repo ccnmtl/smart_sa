@@ -78,8 +78,11 @@ http://www.josh-davis.org/pythonAES
   UserAdmin.prototype.showClients = function () {
     var self = this;
     MD.removeElement('show_clients_button');
-    for (var a in self.session.userList()) {
-      this.showUser(a);
+    var ul = self.session.userList();
+    for (var a in ul) {
+      if (ul.hasOwnProperty(a)) {
+        this.showUser(a);
+      }
     }
   };
 
@@ -104,9 +107,12 @@ http://www.josh-davis.org/pythonAES
     if (restore_key) {
       makeRestoralLink(restore_key, true);
     }
-    for (var a in self.session.backupList()) {
-      restorals = true;
-      makeRestoralLink(a);
+    var bul = self.session.backupList();
+    for (var a in bul) {
+      if (bul.hasOwnProperty(a)) {
+        restorals = true;
+        makeRestoralLink(a);
+      }
     }
     if (restorals) { MD.hideElement('no-restorals'); }
     MD.showElement('restorals');

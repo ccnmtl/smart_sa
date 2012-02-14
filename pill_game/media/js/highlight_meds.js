@@ -17,8 +17,8 @@ function toggle_select(pill_smart_id) {
 }
 
 function save_state() {
-  global.pill_game.game_state.selected_meds = M.Base.map(itemgetter('id'), M.DOM.getElementsByTagAndClassName(null, 'page_2_selected_pill'));
-  Intervention.saveState();
+  global.pill_game.game_state.selected_meds = M.Base.map(M.Base.itemgetter('id'), M.DOM.getElementsByTagAndClassName(null, 'page_2_selected_pill'));
+  global.Intervention.saveState();
 }
 
 function pill_clicked(pill) {
@@ -69,13 +69,13 @@ function draw_group(group) {
 
 function draw_medicine_types(line) {
   var my_line = M.Base.filter(function (m) { return m.line === line; }, global.arv_pill_types);
-  my_line.sort(keyComparator(group_by));
-  var group_list =  groupby_as_array(my_line, itemgetter(group_by));
+  my_line.sort(M.Base.keyComparator(group_by));
+  var group_list =  M.Iter.groupby_as_array(my_line, M.Base.itemgetter(group_by));
   M.Iter.forEach(group_list, draw_group);
 }
 
 function init() {
-  global.pill_game.game_state = Intervention.getGameVar('pill_game_state',  global.pill_game.default_state);
+  global.pill_game.game_state = global.Intervention.getGameVar('pill_game_state',  global.pill_game.default_state);
   if (global.pill_game.game_state.treatment_line === null) {
     alert("Please go back to the previous page and choose your line of medication.");
     return;

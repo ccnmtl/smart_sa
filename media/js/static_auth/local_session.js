@@ -100,7 +100,7 @@ window.NOT = function (bool) {
   LocalFirefoxSession.prototype.userList = function () {
     var userkeys = {};
     for (var a in this.permStor.keyDict()) {
-      if (RegExp('^' + this.nsUSER).test(a)) {
+      if (new RegExp('^' + this.nsUSER).test(a)) {
         userkeys[a] = 1;
       }
     }
@@ -121,7 +121,7 @@ window.NOT = function (bool) {
     var user_hash = this.hash(username, credential);
     var user_info = {};
     if (arguments.length > 2) {
-      update(user_info, more_info);
+      MB.update(user_info, more_info);
     }
     var user_key = this.nsUSER + user_hash;
     ///only save if they don't already exist
@@ -150,7 +150,7 @@ window.NOT = function (bool) {
   LocalFirefoxSession.prototype.backupList = function () {
     var backupkeys = {};
     for (var a in this.permStor.keyDict()) {
-      if (RegExp('^' + this.nsBACKUP).test(a)) {
+      if (new RegExp('^' + this.nsBACKUP).test(a)) {
         backupkeys[a] = 1;
       }
     }
@@ -160,7 +160,7 @@ window.NOT = function (bool) {
   LocalFirefoxSession.prototype.backupObject = function () {
     var keystobackup = {};
     for (var a in this.permStor.keyDict()) {
-      if (RegExp('^' + this.nsUSER).test(a)) {
+      if (new RegExp('^' + this.nsUSER).test(a)) {
         keystobackup[a] = this.permStor.get(a);
       }
     }
@@ -177,23 +177,31 @@ window.NOT = function (bool) {
 
   LocalFirefoxSession.prototype.restore = function (blob) {
     for (var a in blob) {
-      this.permStor.set(a, blob[a]);
+      if (blob.hasOwnProperty(a)) {
+        this.permStor.set(a, blob[a]);
+      }
     }
   };
 
   LocalFirefoxSession.prototype.destroyAllUsers = function () {
-    for (var a in this.userList()) {
-      this.permStor.del(a);
+    var ul = this.userList();
+    for (var a in ul) {
+      if (ul.hasOwnProperty(a)) {
+        this.permStor.del(a);
+      }
     }
   };
   LocalFirefoxSession.prototype.destroyEverything = function () {
     var self = this;
     if (confirm('This will delete all data relating to clients and your own admin account.  Are you sure?')) {
-      for (var a in self.sessStor.keyDict()) {
-        self.sessStor.del(a);
+      var kd = self.sessStor.keyDict();
+      for (var a in kd) {
+        if (kd.hasOwnProperty(a)) {
+          self.sessStor.del(a);
+        }
       }
       for (var a2 in self.permStor.keyDict()) {
-        if (window.NOT(RegExp('^' + self.nsBACKUP).test(a2))) {
+        if (window.NOT(new RegExp('^' + self.nsBACKUP).test(a2))) {
           self.permStor.del(a2);
         }
       }
@@ -335,4 +343,4 @@ window.NOT = function (bool) {
   };
 
 
-})();
+}());

@@ -18,7 +18,7 @@
       global.game_state = global.Intervention.getGameVar('island_game_state', global.default_state);
 
       MI.forEach(MD.getElementsByTagAndClassName('span', 'slider'),
-        function (a) { new Slider(a); }
+        function (a) { new global.Slider(a); }
       );
 
       if (global.game_state.page_2_good !== null) {
@@ -69,4 +69,4 @@
     window.onresize = reloadme;
     // connect(window, 'onbeforeunload', reloadme);
 
-  })();
+  }());

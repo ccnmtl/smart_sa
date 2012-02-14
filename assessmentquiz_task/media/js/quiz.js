@@ -25,28 +25,30 @@
 
     if (window.hasAttr(goal_state, section)) {
       for (var a in goal_state[section]) {
-        if (a === 'total') {
-          showTotal(goal_state[section][a]);
-          continue;
-        }
-        var form_elt = workform.elements[a];
-        if (!form_elt) {
-          continue;
-        }
-
-        if (window.hasAttr(form_elt, 'type')) {
-          if (form_elt.type !== 'checkbox') {
-            workform.elements[a].checked = goal_state[section][a] === workform.elements[a].value;
-          } else {
-            workform.elements[a].value = goal_state[section][a];
+        if (goal_state[section].hasOwnProperty(a)) {
+          if (a === 'total') {
+            showTotal(goal_state[section][a]);
+            continue;
           }
-        } else {///radio -- TODO:might need to do the same for <select>
-          ML.logDebug(form_elt, a);
-          MI.forEach(form_elt, function (selection) {
-            if (selection.value === goal_state[section][a]) {
-              selection.checked = true;
+          var form_elt = workform.elements[a];
+          if (!form_elt) {
+            continue;
+          }
+
+          if (window.hasAttr(form_elt, 'type')) {
+            if (form_elt.type !== 'checkbox') {
+              workform.elements[a].checked = goal_state[section][a] === workform.elements[a].value;
+            } else {
+              workform.elements[a].value = goal_state[section][a];
             }
-          });
+          } else {///radio -- TODO:might need to do the same for <select>
+            ML.logDebug(form_elt, a);
+            MI.forEach(form_elt, function (selection) {
+              if (selection.value === goal_state[section][a]) {
+                selection.checked = true;
+              }
+            });
+          }
         }
       }
     }
@@ -70,7 +72,9 @@
     });
     var all_done = true;
     for (var a in all_form_fields) {
-      all_done &= all_form_fields[a];
+      if (all_form_fields.hasOwnProperty(a)) {
+        all_done &= all_form_fields[a];
+      }
     }
     if (section === 'audit' && !all_done) {
       var gs = goal_state[section];

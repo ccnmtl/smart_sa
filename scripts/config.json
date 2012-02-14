@@ -19,7 +19,9 @@
 
     "predef"        : [  // Custom globals.
        "MochiKit",
-       "alert"
+       "alert",
+       "confirm",
+       "netscape"
         //"exampleVar",
         //"anotherCoolGlobal",
         //"iLoveDouglas"

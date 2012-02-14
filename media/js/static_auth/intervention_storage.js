@@ -145,7 +145,7 @@ current_user = {
       ML.logDebug('Admin Login');
       self.jumpToAdmin();
     } else {
-      location = MD.getElement('login_link').href;
+      location.href = MD.getElement('login_link').href;
     }
     /* we don't do the location explicitly, so
      * the static copy will still work (e.g. when '.html'
@@ -159,16 +159,18 @@ current_user = {
   InterventionSmart.prototype.login_confirm = function () {
     if (window.hasAttr(this, 'current_user')) {
       for (var key in this.current_user) {
-        switch (key) {
-        case 'firstname':
-          if (this.current_user.firstname === 'Test') {
-            MD.getElement('login').href = 'sessionNone_agenda';
+        if (this.current_user.hasOwnProperty(key)) {
+          switch (key) {
+          case 'firstname':
+            if (this.current_user.firstname === 'Test') {
+              MD.getElement('login').href = 'sessionNone_agenda';
+            }
+            break;
+          case 'fullname':     //nobreak
+          case 'patientnumber':
+            MD.getElement('user_' + key).innerHTML = this.current_user[key];
+            break;
           }
-          break;
-        case 'fullname':     //nobreak
-        case 'patientnumber':
-          MD.getElement('user_' + key).innerHTML = this.current_user[key];
-          break;
         }
       }
       var session_count = 0;
@@ -311,7 +313,7 @@ current_user = {
   InterventionSmart.prototype.update_activity = function (extra_data) {
     var activity_data = this.current_activity();
     if (activity_data && extra_data) {
-      update(activity_data, extra_data);
+      MB.update(activity_data, extra_data);
       this.session.saveUser(this.current_user);
     }
   };
@@ -340,7 +342,9 @@ current_user = {
   };
   InterventionSmart.prototype.resetGame = function () {
     for (var key in this.current_task) {
-      this.current_user.games[key] = this.current_task[key];
+      if (this.current_task.hasOwnProperty(key)) {
+        this.current_user.games[key] = this.current_task[key];
+      }
     }
     this.saveState();
   };

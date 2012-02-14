@@ -164,8 +164,6 @@ global.default_state = {
   'page_2_good' : null
 };
 
-global.game_state;
-
 global.clip_image = function (image, width, floor) {
   // sets the 'clip' style on an image so that any portion of the image below y value 'floor' is hidden.
   var hide = floor - M.DOM.elementPosition(image).y;

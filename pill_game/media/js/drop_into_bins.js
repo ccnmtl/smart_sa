@@ -1,8 +1,8 @@
 var M = MochiKit;
 
 var buckets = {};
-var pills = {};
 var global = this;
+global.pills = {};
 var pillbox_grid_positions = {};
 var dragged_pill = {};
 
@@ -51,13 +51,18 @@ function add_print_med_div(info, how_many, where) {
                 M.DOM.DIV({'class': 'asdasdas'}, info.pill_label + " " + how_many));
   }
 
+var pills_in_bucket = function (which) {
+  return M.Base.filter(function (a) {return a.where === which; }, M.Base.values(global.pills));
+};
+
+
 function adjust_for_print() {
   if (!viewing_print()) { return; }
   var day_pill_tally = tally_keys(pills_in_bucket("day"), 'pill_type');
   var night_pill_tally = tally_keys(pills_in_bucket("night"), 'pill_type');
   M.Logging.logDebug("ADJUSTING STYLES FOR PRINT");
   M.Base.map(function (a) { }, M.DOM.getElementsByTagAndClassName('div', 'page_3_pill_info'));
-  M.Base.map(function (a) { var p = pills[a]; if (p.still_in_box) { M.Style.hideElement(p.image); }}, M.Base.keys(pills));
+  M.Base.map(function (a) { var p = global.pills[a]; if (p.still_in_box) { M.Style.hideElement(p.image); }}, M.Base.keys(global.pills));
   M.DOM.getElement('day_pill_info_text').innerHTML = "";
   M.DOM.getElement('night_pill_info_text').innerHTML = "";
 
@@ -117,6 +122,41 @@ function grid(board, n) {
     return entiregrid.slice(0, n);
   }
 
+function Pill(settings) {
+    var its = function (a) { return settings[a]; };
+    var ints = function (n) {
+      if (its(n) === null) {
+        return null;
+      }
+      return parseInt(its(n), 10);
+    };
+    this.id = its('id');
+    this.x_offset = its('x_offset');
+    this.y_offset = its('y_offset');
+    this.pill_type = its('pill_type');
+    this.where = its('where');
+    this.offset_image = its('offset_image');
+    this.image_path = its('image_path');
+    this.image = M.DOM.IMG({'src': this.image_path, 'id': this.id + '_image', 'class': 'pill_image' });
+    M.DOM.appendChildNodes(M.DOM.getElement('pill_images_container'), this.image);
+    if (this.x_offset === null && this.y_offset === null) {
+      //M.Logging.logDebug ("Setting to original position.");
+      this.set_to_original_position();
+      this.draw_box();
+    } else {
+      //M.Logging.logDebug ("In Pill constructor, setting to remembered position.");
+      this.set_to_remembered_position();
+    }
+
+    setz(this.image, 3);
+    this.draggable = this.newDraggable();
+    this.still_in_box = true;
+    global.pills[this.id] = this;
+    this.image.pill_id = this.id;
+    return true;
+  }
+
+
 // draws pills in the bins:
 function pill_from_info(info) {
     var newpill = new Pill(info);
@@ -136,13 +176,13 @@ function build_pill(medication_label) {
         image_path : M.DOM.getElement('image_root').innerHTML + 'images/' +  image_from_pill(medication_label),
         offset_image :  M.DOM.getElement('pillbox').id
       };
-    pills[medication_label] = new Pill(new_settings);
+    global.pills[medication_label] = new Pill(new_settings);
   }
 
 function kill_pills() {
-    if (pills !== null) {
-      M.Base.map(function (x) { x.remove(); }, M.Base.values(pills));
-      delete pills;
+    if (global.pills !== null) {
+      M.Base.map(function (x) { x.remove(); }, M.Base.values(global.pills));
+      global.pills = {};
     }
   }
 
@@ -160,7 +200,6 @@ function draw_page() {
     //figure out where pills go in the box:
     var positions = grid(M.DOM.getElement('pillbox'), global.pill_game.patient_meds.length);
     kill_pills();
-    pills = {};
 
     //build pills in box:
     M.Iter.forEach(M.Iter.list(M.Iter.range(global.pill_game.patient_meds.length)),
@@ -200,27 +239,6 @@ function set_time_menus() {
   }
 
 
-function init() {
-    if (typeof(global.Intervention) === "undefined") {
-      alert("Log in as a client to play this game.");
-      return;
-    }
-    M.Style.hideElement(M.DOM.getElement('image_root'));
-    global.pill_game.game_state = global.Intervention.getGameVar('pill_game_state',  global.pill_game.default_state);
-    global.pill_game.patient_meds = global.pill_game.game_state.selected_meds;
-    M.Iter.forEach(M.DOM.getElementsByTagAndClassName('span', 'bucket'),
-      function (a) { new Bucket(a); }
-    );
-    draw_page();
-    M.Signal.connect('day_pills_time', 'onchange', time_menu_changed);
-    M.Signal.connect('night_pills_time', 'onchange', time_menu_changed);
-    // put pills from state into the buckets...
-    set_time_menus();
-    M.Signal.connect(window, "onresize", draw_page);
-    //test();
-  }
-
-M.DOM.addLoadEvent(init);
 
 
 function axe_state() {
@@ -230,13 +248,10 @@ function axe_state() {
     window.location.reload();
   }
 
-function pills_in_bucket(which) {
-    return M.Base.filter(function (a) {return a.where === which; }, M.Base.values(pills));
-  }
 
 
 function pill_from_image(pill_image) {
-    return pills[M.DOM.getElement(pill_image).pill_id];
+    return global.pills[M.DOM.getElement(pill_image).pill_id];
   }
 
 function pill_dropped(pill_image, where) {
@@ -264,6 +279,8 @@ function pill_dropped(pill_image, where) {
     save_state();
   }
 
+
+
 function Bucket(settings) {
     var its = M.Base.partial(M.DOM.getNodeAttribute, settings);
     var ints = function (n) {
@@ -287,7 +304,30 @@ function Bucket(settings) {
     return true;
   }
 
-function pill_dropped_outside_bin(pill_image) {
+function init() {
+    if (typeof(global.Intervention) === "undefined") {
+      alert("Log in as a client to play this game.");
+      return;
+    }
+    M.Style.hideElement(M.DOM.getElement('image_root'));
+    global.pill_game.game_state = global.Intervention.getGameVar('pill_game_state',  global.pill_game.default_state);
+    global.pill_game.patient_meds = global.pill_game.game_state.selected_meds;
+    M.Iter.forEach(M.DOM.getElementsByTagAndClassName('span', 'bucket'),
+      function (a) { new Bucket(a); }
+    );
+    draw_page();
+    M.Signal.connect('day_pills_time', 'onchange', time_menu_changed);
+    M.Signal.connect('night_pills_time', 'onchange', time_menu_changed);
+    // put pills from state into the buckets...
+    set_time_menus();
+    M.Signal.connect(window, "onresize", draw_page);
+    //test();
+  }
+
+M.DOM.addLoadEvent(init);
+
+
+var pill_dropped_outside_bin = function (pill_image) {
     dragged_pill = pill_from_image(pill_image);
     if (dragged_pill !== null) {
       //M.Logging.logDebug (dragged_pill.still_in_box);
@@ -302,41 +342,8 @@ function pill_dropped_outside_bin(pill_image) {
       }
     }
     return true;
-  }
+  };
 
-function Pill(settings) {
-    var its = function (a) { return settings[a]; };
-    var ints = function (n) {
-      if (its(n) === null) {
-        return null;
-      }
-      return parseInt(its(n), 10);
-    };
-    this.id = its('id');
-    this.x_offset = its('x_offset');
-    this.y_offset = its('y_offset');
-    this.pill_type = its('pill_type');
-    this.where = its('where');
-    this.offset_image = its('offset_image');
-    this.image_path = its('image_path');
-    this.image = M.DOM.IMG({'src': this.image_path, 'id': this.id + '_image', 'class': 'pill_image' });
-    M.DOM.appendChildNodes(M.DOM.getElement('pill_images_container'), this.image);
-    if (this.x_offset === null && this.y_offset === null) {
-      //M.Logging.logDebug ("Setting to original position.");
-      this.set_to_original_position();
-      this.draw_box();
-    } else {
-      //M.Logging.logDebug ("In Pill constructor, setting to remembered position.");
-      this.set_to_remembered_position();
-    }
-
-    setz(this.image, 3);
-    this.draggable = new M.DragAndDrop.Draggable(this.image, { revert: pill_dropped_outside_bin });
-    this.still_in_box = true;
-    pills[this.id] = this;
-    this.image.pill_id = this.id;
-    return true;
-  }
 
 function update_keys(from_object, keys_to_update) {
     var to = {};
@@ -348,9 +355,13 @@ Pill.prototype.info = function () {
     return update_keys(this, ['id', 'where', 'pill_type', 'image_path', 'offset_image', 'x_offset', 'y_offset']);
   };
 
+Pill.prototype.newDraggable = function () {
+  return new M.DragAndDrop.Draggable(this.image, { revert: pill_dropped_outside_bin });
+};
+
 Pill.prototype.remove = function () {
     M.DOM.removeElement(this.image);
-    delete pills[this.id];
+    delete global.pills[this.id];
     return;
   };
 

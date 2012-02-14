@@ -37,7 +37,7 @@ function init() {
     global.game_state = global.Intervention.getGameVar('island_game_state', global.default_state);
 
     M.Iter.forEach(MochiKit.D.getElementsByTagAndClassName('span', 'slider'),
-             function (a) { new Slider(a); }
+             function (a) { new global.Slider(a); }
     );
 
     M.Logging.logDebug(M.Base.serializeJSON(global.game_state));

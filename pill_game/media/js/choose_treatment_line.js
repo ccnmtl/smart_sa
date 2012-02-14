@@ -23,11 +23,11 @@ function select_line(new_line) {
   MochiKit.DOM.addElementClass(line_to_unselect, 'line_unselected');
   MochiKit.DOM.removeElementClass(line_to_unselect, 'line_selected');
   global.pill_game.game_state.treatment_line = new_line;
-  Intervention.saveState();
+  global.Intervention.saveState();
 }
 
 function init() {
-  global.pill_game.game_state = Intervention.getGameVar('pill_game_state',  global.pill_game.default_state);
+  global.pill_game.game_state = global.Intervention.getGameVar('pill_game_state',  global.pill_game.default_state);
   if (global.pill_game.game_state.treatment_line !== "") {
     select_line(global.pill_game.game_state.treatment_line);
   }
