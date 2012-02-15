@@ -35,7 +35,7 @@
 	<div id="navigator">
 	  <ul class="primary">
         {% for activity in activities %}
-	   <li><a id="activity{{activity.id }}" class="subitem activity session_off" href="activity{{activity.id }}_overview.html">
+	   <li><a id="activity{{activity.index }}" class="subitem activity session_off" href="activity{{activity.id }}_overview.html">
 	     <span class="titletext"> Activity {{forloop.counter}}: <br />{{ activity.short_title }}</span>
 	    </a></li>
         {% endfor %}
