@@ -41,7 +41,7 @@
       MD.getElement("iframe-dumping-ground").innerHTML = iframe_string;
     });
   }
-})();
+}());
 
 //not allowed  TestRunner.hta, user0extensions.js.sample,js.jar,,custom_rhino.jar, gotapi.py, make_docs.py, pack.py, domains.json, intervention_storage.js~, build.py, Color.rst, Signal.rst, DragAndDrop.rst, index.rst, selenium*, mochikit/tests, mochikit/doc/ (includes rsts)
 /*
