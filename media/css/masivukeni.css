@@ -3,7 +3,7 @@ body
 	margin: 0px;
 	padding: 0px;
 	background-color: #B4DCC0;
-	background-image: url(../images/background.png);
+	background-image: url(/site_media/images/background.png);
 	background-repeat: repeat-x;
 	font-family: "lucida sans unicode", "lucida grande", sans-serif;
 }
@@ -345,14 +345,14 @@ h2#sessioninfo
 /* start - icons */
 .complete
 {
-	background-image: url(../images/icon_complete.png);
+	background-image: url(/site_media/images/icon_complete.png);
 	background-repeat: no-repeat;
 	background-position: 10px 6px;
 }
 
 .incomplete
 {
-	background-image: url(../images/icon_incomplete.png);
+	background-image: url(/site_media/images/icon_incomplete.png);
 	background-repeat: no-repeat;
 	background-position: 10px 6px;
 }
@@ -364,13 +364,11 @@ li span.task
 	right: 5px;
 	width: 35px;
 	height: 15px;
-	background-image: url(../images/icon_task.png);
+	background-image: url(/site_media/images/icon_task.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-indent: -9999px;
 }
-
-.activity { background-image: none !important; }
 
 /*start - session navigator on home page*/
 #navigator
@@ -564,7 +562,7 @@ container-home
          background-color: #FFF;
          margin: 0px auto;
          border: 1px solid #dedede;
-         background-image: url(../images/home_bg.jpg);
+         background-image: url(/site_media/images/home_bg.jpg);
          background-repeat: repeat-x;
 }
  
@@ -600,7 +598,7 @@ table#login_form td.button { 12px 12px 12px 90px: ; }
 	text-align: center;
 	font-size: 13px;
 	color: #fff;
-	background-image: url(../images/button_short_green.png);
+	background-image: url(/site_media/images/button_short_green.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-decoration: none;
@@ -616,7 +614,7 @@ input.hilite
 	padding-bottom: 10px;
 }
 
-.hilite:hover { background-image: url(../images/button_short_green_over.png); }
+.hilite:hover { background-image: url(/site_media/images/button_short_green_over.png); }
 
 .off
 {
@@ -625,7 +623,7 @@ input.hilite
 	text-align: center;
 	font-size: 13px;
 	color: #fff;
-	background-image: url(../images/button_short_gray.png);
+	background-image: url(/site_media/images/button_short_gray.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-decoration: none;
@@ -633,7 +631,7 @@ input.hilite
 	text-transform: lowercase;
 }
 
-.off:hover { background-image: url(../images/button_short_gray_over.png); }
+.off:hover { background-image: url(/site_media/images/button_short_gray_over.png); }
 
 a.off_right
 {
@@ -642,7 +640,7 @@ a.off_right
 	text-align: center;
 	font-size: 13px;
 	color: #fff;
-	background-image: url(../images/button_short_gray.png);
+	background-image: url(/site_media/images/button_short_gray.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-decoration: none;
@@ -652,7 +650,7 @@ a.off_right
 	margin: 0px 5px 15px 0;
 }
 
-a.off_right:hover { background-image: url(../images/button_short_gray_over.png); }
+a.off_right:hover { background-image: url(/site_media/images/button_short_gray_over.png); }
 
 a.hilite_right
 {
@@ -661,7 +659,7 @@ a.hilite_right
 	text-align: center;
 	font-size: 13px;
 	color: #fff;
-	background-image: url(../images/button_short_green.png);
+	background-image: url(/site_media/images/button_short_green.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-decoration: none;
@@ -671,7 +669,7 @@ a.hilite_right
 	margin: 0px 5px 15px 0;
 }
 
-a.hilite_right:hover { background-image: url(../images/button_short_green_over.png); }
+a.hilite_right:hover { background-image: url(/site_media/images/button_short_green_over.png); }
 
 /* a.session, a.session_off 
 {
@@ -686,9 +684,9 @@ a.hilite_right:hover { background-image: url(../images/button_short_green_over.p
 	text-decoration: none;
 } */
 
-a.session_off:hover { background-image: url(../images/button_tall_gray_over.png); }
-a.session_next:hover { background-image: url(../images/button_tall_green_over.png); }
-a.session_complete:hover { background-image: url(../images/button_tall_orangecheck_over.png); } 
+a.session_off:hover { background-image: url(/site_media/images/button_tall_gray_over.png); }
+a.session_next:hover { background-image: url(/site_media/images/button_tall_green_over.png); }
+a.session_complete:hover { background-image: url(/site_media/images/button_tall_orangecheck_over.png); } 
 
 a.session_complete
 {
@@ -697,7 +695,7 @@ a.session_complete
 	text-align: center;
 	font-size: 13px;
 	color: #fff;
-	background-image: url(../images/button_tall_orangecheck.png);
+	background-image: url(/site_media/images/button_tall_orangecheck.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-decoration: none;
@@ -719,7 +717,7 @@ a.session_next
 	text-align: center;
 	font-size: 13px;
 	color: #fff;
-	background-image: url(../images/button_tall_green.png);
+	background-image: url(/site_media/images/button_tall_green.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-decoration: none;

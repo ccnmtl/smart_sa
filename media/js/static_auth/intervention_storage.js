@@ -192,7 +192,6 @@ current_user = {
     }
   };
   InterventionSmart.prototype.logout = function () {
-//      console.log("InterventionSmart.logout");
     this.logTime();
     this.session.logout();
     this.current_user = false;
@@ -233,7 +232,7 @@ current_user = {
       user_sessions[session_id] = self.session_blueprint();
       this.session.saveUser(this.current_user);
     }
-    self.init_subitems(function (activity_id) {
+    self.init_activity_subitems(function (activity_id) {
       return (window.hasAttr(self.current_user.sessions[session_id], activity_id) && self.current_user.sessions[session_id][activity_id].STATUS === 'complete');
     });
   };
@@ -274,13 +273,13 @@ current_user = {
   InterventionSmart.prototype.init_subitems = function (subitem_complete) {
     var next_session = false; //will be DOM object
     MI.forEach(
-      MD.getElementsByTagAndClassName('a', 'subitem'),
+      MD.getElementsByTagAndClassName('a', 'session'),
       function (elt) {
         var subitem_id = elt.id;
         var is_complete = subitem_complete(subitem_id);
         if (is_complete) {
-          MD.addElementClass(elt, 'session_complete');
-          MD.removeElementClass(elt, 'session_off');
+          MD.addElementClass(elt, 'complete');
+          MD.removeElementClass(elt, 'incomplete');
         } else if (!next_session) {
           next_session = elt;
         }
@@ -288,11 +287,35 @@ current_user = {
       }
     );
     if (next_session) {
-      MD.addElementClass(next_session, 'session_next');
-      MD.removeElementClass(next_session, 'session_off');
+      MD.addElementClass(next_session, 'current');
+      MD.removeElementClass(next_session, 'incomplete');
     }
     return next_session;
   };
+
+  InterventionSmart.prototype.init_activity_subitems = function (subitem_complete) {
+    var next_activity = false; //will be DOM object
+    MI.forEach(
+      MD.getElementsByTagAndClassName('a', 'activity'),
+      function (elt) {
+        var subitem_id = elt.id;
+        var is_complete = subitem_complete(subitem_id);
+        if (is_complete) {
+          MD.addElementClass(elt, 'complete');
+          MD.removeElementClass(elt, 'incomplete');
+        } else if (!next_activity) {
+          next_activity = elt;
+        }
+        return is_complete;
+      }
+    );
+    if (next_activity) {
+      MD.addElementClass(next_activity, 'current');
+      MD.removeElementClass(next_activity, 'incomplete');
+    }
+    return next_activity;
+  };
+
 
   /*******************************************
   Completion
@@ -386,7 +409,6 @@ current_user = {
   INIT Global Instantiation
   **************/
   if (!window.hasAttr(global, 'Intervention')) {
-//      console.log("setting up new InterventionSmart");
     global.Intervention = new InterventionSmart();
   }
 }());

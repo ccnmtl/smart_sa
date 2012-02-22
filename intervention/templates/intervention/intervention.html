@@ -18,24 +18,20 @@
     </div> 
     <div id="content-singlecolumn">
         <p class="instructions">Click on a session number to continue with the intervention.  The suggested next session is highlighted.</p>
-        
-        {% if intervention.clientsession_set.count %}        
-	  {% for session in intervention.clientsession_set.all %}
-	    <a id="session{{session.index }}" class="subitem session session_off" href="session{{session.id }}_agenda.html">
-	      <span class="titletext">  Session {{ session.short_title }}:<br /> {{session.long_title}}</span>
-	    </a>
-	  {% endfor %}
 
-	  <!--
-	      <a id="session2" class="session_next" 
-	                       href="session2_agenda.html">
-	      Session 2
-	      </a>
-	      <a id="session3" class="session_complete" 
-	                       href="session3_agenda.html">
-	      Session 3
-	      </a>
-	  -->
+
+        {% if intervention.clientsession_set.count %}                
+	<div id="navigator">
+	  <ul class="primary">
+        {% for session in intervention.clientsession_set.all %}
+	   <li><a id="session{{session.index }}" class="session" href="session{{session.id }}_agenda.html">
+	     Session {{forloop.counter}}: {{ session.long_title }}
+	    </a></li>
+        {% endfor %}
+	  </ul>
+	  <ul class="secondary">
+	  </ul>
+	</div>
 
 	{% else  %}
 	  <p>No sessions defined for this intervention.</p>
