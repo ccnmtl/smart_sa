@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from intervention.installed_games import InstalledGames
 """
 Intervention (e.g. SMART SA)
@@ -394,3 +395,31 @@ class Fact (models.Model):
                     created=str(self.created),
                     modified=str(self.modified),
                     )
+
+# These are the model objects that have been living client-side in localStorage/Gears
+
+class Participant(models.Model):
+    """ participant in the system """
+    name = models.CharField(max_length=256)
+    id_number = models.CharField(max_length=256)
+    defaulter = models.BooleanField(default=False)
+
+class ParticipantSession(models.Model):
+    participant = models.ForeignKey(Participant)
+    session = models.ForeignKey(ClientSession)
+    status = models.CharField(max_length=256,default="incomplete")
+    
+class ParticipantActivity(models.Model):
+    participant = models.ForeignKey(Participant)
+    activity = models.ForeignKey(Activity)
+    status = models.CharField(max_length=256,default="incomplete")
+
+class CounselorNote(models.Model):
+    participantsession = models.ForeignKey(ParticipantSession)
+    counselor = models.ForeignKey(User)
+    notes = models.TextField(blank=True,null=True,default="")
+
+class ParticipantGameVar(models.Model):
+    participant = models.ForeignKey(Participant)
+    key = models.CharField(max_length=256)
+    value = models.TextField(default="",blank=True,null=True)
