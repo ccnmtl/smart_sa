@@ -12,29 +12,29 @@
     
 </head>
 <body onload="Intervention.login_confirm()">
+  <a id="pagestart"></a> 
+  <div id="container">
+    <div id="header">
+      <h1>
+	<a href="#">Masivukeni</a> 
+      </h1>
+      <div id="nav-header">
+	<ul>
+	  <li><a href="helen.html">Hello, Helen!</a></li>
+	  <li><a id="login" class="off" href="client_login.html" onclick="Intervention.logout()">Log Out</a></li>
+	  <li>(Location: Khayelitsha)</li>
+	</ul>
+      </div>
+    </div>
 
-<a id="pagestart"></a> 
-<div id="container">
-	<div id="header">
-		<h1>
-			<a href="#">Masivukeni</a> 
-		</h1>
-		<div id="nav-header">
-			<ul>
-				<li><a href="helen.html">Hello, Helen!</a></li>
-				<li><a href="logout.html">Log Out</a></li>
-				<li>(Location: Khayelitsha)</li>
-			</ul>
-		</div>
-	</div>
-	<div id="breadcrumb-main">
-	<a href="">Home</a>
-	</div>
-	<div id="contentcontainer">
-	  <h3>
-	    Hello, <span id="user_fullname">Participant</span>!
-	  </h3>
-
+    <div id="breadcrumb-main">
+      <a href="">Home</a>
+    </div>
+    <div id="contentcontainer">
+      <h3>
+	Hello, <span id="user_fullname">Participant</span>!
+      </h3>
+      
       <span id="user_firstname">The client</span> 
       <span id="user_has_completed">
 	has completed 
@@ -106,12 +106,6 @@
 		</div>
 	</div>
 
-<a id="login" class="off" 
-	       href="client_login.html"
-	       onclick="Intervention.logout()"
-	       >
-	      Log in as different client
-	    </a>
 
 	<div id="footer">
 		<!--<p>
