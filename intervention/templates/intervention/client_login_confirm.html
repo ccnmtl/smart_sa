@@ -13,73 +13,112 @@
 </head>
 <body onload="Intervention.login_confirm()">
 
-<div id="container-home">
+<a id="pagestart"></a> 
+<div id="container">
+	<div id="header">
+		<h1>
+			<a href="#">Masivukeni</a> 
+		</h1>
+		<div id="nav-header">
+			<ul>
+				<li><a href="helen.html">Hello, Helen!</a></li>
+				<li><a href="logout.html">Log Out</a></li>
+				<li>(Location: Khayelitsha)</li>
+			</ul>
+		</div>
+	</div>
+	<div id="breadcrumb-main">
+	<a href="">Home</a>
+	</div>
+	<div id="contentcontainer">
+	  <h3>
+	    Hello, <span id="user_fullname">Participant</span>!
+	  </h3>
 
-  <!--BEGIN MAIN AREA-->
-  <div id="content-right-home">
-    <h1>
-      You are logged in as<br /> 
-      Client <span id="user_patientnumber">XX</span>, 
-      <span id="user_fullname">John Smith</span>
-    </h1> 
-    <h2>
       <span id="user_firstname">The client</span> 
       <span id="user_has_completed">
 	has completed 
 	<span id="user_sessions_completed">1</span> 
 	session<span id="user_sessions_plural">s</span>
       </span>
-    </h2>
-        
-    <form method="get">
-      <table id="login_form">
-	<tr>
-	  <td  class="button" align="center"> 
+
+
+
+		<div align="center">
+		<form action="login.html">
+		
+		<table id="choices">
+		
+		<col id="buttons" />
+		<col id="text" />
+		
+		<tr>
+		<td>
+		<input type="submit"  value="Counsel" />
 	    <a id="login" class="hilite" href="intervention1_intro.html">
 	      Continue
 	    </a>
-	    <br />or<br /> <br /> 
-	  </td>
-	</tr>
-	<tr>
-	  <td class="button" align="center"> 
-	    <a id="login" class="off" 
+
+		</td>
+		<td>
+		Counselors and administrators can counsel participants.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<input type="submit" value="Practice" disabled="disabled" />
+		</td>
+		<td class="disabled">
+		Counselors and administrators can practice their counselling skills.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<input type="submit" value="Administrate" disabled="disabled" />
+		</td>
+		<td class="disabled">
+		Counselors and administrators can manage participant information.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<input type="submit" value="Upload" disabled="disabled" />
+		</td>
+		<td class="disabled">
+		Administrators can send data.
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<input type="submit" value="Report" disabled="disabled" />
+		</td>
+		<td class="disabled">
+		Administrators can create reports.
+		</td>
+		</tr>
+		
+		</table>
+		</form>
+		</div>
+	</div>
+
+<a id="login" class="off" 
 	       href="client_login.html"
 	       onclick="Intervention.logout()"
 	       >
 	      Log in as different client
 	    </a>
-	  </td>
-	</tr>
-      </table>
- 
- 
-    </form>
-            
-  </div>	
-      
-  <div id="messaging">
-    Your wish is my command
-  </div>	
-    
-  <div id="content-left-home">
-    <img src="{{relative_root}}site_media/images/logo_lg.png" alt="Masivukeni Logo" />
-  </div>
-            
-<!--BEGIN FOOTER-->  
-  <div id="footer">
 
-    <ul><!--
-      <li><a href="about.html">About</a></li>
-      <li><a href="help.html">Help</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      -->
-    </ul> 	
-
-  </div>
-
+	<div id="footer">
+		<!--<p>
+			Footer <a href="subpage.html">info</a> 
+		</p>-->
+	</div>
 </div>
-
 
 </body>
 </html>
