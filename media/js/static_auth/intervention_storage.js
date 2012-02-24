@@ -49,12 +49,6 @@ current_user = {
                          'default_page':''
                         }
      }
-  'timelog':
-     {
-       'DATE':[{'page':'foo.html','time':24}, //in seconds
-               {'page':'grah.html','time':2000} //in seconds
-              ]
-     }
 }
  */
 
@@ -71,7 +65,6 @@ current_user = {
     try {
       this.session = global.EphemeralSession;
       this.current_user = global.EphemeralSession.currentUser();
-      this.initTimeLog();
       this.current_task = {};
     } catch (e) {
       /*never mind*/
@@ -373,35 +366,6 @@ current_user = {
   };
   InterventionSmart.prototype.saveState = function () {
     this.session.saveUser(this.current_user);
-  };
-
-  /*******************************************
-  Time Log
-  *******************************************/
-  InterventionSmart.prototype.initTimeLog = function () {
-    var self = this;
-    if (self.current_user) {
-      self.start_time = new Date();
-      MS.connect(window, 'onunload', self, 'logTime');
-    }
-  };
-  InterventionSmart.prototype.logTime = function () {
-    if (!this.current_user) { return; } //logged out
-    var now = new Date();
-    var timespent = Math.round((now - this.start_time) / 1000);
-    var date_string = [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('-');
-    var file_name = location.pathname.split('/').pop().split('.html').shift();
-
-    if (!window.hasAttr(this.current_user, 'timelog')) {
-      this.current_user.timelog = {};
-    }
-    if (!window.hasAttr(this.current_user.timelog, date_string)) {
-      this.current_user.timelog[date_string] = [];
-    }
-    this.current_user.timelog[date_string].push({'page': file_name,
-      'time': timespent
-      });
-    this.saveState();
   };
 
 
