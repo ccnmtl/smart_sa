@@ -11,10 +11,6 @@ window.hasAttr = function (obj, key) {
   } catch (e) { return false; }
 };
 
-window.NOT = function (bool) {
-  return !bool;
-};
-
 /*wrap code with module pattern*/
 (function () {
   var global = this;
@@ -59,7 +55,7 @@ window.NOT = function (bool) {
     var self = this;
     var user_key = self.nsUSER + self.hash(username, credential);
     self.setAdmin(false);
-    if (window.NOT(self.permStor.hasKey(user_key))) {
+    if (!self.permStor.hasKey(user_key)) {
       //LOGIN FAILED
       ML.logDebug('login failed', user_key);
       if (typeof(callback) === 'function') { callback(false); }
@@ -125,7 +121,7 @@ window.NOT = function (bool) {
     }
     var user_key = this.nsUSER + user_hash;
     ///only save if they don't already exist
-    if (window.NOT(this.permStor.hasKey(user_key))) {
+    if (!this.permStor.hasKey(user_key)) {
       this.saveUser(user_info, false, user_key);
     }
     return user_key;
@@ -201,14 +197,14 @@ window.NOT = function (bool) {
         }
       }
       for (var a2 in self.permStor.keyDict()) {
-        if (window.NOT(new RegExp('^' + self.nsBACKUP).test(a2))) {
+        if (!(new RegExp('^' + self.nsBACKUP).test(a2))) {
           self.permStor.del(a2);
         }
       }
     }
   };
 
-  if (window.NOT(window.hasAttr(global, 'EphemeralSession'))) {
+  if (!window.hasAttr(global, 'EphemeralSession')) {
     if (window.hasAttr(global, 'sessionStorage') && (window.hasAttr(global, 'localStorage') || window.hasAttr(global, 'globalStorage'))) {
       if (location.hostname !== '') {
         global.EphemeralSession = new LocalFirefoxSession();
