@@ -34,7 +34,7 @@ function Slider(settings) {
 
   //register this slider
   global.sliders[this.id] = this;
-  this.background_position = M.DOM.getElementPosition(this.background_element_id);
+  this.background_position = M.DOM.elementPosition(this.background_element_id);
 
   //draw fixed and moving components:
 
