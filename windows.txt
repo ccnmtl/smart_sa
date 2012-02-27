@@ -16,3 +16,34 @@ that later)
     C:\Python27\python.exe manage.py pull_from_prod --settings=settings_windows
     C:\Python27\python.exe manage.py runserver --settings=settings_windows
 * open browser and navigate to http://127.0.0.1:8000/
+
+Things to look into
+-------------------
+
+* eliminate PIL dependency
+* simplejson complains about lack of C compiler (but works). worth
+  fixing?
+* how to run without terminal, started from a shortcut
+* how to detect existing running instance
+* media paths (where to store video)
+* techniques for capturing logs in a format that could be emailed to
+  us for remote debugging
+* py2exe build?
+* how to install setuptools without network access
+
+No-offline conversion tasks
+---------------------------
+
+* get rid of manifest stuff entirely
+* server-side participant creation
+* patch Intervention.getGameVar to fetch from server
+* patch all games to write game vars to server instead of Intervention.current_user.games
+* replace init_intervention(), init_session(), init_activity(), etc
+  with django templates
+* Intervention.saveCounselorNotes() replaced with server-side call
+* replace participant login/logoff with server-side logic
+* (optional) APPEND_SLASHES can go back to True
+* relative_root stuff can be cleaned out
+* set South Africa timezone in config
+* when running in "clinic" mode, we probably want a different front page (hidden admin login, etc).
+* clear out all email related stuff from clinic settings.py
