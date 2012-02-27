@@ -1,0 +1,18 @@
+Windows Installation
+====================
+
+* Install Python 2.7 (assuming to C:\Python27)
+* Install setuptools
+* Install PIL (TODO: eliminate this dependency)
+* Download http://behemoth.ccnmtl.columbia.edu/masivukeni.zip (will move
+that later)
+* extract it
+* open terminal, navigate to smart_sa directory that was extracted
+* run
+    C:\Python27\lib\scripts\easy_install.exe pip
+    C:\Python27\lib\scripts\pip.exe install --requirement=requirements/windows.txt
+    C:\Python27\python.exe manage.py syncdb --settings=settings_windows
+    C:\Python27\python.exe manage.py migrate --settings=settings_windows
+    C:\Python27\python.exe manage.py pull_from_prod --settings=settings_windows
+    C:\Python27\python.exe manage.py runserver --settings=settings_windows
+* open browser and navigate to http://127.0.0.1:8000/
