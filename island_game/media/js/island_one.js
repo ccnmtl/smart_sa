@@ -21,7 +21,7 @@ var recalc = function () {
     M.DOM.getElement('dude').src = global.pick_image(altitude, dude_images);
 
     //adjust the dude
-    M.DOM.setStyle('dude', {
+    M.Style.setStyle('dude', {
         "left":  (M.DOM.getElement('dude').x) + 'px',
         "top" : (island_height - guy_on_island_offset) + 'px',
         'position': 'absolute',
@@ -36,7 +36,7 @@ var recalc = function () {
 function init() {
     global.game_state = global.Intervention.getGameVar('island_game_state', global.default_state);
 
-    M.Iter.forEach(MochiKit.D.getElementsByTagAndClassName('span', 'slider'),
+    M.Iter.forEach(M.DOM.getElementsByTagAndClassName('span', 'slider'),
              function (a) { new global.Slider(a); }
     );
 
