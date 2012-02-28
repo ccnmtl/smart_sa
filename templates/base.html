@@ -1,14 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-{% if disable_offline %}
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xml:lang="en" lang="en">
-{% else %}
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xml:lang="en" lang="en"
-      manifest="/cache.manifest?version={{manifest_version}}"
->
-{% endif %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <title>Masivukeni: {% block title %}{% endblock %}</title>
   <link href="{{relative_root}}site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
@@ -17,7 +9,6 @@
   <script type="text/javascript" src="{{relative_root}}site_media/js/mochikit/MochiKit/MochiKit.js"></script>
   <script type="text/javascript" src="{{relative_root}}site_media/js/static_auth/local_session.js"></script>
   <script type="text/javascript" src="{{relative_root}}site_media/js/static_auth/intervention_storage.js"></script>    
-  <script type="text/javascript" src="{{relative_root}}site_media/js/appcache_status.js"></script>
   {% block js %}{% endblock %}
   {% block feeds %}{% endblock %}
 </head>
@@ -84,7 +75,6 @@
     <!--BEGIN FOOTER-->  
     <div id="footer">
 		<p>
-		  <span id="cache-status-footer">cache status</span>
 			Footer <a href="index.html">info</a> 
     {% block footer %}{% endblock %}
 		</p>
