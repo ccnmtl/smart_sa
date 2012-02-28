@@ -327,7 +327,7 @@ class Instruction (models.Model):
     STYLE_CHOICES = [('do','Do'),('say','Say'),]
     style = models.CharField(max_length=64, choices=STYLE_CHOICES,blank=True,null=True)
     instruction_text = models.TextField(blank=True)
-    image = models.ImageField(upload_to='intervention_images',blank=True,null=True)
+    image = models.FileField(upload_to='intervention_images',blank=True,null=True)
 
     help_copy = models.TextField(blank=True)
     #image_path = models.CharField(max_length=300)
