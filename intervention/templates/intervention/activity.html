@@ -74,21 +74,21 @@
 	{% if activity.pages %}
 	  <p>
 	    {% if not test %}
-	      <a id="tasklink" class="hilite" href="{{relative_root}}.{% url intervention.views.game activity.game,activity.gamepage_set.all.0.id,activity.pages.0 %}">START</a>
+	      <a id="tasklink" class="hilite" href="{{relative_root}}.{% url smart_sa.intervention.views.game activity.game,activity.gamepage_set.all.0.id,activity.pages.0 %}">START</a>
 	      <ul id="all-task-pages">
 		{%for taskpage in activity.gamepage_set.all %}
 		<li><a id="taskpage-{{taskpage.page_name}}" 
-		       href="{{relative_root}}.{% url intervention.views.game activity.game,taskpage.id,taskpage.page_name %}">
+		       href="{{relative_root}}.{% url smart_sa.intervention.views.game activity.game,taskpage.id,taskpage.page_name %}">
 		  {{taskpage.page_name}}
 		</a></li>
 		{%endfor%}
 	      </ul>
 	    {%else%}
-	      <a id="tasklink" class="hilite" href="{{relative_root}}.{% url intervention.views.game activity.game,activity.pages.0 %}">START</a>
+	      <a id="tasklink" class="hilite" href="{{relative_root}}.{% url smart_sa.intervention.views.game activity.game,activity.pages.0 %}">START</a>
 	      <ul id="all-task-pages">
 		{%for taskpage in activity.pages %}
 		<li><a id="taskpage-{{taskpage}}" 
-		       href="{{relative_root}}.{% url intervention.views.game activity.game,taskpage %}">
+		       href="{{relative_root}}.{% url smart_sa.intervention.views.game activity.game,taskpage %}">
 		  {{taskpage}}
 		</a></li>
 		{%endfor%}
