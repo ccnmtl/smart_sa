@@ -331,48 +331,4 @@ def list_uploads(request):
         urls.append(url)
     return HttpResponse("\n".join(urls),content_type="text/plain")
 
-def manifest(request):
-    media_dir = os.path.join(os.path.dirname(__file__),"../media/")
-    media_files = []
-    for root, dirs, files in os.walk(media_dir):
-        if "selenium" in root \
-                or "mochikit/scripts" in root\
-                or "mochikit/tests" in root\
-                or "mochikit/doc" in root\
-                or "mochikit/examples" in root\
-                or "newskin" in root:
-            continue
-        for f in files:
-            if f.endswith("~"):
-                continue
-            if "#" in f:
-                continue
-            if f.startswith("."):
-                continue
-            fullpath = os.path.join(root,f)
-            path = "/site_media/" + fullpath[len(media_dir):]
-            media_files.append(path)
-
-    for fullpath,f,archive_name,public_path in all_uploads():
-        if f.endswith("mov"):
-            # HTML5 appcache limits things to 5MB,
-            # which our videos totally exceed.
-            # need to find a way around this later, but for now:
-            continue
-        media_files.append(public_path)
-
-    dynamic_paths = ["/index.html","/home.html","/client_login.html",
-                     "/help/credits.html","/help/backup.html",
-                     "/client_login_confirm.html",
-                     "/masivukeni_admin_data.html"]
-    for activity in Activity.objects.all():
-        dynamic_paths.append("/activity%d_overview.html" % activity.id)
-        for taskpage in activity.gamepage_set.all():
-            dynamic_paths.append("/task/%s/%d%s.html" % (activity.game,taskpage.id,taskpage.page_name()))
-
-    for session in ClientSession.objects.all():
-        dynamic_paths.append("/session%d_agenda.html" % session.id)
-
-    return HttpResponse("CACHE MANIFEST\n" + "\n".join(media_files + dynamic_paths),
-                        content_type="text/cache-manifest")
 

@@ -13,7 +13,6 @@ urlpatterns = patterns('',
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
         (r'^multimedia/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
 
-        (r'^cache.manifest$','smart_sa.intervention.views.manifest'),
         (r'^smart_sa$', 'smart_sa.intervention.views.no_vars', {'template_name': 'intervention/index.html'}),
         (r'^logout$', 'django.contrib.auth.views.logout', {'template_name': 'intervention/logged_out.html'}),
         #(r'^admin_confirm$', 'smart_sa.intervention.views.admin_confirm'), # login confirmation p.3
