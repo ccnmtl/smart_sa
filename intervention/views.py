@@ -2,7 +2,7 @@
 from annoying.decorators import render_to
 from django.template import RequestContext, loader, TemplateDoesNotExist
 from django.shortcuts import get_object_or_404, render_to_response
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.forms.models import modelformset_factory,inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
@@ -44,6 +44,32 @@ def no_vars(request, template_name='intervention/blank.html'):
 def intervention(request, intervention_id):
     return {'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id),
             'offlineable' : True}
+
+@render_to('intervention/begin_intervention.html')
+@login_required
+def begin_intervention(request):
+    return {'intervention' : Intervention.objects.all()[0]}
+
+@render_to('intervention/manage_participants.html')
+@login_required
+def manage_participants(request):
+    return dict(participants=Participant.objects.all())
+
+@login_required
+def add_participant(request):
+    p = Participant.objects.create(name=request.POST.get('name','unnamed'),
+                                   id_number=request.POST.get('id_number',''),
+                                   defaulter=(request.POST.get('defaulter','') == 'on'))
+    return HttpResponseRedirect("/manage/")
+
+
+@login_required
+def delete_participant(request,participant_id):
+    # TODO: confirmation
+    p = get_object_or_404(Participant,id=participant_id)
+    p.delete()
+    return HttpResponseRedirect("/manage/")
+
 
 @render_to('intervention/session.html')  
 def session(request, session_id):

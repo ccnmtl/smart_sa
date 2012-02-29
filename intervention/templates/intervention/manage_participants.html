@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Manage Participants</h1>
+
+{% if participants %}
+<table width="100%">
+<tr>
+  <th>name</th>
+  <th>id_number</th>
+  <th>Defaulter?</th>
+  <th></th>
+</tr>
+{% for participant in participants %}
+<tr>
+<td>{{participant.name}}</td>
+<td>{{participant.id_number}}</td>
+<td>{% if participant.defaulter %}Defaulter{% endif %}</td>
+<td><form action="/manage/delete_participant/{{participant.id}}/">
+    <input type="submit" value="delete" /></form></td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p>no participants</p>
+{% endif %}
+
+<h2>Add Participant</h2>
+<form action="/manage/add_participant/" method="post">
+<p><b>Name</b><br />
+<input type="text" name="name" /></p>
+<p><b>Participant ID</b><br />
+<input type="text" name="id_number" /></p>
+<p><b>Defaulter?</b> <input type="checkbox" name="defaulter" /></p>
+<input type="submit" value="add" />
+</form>
+
+
+{% endblock %}

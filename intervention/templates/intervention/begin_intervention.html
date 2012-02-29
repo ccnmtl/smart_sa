@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Masivukeni</title>
+  <link href="/site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <a id="pagestart"></a> 
+  <div id="container">
+    <div id="header">
+      <h1>
+	<a href="#">Masivukeni</a> 
+      </h1>
+      <div id="nav-header">
+	<ul>
+	  <li><a href="">Hello, {{request.user.username}}!</a></li>
+	  <li><a id="logout" href="/accounts/logout/">Log Out</a></li>
+	  <li>(Location: {{clinic}})</li>
+	</ul>
+      </div>
+    </div>
+
+    <div id="breadcrumb-main">
+      <a href="">Home</a>
+    </div>
+    <div id="contentcontainer">
+      <h3>
+	Hello, <span id="user_fullname">{{request.user.username}}</span>!
+      </h3>
+      
+      <div align="center">
+	  <table id="choices">
+	    <col id="buttons" />
+	    <col id="text" />
+		
+	    <tr>
+	      <td>
+		<a href="{{intervention.get_absolute_url}}">Counsel</a>
+	      </td>
+	      <td>
+		Counselors and administrators can counsel participants.
+	      </td>
+	    </tr>
+		
+	    <tr>
+	      <td>
+		<a href="{{intervention.get_absolute_url}}?mode=practice">Practice</a>
+	      </td>
+	      <td class="disabled">
+		Counselors and administrators can practice their counselling skills.
+	      </td>
+	    </tr>
+
+{% if request.user.is_superuser %}		
+	    <tr>
+	      <td>
+		<a href="/manage/">Administrate</a>
+	      </td>
+	      <td class="disabled">
+		Counselors and administrators can manage participant information.
+	      </td>
+	    </tr>
+
+	    <tr>
+	      <td>
+		<a href="">Upload</a>
+	      </td>
+	      <td class="disabled">
+		Administrators can send data.
+	      </td>
+	    </tr>
+		
+	    <tr>
+	      <td>
+		<a href="">Report</a>
+	      </td>
+	      <td class="disabled">
+		Administrators can create reports.
+	      </td>
+	    </tr>
+{% endif %}		
+		
+	  </table>
+      </div>
+    </div>
+
+
+    <div id="footer">
+    </div>
+</div>
+
+</body>
+</html>
