@@ -38,7 +38,7 @@ urlpatterns = patterns('',
         (r'^client_login.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login.html'}),
         (r'^client_login_confirm.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login_confirm.html'}),# login confirmation, p.2
 
-        (r'^intervention/$','smart_sa.intervention.views.begin_intervention'),
+        (r'^intervention/$','smart_sa.intervention.views.counselor_landing_page'),
         (r'^manage/$','smart_sa.intervention.views.manage_participants'),
         (r'^manage/add_participant/$','smart_sa.intervention.views.add_participant'),
         (r'^manage/delete_participant/(?P<participant_id>\d+)/$','smart_sa.intervention.views.delete_participant'),

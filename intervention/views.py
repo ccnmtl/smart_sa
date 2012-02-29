@@ -45,9 +45,9 @@ def intervention(request, intervention_id):
     return {'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id),
             'offlineable' : True}
 
-@render_to('intervention/begin_intervention.html')
+@render_to('intervention/counselor_landing_page.html')
 @login_required
-def begin_intervention(request):
+def counselor_landing_page(request):
     return {'intervention' : Intervention.objects.all()[0]}
 
 @render_to('intervention/manage_participants.html')
