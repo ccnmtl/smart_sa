@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {{ block.super }}
+
+    <div id="titlearea"> 
+      <h1>Session List</h1>
+    </div> 
+    <div id="content-singlecolumn">
+        <p class="instructions">Click on a session number to continue
+	  with the intervention. 
+	  The suggested next session is highlighted.</p>
+
+	<div id="navigator">
+	  <ul class="primary">
+        {% for session in intervention.clientsession_set.all %}
+	   <li><a id="session{{session.index }}" 
+		  class="session" 
+		  href="/session/{{session.id}}/">
+	     Session {{forloop.counter}}: {{ session.long_title }}
+	    </a></li>
+        {% endfor %}
+	  </ul>
+	  <ul class="secondary">
+	  </ul>
+	</div>
+
+    </div>	
+     
+{% endblock %}

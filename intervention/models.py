@@ -24,6 +24,9 @@ class Intervention(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/intervention/%d/" % self.id
+
     def as_dict(self):
         return dict(
             name=self.name,

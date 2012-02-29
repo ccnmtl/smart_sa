@@ -62,7 +62,6 @@ def add_participant(request):
                                    defaulter=(request.POST.get('defaulter','') == 'on'))
     return HttpResponseRedirect("/manage/")
 
-
 @login_required
 def delete_participant(request,participant_id):
     # TODO: confirmation
@@ -70,6 +69,22 @@ def delete_participant(request,participant_id):
     p.delete()
     return HttpResponseRedirect("/manage/")
 
+@render_to('intervention/ss/intervention.html')
+@login_required
+def ss_intervention(request, intervention_id):
+    return dict(intervention=get_object_or_404(Intervention, id=intervention_id))
+
+@render_to('intervention/ss/session.html')  
+@login_required
+def ss_session(request, session_id):
+    session = get_object_or_404(ClientSession, pk=session_id)
+    activities = session.activity_set.all()
+    return dict(session=session, activities=activities)
+
+@render_to('intervention/ss/activity.html')
+@login_required
+def ss_activity(request, activity_id):
+    return dict(activity=get_object_or_404(Activity, pk=activity_id))
 
 @render_to('intervention/session.html')  
 def session(request, session_id):
