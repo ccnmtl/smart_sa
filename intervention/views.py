@@ -94,7 +94,12 @@ def intervention(request, intervention_id):
 @render_to('intervention/counselor_landing_page.html')
 @login_required
 def counselor_landing_page(request):
-    return {'intervention' : Intervention.objects.all()[0]}
+    # if they come here, we want to clear out the participant from the session if any
+    try:
+        del request.session['participant_id']
+    except KeyError:
+        pass
+    return dict(intervention=Intervention.objects.all()[0])
 
 @render_to('intervention/manage_participants.html')
 @login_required
