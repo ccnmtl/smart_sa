@@ -55,15 +55,19 @@ def counselor_landing_page(request):
 def manage_participants(request):
     return dict(participants=Participant.objects.all())
 
+@render_to('intervention/add_participant.html')
 @login_required
 def add_participant(request):
-    p = Participant.objects.create(name=request.POST.get('name','unnamed'),
-                                   id_number=request.POST.get('id_number',''),
-                                   status=request.POST.get('status','') == 'on',
-                                   defaulter=(request.POST.get('defaulter','') == 'on'),
-                                   clinical_notes=request.POST.get('clinical_notes',''),
-                                   )
-    return HttpResponseRedirect("/manage/")
+    if request.method == 'POST':
+        p = Participant.objects.create(name=request.POST.get('name','unnamed'),
+                                       id_number=request.POST.get('id_number',''),
+                                       status=request.POST.get('status','') == 'on',
+                                       defaulter=(request.POST.get('defaulter','') == 'on'),
+                                       clinical_notes=request.POST.get('clinical_notes',''),
+                                       )
+        return HttpResponseRedirect("/manage/")
+    else:
+        return dict()
 
 @login_required
 def delete_participant(request,participant_id):
@@ -71,6 +75,23 @@ def delete_participant(request,participant_id):
     p = get_object_or_404(Participant,id=participant_id)
     p.delete()
     return HttpResponseRedirect("/manage/")
+
+@render_to('intervention/edit_participant.html')
+@login_required
+def edit_participant(request,participant_id):
+    p = get_object_or_404(Participant,id=participant_id)
+    if request.method == 'POST':
+        p.name = request.POST.get('name','')
+        p.clinical_notes = request.POST.get('clinical_notes','')
+        old_id_number = request.POST.get('old_id_number',False)
+        new_id_number = request.POST.get('new_id_number',False)
+        if old_id_number and new_id_number and old_id_number == p.id_number:
+            p.id_number = new_id_number
+        p.status = request.POST.get('status') == 'on'
+        p.defaulter = request.POST.get('defaulter') == 'on'
+        p.save()
+        return HttpResponseRedirect("/manage/")
+    return dict(participant=p)
 
 @render_to('intervention/ss/intervention.html')
 @login_required

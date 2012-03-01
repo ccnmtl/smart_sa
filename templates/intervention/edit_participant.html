@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Participant Information</h2>
+<form action="." method="post">
+<p><b>Name</b><br />
+<input type="text" name="name" value="{{participant.name}}" /></p>
+<p><b>Old Participant ID</b><br />
+<input type="text" name="old_id_number" /></p>
+<p><b>New Participant ID</b><br />
+<input type="text" name="new_id_number" /></p>
+<p><b>Defaulter?</b> <input type="checkbox" name="defaulter" {% if participant.defaulter %}checked="checked" {% endif %}/></p>
+<p><b>Active?</b> <input type="checkbox" name="status" 
+{% if participant.status %}checked="checked"{% endif %} /></p>
+<p><b>Clinical Notes</b><br />
+<textarea name="clinical_notes" rows="5" cols="70">{{participant.clinical_notes}}</textarea></p>
+<input type="submit" value="Done" />
+</form>
+
+{% endblock %}
