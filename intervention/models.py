@@ -406,6 +406,8 @@ class Participant(models.Model):
     name = models.CharField(max_length=256)
     id_number = models.CharField(max_length=256)
     defaulter = models.BooleanField(default=False)
+    status = models.BooleanField(default=True)
+    clinical_notes = models.TextField(default="",blank=True)
 
 class ParticipantSession(models.Model):
     participant = models.ForeignKey(Participant)

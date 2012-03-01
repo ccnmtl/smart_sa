@@ -59,7 +59,10 @@ def manage_participants(request):
 def add_participant(request):
     p = Participant.objects.create(name=request.POST.get('name','unnamed'),
                                    id_number=request.POST.get('id_number',''),
-                                   defaulter=(request.POST.get('defaulter','') == 'on'))
+                                   status=request.POST.get('status','') == 'on',
+                                   defaulter=(request.POST.get('defaulter','') == 'on'),
+                                   clinical_notes=request.POST.get('clinical_notes',''),
+                                   )
     return HttpResponseRedirect("/manage/")
 
 @login_required
