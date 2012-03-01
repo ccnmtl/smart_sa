@@ -93,6 +93,13 @@ def edit_participant(request,participant_id):
         return HttpResponseRedirect("/manage/")
     return dict(participant=p)
 
+@render_to('intervention/view_participant.html')
+@login_required
+def view_participant(request,participant_id):
+    p = get_object_or_404(Participant,id=participant_id)
+    return dict(participant=p)
+
+
 @render_to('intervention/ss/intervention.html')
 @login_required
 def ss_intervention(request, intervention_id):
