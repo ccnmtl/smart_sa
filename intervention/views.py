@@ -163,6 +163,11 @@ def ss_intervention(request, intervention_id):
 @login_required
 def ss_session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
+    participant=request.participant
+    r = ParticipantSession.objects.filter(session=session,participant=participant)
+    if r.count() == 0:
+        ps = ParticipantSession.objects.create(session=session,participant=participant,
+                                               status="incomplete")
     activities = session.activity_set.all()
     return dict(session=session, activities=activities,
                 participant=request.participant)
@@ -171,8 +176,13 @@ def ss_session(request, session_id):
 @participant_required
 @login_required
 def ss_activity(request, activity_id):
-    return dict(activity=get_object_or_404(Activity, pk=activity_id),
-                participant=request.participant)
+    activity=get_object_or_404(Activity, pk=activity_id)
+    participant=request.participant
+    r = ParticipantActivity.objects.filter(activity=activity,participant=participant)
+    if r.count() == 0:
+        ps = ParticipantActivity.objects.create(activity=activity,participant=participant,
+                                               status="incomplete")
+    return dict(activity=activity,participant=request.participant)
 
 @render_to('intervention/session.html')  
 def session(request, session_id):
