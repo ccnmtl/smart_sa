@@ -2,7 +2,7 @@
 from annoying.decorators import render_to
 from django.template import RequestContext, loader, TemplateDoesNotExist
 from django.shortcuts import get_object_or_404, render_to_response
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, QueryDict
 from django.forms.models import modelformset_factory,inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
@@ -12,6 +12,8 @@ from simplejson import dumps,loads
 import os
 import os.path
 import random
+from functools import wraps
+from django.utils.decorators import available_attrs
 
 from aes_v001 import AESModeOfOperation,toNumbers,fromNumbers
 
@@ -39,6 +41,50 @@ def no_vars(request, template_name='intervention/blank.html'):
     t = loader.get_template(template_name)
     c = RequestContext(request)
     return HttpResponse(t.render(c))
+
+
+def participant_required(function=None):
+    def decorator(view_func):
+        def get_participant(session):
+            participant_id = session.get('participant_id',False)
+            if not participant_id:
+                return None
+            try:
+                p = Participant.objects.get(id=participant_id)
+                return p
+            except:
+                return None
+
+        @wraps(view_func, assigned=available_attrs(view_func))
+        def _wrapped_view(request, *args, **kwargs):
+            p = get_participant(request.session)
+            if p is not None:
+                request.participant = p
+                return view_func(request, *args, **kwargs)
+            path = request.get_full_path()
+            set_participant_url = "/set_participant/?next=" + path
+            return HttpResponseRedirect(set_participant_url)
+        return _wrapped_view
+    return decorator(function)
+
+@render_to('intervention/set_participant.html')
+@login_required    
+def set_participant(request):
+    if request.method == 'POST':
+        name = request.POST.get('name','')
+        id_number = request.POST.get('id_number','')
+        try:
+            p = Participant.objects.get(name=name)
+            if p.id_number == id_number:
+                request.session['participant_id'] = p.id
+                return HttpResponseRedirect(request.POST.get('next','/intervention/'))
+            else:
+                return HttpResponse("id number does not match")
+        except Participant.DoesNotExist:
+            return HttpResponse("no participant with that name")
+    # on a GET request, we make sure to clear it
+    request.session.participant_id = ''
+    return dict(next=request.GET.get('next','/intervention/'))
 
 @render_to('intervention/intervention.html')
 def intervention(request, intervention_id):
@@ -101,21 +147,27 @@ def view_participant(request,participant_id):
 
 
 @render_to('intervention/ss/intervention.html')
+@participant_required
 @login_required
 def ss_intervention(request, intervention_id):
-    return dict(intervention=get_object_or_404(Intervention, id=intervention_id))
+    return dict(intervention=get_object_or_404(Intervention, id=intervention_id),
+                participant=request.participant)
 
 @render_to('intervention/ss/session.html')  
+@participant_required
 @login_required
 def ss_session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     activities = session.activity_set.all()
-    return dict(session=session, activities=activities)
+    return dict(session=session, activities=activities,
+                participant=request.participant)
 
 @render_to('intervention/ss/activity.html')
+@participant_required
 @login_required
 def ss_activity(request, activity_id):
-    return dict(activity=get_object_or_404(Activity, pk=activity_id))
+    return dict(activity=get_object_or_404(Activity, pk=activity_id),
+                participant=request.participant)
 
 @render_to('intervention/session.html')  
 def session(request, session_id):
