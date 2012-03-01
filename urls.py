@@ -13,7 +13,6 @@ urlpatterns = patterns('',
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
         (r'^multimedia/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
 
-        (r'^cache.manifest$','smart_sa.intervention.views.manifest'),
         (r'^smart_sa$', 'smart_sa.intervention.views.no_vars', {'template_name': 'intervention/index.html'}),
         (r'^logout$', 'django.contrib.auth.views.logout', {'template_name': 'intervention/logged_out.html'}),
         #(r'^admin_confirm$', 'smart_sa.intervention.views.admin_confirm'), # login confirmation p.3
@@ -38,6 +37,14 @@ urlpatterns = patterns('',
         (r'^index.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
         (r'^client_login.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login.html'}),
         (r'^client_login_confirm.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login_confirm.html'}),# login confirmation, p.2
+
+        (r'^intervention/$','smart_sa.intervention.views.counselor_landing_page'),
+        (r'^manage/$','smart_sa.intervention.views.manage_participants'),
+        (r'^manage/add_participant/$','smart_sa.intervention.views.add_participant'),
+        (r'^manage/delete_participant/(?P<participant_id>\d+)/$','smart_sa.intervention.views.delete_participant'),
+        (r'^intervention/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.ss_intervention'),
+        (r'^session/(?P<session_id>\d+)/$','smart_sa.intervention.views.ss_session'),
+        (r'^activity/(?P<activity_id>\d+)/$','smart_sa.intervention.views.ss_activity'),
 
         (r'^masivukeni_admin_data.html$', 'smart_sa.intervention.views.smart_data'),
         (r'^help/backup.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),

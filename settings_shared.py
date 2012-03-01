@@ -69,7 +69,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.markup',
-    'sorl.thumbnail',
     'django.contrib.admin',
     'sentry.client',
     'smart_sa.assessmentquiz_task',    
@@ -119,7 +118,6 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
                                #non-default:
                                "django.core.context_processors.request",
                                "intervention.views.relative_root",
-                               "intervention.views.manifest_version",
                                )
 
 PROD_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/"

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block breadcrumbs %}
+    {%if session %}
+      <li><a href="/intervention/{{session.intervention.id}}/">Session List</a></li>
+    {%endif%}  
+{% endblock %}
+
+
+{% block content %}
+    {{ block.super }}
+    
+    {% if session %}
+
+      <h3 id="session{{session.id}}" class="incomplete sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h3>
+      {% if session.introductory_copy %}
+	<p class="instructions">{{session.introductory_copy|safe}}</p><hr />
+      {% endif %}
+      {% if activities %}       
+        <p class="instructions">
+	  Click on an activity to continue with this session.  
+	  The suggested next activity is highlighted.
+	</p>
+
+
+
+	<div id="navigator">
+	  <ul class="primary">
+        {% for s in session.intervention.clientsession_set.all %}
+	   <li><a id="session{{s.index }}" class="session {% ifequal session.id s.id %}current{% endifequal %}" href="/session/{{s.id }}/">
+	     Session {{forloop.counter}}: {{ s.long_title }}
+	    </a></li>
+        {% endfor %}
+	  </ul>
+	  <ul class="secondary">
+        {% for activity in activities %}
+	   <li><a id="activity{{activity.index }}" class="activity" href="/activity/{{activity.id }}/">
+	     Activity {{forloop.counter}}: {{ activity.short_title }}</a>
+	     {% if activity.game %}<span class="task">+Task</span>{% endif %}
+           </li>
+        {% endfor %}
+	  </ul>
+	</div>
+
+       {% else  %}
+         <p>No activities defined for this session.</p>
+       {% endif %}
+       <br style="clear: both;" />
+<hr />
+         <p>
+	   <a id="complete" class="off_right" href="/intervention/{{session.intervention.id}}/" >
+	     Complete Session
+	   </a>
+	 </p>
+     
+<br style="clear: both;" /> 
+    </div>
+{% else %}
+    <p>No session defined.</p>
+{% endif %}
+
+{% endblock %}

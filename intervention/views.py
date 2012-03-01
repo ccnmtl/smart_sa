@@ -2,7 +2,7 @@
 from annoying.decorators import render_to
 from django.template import RequestContext, loader, TemplateDoesNotExist
 from django.shortcuts import get_object_or_404, render_to_response
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.forms.models import modelformset_factory,inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
@@ -34,16 +34,6 @@ def relative_root(request):
             'INTERVENTION_MEDIA': relative_root_path + 'site_media/'
             }
 
-def manifest_version(request):
-    """ on development, we want to make sure the manifest gets updated every time. """
-    if settings.DEBUG:
-        return {'manifest_version': str(random.randint(0,320000)),
-                'disable_offline' : settings.DISABLE_OFFLINE }
-    else:
-        # for production, we bump the manifest version on every git commit
-        return {'manifest_version': settings.LAST_GIT_HEAD,
-                'disable_offline': False}
-
 #VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
     t = loader.get_template(template_name)
@@ -54,6 +44,50 @@ def no_vars(request, template_name='intervention/blank.html'):
 def intervention(request, intervention_id):
     return {'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id),
             'offlineable' : True}
+
+@render_to('intervention/counselor_landing_page.html')
+@login_required
+def counselor_landing_page(request):
+    return {'intervention' : Intervention.objects.all()[0]}
+
+@render_to('intervention/manage_participants.html')
+@login_required
+def manage_participants(request):
+    return dict(participants=Participant.objects.all())
+
+@login_required
+def add_participant(request):
+    p = Participant.objects.create(name=request.POST.get('name','unnamed'),
+                                   id_number=request.POST.get('id_number',''),
+                                   status=request.POST.get('status','') == 'on',
+                                   defaulter=(request.POST.get('defaulter','') == 'on'),
+                                   clinical_notes=request.POST.get('clinical_notes',''),
+                                   )
+    return HttpResponseRedirect("/manage/")
+
+@login_required
+def delete_participant(request,participant_id):
+    # TODO: confirmation
+    p = get_object_or_404(Participant,id=participant_id)
+    p.delete()
+    return HttpResponseRedirect("/manage/")
+
+@render_to('intervention/ss/intervention.html')
+@login_required
+def ss_intervention(request, intervention_id):
+    return dict(intervention=get_object_or_404(Intervention, id=intervention_id))
+
+@render_to('intervention/ss/session.html')  
+@login_required
+def ss_session(request, session_id):
+    session = get_object_or_404(ClientSession, pk=session_id)
+    activities = session.activity_set.all()
+    return dict(session=session, activities=activities)
+
+@render_to('intervention/ss/activity.html')
+@login_required
+def ss_activity(request, activity_id):
+    return dict(activity=get_object_or_404(Activity, pk=activity_id))
 
 @render_to('intervention/session.html')  
 def session(request, session_id):
@@ -331,48 +365,4 @@ def list_uploads(request):
         urls.append(url)
     return HttpResponse("\n".join(urls),content_type="text/plain")
 
-def manifest(request):
-    media_dir = os.path.join(os.path.dirname(__file__),"../media/")
-    media_files = []
-    for root, dirs, files in os.walk(media_dir):
-        if "selenium" in root \
-                or "mochikit/scripts" in root\
-                or "mochikit/tests" in root\
-                or "mochikit/doc" in root\
-                or "mochikit/examples" in root\
-                or "newskin" in root:
-            continue
-        for f in files:
-            if f.endswith("~"):
-                continue
-            if "#" in f:
-                continue
-            if f.startswith("."):
-                continue
-            fullpath = os.path.join(root,f)
-            path = "/site_media/" + fullpath[len(media_dir):]
-            media_files.append(path)
-
-    for fullpath,f,archive_name,public_path in all_uploads():
-        if f.endswith("mov"):
-            # HTML5 appcache limits things to 5MB,
-            # which our videos totally exceed.
-            # need to find a way around this later, but for now:
-            continue
-        media_files.append(public_path)
-
-    dynamic_paths = ["/index.html","/home.html","/client_login.html",
-                     "/help/credits.html","/help/backup.html",
-                     "/client_login_confirm.html",
-                     "/masivukeni_admin_data.html"]
-    for activity in Activity.objects.all():
-        dynamic_paths.append("/activity%d_overview.html" % activity.id)
-        for taskpage in activity.gamepage_set.all():
-            dynamic_paths.append("/task/%s/%d%s.html" % (activity.game,taskpage.id,taskpage.page_name()))
-
-    for session in ClientSession.objects.all():
-        dynamic_paths.append("/session%d_agenda.html" % session.id)
-
-    return HttpResponse("CACHE MANIFEST\n" + "\n".join(media_files + dynamic_paths),
-                        content_type="text/cache-manifest")
 

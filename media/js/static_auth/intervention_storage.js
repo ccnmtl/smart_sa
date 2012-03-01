@@ -185,7 +185,6 @@ current_user = {
     }
   };
   InterventionSmart.prototype.logout = function () {
-    this.logTime();
     this.session.logout();
     this.current_user = false;
   };

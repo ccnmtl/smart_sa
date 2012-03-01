@@ -24,6 +24,9 @@ class Intervention(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/intervention/%d/" % self.id
+
     def as_dict(self):
         return dict(
             name=self.name,
@@ -327,7 +330,7 @@ class Instruction (models.Model):
     STYLE_CHOICES = [('do','Do'),('say','Say'),]
     style = models.CharField(max_length=64, choices=STYLE_CHOICES,blank=True,null=True)
     instruction_text = models.TextField(blank=True)
-    image = models.ImageField(upload_to='intervention_images',blank=True,null=True)
+    image = models.FileField(upload_to='intervention_images',blank=True,null=True)
 
     help_copy = models.TextField(blank=True)
     #image_path = models.CharField(max_length=300)
@@ -403,6 +406,8 @@ class Participant(models.Model):
     name = models.CharField(max_length=256)
     id_number = models.CharField(max_length=256)
     defaulter = models.BooleanField(default=False)
+    status = models.BooleanField(default=True)
+    clinical_notes = models.TextField(default="",blank=True)
 
 class ParticipantSession(models.Model):
     participant = models.ForeignKey(Participant)

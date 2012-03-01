@@ -23,7 +23,7 @@ Things to look into
 * eliminate PIL dependency
 * simplejson complains about lack of C compiler (but works). worth
   fixing?
-* how to run without terminal, started from a shortcut
+* how to run without terminal, started from a shortcut [solved: use .pyw extension]
 * how to detect existing running instance
 * media paths (where to store video)
 * techniques for capturing logs in a format that could be emailed to
