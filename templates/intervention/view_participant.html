@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Notes for {{participant.name}}</h2>
+
+<h3>{{participant.name}}'s notes</h3>
+
+<p>{{participant.clinical_notes}}</p>
+
+<h3>{{participant.name}}'s questions and concerns</h3>
+
+<h3>{{participant.name}}'s alerts</h3>
+
+<h3>{{participant.name}}'s sessions</h3>
+
+<a href="/manage/">Done</a>
+
+{% endblock %}

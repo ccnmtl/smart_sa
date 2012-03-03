@@ -1,23 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Manage Participants</h1>
+<h1>Administrate</h1>
+
+<p><b>Participants</b>
+<a href="/manage/add_participant/">+ Add Participant</a></p>
 
 {% if participants %}
 <table width="100%">
 <tr>
-  <th>name</th>
-  <th>id_number</th>
-  <th>Defaulter?</th>
-  <th></th>
+  <th>First Name</th>
+  <th>Status</th>
+  <th>Actions</th>
 </tr>
 {% for participant in participants %}
 <tr>
 <td>{{participant.name}}</td>
-<td>{{participant.id_number}}</td>
-<td>{% if participant.defaulter %}Defaulter{% endif %}</td>
-<td><form action="/manage/delete_participant/{{participant.id}}/">
-    <input type="submit" value="delete" /></form></td>
+<td>{% if participant.status %}Active{% else %}Inactive{% endif %}</td>
+<td><a href="/manage/participant/{{participant.id}}/view/">view
+    notes</a> |
+<a href="/manage/participant/{{participant.id}}/edit/">edit</a>
+</td>
 </tr>
 {% endfor %}
 </table>
@@ -25,18 +28,32 @@
 <p>no participants</p>
 {% endif %}
 
-<h2>Add Participant</h2>
-<form action="/manage/add_participant/" method="post">
-<p><b>Name</b><br />
-<input type="text" name="name" /></p>
-<p><b>Participant ID</b><br />
-<input type="text" name="id_number" /></p>
-<p><b>Defaulter?</b> <input type="checkbox" name="defaulter" /></p>
-<p><b>Active?</b> <input type="checkbox" name="status" checked="checked" /></p>
-<p><b>Clinical Notes</b><br />
-<textarea name="clinical_notes" rows="5" cols="70"></textarea></p>
-<input type="submit" value="add" />
-</form>
+
+<p><b>Counselors</b>
+<a href="/manage/add_counselor/">+ Add Counselor</a></p>
+
+{% if counselors %}
+<table width="100%">
+<tr>
+  <th>First Name</th>
+  <th>Status</th>
+  <th>Actions</th>
+</tr>
+{% for counselor in counselors %}
+<tr>
+<td>{{counselor.name}}</td>
+<td>{% if counselor.status %}Active{% else %}Inactive{% endif %}</td>
+<td><a href="/manage/counselor/{{counselor.id}}/view/">view
+    notes</a> |
+<a href="/manage/counselor/{{counselor.id}}/edit/">edit</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p>no counselors</p>
+{% endif %}
+
 
 
 {% endblock %}

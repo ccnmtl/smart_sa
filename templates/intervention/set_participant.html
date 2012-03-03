@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h2>Log in your Participant</h2>
+<form action="." method="post">
+<input type="hidden" name="next" value="{{next}}" />
+<p><b>First Name:</b> <input type="text" name="name" /></p>
+<p><b>Participant ID:</b> <input type="password" name="id_number" /></p>
+<input type="submit" value="Begin" />
+</form>
+{% endblock %}

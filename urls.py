@@ -38,13 +38,21 @@ urlpatterns = patterns('',
         (r'^client_login.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login.html'}),
         (r'^client_login_confirm.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login_confirm.html'}),# login confirmation, p.2
 
+
+        (r'^set_participant/$','smart_sa.intervention.views.set_participant'),
         (r'^intervention/$','smart_sa.intervention.views.counselor_landing_page'),
         (r'^manage/$','smart_sa.intervention.views.manage_participants'),
         (r'^manage/add_participant/$','smart_sa.intervention.views.add_participant'),
-        (r'^manage/delete_participant/(?P<participant_id>\d+)/$','smart_sa.intervention.views.delete_participant'),
+        (r'^manage/participant/(?P<participant_id>\d+)/delete/$','smart_sa.intervention.views.delete_participant'),
+        (r'^manage/participant/(?P<participant_id>\d+)/edit/$','smart_sa.intervention.views.edit_participant'),                       
+        (r'^manage/participant/(?P<participant_id>\d+)/view/$','smart_sa.intervention.views.view_participant'),                       
         (r'^intervention/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.ss_intervention'),
         (r'^session/(?P<session_id>\d+)/$','smart_sa.intervention.views.ss_session'),
         (r'^activity/(?P<activity_id>\d+)/$','smart_sa.intervention.views.ss_activity'),
+                       
+
+
+
 
         (r'^masivukeni_admin_data.html$', 'smart_sa.intervention.views.smart_data'),
         (r'^help/backup.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),
