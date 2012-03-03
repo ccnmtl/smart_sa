@@ -1,4 +1,3 @@
-from django.db import models
 
 # Create your models here.
 from intervention.installed_games import InstalledGames,GameInterface
@@ -6,7 +5,7 @@ from intervention.installed_games import InstalledGames,GameInterface
 class SSNMTreeGame(GameInterface):
     "Client will label the fruit, and then set disclosure and level of support info for each person"
     def pages(self):
-        return ('addnames','editdisclosure','editsupport')
+        return ('addnames',)
 
     def template(self,page_id):
         game_context = {'mode':page_id}
@@ -22,8 +21,8 @@ class SSNMTreeReview(SSNMTreeGame):
 
 InstalledGames.register_game('ssnmTree',
                              'Social Support Network Tree',
-                             SSNMTreeGame() )
+                             SSNMTreeGame())
 InstalledGames.register_game('ssnmTreeReview',
                              'Social Support Network Review with Peer',
-                             SSNMTreeReview() )
+                             SSNMTreeReview())
 

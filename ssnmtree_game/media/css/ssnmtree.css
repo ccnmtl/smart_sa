@@ -94,13 +94,6 @@ table {
  	padding: right: 4px;
  	background-color: #dedede;
  }
- 
- 
-#edit-support,
-#edit-disclosure { 
-                   display:none;/*just a default*/
- }
-
 
 /*left ups*/
 #top1-fruit {left:133px;top:3px;}
@@ -114,6 +107,58 @@ table {
 #middle3-fruit {left:288px;top:105px;}
 #bottom1-fruit {left:70px;top:176px;}
 #bottom2-fruit {left:203px;top:188px;}
+
+#toggle-support-selection.toggle-button {
+    left: 400px;
+    top: 360px;
+    background-image: none;
+}
+
+#toggle-disclosure-selection.toggle-button {
+    left: 20px;
+    top: 360px;
+    background-image: none;
+}
+
+.toggle-button {
+    width: 125px;
+    height: 75px;
+    font-size: 13px;
+    color: black;
+    display: block;
+    text-decoration: none;
+    padding: 9px 0 0px 0;
+    text-transform: uppercase;
+    position: absolute;
+    display: block;
+    z-index: 10;
+    
+    outline:none;
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    border-radius:12px;
+    -webkit-border-radius:12px;
+    -moz-border-radius:12px;
+    border:1px solid rgba(250, 255, 228, 0.2);
+}
+
+
+.toggle-button:hover {
+    box-shadow: 0 0 14px rgba(250, 255, 228, 1);
+    -webkit-box-shadow: 0 0 14px rgba(250, 255, 228, 1); 
+    -moz-box-shadow: 0 0 14px rgba(250, 255, 228, 1);
+    border:1px solid rgba(250, 255, 228, 0.8); 
+}
+
+.toggle-button.on {
+    text-align: center;
+    box-shadow: 0 0 14px rgba(250, 255, 228, 1);
+    -webkit-box-shadow: 0 0 14px rgba(250, 255, 228, 1); 
+    -moz-box-shadow: 0 0 14px rgba(250, 255, 228, 1);
+    border:1px solid rgba(250, 255, 228, 0.8); 
+    
+}
 
 @media print { 
   #controls { display:none; }

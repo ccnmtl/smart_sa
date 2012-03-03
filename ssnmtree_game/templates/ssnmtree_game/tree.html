@@ -1,99 +1,83 @@
 {% extends "intervention/game.html" %}
 
 {% block game_js %}
-          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}ssnmtree_game/js/ssnmtree.js"></script> 
+    <script type="text/javascript" src="{{INTERVENTION_MEDIA}}ssnmtree_game/js/ssnmtree.js"></script> 
 {% endblock %}
 {% block game_css %}
-  <link href="{{INTERVENTION_MEDIA}}ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
+    <link href="{{INTERVENTION_MEDIA}}ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block game_content %}
-   <div style="position:relative;height:465px;width:545px">
-     <div id="game-mode" data-game-mode="{{game_context.mode}}" />
-     <img class="bare-tree" src="{{INTERVENTION_MEDIA}}ssnmtree_game/images/bare_tree.png" />
-     <table id="controls">
-       <tr>
-	 <th>Show</th>
-	 <th>Edit</th>
-       </tr>
-       <tr>
-	 <td></td>
-	 <td><input class="editmode" id="edit-names" type="radio" name="edit" value="names" /></td>
-	 <td class="component">Names</td>
-       </tr>
-       <tr id="disclosure-controls">
-	 <td><input id="show-disclosure" type="checkbox" /></td>
-	 <td><input class="editmode" id="edit-disclosure" type="radio" name="edit" value="disclosure" /></td>
-	 <td class="component">Disclosure Info</td>
-       </tr>
-       <tr id="support-controls">
-	 <td><input id="show-support" type="checkbox" /></td>
-	 <td><input class="editmode" id="edit-support" type="radio" name="edit" value="support" /></td>
-	 <td class="component">Practical Support Info</td>
-       </tr>
-       <tr id="view-controls">
-	 <td></td>
-	 <td><input class="editmode" id="edit-view" type="radio" name="edit" value="view" /></td>
-	 <td class="component">View only</td>
-       </tr>
-     </table>
-     <div id="fruittree">
-       <!-- ** DO NOT DISTURB: 
-	    programming depends on ids,classes,and structure-->
+    {% comment %}
+        This tree represents your life, and the fruits on the tree represent people in your life (friends or family) who you can rely on for practical support and emotional support.   
+        Let's put in the names of the people who provide you with support.
+        Now that we have all the names listed, let's identify those on the tree who know your HIV status.
+        Now, let's identify those on the tree that provide you with practical support, meaning that they are available to do things for you.
+    {% endcomment %}
+    <div style="position:relative;height:465px;width:545px">
+        <div id="game-mode" data-game-mode="{{game_context.mode}}" />
+        <img class="bare-tree" src="{{INTERVENTION_MEDIA}}ssnmtree_game/images/bare_tree.png" />
+        <div id="fruittree">
+            <!-- ** DO NOT DISTURB: 
+	           programming depends on ids,classes,and structure-->
 
-       <!-- LEFT corner ups -->
-       <div id="top1-fruit" class="fruit leftup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
-       <div id="middle2-fruit" class="fruit leftup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
-       <div id="middle4-fruit" class="fruit leftup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
-       <div id="bottom3-fruit" class="fruit leftup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
+            <!-- LEFT corner ups -->
+            <div id="top1-fruit" class="fruit leftup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="middle2-fruit" class="fruit leftup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="middle4-fruit" class="fruit leftup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="bottom3-fruit" class="fruit leftup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
 
-       <!-- RIGHT corner ups -->
-       <div id="top2-fruit" class="fruit rightup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
-       <div id="top3-fruit" class="fruit rightup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
-       <div id="middle1-fruit" class="fruit rightup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
-       <div id="middle3-fruit" class="fruit rightup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
-       <div id="bottom1-fruit" class="fruit rightup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
-       <div id="bottom2-fruit" class="fruit rightup">
-	 <input type="text" value="" />
-	 <div class="circle"></div>	 
-	 <div class="ripe"></div>
-       </div>
-     </div>
-   </div>
+            <!-- RIGHT corner ups -->
+            <div id="top2-fruit" class="fruit rightup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="top3-fruit" class="fruit rightup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="middle1-fruit" class="fruit rightup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="middle3-fruit" class="fruit rightup">
+	           <input type="text" value="" />
+	           <div class="circle"></div>	 
+	           <div class="ripe"></div>
+            </div>
+            <div id="bottom1-fruit" class="fruit rightup">
+    	        <input type="text" value="" />
+    	        <div class="circle"></div>	 
+    	        <div class="ripe"></div>
+            </div>
+            <div id="bottom2-fruit" class="fruit rightup">
+    	        <input type="text" value="" />
+    	        <div class="circle"></div>	 
+                <div class="ripe"></div>
+            </div>
+            
+            <div id="toggle-support-selection" class="toggle-button off">+/-<br />Practical<br/>Support</div>
+            
+            <div id="toggle-disclosure-selection" class="toggle-button off">+/-<br />Aware<br />of Status</div>
+        </div>
+    </div>
 {% endblock %}
