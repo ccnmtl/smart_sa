@@ -104,7 +104,8 @@ def counselor_landing_page(request):
 @render_to('intervention/manage_participants.html')
 @login_required
 def manage_participants(request):
-    return dict(participants=Participant.objects.all())
+    return dict(participants=Participant.objects.all(),
+                counselors=User.objects.all())
 
 @render_to('intervention/add_participant.html')
 @login_required

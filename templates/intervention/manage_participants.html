@@ -41,8 +41,8 @@
 </tr>
 {% for counselor in counselors %}
 <tr>
-<td>{{counselor.name}}</td>
-<td>{% if counselor.status %}Active{% else %}Inactive{% endif %}</td>
+<td>{{counselor.username}}</td>
+<td>{% if counselor.is_active %}Active{% else %}Inactive{% endif %}</td>
 <td><a href="/manage/counselor/{{counselor.id}}/view/">view
     notes</a> |
 <a href="/manage/counselor/{{counselor.id}}/edit/">edit</a>
