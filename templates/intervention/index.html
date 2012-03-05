@@ -7,6 +7,20 @@
     {{ block.super }}
     
      <h1>  Welcome to Masivukeni! </h1>
+
+     <div id="loginbox">
+       <form method="post" action="/accounts/login/">
+	 <table>
+	   <tr><td><label for="id_username">ID</label></td><td><input type="text" name="username"/></td>
+	   <td><label for="id_password">Pass</label></td><td><input type="password"
+	   name="password"/></td>
+<td>	 <input type="submit" value="Go" />
+	 <input type="hidden" name="next" value="/intervention/" />
+</td>
+	   </tr>
+	 </table>
+       </form>
+     </div>
     
      <div id="content-right" class="game" >
      <h2>Quick Links</h2><br/>
