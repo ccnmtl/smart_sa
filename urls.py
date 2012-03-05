@@ -46,6 +46,9 @@ urlpatterns = patterns('',
         (r'^manage/participant/(?P<participant_id>\d+)/delete/$','smart_sa.intervention.views.delete_participant'),
         (r'^manage/participant/(?P<participant_id>\d+)/edit/$','smart_sa.intervention.views.edit_participant'),                       
         (r'^manage/participant/(?P<participant_id>\d+)/view/$','smart_sa.intervention.views.view_participant'),                       
+
+        (r'^manage/counselor/(?P<counselor_id>\d+)/view/$','smart_sa.intervention.views.view_counselor'),                       
+
         (r'^intervention/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.ss_intervention'),
         (r'^session/(?P<session_id>\d+)/$','smart_sa.intervention.views.ss_session'),
         (r'^activity/(?P<activity_id>\d+)/$','smart_sa.intervention.views.ss_activity'),

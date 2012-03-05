@@ -4,7 +4,7 @@ from django.template import RequestContext, loader, TemplateDoesNotExist
 from django.shortcuts import get_object_or_404, render_to_response
 from django.http import HttpResponse, Http404, HttpResponseRedirect, QueryDict
 from django.forms.models import modelformset_factory,inlineformset_factory
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.conf import settings
 from zipfile import ZipFile
 from cStringIO import StringIO
@@ -151,6 +151,12 @@ def view_participant(request,participant_id):
     p = get_object_or_404(Participant,id=participant_id)
     return dict(participant=p)
 
+@render_to('intervention/view_counselor.html')
+@login_required
+def view_counselor(request,counselor_id):
+    c = get_object_or_404(User,id=counselor_id)
+    return dict(counselor=c,
+                notes=CounselorNote.objects.filter(counselor=c))
 
 @render_to('intervention/ss/intervention.html')
 @participant_required

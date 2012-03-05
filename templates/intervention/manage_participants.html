@@ -30,7 +30,7 @@
 
 
 <p><b>Counselors</b>
-<a href="/manage/add_counselor/">+ Add Counselor</a></p>
+<a href="/admin/auth/user/add/">+ Add Counselor</a></p>
 
 {% if counselors %}
 <table width="100%">
@@ -45,7 +45,7 @@
 <td>{% if counselor.is_active %}Active{% else %}Inactive{% endif %}</td>
 <td><a href="/manage/counselor/{{counselor.id}}/view/">view
     notes</a> |
-<a href="/manage/counselor/{{counselor.id}}/edit/">edit</a>
+<a href="/admin/auth/user/{{counselor.id}}/">edit</a>
 </td>
 </tr>
 {% endfor %}
