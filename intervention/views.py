@@ -178,6 +178,45 @@ def ss_session(request, session_id):
     return dict(session=session, activities=activities,
                 participant=request.participant)
 
+@participant_required
+@login_required
+def ss_complete_session(request, session_id):
+    session = get_object_or_404(ClientSession, pk=session_id)
+
+    if request.method == "POST":
+        participant=request.participant
+        r = ParticipantSession.objects.filter(session=session,participant=participant)
+        if r.count() == 0:
+            ps = ParticipantSession.objects.create(session=session,participant=participant,
+                                                   status="complete")
+        else:
+            ps = r[0]
+            ps.status = "complete"
+            ps.save()
+        return HttpResponseRedirect(session.intervention.get_absolute_url())
+    else:
+        return HttpResponseRedirect(session.get_absolute_url())
+
+@participant_required
+@login_required
+def ss_complete_activity(request, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+
+    if request.method == "POST":
+        participant=request.participant
+        r = ParticipantActivity.objects.filter(activity=activity,participant=participant)
+        if r.count() == 0:
+            pa = ParticipantActivity.objects.create(activity,participant=participant,
+                                                    status="complete")
+        else:
+            pa = r[0]
+            pa.status = "complete"
+            pa.save()
+        return HttpResponseRedirect(activity.clientsession.get_absolute_url())
+    else:
+        return HttpResponseRedirect(activity.get_absolute_url())
+
+
 @render_to('intervention/ss/activity.html')
 @participant_required
 @login_required

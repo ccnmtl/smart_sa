@@ -51,10 +51,9 @@ urlpatterns = patterns('',
 
         (r'^intervention/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.ss_intervention'),
         (r'^session/(?P<session_id>\d+)/$','smart_sa.intervention.views.ss_session'),
+        (r'^session/(?P<session_id>\d+)/complete/$','smart_sa.intervention.views.ss_complete_session'),
         (r'^activity/(?P<activity_id>\d+)/$','smart_sa.intervention.views.ss_activity'),
-                       
-
-
+        (r'^activity/(?P<activity_id>\d+)/complete/$','smart_sa.intervention.views.ss_complete_activity'),
 
 
         (r'^masivukeni_admin_data.html$', 'smart_sa.intervention.views.smart_data'),

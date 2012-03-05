@@ -67,6 +67,10 @@ class ClientSession (models.Model):
     
     def __unicode__(self):
         return self.short_title
+
+    def get_absolute_url(self):
+        return "/session/%d/" % self.id
+
     def index(self):
         sessions = self.intervention.get_clientsession_order()
         if sessions:
@@ -127,6 +131,9 @@ class Activity(models.Model):
     
     def __unicode__(self):
         return self.short_title
+
+    def get_absolute_url(self):
+        return "/activity/%d/" % self.id
 
     def save(self, *args, **kwargs):
         "We want to precreate game pages, based on the game chosen"

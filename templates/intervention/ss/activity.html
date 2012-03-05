@@ -146,11 +146,10 @@
 
 
          <p>
-	   <a id="complete" class="hilite_right" 
-	      href="/session/{{activity.clientsession.id}}/"
-	      >
-	     Complete Activity
-	   </a><br style="clear: both;" /> 
+	   <form action="complete/" method="post">
+	     <input type="submit" value="Complete Activity" />
+	   </form>
+	   <br style="clear: both;" /> 
 	 </p>
 	
 	{% endif %}
