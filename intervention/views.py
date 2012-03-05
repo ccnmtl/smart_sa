@@ -155,8 +155,7 @@ def view_participant(request,participant_id):
 @login_required
 def view_counselor(request,counselor_id):
     c = get_object_or_404(User,id=counselor_id)
-    return dict(counselor=c,
-                notes=CounselorNote.objects.filter(counselor=c))
+    return dict(counselor=c,notes=CounselorNote.objects.filter(counselor=c))
 
 @render_to('intervention/ss/intervention.html')
 @participant_required
