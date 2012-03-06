@@ -170,10 +170,7 @@ def ss_intervention(request, intervention_id):
 def ss_session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     participant=request.participant
-    r = ParticipantSession.objects.filter(session=session,participant=participant)
-    if r.count() == 0:
-        ps = ParticipantSession.objects.create(session=session,participant=participant,
-                                               status="incomplete")
+    ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
     activities = session.activity_set.all()
     return dict(session=session, activities=activities,
                 participant=request.participant)
@@ -185,14 +182,9 @@ def ss_complete_session(request, session_id):
 
     if request.method == "POST":
         participant=request.participant
-        r = ParticipantSession.objects.filter(session=session,participant=participant)
-        if r.count() == 0:
-            ps = ParticipantSession.objects.create(session=session,participant=participant,
-                                                   status="complete")
-        else:
-            ps = r[0]
-            ps.status = "complete"
-            ps.save()
+        ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
+        ps.status = "complete"
+        ps.save()
         return HttpResponseRedirect(session.intervention.get_absolute_url())
     else:
         return HttpResponseRedirect(session.get_absolute_url())
@@ -204,14 +196,9 @@ def ss_complete_activity(request, activity_id):
 
     if request.method == "POST":
         participant=request.participant
-        r = ParticipantActivity.objects.filter(activity=activity,participant=participant)
-        if r.count() == 0:
-            pa = ParticipantActivity.objects.create(activity,participant=participant,
-                                                    status="complete")
-        else:
-            pa = r[0]
-            pa.status = "complete"
-            pa.save()
+        pa,created = ParticipantActivity.objects.get_or_create(activity=activity,participant=participant)
+        pa.status = "complete"
+        pa.save()
         if request.POST.get('counselor_notes',False):
             session = activity.clientsession
             ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
