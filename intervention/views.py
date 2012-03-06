@@ -218,8 +218,11 @@ def ss_complete_activity(request, activity_id):
             note,created = CounselorNote.objects.get_or_create(participantsession=ps,counselor=request.user)
             note.notes = request.POST.get('counselor_notes','')
             note.save()
-            
-        return HttpResponseRedirect(activity.clientsession.get_absolute_url())
+        next_activity = activity.next()
+        if next_activity is None:
+            return HttpResponseRedirect(activity.clientsession.get_absolute_url())
+        else:
+            return HttpResponseRedirect(next_activity.get_absolute_url())
     else:
         return HttpResponseRedirect(activity.get_absolute_url())
 
