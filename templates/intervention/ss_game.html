@@ -8,6 +8,10 @@
    <!-- Delegate to the particular game which extra JS it needs -->
    <script>
      var game_variables = {{game.variables|safe}};
+     this.ss_game_state = {};
+{% for v in game_variables %}
+     this.ss_game_state['{{v.key}}'] = {{v.value|safe}};
+{% endfor %}
    </script>
    {% block game_js %}{% endblock %}
 {% endblock %}

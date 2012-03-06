@@ -347,13 +347,14 @@ current_user = {
       ///this way we can return the pointer, and the original updates
       throw "devault_value required and must be an array or dictionary";
     }
-    if (!window.hasAttr(this.current_user, 'games')) { this.current_user.games = {}; }
-
-    if (!window.hasAttr(this.current_user.games, key)) {
-      this.current_user.games[key] = default_value;
+    if (!window.hasAttr(window,'ss_game_state')) {
+      window.ss_game_state = {};
     }
-    this.current_task[key] = default_value;
-    return this.current_user.games[key];
+
+    if (!window.hasAttr(window.ss_game_state, key)) {
+      window.ss_game_state[key] = default_value;
+    }
+    return window.ss_game_state[key];
   };
   InterventionSmart.prototype.resetGame = function () {
     for (var key in this.current_task) {
@@ -364,7 +365,9 @@ current_user = {
     this.saveState();
   };
   InterventionSmart.prototype.saveState = function () {
-    this.session.saveUser(this.current_user);
+    console.log(window.ss_game_state);
+    var url = "/save_game_state/";
+    MochiKit.Async.doXHR(url,{'method':'POST', 'sendContent' : MB.serializeJSON(window.ss_game_state)});
   };
 
 

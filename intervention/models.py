@@ -419,6 +419,18 @@ class Participant(models.Model):
     status = models.BooleanField(default=True)
     clinical_notes = models.TextField(default="",blank=True)
 
+    def save_game_var(self,key,value):
+        gv,created = ParticipantGameVar.objects.get_or_create(participant=self,key=key)
+        gv.value = value
+        gv.save()
+
+    def get_game_var(self,key):
+        r = self.participantgamevar_set.filter(key=key)
+        if r.count() == 0:
+            return None
+        else:
+            return r[0].value
+
 class ParticipantSession(models.Model):
     participant = models.ForeignKey(Participant)
     session = models.ForeignKey(ClientSession)

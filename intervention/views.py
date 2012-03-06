@@ -226,7 +226,8 @@ def ss_activity(request, activity_id):
     counselor_notes = cn.notes
     return dict(activity=activity,participant=request.participant,counselor_notes=counselor_notes)
 
-
+@participant_required
+@login_required
 def ss_game(request, game_id, page_id):
     my_game = get_object_or_404(GamePage, pk=game_id)
     if not my_game.activity:
@@ -245,14 +246,29 @@ def ss_game(request, game_id, page_id):
 
     my_game.page_id = page_id
     template,game_context = my_game.ss_template(page_id)
-    
+    variables = []
+    for k in my_game.variables(page_id):
+        variables.append(dict(key=k,value=request.participant.get_game_var(k)))
     t = loader.get_template(template)
     c = RequestContext(request,{
         'game' :  my_game,
         'game_context' : game_context,
+        'game_variables' : variables,
     })
     return HttpResponse(t.render(c))
 
+@participant_required
+@login_required
+def save_game_state(request):
+    if not request.method == "POST":
+        return HttpResponse("must be a POST")
+    try:
+        json = loads(request.raw_post_data)
+        for k in json.keys():
+            request.participant.save_game_var(k,dumps(json[k]))
+    except Exception, e:
+        return HttpResponse("not ok")
+    return HttpResponse("ok")
 
 @render_to('intervention/session.html')  
 def session(request, session_id):
