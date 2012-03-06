@@ -212,6 +212,13 @@ def ss_complete_activity(request, activity_id):
             pa = r[0]
             pa.status = "complete"
             pa.save()
+        if request.POST.get('counselor_notes',False):
+            session = activity.clientsession
+            ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
+            note,created = CounselorNote.objects.get_or_create(participantsession=ps,counselor=request.user)
+            note.notes = request.POST.get('counselor_notes','')
+            note.save()
+            
         return HttpResponseRedirect(activity.clientsession.get_absolute_url())
     else:
         return HttpResponseRedirect(activity.get_absolute_url())
@@ -223,11 +230,11 @@ def ss_complete_activity(request, activity_id):
 def ss_activity(request, activity_id):
     activity=get_object_or_404(Activity, pk=activity_id)
     participant=request.participant
-    r = ParticipantActivity.objects.filter(activity=activity,participant=participant)
-    if r.count() == 0:
-        ps = ParticipantActivity.objects.create(activity=activity,participant=participant,
-                                               status="incomplete")
-    return dict(activity=activity,participant=request.participant)
+    ps,created = ParticipantSession.objects.get_or_create(session=activity.clientsession,participant=participant)
+    pa,created = ParticipantActivity.objects.get_or_create(activity=activity,participant=participant)
+    cn,created = CounselorNote.objects.get_or_create(participantsession=ps,counselor=request.user)
+    counselor_notes = cn.notes
+    return dict(activity=activity,participant=request.participant,counselor_notes=counselor_notes)
 
 @render_to('intervention/session.html')  
 def session(request, session_id):

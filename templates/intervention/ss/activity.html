@@ -35,6 +35,8 @@
 		<div id="content">
 
     {% if activity %}
+    <form action="complete/" method="post">
+
     <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
 
 
@@ -141,16 +143,15 @@
       {% if activity.collect_notes %}
       <h4>Counselor Notes</h4>
       <textarea name="counselor_notes" rows="5" cols="70"
-		id="counselor-notes" ></textarea>
+		id="counselor-notes" >{{counselor_notes}}</textarea>
       {% endif %}
 
 
          <p>
-	   <form action="complete/" method="post">
 	     <input type="submit" value="Complete Activity" />
-	   </form>
 	   <br style="clear: both;" /> 
 	 </p>
+    </form>
 	
 	{% endif %}
  
