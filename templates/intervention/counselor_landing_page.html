@@ -1,8 +1,17 @@
 {% extends "base.html" %}
+
+{% block title %} {{user}}'s Home Page{% endblock %}
+
+{% block breadcrumb-main %}
+	<div id="breadcrumb-main">
+	<a href="{{relative_root}}intervention/">Home</a>
+	</div>
+{% endblock %}
+
 {% block content %}
-      <h3>
-	Hello, <span id="user_fullname">{{request.user.username}}</span>!
-      </h3>
+      <h2>
+	Hello, <span id="user_fullname">{{request.user.username}}!</span>
+      </h2>
       
       <div align="center">
 	  <table id="choices">

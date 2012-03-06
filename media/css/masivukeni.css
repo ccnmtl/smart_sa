@@ -22,8 +22,12 @@ body
 {
 	position: relative;
 	height: 70px;
+	border-bottom: 1px solid #ccc;
 }
 
+h2 {color: #f6921e;}
+
+h3 {border-bottom: 1px solid #ccc;}
 #header h1, #header h1 a
 {
 	position: absolute;
@@ -66,6 +70,7 @@ body
 {
 	display: inline;
 	margin-left: 10px;
+	color: #f3912f;
 }
 
 #nav-header ul li a:link
@@ -96,20 +101,43 @@ body
 
 
 /*start - breadcrumb*/
+#breadcrumb-main
+{
+	margin: 0px;
+	padding: 5px 0px 5px 10px;
+	background-image: url(../images/shadow.png);
+	background-repeat: repeat-x;
+	border-bottom: 1px solid #ccc;
+	color: #000;
+	font-size: 12px;
+}
+
+#breadcrumb-main a
+{
+	font-size: 12px;
+	text-decoration: none;
+	color: #000;
+}
+
+#breadcrumb-main a:hover
+{
+	font-size: 12px;
+	text-decoration: underline;
+	color: #000;
+}
+
 #breadcrumb
 {
 	position: relative;
 	margin: 0px;
 	padding-top: 10px;
-	background-image: url(../images/shadow.png);
-	background-repeat: repeat-x;
 	border-bottom: 1px solid #ccc;
 }
 
 #breadcrumb a#tab-home, #breadcrumb a#tab-home:hover, #breadcrumb a.current#tab-home
 {
 	display: block;
-	width: 60px;
+	width: 156px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;
@@ -151,15 +179,14 @@ body
 {
 	display: block;
 	position: absolute;
-	left: 130px;
-	top: 0px;
+	left: 224px;
+	top: 16px;
 	font-size: 12px;
 }
 
 .breadcrumb-text-current { color: #f3912f; }
 
-/*stop - breadcrumb*/
-#contentcontainer
+/*stop - breadcrumb*/#contentcontainer
 {
 	position: relative;
 	padding: 20px;
