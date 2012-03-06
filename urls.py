@@ -54,7 +54,7 @@ urlpatterns = patterns('',
         (r'^session/(?P<session_id>\d+)/complete/$','smart_sa.intervention.views.ss_complete_session'),
         (r'^activity/(?P<activity_id>\d+)/$','smart_sa.intervention.views.ss_activity'),
         (r'^activity/(?P<activity_id>\d+)/complete/$','smart_sa.intervention.views.ss_complete_activity'),
-
+        (r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$', 'smart_sa.intervention.views.ss_game'),
 
         (r'^masivukeni_admin_data.html$', 'smart_sa.intervention.views.smart_data'),
         (r'^help/backup.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),

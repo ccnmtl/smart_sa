@@ -306,6 +306,9 @@ class GamePage (models.Model):
     def template(self, page_id):
         return InstalledGames.template(self.activity.game,page_id)
 
+    def ss_template(self, page_id):
+        return InstalledGames.ss_template(self.activity.game,page_id)
+
     def variables(self, page_id=None):
         return InstalledGames.variables(self.activity.game,page_id)
 

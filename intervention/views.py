@@ -226,6 +226,34 @@ def ss_activity(request, activity_id):
     counselor_notes = cn.notes
     return dict(activity=activity,participant=request.participant,counselor_notes=counselor_notes)
 
+
+def ss_game(request, game_id, page_id):
+    my_game = get_object_or_404(GamePage, pk=game_id)
+    if not my_game.activity:
+        """ for some reason, the database is littered with GamePage
+         objects that don't have an activity associated with them 
+         (and are therefore inaccessible normally) and googlebot 
+         occasionally manages to pull them up, generating an exception
+         I don't yet know if it's OK for these orphan gamepages to be in there
+         so I'm hesitant to just delete them. In the meantime,
+         if there is no referer (ie, probably googlebot or similar),
+         we can silently ignore this exception 
+         -Anders
+         """
+        if not request.META.get('HTTP_REFERER',None):
+            return HttpResponse("orphan gamepage. please contact developers if you are seeing this")
+
+    my_game.page_id = page_id
+    template,game_context = my_game.ss_template(page_id)
+    
+    t = loader.get_template(template)
+    c = RequestContext(request,{
+        'game' :  my_game,
+        'game_context' : game_context,
+    })
+    return HttpResponse(t.render(c))
+
+
 @render_to('intervention/session.html')  
 def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
