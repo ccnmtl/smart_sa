@@ -25,6 +25,13 @@ ENCRYPTION_ARGS = [AESModeOfOperation.modeOfOperation["OFB"], #mode
                    toNumbers(settings.INTERVENTION_BACKUP_IV)
                    ]
 
+def inject_deployment(request):
+    """injects the current Deployment into the context"""
+    if Deployment.objects.count() == 0:
+        return dict(deployment=Deployment.objects.create(name="Clinic"))
+    else:
+        return dict(deployment=Deployment.objects.all()[0])
+
 #VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
     t = loader.get_template(template_name)
