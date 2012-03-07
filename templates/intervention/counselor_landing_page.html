@@ -47,6 +47,7 @@
 	      </td>
 	    </tr>
 
+{% if deployment.is_online %}
 	    <tr>
 	      <td>
 		<a class="action" href="">Upload</a>
@@ -64,6 +65,7 @@
 		Administrators can create reports.
 	      </td>
 	    </tr>
+{% endif %}
 {% endif %}		
 		
 	  </table>

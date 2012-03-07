@@ -25,6 +25,13 @@ ENCRYPTION_ARGS = [AESModeOfOperation.modeOfOperation["OFB"], #mode
                    toNumbers(settings.INTERVENTION_BACKUP_IV)
                    ]
 
+def inject_deployment(request):
+    """injects the current Deployment into the context"""
+    if Deployment.objects.count() == 0:
+        return dict(deployment=Deployment.objects.create(name="Clinic"))
+    else:
+        return dict(deployment=Deployment.objects.all()[0])
+
 #VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
     t = loader.get_template(template_name)
@@ -74,6 +81,14 @@ def set_participant(request):
     # on a GET request, we make sure to clear it
     request.session.participant_id = ''
     return dict(next=request.GET.get('next','/intervention/'))
+
+@login_required
+def set_deployment(request):
+    if request.POST:
+        d = Deployment.objects.all()[0]
+        d.name = request.POST.get('name','Clinic')
+        d.save()
+    return HttpResponseRedirect("/manage/")
 
 @login_required
 def start_practice_mode(request,intervention_id):

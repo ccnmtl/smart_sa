@@ -460,3 +460,11 @@ class ParticipantGameVar(models.Model):
     key = models.CharField(max_length=256)
     value = models.TextField(default="",blank=True,null=True)
 
+class Deployment(models.Model):
+    name = models.CharField(max_length=256,default="Clinic")
+
+    def is_online(self):
+        return self.name == "CCNMTL"
+
+    def is_clinic(self):
+        return self.name != "CCNMTL"
