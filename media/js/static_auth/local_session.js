@@ -112,21 +112,6 @@ window.hasAttr = function (obj, key) {
     return this.getUserData(userkey);
   };
 
-  LocalFirefoxSession.prototype.createUser = function (username, credential, more_info) {
-    var self = this;
-    var user_hash = this.hash(username, credential);
-    var user_info = {};
-    if (arguments.length > 2) {
-      MB.update(user_info, more_info);
-    }
-    var user_key = this.nsUSER + user_hash;
-    ///only save if they don't already exist
-    if (!this.permStor.hasKey(user_key)) {
-      this.saveUser(user_info, false, user_key);
-    }
-    return user_key;
-  };
-
   /*defaults to save user_info to current user*/
   LocalFirefoxSession.prototype.saveUser = function (user_info,/*optional:*/ callback, user_key) {
     var which_user = (user_key) ? user_key : this.currentUserKey();

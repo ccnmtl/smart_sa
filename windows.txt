@@ -20,7 +20,6 @@ that later)
 Things to look into
 -------------------
 
-* eliminate PIL dependency
 * simplejson complains about lack of C compiler (but works). worth
   fixing?
 * how to run without terminal, started from a shortcut [solved: use .pyw extension]
@@ -31,19 +30,8 @@ Things to look into
 * py2exe build?
 * how to install setuptools without network access
 
-No-offline conversion tasks
----------------------------
+TODO: 
 
-* get rid of manifest stuff entirely
-* server-side participant creation
-* patch Intervention.getGameVar to fetch from server
-* patch all games to write game vars to server instead of Intervention.current_user.games
-* replace init_intervention(), init_session(), init_activity(), etc
-  with django templates
-* Intervention.saveCounselorNotes() replaced with server-side call
-* replace participant login/logoff with server-side logic
-* (optional) APPEND_SLASHES can go back to True
-* relative_root stuff can be cleaned out
 * set South Africa timezone in config
 * when running in "clinic" mode, we probably want a different front page (hidden admin login, etc).
 * clear out all email related stuff from clinic settings.py

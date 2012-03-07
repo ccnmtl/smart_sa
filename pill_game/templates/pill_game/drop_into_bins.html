@@ -2,18 +2,18 @@
 
 {% block game_js %}
 
-  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/MochiKit.js"></script>
-  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/DragAndDrop.js"></script> 
-  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/pill_common.js"></script> 
-  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/medication_details.js"></script> 
-  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/drop_into_bins.js"></script> 
-  <script type="text/javascript" src="{{INTERVENTION_MEDIA}}pill_game/js/bucket.js"></script> 
+  <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script>
+  <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/DragAndDrop.js"></script> 
+  <script type="text/javascript" src="/site_media/pill_game/js/pill_common.js"></script> 
+  <script type="text/javascript" src="/site_media/pill_game/js/medication_details.js"></script> 
+  <script type="text/javascript" src="/site_media/pill_game/js/drop_into_bins.js"></script> 
+  <script type="text/javascript" src="/site_media/pill_game/js/bucket.js"></script> 
   
 {% endblock %}
 
 {% block game_css %}
-<link href="{{INTERVENTION_MEDIA}}pill_game/css/pill.css" rel="stylesheet" type="text/css" />
-<!--link id="print_css_link" href="{{INTERVENTION_MEDIA}}pill_game/css/pill_print.css" rel="stylesheet" type="text/css" media="print" /-->
+<link href="/site_media/pill_game/css/pill.css" rel="stylesheet" type="text/css" />
+<!--link id="print_css_link" href="/site_media/pill_game/css/pill_print.css" rel="stylesheet" type="text/css" media="print" /-->
 
 {% endblock %}
 
@@ -28,12 +28,12 @@
 		</p>
         -->
         
-        <img src="{{INTERVENTION_MEDIA}}pill_game/images/background.jpg" id="the_background" height = "450" width ="500"/>
+        <img src="/site_media/pill_game/images/background.jpg" id="the_background" height = "450" width ="500"/>
         
-        <img src="{{INTERVENTION_MEDIA}}pill_game/images/pillbox.png" id="pillbox" background="the_background" x_offset_from_the_background="5" y_offset_from_the_background="5" />
+        <img src="/site_media/pill_game/images/pillbox.png" id="pillbox" background="the_background" x_offset_from_the_background="5" y_offset_from_the_background="5" />
 
 
-        <span id = "image_root" >{{INTERVENTION_MEDIA}}pill_game/</span>
+        <span id = "image_root" >/site_media/pill_game/</span>
         
         <span class = "pill_images_container" id="pill_images_container" ></span>
         
@@ -45,7 +45,7 @@
             background="the_background"
             x_offset_from_the_background="344"
             y_offset_from_the_background="10"
-            image_path = "{{INTERVENTION_MEDIA}}pill_game/images/bucket_day.png"
+            image_path = "/site_media/pill_game/images/bucket_day.png"
         >
         </span>
         
@@ -99,7 +99,7 @@
             background="the_background"
             x_offset_from_the_background="344"
             y_offset_from_the_background="235"
-            image_path   = "{{INTERVENTION_MEDIA}}pill_game/images/bucket_eve.png"
+            image_path   = "/site_media/pill_game/images/bucket_eve.png"
         >        
         </span>
         

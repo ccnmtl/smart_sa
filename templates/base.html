@@ -7,7 +7,7 @@
 
   <title>Masivukeni: {% block title %}{% endblock %}</title>
   
-  <link href="{{relative_root}}site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
+  <link href="/site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
   
   {% block css %}{% endblock %}
   {% block js %}{% endblock %}
@@ -24,7 +24,7 @@
 	<div id="header">
 	
 		<h1>
-			<a href="{{relative_root}}home.html" id="masivukeni-home">Masivukeni</a> 
+			<a href="/" id="masivukeni-home">Masivukeni</a> 
 		</h1>
 		
 		<div id="nav-header">
@@ -58,8 +58,8 @@
     </div>
 
     <div id="footer">
-		<a href="{{relative_root}}home.html">About</a> | 
-		<a href="{{relative_root}}help/credits.html">Credits</a> | 
+		<a href="/">About</a> | 
+		<a href="/credits/">Credits</a> | 
 		<a href="mailto:ccnmtl-masivukeni@columbia.edu">Contact</a>
 		{% block footer %}{% endblock %}
     </div>

@@ -2,13 +2,13 @@
 
 
 {% block game_js %}
-          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/MochiKit.js"></script> 
-          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}problemsolving_game/js/problemsolving.js"></script> 
+          <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script> 
+          <script type="text/javascript" src="/site_media/problemsolving_game/js/problemsolving.js"></script> 
 {% endblock %}
 
 
 {% block game_css %}
-  <link href="{{INTERVENTION_MEDIA}}problemsolving_game/css/problemsolving.css" rel="stylesheet" type="text/css" />
+  <link href="/site_media/problemsolving_game/css/problemsolving.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 
@@ -20,86 +20,86 @@
     <div class="issue currentissue">
       <div class="issuetext">I am away from home when I have an appointment at the clinic</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier-travel.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier-travel.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">Being at the clinic takes too much time, and is too unpleasant</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barriers-clinic.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barriers-clinic.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">I have not disclosed my status to my extended family</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier-feartodislose.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier-feartodislose.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">When I drink too much, I forget to take my medications</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier-booze.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier-booze.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">I don't have enough people to support me in my treatment</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier-alone.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier-alone.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">If I forget to take my medication I am afraid to come back to the clinic</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier-angrynurse.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier-angrynurse.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">I am not comfortable with the clinic staff</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier_uncomfortablewstaff.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier_uncomfortablewstaff.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">I feel so well now that I do not need to take the medicines</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barriers_happy.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barriers_happy.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">The medication makes me feel sick</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier-feelingill.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier-feelingill.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">There are other treatments that I think work better</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier-othermedicine.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier-othermedicine.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">I stop taking my medication when I have a cold, or flu, or other problems</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier_sickwithcold.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier_sickwithcold.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">Sometimes I just forget to take my medication</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier-forgetful.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier-forgetful.png" />
       </div>
     </div>
     <div class="issue">
       <div class="issuetext">It is difficult to get to the clinic</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barrier-cantgettoclinic.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barrier-cantgettoclinic.png" />
       </div>
     </div>
     <div class="issue editable-issue">
       <textarea class="issuetext" name="other">I have a different issue</textarea>
       <div class="done-click">done: click to review</div>
       <div class="issueimage">
-	<img src="{{INTERVENTION_MEDIA}}problemsolving_game/images/issues/barriers_other.png" />
+	<img src="/site_media/problemsolving_game/images/issues/barriers_other.png" />
       </div>
     </div>
   </div>
@@ -120,11 +120,11 @@
     <div id="videobox">
      <object id="video_object" classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="{{game_context.width}}"
         height="{{game_context.height}}" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
-        <param  id="video_src" name='src' value="{{relative_root}}.{{MEDIA_URL}}{{game_context.video}}" />
+        <param  id="video_src" name='src' value="{{MEDIA_URL}}{{game_context.video}}" />
         <param name='autoplay' value="false" />
         <param name='controller' value="true" />
         <param name='loop' value="false" />
-        <embed id="video_embed" src="{{relative_root}}.{{MEDIA_URL}}{{game_context.video}}" width="{{game_context.width}}" height="{{game_context.height}}" autoplay="false" 
+        <embed id="video_embed" src="{{MEDIA_URL}}{{game_context.video}}" width="{{game_context.width}}" height="{{game_context.height}}" autoplay="false" 
         controller="true" loop="false" pluginspage='http://www.apple.com/quicktime/download/'>
         </embed>
       </object>
@@ -137,24 +137,24 @@
       <div id="field-ask" class="problemsolve-field">
 	<label for="ask">Ask</label>
 	<input type="text" name="ask" />
-	<a class="videolink" href="{{relative_root}}.{{MEDIA_URL}}{{game_context.videos.ask}}"></a>
+	<a class="videolink" href="{{MEDIA_URL}}{{game_context.videos.ask}}"></a>
       </div>
       <div id="field-aim" class="problemsolve-field">
 	<label for="aim">Aim</label>
 	<textarea name="aim" rows="3"></textarea>
-	<a class="videolink" href="{{relative_root}}.{{MEDIA_URL}}{{game_context.videos.aim}}"></a>
+	<a class="videolink" href="{{MEDIA_URL}}{{game_context.videos.aim}}"></a>
       </div>
       <div id="field-alternatives" class="problemsolve-field">
 	<label for="alternatives">Alternatives</label>
 	<input type="text" name="alternatives" />
 	<input type="text" name="alternatives2" />
 	<input type="text" name="alternatives3" />
-	<a class="videolink" href="{{relative_root}}.{{MEDIA_URL}}{{game_context.videos.alternatives}}"></a>
+	<a class="videolink" href="{{MEDIA_URL}}{{game_context.videos.alternatives}}"></a>
       </div>
       <div id="field-action" class="problemsolve-field">
 	<label for="action">Action</label>
 	<textarea name="action" rows="3"></textarea>
-	<a class="videolink" href="{{relative_root}}.{{MEDIA_URL}}{{game_context.videos.action}}"></a>
+	<a class="videolink" href="{{MEDIA_URL}}{{game_context.videos.action}}"></a>
       </div>
       <a id="form-continue" href="#gamephase" class="problemsolve-continue">
 	Continue

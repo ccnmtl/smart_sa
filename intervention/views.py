@@ -25,17 +25,6 @@ ENCRYPTION_ARGS = [AESModeOfOperation.modeOfOperation["OFB"], #mode
                    toNumbers(settings.INTERVENTION_BACKUP_IV)
                    ]
 
-#CUSTOM CONTEXT PROCESSOR
-#see/set TEMPLATE_CONTEXT_PROCESSORS in settings_shared.py
-#also note that we need RequestContext instead of the usual Context
-def relative_root(request):
-    """returns a string like '../../../' to get back to the root level"""
-    from_top = request.path.count('/')-1
-    relative_root_path = '../' * from_top
-    return {'relative_root':relative_root_path,
-            'INTERVENTION_MEDIA': relative_root_path + 'site_media/'
-            }
-
 #VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
     t = loader.get_template(template_name)
@@ -85,11 +74,6 @@ def set_participant(request):
     # on a GET request, we make sure to clear it
     request.session.participant_id = ''
     return dict(next=request.GET.get('next','/intervention/'))
-
-@render_to('intervention/intervention.html')
-def intervention(request, intervention_id):
-    return {'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id),
-            'offlineable' : True}
 
 @render_to('intervention/counselor_landing_page.html')
 @login_required
@@ -157,17 +141,17 @@ def view_counselor(request,counselor_id):
     c = get_object_or_404(User,id=counselor_id)
     return dict(counselor=c,notes=CounselorNote.objects.filter(counselor=c))
 
-@render_to('intervention/ss/intervention.html')
+@render_to('intervention/intervention.html')
 @participant_required
 @login_required
-def ss_intervention(request, intervention_id):
+def intervention(request, intervention_id):
     return dict(intervention=get_object_or_404(Intervention, id=intervention_id),
                 participant=request.participant)
 
-@render_to('intervention/ss/session.html')  
+@render_to('intervention/session.html')  
 @participant_required
 @login_required
-def ss_session(request, session_id):
+def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     participant=request.participant
     ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
@@ -177,7 +161,7 @@ def ss_session(request, session_id):
 
 @participant_required
 @login_required
-def ss_complete_session(request, session_id):
+def complete_session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
 
     if request.method == "POST":
@@ -191,7 +175,7 @@ def ss_complete_session(request, session_id):
 
 @participant_required
 @login_required
-def ss_complete_activity(request, activity_id):
+def complete_activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
 
     if request.method == "POST":
@@ -214,10 +198,10 @@ def ss_complete_activity(request, activity_id):
         return HttpResponseRedirect(activity.get_absolute_url())
 
 
-@render_to('intervention/ss/activity.html')
+@render_to('intervention/activity.html')
 @participant_required
 @login_required
-def ss_activity(request, activity_id):
+def activity(request, activity_id):
     activity=get_object_or_404(Activity, pk=activity_id)
     participant=request.participant
     ps,created = ParticipantSession.objects.get_or_create(session=activity.clientsession,participant=participant)
@@ -228,7 +212,7 @@ def ss_activity(request, activity_id):
 
 @participant_required
 @login_required
-def ss_game(request, game_id, page_id):
+def game(request, game_id, page_id):
     my_game = get_object_or_404(GamePage, pk=game_id)
     if not my_game.activity:
         """ for some reason, the database is littered with GamePage
@@ -245,7 +229,7 @@ def ss_game(request, game_id, page_id):
             return HttpResponse("orphan gamepage. please contact developers if you are seeing this")
 
     my_game.page_id = page_id
-    template,game_context = my_game.ss_template(page_id)
+    template,game_context = my_game.template(page_id)
     variables = []
     for k in my_game.variables(page_id):
         variables.append(dict(key=k,value=request.participant.get_game_var(k)))
@@ -270,54 +254,11 @@ def save_game_state(request):
         return HttpResponse("not ok")
     return HttpResponse("ok")
 
-@render_to('intervention/session.html')  
-def session(request, session_id):
-    session = get_object_or_404(ClientSession, pk=session_id)
-    activities = session.activity_set.all()
-    return {'session' : session, 'activities':activities,
-            'offlineable' : True}
-
-@render_to('intervention/activity.html')
-def activity(request, activity_id):
-    return { 'activity' : get_object_or_404(Activity, pk=activity_id) ,
-             'offlineable' : True}
-
-def game(request, game_name, page_id, game_id=None):
-    my_game = get_object_or_404(GamePage, pk=game_id)
-    if not my_game.activity:
-        """ for some reason, the database is littered with GamePage
-         objects that don't have an activity associated with them 
-         (and are therefore inaccessible normally) and googlebot 
-         occasionally manages to pull them up, generating an exception
-         I don't yet know if it's OK for these orphan gamepages to be in there
-         so I'm hesitant to just delete them. In the meantime,
-         if there is no referer (ie, probably googlebot or similar),
-         we can silently ignore this exception 
-         -Anders
-         """
-        if not request.META.get('HTTP_REFERER',None):
-            return HttpResponse("orphan gamepage. please contact developers if you are seeing this")
-    my_game.page_id = page_id
-    template,game_context = my_game.template(page_id)
-    
-    t = loader.get_template(template)
-    c = RequestContext(request,{
-        'game' :  my_game,
-        'game_context' : game_context,
-        'offlineable' : True,
-    })
-    return HttpResponse(t.render(c))
 
 #####################################
 # BACKUP/RESTORE pages
 #####################################
 
-#no login required.
-@render_to('intervention/counselor_admin.html')
-def smart_data(request):
-    return {'hexkey':settings.FAKE_INTERVENTION_BACKUP_HEXKEY,
-                                'hexiv':settings.FAKE_INTERVENTION_BACKUP_IV
-            }
 
 @permission_required('intervention.add_backup')
 def store_backup(request):

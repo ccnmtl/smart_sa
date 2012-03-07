@@ -20,7 +20,7 @@
 
      {% if activity %}
       <div>
-	<a class="admin_link"  href="/activity{{activity.id}}_overview.html">See client view of activity</a>
+	<a class="admin_link"  href="/activity/{{activity.id}}/">See client view of activity</a>
 	<a class="admin_link"  href="#new" class="jumpnew">Jump to new procedure instructions</a>
 	{% if activity.game %}
 	  <a class="admin_link" href="/intervention_admin/task/{{activity.id}}/">Edit {{activity.game}} Game Instructions</a>	

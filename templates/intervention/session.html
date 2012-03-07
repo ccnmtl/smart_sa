@@ -1,8 +1,8 @@
-{% extends "intervention/offlineable_base.html" %}
+{% extends "base.html" %}
 
 {% block breadcrumbs %}
     {%if session %}
-      <li><a href="intervention{{session.intervention.id}}_intro.html">Session List</a></li>
+      <li><a href="/intervention/{{session.intervention.id}}/">Session List</a></li>
     {%endif%}  
 {% endblock %}
 
@@ -10,18 +10,9 @@
 {% block content %}
     {{ block.super }}
     
-     {% if perms.intervention.add_clientsession %}
-        <div>
-	  <a class="admin_link" href="/intervention_admin/session/{{session.id}}/">Edit session activities</a>
-	  <a class="admin_link" href="/intervention_admin/{{session.intervention.id}}/#session{{session.id}}">Edit session title/overview</a>
-	</div>
-      {% endif %}
-    
-    
-    
     {% if session %}
 
-			<h3 id="session{{session.id}}" class="incomplete sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h3>
+      <h3 id="session{{session.id}}" class="incomplete sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h3>
       {% if session.introductory_copy %}
 	<p class="instructions">{{session.introductory_copy|safe}}</p><hr />
       {% endif %}
@@ -36,14 +27,14 @@
 	<div id="navigator">
 	  <ul class="primary">
         {% for s in session.intervention.clientsession_set.all %}
-	   <li><a id="session{{s.index }}" class="session {% ifequal session.id s.id %}current{% endifequal %}" href="session{{s.id }}_agenda.html">
+	   <li><a id="session{{s.index }}" class="session {% ifequal session.id s.id %}current{% endifequal %}" href="/session/{{s.id }}/">
 	     Session {{forloop.counter}}: {{ s.long_title }}
 	    </a></li>
         {% endfor %}
 	  </ul>
 	  <ul class="secondary">
         {% for activity in activities %}
-	   <li><a id="activity{{activity.index }}" class="activity" href="activity{{activity.id }}_overview.html">
+	   <li><a id="activity{{activity.index }}" class="activity" href="/activity/{{activity.id }}/">
 	     Activity {{forloop.counter}}: {{ activity.short_title }}</a>
 	     {% if activity.game %}<span class="task">+Task</span>{% endif %}
            </li>
@@ -51,30 +42,18 @@
 	  </ul>
 	</div>
 
-	<script type="text/javascript">
-	  if (typeof(Intervention) != 'undefined') {
-	      Intervention.init_session();
-	  }
-	</script>
-
        {% else  %}
          <p>No activities defined for this session.</p>
        {% endif %}
        <br style="clear: both;" />
 <hr />
          <p>
-	   <a id="complete" class="off_right" 
-	      href="intervention{{session.intervention.id}}_intro.html"
-	      onclick="Intervention.complete_session()"
-	      >
-	     Complete Session
-	   </a>
+	   <form action="complete/" method="post">
+	     <input type="submit" value="Complete Session" />
+	   </form>
 	 </p>
      
 <br style="clear: both;" /> 
-       <div id="messaging">
-	 Your wish is my command
-       </div>	
     </div>
 {% else %}
     <p>No session defined.</p>

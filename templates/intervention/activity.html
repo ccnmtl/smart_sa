@@ -1,18 +1,12 @@
-{% extends "intervention/offlineable_base.html" %}
+{% extends "base.html" %}
 {% block js %}
    <script>
      var game_variables = {{activity.variables|safe}};
-
    </script>
 {% endblock %}
 {% block breadcrumbs %}
     {%if activity %}
-      <li><a href="intervention{{activity.clientsession.intervention.id}}_intro.html">Session List</a></li>
-    <!--  <li><a href="session{{activity.clientsession.id}}_agenda"
-	     id="session{{activity.clientsession.id}}"
-	     >
-	Session {{ activity.clientsession.index }} Agenda
-      </a></li>-->
+      <li><a href="/intervention/{{activity.clientsession.intervention.id}}/">Session List</a></li>
     {%endif%}  
 {% endblock %}
 
@@ -20,7 +14,7 @@
     {{ block.super }}
 		<div id="side">
 			<h2 id="sessioninfo" class="incomplete">
-				<a href="session{{activity.clientsession.id}}_agenda.html">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}}</a>
+				<a href="/session/{{activity.clientsession.id}}/">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}}</a>
 			</h2>
 			<div id="nav-side">
 				<ul>
@@ -29,7 +23,7 @@
 {% if forloop.first %}first{% endif %}
 {% if forloop.last %}last{% endif %}
 {% ifequal a.id activity.id %}current{% endifequal %}
-" href="activity{{a.id }}_overview.html">{{a.long_title}}</a>
+" href="/activity/{{a.id }}/">{{a.long_title}}</a>
 {% if a.game %}<span class="task">+Task</span>{% endif %}
 </li>
 {% endfor %}
@@ -39,14 +33,10 @@
 
 		</div>
 		<div id="content">
-          {% if perms.intervention.add_clientsession %}
-        <div>
-	  <a class="admin_link" href="/intervention_admin/activity/{{activity.id}}/">Edit Procedure</a>
-	  <a class="admin_link" href="/intervention_admin/session/{{activity.clientsession.id}}/#activity{{activity.id}}">Edit Activity Title/Overview</a>
-	</div>
-      {% endif %}
 
     {% if activity %}
+    <form action="complete/" method="post">
+
     <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
 
 
@@ -55,14 +45,14 @@
 			<div class="nav-lateral" id="top-nav-lateral">
 			  {% with activity.next as next_activity %}
 			     {% if next_activity %}
-				<a href="activity{{next_activity.id }}_overview.html">Next &rarr;</a> 
+				<a href="/activity/{{next_activity.id }}/">Next &rarr;</a> 
                              {% else %}
 				Next &rarr;
                              {% endif %}
 			  {% endwith %}
 			  {% with activity.prev as prev_activity %}
 				{% if prev_activity %}
-				<a href="activity{{prev_activity.id }}_overview.html">&larr; Previous</a> 
+				<a href="/activity/{{prev_activity.id }}/">&larr; Previous</a> 
 				{% else %}
 				&larr; Previous
 				{% endif %}
@@ -74,21 +64,21 @@
 	{% if activity.pages %}
 	  <p>
 	    {% if not test %}
-	      <a id="tasklink" class="hilite" href="{{relative_root}}.{% url smart_sa.intervention.views.game activity.game,activity.gamepage_set.all.0.id,activity.pages.0 %}">START</a>
+	      <a id="tasklink" class="hilite" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">START</a>
 	      <ul id="all-task-pages">
 		{%for taskpage in activity.gamepage_set.all %}
 		<li><a id="taskpage-{{taskpage.page_name}}" 
-		       href="{{relative_root}}.{% url smart_sa.intervention.views.game activity.game,taskpage.id,taskpage.page_name %}">
+		       href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">
 		  {{taskpage.page_name}}
 		</a></li>
 		{%endfor%}
 	      </ul>
 	    {%else%}
-	      <a id="tasklink" class="hilite" href="{{relative_root}}.{% url smart_sa.intervention.views.game activity.game,activity.pages.0 %}">START</a>
+	      <a id="tasklink" class="hilite" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">START</a>
 	      <ul id="all-task-pages">
 		{%for taskpage in activity.pages %}
 		<li><a id="taskpage-{{taskpage}}" 
-		       href="{{relative_root}}.{% url smart_sa.intervention.views.game activity.game,taskpage %}">
+		       href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">
 		  {{taskpage}}
 		</a></li>
 		{%endfor%}
@@ -98,11 +88,6 @@
 
 	{%endif%}
       {%endif%}
-      <script>
-	if (typeof(Intervention) != 'undefined') {
-	      Intervention.init_activity();
-	}
-      </script>
     {% else %}
       <p>No activity defined.</p>
     {% endif %}
@@ -152,21 +137,16 @@
 
       {% if activity.collect_notes %}
       <h4>Counselor Notes</h4>
-      <textarea name="counselor_notes" rows="5" cols="70" id="counselor-notes"
-		onchange="Intervention.saveCounselorNotes(this.value)"
-		></textarea>
-      <script>Intervention.init_notes()</script>
+      <textarea name="counselor_notes" rows="5" cols="70"
+		id="counselor-notes" >{{counselor_notes}}</textarea>
       {% endif %}
 
 
          <p>
-	   <a id="complete" class="hilite_right" 
-	      href="session{{activity.clientsession.id}}_agenda.html"
-	      onclick="Intervention.complete_activity()"
-	      >
-	     Complete Activity
-	   </a><br style="clear: both;" /> 
+	     <input type="submit" value="Complete Activity" />
+	   <br style="clear: both;" /> 
 	 </p>
+    </form>
 	
 	{% endif %}
  
@@ -174,14 +154,14 @@
 			  <a id="top" href="#pagestart">&uarr; Back to Top</a>
 			  {% with activity.next as next_activity %}
 			     {% if next_activity %}
-				<a href="activity{{next_activity.id }}_overview.html">Next &rarr;</a> 
+				<a href="/activity/{{next_activity.id }}/">Next &rarr;</a> 
                              {% else %}
 				Next &rarr;
                              {% endif %}
 			  {% endwith %}
 			  {% with activity.prev as prev_activity %}
 				{% if prev_activity %}
-				<a href="activity{{prev_activity.id }}_overview.html">&larr; Previous</a> 
+				<a href="/activity/{{prev_activity.id }}/">&larr; Previous</a> 
 				{% else %}
 				&larr; Previous
 				{% endif %}
