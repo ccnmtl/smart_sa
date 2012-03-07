@@ -41,14 +41,10 @@
 			<a class="loginlogout loginlogout-remote" href="{{relative_root}}logout">Logout</a>
 			{% else %}
 			<a href="{{relative_root}}intervention/">Log In</a>
-			<!--
-			<a class="loginlogout loginlogout-remote" href="{{relative_root}}accounts/login/{% ifnotequal request.path "/logout" %}?next={{request.path}}{% endifnotequal %}">Administrative Login</a> | 
-			<a class="loginlogout loginlogout-local" href="{{relative_root}}client_login.html" onclick="Intervention.logout()">Logout</a>
-			-->
 			{% endif %}
 			</li>
 			
-			  <li style="color: #000;">Columbia Univertsity, New York</li>
+			  <li style="color: #000;">Columbia University, New York</li>
 			  
 			</ul>
 			
