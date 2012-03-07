@@ -86,11 +86,6 @@ def set_participant(request):
     request.session.participant_id = ''
     return dict(next=request.GET.get('next','/intervention/'))
 
-@render_to('intervention/intervention.html')
-def intervention(request, intervention_id):
-    return {'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id),
-            'offlineable' : True}
-
 @render_to('intervention/counselor_landing_page.html')
 @login_required
 def counselor_landing_page(request):
@@ -270,54 +265,11 @@ def save_game_state(request):
         return HttpResponse("not ok")
     return HttpResponse("ok")
 
-@render_to('intervention/session.html')  
-def session(request, session_id):
-    session = get_object_or_404(ClientSession, pk=session_id)
-    activities = session.activity_set.all()
-    return {'session' : session, 'activities':activities,
-            'offlineable' : True}
-
-@render_to('intervention/activity.html')
-def activity(request, activity_id):
-    return { 'activity' : get_object_or_404(Activity, pk=activity_id) ,
-             'offlineable' : True}
-
-def game(request, game_name, page_id, game_id=None):
-    my_game = get_object_or_404(GamePage, pk=game_id)
-    if not my_game.activity:
-        """ for some reason, the database is littered with GamePage
-         objects that don't have an activity associated with them 
-         (and are therefore inaccessible normally) and googlebot 
-         occasionally manages to pull them up, generating an exception
-         I don't yet know if it's OK for these orphan gamepages to be in there
-         so I'm hesitant to just delete them. In the meantime,
-         if there is no referer (ie, probably googlebot or similar),
-         we can silently ignore this exception 
-         -Anders
-         """
-        if not request.META.get('HTTP_REFERER',None):
-            return HttpResponse("orphan gamepage. please contact developers if you are seeing this")
-    my_game.page_id = page_id
-    template,game_context = my_game.template(page_id)
-    
-    t = loader.get_template(template)
-    c = RequestContext(request,{
-        'game' :  my_game,
-        'game_context' : game_context,
-        'offlineable' : True,
-    })
-    return HttpResponse(t.render(c))
 
 #####################################
 # BACKUP/RESTORE pages
 #####################################
 
-#no login required.
-@render_to('intervention/counselor_admin.html')
-def smart_data(request):
-    return {'hexkey':settings.FAKE_INTERVENTION_BACKUP_HEXKEY,
-                                'hexiv':settings.FAKE_INTERVENTION_BACKUP_IV
-            }
 
 @permission_required('intervention.add_backup')
 def store_backup(request):
