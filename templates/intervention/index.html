@@ -7,7 +7,6 @@
     
 	<h2>Welcome to Masivukeni!</h2>
 
-	<!--
 	<div id="loginbox">
 	<form method="post" action="/accounts/login/">
 	<table>
@@ -18,7 +17,6 @@
 	</table>
 	</form>
 	</div>
-	-->
 
 {% if user.is_superuser %}
 <p><a href="/intervention_admin/1/">Administer Intervention Content</a></p>
@@ -57,13 +55,14 @@
 	<li><a href="/client_login.html">Begin Intervention</a> (Login Required)</li>
 	</ul>
 	<ul id="home-remote">
-			<li><a href="/intervention_admin/save_backup">Backup and Restore client data</a></li>
+			<!--<li><a href="/intervention_admin/save_backup">Backup and Restore client data</a></li>-->
 			<li><a href="/intervention_admin/1/">Administer Intervention Content</a></li>
 			<li><a href="/site_media/selenium/TestRunner.html">Run Selenium Tests</a></li>
 		</ul>
+       <!--
        <ul id="home-desktop">
 			<li><a href="file://localhost/C:/Documents and Settings/Administrator/My Documents/restore.html">Go to restore.html file in "My Documents" to restore a backup</a></li>
      </ul>
-	
+	-->
 	
 {% endblock %}
