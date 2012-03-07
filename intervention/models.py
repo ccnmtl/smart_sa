@@ -431,6 +431,15 @@ class Participant(models.Model):
         else:
             return r[0].value
 
+    def clear_all_data(self):
+        """ this will mostly be called on the practice participant """
+        self.participantsession_set.all().delete()
+        self.participantactivity_set.all().delete()
+        self.participantgamevar_set.all().delete()
+
+    def is_practice(self):
+        return self.name == "practice"
+
 class ParticipantSession(models.Model):
     participant = models.ForeignKey(Participant)
     session = models.ForeignKey(ClientSession)
@@ -450,3 +459,4 @@ class ParticipantGameVar(models.Model):
     participant = models.ForeignKey(Participant)
     key = models.CharField(max_length=256)
     value = models.TextField(default="",blank=True,null=True)
+

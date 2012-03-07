@@ -6,6 +6,9 @@
     <div id="titlearea"> 
       <h1>Session List</h1>
     </div> 
+    {% if participant.is_practice %}
+    <p class="practice-mode">PRACTICE MODE</p>
+    {% endif %}
     <div id="content-singlecolumn">
         <p class="instructions">Click on a session number to continue
 	  with the intervention for <b>{{participant.name}}</b>.
