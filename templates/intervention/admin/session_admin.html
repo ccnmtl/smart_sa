@@ -5,9 +5,10 @@
 {% endblock %}
 
 
-{% block breadcrumbs %}
+{% block editcontentnav %}
     {%if clientsession %}
       <li><a href="/intervention_admin/{{clientsession.intervention.id}}/">Edit Session List</a></li>
+      <li>|</li>
     {%endif%}  
 {% endblock %}
 

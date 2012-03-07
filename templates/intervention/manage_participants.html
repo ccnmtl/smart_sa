@@ -1,65 +1,66 @@
-{% extends "base.html" %}
-{% block title %}Administrate{% endblock %}
-
-{% block breadcrumb-main %}
-	<div id="breadcrumb-main">
-	<a href="{{relative_root}}intervention/">Home</a> &rarr; Administrate
-	</div>
-{% endblock %}
-{% block content %}
-<h2>Administrate</h2>
-
-<p><b>Participants</b>
-<a href="/manage/add_participant/">+ Add Participant</a></p>
-
-{% if participants %}
-<table width="100%">
-<tr>
-  <th>First Name</th>
-  <th>Status</th>
-  <th>Actions</th>
-</tr>
-{% for participant in participants %}
-<tr>
-<td>{{participant.name}}</td>
-<td>{% if participant.status %}Active{% else %}Inactive{% endif %}</td>
-<td><a href="/manage/participant/{{participant.id}}/view/">view
-    notes</a> |
-<a href="/manage/participant/{{participant.id}}/edit/">edit</a>
+{% extends "base.html" %} {% block title %}Administrate{% endblock %} {% block breadcrumb-main %} 
+<div id="breadcrumb-main">
+	<a href="{{relative_root}}intervention/">Home</a> &rarr; Administrate 
+</div>
+{% endblock %} {% block content %} 
+<h2>
+	Administrate
+</h2>
+<h3>
+	Participants
+</h3>
+{% if participants %} 
+<table class="manage" cellspacing="0">
+	<col id="firstname" /> <col id="status" /> <col id="actions" /> 
+	<tr>
+	<td colspan="3">
+<a class="action" href="/manage/add_participant/">+ Add Participant</a>	
 </td>
-</tr>
-{% endfor %}
+	</tr>
+	<tr>
+		<th>First Name</th>
+		<th>Status</th>
+		<th>Actions</th>
+	</tr>
+	{% for participant in participants %} 
+	<tr>
+		<td>{{participant.name}}</td>
+		<td>{% if participant.status %}Active{% else %}Inactive{% endif %}</td>
+		<td> <a class="action" href="/manage/participant/{{participant.id}}/view/">View Notes</a> <a class="action" href="/manage/participant/{{participant.id}}/edit/">Edit</a> </td>
+	</tr>
+	{% endfor %} 
 </table>
-{% else %}
-<p>no participants</p>
-{% endif %}
-
-
-<p><b>Counselors</b>
-<a href="/admin/auth/user/add/">+ Add Counselor</a></p>
-
-{% if counselors %}
-<table width="100%">
-<tr>
-  <th>First Name</th>
-  <th>Status</th>
-  <th>Actions</th>
-</tr>
-{% for counselor in counselors %}
-<tr>
-<td>{{counselor.username}}</td>
-<td>{% if counselor.is_active %}Active{% else %}Inactive{% endif %}</td>
-<td><a href="/manage/counselor/{{counselor.id}}/view/">view
-    notes</a> |
-<a href="/admin/auth/user/{{counselor.id}}/">edit</a>
-</td>
-</tr>
-{% endfor %}
+{% else %} 
+<p>
+	no participants
+</p>
+{% endif %} 
+<h3>
+	Counselors 
+</h3>
+{% if counselors %} 
+<table class="manage" cellspacing="0">
+	<col id="firstname" /> <col id="status" /> <col id="actions" /> 
+	<tr>
+	<td colspan="3">
+	<a class="action" href="/admin/auth/user/add/">+ Add a Counselor</a>	
+	</td>
+	</tr>
+	<tr>
+		<th>First Name</th>
+		<th>Status</th>
+		<th>Actions</th>
+	</tr>
+	{% for counselor in counselors %} 
+	<tr>
+		<td>{{counselor.username}}</td>
+		<td>{% if counselor.is_active %}Active{% else %}Inactive{% endif %}</td>
+		<td><a class="action" href="/manage/counselor/{{counselor.id}}/view/">View Notes</a> <a class="action" href="/admin/auth/user/{{counselor.id}}/">Edit</a> </td>
+	</tr>
+	{% endfor %} 
 </table>
-{% else %}
-<p>no counselors</p>
-{% endif %}
-
-
-
-{% endblock %}
+{% else %} 
+<p>
+	no counselors
+</p>
+{% endif %} {% endblock %} 

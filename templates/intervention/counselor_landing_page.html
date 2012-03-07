@@ -10,17 +10,18 @@
 
 {% block content %}
       <h2>
-	Hello, <span id="user_fullname">{{request.user.username}}!</span>
+	<span id="user_fullname">{{request.user.username}}'s Home Page</span>
       </h2>
       
       <div align="center">
+      
 	  <table id="choices">
 	    <col id="buttons" />
 	    <col id="text" />
 		
 	    <tr>
 	      <td>
-		<a href="{{intervention.get_absolute_url}}">Intervene</a>
+		<a class="action" href="{{intervention.get_absolute_url}}">Intervene</a>
 	      </td>
 	      <td>
 		Counselors and administrators can counsel participants.
@@ -29,7 +30,7 @@
 		
 	    <tr>
 	      <td>
-		<a href="{{intervention.get_absolute_url}}?mode=practice">Intervene (Practice)</a>
+		<a class="action" href="{{intervention.get_absolute_url}}?mode=practice">Intervene (Practice)</a>
 	      </td>
 	      <td class="disabled">
 		Counselors and administrators can practice their counselling skills.
@@ -39,7 +40,7 @@
 {% if request.user.is_superuser %}		
 	    <tr>
 	      <td>
-		<a href="/manage/">Administrate</a>
+		<a class="action" href="/manage/">Administrate</a>
 	      </td>
 	      <td class="disabled">
 		Counselors and administrators can manage participant information.
@@ -48,7 +49,7 @@
 
 	    <tr>
 	      <td>
-		<a href="">Upload</a>
+		<a class="action" href="">Upload</a>
 	      </td>
 	      <td class="disabled">
 		Administrators can send data.
@@ -57,7 +58,7 @@
 		
 	    <tr>
 	      <td>
-		<a href="">Report</a>
+		<a class="action" href="">Report</a>
 	      </td>
 	      <td class="disabled">
 		Administrators can create reports.
@@ -66,5 +67,6 @@
 {% endif %}		
 		
 	  </table>
+	  
       </div>
 {% endblock %}
