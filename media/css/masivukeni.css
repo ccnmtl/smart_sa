@@ -831,3 +831,7 @@ body.logged-in #home-remote
   width: 510px; 
 
  }
+.practice-mode {
+background-color: #00cc00;
+color: white;
+}

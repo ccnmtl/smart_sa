@@ -75,6 +75,13 @@ def set_participant(request):
     request.session.participant_id = ''
     return dict(next=request.GET.get('next','/intervention/'))
 
+@login_required
+def start_practice_mode(request,intervention_id):
+    p,created = Participant.objects.get_or_create(name='practice')
+    p.clear_all_data()
+    request.session['participant_id'] = p.id
+    return HttpResponseRedirect("/intervention/%d/" % int(intervention_id))
+
 @render_to('intervention/counselor_landing_page.html')
 @login_required
 def counselor_landing_page(request):
@@ -238,6 +245,7 @@ def game(request, game_id, page_id):
         'game' :  my_game,
         'game_context' : game_context,
         'game_variables' : variables,
+        'participant' : request.participant,
     })
     return HttpResponse(t.render(c))
 

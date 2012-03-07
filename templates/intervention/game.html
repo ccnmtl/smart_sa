@@ -36,7 +36,12 @@
         </div> 
         
    <div id="content-right" class="game" >
+    {% if participant.is_practice %}
+    <p class="practice-mode">PRACTICE MODE</p>
+    {% endif %}
+
      <h2>Client Task: Part {{game.index}}/{{game.activity.pages|length}}</h2>
+
      <div class="game_instructions">
        {{game.instructions|safe}}
      </div>

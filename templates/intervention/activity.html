@@ -41,6 +41,9 @@
 
 
       <h3 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h3>
+    {% if participant.is_practice %}
+    <p class="practice-mode">PRACTICE MODE</p>
+    {% endif %}
 
 			<div class="nav-lateral" id="top-nav-lateral">
 			  {% with activity.next as next_activity %}
