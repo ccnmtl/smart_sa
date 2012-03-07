@@ -38,13 +38,6 @@ class InstalledGamesLazySingleton:
 
     def template(self,game_code,page_id):
         return self.GAME_OBJECTS[game_code].template(page_id)
-
-    def ss_template(self,game_code,page_id):
-        # temporary hack to support parallel client/server-side implementations
-        if hasattr(self.GAME_OBJECTS[game_code],'ss_template'):
-            return self.GAME_OBJECTS[game_code].ss_template(page_id)
-        else:
-            return self.GAME_OBJECTS[game_code].template(page_id)
         
     def variables(self,game_code,page_id=None):
         return self.GAME_OBJECTS[game_code].variables(page_id)

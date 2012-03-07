@@ -39,12 +39,12 @@ urlpatterns = patterns('',
 
         (r'^manage/counselor/(?P<counselor_id>\d+)/view/$','smart_sa.intervention.views.view_counselor'),                       
 
-        (r'^intervention/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.ss_intervention'),
-        (r'^session/(?P<session_id>\d+)/$','smart_sa.intervention.views.ss_session'),
-        (r'^session/(?P<session_id>\d+)/complete/$','smart_sa.intervention.views.ss_complete_session'),
-        (r'^activity/(?P<activity_id>\d+)/$','smart_sa.intervention.views.ss_activity'),
-        (r'^activity/(?P<activity_id>\d+)/complete/$','smart_sa.intervention.views.ss_complete_activity'),
-        (r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$', 'smart_sa.intervention.views.ss_game'),
+        (r'^intervention/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.intervention'),
+        (r'^session/(?P<session_id>\d+)/$','smart_sa.intervention.views.session'),
+        (r'^session/(?P<session_id>\d+)/complete/$','smart_sa.intervention.views.complete_session'),
+        (r'^activity/(?P<activity_id>\d+)/$','smart_sa.intervention.views.activity'),
+        (r'^activity/(?P<activity_id>\d+)/complete/$','smart_sa.intervention.views.complete_activity'),
+        (r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$', 'smart_sa.intervention.views.game'),
         (r'^save_game_state/$','smart_sa.intervention.views.save_game_state'),                       
 
         (r'^help/backup.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),

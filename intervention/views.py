@@ -152,17 +152,17 @@ def view_counselor(request,counselor_id):
     c = get_object_or_404(User,id=counselor_id)
     return dict(counselor=c,notes=CounselorNote.objects.filter(counselor=c))
 
-@render_to('intervention/ss/intervention.html')
+@render_to('intervention/intervention.html')
 @participant_required
 @login_required
-def ss_intervention(request, intervention_id):
+def intervention(request, intervention_id):
     return dict(intervention=get_object_or_404(Intervention, id=intervention_id),
                 participant=request.participant)
 
-@render_to('intervention/ss/session.html')  
+@render_to('intervention/session.html')  
 @participant_required
 @login_required
-def ss_session(request, session_id):
+def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     participant=request.participant
     ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
@@ -172,7 +172,7 @@ def ss_session(request, session_id):
 
 @participant_required
 @login_required
-def ss_complete_session(request, session_id):
+def complete_session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
 
     if request.method == "POST":
@@ -186,7 +186,7 @@ def ss_complete_session(request, session_id):
 
 @participant_required
 @login_required
-def ss_complete_activity(request, activity_id):
+def complete_activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
 
     if request.method == "POST":
@@ -209,10 +209,10 @@ def ss_complete_activity(request, activity_id):
         return HttpResponseRedirect(activity.get_absolute_url())
 
 
-@render_to('intervention/ss/activity.html')
+@render_to('intervention/activity.html')
 @participant_required
 @login_required
-def ss_activity(request, activity_id):
+def activity(request, activity_id):
     activity=get_object_or_404(Activity, pk=activity_id)
     participant=request.participant
     ps,created = ParticipantSession.objects.get_or_create(session=activity.clientsession,participant=participant)
@@ -223,7 +223,7 @@ def ss_activity(request, activity_id):
 
 @participant_required
 @login_required
-def ss_game(request, game_id, page_id):
+def game(request, game_id, page_id):
     my_game = get_object_or_404(GamePage, pk=game_id)
     if not my_game.activity:
         """ for some reason, the database is littered with GamePage
@@ -240,7 +240,7 @@ def ss_game(request, game_id, page_id):
             return HttpResponse("orphan gamepage. please contact developers if you are seeing this")
 
     my_game.page_id = page_id
-    template,game_context = my_game.ss_template(page_id)
+    template,game_context = my_game.template(page_id)
     variables = []
     for k in my_game.variables(page_id):
         variables.append(dict(key=k,value=request.participant.get_game_var(k)))
