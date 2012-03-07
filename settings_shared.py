@@ -38,7 +38,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
 )
-APPEND_SLASH = False
+APPEND_SLASH = True
 
 #generate these most easily by going to:
 #http://www.josh-davis.org/ecmaScrypt
@@ -117,7 +117,6 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
                                "django.core.context_processors.media",
                                #non-default:
                                "django.core.context_processors.request",
-                               "intervention.views.relative_root",
                                )
 
 PROD_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/"

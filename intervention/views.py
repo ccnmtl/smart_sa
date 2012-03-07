@@ -25,17 +25,6 @@ ENCRYPTION_ARGS = [AESModeOfOperation.modeOfOperation["OFB"], #mode
                    toNumbers(settings.INTERVENTION_BACKUP_IV)
                    ]
 
-#CUSTOM CONTEXT PROCESSOR
-#see/set TEMPLATE_CONTEXT_PROCESSORS in settings_shared.py
-#also note that we need RequestContext instead of the usual Context
-def relative_root(request):
-    """returns a string like '../../../' to get back to the root level"""
-    from_top = request.path.count('/')-1
-    relative_root_path = '../' * from_top
-    return {'relative_root':relative_root_path,
-            'INTERVENTION_MEDIA': relative_root_path + 'site_media/'
-            }
-
 #VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
     t = loader.get_template(template_name)

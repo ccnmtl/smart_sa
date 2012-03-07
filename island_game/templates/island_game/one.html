@@ -1,10 +1,10 @@
 {% extends "intervention/game.html" %}
 
 {% block game_js %}
-          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/MochiKit.js"></script> 
-          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/DragAndDrop.js"></script> 
-          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}island_game/js/slider.js"></script> 
-          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}island_game/js/island_one.js"></script> 
+          <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script> 
+          <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/DragAndDrop.js"></script> 
+          <script type="text/javascript" src="/site_media/island_game/js/slider.js"></script> 
+          <script type="text/javascript" src="/site_media/island_game/js/island_one.js"></script> 
 		<style type="text/css">
 			@media print 
 			{ 
@@ -23,7 +23,7 @@
 		
 		<!-- Move the sky, everything else in the picture moves along with it, as it's defined as the "background" of the sliders on this page. -->
 		
-		<img src="{{INTERVENTION_MEDIA}}island_game/images/backround_part1.jpg" id="sky" />
+		<img src="/site_media/island_game/images/backround_part1.jpg" id="sky" />
         
 		<p style="font-size: 10px;left:50px; top:-5px;position:absolute;z-index:1;color:#444">
 			oi
@@ -41,7 +41,7 @@
 			BEFORE GOING ON ARVS
 		</p>
           
-		<div id="media-base" data-image-base="{{INTERVENTION_MEDIA}}island_game/"></div>
+		<div id="media-base" data-image-base="/site_media/island_game/"></div>
 		
 		<!-- ISLAND -->
 		<span
@@ -53,7 +53,7 @@
 			start_offset_x="0" start_offset_y="237"
 			end_offset_x="0" end_offset_y="0"
 			min_value = "0" max_value = "10" starting_value = "10"
-			moving_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/island_part1.png"
+			moving_image_path   = "/site_media/island_game/images/island_part1.png"
 			draggable_by_user = "false";
 		/>
 		
@@ -72,7 +72,7 @@
 			end_offset_x="0" end_offset_y="131"
 			min_value = "0" max_value = "10" starting_value = "0"
 			draggable_by_user = "false";
-			moving_image_path  = "{{INTERVENTION_MEDIA}}island_game/images/water.png" 
+			moving_image_path  = "/site_media/island_game/images/water.png" 
 		/>
 		
 		<!-- THREE SLIDERS: -->
@@ -85,8 +85,8 @@
 			start_offset_x="50" start_offset_y="120"
 			end_offset_x="50" end_offset_y="20"
 			min_value = "0" max_value = "10" starting_value = "0"
-			fixed_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/slider_bar.png"
-			moving_image_path  = "{{INTERVENTION_MEDIA}}island_game/images/slider_handle.png"
+			fixed_image_path   = "/site_media/island_game/images/slider_bar.png"
+			moving_image_path  = "/site_media/island_game/images/slider_handle.png"
 		/>
 		
 		<span
@@ -98,8 +98,8 @@
 			start_offset_x="100" start_offset_y="120"
 			end_offset_x="100" end_offset_y="20"
 			min_value = "0" max_value = "10" starting_value = "0"
-			fixed_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/slider_bar.png"
-			moving_image_path  = "{{INTERVENTION_MEDIA}}island_game/images/slider_handle.png"
+			fixed_image_path   = "/site_media/island_game/images/slider_bar.png"
+			moving_image_path  = "/site_media/island_game/images/slider_handle.png"
 		/>
 		
 		<span
@@ -111,8 +111,8 @@
 			start_offset_x="445" start_offset_y="120"
 			end_offset_x="445" end_offset_y="20"
 			min_value = "0" max_value = "10" starting_value = "10"
-			fixed_image_path   = "{{INTERVENTION_MEDIA}}island_game/images/slider_bar.png"
-			moving_image_path  = "{{INTERVENTION_MEDIA}}island_game/images/slider_handle.png"
+			fixed_image_path   = "/site_media/island_game/images/slider_bar.png"
+			moving_image_path  = "/site_media/island_game/images/slider_handle.png"
 		/>
         
 	</div>
