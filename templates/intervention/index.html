@@ -19,6 +19,10 @@
 	</form>
 	</div>
 	-->
+
+{% if user.is_superuser %}
+<p><a href="/intervention_admin/1/">Administer Intervention Content</a></p>
+{% endif %}
 	
  	<div style="float: right; margin-left: 30px;">
  	<object width="480" height="385"><param name="movie" value="http://www.youtube.com/v/MOGlicrnko0?hl=en_US&fs=1&"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/MOGlicrnko0?hl=en_US&fs=1&" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="385"></embed></object>
