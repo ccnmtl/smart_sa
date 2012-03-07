@@ -30,6 +30,7 @@ urlpatterns = patterns('',
 
 
         (r'^set_participant/$','smart_sa.intervention.views.set_participant'),
+        (r'^set_deployment/$','smart_sa.intervention.views.set_deployment'),
         (r'^intervention/$','smart_sa.intervention.views.counselor_landing_page'),
         (r'^manage/$','smart_sa.intervention.views.manage_participants'),
         (r'^manage/add_participant/$','smart_sa.intervention.views.add_participant'),

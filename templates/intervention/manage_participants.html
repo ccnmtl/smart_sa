@@ -15,6 +15,14 @@
 <h3>
 	Participants
 </h3>
+
+<form action="/set_deployment/" method="post">
+<p>Location Name: <input type="text" name="name"
+		      value="{{deployment.name}}" />
+<input type="submit" value="save" /></p>
+</form>
+
+
 {% if participants %} 
 <table class="manage" cellspacing="0">
 	<col id="firstname" /> <col id="status" /> <col id="actions" /> 

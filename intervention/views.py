@@ -83,6 +83,14 @@ def set_participant(request):
     return dict(next=request.GET.get('next','/intervention/'))
 
 @login_required
+def set_deployment(request):
+    if request.POST:
+        d = Deployment.objects.all()[0]
+        d.name = request.POST.get('name','Clinic')
+        d.save()
+    return HttpResponseRedirect("/manage/")
+
+@login_required
 def start_practice_mode(request,intervention_id):
     p,created = Participant.objects.get_or_create(name='practice')
     p.clear_all_data()
