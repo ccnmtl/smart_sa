@@ -69,10 +69,10 @@
         M.DOM.toggleElementClass("on", elt);
         M.DOM.toggleElementClass("off", elt);
         
-        var elt = M.DOM.getElement('toggle-disclosure-selection');
+        elt = M.DOM.getElement('toggle-disclosure-selection');
         M.DOM.removeElementClass(elt, "on");
         M.DOM.addElementClass(elt, "off");
-    }
+    };
     
     SSNMTree.prototype.toggleDisclosureSelection = function() {
         var self = this;
@@ -82,10 +82,10 @@
         M.DOM.toggleElementClass("on", elt);
         M.DOM.toggleElementClass("off", elt);
         
-        var elt = M.DOM.getElement('toggle-support-selection');
+        elt = M.DOM.getElement('toggle-support-selection');
         M.DOM.removeElementClass(elt, "on");
         M.DOM.addElementClass(elt, "off");
-    }
+    };
     
     SSNMTree.prototype.showDisclosure = function (evt) {
         var self = this;

@@ -1,7 +1,15 @@
 {% extends "intervention/game.html" %}
 
 {% block game_js %}
-    <script type="text/javascript" src="{{INTERVENTION_MEDIA}}ssnmtree_game/js/ssnmtree.js"></script> 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type="text/javascript" src="/site_media/js/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="/site_media/js/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="{{INTERVENTION_MEDIA}}ssnmtree_game/js/ssnmtreeview.js"></script>
+    
+    {% comment %}
+    <script type="text/javascript" src="{{INTERVENTION_MEDIA}}ssnmtree_game/js/ssnmtree.js"></script>
+    {% endcomment %}
 {% endblock %}
 {% block game_css %}
     <link href="{{INTERVENTION_MEDIA}}ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
@@ -24,7 +32,7 @@
             <!-- LEFT corner ups -->
             <div id="top1-fruit" class="fruit leftup">
 	            <input type="text" value="" />
-	            <div class="circle"></div>	 
+	            <div id="top1-fruit-circle" class="circle"></div>	 
 	            <div class="ripe"></div>
             </div>
             <div id="middle2-fruit" class="fruit leftup">
@@ -74,9 +82,9 @@
     	        <div class="circle"></div>	 
                 <div class="ripe"></div>
             </div>
-            
+        </div>
+        <div id="fruittree-toggles">
             <div id="toggle-support-selection" class="toggle-button off">+/-<br />Practical<br/>Support</div>
-            
             <div id="toggle-disclosure-selection" class="toggle-button off">+/-<br />Aware<br />of Status</div>
         </div>
     </div>
