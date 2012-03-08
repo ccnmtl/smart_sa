@@ -14,5 +14,5 @@ def access_url(step, url):
 
 @step(r'I see the header "(.*)"')
 def see_header(step, text):
-    header = world.dom.cssselect('h1')[0]
+    header = world.dom.cssselect('h2')[0]
     assert header.text.strip() == text.strip()
