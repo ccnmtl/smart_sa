@@ -50,12 +50,10 @@
 		<!--
 		{% else %}
 		<a class="loginlogout loginlogout-remote" href="http://{{request.get_host}}/accounts/windlogin/?next={{ next }}">Administrative Login</a>
-		{% endif %}
 		-->
 		</li>
-		
-		<li>|</li>
-		
+		<li>|>/li>
+		{% endif %}
 		<li><span ID="deployment">{{deployment.name}}</span></li>
 		
 		</ul>
@@ -69,7 +67,7 @@
 	{% block breadcrumb-session %}{% endblock %}
   	
     <div id="contentcontainer">
-      {% block content %}{% endblock %}
+	{% block content %}{% endblock %}
     </div>
 
     <div id="footer">
