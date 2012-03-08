@@ -15,19 +15,8 @@ urlpatterns = patterns('',
 
         (r'^smart_sa$', 'smart_sa.intervention.views.no_vars', {'template_name': 'intervention/index.html'}),
 
-        ########
-        # PUBLIC CLIENT VIEW
-        # goals for static delivery require:
-        # 1. no content at a directory 'root' i.e. urls that end in a '/'
-        # 2. no name with the same as a directory
-        # 3. windoze file-friendly names (e.g. no ';'s or other weird chars)
-        ########
-
         (r'^home.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
         (r'^index.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
-        (r'^client_login.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login.html'}),
-        (r'^client_login_confirm.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login_confirm.html'}),# login confirmation, p.2
-
 
         (r'^set_participant/$','smart_sa.intervention.views.set_participant'),
         (r'^set_deployment/$','smart_sa.intervention.views.set_deployment'),

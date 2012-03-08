@@ -31,14 +31,13 @@
 			<ul>
 			{% block editcontentnav %}{% endblock %}
 			<li>
-			<span id="logged-in-prefix">Logged in as:</span>
+			{% if user.is_authenticated %}<span id="logged-in-prefix">Logged in as:</span>{% endif %}
 			<span id="username" {% if user.is_authenticated %} class="logged_in" {% endif %}>
 			{% if user.is_authenticated %}{{user}} &rarr;{% endif %}</span> 
 			{% if user.is_authenticated %}
-			<a class="loginlogout loginlogout-remote" href="{{relative_root}}logout">Log Out</a>
+			<a class="loginlogout loginlogout-remote" href="/accounts/logout/">Log Out</a>
 			{% else %}
-			<a class="loginlogout loginlogout-remote" href="{{relative_root}}accounts/login/{% ifnotequal request.path "/logout" %}?next={{request.path}}{% endifnotequal %}">Administrative Login</a>
-			<a class="loginlogout loginlogout-local" href="{{relative_root}}client_login.html" onclick="Intervention.logout()">Log Out</a>
+			<a class="loginlogout loginlogout-remote" href="/intervention/">Administrative Login</a>
 			{% endif %}
 			</li>
 			<li>|</li>
