@@ -32,9 +32,11 @@
 	<div id="navigator">
 	  <ul class="primary">
         {% for s in session.intervention.clientsession_set.all %}
+	{% if not s.defaulter or participant.defaulter %}
 	   <li><a id="session{{s.index }}" class="session {% ifequal session.id s.id %}current{% endifequal %}" href="/session/{{s.id }}/">
 	     Session {{forloop.counter}}: {{ s.long_title }}
 	    </a></li>
+	{% endif %}
         {% endfor %}
 	  </ul>
 	  <ul class="secondary">

@@ -47,6 +47,7 @@ class Intervention(models.Model):
                 short_title=c['short_title'],
                 long_title=c['long_title'],
                 introductory_copy=c['introductory_copy'],
+                defaulter=c.get('defaulter',False),
                 created=c['created'],
                 modified=c['modified'],
                 )
@@ -61,6 +62,8 @@ class ClientSession (models.Model):
     introductory_copy = models.TextField(blank=True)
     created = models.DateTimeField('date created', auto_now_add=True)
     modified = models.DateTimeField('date modified', auto_now=True)
+
+    defaulter = models.BooleanField('only show to defaulters',default=False)
 
     class Meta:
         order_with_respect_to = 'intervention'
@@ -85,6 +88,7 @@ class ClientSession (models.Model):
             introductory_copy=self.introductory_copy,
             created=str(self.created),
             modified=str(self.modified),
+            defaulters=self.defaulter,
             activities=[a.as_dict() for a in self.activity_set.all()],
             )
 
@@ -94,6 +98,7 @@ class ClientSession (models.Model):
         self.introductory_copy=d['introductory_copy']
         self.created = d['created']
         self.modified = d['modified']
+        self.defaulter = d.get('defaulter',False)
         self.save()
         self.activity_set.all().delete()
         for a in d['activities']:
