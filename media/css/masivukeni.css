@@ -8,6 +8,60 @@ body
 	font-family: "lucida sans unicode", "lucida grande", sans-serif;
 }
 
+#deployment {color: #000;}
+
+p, ul 
+{
+font-size: 14px !important;
+}
+
+#home-widgets { float: right; width: 320px; text-align: center;}
+#home-copy {margin-right: 340px;}
+
+#home-widgets img {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+form.login {
+    background-color: #b3dcbf;
+    border: 1px solid #4ba257;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+    padding: 10px 20px 20px 20px;
+    width: 280px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+
+form.login label {
+    width: 90px;
+    display: block;
+    float: left;
+    text-align: right;
+    color: #000;
+}
+
+form.login .formrow {
+    margin-top: 10px;
+}
+
+form.login .formtitle {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+form.cu {
+    background-color: #9ec3de;
+    border: 1px solid #7494c4;
+}
+
 #container
 {
 	position: absolute;
@@ -75,7 +129,7 @@ h4
 	list-style-type: none;
 	padding: 0px;
 	margin: 0px;
-	font-size: 12px;
+	font-size: 12px !important;
 	font-weight: bold;
 }
 
@@ -398,6 +452,7 @@ a.action:hover { background-color: #4ba257; }
 
 #footer
 {
+	clear: both;
 	text-align: center;
 	font-weight: bold;
 	font-size: 11px;
