@@ -1,5 +1,5 @@
 from lettuce.django import django_url
-from lettuce import before, after, world
+from lettuce import before, after, world, step
 
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -13,3 +13,6 @@ def setup_browser():
 def teardown_browser(total):
     world.browser.quit()
  
+@step(r'I access the url "(.*)"')
+def access_url(step, url):
+    world.browser.get(django_url(url))
