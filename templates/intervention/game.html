@@ -15,22 +15,12 @@
 {% block css %}
    <!-- Delegate to the particular game extra CSS it needs -->
    {% block game_css %}{% endblock %}
+   <link href="{{relative_root}}site_media/css/masivukeni.deprecated.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block breadcrumbs %}
     {%if game %}
       <li><a href="{{relative_root}}intervention{{game.activity.clientsession.intervention.id}}_intro.html">Session List</a></li>
-     <!-- <li><a href="{{relative_root}}session{{game.activity.clientsession.id}}_agenda"
-	     id="session{{game.activity.clientsession.id}}"
-	     >
-	Session {{ game.activity.clientsession.index }} Agenda
-      </a></li>
-      <li><a href="{{relative_root}}activity{{game.activity.id}}_overview"
-	     class="parentactivity activitytitle"
-	     id="activity{{game.activity.id}}"
-	     >
-	Activity {{ game.activity.index }}: {{ game.activity }}
-      </a></li>-->
     {%endif%}  
 {% endblock %}
 
