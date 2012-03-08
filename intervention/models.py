@@ -114,6 +114,13 @@ class ClientSession (models.Model):
                 )
             na.from_dict(a)
 
+    def get_participant_status(self,participant):
+        r = self.participantsession_set.filter(participant=participant)
+        if r.count() == 1:
+            return r[0].status
+        else:
+            return ""
+
 class Activity(models.Model):
     """Contains one or more pairs of instructions, and zero or one game.
     This can comprise multiple pairs.
@@ -242,6 +249,13 @@ class Activity(models.Model):
                 modified=i['modified'],
                 )
             ni.from_dict(i)
+
+    def get_participant_status(self,participant):
+        r = self.participantactivity_set.filter(participant=participant)
+        if r.count() == 1:
+            return r[0].status
+        else:
+            return ""
 
 class GamePage (models.Model):
     """A javascript 'game' associated with an activity."""

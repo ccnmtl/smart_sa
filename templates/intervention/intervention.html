@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load participant_status %}
 
 {% block content %}
     {{ block.super }}
@@ -19,7 +20,7 @@
         {% for session in intervention.clientsession_set.all %}
 	{% if not session.defaulter or participant.defaulter %}
 	   <li><a id="session{{session.index }}" 
-		  class="session" 
+		  class="session {% get_participant_status participant session %}" 
 		  href="/session/{{session.id}}/">
 	     Session {{forloop.counter}}: {{ session.long_title }}
 	    </a></li>

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load participant_status %}
 
 {% block breadcrumbs %}
     {%if session %}
@@ -12,7 +13,7 @@
     
     {% if session %}
 
-      <h3 id="session{{session.id}}" class="incomplete sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h3>
+      <h3 id="session{{session.id}}" class="{% get_participant_status participant session %} sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h3>
 
     {% if participant.is_practice %}
     <p class="practice-mode">PRACTICE MODE</p>
@@ -33,7 +34,7 @@
 	  <ul class="primary">
         {% for s in session.intervention.clientsession_set.all %}
 	{% if not s.defaulter or participant.defaulter %}
-	   <li><a id="session{{s.index }}" class="session {% ifequal session.id s.id %}current{% endifequal %}" href="/session/{{s.id }}/">
+	   <li><a id="session{{s.index }}" class="session {% get_participant_status participant s %} {% ifequal session.id s.id %}current{% endifequal %}" href="/session/{{s.id }}/">
 	     Session {{forloop.counter}}: {{ s.long_title }}
 	    </a></li>
 	{% endif %}
@@ -41,7 +42,7 @@
 	  </ul>
 	  <ul class="secondary">
         {% for activity in activities %}
-	   <li><a id="activity{{activity.index }}" class="activity" href="/activity/{{activity.id }}/">
+	   <li><a id="activity{{activity.index }}" class="activity {% get_participant_status participant activity %}" href="/activity/{{activity.id }}/">
 	     Activity {{forloop.counter}}: {{ activity.short_title }}</a>
 	     {% if activity.game %}<span class="task">+Task</span>{% endif %}
            </li>
