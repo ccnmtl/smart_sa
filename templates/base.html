@@ -5,13 +5,13 @@
 
 <head>
 
-  <title>Masivukeni: {% block title %}{% endblock %}</title>
+	<title>Masivukeni: {% block title %}{% endblock %}</title>
   
-  <link href="/site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
+	<link href="/site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
   
-  {% block css %}{% endblock %}
-  {% block js %}{% endblock %}
-  {% block feeds %}{% endblock %}
+	{% block css %}{% endblock %}
+	{% block js %}{% endblock %}
+	{% block feeds %}{% endblock %}
   
 </head>
 
@@ -24,33 +24,46 @@
 	<div id="header">
 	
 		<h1>
-			<a href="/" id="masivukeni-home">Masivukeni</a> 
+		{% if user.is_authenticated %}
+		<a href="/intervention/" id="masivukeni-home">Masivukeni</a> 
+		{% else %}
+		<a href="/" id="masivukeni-home">Masivukeni</a> 
+		{% endif %}
 		</h1>
 		
 		<div id="nav-header">
-			<ul>
-			{% block editcontentnav %}{% endblock %}
-			<li>
-			<span id="logged-in-prefix">Logged in as:</span>
-			<span id="username" {% if user.is_authenticated %} class="logged_in" {% endif %}>
-			{% if user.is_authenticated %}{{user}} &rarr;{% endif %}</span> 
-			{% if user.is_authenticated %}
-			<a class="loginlogout loginlogout-remote" href="{{relative_root}}logout">Log Out</a>
-			{% else %}
-			<a class="loginlogout loginlogout-remote" href="{{relative_root}}accounts/login/{% ifnotequal request.path "/logout" %}?next={{request.path}}{% endifnotequal %}">Administrative Login</a>
-			<a class="loginlogout loginlogout-local" href="{{relative_root}}client_login.html" onclick="Intervention.logout()">Log Out</a>
-			{% endif %}
-			</li>
-			<li>|</li>
-			<li><span style="color: #000;">{{deployment.name}}</span></li>
-			</ul>
+		
+		<ul>
+		
+		{% block editcontentnav %}{% endblock %}
+		
+		<li>
+		{% if user.is_authenticated %}
+		<span id="logged-in-prefix">Logged in as:</span>
+		{% endif %}
+		<span id="username" {% if user.is_authenticated %} class="logged_in" {% endif %}>
+		{% if user.is_authenticated %}{{user}} &rarr;{% endif %}
+		</span> 
+		{% if user.is_authenticated %}
+		<a class="loginlogout loginlogout-remote" href="/accounts/logout/">Log Out</a>
+		{% else %}
+		<a class="loginlogout loginlogout-remote" href="/intervention/">Administrative Login</a>
+		{% endif %}
+		</li>
+		
+		<li>|</li>
+		
+		<li><span ID="deployment">{{deployment.name}}</span></li>
+		
+		</ul>
+		
 		</div>
 		
 	</div>
 
-		  {% block breadcrumb-main %}{% endblock %}
-
-		  {% block breadcrumb-session %}{% endblock %}
+	{% block breadcrumb-main %}{% endblock %}
+	
+	{% block breadcrumb-session %}{% endblock %}
   	
     <div id="contentcontainer">
       {% block content %}{% endblock %}
@@ -61,8 +74,9 @@
 		<a href="/credits/">Credits</a> | 
 		<a href="mailto:ccnmtl-masivukeni@columbia.edu">Contact</a>
 		{% block footer %}{% endblock %}
-    </div>
+	</div>
 
   </div>
+  
 </body>
 </html>
