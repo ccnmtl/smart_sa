@@ -25,8 +25,10 @@
 {% if ps.counselornote_set.count %}
 <ul>
 {% for n in ps.counselornote_set.all %}
+{% if n.notes %}
 <li><b>Note from {{n.counselor.username}}</b><br />
 {{n.notes}}</li>
+{% endif %}
 {% endfor %}
 </ul>
 {% endif %}
