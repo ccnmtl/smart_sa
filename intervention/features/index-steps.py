@@ -2,17 +2,13 @@ from lettuce import *
 from lxml import html
 from django.test.client import Client
 from nose.tools import assert_equals
-
-@before.all
-def set_browser():
-    world.browser = Client()
+from lettuce.django import django_url
 
 @step(r'I access the url "(.*)"')
 def access_url(step, url):
-    response = world.browser.get(url)
-    world.dom = html.fromstring(response.content)
+    world.browser.get(django_url(url))
 
 @step(r'I see the header "(.*)"')
 def see_header(step, text):
-    header = world.dom.cssselect('h2')[0]
-    assert header.text.strip() == text.strip()
+    assert text.strip() == world.browser.find_element_by_tag_name("h2").text.strip()
+

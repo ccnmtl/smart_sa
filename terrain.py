@@ -1,13 +1,15 @@
-from lettuce import *
 from lettuce.django import django_url
-from selenium import selenium
- 
-#@before.harvest
-#def prepare_browser_driver(variables):
-#    if variables.get('run_server', False) is True:
-#        world.browser = selenium('localhost', 8000, '*firefox', django_url('/'))
-#        world.browser.start()
+from lettuce import before, after, world
 
-#@after.harvest
-#def shutdown_browser_driver(results):
-#    world.browser.stop()
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
+
+@before.all
+def setup_browser():
+    world.browser = webdriver.Firefox()
+
+@after.all
+def teardown_browser(total):
+    world.browser.quit()
+ 
