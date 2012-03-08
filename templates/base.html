@@ -38,22 +38,25 @@
 		{% block editcontentnav %}{% endblock %}
 		
 		<li>
+		
 		{% if user.is_authenticated %}
-		<span id="logged-in-prefix">Logged in as:</span>
+		<span id="logged-in-prefix">Hello, </span>
 		{% endif %}
+		
 		<span id="username" {% if user.is_authenticated %} class="logged_in" {% endif %}>
-		{% if user.is_authenticated %}{{user}} &rarr;{% endif %}
+		{% if user.is_authenticated %}<a href="/intervention/">{{user}}</a>! &rarr;{% endif %}
 		</span> 
 		{% if user.is_authenticated %}
 		<a class="loginlogout loginlogout-remote" href="/accounts/logout/">Log Out</a>
-		{% else %}
-		<a class="loginlogout loginlogout-remote" href="/intervention/">Administrative Login</a>
-		{% endif %}
-		</li>
-		
+		<!--new cu admin login button on splash page-->
 		<li>|</li>
-		
-		<li><span ID="deployment">{{deployment.name}}</span></li>
+		{% else %}
+		<!--
+		<a class="loginlogout loginlogout-remote" href="http://{{request.get_host}}/accounts/windlogin/?next={{ next }}">Administrative Login</a>
+		-->
+		</li>
+		{% endif %}
+		<li><span id="deployment">{{deployment.name}}</span></li>
 		
 		</ul>
 		
@@ -66,7 +69,7 @@
 	{% block breadcrumb-session %}{% endblock %}
   	
     <div id="contentcontainer">
-      {% block content %}{% endblock %}
+	{% block content %}{% endblock %}
     </div>
 
     <div id="footer">
