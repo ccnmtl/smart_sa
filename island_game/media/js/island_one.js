@@ -27,11 +27,11 @@ var recalc = function () {
         'position': 'absolute',
         'height': '184px',
         'width': '110px'
-      });
+    });
 
     global.clip_image(M.DOM.getElement('island_moving'), 600, global.bottom_of_game);
     global.clip_image(M.DOM.getElement('water_moving'), 600, global.bottom_of_game);
-  };
+};
 
 function init() {
     global.game_state = global.Intervention.getGameVar('island_game_state', global.default_state);
@@ -44,10 +44,10 @@ function init() {
     M.Logging.logDebug(global.game_state.page_1_bad1);
 
     if (global.game_state.page_1_bad1 !== null) {
-      M.Logging.logDebug("yo");
-      global.sliders.bad1.set(global.game_state.page_1_bad1);
-      global.sliders.bad2.set(global.game_state.page_1_bad2);
-      global.sliders.good.set(global.game_state.page_1_good);
+        M.Logging.logDebug("yo");
+        global.sliders.bad1.set(global.game_state.page_1_bad1);
+        global.sliders.bad2.set(global.game_state.page_1_bad2);
+        global.sliders.good.set(global.game_state.page_1_good);
     }
 
     global.sliders.bad1.draggable.options.onchange = recalc;
@@ -56,14 +56,14 @@ function init() {
     var mystery_factor = 20; // where does this come from?
     global.bottom_of_game = M.DOM.elementDimensions(M.DOM.getElement('sky')).h  + M.DOM.elementPosition(M.DOM.getElement('sky')).y - mystery_factor;
     recalc();
-  }
+}
 
 function save_state() {
     global.game_state.page_1_bad1 = global.sliders.bad1.get();
     global.game_state.page_1_bad2 = global.sliders.bad2.get();
     global.game_state.page_1_good = global.sliders.good.get();
     global.Intervention.saveState();
-  }
+}
 
 
 M.DOM.addLoadEvent(init);
@@ -75,5 +75,5 @@ M.DOM.addLoadEvent(init);
 function reloadme() { //or whatver else you have
     save_state();
     setTimeout(function () { window.location.reload(); }, 1); //
-  }
+}
 window.onresize = reloadme;

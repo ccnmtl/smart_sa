@@ -1,7 +1,7 @@
-(function(jQuery) {
+(function (jQuery) {
     var global = this;
     
-    var SupportPerson = Backbone.Model.extend( {
+    var SupportPerson = Backbone.Model.extend({
         defaults : {
             key : "", // for persistence
             name: "",
@@ -9,27 +9,27 @@
             support : false
         },
         
-        hasName: function(attrs) {
+        hasName: function (attrs) {
             return this.get("name").length > 0;
         }
     });
     
-    var SupportPersonList = Backbone.Collection.extend( {
+    var SupportPersonList = Backbone.Collection.extend({
         model : SupportPerson,
-        
-        isValid : function() {
+        isValid : function () {
             var valid = false;
-            this.forEach(function(item) {
-                if (item.hasName()) { 
+            this.forEach(function (item) {
+                if (item.hasName()) {
                     valid = true;
                     return;
                 }
             });
+
             return valid;
         }
     });
 
-    var SupportPersonView = Backbone.View.extend( {
+    var SupportPersonView = Backbone.View.extend({
         events : {
             'click div.circle': 'onClick',
             'change input': 'onChangeName',
@@ -37,14 +37,14 @@
             'keyup input': 'onChangeName'
         },
         
-        initialize: function(options) {
+        initialize: function (options) {
             _.bindAll(this, 'render', 'renderDisclosure', 'renderSupport', 'onClick', 'onChangeName');
             this.parent = options.parent;
             this.model.bind('change:disclosure', this.renderDisclosure);
             this.model.bind('change:support', this.renderSupport);
         },
 
-        onChangeName: function(evt) {
+        onChangeName: function (evt) {
             if (evt.srcElement.value.length < 1) {
                 this.model.set({"name": evt.srcElement.value, "disclosure": false, "support": false });
             } else {
@@ -53,37 +53,40 @@
             this.model.save();
         },
 
-        onClick: function(evt) {
-            if (this.parent.edit_mode == "names")
+        onClick: function (evt) {
+            if (this.parent.edit_mode === "names") {
                 return true; // do nothing
+            }
             
             this.model.set(this.parent.edit_mode, !this.model.get(this.parent.edit_mode));
             this.model.save();
         },
         
-        render: function() {
+        render: function () {
             jQuery("input", this.el).attr("value", this.model.get("name"));
             
             this.renderDisclosure();
             this.renderSupport();
         },
         
-        renderDisclosure: function() {
-            if (this.model.hasName() && this.model.get("disclosure"))
+        renderDisclosure: function () {
+            if (this.model.hasName() && this.model.get("disclosure")) {
                 jQuery(".ripe", this.el).addClass('turned-on');
-            else
+            } else {
                 jQuery(".ripe", this.el).removeClass('turned-on');
+            }
         },
-                
-        renderSupport: function() {    
-            if (this.model.hasName() && this.model.get("support"))
+
+        renderSupport: function () {
+            if (this.model.hasName() && this.model.get("support")) {
                 jQuery(".circle", this.el).addClass('turned-on');
-            else
+            } else {
                 jQuery(".circle", this.el).removeClass('turned-on');
+            }
         }
     });
 
-    var SupportPersonListView = Backbone.View.extend( {
+    var SupportPersonListView = Backbone.View.extend({
         edit_mode: 'names',
         
         events : {
@@ -92,18 +95,17 @@
             'click a#complete': 'saveState'
         },
 
-        initialize : function(options) {
+        initialize : function (options) {
             _.bindAll(this, 'toggleSupportSelection', 'toggleDisclosureSelection', 'saveState', 'addPerson');
-            
-            this.collection = options.collection; 
+            this.collection = options.collection;
             this.collection.bind('add', this.addPerson);
         },
         
-        addPerson : function(person) {
+        addPerson : function (person) {
             new SupportPersonView({ model: person, el: jQuery("#" + person.get("key")), parent: this }).render();
         },
         
-        toggleSupportSelection: function() {
+        toggleSupportSelection: function () {
             var self = this;
             self.edit_mode = "support";
             
@@ -115,7 +117,7 @@
             }
         },
         
-        toggleDisclosureSelection: function() {
+        toggleDisclosureSelection: function () {
             var self = this;
             self.edit_mode = "disclosure";
             
@@ -124,32 +126,44 @@
             if (jQuery("div#toggle-disclosure-selection").hasClass('on')) {
                 jQuery("div#toggle-support-selection").removeClass('on');
                 jQuery("div#toggle-support-selection").addClass('off');
-            }        
+            }
         },
         
-        saveState: function(evt) {
+        saveState: function (evt) {
             if (!this.collection.isValid()) {
                 evt.preventDefault();
                 alert('Please enter at least one name.');
-                return false;
             } else {
-                return true;
+                // Initiate the ajax call to saveState
+                global.Intervention.saveState(function (result) {
+                    if (result.response !== "ok") {
+                        alert("An error occurred while saving your information. Please try again.");
+                    } else {
+                        window.location = evt.srcElement.href;
+                    }
+                });
+                return false;
             }
+            return false;
         }
     });
     
-    Backbone.sync = function(method, model, success, error) {
+    Backbone.sync = function (method, model, success, error) {
         // Save the results back to the game state
+        // Don't do a full server-side save on every sync
         var game_state = global.Intervention.getGameVar('ssnmtree', {});
-        var key = model.get("key"); 
+        var key = model.get("key");
+        
+        if (!_.has(game_state, key)) {
+            game_state[key] = {};
+        }
+            
         game_state[key].name = model.get("name");
         game_state[key].support = model.get("support");
         game_state[key].disclosure = model.get("disclosure");
-
-        global.Intervention.saveState();
     };
 
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         var collection = new SupportPersonList();
         var ssnmTreeView = new SupportPersonListView({
             collection: collection,
@@ -161,20 +175,21 @@
         // will be signaled to create a new subview
         var game_state = global.Intervention.getGameVar('ssnmtree', {});
         
-        jQuery("div.fruit").each(function() {
+        jQuery("div.fruit").each(function () {
             var person = new SupportPerson();
+            person.set("key", this.id);
+            
             if (_.has(game_state, this.id)) {
                 var val = game_state[this.id];
                 
                 person.set({
                     name: val.name,
                     disclosure: val.disclosure,
-                    support: val.support,
-                    key: this.id
+                    support: val.support
                 });
             }
                 
             collection.add(person);
         });
     });
-})(jQuery);
+}(jQuery));

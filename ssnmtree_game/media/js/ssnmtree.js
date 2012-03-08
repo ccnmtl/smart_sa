@@ -36,16 +36,19 @@
         self.showSupport();
      
         var elt = M.DOM.getElement('complete');
-        if (elt)
+        if (elt) {
             M.Signal.connect(elt, 'onclick', self, 'saveState');
+        }
         
         elt = M.DOM.getElement('toggle-support-selection');
-        if (elt)
+        if (elt) {
             M.Signal.connect(elt, 'onclick', self, 'toggleSupportSelection');
+        }
         
         elt = M.DOM.getElement('toggle-disclosure-selection');
-        if (elt)
+        if (elt) {
             M.Signal.connect(elt, 'onclick', self, 'toggleDisclosureSelection');
+        }
     };
     
     SSNMTree.prototype.saveState = function (evt) {
@@ -61,7 +64,7 @@
         }
     };
     
-    SSNMTree.prototype.toggleSupportSelection = function() {
+    SSNMTree.prototype.toggleSupportSelection = function () {
         var self = this;
         self.edit_mode = "support";
         
@@ -74,7 +77,7 @@
         M.DOM.addElementClass(elt, "off");
     };
     
-    SSNMTree.prototype.toggleDisclosureSelection = function() {
+    SSNMTree.prototype.toggleDisclosureSelection = function () {
         var self = this;
         self.edit_mode = "disclosure";
         
@@ -113,16 +116,16 @@
         var id = input_elt.parentNode.id;
 
         if (self.game_state[id].name !== input_elt.value) {
-          self.game_state[id].name = input_elt.value;
-          self.intervention.saveState();
+            self.game_state[id].name = input_elt.value;
+            self.intervention.saveState();
         }
     };
 
     SSNMTree.prototype.anyNames = function () {
         for (var a in this.game_state) {
-          if (typeof(this.game_state[a]) === 'object' && this.game_state[a].name && this.game_state[a].name.length > 0) {
-            return true;
-          }
+            if (typeof(this.game_state[a]) === 'object' && this.game_state[a].name && this.game_state[a].name.length > 0) {
+                return true;
+            }
         }
         return false;
     };
@@ -156,4 +159,4 @@
         global.SSNMTree = new SSNMTree();
     }
 
-  }());
+}());

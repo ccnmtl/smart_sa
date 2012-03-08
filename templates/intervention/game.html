@@ -9,9 +9,15 @@
    <script>
      var game_variables = {{game.variables|safe}};
      this.ss_game_state = {};
-{% for v in game_variables %}
-     this.ss_game_state['{{v.key}}'] = {{v.value|safe}};
-{% endfor %}
+     
+    {% for v in game_variables %}
+         {% if v.value %}
+             this.ss_game_state['{{v.key}}'] = {{v.value|safe}};
+         {% else %}
+             this.ss_game_state['{{v.key}}'] = {};
+         {% endif %}
+    {% endfor %}
+    
    </script>
    {% block game_js %}{% endblock %}
 {% endblock %}
