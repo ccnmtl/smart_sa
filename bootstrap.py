@@ -26,6 +26,18 @@ ret = subprocess.call([os.path.join(vedir, 'bin', 'pip'), "install",
                        "--requirement",os.path.join(pwd,"requirements/apps.txt")])
 if ret: exit(ret)
 
+if len(sys.argv) > 1:
+    if sys.argv[1] == "--full":
+        # lxml is big and takes forever to compile so conditionally enable it
+        # (and potentially other development only libraries)
+        ret = subprocess.call([os.path.join(vedir, 'bin', 'pip'), "install",
+                               "-E", vedir,
+                               "--index-url=''",
+                               "--requirement",os.path.join(pwd,"requirements/dev.txt")])
+        if ret: exit(ret)
+
+
+
 ret = subprocess.call(["python","virtualenv.py","--relocatable",vedir])
 # --relocatable always complains about activate.csh, which we don't really
 # care about. but it means we need to ignore its error messages
