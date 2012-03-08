@@ -1,22 +1,22 @@
 {% extends "intervention/game.html" %}
 
 {% block game_js %}
-          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}js/mochikit/MochiKit/MochiKit.js"></script> 
-          <script type="text/javascript" src="{{INTERVENTION_MEDIA}}watchvideo_game/js/video.js"></script> 
+          <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script> 
+          <script type="text/javascript" src="/site_media/watchvideo_game/js/video.js"></script> 
 {% endblock %}
 {% block game_css %}
-  <!--link href="{{INTERVENTION_MEDIA}}ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" /-->
+  <!--link href="/site_media/ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" /-->
 {% endblock %}
 
 {% block game_content %}
    <div class="video" style="position:relative;height:475px;width:545px">
      <object classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="{{game_context.width}}"
         height="{{game_context.height}}" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
-        <param name='src' value="{{relative_root}}.{{MEDIA_URL}}{{game_context.video}}">
+        <param name='src' value="{{MEDIA_URL}}{{game_context.video}}">
         <param name='autoplay' value="false">
         <param name='controller' value="true">
         <param name='loop' value="false">
-        <embed src="{{relative_root}}.{{MEDIA_URL}}{{game_context.video}}" width="{{game_context.width}}" height="{{game_context.height}}" autoplay="false" 
+        <embed src="{{MEDIA_URL}}{{game_context.video}}" width="{{game_context.width}}" height="{{game_context.height}}" autoplay="false" 
         controller="true" loop="false" pluginspage='http://www.apple.com/quicktime/download/'>
         </embed>
       </object>

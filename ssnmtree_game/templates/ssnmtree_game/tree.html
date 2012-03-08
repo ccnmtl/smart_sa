@@ -12,7 +12,7 @@
     {% endcomment %}
 {% endblock %}
 {% block game_css %}
-    <link href="{{INTERVENTION_MEDIA}}ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
+    <link href="/site_media/ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block game_content %}
@@ -24,7 +24,7 @@
     {% endcomment %}
     <div style="position:relative;height:465px;width:545px">
         <div id="game-mode" data-game-mode="{{game_context.mode}}" />
-        <img class="bare-tree" src="{{INTERVENTION_MEDIA}}ssnmtree_game/images/bare_tree.png" />
+        <img class="bare-tree" src="/site_media/ssnmtree_game/images/bare_tree.png" />
         <div id="fruittree">
             <!-- ** DO NOT DISTURB: 
 	           programming depends on ids,classes,and structure-->
@@ -32,7 +32,7 @@
             <!-- LEFT corner ups -->
             <div id="top1-fruit" class="fruit leftup">
 	            <input type="text" value="" />
-	            <div id="top1-fruit-circle" class="circle"></div>	 
+	            <div class="circle"></div>	 
 	            <div class="ripe"></div>
             </div>
             <div id="middle2-fruit" class="fruit leftup">

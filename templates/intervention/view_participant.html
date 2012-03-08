@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block breadcrumb-main %}
+	<div id="breadcrumb-main">
+	<a href="{{relative_root}}intervention/">Home</a> &rarr; <a href="{{relative_root}}manage/">Administrate</a> &rarr; Notes for {{participant.name}}
+	</div>
+{% endblock %}
+
 {% block content %}
 <h2>Notes for {{participant.name}}</h2>
 
@@ -12,6 +18,28 @@
 <h3>{{participant.name}}'s alerts</h3>
 
 <h3>{{participant.name}}'s sessions</h3>
+
+<ul>Sessions
+{% for ps in participant.participantsession_set.all %}
+<li>[<span class="{{ps.status}}">{{ps.status}}</span>] {{ps.session.long_title}}
+{% if ps.counselornote_set.count %}
+<ul>
+{% for n in ps.counselornote_set.all %}
+<li><b>Note from {{n.counselor.username}}</b><br />
+{{n.notes}}</li>
+{% endfor %}
+</ul>
+{% endif %}
+</li>
+{% endfor %}
+</ul>
+
+<ul>Activities
+{% for pa in participant.participantactivity_set.all %}
+<li>[<span class="{{pa.status}}">{{pa.status}}</span>] {{pa.activity.clientsession.long_title}}/{{pa.activity.long_title}}</li>
+{% endfor %}
+</ul>
+
 
 <a href="/manage/">Done</a>
 

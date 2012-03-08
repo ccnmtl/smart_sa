@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block breadcrumb-main %}
+	<div id="breadcrumb-main">
+	<a href="{{relative_root}}intervention/">Home</a> &rarr; <a href="{{relative_root}}manage/">Administrate</a> &rarr; Notes for {{counselor.username}}
+	</div>
+{% endblock %}
+
+{% block content %}
+<h2>Notes for {{counselor.username}}</h2>
+
+
+{% for note in notes %}
+<h2>Notes for Participant
+  {{note.participantsession.participant.name}}, Session {{note.participantsession.session.title}}</h2>
+<p>{{note.notes}}</p>
+{% endfor %}
+
+<a href="/manage/">Done</a>
+
+{% endblock %}

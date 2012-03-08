@@ -4,7 +4,7 @@ from django.template import RequestContext, loader, TemplateDoesNotExist
 from django.shortcuts import get_object_or_404, render_to_response
 from django.http import HttpResponse, Http404, HttpResponseRedirect, QueryDict
 from django.forms.models import modelformset_factory,inlineformset_factory
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.conf import settings
 from zipfile import ZipFile
 from cStringIO import StringIO
@@ -25,16 +25,12 @@ ENCRYPTION_ARGS = [AESModeOfOperation.modeOfOperation["OFB"], #mode
                    toNumbers(settings.INTERVENTION_BACKUP_IV)
                    ]
 
-#CUSTOM CONTEXT PROCESSOR
-#see/set TEMPLATE_CONTEXT_PROCESSORS in settings_shared.py
-#also note that we need RequestContext instead of the usual Context
-def relative_root(request):
-    """returns a string like '../../../' to get back to the root level"""
-    from_top = request.path.count('/')-1
-    relative_root_path = '../' * from_top
-    return {'relative_root':relative_root_path,
-            'INTERVENTION_MEDIA': relative_root_path + 'site_media/'
-            }
+def inject_deployment(request):
+    """injects the current Deployment into the context"""
+    if Deployment.objects.count() == 0:
+        return dict(deployment=Deployment.objects.create(name="Clinic"))
+    else:
+        return dict(deployment=Deployment.objects.all()[0])
 
 #VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
@@ -86,10 +82,20 @@ def set_participant(request):
     request.session.participant_id = ''
     return dict(next=request.GET.get('next','/intervention/'))
 
-@render_to('intervention/intervention.html')
-def intervention(request, intervention_id):
-    return {'intervention' : get_object_or_404(Intervention, intervention_id=intervention_id),
-            'offlineable' : True}
+@login_required
+def set_deployment(request):
+    if request.POST:
+        d = Deployment.objects.all()[0]
+        d.name = request.POST.get('name','Clinic')
+        d.save()
+    return HttpResponseRedirect("/manage/")
+
+@login_required
+def start_practice_mode(request,intervention_id):
+    p,created = Participant.objects.get_or_create(name='practice')
+    p.clear_all_data()
+    request.session['participant_id'] = p.id
+    return HttpResponseRedirect("/intervention/%d/" % int(intervention_id))
 
 @render_to('intervention/counselor_landing_page.html')
 @login_required
@@ -104,7 +110,8 @@ def counselor_landing_page(request):
 @render_to('intervention/manage_participants.html')
 @login_required
 def manage_participants(request):
-    return dict(participants=Participant.objects.all())
+    return dict(participants=Participant.objects.all(),
+                counselors=User.objects.all())
 
 @render_to('intervention/add_participant.html')
 @login_required
@@ -150,53 +157,84 @@ def view_participant(request,participant_id):
     p = get_object_or_404(Participant,id=participant_id)
     return dict(participant=p)
 
+@render_to('intervention/view_counselor.html')
+@login_required
+def view_counselor(request,counselor_id):
+    c = get_object_or_404(User,id=counselor_id)
+    return dict(counselor=c,notes=CounselorNote.objects.filter(counselor=c))
 
-@render_to('intervention/ss/intervention.html')
+@render_to('intervention/intervention.html')
 @participant_required
 @login_required
-def ss_intervention(request, intervention_id):
+def intervention(request, intervention_id):
     return dict(intervention=get_object_or_404(Intervention, id=intervention_id),
                 participant=request.participant)
 
-@render_to('intervention/ss/session.html')  
+@render_to('intervention/session.html')  
 @participant_required
 @login_required
-def ss_session(request, session_id):
+def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     participant=request.participant
-    r = ParticipantSession.objects.filter(session=session,participant=participant)
-    if r.count() == 0:
-        ps = ParticipantSession.objects.create(session=session,participant=participant,
-                                               status="incomplete")
+    ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
     activities = session.activity_set.all()
     return dict(session=session, activities=activities,
                 participant=request.participant)
 
-@render_to('intervention/ss/activity.html')
 @participant_required
 @login_required
-def ss_activity(request, activity_id):
-    activity=get_object_or_404(Activity, pk=activity_id)
-    participant=request.participant
-    r = ParticipantActivity.objects.filter(activity=activity,participant=participant)
-    if r.count() == 0:
-        ps = ParticipantActivity.objects.create(activity=activity,participant=participant,
-                                               status="incomplete")
-    return dict(activity=activity,participant=request.participant)
-
-@render_to('intervention/session.html')  
-def session(request, session_id):
+def complete_session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
-    activities = session.activity_set.all()
-    return {'session' : session, 'activities':activities,
-            'offlineable' : True}
+
+    if request.method == "POST":
+        participant=request.participant
+        ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
+        ps.status = "complete"
+        ps.save()
+        return HttpResponseRedirect(session.intervention.get_absolute_url())
+    else:
+        return HttpResponseRedirect(session.get_absolute_url())
+
+@participant_required
+@login_required
+def complete_activity(request, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+
+    if request.method == "POST":
+        participant=request.participant
+        pa,created = ParticipantActivity.objects.get_or_create(activity=activity,participant=participant)
+        pa.status = "complete"
+        pa.save()
+        if request.POST.get('counselor_notes',False):
+            session = activity.clientsession
+            ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
+            note,created = CounselorNote.objects.get_or_create(participantsession=ps,counselor=request.user)
+            note.notes = request.POST.get('counselor_notes','')
+            note.save()
+        next_activity = activity.next()
+        if next_activity is None:
+            return HttpResponseRedirect(activity.clientsession.get_absolute_url())
+        else:
+            return HttpResponseRedirect(next_activity.get_absolute_url())
+    else:
+        return HttpResponseRedirect(activity.get_absolute_url())
+
 
 @render_to('intervention/activity.html')
+@participant_required
+@login_required
 def activity(request, activity_id):
-    return { 'activity' : get_object_or_404(Activity, pk=activity_id) ,
-             'offlineable' : True}
+    activity=get_object_or_404(Activity, pk=activity_id)
+    participant=request.participant
+    ps,created = ParticipantSession.objects.get_or_create(session=activity.clientsession,participant=participant)
+    pa,created = ParticipantActivity.objects.get_or_create(activity=activity,participant=participant)
+    cn,created = CounselorNote.objects.get_or_create(participantsession=ps,counselor=request.user)
+    counselor_notes = cn.notes
+    return dict(activity=activity,participant=request.participant,counselor_notes=counselor_notes)
 
-def game(request, game_name, page_id, game_id=None):
+@participant_required
+@login_required
+def game(request, game_id, page_id):
     my_game = get_object_or_404(GamePage, pk=game_id)
     if not my_game.activity:
         """ for some reason, the database is littered with GamePage
@@ -211,27 +249,39 @@ def game(request, game_name, page_id, game_id=None):
          """
         if not request.META.get('HTTP_REFERER',None):
             return HttpResponse("orphan gamepage. please contact developers if you are seeing this")
+
     my_game.page_id = page_id
     template,game_context = my_game.template(page_id)
-    
+    variables = []
+    for k in my_game.variables(page_id):
+        variables.append(dict(key=k,value=request.participant.get_game_var(k)))
     t = loader.get_template(template)
     c = RequestContext(request,{
         'game' :  my_game,
         'game_context' : game_context,
-        'offlineable' : True,
+        'game_variables' : variables,
+        'participant' : request.participant,
     })
     return HttpResponse(t.render(c))
+
+@participant_required
+@login_required
+def save_game_state(request):
+    if not request.method == "POST":
+        return HttpResponse("must be a POST")
+    try:
+        json = loads(request.raw_post_data)
+        for k in json.keys():
+            request.participant.save_game_var(k,dumps(json[k]))
+    except Exception, e:
+        return HttpResponse("not ok")
+    return HttpResponse("ok")
+
 
 #####################################
 # BACKUP/RESTORE pages
 #####################################
 
-#no login required.
-@render_to('intervention/counselor_admin.html')
-def smart_data(request):
-    return {'hexkey':settings.FAKE_INTERVENTION_BACKUP_HEXKEY,
-                                'hexiv':settings.FAKE_INTERVENTION_BACKUP_IV
-            }
 
 @permission_required('intervention.add_backup')
 def store_backup(request):

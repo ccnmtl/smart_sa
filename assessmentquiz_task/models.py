@@ -10,7 +10,7 @@ class AssessmentQuizTask(GameInterface):
     def template(self,page_id):
         game_context = {'mode':page_id,}
         return ('assessmentquiz_task/%s.html' % page_id ,game_context)
-    
+
     def variables(self,page_id=None):
         return ['assessmentquiz']
 

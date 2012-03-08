@@ -38,7 +38,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
 )
-APPEND_SLASH = False
+APPEND_SLASH = True
 
 #generate these most easily by going to:
 #http://www.josh-davis.org/ecmaScrypt
@@ -108,7 +108,7 @@ WIND_SERVICE = "cnmtl_full_np"
 WIND_PROFILE_HANDLERS = []
 WIND_AFFIL_HANDLERS = ['djangowind.auth.AffilGroupMapper','djangowind.auth.StaffMapper','djangowind.auth.SuperuserMapper']
 WIND_STAFF_MAPPER_GROUPS = ['tlcxml.cunix.local:columbia.edu']
-WIND_SUPERUSER_MAPPER_GROUPS = ['anp8','jb2410','zm4','sld2131']
+WIND_SUPERUSER_MAPPER_GROUPS = ['anp8','jb2410','zm4','sld2131','mar227']
 
 #TEMPLATES
 TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
@@ -117,14 +117,14 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
                                "django.core.context_processors.media",
                                #non-default:
                                "django.core.context_processors.request",
-                               "intervention.views.relative_root",
+                               "smart_sa.intervention.views.inject_deployment",
                                )
 
 PROD_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/"
 PROD_MEDIA_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/multimedia/"
 
 DISABLE_OFFLINE = False
- 
+
 try:
     from release_id import LAST_GIT_HEAD
 except ImportError:

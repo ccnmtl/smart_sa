@@ -1,80 +1,66 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <title>Masivukeni: {% block title %}{% endblock %}</title>
-  <link href="{{relative_root}}site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
-  {% block css %}{% endblock %}
 
+<head>
+
+  <title>Masivukeni: {% block title %}{% endblock %}</title>
+  
+  <link href="/site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
+  
+  {% block css %}{% endblock %}
   {% block js %}{% endblock %}
   {% block feeds %}{% endblock %}
+  
 </head>
 
 <body class="{% if user.is_authenticated %}logged-in {% endif %}{% block bodyclass %}{% endblock %}">
+
 <a id="pagestart"></a>
+
   <div id="container">
 
 	<div id="header">
+	
 		<h1>
-			<a href="{{relative_root}}home.html" id="masivukeni-home">Masivukeni</a> 
+			<a href="/" id="masivukeni-home">Masivukeni</a> 
 		</h1>
+		
 		<div id="nav-header">
 			<ul>
-			  <li><b>masivukeni2 drafting site</b></li>
-			  <Li><a href="{{relative_root}}help/credits.html">Credits</a></li>
-			  <li><a href="mailto:ccnmtl-masivukeni@columbia.edu">Contact</a></li>
-			  {% block nav %}{% endblock %}
+			{% block editcontentnav %}{% endblock %}
+			<li>
+			<span id="logged-in-prefix">Logged in as:</span>
+			<span id="username" {% if user.is_authenticated %} class="logged_in" {% endif %}>
+			{% if user.is_authenticated %}{{user}} &rarr;{% endif %}</span> 
+			{% if user.is_authenticated %}
+			<a class="loginlogout loginlogout-remote" href="{{relative_root}}logout">Log Out</a>
+			{% else %}
+			<a class="loginlogout loginlogout-remote" href="{{relative_root}}accounts/login/{% ifnotequal request.path "/logout" %}?next={{request.path}}{% endifnotequal %}">Administrative Login</a>
+			<a class="loginlogout loginlogout-local" href="{{relative_root}}client_login.html" onclick="Intervention.logout()">Log Out</a>
+			{% endif %}
+			</li>
+			<li>|</li>
+			<li><span style="color: #000;">{{deployment.name}}</span></li>
 			</ul>
 		</div>
+		
 	</div>
 
-	<div id="breadcrumb">
-		<a class="incomplete current" href="{{relative_root}}home.html" id="tab-home">Home</a> 
-		<div id="breadcrumb-text">
-      <ul>
-	<li><span id="logged-in-prefix">Logged in as:</span>
-	  <span id="username"
-	    {% if user.is_authenticated %}
-	        class="logged_in"
-	    {% endif %}
-	    >
-		{% if user.is_authenticated %}
-		{{user}}
-		{% endif %}
-	  </span> 
-	  
-	  {% if user.is_authenticated %}
-	  <a class="loginlogout loginlogout-remote" 
-	     href="{{relative_root}}logout">Logout</a>
-	  {% else %}
-	  <a class="loginlogout loginlogout-remote" 
-	     href="{{relative_root}}accounts/login/{% ifnotequal request.path "/logout" %}?next={{request.path}}{% endifnotequal %}">Administrative Login</a>&nbsp;
-	  <a class="loginlogout loginlogout-local" 
-	     href="{{relative_root}}client_login.html"
-	     onclick="Intervention.logout()"
-	     >Logout</a>
-	  {% endif %}
-	</li>
-	{% block breadcrumbs %}{% endblock %}
-      </ul>
-			
-			
-		</div>
-	</div>
+		  {% block breadcrumb-main %}{% endblock %}
 
-  
-    <!--BEGIN MAIN AREA-->
+		  {% block breadcrumb-session %}{% endblock %}
+  	
     <div id="contentcontainer">
       {% block content %}{% endblock %}
-
     </div>
 
-    <!--BEGIN FOOTER-->  
     <div id="footer">
-		<p>
-			Footer <a href="index.html">info</a> 
-    {% block footer %}{% endblock %}
-		</p>
+		<a href="/">About</a> | 
+		<a href="/credits/">Credits</a> | 
+		<a href="mailto:ccnmtl-masivukeni@columbia.edu">Contact</a>
+		{% block footer %}{% endblock %}
     </div>
 
   </div>

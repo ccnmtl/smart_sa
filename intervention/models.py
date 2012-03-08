@@ -67,6 +67,10 @@ class ClientSession (models.Model):
     
     def __unicode__(self):
         return self.short_title
+
+    def get_absolute_url(self):
+        return "/session/%d/" % self.id
+
     def index(self):
         sessions = self.intervention.get_clientsession_order()
         if sessions:
@@ -127,6 +131,9 @@ class Activity(models.Model):
     
     def __unicode__(self):
         return self.short_title
+
+    def get_absolute_url(self):
+        return "/activity/%d/" % self.id
 
     def save(self, *args, **kwargs):
         "We want to precreate game pages, based on the game chosen"
@@ -299,6 +306,9 @@ class GamePage (models.Model):
     def template(self, page_id):
         return InstalledGames.template(self.activity.game,page_id)
 
+    def ss_template(self, page_id):
+        return InstalledGames.ss_template(self.activity.game,page_id)
+
     def variables(self, page_id=None):
         return InstalledGames.variables(self.activity.game,page_id)
 
@@ -409,6 +419,27 @@ class Participant(models.Model):
     status = models.BooleanField(default=True)
     clinical_notes = models.TextField(default="",blank=True)
 
+    def save_game_var(self,key,value):
+        gv,created = ParticipantGameVar.objects.get_or_create(participant=self,key=key)
+        gv.value = value
+        gv.save()
+
+    def get_game_var(self,key):
+        r = self.participantgamevar_set.filter(key=key)
+        if r.count() == 0:
+            return None
+        else:
+            return r[0].value
+
+    def clear_all_data(self):
+        """ this will mostly be called on the practice participant """
+        self.participantsession_set.all().delete()
+        self.participantactivity_set.all().delete()
+        self.participantgamevar_set.all().delete()
+
+    def is_practice(self):
+        return self.name == "practice"
+
 class ParticipantSession(models.Model):
     participant = models.ForeignKey(Participant)
     session = models.ForeignKey(ClientSession)
@@ -428,3 +459,12 @@ class ParticipantGameVar(models.Model):
     participant = models.ForeignKey(Participant)
     key = models.CharField(max_length=256)
     value = models.TextField(default="",blank=True,null=True)
+
+class Deployment(models.Model):
+    name = models.CharField(max_length=256,default="Clinic")
+
+    def is_online(self):
+        return self.name == "CCNMTL"
+
+    def is_clinic(self):
+        return self.name != "CCNMTL"

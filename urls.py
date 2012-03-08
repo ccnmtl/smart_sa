@@ -14,8 +14,6 @@ urlpatterns = patterns('',
         (r'^multimedia/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
 
         (r'^smart_sa$', 'smart_sa.intervention.views.no_vars', {'template_name': 'intervention/index.html'}),
-        (r'^logout$', 'django.contrib.auth.views.logout', {'template_name': 'intervention/logged_out.html'}),
-        #(r'^admin_confirm$', 'smart_sa.intervention.views.admin_confirm'), # login confirmation p.3
 
         ########
         # PUBLIC CLIENT VIEW
@@ -25,14 +23,6 @@ urlpatterns = patterns('',
         # 3. windoze file-friendly names (e.g. no ';'s or other weird chars)
         ########
 
-        (r'^intervention(?P<intervention_id>\d+)_intro.html$', 'smart_sa.intervention.views.intervention'),
-        # page 4, 5
-        (r'^session(?P<session_id>\d+)_agenda.html$', 'smart_sa.intervention.views.session'),
-        # page 6,7, 15
-        (r'^activity(?P<activity_id>\d+)_overview.html$', 'smart_sa.intervention.views.activity'), # page 12
-        #game names can have a '-' e.g. video
-        (r'^task/(?P<game_name>[-\w]+?)/(?P<game_id>\d+)(?P<page_id>\w+).html$', 'smart_sa.intervention.views.game'),
-
         (r'^home.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
         (r'^index.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
         (r'^client_login.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/client_login.html'}),
@@ -40,21 +30,25 @@ urlpatterns = patterns('',
 
 
         (r'^set_participant/$','smart_sa.intervention.views.set_participant'),
+        (r'^set_deployment/$','smart_sa.intervention.views.set_deployment'),
         (r'^intervention/$','smart_sa.intervention.views.counselor_landing_page'),
         (r'^manage/$','smart_sa.intervention.views.manage_participants'),
         (r'^manage/add_participant/$','smart_sa.intervention.views.add_participant'),
         (r'^manage/participant/(?P<participant_id>\d+)/delete/$','smart_sa.intervention.views.delete_participant'),
         (r'^manage/participant/(?P<participant_id>\d+)/edit/$','smart_sa.intervention.views.edit_participant'),                       
         (r'^manage/participant/(?P<participant_id>\d+)/view/$','smart_sa.intervention.views.view_participant'),                       
-        (r'^intervention/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.ss_intervention'),
-        (r'^session/(?P<session_id>\d+)/$','smart_sa.intervention.views.ss_session'),
-        (r'^activity/(?P<activity_id>\d+)/$','smart_sa.intervention.views.ss_activity'),
-                       
 
+        (r'^manage/counselor/(?P<counselor_id>\d+)/view/$','smart_sa.intervention.views.view_counselor'),                       
 
+        (r'^practice/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.start_practice_mode'),
+        (r'^intervention/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.intervention'),
+        (r'^session/(?P<session_id>\d+)/$','smart_sa.intervention.views.session'),
+        (r'^session/(?P<session_id>\d+)/complete/$','smart_sa.intervention.views.complete_session'),
+        (r'^activity/(?P<activity_id>\d+)/$','smart_sa.intervention.views.activity'),
+        (r'^activity/(?P<activity_id>\d+)/complete/$','smart_sa.intervention.views.complete_activity'),
+        (r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$', 'smart_sa.intervention.views.game'),
+        (r'^save_game_state/$','smart_sa.intervention.views.save_game_state'),                       
 
-
-        (r'^masivukeni_admin_data.html$', 'smart_sa.intervention.views.smart_data'),
         (r'^help/backup.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),
         (r'^help/credits.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/credits.html'}),
 

@@ -1,13 +1,17 @@
-{% extends "intervention/offlineable_base.html" %}
+{% extends "base.html" %}
 
 {% block js %}
-   <script type="text/javascript" src="{{relative_root}}site_media/js/mochikit/MochiKit/MochiKit.js"></script>
-   <script type="text/javascript" src="{{relative_root}}site_media/js/static_auth/local_session.js"></script>    
-   <script type="text/javascript" src="{{relative_root}}site_media/js/static_auth/intervention_storage.js"></script>    
+   <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script>
+   <script type="text/javascript" src="/site_media/js/static_auth/local_session.js"></script>    
+   <script type="text/javascript" src="/site_media/js/static_auth/intervention_storage.js"></script>    
    
    <!-- Delegate to the particular game which extra JS it needs -->
    <script>
      var game_variables = {{game.variables|safe}};
+     this.ss_game_state = {};
+{% for v in game_variables %}
+     this.ss_game_state['{{v.key}}'] = {{v.value|safe}};
+{% endfor %}
    </script>
    {% block game_js %}{% endblock %}
 {% endblock %}
@@ -15,29 +19,29 @@
 {% block css %}
    <!-- Delegate to the particular game extra CSS it needs -->
    {% block game_css %}{% endblock %}
-   <link href="{{relative_root}}site_media/css/masivukeni.deprecated.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block breadcrumbs %}
     {%if game %}
-      <li><a href="{{relative_root}}intervention{{game.activity.clientsession.intervention.id}}_intro.html">Session List</a></li>
+      <li><a href="/intervention/{{game.activity.clientsession.intervention.id}}/">Session List</a></li>
     {%endif%}  
 {% endblock %}
 
 
 {% block content %}
   
-   <!-- To Liz:
-	All HTML and IDs/classes here are changeable except the 'complete' button.  Please do.
-	This is just placeholder for content
-   -->
    <div id="session{{game.activity.clientsession.id}}" class="parentsession"></div>   
       <div id="titlearea"> 
       <h1 id="activity{{game.activity.id}}" class="activitytitle">Activity {{game.activity.index}}: {{ game.activity.long_title }}</h1>
         </div> 
         
    <div id="content-right" class="game" >
+    {% if participant.is_practice %}
+    <p class="practice-mode">PRACTICE MODE</p>
+    {% endif %}
+
      <h2>Client Task: Part {{game.index}}/{{game.activity.pages|length}}</h2>
+
      <div class="game_instructions">
        {{game.instructions|safe}}
      </div>
@@ -56,10 +60,7 @@
 
        {% else %}
          
-	   <a id="complete" class="hilite" 
-	      href="{{relative_root}}session{{game.activity.clientsession.id}}_agenda.html"
-	      onclick="Intervention.complete_activity()"
-	      >
+	   <a id="complete" class="hilite" href="/activity/{{game.activity.id}}/complete/" >
 	     COMPLETE
 	   </a><span class="cent_or">or</span>
 	
@@ -72,8 +73,8 @@
 	   {%endif%}
 	 </a>
        {% endif %}
-   <a class="off" href="{{relative_root}}activity{{game.activity.id}}_overview.html">return to task overview</a>
-   <a class="off" href="{{relative_root}}session{{game.activity.clientsession.id}}_agenda.html">return to agenda</a>
+   <a class="off" href="/activity/{{game.activity.id}}/">return to task overview</a>
+   <a class="off" href="/session/{{game.activity.clientsession.id}}/">return to agenda</a>
    {%if debug%}
      <a class="off" href="#BEWARE" onclick="if(confirm('sure?')){Intervention.resetGame();}return false;">Reset Task for this User</a>
    {%endif%}

@@ -5,10 +5,12 @@
   <script type="text/javascript" src="/site_media/js/simple_tinymce.js"></script>
 {% endblock %}
 
-{% block breadcrumbs %}
+{% block editcontentnav %}
     {%if activity %}
       <li><a href="/intervention_admin/{{activity.clientsession.intervention.id}}/">Session List</a></li>
+      <li>|</li>
       <li><a href="/intervention_admin/session/{{activity.clientsession.id}}/#activity{{activity.id}}">Edit Activity Title/Overview</a></li>
+      <li>|</li>
     {%endif%}  
 {% endblock %}
 
@@ -18,7 +20,7 @@
 
      {% if activity %}
       <div>
-	<a class="admin_link"  href="/activity{{activity.id}}_overview.html">See client view of activity</a>
+	<a class="admin_link"  href="/activity/{{activity.id}}/">See client view of activity</a>
 	<a class="admin_link"  href="#new" class="jumpnew">Jump to new procedure instructions</a>
 	{% if activity.game %}
 	  <a class="admin_link" href="/intervention_admin/task/{{activity.id}}/">Edit {{activity.game}} Game Instructions</a>	
