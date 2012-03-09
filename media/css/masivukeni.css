@@ -8,10 +8,6 @@ body
 	font-family: "lucida sans unicode", "lucida grande", sans-serif;
 }
 
-
-
-
-
 p, ul { font-size: 14px !important; }
 p a, ul a {color: #4ea15a;}
 p a:hover, ul a:hover {text-decoration: none;}
@@ -101,6 +97,7 @@ form.login label
 #container
 {
 	position: absolute;
+	top: 0px;
 	left: 50%;
 	width: 980px;
 	margin-left: -490px;
@@ -967,6 +964,7 @@ p.instructions { margin-bottom: 35px; }
 	float: right;
 }
 
+/*
 .say { font-style: italic; }
 
 .say ul, .do ul, .None ul
@@ -974,6 +972,7 @@ p.instructions { margin-bottom: 35px; }
 	margin: 0px;
 	list-style-type: disc;
 }
+*/
 
 .no-bullets > li { list-style-type: none; }
 #home-remote { display: none; }
@@ -989,6 +988,22 @@ body.logged-in #home-remote { display: block; }
 
 .practice-mode
 {
-	background-color: #00cc00;
+	background-color: #ffc;
+	color: black;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	border: 1px solid #f3912f;
+}
+
+.error
+{
+	background-color: #f99;
 	color: white;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	border: 1px solid red;
 }

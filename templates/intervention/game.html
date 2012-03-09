@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% block title %}game.html{% endblock %}
 {% block js %}
    <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script>
    <script type="text/javascript" src="/site_media/js/static_auth/local_session.js"></script>    
@@ -33,6 +33,9 @@
     {%endif%}  
 {% endblock %}
 
+{% block breadcrumb-main %}<div>breadcrumb-main</div>{% endblock %}
+
+{% block breadcrumb-session %}<div>breadcrumb-session</div>{% endblock %}
 
 {% block content %}
   
@@ -43,7 +46,7 @@
         
    <div id="content-right" class="game" >
     {% if participant.is_practice %}
-    <p class="practice-mode">PRACTICE MODE</p>
+    <p class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</p>
     {% endif %}
 
      <h2>Client Task: Part {{game.index}}/{{game.activity.pages|length}}</h2>

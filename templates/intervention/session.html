@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% block title %}session.html{% endblock %}
+
 {% load participant_status %}
 
 {% block breadcrumbs %}
@@ -8,6 +10,10 @@
 {% endblock %}
 
 
+{% block breadcrumb-main %}<div>breadcrumb-main</div>{% endblock %}
+
+{% block breadcrumb-session %}<div>breadcrumb-session</div>{% endblock %}
+
 {% block content %}
     {{ block.super }}
     
@@ -16,7 +22,7 @@
       <h3 id="session{{session.id}}" class="{% get_participant_status participant session %} sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h3>
 
     {% if participant.is_practice %}
-    <p class="practice-mode">PRACTICE MODE</p>
+    <p class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</p>
     {% endif %}
 
       {% if session.introductory_copy %}
