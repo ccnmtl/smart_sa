@@ -22,5 +22,16 @@ def see_title(step, text):
 
 @step(r'the deployment is displayed as "(.*)"')
 def check_deployment(step, name):
-    deployment = str(world.dom.cssselect("#deployment")[0].text)
+    deployment = world.dom.cssselect("#deployment")[0].text
     assert name == deployment, "Got %s" % deployment
+
+@step(u'Then I see a counselor login form')
+def then_i_see_a_counselor_login_form(step):
+    formtitle = world.dom.cssselect("form.login .formtitle")[0].text
+    assert formtitle == "Log In to Masivukeni", "Got %s" % formtitle
+
+@step(u'Then I do not see a WIND login form')
+def then_i_do_not_see_a_wind_login_form(step):
+    forms = world.dom.cssselect("form.cu")
+    assert len(forms) == 0
+
