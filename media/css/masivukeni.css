@@ -8,58 +8,94 @@ body
 	font-family: "lucida sans unicode", "lucida grande", sans-serif;
 }
 
-#deployment {color: #000;}
 
-p, ul 
+
+
+
+p, ul { font-size: 14px !important; }
+p a, ul a {color: #4ea15a;}
+p a:hover, ul a:hover {text-decoration: none;}
+
+
+#home-widgets
 {
-font-size: 14px !important;
+	float: right;
+	width: 320px;
+	text-align: center;
 }
 
-#home-widgets { float: right; width: 320px; text-align: center;}
-#home-copy {margin-right: 340px;}
+#home-copy { margin-right: 340px; }
 
-#home-widgets img {
+#home-widgets img
+{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
 
-form.login {
-    background-color: #b3dcbf;
-    border: 1px solid #4ba257;
+#login-box
+{
+	position: relative;
+	height: 100px;
+	margin-top: 20px;
+}
+
+#login-box input[type="text"], #login-box input[type="password"]
+{
+	width: 200px;
+}
+
+.login-panel
+{
+	position: absolute;
+	top: 0px;
+	width: 46%;
+	text-align: center;
+}
+
+#login-all { left: 20px; }
+
+
+#login-cu { right: 20px; }
+
+
+form.login
+{
+	background-color: #b3dcbf;
+	border: 1px solid #4ba257;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-    padding: 10px 20px 20px 20px;
-    width: 280px;
-    font-weight: bold;
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 20px;
+	padding: 10px 20px 20px 20px;
+	font-weight: bold;
+	font-size: 12px;
+	color: #666;
+	margin-bottom: 20px;
+	height: 110px;
 }
 
-
-form.login label {
-    width: 90px;
-    display: block;
-    float: left;
-    text-align: right;
-    color: #000;
+form.cu
+{
+	background-color: #9ec3de;
+	border: 1px solid #7494c4;
 }
 
-form.login .formrow {
-    margin-top: 10px;
+form.login .formtitle
+{
+	font-size: 14px;
+	margin-bottom: 10px;
+	color: #fff;
 }
 
-form.login .formtitle {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #fff;
-}
+form.login .formrow { margin-top: 10px; }
 
-form.cu {
-    background-color: #9ec3de;
-    border: 1px solid #7494c4;
+form.login label
+{
+	width: 120px;
+	display: block;
+	float: left;
+	text-align: right;
+	color: #000;
 }
 
 #container
@@ -116,6 +152,9 @@ h4
 
 /*stop - header*/
 /*start - nav-header*/
+
+#deployment { color: #000; }
+
 #nav-header
 {
 	position: absolute;
@@ -370,13 +409,32 @@ h2#sessioninfo
 }
 
 /*start - tables*/
+table.manage
+{
+	border-collapse: collapse;
+	width: 100%;
+}
 
-table.manage {border-collapse: collapse; width: 100%;}
+table.manage th
+{
+	border: 1px solid #ccc;
+	background-color: #eee;
+	text-align: center;
+	padding: 5px;
+}
 
-table.manage th {  border: 1px solid #ccc; background-color: #eee; text-align: center; padding: 5px;}
-table.manage td {  border: 1px solid #ccc; text-align: center; padding: 10px 0px 10px 0px;}
+table.manage td
+{
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 10px 0px 10px 0px;
+}
 
-table.manage a.action {display: inline; width: 100px;}
+table.manage a.action
+{
+	display: inline;
+	width: 100px;
+}
 
 table#choices { margin-top: 20px; }
 
@@ -929,14 +987,8 @@ body.logged-in #home-remote { display: block; }
 	width: 510px;
 }
 
-#login-box {position: relative; height: 100px; margin-top: 20px;}
-.login-panel {position: absolute; top: 0px; width: 40%; border: 1px solid #ccc; padding: 20px; height: 100px;}
-#login-all {left: 40px;}
-#login-cu {right: 40px}
-.login-panel form {text-align: center;}
-
-
-.practice-mode {
-background-color: #00cc00;
-color: white;
+.practice-mode
+{
+	background-color: #00cc00;
+	color: white;
 }

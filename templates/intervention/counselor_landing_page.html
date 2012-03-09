@@ -19,6 +19,16 @@
 	    <col id="buttons" />
 	    <col id="text" />
 		
+{% if request.user.is_superuser %}		
+	    <tr>
+	      <td>
+		<a class="action" href="/intervention_admin/1/">Edit Content</a>
+	      </td>
+	      <td>
+		Administrators can add and edit content for the intervention here.
+	      </td>
+	    </tr>
+{% endif %}
 	    <tr>
 	      <td>
 		<a class="action" href="{{intervention.get_absolute_url}}">Intervene</a>

@@ -49,11 +49,10 @@
 		{% if user.is_authenticated %}
 		<a class="loginlogout loginlogout-remote" href="/accounts/logout/">Log Out</a>
 		<!--new cu admin login button on splash page-->
-		<li>|</li>
+		<li>&bull;</li>
 		{% else %}
-		<!--
-		<a class="loginlogout loginlogout-remote" href="http://{{request.get_host}}/accounts/windlogin/?next={{ next }}">Administrative Login</a>
-		-->
+		<!--<a class="loginlogout loginlogout-remote" href="http://{{request.get_host}}/accounts/windlogin/?next={{ next }}">Administrative Login</a>-->
+		<a class="loginlogout loginlogout-remote" href="/intervention/">Log In</a>
 		</li>
 		{% endif %}
 		<li><span id="deployment">{{deployment.name}}</span></li>
