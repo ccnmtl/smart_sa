@@ -13,31 +13,44 @@
 
 	<div class="login-panel" id="login-all">
 	
-		<form method="post" action=".">
-		<table width="100%">
-		<tr><td><label for="id_username">User ID:</label></td><td>{{ form.username }}</td></tr>
-		<tr><td><label for="id_password">Password:</label></td><td>{{ form.password }}</td></tr>
-		</table>
-		<input type="submit" value="Log In to Masivukeni" />
-		<input type="hidden" name="next" value="{{ next }}" />
+		<form class="login" method="post" action="/intervention/"">
+		<div class="formtitle">All Users</div>
+		{% if form.has_errors %}
+		<p>Your username and password didn't match. Please try again.</p>
+		{% endif %}
+		<div class="formrow">
+		<label for="id_username">User ID</label><input type="text" name="username"/>
+		</div>
+		<div class="formrow">
+		<label for="id_password">Password</label><input type="password" name="password"/>
+		</div>
+		<div class="formrow">
+		<input type="submit" value="Log In" />
+		<input type="hidden" name="next" value="/intervention/" />
+		</div>
 		</form>
 	
 	</div>
 
-{% if deployment.is_online %}	
+<!--remove space between {} and % to restore code -->
+<!--{ % if deployment.is_online % }-->
+
 	<div class="login-panel" id="login-cu">
 	
-		<form method="get" action="{{ wind_base }}login">
-		<input type="hidden" name="service" value="{{ wind_service }}" />
-		<input type="hidden" name="destination" value="http://{{request.get_host}}/accounts/windlogin/?next={{ next }}" />
-		<p>
-		If you have a Columbia UNI, you already have an account and can log in through WIND with it.
-		</p>
-		<input type="submit" value="Log in to Masivukeni with CU UNI" />
+		<form class="login cu" method="get" action="https://wind.columbia.edu/login">
+		<div class="formtitle">Columbia University Users</div>
+		<div class="formrow">
+		Access Masivukeni using your UNI.
+		</div>
+		<div class="formrow">
+		<input type="submit" value="Log In" />
+		<input type="hidden" name="service" value="cnmtl_full_np" />
+		<input type="hidden" name="destination" value="http://kang.ccnmtl.columbia.edu:13094/accounts/windlogin/?next=/intervention/" />
+		</div>
 		</form>
 	
 	</div>
-{% endif %}
+<!--{ % endif % }-->
 
 </div>
 

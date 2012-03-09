@@ -9,6 +9,7 @@
 
  	<div id="home-widgets"">
 
+		<!--
 		<div align="center">
 		<form class="login" method="post" action="/intervention/"">
 		<div class="formtitle">Log In to Masivukeni</div>
@@ -40,6 +41,7 @@
 		</form>
 		</div>
 		{% endif %}
+		-->
 		
 		<div align="center">
 		{% if deployment.is_online %}	
@@ -53,6 +55,10 @@
 	
  	<div id="home-copy">
  	
+ 		<p>
+ 		Welcome to Masivukeni! <a href="/intervention/">Log in to get started</a>!
+ 		
+ 		</p>
 		<p>
 		Masivukeni is a new adherence to HIV care and treatment intervention being piloted in South Africa. It is based on a proven dyadic-focused adherence intervention called "SMART Couples," which was developed at the HIV Center by Dr. Robert H. Remien and his colleagues. Masivukeni is a collaboration between CCNMTL, the HIV Center, and researchers at the University of Cape Town, South Africa.
 		</p>
@@ -64,18 +70,20 @@
 		<p>
 		The study is funded by the NIMH under a grant titled 'A Multimedia Social Support Intervention: Adherence to HIV Care in South Africa' and is in its second year.
 		</p>
-		{% if deployment.is_online %}	
+		<!--remove space between {} and % to restore code -->
+		<!--{ % if deployment.is_online % }-->	
 		<p>
 		For detailed information, visit CCNMTL's <a href="http://ccnmtl.columbia.edu/portfolio/medicine_and_health/masivukeni.html" target="blank">Masivukeni Project Page</a>.
 		</p>
-		{% endif %}
+		<!--{ % endif % }-->	
+		<!--
 		<ul>
 		{% if user.is_superuser %}
 		<li><a href="/intervention_admin/1/">Administer Intervention Content</a></li>
 		{% endif %}
 		<li><a href="/intervention/">Begin Intervention</a></li>
 		</ul>
-	
+		-->
 	
 	</div>
 	
