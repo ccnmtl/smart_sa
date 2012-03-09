@@ -1,15 +1,18 @@
 {% extends "base.html" %}
+{% block title %}intervention.html{% endblock %}
 {% load participant_status %}
+{% block breadcrumb-main %}<div>breadcrumb-main</div>{% endblock %}
+
+{% block breadcrumb-session %}<div>breadcrumb-session</div>{% endblock %}
 
 {% block content %}
     {{ block.super }}
-
     <div id="titlearea"> 
       <h1>Session List</h1>
-    </div> 
     {% if participant.is_practice %}
-    <p class="practice-mode">PRACTICE MODE</p>
+    <p class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</p>
     {% endif %}
+    </div> 
     <div id="content-singlecolumn">
         <p class="instructions">Click on a session number to continue
 	  with the intervention for <b>{{participant.name}}</b>.
