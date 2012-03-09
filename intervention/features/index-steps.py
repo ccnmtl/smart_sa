@@ -7,5 +7,9 @@ from lettuce.django import django_url
 
 @step(r'I see the header "(.*)"')
 def see_header(step, text):
-    assert text.strip() == world.browser.find_element_by_tag_name("h2").text.strip()
+    if world.using_selenium:
+        assert text.strip() == world.firefox.find_element_by_tag_name("h2").text.strip()
+    else:
+        header = world.dom.cssselect('h2')[0]
+        assert text.strip() == header.text.strip()
 
