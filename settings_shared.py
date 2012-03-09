@@ -86,6 +86,12 @@ INSTALLED_APPS = (
 
 if 'test' in sys.argv:
     DATABASE_ENGINE = 'sqlite3'
+if 'harvest' in sys.argv:
+    """ lettuce doesn't seem to want to run with sqlite in-memory
+    (it won't sync/migrate it properly) so I created an on-disk database
+    for it all synced and migrated and ready to go"""
+    DATABASE_ENGINE = 'sqlite3'
+    DATABASE_NAME = 'lettuce.db'
 
 SOUTH_TESTS_MIGRATE = False
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

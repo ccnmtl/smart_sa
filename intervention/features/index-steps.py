@@ -19,3 +19,8 @@ def see_title(step, text):
         assert text == world.firefox.title
     else:
         assert text == world.dom.find(".//title").text
+
+@step(r'the deployment is displayed as "(.*)"')
+def check_deployment(step, name):
+    deployment = str(world.dom.cssselect("#deployment")[0].text)
+    assert name == deployment, "Got %s" % deployment

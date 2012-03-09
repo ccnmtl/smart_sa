@@ -8,3 +8,4 @@ pip-log.txt
 snapshots
 ve-bootstrap.py
 local_settings.py
+lettuce.db
