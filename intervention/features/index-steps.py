@@ -13,3 +13,9 @@ def see_header(step, text):
         header = world.dom.cssselect('h2')[0]
         assert text.strip() == header.text.strip()
 
+@step(r'I see the page title "(.*)"')
+def see_title(step, text):
+    if world.using_selenium:
+        assert text == world.firefox.title
+    else:
+        assert text == world.dom.find(".//title").text
