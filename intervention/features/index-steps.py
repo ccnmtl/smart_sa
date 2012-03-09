@@ -35,3 +35,15 @@ def then_i_do_not_see_a_wind_login_form(step):
     forms = world.dom.cssselect("form.cu")
     assert len(forms) == 0
 
+@step(u'Then I am not logged in')
+def then_i_am_not_logged_in(step):
+    username = world.dom.cssselect("#username")[0].text.strip()
+    assert username == "", "Got '%s'" % str(username)
+
+@step(u'Then there is a login link')
+def then_there_is_a_login_link(step):
+    # <a class="loginlogout loginlogout-remote" href="/intervention/">Log In</a>
+    link = world.dom.cssselect("a.loginlogout")[0]
+    assert link.text == "Log In", "Got '%s'" % link.text
+
+
