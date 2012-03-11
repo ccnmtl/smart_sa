@@ -5,15 +5,12 @@ from intervention.installed_games import InstalledGames,GameInterface
 
 class IslandGame(GameInterface):
     def pages(self):
-        return ('one','two')
+        return ('one',)
 
     def template(self,page_id):
         game_context = {}
         if page_id == 'one':
-            return ('island_game/one.html',game_context)
-        if page_id == 'two':
-            return ('island_game/two.html',game_context)
-
+            return ('island_game/island.html',game_context)
 
 InstalledGames.register_game('island','Island', IslandGame() )
 
