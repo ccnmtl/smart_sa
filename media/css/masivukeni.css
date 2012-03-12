@@ -54,7 +54,7 @@ p a:hover, ul a:hover {text-decoration: none;}
 
 #login-cu { right: 20px; }
 
-
+form {margin: 0px; padding: 0px;}
 form.login
 {
 	background-color: #b3dcbf;
@@ -238,7 +238,7 @@ h4
 #breadcrumb a#tab-home, #breadcrumb a#tab-home:hover, #breadcrumb a.current#tab-home
 {
 	display: block;
-	width: 156px;
+	width: 100px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;
@@ -280,7 +280,7 @@ h4
 {
 	display: block;
 	position: absolute;
-	left: 224px;
+	left: 170px;
 	top: 16px;
 	font-size: 12px;
 }
@@ -320,7 +320,6 @@ h2#sessioninfo
 	list-style-type: none;
 	padding: 0px;
 	margin: 0px;
-	font-size: 14px;
 	font-weight: bold;
 }
 
@@ -337,7 +336,7 @@ h2#sessioninfo
 #nav-side ul li a
 {
 	display: block;
-	padding: 6px 20px 6px 40px;
+	padding: 6px 50px 6px 40px;
 	background-color: #eee;
 	font-weight: normal;
 }
@@ -545,7 +544,7 @@ a.action:hover { background-color: #4ba257; }
 li span.task
 {
 	position: absolute;
-	top: 8px;
+	top: 10px;
 	right: 5px;
 	width: 35px;
 	height: 15px;
@@ -558,9 +557,8 @@ li span.task
 /*start - session navigator on home page*/
 #navigator
 {
-	width: 640px;
-	height: 390px;
-	margin-left: 170px;
+	width: 940px;
+	height: 310px;
 	position: relative;
 }
 
@@ -571,8 +569,27 @@ li span.task
 	margin: 0px;
 	font-size: 14px;
 	font-weight: bold;
-	width: 315px;
 	height: 100%;
+}
+
+#navigator ul.primary
+{
+	width: 460px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#navigator ul.secondary
+{
+	width: 460px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: #fcead7;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 #navigator ul li
@@ -613,13 +630,6 @@ li span.task
 	border-bottom: 0px !important;
 }
 
-#navigator ul.primary
-{
-	width: 315px;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
 
 #navigator ul.primary li a
 {
@@ -652,16 +662,6 @@ li span.task
 	background-color: #fcead7;
 }
 
-#navigator ul.secondary
-{
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	background-color: #fcead7;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
 
 #navigator ul.secondary li a { }
 
@@ -995,6 +995,9 @@ body.logged-in #home-remote { display: block; }
 	border-radius: 5px;
 	padding: 5px;
 	border: 1px solid #f3912f;
+	margin: 10px;
+	font-size: 12px;
+	font-weight: bold;
 }
 
 .error

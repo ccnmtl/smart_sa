@@ -29,13 +29,29 @@
 
 {% block breadcrumbs %}
     {%if game %}
-      <li><a href="{{relative_root}}/intervention/{{game.activity.clientsession.intervention.id}}/">Session List</a></li>
+      <li><a href="">Session List</a></li>
     {%endif%}  
 {% endblock %}
 
-{% block breadcrumb-main %}<div>breadcrumb-main</div>{% endblock %}
+{% block breadcrumb-main %}
+<div id="breadcrumb-main">
+	<a href="{{relative_root}}/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
+</div>
+{% endblock %}
 
-{% block breadcrumb-session %}<div>breadcrumb-session</div>{% endblock %}
+{% block breadcrumb-session %}
+    {%if game %}
+<div id="breadcrumb">
+      <a class="incomplete" id="tab-home" href="{{relative_root}}/intervention/{{game.activity.clientsession.intervention.id}}/">Sessions</a>
+	<div id="breadcrumb-text">
+		You are currently in: Session #: TITLE &rarr; <span class="breadcrumb-text-current">Activity #: TITLE</span>
+	</div>
+</div>
+    {%endif%}  
+    {% if participant.is_practice %}
+    <div class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</div>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
   

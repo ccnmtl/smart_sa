@@ -4,26 +4,27 @@
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="{{relative_root}}/intervention/">Home</a>  &rarr; Intervene
+	<a href="{{relative_root}}/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
 </div>
 {% endblock %}
 
 {% block breadcrumb-session %}
 <div id="breadcrumb">
 	<a class="incomplete current" href="#" id="tab-home">Sessions</a> 
+	<!--
 	<div id="breadcrumb-text">
-		<!--You are currently in: Session 1: Getting Started  &rarr; <span class="breadcrumb-text-current">Activity 1: Welcome</span>--> 
+		You are currently in: Session #: TITLE &rarr; <span class="breadcrumb-text-current">Activity #: TITLE</span>
 	</div>
-</div>
+	--></div>
+    {% if participant.is_practice %}
+    <div class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</div>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     {{ block.super }}
     <div id="titlearea"> 
       <h1>Session List</h1>
-    {% if participant.is_practice %}
-    <p class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</p>
-    {% endif %}
     </div> 
     <div id="content-singlecolumn">
         <p class="instructions">Click on a session number to continue
