@@ -29,7 +29,7 @@
 
 {% block breadcrumbs %}
     {%if game %}
-      <li><a href="/intervention/{{game.activity.clientsession.intervention.id}}/">Session List</a></li>
+      <li><a href="{{relative_root}}/intervention/{{game.activity.clientsession.intervention.id}}/">Session List</a></li>
     {%endif%}  
 {% endblock %}
 

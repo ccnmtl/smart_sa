@@ -1,19 +1,34 @@
 {% extends "base.html" %}
+
 {% block title %}activity.html{% endblock %}
+
 {% load participant_status %}
+
 {% block js %}
    <script>
      var game_variables = {{activity.variables|safe}};
    </script>
 {% endblock %}
-{% block breadcrumbs %}
-    {%if activity %}
-      <li><a href="/intervention/{{activity.clientsession.intervention.id}}/">Session List</a></li>
+
+{% block breadcrumb-main %}
+<div id="breadcrumb-main">
+	<a href="{{relative_root}}/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
+	<form action="complete/" method="post" style="margin: 0px padding: 0px; float: right; padding-right: 4px;">
+	<input type="submit" value="Complete Session" />
+	</form>
+</div>
+{% endblock %}
+
+{% block breadcrumb-session %}
+   {%if activity %}
+<div id="breadcrumb">
+      <a class="incomplete" id="tab-home" href="{{relative_root}}/intervention/{{activity.clientsession.intervention.id}}/">Sessions</a>
+	<div id="breadcrumb-text">
+		<!--You are currently in: Session 1: Getting Started  &rarr; <span class="breadcrumb-text-current">Activity 1: Welcome</span>--> 
+	</div>
+</div>
     {%endif%}  
 {% endblock %}
-{% block breadcrumb-main %}<div>breadcrumb-main</div>{% endblock %}
-
-{% block breadcrumb-session %}<div>breadcrumb-session</div>{% endblock %}
 
 {% block content %}
     {{ block.super }}
