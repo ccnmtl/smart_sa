@@ -9,9 +9,8 @@ body
 }
 
 p, ul { font-size: 14px !important; }
-p a, ul a {color: #4ea15a;}
-p a:hover, ul a:hover {text-decoration: none;}
-
+p a, ul a { color: #4ea15a; }
+p a:hover, ul a:hover { text-decoration: none; }
 
 #home-widgets
 {
@@ -36,10 +35,7 @@ p a:hover, ul a:hover {text-decoration: none;}
 	margin-top: 20px;
 }
 
-#login-box input[type="text"], #login-box input[type="password"]
-{
-	width: 200px;
-}
+#login-box input[type="text"], #login-box input[type="password"] { width: 200px; }
 
 .login-panel
 {
@@ -50,11 +46,14 @@ p a:hover, ul a:hover {text-decoration: none;}
 }
 
 #login-all { left: 20px; }
-
-
 #login-cu { right: 20px; }
 
-form {margin: 0px; padding: 0px;}
+form
+{
+	margin: 0px;
+	padding: 0px;
+}
+
 form.login
 {
 	background-color: #b3dcbf;
@@ -149,7 +148,6 @@ h4
 
 /*stop - header*/
 /*start - nav-header*/
-
 #deployment { color: #000; }
 
 #nav-header
@@ -331,6 +329,7 @@ h2#sessioninfo
 	font-size: 14px;
 	font-weight: bold;
 	position: relative;
+	line-height: 18px;
 }
 
 #nav-side ul li a
@@ -630,7 +629,6 @@ li span.task
 	border-bottom: 0px !important;
 }
 
-
 #navigator ul.primary li a
 {
 	margin-bottom: 8px;
@@ -661,7 +659,6 @@ li span.task
 	color: #000;
 	background-color: #fcead7;
 }
-
 
 #navigator ul.secondary li a { }
 
