@@ -1,42 +1,59 @@
 {% extends "base.html" %}
-{% block title %}activity.html{% endblock %}
-{% load participant_status %}
-{% block js %}
-   <script>
-     var game_variables = {{activity.variables|safe}};
-   </script>
-{% endblock %}
-{% block breadcrumbs %}
-    {%if activity %}
-      <li><a href="/intervention/{{activity.clientsession.intervention.id}}/">Session List</a></li>
-    {%endif%}  
-{% endblock %}
-{% block breadcrumb-main %}<div>breadcrumb-main</div>{% endblock %}
 
-{% block breadcrumb-session %}<div>breadcrumb-session</div>{% endblock %}
+{% block title %}activity.html{% endblock %}
+
+{% load participant_status %}
+
+{% block js %}
+<script>
+var game_variables = {{activity.variables|safe}};
+</script>
+{% endblock %}
+
+{% block breadcrumb-main %}
+<div id="breadcrumb-main">
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
+</div>
+{% endblock %}
+
+{% block breadcrumb-session %}
+{%if activity %}
+<div id="breadcrumb">
+      <a class="incomplete" id="tab-home" href="/intervention/{{activity.clientsession.intervention.id}}/">Sessions</a>
+	<div id="breadcrumb-text">
+		You are currently in: Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; <span class="breadcrumb-text-current">Activity {{activity.index}}: {{ activity.long_title }}</span>
+	</div>
+</div>
+{%endif%}  
+{% if participant.is_practice %}
+<div class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</div>
+{% endif %}
+{% endblock %}
 
 {% block content %}
+
     {{ block.super }}
+    
 		<div id="side">
 			<h2 id="sessioninfo" class="{% get_participant_status participant activity.clientsession %}">
 				<a href="/session/{{activity.clientsession.id}}/">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}}</a>
 			</h2>
 			<div id="nav-side">
 				<ul>
-{% for a in activity.clientsession.activity_set.all %}
-<li><a class="{% get_participant_status participant a %}
-{% if forloop.first %}first{% endif %}
-{% if forloop.last %}last{% endif %}
-{% ifequal a.id activity.id %}current{% endifequal %}
-" href="/activity/{{a.id }}/">{{a.long_title}}</a>
-{% if a.game %}<span class="task">+Task</span>{% endif %}
-</li>
-{% endfor %}
-
+				{% for a in activity.clientsession.activity_set.all %}
+				<li><a class="{% get_participant_status participant a %}
+				{% if forloop.first %}first{% endif %}
+				{% if forloop.last %}last{% endif %}
+				{% ifequal a.id activity.id %}current{% endifequal %}
+				" href="/activity/{{a.id }}/">{{a.long_title}}</a>
+				{% if a.game %}<span class="task">+Task</span>{% endif %}
+				</li>
+				{% endfor %}
 				</ul>
 			</div>
 
 		</div>
+		
 		<div id="content">
 
     {% if activity %}
@@ -45,10 +62,6 @@
     <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
 
 
-      <h3 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h3>
-    {% if participant.is_practice %}
-    <p class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</p>
-    {% endif %}
 
 			<div class="nav-lateral" id="top-nav-lateral">
 			  {% with activity.next as next_activity %}
@@ -66,7 +79,7 @@
 				{% endif %}
 			  {% endwith %}
 			</div>
-
+      <h3 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h3>
          {%if activity.game %}
 	<h4 class="flag">This activity has a client task</h4>
 	{% if activity.pages %}
@@ -141,19 +154,17 @@
 	{% endif %}
 	{% if not activity.game %}
 	 <!-- if we have a game, the complete button is on the last game page-->
-      <br />  <hr />
-
-      {% if activity.collect_notes %}
-      <h4>Counselor Notes</h4>
+      <br />  
+       {% if activity.collect_notes %}
+      <h4>Questions and concerns</h4>
       <textarea name="counselor_notes" rows="5" cols="70"
 		id="counselor-notes" >{{counselor_notes}}</textarea>
       {% endif %}
 
 
-         <p>
-	     <input type="submit" value="Complete Activity" />
-	   <br style="clear: both;" /> 
-	 </p>
+	<div id="completeactivity" align="center">
+	<input type="submit" value="Complete Activity" />
+	</div>
     </form>
 	
 	{% endif %}

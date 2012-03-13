@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Add Counselor{% endblock %}
+{% block breadcrumb-main %}
+	<div id="breadcrumb-main">
+	<a href="/intervention/">Home</a> &rarr; <a href="/manage/">Administrate</a> &rarr; Add Counselor
+	</div>
+{% endblock %}
+
+{% block content %}
+<h2>Add Counselor</h2>
+<form action="." method="post">
+<p><b>Name</b><br />
+<input type="text" name="username" /></p>
+<p><b>Password</b><br />
+<input type="text" name="password" /></p>
+<input type="submit" value="add counselor" />
+</form>
+
+{% endblock %}

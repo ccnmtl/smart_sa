@@ -9,9 +9,8 @@ body
 }
 
 p, ul { font-size: 14px !important; }
-p a, ul a {color: #4ea15a;}
-p a:hover, ul a:hover {text-decoration: none;}
-
+p a, ul a { color: #4ea15a; }
+p a:hover, ul a:hover { text-decoration: none; }
 
 #home-widgets
 {
@@ -36,10 +35,7 @@ p a:hover, ul a:hover {text-decoration: none;}
 	margin-top: 20px;
 }
 
-#login-box input[type="text"], #login-box input[type="password"]
-{
-	width: 200px;
-}
+#login-box input[type="text"], #login-box input[type="password"] { width: 200px; }
 
 .login-panel
 {
@@ -50,10 +46,13 @@ p a:hover, ul a:hover {text-decoration: none;}
 }
 
 #login-all { left: 20px; }
-
-
 #login-cu { right: 20px; }
 
+form
+{
+	margin: 0px;
+	padding: 0px;
+}
 
 form.login
 {
@@ -138,7 +137,11 @@ h2
 	padding: 0px;
 }
 
-h3 { border-bottom: 1px solid #ccc; }
+h3 
+{ 
+	margin: 0px;
+	padding: 0px;
+}
 
 h4
 {
@@ -149,7 +152,6 @@ h4
 
 /*stop - header*/
 /*start - nav-header*/
-
 #deployment { color: #000; }
 
 #nav-header
@@ -238,7 +240,7 @@ h4
 #breadcrumb a#tab-home, #breadcrumb a#tab-home:hover, #breadcrumb a.current#tab-home
 {
 	display: block;
-	width: 156px;
+	width: 100px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;
@@ -280,7 +282,7 @@ h4
 {
 	display: block;
 	position: absolute;
-	left: 224px;
+	left: 170px;
 	top: 16px;
 	font-size: 12px;
 }
@@ -291,7 +293,7 @@ h4
 #contentcontainer
 {
 	position: relative;
-	padding: 20px;
+	padding: 30px 20px 20px 20px;
 }
 
 h2#sessioninfo
@@ -304,6 +306,7 @@ h2#sessioninfo
 	font-weight: bold;
 	color: #000;
 	padding: 6px 20px 6px 40px;
+	width: 800px;
 }
 
 /*start - nav-side*/
@@ -320,7 +323,6 @@ h2#sessioninfo
 	list-style-type: none;
 	padding: 0px;
 	margin: 0px;
-	font-size: 14px;
 	font-weight: bold;
 }
 
@@ -332,12 +334,13 @@ h2#sessioninfo
 	font-size: 14px;
 	font-weight: bold;
 	position: relative;
+	line-height: 18px;
 }
 
 #nav-side ul li a
 {
 	display: block;
-	padding: 6px 20px 6px 40px;
+	padding: 6px 50px 6px 40px;
 	background-color: #eee;
 	font-weight: normal;
 }
@@ -412,6 +415,10 @@ table.manage
 	width: 100%;
 }
 
+table.manage col#firstname { width: 25%}
+table.manage col#status { width: 25%}
+table.manage col#actions { width: 50%}
+
 table.manage th
 {
 	border: 1px solid #ccc;
@@ -429,8 +436,9 @@ table.manage td
 
 table.manage a.action
 {
-	display: inline;
-	width: 100px;
+float: left;
+margin-left: 10px;
+width: 200px;
 }
 
 table#choices { margin-top: 20px; }
@@ -457,7 +465,7 @@ a.action
 	padding: 5px 10px 5px 10px;
 	text-decoration: none;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 14px;
 	color: #fff;
 	background-color: #b4dcc0;
 	width: 180px;
@@ -499,8 +507,8 @@ a.action:hover { background-color: #4ba257; }
 
 #top-nav-lateral
 {
-	margin-top: -35px;
-	margin-bottom: -20px;
+	margin-top: -30px;
+	padding: 0px;
 }
 
 #bottom-nav-lateral { margin-top: 40px; }
@@ -545,7 +553,7 @@ a.action:hover { background-color: #4ba257; }
 li span.task
 {
 	position: absolute;
-	top: 8px;
+	top: 10px;
 	right: 5px;
 	width: 35px;
 	height: 15px;
@@ -558,9 +566,8 @@ li span.task
 /*start - session navigator on home page*/
 #navigator
 {
-	width: 640px;
-	height: 390px;
-	margin-left: 170px;
+	width: 940px;
+	height: 310px;
 	position: relative;
 }
 
@@ -571,8 +578,27 @@ li span.task
 	margin: 0px;
 	font-size: 14px;
 	font-weight: bold;
-	width: 315px;
 	height: 100%;
+}
+
+#navigator ul.primary
+{
+	width: 460px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#navigator ul.secondary
+{
+	width: 460px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: #fcead7;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 #navigator ul li
@@ -613,14 +639,6 @@ li span.task
 	border-bottom: 0px !important;
 }
 
-#navigator ul.primary
-{
-	width: 315px;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
 #navigator ul.primary li a
 {
 	margin-bottom: 8px;
@@ -650,17 +668,6 @@ li span.task
 	text-decoration: none;
 	color: #000;
 	background-color: #fcead7;
-}
-
-#navigator ul.secondary
-{
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	background-color: #fcead7;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
 }
 
 #navigator ul.secondary li a { }
@@ -995,6 +1002,9 @@ body.logged-in #home-remote { display: block; }
 	border-radius: 5px;
 	padding: 5px;
 	border: 1px solid #f3912f;
+	margin: 10px;
+	font-size: 12px;
+	font-weight: bold;
 }
 
 .error
@@ -1006,4 +1016,12 @@ body.logged-in #home-remote { display: block; }
 	border-radius: 5px;
 	padding: 5px;
 	border: 1px solid red;
+}
+
+#completeactivity {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 20px;
+	background-color: #f8ece0;
 }

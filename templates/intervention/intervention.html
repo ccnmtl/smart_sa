@@ -1,22 +1,35 @@
 {% extends "base.html" %}
 {% block title %}intervention.html{% endblock %}
 {% load participant_status %}
-{% block breadcrumb-main %}<div>breadcrumb-main</div>{% endblock %}
 
-{% block breadcrumb-session %}<div>breadcrumb-session</div>{% endblock %}
+{% block breadcrumb-main %}
+<div id="breadcrumb-main">
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
+</div>
+{% endblock %}
+
+{% block breadcrumb-session %}
+<div id="breadcrumb">
+	<a class="incomplete current" href="#" id="tab-home">Sessions</a> 
+	<!--
+	<div id="breadcrumb-text">
+		You are currently in: Session #: TITLE &rarr; <span class="breadcrumb-text-current">Activity #: TITLE</span>
+	</div>
+	--></div>
+    {% if participant.is_practice %}
+    <div class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</div>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     {{ block.super }}
     <div id="titlearea"> 
-      <h1>Session List</h1>
-    {% if participant.is_practice %}
-    <p class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</p>
-    {% endif %}
+      <h2>Sessions</h2>
     </div> 
     <div id="content-singlecolumn">
-        <p class="instructions">Click on a session number to continue
-	  with the intervention for <b>{{participant.name}}</b>.
-	  The suggested next session is highlighted.</p>
+        <p class="instructions">
+       Click on a session number to continue with the intervention for <b>{{participant.name}}</b>. The suggested next session is highlighted.
+	  </p>
 
 	<div id="navigator">
 	  <ul class="primary">
@@ -30,7 +43,7 @@
         {% endif %}
         {% endfor %}
 	  </ul>
-	  <ul class="secondary">
+	  <ul class="secondary" style="background-color: #fff;">
 	  </ul>
 	</div>
 

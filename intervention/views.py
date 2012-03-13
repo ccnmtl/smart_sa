@@ -85,6 +85,14 @@ def set_participant(request):
     return dict(next=request.GET.get('next','/intervention/'))
 
 @login_required
+def clear_participant(request):
+    try:
+        del request.session['participant_id']
+    except KeyError:
+        pass
+    return HttpResponseRedirect(request.GET.get('next','/intervention/'))
+
+@login_required
 def set_deployment(request):
     if request.POST:
         d = Deployment.objects.all()[0]
@@ -164,6 +172,18 @@ def view_participant(request,participant_id):
 def view_counselor(request,counselor_id):
     c = get_object_or_404(User,id=counselor_id)
     return dict(counselor=c,notes=CounselorNote.objects.filter(counselor=c))
+
+@render_to('intervention/add_counselor.html')
+@login_required
+def add_counselor(request):
+    if request.method == 'POST':
+        u = User.objects.create(username=request.POST.get('username',''))
+        u.set_password(request.POST.get('password',''))
+        u.save()
+        return HttpResponseRedirect("/manage/")
+    else:
+        return dict()
+
 
 @render_to('intervention/intervention.html')
 @participant_required

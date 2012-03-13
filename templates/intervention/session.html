@@ -1,42 +1,54 @@
 {% extends "base.html" %}
+
 {% block title %}session.html{% endblock %}
 
 {% load participant_status %}
 
-{% block breadcrumbs %}
-    {%if session %}
-      <li><a href="/intervention/{{session.intervention.id}}/">Session List</a></li>
-    {%endif%}  
+{% block breadcrumb-main %}
+<div id="breadcrumb-main">
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
+	<form action="complete/" method="post" style="margin: 0px padding: 0px; float: right; padding-right: 4px;">
+	<input type="submit" value="Complete Session" />
+	</form>
+</div>
 {% endblock %}
 
-
-{% block breadcrumb-main %}<div>breadcrumb-main</div>{% endblock %}
-
-{% block breadcrumb-session %}<div>breadcrumb-session</div>{% endblock %}
+{% block breadcrumb-session %}
+{%if session %}
+<div id="breadcrumb">
+      <a class="incomplete current" id="tab-home" href="/intervention/{{session.intervention.id}}/">Sessions</a>
+	<!--
+	<div id="breadcrumb-text">
+		You are currently in: Session #: TITLE &rarr; <span class="breadcrumb-text-current">Activity #: TITLE</span>
+	</div>
+	-->
+</div>
+{%endif%}  
+    {% if participant.is_practice %}
+    <div class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</div>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     {{ block.super }}
     
     {% if session %}
 
-      <h3 id="session{{session.id}}" class="{% get_participant_status participant session %} sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h3>
-
-    {% if participant.is_practice %}
-    <p class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</p>
-    {% endif %}
+      <!--
+      <h2 id="session{{session.id}}" class="{% get_participant_status participant session %} sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h2>
+	-->
+      <h2>Session {{ session.index }}: {{ session.long_title }}</h2>
 
       {% if session.introductory_copy %}
 	<p class="instructions">{{session.introductory_copy|safe}}</p><hr />
       {% endif %}
-      {% if activities %}       
-        <p class="instructions">
-	  Click on an activity to continue with this session.  
-	  The suggested next activity is highlighted.
-	</p>
-
-
-
-	<div id="navigator">
+      {% if activities %}   
+      
+       <p class="instructions">
+	 Now, click on an activity to continue with this session.  The suggested next activity is highlighted.
+	  </p>
+	  
+   	<div id="navigator">
 	  <ul class="primary">
         {% for s in session.intervention.clientsession_set.all %}
 	{% if not s.defaulter or participant.defaulter %}

@@ -1,11 +1,13 @@
 from lettuce.django import django_url
 from lettuce import before, after, world, step
 from django.test import client
-from lxml import html
-
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.keys import Keys
+try:
+    from lxml import html
+    from selenium import webdriver
+    from selenium.common.exceptions import NoSuchElementException
+    from selenium.webdriver.common.keys import Keys
+except:
+    pass
 
 @before.all
 def setup_browser():

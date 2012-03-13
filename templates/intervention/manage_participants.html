@@ -4,7 +4,7 @@
 
 {% block breadcrumb-main %} 
 <div id="breadcrumb-main">
-	<a href="{{relative_root}}intervention/">Home</a> &rarr; Administrate 
+	<a href="/intervention/">Home</a> &rarr; Administrate 
 </div>
 {% endblock %} 
 
@@ -25,7 +25,9 @@
 
 {% if participants %} 
 <table class="manage" cellspacing="0">
-	<col id="firstname" /> <col id="status" /> <col id="actions" /> 
+	<col id="firstname" /> 
+	<col id="status" /> 
+	<col id="actions" /> 
 	<tr>
 	<td colspan="3">
 <a class="action" href="/manage/add_participant/">+ Add Participant</a>	
@@ -40,7 +42,7 @@
 	<tr>
 		<td>{{participant.name}}</td>
 		<td>{% if participant.status %}Active{% else %}Inactive{% endif %}</td>
-		<td> <a class="action" href="/manage/participant/{{participant.id}}/view/">View Notes</a> <a class="action" href="/manage/participant/{{participant.id}}/edit/">Edit</a> </td>
+		<td> <a class="action" href="/manage/participant/{{participant.id}}/view/">View Notes for {{participant.name}}</a> <a class="action" href="/manage/participant/{{participant.id}}/edit/">Edit Notes for {{participant.name}}</a> </td>
 	</tr>
 	{% endfor %} 
 </table>
@@ -57,7 +59,7 @@
 	<col id="firstname" /> <col id="status" /> <col id="actions" /> 
 	<tr>
 	<td colspan="3">
-	<a class="action" href="/admin/auth/user/add/">+ Add a Counselor</a>	
+	<a class="action" href="/manage/add_counselor/">+ Add a Counselor</a>	
 	</td>
 	</tr>
 	<tr>
@@ -69,7 +71,7 @@
 	<tr>
 		<td>{{counselor.username}}</td>
 		<td>{% if counselor.is_active %}Active{% else %}Inactive{% endif %}</td>
-		<td><a class="action" href="/manage/counselor/{{counselor.id}}/view/">View Notes</a> <a class="action" href="/admin/auth/user/{{counselor.id}}/">Edit</a> </td>
+		<td><a class="action" href="/manage/counselor/{{counselor.id}}/view/">View Notes for {{counselor.username}}</a> <a class="action" href="/admin/auth/user/{{counselor.id}}/">Edit Notes for {{counselor.username}}</a> </td>
 	</tr>
 	{% endfor %} 
 </table>
