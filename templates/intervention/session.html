@@ -6,7 +6,7 @@
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="{{relative_root}}/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
 	<form action="complete/" method="post" style="margin: 0px padding: 0px; float: right; padding-right: 4px;">
 	<input type="submit" value="Complete Session" />
 	</form>
@@ -16,7 +16,7 @@
 {% block breadcrumb-session %}
 {%if session %}
 <div id="breadcrumb">
-      <a class="incomplete current" id="tab-home" href="{{relative_root}}/intervention/{{session.intervention.id}}/">Sessions</a>
+      <a class="incomplete current" id="tab-home" href="/intervention/{{session.intervention.id}}/">Sessions</a>
 	<!--
 	<div id="breadcrumb-text">
 		You are currently in: Session #: TITLE &rarr; <span class="breadcrumb-text-current">Activity #: TITLE</span>
