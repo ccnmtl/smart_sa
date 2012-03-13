@@ -1,5 +1,7 @@
 {% extends "intervention/game.html" %}
 
+{% block title %}Island Activity{% endblock %}
+
 {% block game_js %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     <script type="text/javascript" src="/site_media/js/underscore/underscore-min.js"></script>
@@ -25,23 +27,30 @@
                 
             <img src="/site_media/island_game/images/water.png" id="water" alt="water"></img>
                 
-            <img id="figure" alt="figure"></img>
+            <img id="figure" alt="figure" class="figure_one"></img>
               
-            <div id="infection_label" class="slider_label"><br />oi</div>
-            <img src="/site_media/island_game/images/slider_bar.png" id="infection_slider" class="slider" />
-            <img src="/site_media/island_game/images/slider_handle.png" id="infection" class="slider_thumb" />
+            <div id="infection_label" class="slider_label infection"><br />oi</div>
+            <img src="/site_media/island_game/images/slider_bar.png" id="infection_slider" class="slider infection" />
+            <img src="/site_media/island_game/images/slider_handle.png" id="infection" class="slider_thumb infection" />
             
-            <div id="viral_load_label" class="slider_label">viral<br />load</div>
-            <img src="/site_media/island_game/images/slider_bar.png" id="viral_load_slider" class="slider" />
-            <img src="/site_media/island_game/images/slider_handle.png" id="viral_load" class="slider_thumb" />
+            <div id="viral_load_label" class="slider_label viral_load">viral<br />load</div>
+            <img src="/site_media/island_game/images/slider_bar.png" id="viral_load_slider" class="slider viral_load" />
+            <img src="/site_media/island_game/images/slider_handle.png" id="viral_load" class="slider_thumb viral_load" />
               
-            <div id="cd4_count_label" class="slider_label">cd4<br />count</div>
-            <img src="/site_media/island_game/images/slider_bar.png" id="cd4_count_slider" class="slider" />
-            <img src="/site_media/island_game/images/slider_handle.png" id="cd4_count" class="slider_thumb" />
+            <div id="cd4_count_label" class="slider_label cd4_count">cd4<br />count</div>
+            <img src="/site_media/island_game/images/slider_bar.png" id="cd4_count_slider" class="slider cd4_count" />
+            <img src="/site_media/island_game/images/slider_handle.png" id="cd4_count" class="slider_thumb cd4_count" />
 
-            <div id="adherence_label" class="slider_label"><br />adherence</div>
-            <img src="/site_media/island_game/images/slider_bar.png" id="adherence_slider" class="slider" />
-            <img src="/site_media/island_game/images/slider_handle.png" id="adherence" class="slider_thumb" />
+            <div id="adherence_label" class="slider_label" style="display: none"><br />adherence</div>
+            <img src="/site_media/island_game/images/slider_bar.png" id="adherence_slider" class="slider" style="display: none"/>
+            <img src="/site_media/island_game/images/slider_handle.png" id="adherence" class="slider_thumb" style="display: none"/>
+            
+            <div id="island_view_navigation">
+                <img id="left" class="navigation_button" src="/site_media/images/leftarrow.png" style="display: none"></img>
+                <span id="island_view_label">BEFORE GOING ON ARVS</span>
+                <img id="right" class="navigation_button" src="/site_media/images/rightarrow.png"></img>
+            </div>
+            
         </div>
 
     {% endblock %}

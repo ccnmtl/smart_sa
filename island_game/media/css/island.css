@@ -1,7 +1,7 @@
 .island-container {
     height: 465px;
     width: 100%; 
-    background-image: url(/site_media/island_game/images/backround_part1.jpg);
+    background-image: url(/site_media/island_game/images/background.jpg);
     background-repeat: no-repeat;
 }
 
@@ -22,7 +22,14 @@
     height: 184px;
     width: 110px;
     position: absolute;
-    left: 210px;
+}
+
+.figure_one {
+    left: 210px !important;
+}
+
+.figure_two {
+    left: 300px;
 }
 
 .slider {
@@ -83,3 +90,20 @@
 #adherence_label {
     left: 482px;    
 }
+
+#island_view_navigation {
+    left: 20px; 
+    top: 500px;
+    width: 545px;
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    z-index: 300;
+    color: #fff
+}
+
+.navigation_button {
+    vertical-align: middle;
+}
+
+

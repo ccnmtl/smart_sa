@@ -1,15 +1,18 @@
 {% extends "intervention/game.html" %}
 
-{% block game_js %}
+{% block title %}Support Tree Activity{% endblock %}
 
+{% block game_css %}
+    <link href="/site_media/ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block game_js %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
     <script type="text/javascript" src="/site_media/js/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="/site_media/js/backbone/backbone-min.js"></script>
     <script type="text/javascript" src="/site_media/ssnmtree_game/js/ssnmtreeview.js"></script>
 {% endblock %}
-{% block game_css %}
-    <link href="/site_media/ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
-{% endblock %}
+
 
 {% block game_content %}
     {% comment %}
@@ -19,7 +22,7 @@
         Now, let's identify those on the tree that provide you with practical support, meaning that they are available to do things for you.
     {% endcomment %}
     <div style="position:relative;height:465px;width:545px">
-        <div id="game-mode" data-game-mode="{{game_context.mode}}" />
+        <div id="game-mode" data-game-mode="{{game_context.mode}}"></div>
         <img class="bare-tree" src="/site_media/ssnmtree_game/images/bare_tree.png" />
         <div id="fruittree">
             <!-- ** DO NOT DISTURB: 
