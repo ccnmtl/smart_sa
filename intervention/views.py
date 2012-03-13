@@ -173,6 +173,18 @@ def view_counselor(request,counselor_id):
     c = get_object_or_404(User,id=counselor_id)
     return dict(counselor=c,notes=CounselorNote.objects.filter(counselor=c))
 
+@render_to('intervention/add_counselor.html')
+@login_required
+def add_counselor(request):
+    if request.method == 'POST':
+        u = User.objects.create(username=request.POST.get('username',''))
+        u.set_password(request.POST.get('password',''))
+        u.save()
+        return HttpResponseRedirect("/manage/")
+    else:
+        return dict()
+
+
 @render_to('intervention/intervention.html')
 @participant_required
 @login_required
