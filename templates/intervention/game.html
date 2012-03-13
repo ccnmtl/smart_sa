@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% block title %}game.html{% endblock %}
+
 {% block js %}
    <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script>
    <script type="text/javascript" src="/site_media/js/static_auth/local_session.js"></script>    
@@ -44,7 +46,7 @@
 <div id="breadcrumb">
       <a class="incomplete" id="tab-home" href="{{relative_root}}/intervention/{{game.activity.clientsession.intervention.id}}/">Sessions</a>
 	<div id="breadcrumb-text">
-		You are currently in: Session #: TITLE &rarr; <span class="breadcrumb-text-current">Activity #: TITLE</span>
+		You are currently in: Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; <span class="breadcrumb-text-current">Activity {{game.activity.index}}: {{ game.activity.long_title }}}</span>
 	</div>
 </div>
     {%endif%}  
