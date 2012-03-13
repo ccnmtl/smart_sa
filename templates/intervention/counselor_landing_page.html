@@ -4,7 +4,7 @@
 
 {% block breadcrumb-main %}
 	<div id="breadcrumb-main">
-	<a href="{{relative_root}}/intervention/">Home</a>
+	<a href="/intervention/">Home</a>
 	</div>
 {% endblock %}
 
@@ -31,7 +31,7 @@
 {% endif %}
 	    <tr>
 	      <td>
-		<a class="action" href="{{intervention.get_absolute_url}}">Intervene</a>
+		<a class="action" href="/clear_participant/?next={{intervention.get_absolute_url}}">Intervene</a>
 	      </td>
 	      <td>
 		Counselors and administrators can counsel participants.

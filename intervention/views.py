@@ -85,6 +85,14 @@ def set_participant(request):
     return dict(next=request.GET.get('next','/intervention/'))
 
 @login_required
+def clear_participant(request):
+    try:
+        del request.session['participant_id']
+    except KeyError:
+        pass
+    return HttpResponseRedirect(request.GET.get('next','/intervention/'))
+
+@login_required
 def set_deployment(request):
     if request.POST:
         d = Deployment.objects.all()[0]

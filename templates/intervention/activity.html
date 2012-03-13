@@ -12,14 +12,14 @@ var game_variables = {{activity.variables|safe}};
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="{{relative_root}}/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
 </div>
 {% endblock %}
 
 {% block breadcrumb-session %}
 {%if activity %}
 <div id="breadcrumb">
-      <a class="incomplete" id="tab-home" href="{{relative_root}}/intervention/{{activity.clientsession.intervention.id}}/">Sessions</a>
+      <a class="incomplete" id="tab-home" href="/intervention/{{activity.clientsession.intervention.id}}/">Sessions</a>
 	<div id="breadcrumb-text">
 		You are currently in: Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; <span class="breadcrumb-text-current">Activity {{activity.index}}: {{ activity.long_title }}</span>
 	</div>
