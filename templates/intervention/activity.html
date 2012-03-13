@@ -5,9 +5,9 @@
 {% load participant_status %}
 
 {% block js %}
-   <script>
-     var game_variables = {{activity.variables|safe}};
-   </script>
+<script>
+var game_variables = {{activity.variables|safe}};
+</script>
 {% endblock %}
 
 {% block breadcrumb-main %}
@@ -21,7 +21,7 @@
 <div id="breadcrumb">
       <a class="incomplete" id="tab-home" href="/intervention/{{activity.clientsession.intervention.id}}/">Sessions</a>
 	<div id="breadcrumb-text">
-		You are currently in: Session #: TITLE &rarr; <span class="breadcrumb-text-current">Activity #: TITLE</span>
+		You are currently in: Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; <span class="breadcrumb-text-current">Activity {{activity.index}}: {{ activity.long_title }}</span>
 	</div>
 </div>
 {%endif%}  
@@ -40,16 +40,15 @@
 			</h2>
 			<div id="nav-side">
 				<ul>
-{% for a in activity.clientsession.activity_set.all %}
-<li><a class="{% get_participant_status participant a %}
-{% if forloop.first %}first{% endif %}
-{% if forloop.last %}last{% endif %}
-{% ifequal a.id activity.id %}current{% endifequal %}
-" href="/activity/{{a.id }}/">{{a.long_title}}</a>
-{% if a.game %}<span class="task">+Task</span>{% endif %}
-</li>
-{% endfor %}
-
+				{% for a in activity.clientsession.activity_set.all %}
+				<li><a class="{% get_participant_status participant a %}
+				{% if forloop.first %}first{% endif %}
+				{% if forloop.last %}last{% endif %}
+				{% ifequal a.id activity.id %}current{% endifequal %}
+				" href="/activity/{{a.id }}/">{{a.long_title}}</a>
+				{% if a.game %}<span class="task">+Task</span>{% endif %}
+				</li>
+				{% endfor %}
 				</ul>
 			</div>
 
@@ -155,18 +154,16 @@
 	{% endif %}
 	{% if not activity.game %}
 	 <!-- if we have a game, the complete button is on the last game page-->
-      <br />  <hr />
-
-      {% if activity.collect_notes %}
+      <br />  
+       {% if activity.collect_notes %}
       <h4>Questions and concerns</h4>
       <textarea name="counselor_notes" rows="5" cols="70"
 		id="counselor-notes" >{{counselor_notes}}</textarea>
       {% endif %}
 
 
-	<div align="center">
+	<div id="completeactivity" align="center">
 	<input type="submit" value="Complete Activity" />
-	<br style="clear: both;" /> 
 	</div>
     </form>
 	

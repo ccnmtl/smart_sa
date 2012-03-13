@@ -137,7 +137,11 @@ h2
 	padding: 0px;
 }
 
-h3 { border-bottom: 1px solid #ccc; }
+h3 
+{ 
+	margin: 0px;
+	padding: 0px;
+}
 
 h4
 {
@@ -289,7 +293,7 @@ h4
 #contentcontainer
 {
 	position: relative;
-	padding: 20px;
+	padding: 30px 20px 20px 20px;
 }
 
 h2#sessioninfo
@@ -302,6 +306,7 @@ h2#sessioninfo
 	font-weight: bold;
 	color: #000;
 	padding: 6px 20px 6px 40px;
+	width: 800px;
 }
 
 /*start - nav-side*/
@@ -410,6 +415,10 @@ table.manage
 	width: 100%;
 }
 
+table.manage col#firstname { width: 25%}
+table.manage col#status { width: 25%}
+table.manage col#actions { width: 50%}
+
 table.manage th
 {
 	border: 1px solid #ccc;
@@ -427,8 +436,9 @@ table.manage td
 
 table.manage a.action
 {
-	display: inline;
-	width: 100px;
+float: left;
+margin-left: 10px;
+width: 200px;
 }
 
 table#choices { margin-top: 20px; }
@@ -455,7 +465,7 @@ a.action
 	padding: 5px 10px 5px 10px;
 	text-decoration: none;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 14px;
 	color: #fff;
 	background-color: #b4dcc0;
 	width: 180px;
@@ -497,8 +507,8 @@ a.action:hover { background-color: #4ba257; }
 
 #top-nav-lateral
 {
-	margin-top: -35px;
-	margin-bottom: -20px;
+	margin-top: -30px;
+	padding: 0px;
 }
 
 #bottom-nav-lateral { margin-top: 40px; }
@@ -1006,4 +1016,12 @@ body.logged-in #home-remote { display: block; }
 	border-radius: 5px;
 	padding: 5px;
 	border: 1px solid red;
+}
+
+#completeactivity {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 20px;
+	background-color: #f8ece0;
 }
