@@ -69,8 +69,9 @@ current_user = {
   InterventionSmart.prototype.saveState = function (callback) {
     var url = "/save_game_state/";
     var deferred = MochiKit.Async.doXHR(url,{'method':'POST', 'sendContent' : MB.serializeJSON(window.ss_game_state)});
-    if (callback)
-        deferred.addCallback(callback);
+    if (callback) {
+      deferred.addCallback(callback);
+    }
   };
 
 
