@@ -12,7 +12,7 @@ var game_variables = {{activity.variables|safe}};
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; NAME's Session 	   
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; Working with <b>{{participant.name}}</b> 
 </div>
 {% endblock %}
 
@@ -41,12 +41,13 @@ var game_variables = {{activity.variables|safe}};
 			<div id="nav-side">
 				<ul>
 				{% for a in activity.clientsession.activity_set.all %}
-				<li><a class="{% get_participant_status participant a %}
+				<li>
+				<a class="
+				{% get_participant_status participant a %} 
 				{% if forloop.first %}first{% endif %}
-				{% if forloop.last %}last{% endif %}
+				{% if forloop.last %}last{% endif %} 
 				{% ifequal a.id activity.id %}current{% endifequal %}
-				" href="/activity/{{a.id }}/">{{a.long_title}}</a>
-				{% if a.game %}<span class="task">+Task</span>{% endif %}
+				" href="/activity/{{a.id }}/">{{a.long_title}}</a>{% if a.game %}<span class="task">+Task</span>{% endif %}
 				</li>
 				{% endfor %}
 				</ul>
@@ -57,7 +58,7 @@ var game_variables = {{activity.variables|safe}};
 		<div id="content">
 
     {% if activity %}
-    <form action="complete/" method="post">
+    <form name="completeactivity" action="complete/" method="post">
 
     <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
 
@@ -66,16 +67,17 @@ var game_variables = {{activity.variables|safe}};
 			<div class="nav-lateral" id="top-nav-lateral">
 			  {% with activity.next as next_activity %}
 			     {% if next_activity %}
-				<a href="/activity/{{next_activity.id }}/">Next &rarr;</a> 
+			     
+				<a href="/activity/{{next_activity.id }}/" onclick="document['completeactivity'].submit()">Next &rarr;</a> 
                              {% else %}
-				Next &rarr;
+				<a href="/session/{{activity.clientsession.id}}/" onclick="document['completeactivity'].submit()">We're Done!</a> 
                              {% endif %}
 			  {% endwith %}
 			  {% with activity.prev as prev_activity %}
 				{% if prev_activity %}
 				<a href="/activity/{{prev_activity.id }}/">&larr; Previous</a> 
 				{% else %}
-				&larr; Previous
+				<!--START - There's no activity before this.-->
 				{% endif %}
 			  {% endwith %}
 			</div>
@@ -122,10 +124,10 @@ var game_variables = {{activity.variables|safe}};
 
  
           
-     <h4>Objective(s)</h4>
-        <div class="objective">
-	  {{activity.objective_copy|safe}}
+     <div id="suggestedtime">
+	Estimated Time to Complete: {{activity.objective_copy|safe}}
 	</div>
+	
 	<h4>Procedure</h4>
 	{% if not test and activity.instruction_set.count %}
  
@@ -162,30 +164,26 @@ var game_variables = {{activity.variables|safe}};
       {% endif %}
 
 
-	<div id="completeactivity" align="center">
-	<input type="submit" value="Complete Activity" />
-	</div>
-    </form>
-	
-	{% endif %}
- 
 			<div class="nav-lateral" id="bottom-nav-lateral">
 			  <a id="top" href="#pagestart">&uarr; Back to Top</a>
 			  {% with activity.next as next_activity %}
 			     {% if next_activity %}
-				<a href="/activity/{{next_activity.id }}/">Next &rarr;</a> 
+				<a href="/activity/{{next_activity.id }}/" onclick="document['completeactivity'].submit()">Next &rarr;</a> 
                              {% else %}
-				Next &rarr;
+				<a href="/session/{{activity.clientsession.id}}/" onclick="document['completeactivity'].submit()">We're Done!</a> 
                              {% endif %}
 			  {% endwith %}
 			  {% with activity.prev as prev_activity %}
 				{% if prev_activity %}
 				<a href="/activity/{{prev_activity.id }}/">&larr; Previous</a> 
 				{% else %}
-				&larr; Previous
+				<!--START - There's no activity before this.-->
 				{% endif %}
 			  {% endwith %}
 			</div>
+	
+	{% endif %}
+ 
 
 </div>  
 

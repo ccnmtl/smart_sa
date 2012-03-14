@@ -260,7 +260,7 @@ h4
 
 #breadcrumb a#tab-home
 {
-	background-color: #eee;
+	background-color: #fcead7;
 	color: #000;
 }
 
@@ -306,7 +306,18 @@ h2#sessioninfo
 	font-weight: bold;
 	color: #000;
 	padding: 6px 20px 6px 40px;
-	width: 800px;
+	width: 640px;
+}
+
+h2#sessioninfo a
+{
+text-decoration: none;
+color: #000;
+}
+
+h2#sessioninfo a:hover
+{
+text-decoration: underline;
 }
 
 /*start - nav-side*/
@@ -316,6 +327,10 @@ h2#sessioninfo
 	left: 10px;
 	top: 50px;
 	width: 250px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
 }
 
 #nav-side ul
@@ -341,50 +356,38 @@ h2#sessioninfo
 {
 	display: block;
 	padding: 6px 50px 6px 40px;
-	background-color: #eee;
+	background-color: #fcead7;
 	font-weight: normal;
 }
 
 #nav-side ul li a:link
 {
 	text-decoration: none;
-	color: #bfbfbf;
-}
-
-#nav-side ul li a:link
-{
-	text-decoration: none;
-	color: #bfbfbf;
-}
-
-#nav-side ul li a:hover
-{
-	text-decoration: underline;
-	color: #4ea15a;
-}
-
-#nav-side ul li a:active
-{
-	text-decoration: none;
-	color: #4ea15a;
-}
-
-#nav-side ul li a:visited
-{
-	text-decoration: none;
-	color: #bfbfbf;
-}
-
-#nav-side ul li a.current
-{
-	background-color: #fff;
 	color: #000;
 }
 
 #nav-side ul li a:hover
 {
 	text-decoration: underline;
-	color: #4ea15a;
+	color: #000;
+}
+
+#nav-side ul li a:active
+{
+	text-decoration: none;
+	color: #fff;
+}
+
+#nav-side ul li a:visited
+{
+	text-decoration: none;
+	color: #000;
+}
+
+#nav-side ul li a.current
+{
+	background-color: #fff;
+	color: #f3912f;
 }
 
 #nav-side ul li a.first
@@ -1000,7 +1003,7 @@ body.logged-in #home-remote { display: block; }
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	padding: 5px;
+	padding: 5px 10px 5px 10px;
 	border: 1px solid #f3912f;
 	margin: 10px;
 	font-size: 12px;
@@ -1025,3 +1028,16 @@ body.logged-in #home-remote { display: block; }
 	padding: 20px;
 	background-color: #f8ece0;
 }
+
+#suggestedtime
+{
+	font-size: 11px;
+	font-weight: bold;
+	background-image: url(/site_media/images/clock-icon.jpg);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	padding: 0px 0px 0px 24px;
+	color: #666;
+}
+
+#endintervention {float: right; padding-right: 10px;} 	   
