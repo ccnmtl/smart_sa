@@ -57,134 +57,127 @@ var game_variables = {{activity.variables|safe}};
 		
 		<div id="content">
 
-    {% if activity %}
-    <form name="completeactivity" action="complete/" method="post">
-
-    <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
-
-
-
-			<div class="nav-lateral" id="top-nav-lateral">
-			  {% with activity.next as next_activity %}
-			     {% if next_activity %}
-			     
-				<a href="/activity/{{next_activity.id }}/" onclick="document['completeactivity'].submit()">Next &rarr;</a> 
-                             {% else %}
-				<a href="/session/{{activity.clientsession.id}}/" onclick="document['completeactivity'].submit()">We're Done!</a> 
-                             {% endif %}
-			  {% endwith %}
-			  {% with activity.prev as prev_activity %}
-				{% if prev_activity %}
-				<a href="/activity/{{prev_activity.id }}/">&larr; Previous</a> 
-				{% else %}
-				<!--START - There's no activity before this.-->
-				{% endif %}
-			  {% endwith %}
-			</div>
-      <h3 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h3>
-         {%if activity.game %}
-	<h4 class="flag">This activity has a client task</h4>
-	{% if activity.pages %}
-	  <p>
-	    {% if not test %}
-	      <a id="tasklink" class="hilite" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">START</a>
-	      <ul id="all-task-pages">
-		{%for taskpage in activity.gamepage_set.all %}
-		<li><a id="taskpage-{{taskpage.page_name}}" 
-		       href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">
-		  {{taskpage.page_name}}
-		</a></li>
-		{%endfor%}
-	      </ul>
-	    {%else%}
-	      <a id="tasklink" class="hilite" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">START</a>
-	      <ul id="all-task-pages">
-		{%for taskpage in activity.pages %}
-		<li><a id="taskpage-{{taskpage}}" 
-		       href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">
-		  {{taskpage}}
-		</a></li>
-		{%endfor%}
-	      </ul>
-	    {%endif%}	    
-	  </p>
-
-	{%endif%}
-      {%endif%}
-    {% else %}
-      <p>No activity defined.</p>
-    {% endif %}
-
+	    {% if activity %}
+	    <form name="completeactivity" action="complete/" method="post">
 	
-    <div id="messaging">
-       Your wish is my command
-    </div>	
-     
-     
+	    <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
 
- 
-          
-     <div id="suggestedtime">
-	Estimated Time to Complete: {{activity.objective_copy|safe}}
-	</div>
+		<div class="nav-lateral" id="top-nav-lateral">
+				  {% with activity.next as next_activity %}
+					{% if next_activity %}
+					
+					<a href="/activity/{{next_activity.id }}/" onclick="document['completeactivity'].submit()">Complete This Activity &rarr;</a> 
+						    {% else %}
+					<a href="/session/{{activity.clientsession.id}}/" onclick="document['completeactivity'].submit()">We're Done with Session {{activity.clientsession.index}}!</a> 
+						    {% endif %}
+				  {% endwith %}
+				  {% with activity.prev as prev_activity %}
+					{% if prev_activity %}
+					<a href="/activity/{{prev_activity.id }}/">&larr; Review Last Activity</a> 
+					{% else %}
+					<!--START - There's no activity before this.-->
+					{% endif %}
+				  {% endwith %}
+				</div>
+		
+		<h3 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h3>
+		
+		    {%if activity.game %}
+		<h4 class="flag">This activity has a client task</h4>
+		{% if activity.pages %}
+		  <p>
+		    {% if not test %}
+			 <a id="tasklink" class="hilite" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">START</a>
+			 <ul id="all-task-pages">
+			{%for taskpage in activity.gamepage_set.all %}
+			<li><a id="taskpage-{{taskpage.page_name}}" 
+				  href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">
+			  {{taskpage.page_name}}
+			</a></li>
+			{%endfor%}
+			 </ul>
+		    {%else%}
+			 <a id="tasklink" class="hilite" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">START</a>
+			 <ul id="all-task-pages">
+			{%for taskpage in activity.pages %}
+			<li><a id="taskpage-{{taskpage}}" 
+				  href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">
+			  {{taskpage}}
+			</a></li>
+			{%endfor%}
+			 </ul>
+		    {%endif%}	    
+		  </p>
+		{%endif%}
+		 {%endif%}
+	    {% else %}
+		 <p>No activity defined.</p>
+	    {% endif %}
 	
-	<h4>Procedure</h4>
-	{% if not test and activity.instruction_set.count %}
- 
-	 {% for instruction in activity.instruction_set.all %}
-           <ul>
-	     <li>
-	       {%if instruction.title %}
-	         <h5>{{instruction.title}}</h5> 
-	       {%endif%}
+	    <div id="messaging">
+		  Your wish is my command
+	    </div>	
 
-	       {%if instruction.image %}
-	         <img src="{{instruction.image.url}}" />
-		 <br />
-	       {%endif%}
-
-	    <!--   {%if instruction.style %}
-	         <span class="instruction_style">{{instruction.style}}:</span> 
-	       {%endif%}-->
-		 
-	      <div class="{{instruction.style}}"> {{ instruction.instruction_text|safe }}</div>
-	     </li>
-	   </ul>
-	 {% endfor %}
-	{% else  %}
-	  <p>No content instructions defined for this activity.</p>
-	{% endif %}
-	{% if not activity.game %}
-	 <!-- if we have a game, the complete button is on the last game page-->
-      <br />  
-       {% if activity.collect_notes %}
-      <h4>Questions and concerns</h4>
-      <textarea name="counselor_notes" rows="5" cols="70"
-		id="counselor-notes" >{{counselor_notes}}</textarea>
-      {% endif %}
-
-
-			<div class="nav-lateral" id="bottom-nav-lateral">
-			  <a id="top" href="#pagestart">&uarr; Back to Top</a>
-			  {% with activity.next as next_activity %}
-			     {% if next_activity %}
-				<a href="/activity/{{next_activity.id }}/" onclick="document['completeactivity'].submit()">Next &rarr;</a> 
-                             {% else %}
-				<a href="/session/{{activity.clientsession.id}}/" onclick="document['completeactivity'].submit()">We're Done!</a> 
-                             {% endif %}
-			  {% endwith %}
-			  {% with activity.prev as prev_activity %}
-				{% if prev_activity %}
-				<a href="/activity/{{prev_activity.id }}/">&larr; Previous</a> 
-				{% else %}
-				<!--START - There's no activity before this.-->
-				{% endif %}
-			  {% endwith %}
-			</div>
+		<div id="suggestedtime">
+		Estimated Time to Complete: {{activity.objective_copy|safe}}
+		</div>
+		
+		<h4>Procedure</h4>
+		{% if not test and activity.instruction_set.count %}
+	 
+		 {% for instruction in activity.instruction_set.all %}
+			 <ul>
+			<li>
+			  {%if instruction.title %}
+			    <h5>{{instruction.title}}</h5> 
+			  {%endif%}
 	
-	{% endif %}
- 
+			  {%if instruction.image %}
+			    <img src="{{instruction.image.url}}" />
+			 <br />
+			  {%endif%}
+	
+		    <!--   {%if instruction.style %}
+			    <span class="instruction_style">{{instruction.style}}:</span> 
+			  {%endif%}-->
+			 
+			 <div class="{{instruction.style}}"> {{ instruction.instruction_text|safe }}</div>
+			</li>
+		   </ul>
+		 {% endfor %}
+		{% else  %}
+		  <p>No content instructions defined for this activity.</p>
+		{% endif %}
+		{% if not activity.game %}
+		 <!-- if we have a game, the complete button is on the last game page-->
+		 <br />  
+		  {% if activity.collect_notes %}
+		 <h4>Questions and concerns</h4>
+		 <textarea name="counselor_notes" rows="5" cols="70"
+			id="counselor-notes" >{{counselor_notes}}</textarea>
+		 {% endif %}
+	
+		<div class="nav-lateral" id="bottom-nav-lateral">
+				  <a id="top" href="#pagestart">&uarr; Back to Top</a>
+				  {% with activity.next as next_activity %}
+					{% if next_activity %}
+					<a href="/activity/{{next_activity.id }}/" onclick="document['completeactivity'].submit()">Complete This Activity &rarr;</a> 
+						    {% else %}
+					<a href="/session/{{activity.clientsession.id}}/" onclick="document['completeactivity'].submit()">We're Done with Session {{activity.clientsession.index}}!</a> 
+						    {% endif %}
+				  {% endwith %}
+				  {% with activity.prev as prev_activity %}
+					{% if prev_activity %}
+					<a href="/activity/{{prev_activity.id }}/">&larr; Review Last Activity</a> 
+					{% else %}
+					<!--START - There's no activity before this.-->
+					{% endif %}
+				  {% endwith %}
+				</div>
+				
+		</form>
+		{% endif %}
 
-</div>  
+		</div>  
 
 {% endblock %}

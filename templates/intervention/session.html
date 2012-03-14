@@ -13,7 +13,7 @@
 {% block breadcrumb-session %}
 {%if session %}
 <div id="breadcrumb">
-	<span id="endintervention"><a class="action" style="padding: 2px;" href="#" onclick="document['completesession'].submit()">End Session {{ session.index }}</a></span> 	   
+	<span id="endintervention"><a class="action" style="padding: 2px;" href="#" onclick="document['completesession'].submit()">Complete Session {{ session.index }}</a></span> 	   
 	<form style="display: none;" name="completesession" action="complete/" method="post"></form>
       <a class="incomplete" id="tab-home" href="/intervention/{{session.intervention.id}}/">Sessions</a>
 </div>
