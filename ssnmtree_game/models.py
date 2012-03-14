@@ -11,11 +11,6 @@ class SSNMTreeGame(GameInterface):
         game_context = {'mode':page_id}
         return ('ssnmtree_game/tree.html',game_context)
 
-    def ss_template(self,page_id):
-        """ temporarily here while we do parallel client/server-side versions """
-        game_context = {'mode':page_id}
-        return ('ssnmtree_game/ss_tree.html',game_context)
-    
     def variables(self,page_id=None):
         return ['ssnmtree']
 
