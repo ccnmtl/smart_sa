@@ -49,7 +49,7 @@ current_user = {
       ///this way we can return the pointer, and the original updates
       throw "devault_value required and must be an array or dictionary";
     }
-    if (!window.hasAttr(window,'ss_game_state')) {
+    if (!window.hasAttr(window, 'ss_game_state')) {
       window.ss_game_state = {};
     }
 
@@ -68,7 +68,7 @@ current_user = {
   };
   InterventionSmart.prototype.saveState = function (callback) {
     var url = "/save_game_state/";
-    var deferred = MochiKit.Async.doXHR(url,{'method':'POST', 'sendContent' : MB.serializeJSON(window.ss_game_state)});
+    var deferred = MochiKit.Async.doXHR(url, {'method' : 'POST', 'sendContent' : MB.serializeJSON(window.ss_game_state)});
     if (callback) {
       deferred.addCallback(callback);
     }
