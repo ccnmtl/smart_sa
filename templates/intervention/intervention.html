@@ -26,6 +26,7 @@
     <div id="titlearea"> 
       <h2>Sessions</h2>
     </div> 
+    {% get_recommended_next_session participant as next_session %}
     <div id="content-singlecolumn">
         <p class="instructions">
        Click on a session number to continue with the intervention for <b>{{participant.name}}</b>. The suggested next session is highlighted.
@@ -36,7 +37,9 @@
         {% for session in intervention.clientsession_set.all %}
 	{% if not session.defaulter or participant.defaulter %}
 	   <li><a id="session{{session.index }}" 
-		  class="session {% get_participant_status participant session %}" 
+		  class="session 
+			 {% get_participant_status participant session %}
+			 {% ifequal session.id next_session.id %}hilite{% endifequal %}" 
 		  href="/session/{{session.id}}/">
 	     Session {{forloop.counter}}: {{ session.long_title }}
 	    </a></li>

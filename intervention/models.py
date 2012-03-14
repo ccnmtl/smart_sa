@@ -121,6 +121,13 @@ class ClientSession (models.Model):
         else:
             return ""
 
+    def next(self):
+        try:
+            return self.get_next_in_order()
+        except ClientSession.DoesNotExist:
+            return None
+
+
 class Activity(models.Model):
     """Contains one or more pairs of instructions, and zero or one game.
     This can comprise multiple pairs.
@@ -458,6 +465,55 @@ class Participant(models.Model):
 
     def is_practice(self):
         return self.name == "practice"
+
+    def next_session(self):
+        """ which session the participant should be sent to """
+        all_sessions = ClientSession.objects.all()
+
+        if self.participantsession_set.count() == 0:
+            # has not visited any sessions yet, so send them to the first one
+            return all_sessions[0]
+
+        complete_sessions = [ps.session for ps in self.participantsession_set.filter(status="complete").order_by("session___order")]
+        incomplete_sessions = [ps.session for ps in self.participantsession_set.filter(status="incomplete").order_by("session___order")]
+
+        if len(incomplete_sessions) > 0:
+            # easy, just send them to the first incomplete session
+            return incomplete_sessions[0]
+
+        if len(complete_sessions) == len(all_sessions):
+            # they have completed all sessions
+            return None
+        
+        # if we make it here, it means they have some completed sesssions,
+        # but haven't completed them all and there are no incomplete ones. 
+        # so we get the last completed session and send them to the next
+        return complete_session[-1].get_next()
+
+    def next_activity(self):
+        """ which activity the participant should be sent to """
+        all_activities = Activity.objects.all()
+
+        if self.participantactivity_set.count() == 0:
+            # has not visited any activities yet, so send them to the first one
+            return all_activities[0]
+
+        complete_activities = [ps.activity for ps in self.participantactivity_set.filter(status="complete").order_by("activity__clientsession___order","activity___order")]
+        incomplete_activities = [ps.activity for ps in self.participantactivity_set.filter(status="incomplete").order_by("activity__clientsession___order","activity___order")]
+
+        if len(incomplete_activities) > 0:
+            # easy, just send them to the first incomplete activity
+            return incomplete_activities[0]
+
+        if len(complete_activities) == len(all_activities):
+            # they have completed all activities
+            return None
+        
+        # if we make it here, it means they have some completed sesssions,
+        # but haven't completed them all and there are no incomplete ones. 
+        # so we get the last completed activity and send them to the next
+        return complete_activities[-1].get_next()
+
 
 class ParticipantSession(models.Model):
     participant = models.ForeignKey(Participant)
