@@ -61,7 +61,7 @@
 				<li><a class="{% get_participant_status participant a %}
 				{% if forloop.first %}first{% endif %}
 				{% if forloop.last %}last{% endif %}
-				{% ifequal a.id game.activity.id %}current{% endifequal %}
+				{% ifequal a.id game.activity.id %}current{%else%}default{% endifequal %}
 				" href="/activity/{{a.id }}/">{{a.long_title}}</a>
 				{% if a.game %}<span class="task">+Task</span>{% endif %}
 				</li>

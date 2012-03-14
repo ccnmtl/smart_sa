@@ -38,13 +38,8 @@
 		{% block editcontentnav %}{% endblock %}
 		
 		<li>
-		
-		{% if user.is_authenticated %}
-		<span id="logged-in-prefix">Hello, </span>
-		{% endif %}
-		
 		<span id="username" {% if user.is_authenticated %} class="logged_in" {% endif %}>
-		{% if user.is_authenticated %}<a href="/intervention/">{{user}}</a>! &rarr;{% endif %}
+		{% if user.is_authenticated %}<a href="/intervention/">{{user}}'s Home Page</a> &rarr;{% endif %}
 		</span> 
 		{% if user.is_authenticated %}
 		<a class="loginlogout loginlogout-remote" href="/accounts/logout/">Log Out</a>

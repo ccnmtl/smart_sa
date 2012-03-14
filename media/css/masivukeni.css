@@ -134,7 +134,7 @@ h2
 {
 	color: #f6921e;
 	margin: 0px;
-	padding: 0px;
+	padding-top: 10px;
 }
 
 h3 
@@ -293,7 +293,7 @@ h4
 #contentcontainer
 {
 	position: relative;
-	padding: 30px 20px 20px 20px;
+	padding: 0px 20px 20px 20px;
 }
 
 h2#sessioninfo
@@ -457,7 +457,7 @@ table#choices td
 #content
 {
 	margin-left: 270px;
-	padding: 10px 30px 10px 10px;
+	padding-top: 30px;
 }
 
 a.action
@@ -539,6 +539,13 @@ a.action:hover { background-color: #4ba257; }
 }
 
 /* start - icons */
+.default
+{
+	background-image: url(/site_media/images/icon_default.png);
+	background-repeat: no-repeat;
+	background-position: 10px 6px;
+}
+
 .complete
 {
 	background-image: url(/site_media/images/icon_complete.png);
@@ -572,6 +579,7 @@ li span.task
 	width: 940px;
 	height: 310px;
 	position: relative;
+	margin-top: -20px;
 }
 
 #navigator ul

@@ -23,13 +23,10 @@
 
 {% block content %}
     {{ block.super }}
-    <div id="titlearea"> 
       <h2>Sessions</h2>
-    </div> 
-    {% get_recommended_next_session participant as next_session %}
-    <div id="content-singlecolumn">
+
         <p class="instructions">
-       Click on a session number to for <b>{{participant.name}}</b>
+       Select a session so <b>{{participant.name}}</b> can get started!
 	  </p>
 
 	<div id="navigator">
@@ -39,7 +36,7 @@
 	   <li><a id="session{{session.index }}" 
 		  class="session 
 			 {% get_participant_status participant session %}
-			 {% ifequal session.id next_session.id %}hilite{% endifequal %}" 
+			 {% ifequal session.id next_session.id %}hilite{%else%}default{% endifequal %}" 
 		  href="/session/{{session.id}}/">
 	     Session {{forloop.counter}}: {{ session.long_title }}
 	    </a></li>
@@ -50,6 +47,5 @@
 	  </ul>
 	</div>
 
-    </div>	
      
 {% endblock %}
