@@ -6,6 +6,7 @@ try:
     from selenium import webdriver
     from selenium.common.exceptions import NoSuchElementException
     from selenium.webdriver.common.keys import Keys
+    import selenium
 except:
     pass
 
@@ -83,3 +84,28 @@ def there_is_a_location_edit_form(step):
         if f.action == "/set_deployment/":
             found = True
     assert found
+
+@step(u'I click the "([^"]*)" link')
+def i_click_the_link(step, text):
+    if not world.using_selenium:
+        return
+    link = world.firefox.find_element_by_link_text(text)
+    assert link.is_displayed()
+    assert False, link.location
+    link.click()
+
+
+@step(u'I fill in "([^"]*)" in the "([^"]*)" form field')
+def i_fill_in_the_form_field(step, value, field_name):
+    if not world.using_selenium:
+        return
+
+    assert False, 'This step must be implemented'
+
+@step(u'I click the "([^"]*)" submit button')
+def i_click_the_submit_button(step, label):
+    if not world.using_selenium:
+        return
+
+    assert False, 'This step must be implemented'
+
