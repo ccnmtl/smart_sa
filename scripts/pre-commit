@@ -2,7 +2,7 @@
 # link me into your git hooks like so:
 # ln -s `pwd`/scripts/pre-commit `pwd`/.git/hooks/pre-commit
 
-for js in `find -L media -name '*.js' | grep -v tinymce | grep -v media/js/mochikit | grep -v media/selenium/ | grep -v media/js/underscore | grep -v media/js/backbone | grep -v media/flowplayer`;
+for js in `find -L media -name '*.js' | grep -v tinymce | grep -v media/js/mochikit | grep -v media/selenium/ | grep -v media/js/underscore | grep -v media/js/backbone | grep -v media/flowplayer | grep -v media/js/jquery/`;
   do jshint $js --config scripts/config.json;
 done;
 
