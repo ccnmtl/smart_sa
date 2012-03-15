@@ -43,6 +43,7 @@ def i_am_not_logged_in(step):
 def i_access_the_management_console(step):
     response = world.client.get(django_url("/manage/"),follow=True)
     world.response = response
+    world.dom = html.fromstring(response.content)
 
 @step(u'I am taken to a login screen')
 def i_am_taken_to_a_login_screen(step):
@@ -59,3 +60,26 @@ def i_am_logged_in_as_a_counselor(step):
 def given_i_am_logged_in_as_an_admin(step):
     world.client.login(username='testadmin',password='test')
 
+@step(u'there is not an? "([^"]*)" link')
+def there_is_not_a_link(step, text):
+    found = False
+    for a in world.dom.cssselect("a"):
+        if a.text and a.text.strip() == text:
+            found = True
+    assert not found
+
+@step(u'there is an? "([^"]*)" link')
+def there_is_a_link(step, text):
+    found = False
+    for a in world.dom.cssselect("a"):
+        if a.text and a.text.strip() == text:
+            found = True
+    assert found
+
+@step(u'there is a location edit form')
+def there_is_a_location_edit_form(step):
+    found = False
+    for f in world.dom.cssselect("form"):
+        if f.action == "/set_deployment/":
+            found = True
+    assert found
