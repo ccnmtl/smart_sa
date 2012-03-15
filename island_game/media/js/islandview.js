@@ -5,7 +5,7 @@
     var GameElement = Backbone.Model.extend({
         defaults: {
             name: "",
-            clip_floor: 0,
+            clipFloor: 0,
             min_value : 0,
             max_value : 10,
             starting_value : 0,
@@ -13,7 +13,9 @@
             end_offset: { x: 0, y: 0 },
             draggable: false,
             gender: "",
-            enabled: true
+            enabled: true,
+            horizontal_range: 0,
+            vertical_range: 0
         },
         
         initialize : function (options) {
@@ -31,13 +33,18 @@
     
     var GameElementList = Backbone.Collection.extend({ model : GameElement });
 
-    var SliderView = Backbone.View.extend({
+    var SlidingElementView = Backbone.View.extend({
         initialize : function (options) {
             _.bindAll(this, "val", "pos", "setValue", "getValue", "getfraction", "snap", "top", "render");
+            this.model.bind('change:enabled', this.render);
+            
             var self = this;
             
             this.parent = options.parent;
+            this.offset = jQuery(this.parent.el).position();
+            this.initializePosition();
             
+            // setup draggable options
             if (this.model.get("draggable")) {
                 this.draggable = M.DragAndDrop.Draggable(this.el, {
                     snap : function (x, y) {
@@ -57,7 +64,37 @@
             // set to requested starting value:
             this.setValue(this.model.get("starting_value"));
             
-            this.model.bind('change:enabled', this.render);
+            // hide if requested
+            if (this.model.get("visible") === false) {
+                this.hide();
+            }
+        },
+        
+        initializePosition: function () {
+            // Set the start_offset & end_offset based on the sliders
+            // initial left/top properties as specified in the .css
+            // offset these positioning elements by the parent container
+            // plus a "height" as specified in the model.
+            // This properly specified in .css screwed things up.
+            var position = jQuery(this.el).position();
+            var offset = this.offset;
+            
+            if (this.model.get("draggable")) {
+                // position labels & background images appropriately
+                var slider = jQuery(this.el).siblings(".slider")[0];
+                var sliderPos = jQuery(slider).position();
+                jQuery(slider).css({ left: sliderPos.left + offset.left, top: sliderPos.top + offset.top });
+                
+                var label = jQuery(this.el).siblings(".slider_label")[0];
+                var labelPos = jQuery(label).position();
+                jQuery(label).css({ left: labelPos.left + offset.left, top: labelPos.top + offset.top });
+                
+                this.model.set("start_offset", { x: position.left + offset.left, y: position.top + offset.top + this.model.get("vertical_range") });
+                this.model.set("end_offset", { x: position.left + offset.left, y: position.top + offset.top });
+            } else {
+                this.model.set("start_offset", { x: position.left + offset.left, y: position.top + offset.top + this.model.get("vertical_range") });
+                this.model.set("end_offset", { x: position.left + offset.left + this.model.get("horizontal_range"), y: position.top + offset.top });
+            }
         },
         
         disable: function () {
@@ -66,6 +103,24 @@
         
         enable: function () {
             this.model.set("enabled", true);
+        },
+        
+        hide: function () {
+            jQuery(this.el).hide();
+            
+            if (this.model.get("draggable")) {
+                jQuery(this.el).siblings(".slider_label").hide();
+                jQuery(this.el).siblings(".slider").hide();
+            }
+        },
+        
+        show: function () {
+            jQuery(this.el).show();
+            
+            if (this.model.get("draggable")) {
+                jQuery(this.el).siblings(".slider_label").show();
+                jQuery(this.el).siblings(".slider").show();
+            }
         },
         
         render: function () {
@@ -106,7 +161,6 @@
             // programatically set the slider at a given value.
             var p = this.pos(value);
             jQuery(this.el).css({ "left":  (p[0]) + 'px', "top": (p[1]) + 'px' });
-            
             this.clipImage();
         },
 
@@ -129,11 +183,11 @@
         
         clipImage: function () {
             // sets the 'clip' style on an image so that any portion of the image below y value 'floor' is hidden.
-            var floor = this.model.get("clip_floor");
+            var floor = this.model.get("clipFloor");
             if (floor > 0) {
                 var width = M.Style.getElementDimensions(this.el).w;
-                var hide = this.model.get("clip_floor") - M.DOM.elementPosition(this.el).y;
-                M.Style.setStyle(this.el, { 'clip': 'rect(0 ' + width + 'px ' + (hide - 10) + 'px 0)' });
+                var hide = this.model.get("clipFloor") - M.DOM.elementPosition(this.el).y;
+                M.Style.setStyle(this.el, { 'clip': 'rect(0 ' + width + 'px ' + hide + 'px 0)' });
             }
         },
         
@@ -146,10 +200,12 @@
         }
     });
     
-    var FigureView = SliderView.extend({
+    var FigureView = SlidingElementView.extend({
         initialize : function (options) {
             _.bindAll(this, "update", "setValue");
             var self = this;
+            
+            SlidingElementView.prototype.initialize.call(this, options);
         },
         
         male_images: [
@@ -186,8 +242,8 @@
         },
         
         setValue: function (value) {
-            SliderView.prototype.setValue.call(this, value);
-            this.selectImage(SliderView.prototype.getfraction.call(this));
+            SlidingElementView.prototype.setValue.call(this, value);
+            this.selectImage(SlidingElementView.prototype.getfraction.call(this));
         },
         
         update: function (altitude, top) {
@@ -225,11 +281,11 @@
         
         addGameElement: function (element) {
             var name = element.get("name");
-            if (name === 'figure') {
+            if (name === 'figure1' || name === 'figure2') {
                 element.set("gender", this.model.get("gender"));
-                this.views[name] = new FigureView({ model: element, el: jQuery("#" + name) });
+                this.views[name] = new FigureView({ model: element, el: jQuery("#" + name), parent: this });
             } else {
-                this.views[name] = new SliderView({ model: element, el: jQuery("#" + name), parent: this });
+                this.views[name] = new SlidingElementView({ model: element, el: jQuery("#" + name), parent: this });
             }
         },
         
@@ -248,25 +304,18 @@
             jQuery("span#island_view_label").html("BEFORE GOING ON ARVS");
             jQuery("img#island").attr("src", "/site_media/island_game/images/island_part1.png");
             
-            jQuery("#adherence_label").hide();
-            jQuery("#adherence_slider").hide();
-            jQuery("#adherence").hide();
-            
-            jQuery("#figure").addClass("figure_one");
-            jQuery("#figure").removeClass("figure_two");
-            
+            this.views.adherence.hide();
             this.views.infection.enable();
             this.views.viral_load.enable();
             this.views.cd4_count.enable();
             
-            var start_offset = { x: 21, y: 300 };
-            var end_offset = { x: 21, y: 100 };
-            this.views.figure.model.set("start_offset", start_offset);
-            this.views.figure.model.set("end_offset", end_offset);
-            
             this.views.infection.setValue(0);
             this.views.viral_load.setValue(0);
             this.views.cd4_count.setValue(10);
+            
+            this.views.figure2.hide();
+            this.views.figure1.show();
+
             this.model.set("beforeMedication", true);
         },
         
@@ -276,18 +325,10 @@
             jQuery("span#island_view_label").html("ON ARVS");
             jQuery("img#island").attr("src", "/site_media/island_game/images/island_part2.png");
             
-            jQuery("#adherence_label").show();
-            jQuery("#adherence_slider").show();
-            jQuery("#adherence").show();
+            this.views.figure1.hide();
+            this.views.figure2.show();
             
-            jQuery("#figure").removeClass("figure_one");
-            jQuery("#figure").addClass("figure_two");
-            
-            var start_offset = { x: 150, y: 200 };
-            var end_offset = { x: 400, y: 125 };
-            this.views.figure.model.set("start_offset", start_offset);
-            this.views.figure.model.set("end_offset", end_offset);
-
+            this.views.adherence.show();
             this.views.infection.disable();
             this.views.viral_load.disable();
             this.views.cd4_count.disable();
@@ -308,7 +349,7 @@
                 this.views.island.setValue(island_level);
                 
                 var altitude = 0.5 + (this.views.island.getfraction() - this.views.water.getfraction()) / 2;
-                this.views.figure.update(altitude, this.views.island.top());
+                this.views.figure1.update(altitude, this.views.island.top());
             } else {
                 this.views.island.setValue(10);
                 
@@ -317,7 +358,7 @@
                 this.views.infection.setValue(10 - health);
                 this.views.viral_load.setValue(10 - health);
                 this.views.cd4_count.setValue(health);
-                this.views.figure.setValue(health);
+                this.views.figure2.setValue(health);
             }
         }
     });
@@ -335,44 +376,48 @@
         });
         
         var model = new GameElement({
-            name: "figure",
+            name: "figure1",
             starting_value: 10,
             gender: global.Intervention.current_user.gender
         });
         elements.add(model);
         
         model = new GameElement({
+            name: "figure2",
+            starting_value: 10,
+            horizontal_range: 250,
+            vertical_range: 90,
+            gender: global.Intervention.current_user.gender,
+            visible: false
+        });
+        elements.add(model);
+
+        
+        model = new GameElement({
             name: "island",
             starting_value: 10,
-            start_offset: { x: 21, y: 300 },
-            end_offset: { x: 21, y: 100 },
-            clip_floor: islandView.gameFloor()
+            vertical_range: 225,
+            clipFloor: islandView.gameFloor()
         });
         elements.add(model);
         
         model = new GameElement({
             name: "water",
-            starting_value: 0,
-            start_offset: { x: 21, y: 400 },
-            end_offset: { x: 21, y: 175 },
-            clip_floor: islandView.gameFloor()
+            vertical_range: 225,
+            clipFloor: islandView.gameFloor()
         });
         elements.add(model);
         
         model = new GameElement({
             name: "infection",
-            starting_value: 0,
-            start_offset: { x: 50, y: 245 },
-            end_offset: { x: 50, y: 154 },
+            vertical_range: 90,
             draggable: true
         });
         elements.add(model);
                     
         model = new GameElement({
             name: "viral_load",
-            starting_value: 0,
-            start_offset: { x: 100, y: 245 },
-            end_offset: { x: 100, y: 154 },
+            vertical_range: 90,
             draggable: true
         });
         elements.add(model);
@@ -380,8 +425,7 @@
         model = new GameElement({
             name: "cd4_count",
             starting_value: 10,
-            start_offset: { x: 150, y: 245 },
-            end_offset: { x: 150, y: 154 },
+            vertical_range: 90,
             draggable: true
         });
         elements.add(model);
@@ -389,8 +433,8 @@
         model = new GameElement({
             name: "adherence",
             starting_value: 10,
-            start_offset: { x: 500, y: 245 },
-            end_offset: { x: 500, y: 154 },
+            vertical_range: 90,
+            visible: false,
             draggable: true
         });
         elements.add(model);

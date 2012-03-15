@@ -8,45 +8,52 @@
 #island {
     z-index: 100;
     position: absolute;
+    top: 0px;
+    left: 0px;
     width: 545px;
 }
 
 #water {
     z-index: 200;
     position: absolute;
+    left: 0px;
+    top: 75px;
     width: 545px;
 }
 
-#figure {
+.figure {
     z-index: 100;
     height: 184px;
     width: 110px;
     position: absolute;
 }
 
-.figure_one {
-    left: 210px !important;
+#figure1 {
+    left: 480px !important;
+    top: 0px;
 }
 
-.figure_two {
-    left: 300px;
+#figure2 {
+    left: 150px;
+    top: 25px;
 }
 
 .slider {
     z-index: 300;
     position: absolute;
-    top: 150px;
+    top: 35px;
 }
 
 .slider_thumb {
     z-index: 400;
     position: absolute;
+    top: 39px;
 }
 
 .slider_label {
     z-index: 300;
     position: absolute;
-    top: 115px;
+    top: 5px;
     width: 25px;
     height: 30px;
     font-size: 10px;
@@ -92,8 +99,8 @@
 }
 
 #island_view_navigation {
-    left: 20px; 
-    top: 500px;
+    left: 290px; 
+    top: 600px;
     width: 545px;
     text-align: center;
     vertical-align: middle;
