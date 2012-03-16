@@ -287,13 +287,13 @@ h4
 	font-size: 12px;
 }
 
-.breadcrumb-text-current { color: #f3912f; }
+.breadcrumb-text-current { font-weight: bold; }
 
 /*stop - breadcrumb*/
 #contentcontainer
 {
 	position: relative;
-	padding: 0px 20px 20px 20px;
+	padding: 20px 30px 20px 20px;
 }
 
 h2#sessioninfo
@@ -326,7 +326,7 @@ text-decoration: underline;
 	position: absolute;
 	left: 10px;
 	top: 50px;
-	width: 250px;
+	width: 260px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -456,8 +456,7 @@ table#choices td
 /*stop - nav-side*/
 #content
 {
-	margin-left: 270px;
-	padding-top: 30px;
+	margin-left: 280px;
 }
 
 a.action
@@ -470,7 +469,7 @@ a.action
 	font-weight: bold;
 	font-size: 14px;
 	color: #fff;
-	background-color: #b4dcc0;
+	background-color: #79b985;
 	width: 180px;
 	display: block;
 	text-align: center;
@@ -494,7 +493,7 @@ a.action:hover { background-color: #4ba257; }
 	font-weight: bold;
 	font-size: 12px;
 	color: #fff;
-	background-color: #b4dcc0;
+	background-color: #79b985;
 	display: block;
 	float: right;
 	margin-left: 10px;
@@ -510,7 +509,7 @@ a.action:hover { background-color: #4ba257; }
 
 #top-nav-lateral
 {
-	margin-top: -30px;
+	margin: -15px;
 	padding: 0px;
 }
 
@@ -984,15 +983,14 @@ p.instructions { margin-bottom: 35px; }
 	float: right;
 }
 
-/*
-.say { font-style: italic; }
+
+/*.say { font-style: italic; } */
 
 .say ul, .do ul, .None ul
 {
 	margin: 0px;
 	list-style-type: disc;
 }
-*/
 
 .no-bullets > li { list-style-type: none; }
 #home-remote { display: none; }
@@ -1051,3 +1049,62 @@ body.logged-in #home-remote { display: block; }
 }
 
 #endintervention {float: right; padding-right: 10px;} 	   
+
+table#gamenav
+{
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	font-weight: bold;
+	background-color: #4ba257;
+	font-size: 12px;
+	width: 100%;
+}
+
+table#gamenav td
+{
+	padding: 5px;
+	color: #fff;
+}
+
+table#gamenav td a
+{
+	text-decoration: none;
+	color: #fff;
+}
+
+table#gamenav td a:hover
+{
+	text-decoration: underline;
+}
+
+table#gamenav td#left
+{
+text-align: left;
+width: 33%;
+}
+
+table#gamenav td#center
+{
+text-align: center;
+width: 34%;
+}
+
+table#gamenav td#right
+{
+text-align: right;
+width: 33%;
+}
+
+#gamebox
+{
+	border: 1px solid #ccc;
+	min-height: 300px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	position: relative;
+}
