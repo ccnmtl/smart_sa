@@ -208,3 +208,12 @@ def i_go_back(self):
     if not world.using_selenium:
         return
     world.firefox.back()
+
+@step('I fill in all (\d)s in the quiz')
+def fill_in_quiz(self,value):
+    if not world.using_selenium:
+        return
+    for i in world.firefox.find_elements_by_tag_name('input'):
+        if i.get_attribute('type') == 'radio' and i.get_attribute('value') == value:
+            i.click()
+
