@@ -141,11 +141,13 @@ h3
 { 
 	margin-top: 10px;
 	padding: 0px;
+	color: #f6921e;
+	font-size: 24px;
 }
 
 h4
 {
-	color: #4ea15a;
+	color: #000;
 	border-bottom: 1px solid #4ea15a;
 	font-size: 18px;
 }
@@ -240,7 +242,7 @@ h4
 #breadcrumb a#tab-home, #breadcrumb a#tab-home:hover, #breadcrumb a.current#tab-home
 {
 	display: block;
-	width: 100px;
+	width: 90px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;
@@ -256,6 +258,33 @@ h4
 	text-decoration: none;
 	padding: 6px 0px 6px 40px;
 	margin: 0px 0px -1px 10px;
+}
+
+#breadcrumb a#endintervention
+{
+	display: block;
+	width: 170px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #fff;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 6px 0px 6px 24px;
+	margin: 0px 10px -1px 20px;
+	text-align: center;
+	background-color: #FFF;
+	color: #000;
+	background-image: url(../images/icon_check.png);
+	background-repeat: no-repeat;
+	background-position: 10px 10px;
 }
 
 #breadcrumb a#tab-home
@@ -294,6 +323,7 @@ h4
 {
 	position: relative;
 	padding: 20px 30px 20px 20px;
+	min-height: 450px;
 }
 
 h2#sessioninfo
@@ -517,11 +547,9 @@ a.action:hover { background-color: #4ba257; }
 
 #footer
 {
-	clear: both;
 	text-align: center;
 	font-weight: bold;
 	font-size: 11px;
-	margin-top: 60px;
 	padding: 10px 0px 10px 0px;
 }
 
@@ -576,9 +604,10 @@ li span.task
 #navigator
 {
 	width: 940px;
-	height: 310px;
+	min-height: 500px;
 	position: relative;
 	margin-top: -20px;
+	clear: both;
 }
 
 #navigator ul
@@ -1039,14 +1068,17 @@ body.logged-in #home-remote { display: block; }
 
 #suggestedtime
 {
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	background-image: url(/site_media/images/clock-icon.jpg);
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	padding: 0px 0px 0px 24px;
+	padding: 3px 3px 3px 24px;
 	color: #666;
+	margin-bottom: 20px;
 }
+
+#suggestedtime * {display: inline !important; font-size: 12px !important;}
 
 #endintervention {float: right; padding-right: 10px;} 	   
 

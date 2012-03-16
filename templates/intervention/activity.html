@@ -66,7 +66,7 @@ var game_variables = {{activity.variables|safe}};
 				  {% with activity.next as next_activity %}
 					{% if next_activity %}
 					
-					<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
+					<a class="" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
 						    {% else %}
 					<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">We're Done with Session {{activity.clientsession.index}}!</a> 
 						    {% endif %}
@@ -123,20 +123,16 @@ var game_variables = {{activity.variables|safe}};
 		{% endif %}
 		<!-- GAME STUFF -->
 		
-		
 	    <div id="messaging">
 		  Your wish is my command
 	    </div>	
 
-		
-		<h4>Procedure</h4>
-		
 		{% if not test and activity.instruction_set.count %}
 		
 		{% for instruction in activity.instruction_set.all %}
 		
 		{%if instruction.title %}
-		<h5>{{instruction.title}}</h5> 
+		<h4>{{instruction.title}}</h4> 
 		{%endif%}
 		{%if instruction.image %}
 		<img src="{{instruction.image.url}}" />
@@ -153,33 +149,37 @@ var game_variables = {{activity.variables|safe}};
 		{% endif %}
 		
 		{% if not activity.game %}
-		<br />  
+		{% endif %}
 		
 		{% if activity.collect_notes %}
-		<h4>{{participant.name}}'s Questions and Concerns</h4>
+		<h4>{{participant.name}}'s Questions and Concerns</h4>	
+		
 		<textarea name="counselor_notes" rows="5" cols="70" id="counselor-notes" >{{counselor_notes}}</textarea>
 		{% endif %}
 	
 		<div class="nav-lateral" id="bottom-nav-lateral">
-				  <a id="top" href="#pagestart">&uarr; Back to Top</a>
-				  {% with activity.next as next_activity %}
-					{% if next_activity %}
-					<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
-						    {% else %}
-					<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">We're Done with Session {{activity.clientsession.index}}!</a> 
-						    {% endif %}
-				  {% endwith %}
-				  {% with activity.prev as prev_activity %}
-					{% if prev_activity %}
-					<a href="/activity/{{prev_activity.id }}/">&larr; Review Last Activity</a> 
-					{% else %}
-					<!--START - There's no activity before this.-->
-					{% endif %}
-				  {% endwith %}
-				</div>
+		
+			<a id="top" href="#pagestart">&uarr; Back to Top</a>
+			
+			{% with activity.next as next_activity %}
+			{% if next_activity %}
+			<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
+			{% else %}
+			<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">We're Done with Session {{activity.clientsession.index}}!</a> 
+			{% endif %}
+			{% endwith %}
+			
+			{% with activity.prev as prev_activity %}
+			{% if prev_activity %}
+			<a href="/activity/{{prev_activity.id }}/">&larr; Review Last Activity</a> 
+			{% else %}
+			<!--START - There's no activity before this.-->
+			{% endif %}
+			{% endwith %}
+			
+		</div>
 				
 		</form>
-		{% endif %}
 
 		</div>  
 
