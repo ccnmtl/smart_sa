@@ -32,4 +32,60 @@ check very basic things.
       Then I am on the Activity 8 page
       When I click on Complete Activity
       Then I am on the Session 1 page
+
+      When I click on Session 2
+      When I click on Activity 1
+      When I click on Complete Activity
+      Then I am on the Activity 2 page
+      When I click on Complete Activity
+      Then I am on the Activity 3 page
+      When I click on Complete Activity
+      Then I am on the Activity 4 page
+#      When I click on Complete Activity
+#      Then I am on the Activity 5 page
+#      When I click on Complete Activity
+#      Then I am on the Activity 6 page
+#      When I click on Complete Activity
+#      Then I am on the Activity 7 page
+#      When I click on Complete Activity
+#      Then I am on the Activity 8 page
+#      When I click on Complete Activity
+#      Then I am on the Session 2 page
+
+      When I click the "Sessions" link
+      When I click on Session 3
+      When I click on Activity 1
+      When I click on Complete Activity
+      Then I am on the Activity 2 page
+      When I click on Complete Activity
+      Then I am on the Activity 3 page
+      When I click on Complete Activity
+      Then I am on the Activity 4 page
+      When I click on Complete Activity
+      Then I am on the Activity 5 page
+      When I click on Complete Activity
+      Then I am on the Activity 6 page
+      When I click on Complete Activity
+      Then I am on the Activity 7 page
+      When I click on Complete Activity
+      Then I am on the Activity 8 page
+      When I click on Complete Activity
+      Then I am on the Session 3 page
+
+      When I click on Session 4
+      When I click on Activity 1
+      When I click on Complete Activity
+      Then I am on the Activity 2 page
+      When I click on Complete Activity
+      Then I am on the Activity 3 page
+      When I click on Complete Activity
+      Then I am on the Activity 4 page
+      When I click on Complete Activity
+      Then I am on the Activity 5 page
+      When I click on Complete Activity
+      Then I am on the Activity 6 page
+      When I click on Complete Activity
+      Then I am on the Session 4 page
+
+
       Finished using selenium
