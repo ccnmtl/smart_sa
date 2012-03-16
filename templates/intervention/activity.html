@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}activity.html{% endblock %}
+{% block title %}{{ activity.long_title }}{% endblock %}
 
 {% load participant_status %}
 
@@ -21,7 +21,7 @@ var game_variables = {{activity.variables|safe}};
 <div id="breadcrumb">
       <a class="incomplete" id="tab-home" href="/intervention/{{activity.clientsession.intervention.id}}/">Sessions</a>
 	<div id="breadcrumb-text">
-		You are currently in: Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; <span class="breadcrumb-text-current">Activity {{activity.index}}: {{ activity.long_title }}</span>
+		You are currently in: <span class="breadcrumb-text-current">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; Activity {{activity.index}}: {{ activity.long_title }}</span>
 	</div>
 </div>
 {%endif%}  
@@ -80,82 +80,85 @@ var game_variables = {{activity.variables|safe}};
 				  {% endwith %}
 				</div>
 		
-		<h3 id="activity{{activity.id}}" class="activitytitle">Activity {{activity.index}}: {{ activity.long_title }}</h3>
+		<h3 id="activity{{activity.id}}" class="activitytitle">{{ activity.long_title }}</h3>
 		
-		    {%if activity.game %}
-		<h4 class="flag">This activity has a client task</h4>
-		{% if activity.pages %}
-		  <p>
-		    {% if not test %}
-			 <a id="tasklink" class="hilite" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">START</a>
-			 <ul id="all-task-pages">
-			{%for taskpage in activity.gamepage_set.all %}
-			<li><a id="taskpage-{{taskpage.page_name}}" 
-				  href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">
-			  {{taskpage.page_name}}
-			</a></li>
-			{%endfor%}
-			 </ul>
-		    {%else%}
-			 <a id="tasklink" class="hilite" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">START</a>
-			 <ul id="all-task-pages">
-			{%for taskpage in activity.pages %}
-			<li><a id="taskpage-{{taskpage}}" 
-				  href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">
-			  {{taskpage}}
-			</a></li>
-			{%endfor%}
-			 </ul>
-		    {%endif%}	    
-		  </p>
-		{%endif%}
-		 {%endif%}
-	    {% else %}
-		 <p>No activity defined.</p>
-	    {% endif %}
-	
-	    <div id="messaging">
-		  Your wish is my command
-	    </div>	
-
 		<div id="suggestedtime">
 		Estimated Time to Complete: {{activity.objective_copy|safe}}
 		</div>
 		
-		<h4>Procedure</h4>
-		{% if not test and activity.instruction_set.count %}
-	 
-		 {% for instruction in activity.instruction_set.all %}
-			 <ul>
-			<li>
-			  {%if instruction.title %}
-			    <h5>{{instruction.title}}</h5> 
-			  {%endif%}
+		<!-- GAME STUFF -->
+		{%if activity.game %}
+		
+		{% if activity.pages %}
+		<div align="center">
+		{% if not test %}
+		<a class="action" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">Let's Begin!</a>
+		<div id="all-task-pages"  style="border: 1px solid blue;">
 	
-			  {%if instruction.image %}
-			    <img src="{{instruction.image.url}}" />
-			 <br />
-			  {%endif%}
-	
-		    <!--   {%if instruction.style %}
-			    <span class="instruction_style">{{instruction.style}}:</span> 
-			  {%endif%}-->
-			 
-			 <div class="{{instruction.style}}"> {{ instruction.instruction_text|safe }}</div>
-			</li>
-		   </ul>
-		 {% endfor %}
-		{% else  %}
-		  <p>No content instructions defined for this activity.</p>
+		{%for taskpage in activity.gamepage_set.all %}
+		<a id="taskpage-{{taskpage.page_name}}" href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">{{taskpage.page_name}}</a>
+		{%endfor%}
+		
+		</div>
+		
+		{%else%}
+		<a class="action" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">Let's Begin!</a>
+		<div id="all-task-pages">
+		
+		{%for taskpage in activity.pages %}
+		<a id="taskpage-{{taskpage}}" href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">{{taskpage}}</a>
+		{%endfor%}
+		</div>
+		{%endif%}	    
+		</div>
+		{%endif%}
+		
+		{%endif%}
+		
+		{% else %}
+		<p>
+		No interactivity defined.
+		</p>
+		
 		{% endif %}
+		<!-- GAME STUFF -->
+		
+		
+	    <div id="messaging">
+		  Your wish is my command
+	    </div>	
+
+		
+		<h4>Procedure</h4>
+		
+		{% if not test and activity.instruction_set.count %}
+		
+		{% for instruction in activity.instruction_set.all %}
+		
+		{%if instruction.title %}
+		<h5>{{instruction.title}}</h5> 
+		{%endif%}
+		{%if instruction.image %}
+		<img src="{{instruction.image.url}}" />
+		<br />
+		{%endif%}
+		
+		<!--  {%if instruction.style %}
+		<span class="instruction_style">{{instruction.style}}:</span> 
+		{%endif%}-->
+		<p class="{{instruction.style}}"> {{ instruction.instruction_text|safe }}</p>
+		{% endfor %}
+		{% else  %}
+		<p>No content instructions defined for this activity.</p>
+		{% endif %}
+		
 		{% if not activity.game %}
-		 <!-- if we have a game, the complete button is on the last game page-->
-		 <br />  
-		  {% if activity.collect_notes %}
-		 <h4>Questions and concerns</h4>
-		 <textarea name="counselor_notes" rows="5" cols="70"
-			id="counselor-notes" >{{counselor_notes}}</textarea>
-		 {% endif %}
+		<br />  
+		
+		{% if activity.collect_notes %}
+		<h4>{{participant.name}}'s Questions and Concerns</h4>
+		<textarea name="counselor_notes" rows="5" cols="70" id="counselor-notes" >{{counselor_notes}}</textarea>
+		{% endif %}
 	
 		<div class="nav-lateral" id="bottom-nav-lateral">
 				  <a id="top" href="#pagestart">&uarr; Back to Top</a>
