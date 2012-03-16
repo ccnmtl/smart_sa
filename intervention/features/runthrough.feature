@@ -12,5 +12,5 @@ check very basic things.
       When I click the "Intervene" link
       When I fill in "test" in the "name" form field
       When I fill in "test" in the "id_number" form field
-      When I click the "Begin" submit button
+      When I submit the "login-participant-form" form
       Finished using selenium

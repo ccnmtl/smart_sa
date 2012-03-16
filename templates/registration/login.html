@@ -12,19 +12,19 @@
 
 	<div class="login-panel" id="login-all">
 	
-		<form class="login" method="post" action=".">
+		<form class="login" method="post" action="." id="login-form">
 		<div class="formtitle">All Users</div>
 		{% if form.has_errors %}
 		<p>Your username and password didn't match. Please try again.</p>
 		{% endif %}
 		<div class="formrow">
-		<label for="id_username">User ID</label><input type="text" name="username"/>
+		<label for="id_username">User ID</label><input type="text" name="username" id="id_username" />
 		</div>
 		<div class="formrow">
-		<label for="id_password">Password</label><input type="password" name="password"/>
+		<label for="id_password">Password</label><input type="password" name="password" id="id_password" />
 		</div>
 		<div class="formrow">
-		<input type="submit" value="Log In" />
+		<input type="submit" value="Log In" id="login-button" />
 		<input type="hidden" name="next" value="{{ next }}" />
 		</div>
 		</form>
