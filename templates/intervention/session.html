@@ -14,7 +14,6 @@
 {%if session %}
 <div id="breadcrumb">
 	<form name="completesession" action="complete/" method="post"></form>
-	<a href="#" id="endintervention" onclick="document.completesession.submit()">Complete Session {{ session.index }}</a> 	   
       <a class="incomplete" id="tab-home" href="/intervention/{{session.intervention.id}}/">Sessions</a>
 </div>
 {%endif%}  
@@ -24,6 +23,8 @@
 {% endblock %}
 
 {% block content %}
+	<a href="#" class="action" id="endintervention" onclick="document.completesession.submit()">We're Done with Session {{ session.index }}!</a> 	   
+
     {{ block.super }}
     
     {% if session %}
