@@ -20,5 +20,16 @@
       "clinical_notes": "some clinical notes", 
       "name": "practice"
     }
+  },
+  {
+    "pk": 3, 
+    "model": "intervention.participant", 
+    "fields": {
+      "id_number": "test", 
+      "status": true, 
+      "defaulter": true, 
+      "clinical_notes": "some clinical notes", 
+      "name": "test"
+    }
   }
 ]
