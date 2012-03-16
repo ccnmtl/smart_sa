@@ -1,6 +1,7 @@
 from lettuce.django import django_url
 from lettuce import before, after, world, step
 from django.test import client
+import time
 try:
     from lxml import html
     from selenium import webdriver
@@ -13,6 +14,7 @@ except:
 @before.all
 def setup_browser():
     world.firefox = webdriver.Firefox()
+    time.sleep(5)
     world.client = client.Client()
     world.using_selenium = False
 
@@ -91,7 +93,6 @@ def i_click_the_link(step, text):
         return
     link = world.firefox.find_element_by_link_text(text)
     assert link.is_displayed()
-    assert False, link.location
     link.click()
 
 
