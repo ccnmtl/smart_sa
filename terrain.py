@@ -1,7 +1,7 @@
 from lettuce.django import django_url
 from lettuce import before, after, world, step
 from django.test import client
-from intervention.models import Intervention
+from intervention.models import Intervention, Participant
 
 import time
 try:
@@ -23,6 +23,13 @@ def setup_browser():
 @after.all
 def teardown_browser(total):
     world.firefox.quit()
+
+@before.each_scenario
+def clear_participant_data(_foo):
+    for p in ['test',]:
+        participant = Participant.objects.get(name=p)
+        participant.clear_all_data()
+        participant.save()
 
 @step(u'Using selenium')
 def using_selenium(step):
