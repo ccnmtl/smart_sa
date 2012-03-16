@@ -519,6 +519,14 @@ a.action:hover { background-color: #4ba257; }
 	margin-left: -2px;
 }
 
+.nav-lateral a.complete
+{
+	background-image: url(../images/icon_complete.png);
+	background-repeat: no-repeat;
+	background-position: 8px 7px;
+	padding-left: 34px;
+}
+
 .nav-lateral a:hover { background-color: #4ea15a; }
 
 #top-nav-lateral
