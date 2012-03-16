@@ -195,6 +195,13 @@ def there_is_a_game(self):
         return
     assert world.firefox.find_element_by_id('gamebox')
 
+@step('there is an assessmentquiz')
+def there_is_an_assessmentquiz(self):
+    if not world.using_selenium:
+        return
+    assert world.firefox.find_element_by_id('assessmentquiz')
+
+
 @step('I go back')
 def i_go_back(self):
     """ need to back out of games currently"""

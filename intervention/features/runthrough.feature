@@ -24,6 +24,7 @@ check very basic things.
       # assessment quiz
       When I click the "Let's Begin!" link
       Then there is a game
+      Then there is an assessmentquiz
       When I go back
       When I click on Complete Activity
       Then I am on the Activity 4 page
