@@ -168,7 +168,7 @@ def i_click_on_complete_activity(step):
         link = world.firefox.find_element_by_partial_link_text("Complete This Activity")
         link.click()
     except:
-        link = world.firefox.find_element_by_partial_link_text("We're Done with")
+        link = world.firefox.find_element_by_partial_link_text("Wrap-Up")
         link.click()
 
 @step(u'I am on the Session (\d+) page')
