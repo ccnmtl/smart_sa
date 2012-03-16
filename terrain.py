@@ -1,6 +1,8 @@
 from lettuce.django import django_url
 from lettuce import before, after, world, step
 from django.test import client
+from intervention.models import Intervention
+
 import time
 try:
     from lxml import html
@@ -131,4 +133,57 @@ def i_submit_the_form(step, id):
         return
 
     world.firefox.find_element_by_id(id).submit()
+
+@step(u'I am on the Intervention page')
+def i_am_on_the_intervention_page(step):
+    if not world.using_selenium:
+        return
+    i = Intervention.objects.all()[0]
+    assert world.firefox.current_url.endswith("/intervention/%d/" % i.id), world.firefox.current_url
+    assert world.firefox.find_elements_by_tag_name('h2')[0].text == "Sessions"
+
+@step(u'I click on Session (\d+)')
+def i_click_session(step, session_number):
+    if not world.using_selenium:
+        return
+    link = world.firefox.find_element_by_partial_link_text("Session %s:" % session_number)
+    link.click()
+
+@step(u'I click on Activity (\d+)')
+def i_click_activity(step, activity_number):
+    if not world.using_selenium:
+        return
+    try:
+        link = world.firefox.find_element_by_partial_link_text("Activity %s:" % activity_number)
+        link.click()
+        time.sleep(1)
+    except:
+        assert False, world.firefox.page_source
+
+@step(u'I click on Complete Activity')
+def i_click_on_complete_activity(step):
+    if not world.using_selenium:
+        return
+    try:
+        link = world.firefox.find_element_by_partial_link_text("Complete This Activity")
+        link.click()
+    except:
+        link = world.firefox.find_element_by_partial_link_text("We're Done with")
+        link.click()
+
+@step(u'I am on the Session (\d+) page')
+def i_am_on_the_session_page(step,session_id):
+    if not world.using_selenium:
+        return
+    assert world.firefox.find_elements_by_tag_name('h2')[0].text.startswith("Session %s:" % session_id)
+
+@step(u'I am on the Activity (\d+) page')
+def i_am_on_the_activity_page(step,activity_id):
+    if not world.using_selenium:
+        return
+    """<div id="breadcrumb-text">
+		You are currently in: <span class="breadcrumb-text-current">Session 1: Getting Started &rarr; Activity 2: Your questions and concerns</span>
+	</div>"""
+    breadcrumb = world.firefox.find_element_by_id("breadcrumb-text")
+    assert "Activity %s:" % activity_id in breadcrumb.text, breadcrumb.text
 
