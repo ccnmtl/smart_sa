@@ -66,7 +66,7 @@ var game_variables = {{activity.variables|safe}};
 				  {% with activity.next as next_activity %}
 					{% if next_activity %}
 					
-					<a class="" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
+					<a class="complete" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
 						    {% else %}
 					<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">Wrap-Up Session {{activity.clientsession.index}}!</a> 
 						    {% endif %}
@@ -163,9 +163,9 @@ var game_variables = {{activity.variables|safe}};
 			
 			{% with activity.next as next_activity %}
 			{% if next_activity %}
-			<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
+			<a class="complete" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
 			{% else %}
-			<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">Wrap-Up {{activity.clientsession.index}}!</a> 
+			<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">Wrap-Up Session {{activity.clientsession.index}}!</a> 
 			{% endif %}
 			{% endwith %}
 			
