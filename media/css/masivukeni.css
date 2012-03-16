@@ -8,9 +8,9 @@ body
 	font-family: "lucida sans unicode", "lucida grande", sans-serif;
 }
 
-p, ul { font-size: 14px !important; }
-p a, ul a { color: #4ea15a; }
-p a:hover, ul a:hover { text-decoration: none; }
+p, ul, ol { font-size: 14px !important; }
+p a, ul a, ol a { color: #4ea15a; }
+p a:hover, ul a:hover, ol a:hover { text-decoration: none; }
 
 #home-widgets
 {
