@@ -189,3 +189,15 @@ def i_am_on_the_activity_page(step,activity_id):
     breadcrumb = world.firefox.find_element_by_id("breadcrumb-text")
     assert "Activity %s:" % activity_id in breadcrumb.text, breadcrumb.text
 
+@step('there is a game')
+def there_is_a_game(self):
+    if not world.using_selenium:
+        return
+    assert world.firefox.find_element_by_id('gamebox')
+
+@step('I go back')
+def i_go_back(self):
+    """ need to back out of games currently"""
+    if not world.using_selenium:
+        return
+    world.firefox.back()

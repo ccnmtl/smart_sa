@@ -22,17 +22,29 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 3 page
       # assessment quiz
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 4 page
       When I click on Complete Activity
       Then I am on the Activity 5 page
       # ssnmtree
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 6 page
       # ssnmtree
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 7 page
       # reasons to stay healthy
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 8 page
       When I click on Complete Activity
@@ -68,6 +80,9 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 2 page
       # watchvideo
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 3 page
       When I click on Complete Activity
@@ -77,9 +92,15 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 6 page
       # watchvideo
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 7 page
       # reasons to stay healthy
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 8 page
       When I click on Complete Activity
@@ -91,9 +112,15 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 2 page
       # pill game
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 3 page
       # watchvideo
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 4 page
       When I click on Complete Activity
@@ -132,9 +159,15 @@ check very basic things.
       When I click on Activity 1
       Then I am on the Activity 1 page
       # problem solving
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 2 page
       # watchvideo
+      When I click the "Let's Begin!" link
+      Then there is a game
+      When I go back
       When I click on Complete Activity
       Then I am on the Activity 3 page
       When I click on Complete Activity
