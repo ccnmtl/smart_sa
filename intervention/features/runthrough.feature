@@ -87,5 +87,32 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Session 4 page
 
+      # defaulter sessions
+      When I click on Session 5
+      When I click on Activity 1
+      When I click on Complete Activity
+      Then I am on the Activity 2 page
+      # When I click on Complete Activity
+      # Then I am on the Activity 3 page
+      # When I click on Complete Activity
+      # Then I am on the Activity 4 page
+      # When I click on Complete Activity
+      # Then I am on the Activity 5 page
+      # When I click on Complete Activity
+      # Then I am on the Activity 6 page
+      # When I click on Complete Activity
+      # Then I am on the Activity 7 page
+      # When I click on Complete Activity
+      # Then I am on the Session 5 page
+      When I click the "Sessions" link
+
+      When I click on Session 6
+      When I click on Activity 1
+      When I click on Complete Activity
+      Then I am on the Activity 2 page
+      When I click on Complete Activity
+      Then I am on the Activity 3 page
+      When I click on Complete Activity
+      Then I am on the Session 6 page
 
       Finished using selenium
