@@ -149,9 +149,9 @@
             // sets the 'clip' style on an image so that any portion of the image below y value 'floor' is hidden.
             var floor = this.parent.gameFloor();
             if (floor > 0) {
-                var width = M.Style.getElementDimensions(this.el).w;
-                var hide = floor - M.DOM.elementPosition(this.el).y;
-                M.Style.setStyle(this.el, { 'clip': 'rect(0 ' + width + 'px ' + hide + 'px 0)' });
+                var width = jQuery(this.el).width();
+                var hide = floor - jQuery(this.el).offset().top;
+                jQuery(this.el).css('clip', 'rect(0 ' + width + 'px ' + hide + 'px 0)');
             }
         },
         
