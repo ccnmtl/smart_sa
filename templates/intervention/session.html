@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}session.html{% endblock %}
+{% block title %}Session {{ session.index }}: {{ session.long_title }}{% endblock %}
 
 {% load participant_status %}
 
@@ -14,7 +14,6 @@
 {%if session %}
 <div id="breadcrumb">
 	<form name="completesession" action="complete/" method="post"></form>
-	<span id="endintervention"><a class="action" style="padding: 2px;" href="#" onclick="document.completesession.submit()">Complete Session {{ session.index }}</a></span> 	   
       <a class="incomplete" id="tab-home" href="/intervention/{{session.intervention.id}}/">Sessions</a>
 </div>
 {%endif%}  
@@ -24,6 +23,8 @@
 {% endblock %}
 
 {% block content %}
+	<a href="#" class="action" id="endintervention" onclick="document.completesession.submit()">We're Done with Session {{ session.index }}!</a> 	   
+
     {{ block.super }}
     
     {% if session %}
@@ -66,8 +67,6 @@
          <p>No activities defined for this session.</p>
        {% endif %}
 
-<br style="clear: both;" /> 
-    </div>
 {% else %}
     <p>No session defined.</p>
 {% endif %}

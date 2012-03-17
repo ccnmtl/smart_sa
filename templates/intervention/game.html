@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% block title %}{{ game.activity.long_title }}{% endblock %}
+
 {% load participant_status %}
 {% block js %}
    <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script>
@@ -38,7 +40,7 @@
 <div id="breadcrumb">
       <a class="incomplete" id="tab-home" href="/intervention/{{game.activity.clientsession.intervention.id}}/">Sessions</a>
 	<div id="breadcrumb-text">
-		You are currently in: Session {{game.activity.clientsession.index}}: {{game.activity.clientsession.long_title}} &rarr; <span class="breadcrumb-text-current">Activity {{game.activity.index}}: {{ game.activity.long_title }}</span>
+		You are currently in: <span class="breadcrumb-text-current">Session {{game.activity.clientsession.index}}: {{game.activity.clientsession.long_title}} &rarr; Activity {{game.activity.index}}: {{ game.activity.long_title }}</span>
 	</div>
 </div>
     {%endif%}  
@@ -92,52 +94,66 @@
 			  {% endwith %}
 			</div>
 			
-			<h3 id="activity{{game.activity.id}}" class="activitytitle">Activity {{game.activity.index}}: {{ game.activity.long_title }}</h3>
+			<h3 id="activity{{game.activity.id}}" class="activitytitle">{{ game.activity.long_title }}</h3>
 			
-			<h4>Client Task: Part {{game.index}}/{{game.activity.pages|length}}</h4>
-			
-			<div>
-			<p class="game_instructions">
+			<p>
 			{{game.instructions|safe}}
 			</p>
+			
+			<!--
+			<table id="gamenav">
+			<tr>
+			
+				<td id="left">
+					Our Task: Part {{game.index}} of {{game.activity.pages|length}}
+				</td>
 
-			{% if game.next_url %}
+				<td id="center">
+					{% if game.previous_url %}
+					|
+					<a class="off" href="{{game.previous_url}}.html">
+					{%if game.prev_title%}{{game.prev_title}}
+					{%else%}
+					&larr; Previous
+					{%endif%}
+					</a>
+					{% endif %}
+					
+					
+					{% if game.next_url %}
+					<a id="next-game-part-link" class="hilite" href="{{game.next_url}}.html">
+					{%if game.next_title%}
+					Next: {{game.next_title}} &rarr;
+					{%else%}
+					Next  &rarr;
+					{%endif%}
+					</a>
+					
+					{% else %}
+					
+					<a id="complete" class="hilite" href="/activity/{{game.activity.id}}/complete/" >
+					We're Done!
+					</a>
+					
+					{% endif %}
+				</td>
+				
+				<td id="right">
+					<a class="off" href="/activity/{{game.activity.id}}/">Return to Overview</a>
+					{%if debug%}
+					<a class="off" href="#BEWARE" onclick="if(confirm('sure?')){Intervention.resetGame();}return false;">Reset Game</a>
+					{%endif%}
+				</td>
+			<tr>
+			</table>
+			-->
 			
-			<a id="next-game-part-link" class="hilite" href="{{game.next_url}}.html">
-			{%if game.next_title%}
-			Next: {{game.next_title}}
-			{%else%}
-			NEXT PART
-			{%endif%}
-			</a>
-			<span class="cent_or">or</span>
 			
-			{% else %}
-			
-			<a id="complete" class="hilite" href="/activity/{{game.activity.id}}/complete/" >
-			COMPLETE
-			</a><span class="cent_or">or</span>
-			
-			{% endif %}
-			{% if game.previous_url %}
-			<a class="off" href="{{game.previous_url}}.html">
-			{%if game.prev_title%}{{game.prev_title}}
-			{%else%}
-			PREVIOUS PART
-			{%endif%}
-			</a>
-			{% endif %}
-			<a class="off" href="/activity/{{game.activity.id}}/">return to task overview</a>
-			<a class="off" href="/session/{{game.activity.clientsession.id}}/">return to agenda</a>
-			{%if debug%}
-			<a class="off" href="#BEWARE" onclick="if(confirm('sure?')){Intervention.resetGame();}return false;">Reset Task for this User</a>
-			{%endif%}
-
 			<!-- START - Delegate HTML to the particular game -->
+			<div id="gamebox">
 			{% block game_content %}{% endblock %}
-			<!-- STOP Delegate HTML to the particular game -->
-			
 			</div>
+			<!-- STOP Delegate HTML to the particular game -->
 			
 			<div class="nav-lateral" id="bottom-nav-lateral">
 			  <a id="top" href="#pagestart">&uarr; Back to Top</a>
@@ -156,6 +172,9 @@
 				{% endif %}
 			  {% endwith %}
 			</div>
+			
+			</div>
+			
 
 		</div>
 

@@ -8,9 +8,9 @@ body
 	font-family: "lucida sans unicode", "lucida grande", sans-serif;
 }
 
-p, ul { font-size: 14px !important; }
-p a, ul a { color: #4ea15a; }
-p a:hover, ul a:hover { text-decoration: none; }
+p, ul, ol { font-size: 14px !important; }
+p a, ul a, ol a { color: #4ea15a; }
+p a:hover, ul a:hover, ol a:hover { text-decoration: none; }
 
 #home-widgets
 {
@@ -141,11 +141,13 @@ h3
 { 
 	margin-top: 10px;
 	padding: 0px;
+	color: #f6921e;
+	font-size: 24px;
 }
 
 h4
 {
-	color: #4ea15a;
+	color: #000;
 	border-bottom: 1px solid #4ea15a;
 	font-size: 18px;
 }
@@ -240,7 +242,7 @@ h4
 #breadcrumb a#tab-home, #breadcrumb a#tab-home:hover, #breadcrumb a.current#tab-home
 {
 	display: block;
-	width: 100px;
+	width: 90px;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;
@@ -256,6 +258,17 @@ h4
 	text-decoration: none;
 	padding: 6px 0px 6px 40px;
 	margin: 0px 0px -1px 10px;
+}
+
+a#endintervention
+{
+	width: 190px;
+	padding: 6px 0px 6px 24px;
+	margin: 0px 0px -0px 20px;
+	background-image: url(../images/icon_complete.png);
+	background-repeat: no-repeat;
+	background-position: 8px 7px;
+	margin-top: 14px;
 }
 
 #breadcrumb a#tab-home
@@ -287,13 +300,14 @@ h4
 	font-size: 12px;
 }
 
-.breadcrumb-text-current { color: #f3912f; }
+.breadcrumb-text-current { font-weight: bold; }
 
 /*stop - breadcrumb*/
 #contentcontainer
 {
 	position: relative;
-	padding: 0px 20px 20px 20px;
+	padding: 20px 30px 20px 20px;
+	min-height: 600px;
 }
 
 h2#sessioninfo
@@ -326,7 +340,7 @@ text-decoration: underline;
 	position: absolute;
 	left: 10px;
 	top: 50px;
-	width: 250px;
+	width: 260px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -456,8 +470,7 @@ table#choices td
 /*stop - nav-side*/
 #content
 {
-	margin-left: 270px;
-	padding-top: 30px;
+	margin-left: 280px;
 }
 
 a.action
@@ -468,9 +481,9 @@ a.action
 	padding: 5px 10px 5px 10px;
 	text-decoration: none;
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 12px;
 	color: #fff;
-	background-color: #b4dcc0;
+	background-color: #79b985;
 	width: 180px;
 	display: block;
 	text-align: center;
@@ -494,7 +507,7 @@ a.action:hover { background-color: #4ba257; }
 	font-weight: bold;
 	font-size: 12px;
 	color: #fff;
-	background-color: #b4dcc0;
+	background-color: #79b985;
 	display: block;
 	float: right;
 	margin-left: 10px;
@@ -506,11 +519,19 @@ a.action:hover { background-color: #4ba257; }
 	margin-left: -2px;
 }
 
+.nav-lateral a.complete
+{
+	background-image: url(../images/icon_complete.png);
+	background-repeat: no-repeat;
+	background-position: 8px 7px;
+	padding-left: 34px;
+}
+
 .nav-lateral a:hover { background-color: #4ea15a; }
 
 #top-nav-lateral
 {
-	margin-top: -30px;
+	margin: -15px;
 	padding: 0px;
 }
 
@@ -518,11 +539,9 @@ a.action:hover { background-color: #4ba257; }
 
 #footer
 {
-	clear: both;
 	text-align: center;
 	font-weight: bold;
 	font-size: 11px;
-	margin-top: 60px;
 	padding: 10px 0px 10px 0px;
 }
 
@@ -577,9 +596,10 @@ li span.task
 #navigator
 {
 	width: 940px;
-	height: 310px;
+	min-height: 500px;
 	position: relative;
 	margin-top: -20px;
+	clear: both;
 }
 
 #navigator ul
@@ -984,15 +1004,14 @@ p.instructions { margin-bottom: 35px; }
 	float: right;
 }
 
-/*
-.say { font-style: italic; }
+
+/*.say { font-style: italic; } */
 
 .say ul, .do ul, .None ul
 {
 	margin: 0px;
 	list-style-type: disc;
 }
-*/
 
 .no-bullets > li { list-style-type: none; }
 #home-remote { display: none; }
@@ -1041,13 +1060,75 @@ body.logged-in #home-remote { display: block; }
 
 #suggestedtime
 {
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	background-image: url(/site_media/images/clock-icon.jpg);
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
-	padding: 0px 0px 0px 24px;
+	padding: 3px 3px 3px 24px;
 	color: #666;
+	margin-bottom: 20px;
 }
 
+#suggestedtime * {display: inline !important; font-size: 12px !important;}
+
 #endintervention {float: right; padding-right: 10px;} 	   
+
+table#gamenav
+{
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	font-weight: bold;
+	background-color: #4ba257;
+	font-size: 12px;
+	width: 100%;
+}
+
+table#gamenav td
+{
+	padding: 5px;
+	color: #fff;
+}
+
+table#gamenav td a
+{
+	text-decoration: none;
+	color: #fff;
+}
+
+table#gamenav td a:hover
+{
+	text-decoration: underline;
+}
+
+table#gamenav td#left
+{
+text-align: left;
+width: 33%;
+}
+
+table#gamenav td#center
+{
+text-align: center;
+width: 34%;
+}
+
+table#gamenav td#right
+{
+text-align: right;
+width: 33%;
+}
+
+#gamebox
+{
+	border: 1px solid #ccc;
+	min-height: 300px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	position: relative;
+}

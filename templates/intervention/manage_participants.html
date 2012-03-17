@@ -59,7 +59,9 @@
 	<col id="firstname" /> <col id="status" /> <col id="actions" /> 
 	<tr>
 	<td colspan="3">
-	<a class="action" href="/manage/add_counselor/">+ Add a Counselor</a>	
+	  {% if request.user.is_superuser %}
+	    <a class="action" href="/manage/add_counselor/">+ Add a Counselor</a>	
+          {% endif %}
 	</td>
 	</tr>
 	<tr>

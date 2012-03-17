@@ -12,8 +12,6 @@ stuff is all hooked up properly and running.
 	Then the deployment is displayed as "Clinic"
 	Then I am not logged in
 	Then there is a login link
-#	Then I see a counselor login form
-#	Then I do not see a WIND login form
 
     Scenario: Index Page Load With Selenium
         Using selenium
