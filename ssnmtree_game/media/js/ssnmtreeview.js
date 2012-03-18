@@ -142,7 +142,6 @@
                         window.location = evt.srcElement.href;
                     }
                 });
-                return false;
             }
             return false;
         }

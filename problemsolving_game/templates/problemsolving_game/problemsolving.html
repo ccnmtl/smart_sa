@@ -1,0 +1,123 @@
+{% extends "intervention/game.html" %}
+
+{% block game_js %}
+    <script type="text/javascript" src="/site_media/js/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/site_media/js/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="/site_media/js/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="/site_media/ssnmtree_game/js/ssnmtreeview.js"></script>
+    
+    <script type="text/javascript" src="/site_media/problemsolving_game/js/problemsolvingview.js"></script> 
+{% endblock %}
+
+{% block game_css %}
+  <link href="/site_media/problemsolving_game/css/problemsolving.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block game_content %}
+    {% ifequal game_context.mode "video" %}
+        <div id="videobox">
+            <object id="video_object" classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="{{game_context.width}}"
+                height="{{game_context.height}}" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
+                <param  id="video_src" name='src' value="{{MEDIA_URL}}{{game_context.video}}" />
+                <param name='autoplay' value="false" />
+                <param name='controller' value="true" />
+                <param name='loop' value="false" />
+                <embed id="video_embed" src="{{MEDIA_URL}}{{game_context.video}}" width="{{game_context.width}}" height="{{game_context.height}}" autoplay="false" 
+                    controller="true" loop="false" pluginspage='http://www.apple.com/quicktime/download/'>
+                </embed>
+            </object>
+        </div>  
+    {% else %}
+        <div class="issue-selector">
+            {% for issue in game_context.issues %}
+                <div id="{{issue.name}}" class="issue-number" unselectable="on">{{issue.ordinality}}</div>
+            {% endfor %}
+        </div>
+        
+        <div class="issue-gallery">
+            <div id="previous_issue" class="issue-navigation issue-gallery-item">
+                <span unselectable="on"></span><img style="display: none" src="/site_media/images/leftarrow.png"></img>
+            </div>
+            
+            <div id="issue_details" class="issue-gallery-item">
+                <div class="issue-number infocus"></div>
+                <img class="issue-image"/>
+                <div class="issue-text"></div>
+                
+                <div class="personal-issue">
+                    <div class="personal-issue-label">Issue?</div> 
+                    <div class="personal-issue-toggle iphone-toggle-buttons"> 
+                        <ul>
+                            <li>
+                                <label for="checkbox-personal-issue">
+                                    <input type="checkbox" id="checkbox-personal-issue"><span></span>
+                                </label>
+                           </li> 
+                       </ul>
+                    </div>
+                </div>
+                
+                <div id="actionplan" style="display: none">
+                    <a href="#">Make Plan</a>
+                </div>
+            </div>
+            
+            <div id="next_issue" class="issue-navigation issue-gallery-item">
+                <span unselectable="on"></span><img src="/site_media/images/rightarrow.png"></img>
+            </div>
+        </div>
+        
+        <div class="issue-action-plan">
+        
+        </div>
+            
+        <div id="issue-list" style="display: none">
+            {% for issue in game_context.issues %}
+                <div class="issue">
+                    <div class="name">{{issue.name}}</div>
+                    <div class="text">{{issue.text}}</div>
+                    <div class="image">/site_media/problemsolving_game/images/issues/barrier-{{issue.name}}.png</div>
+                    <div class="ordinality">{{issue.ordinality}}</div>
+                </div>
+            {% endfor %}
+        </div>
+    
+    {% endifequal %}
+
+{% comment %}
+<div id="gamephase" class="{{game_context.mode}}">
+
+   <!--PART IV, ONLY-->  
+  <div id="formworkthrough">
+    <form id="workthrough_form" name="workthrough_form">
+      <div id="field-ask" class="problemsolve-field">
+    <label for="ask">Ask</label>
+    <input type="text" name="ask" />
+    <a class="videolink" href="{{MEDIA_URL}}{{game_context.videos.ask}}"></a>
+      </div>
+      <div id="field-aim" class="problemsolve-field">
+    <label for="aim">Aim</label>
+    <textarea name="aim" rows="3"></textarea>
+    <a class="videolink" href="{{MEDIA_URL}}{{game_context.videos.aim}}"></a>
+      </div>
+      <div id="field-alternatives" class="problemsolve-field">
+    <label for="alternatives">Alternatives</label>
+    <input type="text" name="alternatives" />
+    <input type="text" name="alternatives2" />
+    <input type="text" name="alternatives3" />
+    <a class="videolink" href="{{MEDIA_URL}}{{game_context.videos.alternatives}}"></a>
+      </div>
+      <div id="field-action" class="problemsolve-field">
+    <label for="action">Action</label>
+    <textarea name="action" rows="3"></textarea>
+    <a class="videolink" href="{{MEDIA_URL}}{{game_context.videos.action}}"></a>
+      </div>
+      <a id="form-continue" href="#gamephase" class="problemsolve-continue">
+    Continue
+      </a>
+    </form>
+
+  </div>
+</div>
+{% endcomment %}
+{% endblock %}

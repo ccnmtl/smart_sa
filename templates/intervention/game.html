@@ -50,8 +50,12 @@
 {% endblock %}
 
 {% block content %}
-
   {{ block.super }}
+  
+  {% with activity.next as next_activity %}
+  {% with activity.prev as prev_activity %}
+  {% with game.next_url as game_next_url %}
+  {% with game.previous_url as game_previous_url %}
 
 		<div id="side">
 			<h2 id="sessioninfo" class="{% get_participant_status participant game.activity.clientsession %}">
@@ -77,21 +81,22 @@
 		
 			<div id="session{{game.activity.clientsession.id}}" class="parentsession"></div>
 			
-			<div class="nav-lateral" id="top-nav-lateral">
-			  {% with activity.next as next_activity %}
-			     {% if next_activity %}
-				<a href="/activity/{{next_activity.id }}/">Next &rarr;</a> 
-                             {% else %}
-				Next &rarr;
-                             {% endif %}
-			  {% endwith %}
-			  {% with activity.prev as prev_activity %}
-				{% if prev_activity %}
-				<a href="/activity/{{prev_activity.id }}/">&larr; Previous</a> 
-				{% else %}
-				&larr; Previous
-				{% endif %}
-			  {% endwith %}
+            <div class="nav-lateral" id="top-nav-lateral">
+                {% if game_next_url %}
+                    <a id="next-game-part-link" class="hilite" href="/task/{{game_next_url}}">
+                        Next &rarr;
+                    </a>
+                {% else %}{% if next_activity %}
+                    <a href="/activity/{{next_activity.id }}/">Next &rarr;</a> 
+                {% endif %}{% endif %}
+          
+                {% if game_previous_url %}
+                    <a id="prev-game-part-link" class="hilite" href="/task/{{game_previous_url}}">
+                        &larr; Prev
+                    </a>
+                {% else %}{% if prev_activity %}
+                    <a href="/activity/{{prev_activity.id }}/">&larr; Previous</a>
+                {% endif %}{% endif %}
 			</div>
 			
 			<h3 id="activity{{game.activity.id}}" class="activitytitle">{{ game.activity.long_title }}</h3>
@@ -109,9 +114,9 @@
 				</td>
 
 				<td id="center">
-					{% if game.previous_url %}
+					{% if game_previous_url %}
 					|
-					<a class="off" href="{{game.previous_url}}.html">
+					<a class="off" href="{{game_previous_url}}.html">
 					{%if game.prev_title%}{{game.prev_title}}
 					{%else%}
 					&larr; Previous
@@ -120,8 +125,8 @@
 					{% endif %}
 					
 					
-					{% if game.next_url %}
-					<a id="next-game-part-link" class="hilite" href="{{game.next_url}}.html">
+					{% if game_next_url %}
+					<a id="next-game-part-link" class="hilite" href="{{game_next_url}}.html">
 					{%if game.next_title%}
 					Next: {{game.next_title}} &rarr;
 					{%else%}
@@ -155,27 +160,29 @@
 			</div>
 			<!-- STOP Delegate HTML to the particular game -->
 			
-			<div class="nav-lateral" id="bottom-nav-lateral">
-			  <a id="top" href="#pagestart">&uarr; Back to Top</a>
-			  {% with activity.next as next_activity %}
-			     {% if next_activity %}
-				<a href="/activity/{{next_activity.id }}/">Next &rarr;</a> 
-                             {% else %}
-				Next &rarr;
-                             {% endif %}
-			  {% endwith %}
-			  {% with activity.prev as prev_activity %}
-				{% if prev_activity %}
-				<a href="/activity/{{prev_activity.id }}/">&larr; Previous</a> 
-				{% else %}
-				&larr; Previous
-				{% endif %}
-			  {% endwith %}
-			</div>
+            <div class="nav-lateral" id="bottom-nav-lateral">
+                <a id="top" href="#pagestart">&uarr; Back to Top</a>
+                {% if game_next_url %}
+                    <a id="next-game-part-link" class="hilite" href="/task/{{game_next_url}}">
+                        Next &rarr;
+                    </a>
+                {% else %}{% if next_activity %}
+                    <a href="/activity/{{next_activity.id }}/">Next &rarr;</a> 
+                {% endif %}{% endif %}
+              
+                {% if game_previous_url %}
+                    <a id="prev-game-part-link" class="hilite" href="/task/{{game_previous_url}}">
+                        &larr; Prev
+                    </a>
+                {% else %}{% if prev_activity %}
+                    <a href="/activity/{{prev_activity.id }}/">&larr; Previous</a>
+                {% endif %}{% endif %}
+            </div>
 			
-			</div>
-			
+        </div>
 
-		</div>
-
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
 {% endblock %}

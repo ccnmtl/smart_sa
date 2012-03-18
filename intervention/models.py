@@ -300,7 +300,7 @@ class GamePage (models.Model):
             except:
                 id = ''
             pages = self.activity.pages()
-            return '%s%s' % (id,pages[ind-2])
+            return '%s/%s' % (id,pages[ind-2])
         else:
             return None
         
@@ -312,7 +312,7 @@ class GamePage (models.Model):
                 id = str(self.get_next_in_order().id)
             except:
                 id = ''
-            return '%s%s' % (id,pages[ind])
+            return '%s/%s' % (id,pages[ind])
         else:
             return None
 

@@ -1,294 +1,338 @@
-/*DEFAULTS*/
+/** Top Numbered Issue Selector **/
 
-.issue { display: none; }
+.issue-selector {
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+    margin: 10px 5px 0px 5px;
+}
 
-#isthisanissue { display: none; }
+.issue-number {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 7px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    color: #fff;
+    display: block;
+    float: left;
+    margin-left: 5px;
+    width: 24px;
+    text-align: center;
+    background-color: white;
+    border: 1px solid #ccc;
+    color: gray;
+    -moz-user-select: none;
+   -khtml-user-select: none;
+   user-select: none;
+}
 
-#formworkthrough { display: none; }
+.issue-number.personal {
+    color: black;
+    background-color: #ffebc4;
+    background-image: none;
+}
 
-.issuetext
+.issue-number.infocus,
+.issue-number:hover {
+    padding: 5px;
+    border: 3px solid #f58e33; 
+}
+
+/** Issue Gallery Container to display individual issues, prev and next navigation **/
+
+.issue-gallery {
+    width: 99%;
+    height: 240px;
+    margin: 10px;  
+}
+
+.issue-gallery-item {
+    float: left;
+}
+
+/** Prev & Next buttons **/
+.issue-navigation {
+    height: 100%;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    width: 7%;
+    border: 1px solid #ccc;
+}
+
+.issue-navigation span {
+    height: 50%;
+    display: inline-block;
+    width: 1px;
+    -moz-user-select: none;
+   -khtml-user-select: none;
+   user-select: none;
+}
+
+/** Individual Issue Display **/
+div#issue_details {
+    width: 80%;
+    height: 94%; 
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 7px;
+    margin: 1px 5px 0px 5px;
+    text-align: center;
+    background-color: #ffd479;
+    border: 1px solid #ccc;
+    color: black;  
+}
+
+div#issue_details div.issue-number {
+    position: absolute;
+}
+
+div#issue_details div.issue-number:hover {
+    border: 1px solid #ccc;
+    padding: 7px;
+}
+
+div#issue_details img.issue-image {
+    width: 50%;
+    height: auto;
+    float: left;
+}
+
+div#issue_details div.issue-text {
+    width: 45%;
+    height: 80px;
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 7px;
+    margin: 5px 5px 0px 5px;
+    text-align: center;
+    vertical-align: center;
+    background-color: white;
+    color: black;      
+}
+
+div#issue_details div.personal-issue {
+    margin-top: 20px;
+    width: 45%;
+    float: left;
+    text-align: center;
+}
+
+div#issue_details div.personal-issue div.personal-issue-label,
+div#issue_details div.personal-issue div.personal-issue-toggle {
+    float: left;
+}
+
+div#issue_details div.personal-issue div.personal-issue-label {
+    width: 40%;
+    text-align: right;
+    margin-right: 5px;
+    margin-top: 7px;
+}
+
+div#issue_details div#actionplan {
+    width: 50%;
+    float: left;
+    margin-top: 20px;
+    text-align: center; 
+    display: table-cell;
+}
+
+div#issue_details div#actionplan a {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    color: #fff;
+    background-color: #4ea15a;
+    display: inline-block;
+    width: 100px;
+    height: 20px; 
+}
+
+/** iPhone Type Toggle Buttons **/
+/** http://acidmartin.wordpress.com/2011/06/18/css3-iphone-toggle-buttons/ **/
+.iphone-toggle-buttons ul {
+    padding: 0;
+    margin: 0;
+}
+.iphone-toggle-buttons li {
+    list-style: none;
+}
+
+.iphone-toggle-buttons input[type="checkbox"] + span::after
 {
-	font-size: 13px;
-	text-align: center;
-	margin: 10px;
-	font-weight: bold;
-	font-style: oblique;
-	color: #666;
+    content: "No";
 }
 
-.issuetext:before { content: '\201C'; }
-
-.issuetext:after { content: '\201D'; }
-
-.issueimage { text-align: center; }
-
-.issueimage img
+.iphone-toggle-buttons input[type="checkbox"]:checked + span::after
 {
-	width: 306px;
-	height: 280px;
-	background-image: url(../images/ps_issue1.png);
+    content: "Yes";
 }
 
-.issue.currentissue { text-align: center; }
-
-/*PART I: My Issues*/
-
-.my_issues .currentissue,
-.my_issues #isthisanissue { display: block; }
-
-/*PART II: Choose One*/
-.choose_one .issue.picked
+.iphone-toggle-buttons
 {
-	/* This controls all of the listed issues in part 2*/
-	width: 159px;
-	height: 230px;
-	display: inline-block;
-	text-align: center;
-	margin: 5px 5px 0px 5px;
-	position: relative;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-.choose_one .picked,
-.problemsolve_one .chosen-issue { position: relative; }
-
-/*we need to flip .issuetext and .issueimage */
-.choose_one .picked .issuetext,
-.problemsolve_one  .issuetext
+.iphone-toggle-buttons label,
+.iphone-toggle-buttons input[type="checkbox"] + span,
+.iphone-toggle-buttons input[type="checkbox"] + span::before,
+.iphone-toggle-buttons input[type="checkbox"] + span::after
 {
-	position: absolute;
-	top: 140px;
-	height: 3em;
-	font-size: 11px;
-	font-weight: normal;
-	display: block;
-	left: -5px;
-	max-width: 150px;
-  /*explicit for the textarea/input tags with monospace default*/
-  font-family:"Lucida Sans",Arial,sans-serif;
+    display: inline-block;
 }
 
-.my_issues .editable-issue .issuetext
-{ 
-  height:2.5em;
-  width:306px;
-
- }
-
-.choose_one .picked .issueimage,
-.problemsolve_one .issueimage
+.iphone-toggle-buttons label,
+.iphone-toggle-buttons input[type="checkbox"] + span
 {
-	position: absolute;
-	top: 0px;
+    vertical-align: middle;
 }
 
-.choose_one .picked img,
-.problemsolve_one img
+.iphone-toggle-buttons input[type="checkbox"] + span,
+.iphone-toggle-buttons input[type="radio"] + span,
+.iphone-toggle-buttons input[type="checkbox"] + span::before,
+.iphone-toggle-buttons input[type="radio"] + span::before,
+.iphone-toggle-buttons input[type="checkbox"] + span::after,
+.iphone-toggle-buttons input[type="radio"] + span::after
 {
-	width: 160px;
-	height: 146px;
-	background-image: url(../images/ps_issue1_sm.png);
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
 }
 
-.choose_one .completed .issuetext:after,
-.choose_one .completed .done-click
+.iphone-toggle-buttons input[type="checkbox"] + span::before,
+.iphone-toggle-buttons input[type="checkbox"] + span::after,
+.iphone-toggle-buttons input[type="checkbox"]:checked + span::before,
+.iphone-toggle-buttons input[type="checkbox"]:checked + span::after
 {
-	display: block;
-	content: "done: click to review";
-	margin-top: 12px;
-	color: red;
-
+    top: 0;
 }
 
-.done-click 
-{ 
-  display:none;/*default*/
-  position:absolute;
-  top:179px;
-  width:100%;
-  font-style:oblique;
-  font-size:11px;
-  }
-
-.chosen-issue { }
-
-.chosen-issue .issuetext { }
-
-#issue-list { margin-left: 15px; }
-
-/* PART IV: Problem-Solve One */
-.problemsolve_one #issue-list
+.iphone-toggle-buttons input[type="checkbox"] + span::after,
+.iphone-toggle-buttons input[type="checkbox"]:checked + span::before
 {
-	float: left;
-	width: 160px;
-	padding: 20px;
-	background-color: #999;
-	height: 455px;
-	margin: 0 20px 0 -20px;
-	text-align: center;
+    right: 0;
 }
 
-.problemsolve_one .chosen-issue
+.iphone-toggle-buttons input[type="checkbox"] + span::before,
+.iphone-toggle-buttons input[type="checkbox"]:checked + span::after
 {
-	width: 100%;
-	background-color: #CCCCCC;
-	padding: 10px;
+    left: 0;
 }
 
-.problemsolve_one .chosen-issue .issuetext { }
-
-.problemsolve_one .chosen-issue .issueimage
+.iphone-toggle-buttons input[type="checkbox"],
+.iphone-toggle-buttons input[type="checkbox"] + span::before,
+.iphone-toggle-buttons input[type="checkbox"] + span::after
 {
-	top: 0px;
-	left: 0px;
+    position: absolute;
 }
 
-.problemsolve_one #formworkthrough { display: block; }
-
-.problemsolve-field
+.iphone-toggle-buttons label
 {
-	display: none;
-	padding: 10px 0 15px 0;
-  margin-left:200px;/*for case where printing goes past image on left*/
+    margin: 4px;
+    cursor: pointer;
 }
 
-/*  These rules are for the program */
-div.problemsolve-field:target,
-#gamephase:target div.problemsolve-field,
-#gamephase.problemsolve_one.general div.problemsolve-field
+.iphone-toggle-buttons input[type="checkbox"]
 {
-  display: block; 
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    opacity: 0;
 }
-#gamephase:target #videobox,
-#gamephase.problemsolve_one.general #videobox 
-{ 
-  display: none; 
-  }
-#gamephase:target #form-continue,
-#gamephase.problemsolve_one.general #form-continue 
-{ 
-  display: none; 
-  }
 
-#formworkthrough  label
+.iphone-toggle-buttons input[type="checkbox"] + span
 {
-	display: block;
-	width: 100%;
-	font-weight: bold;
-	font-size: 2em;
+    width: 100px;
+    height: 30px;
+    font: bold 14px/30px Arial, Sans-serif;
+    color: #8c8c8c;
+    text-transform: uppercase;
+    border: solid 1px #bcbbbb;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c8c8c8", endColorstr="#f3f3f3");
+    background: -moz-linear-gradient(top, #c8c8c8, #f3f3f3);
+    background: -webkit-linear-gradient(top, #c8c8c8, #f3f3f3);
+    background: -o-linear-gradient(top, #c8c8c8, #f3f3f3);
+    background: -ms-linear-gradient(top, #c8c8c8, #f3f3f3);
+    background: linear-gradient(top, #c8c8c8, #f3f3f3);
+    position: relative;
+    text-indent: -9999px;
 }
 
-#formworkthrough label:first-letter { color: orange; }
-#formworkthrough input,
-#formworkthrough textarea { width: 300px; }
-
-#formworkthrough .videolink { display:none; /*program data*/ }
-
-
-input.issuetext { top: 139px; }
-
-.choose_one .picked.chosen-issue
+.iphone-toggle-buttons input[type="checkbox"] + span::before
 {
-	background-image: url(../images/chosen_issue.png);
-	background-repeat: no-repeat;
-	display: inline-block;
+    content: "";
+    width: 40%;
+    height: 29px;
+    border-top: solid 1px #fff;
+    border-right: solid 1px #bebebe;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cfcfcf", endColorstr="#f9f9f9");
+    background: -moz-linear-gradient(top, #cfcfcf, #f9f9f9);
+    background: -webkit-linear-gradient(top, #cfcfcf, #f9f9f9);
+    background: -o-linear-gradient(top, #cfcfcf, #f9f9f9);
+    background: -ms-linear-gradient(top, #cfcfcf, #f9f9f9);
+    background: linear-gradient(top, #cfcfcf, #f9f9f9);
+    -moz-box-shadow: 1px 0 1px #bebebe;
+    -webkit-box-shadow: 1px 0 1px #bebebe;
+    box-shadow: 1px 0 1px #bebebe;
 }
 
-.problemsolve_one .chosen-issue
+.iphone-toggle-buttons input[type="checkbox"] + span::after
 {
-	background-image: url(../images/chosen_issue.png);
-	background-repeat: no-repeat;
-	display: block;
-	height: 230px;
-	width: 139px;
-	background-color: #999;
-	text-align: center;
-	margin-left: 10px;
+    text-indent: 0;
+    width: 62%;
+    height: 32px;
+    text-align: center;
 }
 
-#issueyesno
+.iphone-toggle-buttons input[type="checkbox"]:checked + span
 {
-	background-color: #ccc;
-	text-transform: uppercase;
-	margin: 5px 20px 20px 115px;
-	border: 1px solid #999;
-	padding: 1px 5px 7px 5px;
-	text-align: center;
-	width: 302px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1b45bd", endColorstr="#5d96ea");
+    background: -moz-linear-gradient(top, #1b45bd, #5d96ea);
+    background: -webkit-linear-gradient(top, #1b45bd, #5d96ea);
+    background: -o-linear-gradient(top, #1b45bd, #5d96ea);
+    background: -ms-linear-gradient(top, #1b45bd, #5d96ea);
+    background: linear-gradient(top, #1b45bd, #5d96ea);
+    color: #fff;
+    text-shadow: -1px -1px #0d2046;
 }
 
-input.yes
+.iphone-toggle-buttons input[type="checkbox"]:checked + span::before
 {
-	background-image: url(../images/yes_button.png);
-	background-position: 0px 0px;
-	background-repeat: no-repeat;
-	background-color: #ccc;
-	width: 72px;
-	height: 27px;
-	display: inline-block;
-	color: #fff;
-	border: none;
-	margin: -2px 5px 2px 0px;
-	cursor: pointer;
+    left: auto;
+    -moz-box-shadow: -2px 0 1px #3a5e91;
+    -webkit-box-shadow: -2px 0 1px #3a5e91;
+    box-shadow: -2px 0 1px #3a5e91;
 }
 
-input.no
+.iphone-toggle-buttons input[type="checkbox"]:checked + span::after
 {
-	background-image: url(../images/no_button.png);
-	background-position: 0px 0px;
-	background-repeat: no-repeat;
-	background-color: #ccc;
-	width: 72px;
-	height: 27px;
-	display: inline-block;
-	color: #fff;
-	border: none;
-	margin: -2px 5px 2px 0px;
-	cursor: pointer;
+    border-top: solid 1px #0f2a4f;
+    border-bottom: solid 1px #0f2a4f;
+    border-left: solid 1px #2c5496;
+    height: 30px;
+    top: -1px;
+    left: -1px;
+    -moz-border-radius: 4px 0 0 4px;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
 }
 
-a.return 
-{ 
-  margin: 15px; 
-  display:none; /*original state*/
-}
-
-#game-content
+.browser-support li.ie6,
+.browser-support li.ie7,
+.browser-support li.ie8
 {
-	overflow: auto;
-	height: auto;
-	min-height: 455px;
-}
-
-#videobox
-{
-	text-align: center;
-	margin-top: 5px;
-
-}
-
-
-a.problemsolve-continue
-{
-	background-image: url(../../images/button_short_gray.png);
-	width: 190px;
-	height: 35px;
-	display: block;
-	margin-left: 260px;
-	text-align: center;
-	color: #fff;
-	text-decoration: none;
-	background-repeat: no-repeat;
-	padding-top: 10px;
-}
-
-a.problemsolve-continue:hover
-{
-	background-image: url(../../images/button_short_gray_over.png);
-}
-
-
-@media print 
-{ 
- 
-  
+    display: none;
 }

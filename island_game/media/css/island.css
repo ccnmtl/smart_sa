@@ -29,7 +29,7 @@
 }
 
 #figure1 {
-    left: 480px !important;
+    left: 200px !important;
     top: 0px;
 }
 
@@ -99,8 +99,8 @@
 }
 
 #island_view_navigation {
-    left: 290px; 
-    top: 600px;
+    left: 40px; 
+    top: 410px;
     width: 545px;
     text-align: center;
     vertical-align: middle;

@@ -1,8 +1,14 @@
 from django.db import models
-
-# Create your models here.
 from intervention.installed_games import InstalledGames,GameInterface
 
+class Issue(models.Model):
+    name = models.CharField(max_length=100)
+    text = models.CharField(max_length=500)
+    ordinality = models.IntegerField()
+    
+    def __unicode__(self):
+        return "%s) %s" % (self.ordinality, self.name) 
+    
 class ProblemSolvingGame(GameInterface):
     def pages(self):
         return ('video','my_issues','choose_one','problemsolve_one',)
@@ -17,14 +23,16 @@ class ProblemSolvingGame(GameInterface):
                                   'aim':'video/problem_solving02.mov',
                                   'alternatives':'video/problem_solving03.mov',
                                   'action':'video/problem_solving04.mov',
-                                  }
-
+                                  },
+                        'issues': Issue.objects.all().order_by('ordinality')
                         }
+        
         if page_id == 'video':
             game_context['video'] = 'video/problem_solving_complete.mov'
             game_context['width'] = 426
             game_context['height'] = 256
-        return ('problemsolving_game/my_issues.html',game_context)
+            
+        return ('problemsolving_game/problemsolving.html', game_context)
     
     def variables(self,page_id=None):
         return ['problemsolving']
