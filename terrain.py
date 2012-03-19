@@ -2,6 +2,7 @@ from lettuce.django import django_url
 from lettuce import before, after, world, step
 from django.test import client
 from intervention.models import Intervention, Participant
+import sys
 
 import time
 try:
@@ -16,7 +17,6 @@ except:
 @before.all
 def setup_browser():
     world.firefox = webdriver.Firefox()
-#    time.sleep(3)
     world.client = client.Client()
     world.using_selenium = False
 
@@ -174,17 +174,20 @@ def i_click_on_complete_activity(step):
     try:
         link = world.firefox.find_element_by_partial_link_text("Complete This Activity")
         link.click()
-        time.sleep(1)
     except:
         link = world.firefox.find_element_by_partial_link_text("Wrap-Up")
         link.click()
-        time.sleep(1)
 
 @step(u'I am on the Session (\d+) page')
 def i_am_on_the_session_page(step,session_id):
     if not world.using_selenium:
         return
-    assert world.firefox.find_elements_by_tag_name('h2')[0].text.startswith("Session %s:" % session_id)
+    try:
+        h2 = world.firefox.find_elements_by_tag_name('h2')[0]
+    except:
+        time.sleep(1)
+        h2 = world.firefox.find_elements_by_tag_name('h2')[0]
+    assert h2.text.startswith("Session %s:" % session_id)
 
 @step(u'I am on the Activity (\d+) page')
 def i_am_on_the_activity_page(step,activity_id):
@@ -193,7 +196,11 @@ def i_am_on_the_activity_page(step,activity_id):
     """<div id="breadcrumb-text">
 		You are currently in: <span class="breadcrumb-text-current">Session 1: Getting Started &rarr; Activity 2: Your questions and concerns</span>
 	</div>"""
-    breadcrumb = world.firefox.find_element_by_id("breadcrumb-text")
+    try:
+        breadcrumb = world.firefox.find_element_by_id("breadcrumb-text")
+    except:
+        time.sleep(1)
+        breadcrumb = world.firefox.find_element_by_id("breadcrumb-text")
     assert "Activity %s:" % activity_id in breadcrumb.text, breadcrumb.text
 
 @step('there is a game')
