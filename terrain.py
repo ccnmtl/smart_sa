@@ -193,9 +193,6 @@ def i_am_on_the_session_page(step,session_id):
 def i_am_on_the_activity_page(step,activity_id):
     if not world.using_selenium:
         return
-    """<div id="breadcrumb-text">
-		You are currently in: <span class="breadcrumb-text-current">Session 1: Getting Started &rarr; Activity 2: Your questions and concerns</span>
-	</div>"""
     try:
         breadcrumb = world.firefox.find_element_by_id("breadcrumb-text")
     except:

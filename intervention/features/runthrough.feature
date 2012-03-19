@@ -65,17 +65,18 @@ check very basic things.
 #      When I click on Complete Activity
 #      Then I am on the Activity 5 page
 #      When I click on Complete Activity
-#      Then I am on the Activity 6 page
+      When I click on Session 2
+      When I click on Activity 6
+      Then I am on the Activity 6 page
       # ssnmtree
-#      When I click on Complete Activity
-#      Then I am on the Activity 7 page
+      When I click on Complete Activity
+      Then I am on the Activity 7 page
       # reasons to stay healthy
-#      When I click on Complete Activity
-#      Then I am on the Activity 8 page
-#      When I click on Complete Activity
-#      Then I am on the Session 2 page
+      When I click on Complete Activity
+      Then I am on the Activity 8 page
+      When I click on Complete Activity
+      Then I am on the Session 2 page
 
-      When I click the "Sessions" link
       When I click on Session 3
       When I click on Activity 1
       Then I am on the Activity 1 page
@@ -142,19 +143,21 @@ check very basic things.
       # When I click on Complete Activity
       # Then I am on the Activity 3 page
       # When I click on Complete Activity
-      # Then I am on the Activity 4 page
+      When I click on Session 5
+      When I click on Activity 4
+      Then I am on the Activity 4 page
       # pill game
-      # When I click on Complete Activity
-      # Then I am on the Activity 5 page
+      When I click on Complete Activity
+      Then I am on the Activity 5 page
       # watchvideo
-      # When I click on Complete Activity
-      # Then I am on the Activity 6 page
+      When I click on Complete Activity
+      Then I am on the Activity 6 page
       # ssnmtree
-      # When I click on Complete Activity
-      # Then I am on the Activity 7 page
+      When I click on Complete Activity
+      Then I am on the Activity 7 page
       # reasons to stay healthy
-      # When I click on Complete Activity
-      # Then I am on the Session 5 page
+      When I click on Complete Activity
+      Then I am on the Session 5 page
       When I click the "Sessions" link
 
       When I click on Session 6
