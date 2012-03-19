@@ -62,11 +62,9 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 4 page
       # watchvideo
-#      When I click on Complete Activity
-#      Then I am on the Activity 5 page
-#      When I click on Complete Activity
-      When I click on Session 2
-      When I click on Activity 6
+      When I click on Complete Activity
+      Then I am on the Activity 5 page
+      When I click on Complete Activity
       Then I am on the Activity 6 page
       # ssnmtree
       When I click on Complete Activity
@@ -140,11 +138,9 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 2 page
       # quiz
-      # When I click on Complete Activity
-      # Then I am on the Activity 3 page
-      # When I click on Complete Activity
-      When I click on Session 5
-      When I click on Activity 4
+      When I click on Complete Activity
+      Then I am on the Activity 3 page
+      When I click on Complete Activity
       Then I am on the Activity 4 page
       # pill game
       When I click on Complete Activity
