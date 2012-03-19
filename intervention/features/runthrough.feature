@@ -34,12 +34,14 @@ check very basic things.
       # ssnmtree
       When I click the "Let's Begin!" link
       Then there is a game
+      When I fill in the SSNM Tree
       When I go back
       When I click on Complete Activity
       Then I am on the Activity 6 page
       # ssnmtree
       When I click the "Let's Begin!" link
       Then there is a game
+      When I fill in the SSNM Tree
       When I go back
       When I click on Complete Activity
       Then I am on the Activity 7 page
@@ -67,6 +69,7 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 6 page
       # ssnmtree
+      When I fill in the SSNM Tree
       When I click on Complete Activity
       Then I am on the Activity 7 page
       # reasons to stay healthy
@@ -150,6 +153,7 @@ check very basic things.
       Then I am on the Activity 6 page
       # ssnmtree
       When I click on Complete Activity
+      When I fill in the SSNM Tree
       Then I am on the Activity 7 page
       # reasons to stay healthy
       When I click on Complete Activity

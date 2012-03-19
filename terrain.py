@@ -228,3 +228,21 @@ def fill_in_quiz(self,value):
         if i.get_attribute('type') == 'radio' and i.get_attribute('value') == value:
             i.click()
 
+@step('I fill in the SSNM Tree')
+def fill_in_ssnmtree(self):
+    if not world.using_selenium:
+        return
+    for i in world.firefox.find_elements_by_tag_name('input'):
+        if i.get_attribute('type') == 'text':
+            i.send_keys("asdf")
+
+@step('there is a filled in SSNM Tree')
+def filled_in_ssnmtree(self):
+    if not world.using_selenium:
+        return
+    all_filled = True
+    for i in world.firefox.find_elements_by_tag_name('input'):
+        if i.get_attribute('type') == 'text':
+            if i.get_attribute('value') != "asdf":
+                all_filled = False
+    assert all_filled
