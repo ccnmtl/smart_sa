@@ -66,25 +66,26 @@ var game_variables = {{activity.variables|safe}};
 				  {% with activity.next as next_activity %}
 					{% if next_activity %}
 					
-					<a class="complete" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
+					<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Next &rarr;</a> 
 						    {% else %}
 					<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">Wrap-Up Session {{activity.clientsession.index}}!</a> 
 						    {% endif %}
 				  {% endwith %}
 				  {% with activity.prev as prev_activity %}
 					{% if prev_activity %}
-					<a href="/activity/{{prev_activity.id }}/">&larr; Review Last Activity</a> 
+					<a href="/activity/{{prev_activity.id }}/">&larr; Back</a> 
 					{% else %}
 					<!--START - There's no activity before this.-->
 					{% endif %}
 				  {% endwith %}
 				</div>
+				
+		<div id="suggestedtime">
+		{{activity.objective_copy|safe}}
+		</div>
 		
 		<h3 id="activity{{activity.id}}" class="activitytitle">{{ activity.long_title }}</h3>
 		
-		<div id="suggestedtime">
-		Estimated Time to Complete: {{activity.objective_copy|safe}}
-		</div>
 		
 		<!-- GAME STUFF -->
 		{%if activity.game %}
@@ -163,7 +164,7 @@ var game_variables = {{activity.variables|safe}};
 			
 			{% with activity.next as next_activity %}
 			{% if next_activity %}
-			<a class="complete" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Complete This Activity &rarr;</a> 
+			<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Next &rarr;</a> 
 			{% else %}
 			<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">Wrap-Up Session {{activity.clientsession.index}}!</a> 
 			{% endif %}
@@ -171,7 +172,7 @@ var game_variables = {{activity.variables|safe}};
 			
 			{% with activity.prev as prev_activity %}
 			{% if prev_activity %}
-			<a href="/activity/{{prev_activity.id }}/">&larr; Review Last Activity</a> 
+			<a href="/activity/{{prev_activity.id }}/">&larr; Back</a> 
 			{% else %}
 			<!--START - There's no activity before this.-->
 			{% endif %}

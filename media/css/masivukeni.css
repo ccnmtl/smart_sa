@@ -306,7 +306,7 @@ a#endintervention
 #contentcontainer
 {
 	position: relative;
-	padding: 20px 30px 20px 20px;
+	padding: 40px 30px 0px 30px;
 	min-height: 600px;
 }
 
@@ -531,7 +531,7 @@ a.action:hover { background-color: #4ba257; }
 
 #top-nav-lateral
 {
-	margin: -15px;
+	margin-top: -15px;
 	padding: 0px;
 }
 
@@ -1064,14 +1064,17 @@ body.logged-in #home-remote { display: block; }
 	font-weight: bold;
 	background-image: url(/site_media/images/clock-icon.jpg);
 	background-repeat: no-repeat;
-	background-position: 0px 0px;
-	padding: 3px 3px 3px 24px;
+	background-position: 4px 4px;
+	margin: 18px 0px 0px 0px;
+	padding: 4px 4px 4px 30px;
 	color: #666;
-	margin-bottom: 20px;
+	width: 160px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	float: right;
 }
-
-#suggestedtime * {display: inline !important; font-size: 12px !important;}
-
 #endintervention {float: right; padding-right: 10px;} 	   
 
 table#gamenav
