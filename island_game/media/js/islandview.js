@@ -233,8 +233,7 @@
             }
             
             GameElementView.prototype.render.call(this);
-
-        },
+        }
     });
     
     var FigureView = GameElementView.extend({

@@ -40,7 +40,7 @@
             this.parent = options.parent;
             
             this.model.bind('change:personal', this.parent.render);
-        },
+        }
     });
     
     
