@@ -1,7 +1,7 @@
 from lettuce.django import django_url
 from lettuce import before, after, world, step
 from django.test import client
-from intervention.models import Intervention, Participant
+from intervention.models import Intervention, Participant, ClientSession, Activity
 import sys
 
 import time
@@ -246,3 +246,59 @@ def filled_in_ssnmtree(self):
             if i.get_attribute('value') != "asdf":
                 all_filled = False
     assert all_filled
+
+@step(u'I have logged in a participant')
+def i_have_logged_in_a_participant(step):
+    response = world.client.post(django_url('/set_participant/'), {'name': 'test', 'id_number': 'test'})
+    world.participant = Participant.objects.filter(name='test')[0]
+
+@step(u'the participant has not completed any sessions')
+def participant_has_not_completed_any_sessions(step):
+    world.participant.participantsession_set.all().delete()
+    world.participant.participantactivity_set.all().delete()
+
+
+@step(u'I go to Session (\d+)')
+def i_go_to_session(step,session_number):
+    i = Intervention.objects.all()[0]
+    s = i.clientsession_set.all()[int(session_number) - 1]
+    assert s.index() == int(session_number)
+    response = world.client.get(django_url("/session/%d/" % s.id))
+    world.dom = html.fromstring(response.content)
+    world.response = response
+
+@step(u'there is no "([^"]*)" button')
+def there_is_no_button(step, label):
+    found = False
+    n = len(world.dom.cssselect('a.action'))
+    for a in world.dom.cssselect('a.action'):
+        if a.text.strip().lower() == label.strip().lower():
+            found = True
+    assert not found
+
+@step(u'the participant has completed (\d+) activit[y|ies] in session (\d+)')
+def the_participant_has_completed_activity_in_session_1(step,num_activities,session_number):
+    world.participant.participantsession_set.all().delete()
+    world.participant.participantactivity_set.all().delete()
+    i = Intervention.objects.all()[0]
+    s = i.clientsession_set.all()[int(session_number) - 1]
+    for a in s.activity_set.all()[:int(num_activities)]:
+        r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
+    
+
+@step(u'the participant has completed all activities in session (\d+)')
+def the_participant_has_completed_all_activities_in_session_1(step,session_number):
+    i = Intervention.objects.all()[0]
+    s = i.clientsession_set.all()[int(session_number) - 1]
+    for a in s.activity_set.all():
+        r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
+
+@step(u'there is "([^"]*)" button')
+def then_there_is_button(step, label):
+    found = False
+    n = len(world.dom.cssselect('a.action'))
+    for a in world.dom.cssselect('a.action'):
+        if a.text.strip().lower() == label.strip().lower():
+            found = True
+    assert found
+

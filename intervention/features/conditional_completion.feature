@@ -9,20 +9,20 @@ is actually complete instead of a persistent placement?"
       Given I have logged in a participant
       Given the participant has not completed any sessions
       When I go to Session 1
-      Then there is no "We're Done with Session 1" button
+      Then there is no "We're Done with Session 1!" button
 
     Scenario: Some activities completed, but not all
       Given I am logged in as a counselor
       Given I have logged in a participant
       Given the participant has completed 1 activity in session 1
       When I go to Session 1
-      Then there is no "We're Done with Session 1" button
+      Then there is no "We're Done with Session 1!" button
 
     Scenario: All activities complted
       Given I am logged in as a counselor
       Given I have logged in a participant
       Given the participant has completed all activities in session 1
       When I go to Session 1
-      Then there is "We're Done with Session 1" button
+      Then there is "We're Done with Session 1!" button
 
       
