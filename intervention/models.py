@@ -127,6 +127,12 @@ class ClientSession (models.Model):
         except ClientSession.DoesNotExist:
             return None
 
+    def completed_all_activities(self, participant):
+        for a in self.activity_set.all():
+            if a.get_participant_status(participant) != "complete":
+                return False
+        return True
+
 
 class Activity(models.Model):
     """Contains one or more pairs of instructions, and zero or one game.

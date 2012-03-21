@@ -66,9 +66,9 @@ var game_variables = {{activity.variables|safe}};
 				  {% with activity.next as next_activity %}
 					{% if next_activity %}
 					
-					<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Next &rarr;</a> 
+					<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit();return false">Next &rarr;</a> 
 						    {% else %}
-					<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">Wrap-Up Session {{activity.clientsession.index}}!</a> 
+					<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit();return false">Wrap-Up Session {{activity.clientsession.index}}!</a> 
 						    {% endif %}
 				  {% endwith %}
 				  {% with activity.prev as prev_activity %}
@@ -164,9 +164,9 @@ var game_variables = {{activity.variables|safe}};
 			
 			{% with activity.next as next_activity %}
 			{% if next_activity %}
-			<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit()">Next &rarr;</a> 
+			<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit(); return false">Next &rarr;</a> 
 			{% else %}
-			<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit()">Wrap-Up Session {{activity.clientsession.index}}!</a> 
+			<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit(); return false">Wrap-Up Session {{activity.clientsession.index}}!</a> 
 			{% endif %}
 			{% endwith %}
 			

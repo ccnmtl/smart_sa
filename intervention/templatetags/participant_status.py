@@ -75,3 +75,29 @@ def get_recommended_next_activity(parser, token):
         var_name = token.split_contents()[1:][2]
     return GetRecommendedNextActivity(participant,var_name)
         
+
+class ParticipantCompletedAllActivitiesInSession(template.Node):
+    def __init__(self,participant,session,var_name=None):
+        self.participant = template.Variable(participant)
+        self.session = template.Variable(session)
+        self.var_name = var_name
+
+    def render(self,context):
+        p = self.participant.resolve(context)
+        s = self.session.resolve(context)
+        status = s.completed_all_activities(p)
+        if self.var_name:
+            context[self.var_name] = status
+            return ''
+        else:
+            return status
+
+@register.tag('participant_completed_all_activities_in_session')
+def participant_completed_all_activities_in_session(parser, token):
+    participant = token.split_contents()[1:][0]
+    session = token.split_contents()[1:][1]
+    var_name = None
+    if len(token.split_contents()[1:]) > 2:
+        # handle "as some_var"
+        var_name = token.split_contents()[1:][3]
+    return ParticipantCompletedAllActivitiesInSession(participant,session,var_name)
