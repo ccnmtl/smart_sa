@@ -172,7 +172,7 @@ def i_click_on_complete_activity(step):
     if not world.using_selenium:
         return
     try:
-        link = world.firefox.find_element_by_partial_link_text("Complete This Activity")
+        link = world.firefox.find_element_by_partial_link_text("Next")
         link.click()
     except:
         link = world.firefox.find_element_by_partial_link_text("Wrap-Up")
