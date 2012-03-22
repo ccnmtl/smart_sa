@@ -313,3 +313,21 @@ def then_there_is_button(step, label):
             found = True
     assert found
 
+@step(u'there is a "([^"]*)" nav button')
+def then_there_is_navbutton(step, label):
+    found = False
+    n = len(world.dom.cssselect('a.navlink'))
+    for a in world.dom.cssselect('a.navlink'):
+#        assert False, a.text.strip()
+        if a.text.strip().lower() == label.strip().lower():
+            found = True
+    assert found
+
+@step(u'there is no "([^"]*)" nav button')
+def there_is_no_navbutton(step, label):
+    found = False
+    n = len(world.dom.cssselect('a.navlink'))
+    for a in world.dom.cssselect('a.navlink'):
+        if a.text.strip().lower() == label.strip().lower():
+            found = True
+    assert not found

@@ -11,5 +11,5 @@ Clicking Next -> when the interactivity phase is complete advances the user to t
         Given I am logged in as a counselor
         Given I have logged in a participant
         When I go to Session 1, Activity 3
-        Then there is a "Next" button
-        Then there is no "Let's Begin" button
+        Then there is a "Next →" nav button
+        Then there is no "Let's Begin!" nav button

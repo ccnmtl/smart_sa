@@ -17,14 +17,14 @@ var game_variables = {{activity.variables|safe}};
 {% endblock %}
 
 {% block breadcrumb-session %}
-{%if activity %}
+
 <div id="breadcrumb">
       <a class="incomplete" id="tab-home" href="/intervention/{{activity.clientsession.intervention.id}}/">Sessions</a>
 	<div id="breadcrumb-text">
 		You are currently in: <span class="breadcrumb-text-current">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; Activity {{activity.index}}: {{ activity.long_title }}</span>
 	</div>
 </div>
-{%endif%}  
+
 {% if participant.is_practice %}
 <div class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</div>
 {% endif %}
@@ -45,8 +45,8 @@ var game_variables = {{activity.variables|safe}};
 				<a class="
 				{% get_participant_status participant a %} 
 				{% if forloop.first %}first{% endif %}
-				{% if forloop.last %}last{% endif %} 
-				{% ifequal a.id activity.id %}current{%else%}default{% endifequal %}
+				{% if forloop.last %}last{% endif %} 	
+			{% ifequal a.id activity.id %}current{%else%}default{% endifequal %}
 				" href="/activity/{{a.id }}/">{{a.long_title}}</a>{% if a.game %}<span class="task">+Task</span>{% endif %}
 				</li>
 				{% endfor %}
@@ -57,20 +57,25 @@ var game_variables = {{activity.variables|safe}};
 		
 		<div id="content">
 
-	    {% if activity %}
+
 	    <form name="completeactivity" action="complete/" method="post">
 	
 	    <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
 
 		<div class="nav-lateral" id="top-nav-lateral">
-				  {% with activity.next as next_activity %}
-					{% if next_activity %}
-					
-					<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit();return false">Next &rarr;</a> 
-						    {% else %}
-					<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit();return false">Wrap-Up Session {{activity.clientsession.index}}!</a> 
-						    {% endif %}
-				  {% endwith %}
+		  {%if activity.game %}
+		    {% if activity.pages %}
+           	      <a class="navlink" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/" onclick="document.completeactivity.submit();return false">Next &rarr;</a>
+		    {%endif%}
+		    {% else %}
+                      {% with activity.next as next_activity %}
+		        {% if next_activity %}
+		          <a class="navlink" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit();return false">Next &rarr;</a> 
+			{% else %}
+			  <a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit();return false">Wrap-Up Session {{activity.clientsession.index}}!</a> 
+			{% endif %}
+	              {% endwith %}
+  		  {%endif%}
 				  {% with activity.prev as prev_activity %}
 					{% if prev_activity %}
 					<a href="/activity/{{prev_activity.id }}/">&larr; Back</a> 
@@ -87,31 +92,6 @@ var game_variables = {{activity.variables|safe}};
 		<h3 id="activity{{activity.id}}" class="activitytitle">{{ activity.long_title }}</h3>
 		
 		
-		<!-- GAME STUFF -->
-		{%if activity.game %}
-		
-		{% if activity.pages %}
-		<div align="center">
-         	<a class="action" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">Let's Begin!</a>
-	        <div id="all-task-pages"  style="border: 1px solid blue;">
-	
-		{%for taskpage in activity.gamepage_set.all %}
-		<a id="taskpage-{{taskpage.page_name}}" href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">{{taskpage.page_name}}</a>
-		{%endfor%}
-		</div>
-		
-		</div>
-		{%endif%}
-		
-		{%endif%}
-		
-		{% else %}
-		<p>
-		No interactivity defined.
-		</p>
-		
-		{% endif %}
-		<!-- GAME STUFF -->
 		
 	    <div id="messaging">
 		  Your wish is my command
@@ -151,13 +131,19 @@ var game_variables = {{activity.variables|safe}};
 		
 			<a id="top" href="#pagestart">&uarr; Back to Top</a>
 			
-			{% with activity.next as next_activity %}
-			{% if next_activity %}
-			<a href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit(); return false">Next &rarr;</a> 
+		  {%if activity.game %}
+		    {% if activity.pages %}
+           	      <a class="navlink" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/" onclick="document.completeactivity.submit();return false">Next &rarr;</a>
+		    {%endif%}
+		    {% else %}
+                      {% with activity.next as next_activity %}
+		        {% if next_activity %}
+		          <a class="navlink" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit();return false">Next &rarr;</a> 
 			{% else %}
-			<a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit(); return false">Wrap-Up Session {{activity.clientsession.index}}!</a> 
+			  <a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit();return false">Wrap-Up Session {{activity.clientsession.index}}!</a> 
 			{% endif %}
-			{% endwith %}
+	              {% endwith %}
+  		  {%endif%}
 			
 			{% with activity.prev as prev_activity %}
 			{% if prev_activity %}
