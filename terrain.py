@@ -267,6 +267,17 @@ def i_go_to_session(step,session_number):
     world.dom = html.fromstring(response.content)
     world.response = response
 
+@step(u'I go to Session (\d+), Activity (\d+)')
+def i_go_to_session(step,session_number,activity_number):
+    i = Intervention.objects.all()[0]
+    s = i.clientsession_set.all()[int(session_number) - 1]
+    assert s.index() == int(session_number)
+    a = s.activity_set.all()[int(activity_number) - 1]
+    assert a.index() == int(activity_number)
+    response = world.client.get(django_url("/activity/%d/" % a.id))
+    world.dom = html.fromstring(response.content)
+    world.response = response
+
 @step(u'there is no "([^"]*)" button')
 def there_is_no_button(step, label):
     found = False
