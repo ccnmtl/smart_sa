@@ -304,7 +304,7 @@ def the_participant_has_completed_all_activities_in_session_1(step,session_numbe
     for a in s.activity_set.all():
         r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
 
-@step(u'there is "([^"]*)" button')
+@step(u'there is a "([^"]*)" button')
 def then_there_is_button(step, label):
     found = False
     n = len(world.dom.cssselect('a.action'))
