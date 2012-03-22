@@ -92,25 +92,14 @@ var game_variables = {{activity.variables|safe}};
 		
 		{% if activity.pages %}
 		<div align="center">
-		{% if not test %}
-		<a class="action" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">Let's Begin!</a>
-		<div id="all-task-pages"  style="border: 1px solid blue;">
+         	<a class="action" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">Let's Begin!</a>
+	        <div id="all-task-pages"  style="border: 1px solid blue;">
 	
 		{%for taskpage in activity.gamepage_set.all %}
 		<a id="taskpage-{{taskpage.page_name}}" href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">{{taskpage.page_name}}</a>
 		{%endfor%}
-		
 		</div>
 		
-		{%else%}
-		<a class="action" href="/task/{{activity.gamepage_set.all.0.id}}/{{activity.pages.0}}/">Let's Begin!</a>
-		<div id="all-task-pages">
-		
-		{%for taskpage in activity.pages %}
-		<a id="taskpage-{{taskpage}}" href="/task/{{activity.taskpage.id}}/{{activity.taskpage.page_name}}/">{{taskpage}}</a>
-		{%endfor%}
-		</div>
-		{%endif%}	    
 		</div>
 		{%endif%}
 		
@@ -128,7 +117,7 @@ var game_variables = {{activity.variables|safe}};
 		  Your wish is my command
 	    </div>	
 
-		{% if not test and activity.instruction_set.count %}
+		{% if activity.instruction_set.count %}
 		
 		{% for instruction in activity.instruction_set.all %}
 		
