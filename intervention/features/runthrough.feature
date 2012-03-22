@@ -22,33 +22,33 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 3 page
       # assessment quiz
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
       Then there is an assessmentquiz
       When I fill in all 3s in the quiz
-      When I go back
+      When I click the "Next" link
+      Then there is a game
+      Then there is an assessmentquiz
+
       When I click on Complete Activity
       Then I am on the Activity 4 page
       When I click on Complete Activity
       Then I am on the Activity 5 page
       # ssnmtree
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
       When I fill in the SSNM Tree
-      When I go back
-      When I click on Complete Activity
+      When I click the "Next" Link
       Then I am on the Activity 6 page
       # ssnmtree
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
       When I fill in the SSNM Tree
-      When I go back
       When I click on Complete Activity
       Then I am on the Activity 7 page
       # reasons to stay healthy
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
-      When I go back
       When I click on Complete Activity
       Then I am on the Activity 8 page
       When I click on Complete Activity
@@ -65,14 +65,24 @@ check very basic things.
       Then I am on the Activity 4 page
       # watchvideo
       When I click on Complete Activity
+      Then there is a game
+      When I click on Complete Activity
       Then I am on the Activity 5 page
+      # island game
+      When I click the "Next" link
+      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 6 page
       # ssnmtree
+      When I click the "Next" link
+      Then there is a game
       When I fill in the SSNM Tree
       When I click on Complete Activity
       Then I am on the Activity 7 page
       # reasons to stay healthy
+      When I click the "Next" link
+      Then there is a game
+
       When I click on Complete Activity
       Then I am on the Activity 8 page
       When I click on Complete Activity
@@ -84,9 +94,8 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 2 page
       # watchvideo
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
-      When I go back
       When I click on Complete Activity
       Then I am on the Activity 3 page
       When I click on Complete Activity
@@ -96,15 +105,13 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 6 page
       # watchvideo
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
-      When I go back
       When I click on Complete Activity
       Then I am on the Activity 7 page
       # reasons to stay healthy
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
-      When I go back
       When I click on Complete Activity
       Then I am on the Activity 8 page
       When I click on Complete Activity
@@ -116,15 +123,18 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 2 page
       # pill game
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
-      When I go back
+      When I click the "Next" link
+      Then there is a game
+      When I click the "Next" link
+      Then there is a game
+
       When I click on Complete Activity
       Then I am on the Activity 3 page
       # watchvideo
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
-      When I go back
       When I click on Complete Activity
       Then I am on the Activity 4 page
       When I click on Complete Activity
@@ -141,21 +151,41 @@ check very basic things.
       When I click on Complete Activity
       Then I am on the Activity 2 page
       # quiz
+      When I click the "Next" link
+      Then there is a game
+      When I click the "Next" link
+      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 3 page
+      When I click the "Next" link
+      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 4 page
       # pill game
+      When I click the "Next" link
+      Then there is a game
+      When I click the "Next" link
+      Then there is a game
+      When I click the "Next" link
+      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 5 page
       # watchvideo
+      When I click the "Next" link
+      Then there is a game
+
       When I click on Complete Activity
       Then I am on the Activity 6 page
       # ssnmtree
-      When I click on Complete Activity
+      When I click the "Next" link
+      Then there is a game
       When I fill in the SSNM Tree
+      When I click on Complete Activity
       Then I am on the Activity 7 page
       # reasons to stay healthy
+      When I click the "Next" link
+      Then there is a game
+
       When I click on Complete Activity
       Then I am on the Session 5 page
       When I click the "Sessions" link
@@ -164,15 +194,13 @@ check very basic things.
       When I click on Activity 1
       Then I am on the Activity 1 page
       # problem solving
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
-      When I go back
       When I click on Complete Activity
       Then I am on the Activity 2 page
       # watchvideo
-      When I click the "Let's Begin!" link
+      When I click the "Next" link
       Then there is a game
-      When I go back
       When I click on Complete Activity
       Then I am on the Activity 3 page
       When I click on Complete Activity

@@ -119,7 +119,7 @@ def i_click_the_link(step, text):
     if not world.using_selenium:
         return
     try:
-        link = world.firefox.find_element_by_link_text(text)
+        link = world.firefox.find_element_by_partial_link_text(text)
         assert link.is_displayed()
         link.click()
     except:

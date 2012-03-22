@@ -234,10 +234,13 @@ def complete_activity(request, activity_id):
             note.notes = request.POST.get('counselor_notes','')
             note.save()
         next_activity = activity.next()
-        if next_activity is None:
-            return HttpResponseRedirect(activity.clientsession.get_absolute_url())
+        if activity.game:
+            return HttpResponseRedirect("/task/%d/%s/" % (activity.gamepage_set.all()[0].id,activity.pages()[0]))
         else:
-            return HttpResponseRedirect(next_activity.get_absolute_url())
+            if next_activity is None:
+                return HttpResponseRedirect(activity.clientsession.get_absolute_url())
+            else:
+                return HttpResponseRedirect(next_activity.get_absolute_url())
     else:
         return HttpResponseRedirect(activity.get_absolute_url())
 
