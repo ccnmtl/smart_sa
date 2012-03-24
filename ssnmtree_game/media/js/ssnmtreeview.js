@@ -92,7 +92,8 @@
         events : {
             'click div#toggle-support-selection' : 'toggleSupportSelection',
             'click div#toggle-disclosure-selection' : 'toggleDisclosureSelection',
-            'click a#complete': 'saveState'
+            'click div#top-nav-lateral a': 'saveState',
+            'click div#bottom-nav-lateral a': 'saveState'
         },
 
         initialize : function (options) {

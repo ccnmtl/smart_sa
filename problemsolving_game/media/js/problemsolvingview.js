@@ -43,17 +43,18 @@
 
     var IssueListView = Backbone.View.extend({
         events : {
-            'click a#complete': 'saveState',
             'click div.issue-selector div.issue-number': 'onIssueNumber',
             'click #previous_issue': 'onPreviousIssue',
             'click #next_issue': 'onNextIssue',
             'click input[type=checkbox]': 'onPersonalIssue',
             'click #actionplan': 'onActionPlan',
-            'click #actionplan_form input[type=submit]': 'onCloseActionPlan'
+            'click #actionplan_form input[type=submit]': 'onCloseActionPlan',
+            'click div#top-nav-lateral a': 'onNavigate',
+            'click div#bottom-nav-lateral a': 'onNavigate'
         },
         
         initialize : function (options) {
-            _.bindAll(this, "render", "onIssueNumber", "onPreviousIssue", "onNextIssue", "saveState", "onActionPlan", "onCloseActionPlan");
+            _.bindAll(this, "render", "onIssueNumber", "onPreviousIssue", "onNextIssue", "onNavigate", "onActionPlan", "onCloseActionPlan");
             
             this.issues = options.issues;
             
@@ -100,7 +101,10 @@
                 this.actionPlans.archive(issueId);
             } else {
                 if (!this.actionPlans.get(issueId)) {
-                    this.actionPlans.add(new ActionPlan({id: issueId}));
+                    var actionPlan = new ActionPlan({id: issueId});
+                    actionPlan.save();
+                    
+                    this.actionPlans.add(actionPlan);
                 }
             }
         },
@@ -137,6 +141,12 @@
         },
         
         render: function () {
+            // make sure all the actionPlans are represented
+            // in the issueNumber selector
+            this.actionPlans.forEach(function (plan) {
+                jQuery("#" + plan.get("id")).addClass("personal");
+            });
+            
             var a = jQuery(".issue-number.infocus");
             if (a.length > 0) {
                 jQuery(a[0]).removeClass("infocus");
@@ -204,10 +214,10 @@
             }
         },
     
-        saveState: function (evt) {
-            if (!this.collection.isValid()) {
+        onNavigate: function (evt) {
+            if (this.actionPlans.length < 1) {
                 evt.preventDefault();
-                alert('Please select at least one barrier.');
+                alert('Please select at least one barrier before continuing.');
             } else {
                 // Initiate the ajax call to saveState
                 global.Intervention.saveState(function (result) {
@@ -243,6 +253,19 @@
     jQuery(document).ready(function () {
         // pick up the individual's personal action plans
         var actionPlans = new ActionPlanList();
+        
+        // pick up the issues from the DOM
+        var issues = new IssueList();
+        jQuery("div.issue").each(function () {
+            var issue = new Issue();
+            issue.set("id", jQuery(this).children("div.name").html());
+            issue.set("text", jQuery(this).children("div.text").html());
+            issue.set("image", jQuery(this).children("div.image").html());
+            issue.set("ordinality", jQuery(this).children("div.ordinality").html());
+            issues.add(issue);
+        });
+        
+        // pick up the personal plans from the game state
         var gameState = global.Intervention.getGameVar('problemsolving', {});
         for (var issueId in gameState) {
             actionPlans.add(new ActionPlan({
@@ -253,22 +276,15 @@
             }));
         }
         
-        var issues = new IssueList();
-        // pick up the issues from the DOM
-        jQuery("div.issue").each(function () {
-            var issue = new Issue();
-            issue.set("id", jQuery(this).children("div.name").html());
-            issue.set("text", jQuery(this).children("div.text").html());
-            issue.set("image", jQuery(this).children("div.image").html());
-            issue.set("ordinality", jQuery(this).children("div.ordinality").html());
-            issues.add(issue);
-        });
-        
         var issueListView = new IssueListView({
             issues: issues,
             actionPlans: actionPlans,
             el: 'div#contentcontainer',
             model: new BarrierExercise({"selected": jQuery(".issue-number")[0].id})
-        }).render();
+        });
+        
+
+        
+        issueListView.render();
     });
 }(jQuery));
