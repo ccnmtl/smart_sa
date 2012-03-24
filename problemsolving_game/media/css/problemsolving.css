@@ -4,22 +4,22 @@
     text-align: center;
     vertical-align: middle;
     height: 40px;
-    margin: 10px 5px 0px 5px;
+    margin: 10px 3px 0px 3px;
 }
 
 .issue-number {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    padding: 7px;
+    padding: 6px;
     text-decoration: none;
     font-weight: bold;
     font-size: 12px;
     color: #fff;
     display: block;
     float: left;
-    margin-left: 5px;
-    width: 24px;
+    margin-left: 3px;
+    width: 16px;
     text-align: center;
     background-color: white;
     border: 1px solid #ccc;
@@ -37,7 +37,7 @@
 
 .issue-number.infocus,
 .issue-number:hover {
-    padding: 5px;
+    padding: 4px;
     border: 3px solid #f58e33; 
 }
 
@@ -45,7 +45,7 @@
 
 .issue-gallery {
     width: 99%;
-    height: 240px;
+    height: 250px;
     margin: 10px;  
 }
 
@@ -75,12 +75,11 @@
 /** Individual Issue Display **/
 div#issue_details {
     width: 80%;
-    height: 94%; 
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     padding: 7px;
-    margin: 1px 5px 0px 5px;
+    margin: 1px 5px 5px 5px;
     text-align: center;
     background-color: #ffd479;
     border: 1px solid #ccc;
@@ -157,6 +156,28 @@ div#issue_details div#actionplan a {
     display: inline-block;
     width: 100px;
     height: 20px; 
+}
+
+/** Individual Issue Display **/
+div#actionplan_form {
+    margin: 10px;
+    background-color: #ffd479;
+    color: black;  
+    text-align: left;
+    font-size: 80%;
+    padding-top: 5px;
+    clear: both;
+}
+
+div#actionplan_form label {
+    display: block;
+    padding-top: 5px;
+}
+
+div#actionplan_form textarea {
+    width: 98%;
+    max-width: 485px;
+    max-height: 150px;
 }
 
 /** iPhone Type Toggle Buttons **/

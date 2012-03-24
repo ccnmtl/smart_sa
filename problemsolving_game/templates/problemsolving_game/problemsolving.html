@@ -47,17 +47,29 @@
             <div id="actionplan" style="display: none">
                 <a href="#">Make Plan</a>
             </div>
+            
+            <div id="actionplan_form" class="actionplan_form" style="display: none;">
+                <h2>Your Action Plan</h2>        
+                <label for="action">How does this keep me from making a plan?</label>
+                <textarea id="barriers" rows="3"></textarea>
+                
+                <label for="action">What are some ways I can work on the problem?</label>
+                <textarea id="proposals" rows="3"></textarea>
+                
+                <label for="action">What is my plan of action?</label>
+                <textarea id="finalPlan" rows="3"></textarea>
+                
+                <input type="submit" value="Done"></input>
+            </div>
         </div>
         
         <div id="next_issue" class="issue-navigation issue-gallery-item">
             <span unselectable="on"></span><img src="/site_media/images/rightarrow.png"></img>
         </div>
     </div>
-    
-    <div class="issue-action-plan">
-    
-    </div>
         
+    <div style="clear: both"></div>
+
     <div id="issue-list" style="display: none">
         {% for issue in game_context.issues %}
             <div class="issue">
