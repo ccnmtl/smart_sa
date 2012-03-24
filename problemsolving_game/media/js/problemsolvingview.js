@@ -8,14 +8,17 @@
             proposals: "",
             finalPlan: ""
         },
-        isPlanComplete: function () {
-            return this.get("barriers").length > 0 && this.get("proposals").length > 0 && this.get("finalPlan").length > 0;
+        isPlanValid: function () {
+            return this.get("barriers").length > 0 || this.get("proposals").length > 0 || this.get("finalPlan").length > 0;
         }
 
     });
     
     var ActionPlanList = Backbone.Collection.extend({
-        model: ActionPlan
+        model: ActionPlan,
+        archive: function (issueId) {
+            this.remove(issueId);
+        }
     });
     
     var Issue = Backbone.Model.extend({
@@ -23,8 +26,7 @@
             id: "",
             image: "",
             text: "",
-            ordinality: 0,
-            personal: false
+            ordinality: 0
         }
     });
     
@@ -35,21 +37,10 @@
     var BarrierExercise = Backbone.Model.extend({
         defaults : {
             selected: "",
-            making_actionplan: false
+            editing_actionplan: false
         }
     });
-    
-    var IssueView = Backbone.View.extend({
-        initialize : function (options) {
-            _.bindAll(this);
-            
-            this.parent = options.parent;
-            
-            this.model.bind('change:personal', this.parent.render);
-        }
-    });
-    
-    
+
     var IssueListView = Backbone.View.extend({
         events : {
             'click a#complete': 'saveState',
@@ -62,18 +53,15 @@
         },
         
         initialize : function (options) {
-            _.bindAll(this, "render", "onAddIssue", "onIssueNumber", "onPreviousIssue", "onNextIssue", "saveState", "onActionPlan", "onCloseActionPlan");
+            _.bindAll(this, "render", "onIssueNumber", "onPreviousIssue", "onNextIssue", "saveState", "onActionPlan", "onCloseActionPlan");
             
             this.issues = options.issues;
-            this.issues.bind('add', this.onAddIssue);
             
             this.actionPlans = options.actionPlans;
+            this.actionPlans.bind('add', this.render);
+            this.actionPlans.bind('remove', this.render);
             
             this.model.bind('change', this.render);
-        },
-        
-        onAddIssue: function (issue) {
-            new IssueView({ model: issue, parent: this });
         },
         
         onIssueNumber: function (evt) {
@@ -81,16 +69,20 @@
         },
         
         onPreviousIssue: function (evt) {
-            var a = jQuery(".issue-number.infocus").prev(".issue-number");
-            if (a.length > 0) {
-                this.model.set("selected", a[0].id);
+            if (!this.model.get("editing_actionplan")) {
+                var a = jQuery(".issue-number.infocus").prev(".issue-number");
+                if (a.length > 0) {
+                    this.model.set("selected", a[0].id);
+                }
             }
         },
         
         onNextIssue: function (evt) {
-            var a = jQuery(".issue-number.infocus").next(".issue-number");
-            if (a.length > 0) {
-                this.model.set("selected", a[0].id);
+            if (!this.model.get("editing_actionplan")) {
+                var a = jQuery(".issue-number.infocus").next(".issue-number");
+                if (a.length > 0) {
+                    this.model.set("selected", a[0].id);
+                }
             }
         },
         
@@ -101,40 +93,46 @@
             var checked = jQuery("#checkbox-personal-issue").is(':checked');
 
             if (!checked) {
-                this.model.set("making_actionplan", false);
+                this.model.set("editing_actionplan", false);
+                
+                // @todo -- archive out the action plan if a plan is complete
+                // don't do this if the plan is empty or partial
+                this.actionPlans.archive(issueId);
+            } else {
+                if (!this.actionPlans.get(issueId)) {
+                    this.actionPlans.add(new ActionPlan({id: issueId}));
+                }
             }
-            
-            issue.set("personal", checked);
         },
         
         onActionPlan: function (evt) {
-            this.model.set("making_actionplan", true);
+            this.model.set("editing_actionplan", true);
         },
         
         onCloseActionPlan: function (evt) {
             // transfer information to the action plan & close if valid
             var issueId = this.model.get("selected");
             var actionPlan = this.actionPlans.get(issueId);
-            if (!actionPlan) {
-                actionPlan = new ActionPlan({id: issueId});
-            }
+            
             actionPlan.set("barriers", jQuery("textarea#barriers").val());
             actionPlan.set("proposals", jQuery("textarea#proposals").val());
             actionPlan.set("finalPlan", jQuery("textarea#finalPlan").val());
             
-            if (!actionPlan.isPlanComplete()) {
-                alert("todo: error case");
-                return false;
+            if (!actionPlan.isPlanValid()) {
+                this.model.set("editing_actionplan", false);
             } else {
                 actionPlan.save();
                 
-                // Don't add the actionPlan object until it's 
-                // information is all valid!
-                if (!this.actionPlans.get(issueId)) {
-                    this.actionPlans.add(actionPlan);
-                }
+                var self = this;
                 
-                this.model.set("making_actionplan", false);
+                // Initiate the ajax call to saveState
+                global.Intervention.saveState(function (result) {
+                    if (result.response !== "ok") {
+                        alert("An error occurred while saving your information. Please try again.");
+                    } else {
+                        self.model.set("editing_actionplan", false);
+                    }
+                });
             }
         },
         
@@ -171,23 +169,16 @@
             }
 
             // Represent selected issue if marked as "personal"
-            if (issue.get("personal")) {
+            var actionPlan = this.actionPlans.get(issueId);
+            if (actionPlan) {
                 jQuery("#actionplan").show();
                 jQuery("#checkbox-personal-issue").attr('checked', 'checked');
                 jQuery(elt).addClass("personal");
                 
-                var actionPlan = this.actionPlans.get(issueId);
-                if (actionPlan) {
-                    jQuery("textarea#barriers").val(actionPlan.get("barriers"));
-                    jQuery("textarea#proposals").val(actionPlan.get("proposals"));
-                    jQuery("textarea#finalPlan").val(actionPlan.get("finalPlan"));
-                    jQuery("#actionplan a").html("Edit Plan");
-                } else {
-                    jQuery("textarea#barriers").val("");
-                    jQuery("textarea#proposals").val("");
-                    jQuery("textarea#finalPlan").val("");
-                    jQuery("#actionplan a").html("Make Plan");
-                }
+                jQuery("textarea#barriers").val(actionPlan.get("barriers"));
+                jQuery("textarea#proposals").val(actionPlan.get("proposals"));
+                jQuery("textarea#finalPlan").val(actionPlan.get("finalPlan"));
+                jQuery("#actionplan a").html("Edit Plan");
             } else {
                 jQuery("#actionplan").hide();
                 jQuery("#checkbox-personal-issue").removeAttr('checked');
@@ -199,10 +190,12 @@
                 jQuery("#actionplan a").html("Make Plan");
             }
             
-            if (this.model.get("making_actionplan")) {
+            if (this.model.get("editing_actionplan")) {
                 jQuery("#actionplan_form").show();
                 elt = jQuery("#actionplan_form input[type=submit]")[0];
                 jQuery('html, body').animate({scrollTop: jQuery(elt).offset().top}, 1000);
+                jQuery("#next_issue img").hide();
+                jQuery("#previous_issue img").hide();
             } else {
                 elt = jQuery("#gamebox");
                 jQuery('html, body').animate({scrollTop: 0}, 0, function() {
@@ -233,7 +226,6 @@
     Backbone.sync = function (method, model, success, error) {
         // Sync is called on model.save()
         // Transfer the results back to the game state
-        // Don't do a full server-side save on every sync, i.e. global.Intervention.saveState()
         var game_state = global.Intervention.getGameVar('problemsolving', {});
         
         var id = model.get("id");
@@ -243,24 +235,25 @@
         }
             
         game_state[id].id = model.get("id");
-        game_state[id].barriers = model.get("barriers");
-        game_state[id].proposals = model.get("proposals");
-        game_state[id].finalPlan = model.get("plan");
+        game_state[id].barriers = model.get("barriers") || "";
+        game_state[id].proposals = model.get("proposals") || "";
+        game_state[id].finalPlan = model.get("finalPlan") || "";
     };
 
     jQuery(document).ready(function () {
-        var barrierExercise = new BarrierExercise();
+        // pick up the individual's personal action plans
+        var actionPlans = new ActionPlanList();
+        var gameState = global.Intervention.getGameVar('problemsolving', {});
+        for (var issueId in gameState) {
+            actionPlans.add(new ActionPlan({
+                                "id": gameState[issueId].id,
+                                "barriers": gameState[issueId].barriers,
+                                "proposals": gameState[issueId].proposals,
+                                "finalPlan": gameState[issueId].finalPlan
+            }));
+        }
         
         var issues = new IssueList();
-        var actionPlans = new ActionPlanList();
-        
-        var issueListView = new IssueListView({
-            issues: issues,
-            actionPlans: actionPlans,
-            model: barrierExercise,
-            el: 'div#contentcontainer'
-        });
-        
         // pick up the issues from the DOM
         jQuery("div.issue").each(function () {
             var issue = new Issue();
@@ -271,17 +264,11 @@
             issues.add(issue);
         });
         
-        // pick up the individual's personal action plans
-        var gameState = global.Intervention.getGameVar('problemsolving', {});
-        for (var p in gameState) {
-            actionPlans.add(new ActionPlan({
-                                "id": p.id,
-                                "barriers": p.barriers,
-                                "proposals": p.proposals,
-                                "finalPlan": p.finalPlan
-            }));
-        }
-        
-        barrierExercise.set("selected", jQuery(".issue-number")[0].id);
+        var issueListView = new IssueListView({
+            issues: issues,
+            actionPlans: actionPlans,
+            el: 'div#contentcontainer',
+            model: new BarrierExercise({"selected": jQuery(".issue-number")[0].id})
+        }).render();
     });
 }(jQuery));
