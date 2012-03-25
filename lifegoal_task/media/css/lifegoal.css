@@ -1,4 +1,7 @@
-#game-content { background-image: url(../images/background-island.jpg); }
+#gamebox { 
+    background-image: url(/site_media/lifegoal_task/images/background-island.jpg);
+    background-repeat: no-repeat;
+}
 
 #lifegoalsbox { position: relative; }
 
