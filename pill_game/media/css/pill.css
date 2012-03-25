@@ -1,194 +1,144 @@
-#select_line_1, #select_line_2
-{
-	float: left;
-	width: 190px;
-	margin: 50px 0px 0px 50px;
-	height: 35px;
-	text-align: center;
-	padding-top: 8px;
+#mode, #pill-template, .printonly {
+    display: none;
 }
 
-
-.line_unselected
-{
-	width: 190px;
-	height: 35px;
-	text-align: center;
-	font-size: 13px;
-	color: #fff;
-	background-image: url(../../images/button_short_gray.png);
-	background-repeat: no-repeat;
-	display: block;
-	text-decoration: none;
-	padding-top: 9px;
-	text-transform: capitalize;
-	cursor: pointer;
+#pill-game-container {
+    width: 99%;
+    height: 450px;
+    vertical-align: top;
 }
 
-.line_unselected:hover { background-image: url(../../images/button_short_gray_over.png); }
-
-.line_selected
-{
-	width: 190px;
-	height: 35px;
-	text-align: center;
-	font-size: 13px;
-	color: #fff;
-	background-image: url(../../images/button_short_orange.png);
-	background-repeat: no-repeat;
-	display: block;
-	text-decoration: none;
-	padding: 9px 0 0px 0;
-	text-transform: capitalize;
+div.pill-list {
+    float: left;
+    height: 95%;
+    width: 66%;
+    margin: 10px;
 }
 
-.line_selected:before { content: "Your Choice: "; }
-
-p#linetext
-{
-	text-align: center;
-	margin: 20px 20px 20px 20px;
+div.pill-buckets {
+    float: left;
+    width: 29%;
+    margin: 10px 10px 10px 0;
+    text-align: center;
 }
 
-.page_2_pill_group {
-background-color:#EEEEEE;
-border:1px solid #CCCCCC;
-display:block;
-font-weight:bold;
-margin:20px;
-padding:6px;
-text-align:center;
-width:475px;
-}
-
-/*
-.page_2_pill_group:before { content: "Group: "; }
-*/
-
-.page_2_pill
-{
-background-color:#FFFFFF;
-border:1px solid #CCCCCC;
-float:left;
-font-weight:normal;
-height:80px;
-margin:10px;
-padding:6px;
-text-align:center;
-width:124px;
-}
-
-.page_2_selected_pill
-{
-	text-align: center;
-	padding: 6px 6px 6px 6px;
-	margin: 10px;
-	border: 1px solid #fc9;
-	background-color: #ffc;
-	font-weight: normal;
-}
-
-.pill_fact_div {margin-top: 5px;}
-
-#game-content { overflow: auto; }
-
-/* Box that goes behind each pill on the left side of page 3: */
-.page_3_pill_info
-{
-	text-align: center;
-	
-	
-	
-	/*
-	
-	last minute change 1:
-	
-	height: 100px;
-	width: 100px;
-	*/
-	height: 90px;
-	width: 90px;
-	
-	
-	font-weight: bold;
-	z-index: 1;
-	position: absolute;
-	background-image: url(../images/pillboxsingle.png);
-	background-repeat: no-repeat;
-	
-	
-	/*
-	last minute change 2:
-	
-	background-position: center center; */
-	background-position: 0px 0px;
-    font-size: 11px; 
+div.pill-bucket {
+    background-repeat: no-repeat;
+    width: 190px;
+    height: 210px;
     
+}
+
+div.pill-bucket .time {
+    padding-top: 175px;
+}
+
+div#day.pill-bucket {
+    background-image: url('/site_media/pill_game/images/bucket_day.png');
+    margin-bottom: 10px;
+}
+
+div#night.pill-bucket {
+    background-image: url('/site_media/pill_game/images/bucket_eve.png');
+}
+
+.pill {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 5px 3px;
+    width: 95%;
+    height: 30px;
+    border: 1px solid #ccc;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+
+.pill-text {
+    float: left;
+}
+
+.pill-image, .draggable {
+    float: right;
+    width: 10px;
+    height: 10px;
+    padding: 10px;
+    border-radius:155px;
+    -moz-border-radius: 155px;
+    -webkit-border-radius: 155px;
+    background-position: center center;
+    margin-right: 5px;
+    color: #E8F3F8;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.draggable {
+   margin-top: -11px;
+   margin-right: -10px;
+}
+
+.one {
+    background-image: -moz-radial-gradient(65% 35%
+        45deg, circle , #ffffff 1%, blue 100%);
+    background-image: -webkit-gradient(radial, 65% 35%, 1,
+     center center, 30, from(#ffffff), to(blue));
+}
+
+.two {
+    background-image: -moz-radial-gradient(65% 35%
+        45deg, circle , #ffffff 1%, red 100%);
+    background-image: -webkit-gradient(radial, 65% 35%, 1,
+     center center, 30, from(#ffffff), to(red));
+}
+
+.three {
+    background-image: -moz-radial-gradient(65% 35%
+        45deg, circle , #ffffff 1%, green 100%);
+    background-image: -webkit-gradient(radial, 65% 35%, 1,
+     center center, 30, from(#ffffff), to(green));
+}
+
+.four {
+    background-image: -moz-radial-gradient(65% 35%
+        45deg, circle , #ffffff 1%, darkorange 100%);
+    background-image: -webkit-gradient(radial, 65% 35%, 1,
+     center center, 30, from(#ffffff), to(darkorange));
+}
+
+.five {
+    background-image: -moz-radial-gradient(65% 35%
+        45deg, circle , #ffffff 1%, yellow 100%);
+    background-image: -webkit-gradient(radial, 65% 35%, 1,
+     center center, 30, from(#ffffff), to(yellow));
+}
+
+.six {
+    background-image: -moz-radial-gradient(65% 35%
+        45deg, circle , #ffffff 1%, black 100%);
+    background-image: -webkit-gradient(radial, 65% 35%, 1,
+     center center, 30, from(#ffffff), to(black));
+}
+
+.seven {
+    background-image: -moz-radial-gradient(65% 35%
+        45deg, circle , #ffffff 1%, purple 100%);
+    background-image: -webkit-gradient(radial, 65% 35%, 1,
+     center center, 30, from(#ffffff), to(purple));
+}
+
+.eight {
+    background-image: -moz-radial-gradient(65% 35%
+        45deg, circle , #ffffff 1%, darkturquoise 100%);
+    background-image: -webkit-gradient(radial, 65% 35%, 1,
+     center center, 30, from(#ffffff), to(darkturquoise));
+}
+
+
+.timeofday {
     
-    padding: 5px; 
 }
-
-/*NOTE: the actual left and top values are still set in the javascript, relative to the placement of each pill.
-
-    To change them, edit:
-
-    box_offset_from_pill_x = -40;
-    box_offset_from_pill_y = -40;
-   
-    in Pill.prototype.draw_box function toward the bottom of file drop_into_bins.js    
-    
-*/
-
-/* Box enclosing dosage (600 mg.) and frequency (Every 24 hrs.) on the left side of page 3: */
-.page_3_pill_info_fact
-{
-	font-size: 10px;
-	text-align: left;
-	margin: 20px;
-	padding: 4px 4px 4px 4px;
-	background-color: #fff;
-	height: 10px;
-	width: 80px;
-	font-weight: normal;
-	z-index: 2;
-	position: absolute;
-}
-
-.mg_fact:before { content: ""; }
-
-.mg_fact:after { content: " mg."; }
-
-/*Dosage offset relatve to the page_3_pill_info that encloses it:*/
-.mg_fact
-{
-	left: -15px;
-	top: 18px;
-}
-
-.hrs_fact:before { content: "Every "; }
-
-.hrs_fact:after { content: " hrs."; }
-
-/*Frequency offset relatve to the page_3_pill_info that encloses it:*/
-.hrs_fact
-{
-	left: -15px;
-	top: 50px;
-}
-
-
-/* start - pill game print styles */
-
-h3.arv {display: none;}
-
-label {display: none;}
-
-select#day_pills_time_print {display: none;}
-
-select#night_pills_time_print {display: none;}
-
-#night_pill_info_text {display: none;}
-
-#day_pill_info_text {display: none;}
-
-/* end - pill game print styles */

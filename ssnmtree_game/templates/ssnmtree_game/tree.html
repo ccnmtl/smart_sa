@@ -1,7 +1,5 @@
 {% extends "intervention/game.html" %}
 
-{% block title %}Support Tree Activity{% endblock %}
-
 {% block game_css %}
     <link href="/site_media/ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
 {% endblock %}
@@ -14,12 +12,6 @@
 {% endblock %}
 
 {% block game_content %}
-    {% comment %}
-        This tree represents your life, and the fruits on the tree represent people in your life (friends or family) who you can rely on for practical support and emotional support.   
-        Let's put in the names of the people who provide you with support.
-        Now that we have all the names listed, let's identify those on the tree who know your HIV status.
-        Now, let's identify those on the tree that provide you with practical support, meaning that they are available to do things for you.
-    {% endcomment %}
     <div style="position:relative;height:465px;width:545px">
         <div id="game-mode" data-game-mode="{{game_context.mode}}"></div>
         <img class="bare-tree" src="/site_media/ssnmtree_game/images/bare_tree.png" />
