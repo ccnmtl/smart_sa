@@ -41,11 +41,12 @@
     border: 3px solid #f58e33; 
 }
 
+
 /** Issue Gallery Container to display individual issues, prev and next navigation **/
 
 .issue-gallery {
     width: 99%;
-    height: 250px;
+    height: 300px;
     margin: 10px;  
 }
 
@@ -60,7 +61,6 @@
     text-align: center;
     vertical-align: middle;
     width: 7%;
-    border: 1px solid #ccc;
 }
 
 .issue-navigation span {
@@ -101,46 +101,60 @@ div#issue_details img.issue-image {
     float: left;
 }
 
-div#issue_details div.issue-text {
+div#issue_details div.issue-text-container {
     width: 45%;
-    height: 80px;
+    height: 155px;
     float: left;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     padding: 7px;
     margin: 5px 5px 0px 5px;
-    text-align: center;
+    text-align: left;
     vertical-align: center;
     background-color: white;
     color: black;      
 }
 
-div#issue_details div.personal-issue {
-    margin-top: 20px;
-    width: 45%;
-    float: left;
-    text-align: center;
+div#issue_details div.issue-text-container div.issue-text {
+    font-weight: bold;
+    font-size: 90%;
 }
 
-div#issue_details div.personal-issue div.personal-issue-label,
-div#issue_details div.personal-issue div.personal-issue-toggle {
-    float: left;
+div#issue_details div.issue-text-container div.issue-subtext {
+    margin-top: 5px;
+    font-size: 80%;
 }
 
-div#issue_details div.personal-issue div.personal-issue-label {
+div#issue_details div.personal-issue-container {
+    height: 100px;
+    float: right;
+    width: 50%;
+}
+
+div#issue_details div.personal-issue-container div.personal-issue {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+}
+
+div#issue_details div.personal-issue-container div.personal-issue div.personal-issue-label,
+div#issue_details div.personal-issue-container div.personal-issue div.personal-issue-toggle {
+    float: right;    
+}
+
+div#issue_details div.personal-issue-container div.personal-issue div.personal-issue-label {
     width: 40%;
     text-align: right;
-    margin-right: 5px;
+    margin-right: 10px;
     margin-top: 7px;
 }
 
 div#issue_details div#actionplan {
-    width: 50%;
-    float: left;
-    margin-top: 20px;
+    margin-top: 10px;
     text-align: center; 
-    display: table-cell;
+    float: right;
+    margin-right: 10px;
 }
 
 div#issue_details div#actionplan a {
@@ -180,6 +194,11 @@ div#actionplan_form textarea {
     max-height: 150px;
 }
 
+div#actionplan_form div#example {
+    font-style: italic;
+    font-size: 90%;
+}
+
 div#actionplan_form input[type=submit] {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -191,8 +210,9 @@ div#actionplan_form input[type=submit] {
     color: #fff;
     background-color: #4ea15a;
     display: inline-block;
-    width: 100px;
+    width: 120px;
     height: 30px;     
+    float: right;
 }
 
 /** iPhone Type Toggle Buttons **/

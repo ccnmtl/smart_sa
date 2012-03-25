@@ -5,6 +5,8 @@ class Issue(models.Model):
     name = models.CharField(max_length=100)
     text = models.CharField(max_length=500)
     ordinality = models.IntegerField()
+    subtext = models.CharField(max_length=1000, null=True, blank=True)
+    example = models.CharField(max_length=1000, null=True, blank=True)
     
     def __unicode__(self):
         return "%s) %s" % (self.ordinality, self.name) 

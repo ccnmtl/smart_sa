@@ -28,23 +28,28 @@
         <div id="issue_details" class="issue-gallery-item">
             <div class="issue-number infocus"></div>
             <img class="issue-image"/>
-            <div class="issue-text"></div>
-            
-            <div class="personal-issue">
-                <div class="personal-issue-label">Issue?</div> 
-                <div class="personal-issue-toggle iphone-toggle-buttons"> 
-                    <ul>
-                        <li>
-                            <label for="checkbox-personal-issue">
-                                <input type="checkbox" id="checkbox-personal-issue"><span></span>
-                            </label>
-                       </li> 
-                   </ul>
-                </div>
+            <div class="issue-text-container">
+                <div class="issue-text"></div>
+                <div class="issue-subtext"></div>
             </div>
             
-            <div id="actionplan" style="display: none">
-                <a href="#">Make Plan</a>
+            <div class="personal-issue-container">
+                <div class="personal-issue">
+                    <div class="personal-issue-toggle iphone-toggle-buttons"> 
+                        <ul>
+                            <li>
+                                <label for="checkbox-personal-issue">
+                                    <input type="checkbox" id="checkbox-personal-issue"><span></span>
+                                </label>
+                           </li>
+                       </ul>
+                    </div>
+                    <div class="personal-issue-label">Issue?</div> 
+                </div>
+                
+                <div id="actionplan" style="display: none">
+                    <a>Make Plan</a>
+                </div>
             </div>
             
             <div id="actionplan_form" class="actionplan_form" style="display: none;">
@@ -53,12 +58,13 @@
                 <textarea id="barriers" rows="3"></textarea>
                 
                 <label for="action">What are some ways I can work on the problem?</label>
+                <div id="example"></div>
                 <textarea id="proposals" rows="3"></textarea>
                 
                 <label for="action">What is my plan of action?</label>
                 <textarea id="finalPlan" rows="3"></textarea>
                 
-                <input type="submit" value="Done"></input>
+                <input type="submit" value="Save Plan"></input>
             </div>
         </div>
         
@@ -74,6 +80,8 @@
             <div class="issue">
                 <div class="name">{{issue.name}}</div>
                 <div class="text">{{issue.text}}</div>
+                <div class="subtext">{% if issue.subtext %}{{issue.subtext}}{% endif %}</div>
+                <div class="example">{% if issue.example %}{{issue.example}}{% endif %}</div>
                 <div class="image">/site_media/problemsolving_game/images/issues/barrier-{{issue.name}}.png</div>
                 <div class="ordinality">{{issue.ordinality}}</div>
             </div>

@@ -26,6 +26,8 @@
             id: "",
             image: "",
             text: "",
+            subtext: "",
+            examples: "",
             ordinality: 0
         }
     });
@@ -162,6 +164,8 @@
             jQuery("#issue_details div.issue-number").html(issue.get("ordinality"));
             jQuery("#issue_details img.issue-image").attr("src", issue.get("image"));
             jQuery("#issue_details div.issue-text").html(issue.get("text"));
+            jQuery("#issue_details div.issue-subtext").html(issue.get("subtext"));
+            jQuery("div#example").html(issue.get("example"));
             
             // enabled/disable next & prev navigation
             a = jQuery(elt).next(".issue-number");
@@ -206,11 +210,15 @@
                 jQuery('html, body').animate({scrollTop: jQuery(elt).offset().top}, 1000);
                 jQuery("#next_issue img").hide();
                 jQuery("#previous_issue img").hide();
+                jQuery("div.issue-selector").hide();
+                jQuery("div#actionplan").hide();
             } else {
+                jQuery("div.issue-selector").show();
                 elt = jQuery("#gamebox");
                 jQuery('html, body').animate({scrollTop: 0}, 0, function() {
                     jQuery("#actionplan_form").hide('fast');
                 });
+                
             }
         },
     
@@ -260,6 +268,8 @@
             var issue = new Issue();
             issue.set("id", jQuery(this).children("div.name").html());
             issue.set("text", jQuery(this).children("div.text").html());
+            issue.set("subtext", jQuery(this).children("div.subtext").html());
+            issue.set("example", jQuery(this).children("div.example").html());
             issue.set("image", jQuery(this).children("div.image").html());
             issue.set("ordinality", jQuery(this).children("div.ordinality").html());
             issues.add(issue);
