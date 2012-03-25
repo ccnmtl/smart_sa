@@ -14,6 +14,6 @@ class IslandGame(GameInterface):
         game_context = { 'mode': self.mode }
         return ('island_game/island.html',game_context)
 
-InstalledGames.register_game('island-before-medication','Island Before Medication', IslandGame('before-medication'))
+InstalledGames.register_game('island','Island Before Medication', IslandGame('before-medication'))
 InstalledGames.register_game('island-after-medication','Island After Medication', IslandGame('after-medication'))
 
