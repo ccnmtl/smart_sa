@@ -5,6 +5,10 @@
     background-repeat: no-repeat;
 }
 
+#mode {
+    display: none;
+}
+
 #island {
     z-index: 100;
     position: absolute;
@@ -107,10 +111,6 @@
     position: absolute;
     z-index: 300;
     color: #fff
-}
-
-.navigation_button {
-    vertical-align: middle;
 }
 
 

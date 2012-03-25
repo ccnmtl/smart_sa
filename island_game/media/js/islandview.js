@@ -292,16 +292,14 @@
     });
     
     var IslandGameView = Backbone.View.extend({
-        events: {
-            'click img#right' : 'afterMedicationView',
-            'click img#left': 'beforeMedicationView'
-        },
+        events: {},
         
         initialize : function (options) {
-            _.bindAll(this, "render", "gameFloor", "addGameElement", "waterLevel", 'afterMedicationView', 'beforeMedicationView');
+            _.bindAll(this, "render", "gameFloor", "addGameElement", "waterLevel");
             _.extend(this, Backbone.Events);
             this.on("render", this.render);
             
+            this.model.set("beforeMedication", options.mode == 'before-medication');
             this.model.set("floor", jQuery(this.el).offset().top + jQuery(this.el).height());
             this.model.bind('change', this.render);
             
@@ -341,19 +339,6 @@
         
         waterLevel: function () {
             return (this.views.infection.getValue() + this.views.viral_load.getValue()) / 2;
-        },
-        
-        beforeMedicationView: function () {
-            this.views.infection.resetValue();
-            this.views.viral_load.resetValue();
-            this.views.cd4_count.resetValue();
-
-            this.model.set("beforeMedication", true);
-        },
-        
-        afterMedicationView: function () {
-            this.views.adherence.resetValue();
-            this.model.set("beforeMedication", false);
         },
         
         render: function () {
@@ -411,7 +396,8 @@
         var islandView = new IslandGameView({
             model: new IslandGame({ beforeMedication: true }),
             el: 'div#island_container',
-            gender: global.Intervention.current_user.gender
+            gender: global.Intervention.current_user.gender,
+            mode: jQuery('div#mode').html()
         });
     });
 }(jQuery));
