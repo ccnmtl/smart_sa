@@ -1,3 +1,9 @@
+#gamebox {
+	padding-left: 50px; /*center the game*/
+}
+
+
+
 .island-container {
     height: 465px;
     width: 100%; 
@@ -33,7 +39,7 @@
 }
 
 #figure1 {
-    left: 200px !important;
+    left: 250px !important;
     top: 0px;
 }
 

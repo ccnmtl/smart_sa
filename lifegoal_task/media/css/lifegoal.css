@@ -1,9 +1,18 @@
 #gamebox { 
-    background-image: url(/site_media/lifegoal_task/images/background-island.jpg);
-    background-repeat: no-repeat;
+	height: 450px; /*set the box to the game's height*/
 }
 
-#lifegoalsbox { position: relative; }
+#lifegoalsbox { 
+	position: absolute;
+    background-image: url(/site_media/lifegoal_task/images/background-island.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	top: 0;
+	left: 50px; /*center the game*/
+}
 
 #lifegoals label
 {
