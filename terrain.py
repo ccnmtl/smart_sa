@@ -163,7 +163,7 @@ def i_click_activity(step, activity_number):
     try:
         link = world.firefox.find_element_by_partial_link_text("Activity %s:" % activity_number)
         link.click()
-        time.sleep(1)
+#        time.sleep(1)
     except:
         assert False, world.firefox.page_source
 
@@ -234,6 +234,7 @@ def fill_in_ssnmtree(self):
         return
     for i in world.firefox.find_elements_by_tag_name('input'):
         if i.get_attribute('type') == 'text':
+            i.clear()
             i.send_keys("asdf")
 
 @step('there is a filled in SSNM Tree')
@@ -335,3 +336,23 @@ def there_is_no_navbutton(step, label):
 @step(u'I wait for (\d+) seconds')
 def wait(step,seconds):
     time.sleep(int(seconds))
+
+@step(u'I select the first barrier')
+def select_the_first_barrier(step):
+    if not world.using_selenium:
+        return
+#    assert False, str(world.firefox.find_elements_by_css_selector("input#checkbox-personal-info"))
+    for i in world.firefox.find_elements_by_tag_name("input"):
+        try:
+            i.click()
+        except:
+            # selenium likes to give us a ElementNotVisibleException exception here
+            pass
+#    for l in world.firefox.find_elements_by_tag_name('label'):
+#        if l.get_attribute('for') == "checkbox-personal-info":
+#            assert False, l
+#            l.click()
+#        world.firefox.find_element_by_id('checkbox-personal-info').click()
+#    except:
+#        time.sleep(1)
+#        world.firefox.find_element_by_id('checkbox-personal-info').click()

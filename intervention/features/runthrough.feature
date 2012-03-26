@@ -105,9 +105,12 @@ check very basic things.
       Then I am on the Activity 5 page
       When I click on Complete Activity
       Then I am on the Activity 6 page
-      # watchvideo
+      # Barriers
       When I click the "Next" link
       Then there is a game
+#      When I wait for 3 seconds
+      When I select the first barrier
+#      When I wait for 300 seconds
       When I click on Complete Activity
       Then I am on the Activity 7 page
       # reasons to stay healthy
@@ -127,16 +130,13 @@ check very basic things.
       When I click the "Next" link
       Then there is a game
       When I click the "Next" link
-      Then there is a game
-      When I click the "Next" link
-      Then there is a game
-
-      When I click on Complete Activity
       Then I am on the Activity 3 page
-      # watchvideo
       When I click the "Next" link
       Then there is a game
+#      When I select the first barrier
       When I click on Complete Activity
+
+      # watchvideo
       Then I am on the Activity 4 page
       When I click on Complete Activity
       Then I am on the Activity 5 page
@@ -154,8 +154,6 @@ check very basic things.
       # quiz
       When I click the "Next" link
       Then there is a game
-      When I click the "Next" link
-      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 3 page
       When I click the "Next" link
@@ -165,14 +163,9 @@ check very basic things.
       # pill game
       When I click the "Next" link
       Then there is a game
-      When I click the "Next" link
-      Then there is a game
-      When I click the "Next" link
-      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 5 page
-      # watchvideo
-      When I click the "Next" link
+       When I click the "Next" link
       Then there is a game
 
       When I click on Complete Activity
