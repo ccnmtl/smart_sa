@@ -331,3 +331,7 @@ def there_is_no_navbutton(step, label):
         if a.text.strip().lower() == label.strip().lower():
             found = True
     assert not found
+
+@step(u'I wait for (\d+) seconds')
+def wait(step,seconds):
+    time.sleep(int(seconds))

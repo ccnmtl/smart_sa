@@ -27,10 +27,10 @@ check very basic things.
       Then there is an assessmentquiz
       When I fill in all 3s in the quiz
       When I click the "Next" link
-      Then there is a game
-      Then there is an assessmentquiz
+      # Then there is a game
+      # Then there is an assessmentquiz
 
-      When I click on Complete Activity
+      # When I click on Complete Activity
       Then I am on the Activity 4 page
       When I click on Complete Activity
       Then I am on the Activity 5 page
@@ -39,6 +39,7 @@ check very basic things.
       Then there is a game
       When I fill in the SSNM Tree
       When I click the "Next" Link
+
       Then I am on the Activity 6 page
       # ssnmtree
       When I click the "Next" link
