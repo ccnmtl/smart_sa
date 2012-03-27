@@ -212,6 +212,19 @@ class Activity(models.Model):
         else:
             return tuple()
 
+    def last_gamepage(self):
+        if self.game:
+            return self.pages()[-1]
+        else:
+            return None
+
+    def last_gamepage_obj(self):
+        if self.game:
+            gamepages = list(self.gamepage_set.all())
+            return gamepages[-1]
+        else:
+            return None
+
     def variables(self,page_id=None):
         if self.game:
             return InstalledGames.variables(self.game,page_id) or []
