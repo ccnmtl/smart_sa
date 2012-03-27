@@ -26,6 +26,6 @@ Clicking Next -> when the interactivity phase is complete advances the user to t
         Given I have logged in a participant
         When I go to Session 1, Activity 4
         When I click the "Back" link
-#        Then there is a game
+        Then there is a game
         Then I am not on an activity page
         Then I am on a game page

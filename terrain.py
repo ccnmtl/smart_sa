@@ -213,13 +213,15 @@ def i_am_on_the_activity_page(step,activity_id):
 def there_is_a_game(self):
     if not world.using_selenium:
         assert len(world.dom.cssselect('#gamebox')) > 0
-    assert world.firefox.find_element_by_id('gamebox')
+    else:
+        assert world.firefox.find_element_by_id('gamebox')
 
 @step('there is an assessmentquiz')
 def there_is_an_assessmentquiz(self):
     if not world.using_selenium:
         assert len(world.dom.cssselect('#assessmentquiz')) > 0
-    assert world.firefox.find_element_by_id('assessmentquiz')
+    else:
+        assert world.firefox.find_element_by_id('assessmentquiz')
 
 
 @step('I go back')
