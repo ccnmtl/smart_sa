@@ -1,5 +1,4 @@
 #gamebox {
-	padding-left: 50px; /*center the game*/
 	height: 475px; /*set the box to the game's height*/
 }
 
@@ -17,9 +16,11 @@ img.bare-tree
 {
 	position: absolute;
 	z-index: 0;
-	top: 0;
+	top: 2px;
 	left: 0;
 	background-color: #fff; /*give the game a white background*/
+	width: 638px;
+	height: 475;
 }
 
 #fruittree .fruit
@@ -36,9 +37,9 @@ img.bare-tree
 	position: absolute;
 	z-index: 20;
 	font-size: 9px;
-	left: 13px;
-	top: 22px;
-	width: 52px;
+	left: 14px;
+	top: 23px;
+	width: 50px;
 }
 
 #fruittree .ripe
@@ -90,65 +91,66 @@ table { border-collapse: collapse; }
 }
 
 /*left ups*/
+/* +46 +3 */
 #top1-fruit
 {
-	left: 133px;
-	top: 3px;
+	left: 179px;
+	top: 6px;
 }
 
 #middle2-fruit
 {
-	left: 177px;
-	top: 86px;
+	left: 223px;
+	top: 88px;
 }
 
 #middle4-fruit
 {
-	left: 402px;
-	top: 107px;
+	left: 447px;
+	top: 109px;
 }
 
 #bottom3-fruit
 {
-	left: 382px;
-	top: 199px;
+	left: 427px;
+	top: 200px;
 }
 
 /*right ups*/
 #top2-fruit
 {
-	left: 262px;
-	top: 2px;
+	left: 308px;
+	top: 4px;
 }
 
 #top3-fruit
 {
-	left: 363px;
-	top: 37px;
+	left: 409px;
+	top: 39px;
 }
 
 #middle1-fruit
 {
-	left: 62px;
-	top: 75px;
+	left: 109px;
+	top: 76px;
 }
 
 #middle3-fruit
 {
-	left: 288px;
-	top: 105px;
+	left: 334px;
+	top: 106px;
 }
 
 #bottom1-fruit
 {
-	left: 70px;
-	top: 176px;
+	left: 117px;
+	top: 177px;
 }
 
 #bottom2-fruit
 {
-	left: 203px;
-	top: 188px;
+	left: 249px;
+	top: 189px;
 }
 
 #toggle-support-selection.toggle-button
