@@ -1140,11 +1140,13 @@ width: 33%;
 
 #gamebox
 {
+	/*
 	border: 1px solid #ccc;
 	background-color: #EEE;
 	background-image: url(/site_media/images/logo_repeat.png);
-	position: relative;
 	background-repeat: repeat;
-	min-height: 350px;
 	background-position: center center;
+	*/
+	position: relative;
+	min-height: 350px;
 }

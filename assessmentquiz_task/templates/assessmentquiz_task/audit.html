@@ -8,11 +8,100 @@
 {% endblock %}
 
 {% block game_content %}
-   <div>
+<a name="score"></a>
+<div id="interpretation">
+
+	<h5>
+		Interpretation of Total Score
+	</h5>
+	
+	<ul id="interpretation_range">
+	
+		<li id="r0">
+		
+		0-8: There are no issues.
+		
+		</li>
+		
+		<li id="r8">
+		
+		8-15: Give simple advice on drinking.
+		
+		<div class="script">
+		
+			Have you ever thought about talking with someone about the risks and consequences of drinking? If you haven't already done so, would you be interested in talking with someone who knows a lot about the risks and consequences of drinking?
+			
+			<ul>
+			
+				<li> 
+				<h2 class="yes">If yes,</h2>
+				Yes, good. I will give you information to do so at the end of our Masivukeni session today.
+				</li>
+				
+				<li> 
+				<h2 class="no">If no,</h2>
+				Are you completely certain? Talking can really help sometimes.
+				</li>
+				
+				<li>
+				<h2 class="no">If no,</h2>
+				Okay then. Let's continue with our Masivukeni session.
+				</li>
+
+			</ul>
+			
+		</div>
+		
+		</li>
+		
+		<li id="r16">
+		
+		16-19: Offer brief counseling. 
+		
+		<div class="script">
+		
+			
+			"It seems like your drinking could be interfering with your life and health. Have you ever considered talking with someone about your drinking? If you haven't already done so, would you be interested in talking with someone who can help you with your drinking?" 
+			
+			<ul>
+			
+				<li> 
+				<h2 class="yes">If yes,</h2>
+				Yes, good. I will give you information to do so at the end of our Masivukeni session today.
+				</li>
+				
+				<li> 
+				<h2 class="no">If no,</h2>
+				Are you completely certain? Talking with someone who knows a lot about drinking and its consequences could really help." 
+				</li>
+				
+				<li> 
+				<h2 class="no">If no,</h2>
+				Okay then. Let's continue with our Masivukeni session.
+				</li>
+				
+			</ul>
+			
+		</div>
+		
+		</li>
+		
+		<li id="r20"> 
+		
+		&gt;20: There are serious problems and further diagnosis needed. 
+		<div class="script">
+			"It seems like alcohol use could really be causing some serious problems for you. If you haven't already done so, at the end of our Masivukeni session, I'm going to give you information so that you can talk with someone trained in helping people with their drinking. You don't have to talk to anyone, but I highly recommend it because it could really help you." 
+		</div>
+		</li>
+	</ul>
+</div>
+
+<div id="quiz">
      <p>
        During the past month, that is, from <span id="monthago">last month</span> to yesterday,
        about how often did you feel:
      </p>
+     
      <form id="assessmentquiz">
        <input type="hidden" name="section" value="audit" />
        <ol>
@@ -313,55 +402,11 @@
        </ol>
 
      </form>
-     <div id="interpretation">
-       <h3>Interpretation of Total Score</h3>
-       <ul id="interpretation_range">
-	 <li id="r0">0-8: No issues</li>
-	 <li id="r8">8-15: Simple advice on drinking
-	   <div class="script">"Have you ever thought about talking with someone about the risks and consequences of drinking? If you haven't already done so, would you be interested in talking with someone who knows a lot about the risks and consequences of drinking?" 
-	   <ul>
-	     <li> <h2 class="yes">If yes,</h2> 
-	     "Yes, good. I will give you information to do so at the end of our Masivukeni session today." 
-	     </li>
-	     <li> <h2 class="no">If no,</h2> 
-	     "Are you completely certain? Talking can really help sometimes." 
-	     </li>
-	     <li>
-	       <ul class="indent">
-		 <li><h2 class="no">If no,</h2> 
-		 "Okay then. Let's continue with our Masivukeni session."
-		 </li>
-	       </ul>
-	     </li>
-	   </ul>
-	   
-	   </div>
-	 </li>
-	 <li id="r16">16-19: Brief counseling 
-	   <div class="script">"It seems like your drinking could be interfering with your life and health. Have you ever considered talking with someone about your drinking? If you haven't already done so, would you be interested in talking with someone who can help you with your drinking?"
-	   <ul>
-	     <li> <h2 class="yes">If yes,</h2> 
-	     "Yes, good. I will give you information to do so at the end of our Masivukeni session today."
-	     </li>
-	     <li> <h2 class="no">If no,</h2> 
-	     "Are you completely certain? Talking with someone who knows a lot about drinking and its consequences could really help." 
-	     </li>
-	     <li>
-	       <ul class="indent">
-		 <li><h2 class="no">If no,</h2> 
-		 "Okay then. Let's continue with our Masivukeni session."
-		 </li>
-	       </ul>
-	     </li>
-	   </ul>
-	   </div>
-	 </li>
-	 <li id="r20"> &gt;20: Serious problems, further diagnosis needed
-	   <div class="script"> "It seems like alcohol use could really be causing some serious problems for you. If you haven't already done so, at the end of our Masivukeni session, I'm going to give you information so that you can talk with someone trained in helping people with their drinking. You don't have to talk to anyone, but I highly recommend it because it could really help you."
-	   
-	   </div>
-	 </li>
-       </ul>
-     </div>
-   </div>
+     
+<div align="center" style="margin: 20px 0px 20px 0px;">
+<a href="#score" class="action">What is My Score?</a>
+</div>
+
+</div>
+
 {% endblock %}
