@@ -20,6 +20,8 @@ h3 { margin-bottom: 0; }
 	margin-left: -20px;
 }
 
+ol ol {border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 20px;}
+
 ol.a
 {
 	counter-reset: mycounter -1;
