@@ -309,13 +309,13 @@
             this.collection.bind('add', this.addGameElement);
             
             this.collection.add(new GameElement({ name: "figure1", starting_value: 10, gender: options.gender }));
-            this.collection.add(new GameElement({ name: "figure2", starting_value: 10, horizontal_range: 250, vertical_range: 90, gender: options.gender, visible: false }));
+            this.collection.add(new GameElement({ name: "figure2", starting_value: 10, horizontal_range: 260, vertical_range: 100, gender: options.gender, visible: false }));
             this.collection.add(new GameElement({ name: "island", vertical_range: 225, starting_value: 10 }));
             this.collection.add(new GameElement({ name: "water" }));
             this.collection.add(new GameElement({ name: "infection", draggable: true }));
             this.collection.add(new GameElement({ name: "viral_load", draggable: true }));
             this.collection.add(new GameElement({ name: "cd4_count", starting_value: 10, draggable: true }));
-            this.collection.add(new GameElement({ name: "adherence", starting_value: 10, draggable: true, visible: false  }));
+            this.collection.add(new GameElement({ name: "adherence", starting_value: 5, draggable: true, visible: false  }));
             
             this.render();
         },

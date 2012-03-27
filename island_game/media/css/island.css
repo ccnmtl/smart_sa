@@ -1,11 +1,5 @@
-#gamebox {
-	padding-left: 50px; /*center the game*/
-}
-
-
-
 .island-container {
-    height: 465px;
+    height: 467px;
     width: 100%; 
     background-image: url(/site_media/island_game/images/background.jpg);
     background-repeat: no-repeat;
@@ -20,7 +14,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 545px;
+    width:  640px;
 }
 
 #water {
@@ -28,7 +22,7 @@
     position: absolute;
     left: 0px;
     top: 75px;
-    width: 545px;
+    width: 640px;
 }
 
 .figure {
@@ -45,7 +39,7 @@
 
 #figure2 {
     left: 150px;
-    top: 25px;
+    top: 70px;
 }
 
 .slider {
@@ -101,11 +95,17 @@
 
 #adherence_slider,
 #adherence {
-    left: 500px;
+    left: 570px;
 }
 
-#adherence_label {
-    left: 482px;    
+#good_adherence_label,
+#no_adherence_label {
+    left: 550px;
+    width: 50px;    
+}
+
+#no_adherence_label {
+    top: 150px;
 }
 
 #island_view_navigation {
