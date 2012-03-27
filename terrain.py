@@ -50,7 +50,7 @@ def access_url(step, url):
 @step(u'I am not logged in')
 def i_am_not_logged_in(step):
     if world.using_selenium:
-        pass
+        assert False, "this step needs to be implemented for selenium"
     else:
         world.client.logout()
 
@@ -86,7 +86,7 @@ def i_am_logged_in_as_a_counselor(step):
 @step(u'I am logged in as an admin')
 def given_i_am_logged_in_as_an_admin(step):
     if world.using_selenium:
-        pass
+        assert False, "this step needs to be implemented for selenium"
     else:
         world.client.login(username='testadmin',password='test')
 
@@ -139,14 +139,14 @@ def i_click_the_link(step, text):
 @step(u'I fill in "([^"]*)" in the "([^"]*)" form field')
 def i_fill_in_the_form_field(step, value, field_name):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
 
     world.firefox.find_element_by_id(field_name).send_keys(value)
 
 @step(u'I submit the "([^"]*)" form')
 def i_submit_the_form(step, id):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
 
     world.firefox.find_element_by_id(id).submit()
 
@@ -161,14 +161,14 @@ def i_am_on_the_intervention_page(step):
 @step(u'I click on Session (\d+)')
 def i_click_session(step, session_number):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     link = world.firefox.find_element_by_partial_link_text("Session %s:" % session_number)
     link.click()
 
 @step(u'I click on Activity (\d+)')
 def i_click_activity(step, activity_number):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     try:
         link = world.firefox.find_element_by_partial_link_text("Activity %s:" % activity_number)
         link.click()
@@ -179,7 +179,7 @@ def i_click_activity(step, activity_number):
 @step(u'I click on Complete Activity')
 def i_click_on_complete_activity(step):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     try:
         link = world.firefox.find_element_by_partial_link_text("Next")
         link.click()
@@ -190,7 +190,7 @@ def i_click_on_complete_activity(step):
 @step(u'I am on the Session (\d+) page')
 def i_am_on_the_session_page(step,session_id):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     try:
         h2 = world.firefox.find_elements_by_tag_name('h2')[0]
     except:
@@ -201,7 +201,7 @@ def i_am_on_the_session_page(step,session_id):
 @step(u'I am on the Activity (\d+) page')
 def i_am_on_the_activity_page(step,activity_id):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     try:
         breadcrumb = world.firefox.find_element_by_id("breadcrumb-text")
     except:
@@ -228,13 +228,13 @@ def there_is_an_assessmentquiz(self):
 def i_go_back(self):
     """ need to back out of games currently"""
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     world.firefox.back()
 
 @step('I fill in all (\d)s in the quiz')
 def fill_in_quiz(self,value):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     for i in world.firefox.find_elements_by_tag_name('input'):
         if i.get_attribute('type') == 'radio' and i.get_attribute('value') == value:
             i.click()
@@ -242,7 +242,7 @@ def fill_in_quiz(self,value):
 @step('I fill in the SSNM Tree')
 def fill_in_ssnmtree(self):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     for i in world.firefox.find_elements_by_tag_name('input'):
         if i.get_attribute('type') == 'text':
             i.clear()
@@ -251,7 +251,7 @@ def fill_in_ssnmtree(self):
 @step('there is a filled in SSNM Tree')
 def filled_in_ssnmtree(self):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     all_filled = True
     for i in world.firefox.find_elements_by_tag_name('input'):
         if i.get_attribute('type') == 'text':
@@ -351,7 +351,7 @@ def wait(step,seconds):
 @step(u'I select the first barrier')
 def select_the_first_barrier(step):
     if not world.using_selenium:
-        return
+        assert False, "this step needs to be implemented for the django test client"
     for i in world.firefox.find_elements_by_tag_name("input"):
         try:
             i.click()
