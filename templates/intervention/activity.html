@@ -78,7 +78,12 @@ var game_variables = {{activity.variables|safe}};
   		  {%endif%}
 				  {% with activity.prev as prev_activity %}
 					{% if prev_activity %}
-					<a href="/activity/{{prev_activity.id }}/">&larr; Back</a> 
+			                   {% if prev_activity.game %}
+				              <a href="/task/{{prev_activity.last_gamepage_obj.id }}/{{prev_activity.last_gamepage}}/">&larr; Back</a> 
+					   {% else %}
+					      No game on previous activity
+			                      <a href="/activity/{{prev_activity.id }}/">&larr; Back</a> 
+					   {% endif %}
 					{% else %}
 					<!--START - There's no activity before this.-->
 					{% endif %}
@@ -145,14 +150,18 @@ var game_variables = {{activity.variables|safe}};
 	              {% endwith %}
   		  {%endif%}
 			
-			{% with activity.prev as prev_activity %}
-			{% if prev_activity %}
-			<a href="/activity/{{prev_activity.id }}/">&larr; Back</a> 
-			{% else %}
-			<!--START - There's no activity before this.-->
-			{% endif %}
-			{% endwith %}
-			
+                        {% with activity.prev as prev_activity %}
+					{% if prev_activity %}
+			                   {% if prev_activity.game %}
+				              <a href="/task/{{prev_activity.last_gamepage_obj.id }}/{{prev_activity.last_gamepage}}/">&larr; Back</a> 
+					   {% else %}
+					      No game on previous activity
+			                      <a href="/activity/{{prev_activity.id }}/">&larr; Back</a> 
+					   {% endif %}
+					{% else %}
+					<!--START - There's no activity before this.-->
+					{% endif %}
+				  {% endwith %}
 		</div>
 				
 		</form>
