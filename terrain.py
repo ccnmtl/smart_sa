@@ -117,14 +117,23 @@ def there_is_a_location_edit_form(step):
 @step(u'I click the "([^"]*)" link')
 def i_click_the_link(step, text):
     if not world.using_selenium:
-        return
-    try:
-        link = world.firefox.find_element_by_partial_link_text(text)
-        assert link.is_displayed()
-        link.click()
-    except:
-        world.firefox.get_screenshot_as_file("/tmp/selenium.png")
-        assert False, link.location
+        for a in world.dom.cssselect("a"):
+            if a.text:
+                if text.strip().lower() in a.text.strip().lower():
+                    #import pdb; pdb.set_trace()
+                    href = a.attrib['href']
+                    response = world.client.get(django_url(href))
+                    world.dom = html.fromstring(response.content)
+                    return
+        assert False, "could not find the '%s' link" % text
+    else:
+        try:
+            link = world.firefox.find_element_by_partial_link_text(text)
+            assert link.is_displayed()
+            link.click()
+        except:
+            world.firefox.get_screenshot_as_file("/tmp/selenium.png")
+            assert False, link.location
 
 
 @step(u'I fill in "([^"]*)" in the "([^"]*)" form field')
@@ -203,13 +212,13 @@ def i_am_on_the_activity_page(step,activity_id):
 @step('there is a game')
 def there_is_a_game(self):
     if not world.using_selenium:
-        return
+        assert len(world.dom.cssselect('#gamebox')) > 0
     assert world.firefox.find_element_by_id('gamebox')
 
 @step('there is an assessmentquiz')
 def there_is_an_assessmentquiz(self):
     if not world.using_selenium:
-        return
+        assert len(world.dom.cssselect('#assessmentquiz')) > 0
     assert world.firefox.find_element_by_id('assessmentquiz')
 
 
@@ -331,7 +340,7 @@ def there_is_no_navbutton(step, label):
     for a in world.dom.cssselect('a.navlink'):
         if a.text.strip().lower() == label.strip().lower():
             found = True
-    assert not found
+    assert not found, "expecting no nav button, but we found one"
 
 @step(u'I wait for (\d+) seconds')
 def wait(step,seconds):
@@ -341,18 +350,23 @@ def wait(step,seconds):
 def select_the_first_barrier(step):
     if not world.using_selenium:
         return
-#    assert False, str(world.firefox.find_elements_by_css_selector("input#checkbox-personal-info"))
     for i in world.firefox.find_elements_by_tag_name("input"):
         try:
             i.click()
         except:
             # selenium likes to give us a ElementNotVisibleException exception here
             pass
-#    for l in world.firefox.find_elements_by_tag_name('label'):
-#        if l.get_attribute('for') == "checkbox-personal-info":
-#            assert False, l
-#            l.click()
-#        world.firefox.find_element_by_id('checkbox-personal-info').click()
-#    except:
-#        time.sleep(1)
-#        world.firefox.find_element_by_id('checkbox-personal-info').click()
+
+@step(u'I am not on an activity page')
+def i_am_not_on_an_activity_page(step):
+    # look for an h3.activitytitle
+    if len(world.dom.cssselect("h3.activitytitle")) > 0:
+        # if there is one, we're either on an activity or a game
+        # let's make sure it's a game page
+        assert len(world.dom.cssselect("#gamebox")) > 0, "on an activity page"
+    else:
+        assert True
+
+@step(u'I am on a game page')
+def i_am_on_a_game_page(step):
+    assert len(world.dom.cssselect("#gamebox")) > 0, "not a game page"
