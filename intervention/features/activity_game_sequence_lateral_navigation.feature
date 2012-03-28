@@ -24,7 +24,7 @@ Clicking Next -> when the interactivity phase is complete advances the user to t
         # Actual: http://masivukeni2.ccnmtl.columbia.edu/activity/15/
         Given I am logged in as a counselor
         Given I have logged in a participant
-        When I go to Session 1, Activity 4
+        When I go to Session 1, Activity 8
         When I click the "Back" link
         Then there is a game
         Then I am not on an activity page

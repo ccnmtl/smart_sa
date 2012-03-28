@@ -39,6 +39,10 @@ def using_selenium(step):
 def finished_selenium(step):
     world.using_selenium = False
 
+@before.each_scenario
+def clear_selenium(step):
+    world.using_selenium = False
+
 @step(r'I access the url "(.*)"')
 def access_url(step, url):
     if world.using_selenium:
@@ -120,7 +124,6 @@ def i_click_the_link(step, text):
         for a in world.dom.cssselect("a"):
             if a.text:
                 if text.strip().lower() in a.text.strip().lower():
-                    #import pdb; pdb.set_trace()
                     href = a.attrib['href']
                     response = world.client.get(django_url(href))
                     world.dom = html.fromstring(response.content)
