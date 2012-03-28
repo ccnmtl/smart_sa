@@ -352,12 +352,12 @@ def wait(step,seconds):
 def select_the_first_barrier(step):
     if not world.using_selenium:
         assert False, "this step needs to be implemented for the django test client"
-    for i in world.firefox.find_elements_by_tag_name("input"):
-        try:
-            i.click()
-        except:
-            # selenium likes to give us a ElementNotVisibleException exception here
-            pass
+    i = world.firefox.find_element_by_css_selector('input[type="checkbox"]')
+    try:
+        i.click()
+    except:
+        pass
+        
 
 @step(u'I am not on an activity page')
 def i_am_not_on_an_activity_page(step):

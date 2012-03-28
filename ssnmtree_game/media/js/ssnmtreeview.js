@@ -140,10 +140,11 @@
                 // Initiate the ajax call to saveState
                 global.Intervention.saveState(function (result) {
                     if (result.response !== "ok") {
-                        alert("An error occurred while saving your information. Please try again.");
+                        //alert("An error occurred while saving your information. Please try again.");
                     } else {
                         window.location = srcElement.href;
                     }
+                    window.location = srcElement.href;
                 });
             }
             return false;

@@ -172,13 +172,13 @@ check very basic things.
       Then there is a game
       When I click the "Next" link
       Then I am on the Activity 4 page
+      
+      # barrier game
       When I click the "Next" link
       Then there is a game
       When I select the first barrier
       When I click on Complete Activity
 
-      Then I am on the Activity 5 page
-      When I click on Complete Activity
       Then I am on the Activity 5 page
       When I click on Complete Activity
       Then I am on the Activity 6 page
@@ -193,52 +193,101 @@ check very basic things.
       Then I am on the Activity 1 page
       When I click on Complete Activity
       Then I am on the Activity 2 page
-      # quiz
-      When I click the "Next" link
-      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 3 page
+      # quiz - assessment
       When I click the "Next" link
       Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 4 page
-      # pill game
+      
+      # quiz - assessment audit
       When I click the "Next" link
       Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 5 page
-       When I click the "Next" link
+      
+      # quiz - drugs
+      When I click the "Next" link
       Then there is a game
-
       When I click on Complete Activity
       Then I am on the Activity 6 page
-      # ssnmtree
-      When I click the "Next" link
+      
+      # island game
+      When I click on Complete Activity
       Then there is a game
-      When I fill in the SSNM Tree
       When I click on Complete Activity
       Then I am on the Activity 7 page
-      # reasons to stay healthy
+      
+      # island game part 2
+      When I click on Complete Activity
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 8 page
+      When I click on Complete Activity
+      Then I am on the Activity 9 page
+      
+      # tree
       When I click the "Next" link
       Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 10 page
+      When I click on Complete Activity
+      Then I am on the Activity 11 page
 
+      # tree
+      When I click the "Next" link
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 12 page
+      
+      # pill game
+      When I click the "Next" link
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 13 page
+      
+      # barrier game - no need to select something
+      When I click the "Next" link
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 14 page
+      When I click on Complete Activity
+      Then I am on the Activity 15 page
+      When I click on Complete Activity
+      Then I am on the Activity 16 page
+
+      # barrier game redux - no need to select something
+      When I click the "Next" link
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 17 page
+
+      # reasons to stay healthy redux
+      When I click the "Next" link
+      Then there is a game
       When I click on Complete Activity
       Then I am on the Session 5 page
-      When I click the "Sessions" link
-
+      
+      ## SESSION 6
       When I click on Session 6
       When I click on Activity 1
       Then I am on the Activity 1 page
-      # problem solving
-      When I click the "Next" link
-      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 2 page
-      # watchvideo
+      
+      # reasons to stay healhty
       When I click the "Next" link
       Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 3 page
+      
+      # barrier game redux - no need to select something
+      When I click the "Next" link
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 4 page
+      
       When I click on Complete Activity
       Then I am on the Session 6 page
 
