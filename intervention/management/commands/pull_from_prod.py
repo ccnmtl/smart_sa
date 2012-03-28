@@ -7,12 +7,17 @@ from cStringIO import StringIO
 from simplejson import dumps,loads
 import os
 import os.path
-
+from optparse import make_option
 
 class Command(BaseCommand):
     args = ''
     help = ''
-    
+
+    option_list = BaseCommand.option_list + (
+        make_option('-d', '--db-only', dest='dbonly',
+                    default=False,help='only pull the database content'),
+    )
+
     def handle(self, *args, **options):
         if not settings.DEBUG:
             print "this should never be run on production"
@@ -20,7 +25,8 @@ class Command(BaseCommand):
 
         print "fetching content from prod..."
         zc = GET(settings.PROD_BASE_URL + "intervention_admin/content_sync/")
-        uploads = GET(settings.PROD_BASE_URL + "intervention_admin/list_uploads/").split("\n")
+        if not options["dbonly"]:
+            uploads = GET(settings.PROD_BASE_URL + "intervention_admin/list_uploads/").split("\n")
 
         buffer = StringIO(zc)
         zipfile = ZipFile(buffer,"r")
@@ -33,6 +39,9 @@ class Command(BaseCommand):
         for i in json['interventions']:
             intervention = Intervention.objects.create(name="tmp")
             intervention.from_dict(i)
+
+        if options["dbonly"]:
+            return
 
         print "updating uploaded files..."
         base_len = len(settings.PROD_MEDIA_BASE_URL)
