@@ -25,6 +25,9 @@ check very basic things.
       Then I am on the Activity 3 page
       When I click on Complete Activity
       Then I am on the Activity 4 page
+      When I click the "Next" link
+      Then there is a game
+      # pill game
       When I click on Complete Activity
       Then I am on the Activity 5 page
       When I click on Complete Activity
@@ -212,34 +215,36 @@ check very basic things.
       Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 6 page
-      
-      # island game
-      When I click on Complete Activity
-      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 7 page
+      When I click the "Next" link
+      
+      # island game
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 8 page
       
       # island game part 2
       When I click on Complete Activity
       Then there is a game
       When I click on Complete Activity
-      Then I am on the Activity 8 page
-      When I click on Complete Activity
       Then I am on the Activity 9 page
+      When I click on Complete Activity
+      Then I am on the Activity 10 page
       
       # tree
       When I click the "Next" link
       Then there is a game
       When I click on Complete Activity
-      Then I am on the Activity 10 page
-      When I click on Complete Activity
       Then I am on the Activity 11 page
+      When I click on Complete Activity
+      Then I am on the Activity 12 page
 
       # tree
       When I click the "Next" link
       Then there is a game
       When I click on Complete Activity
-      Then I am on the Activity 12 page
+      Then I am on the Activity 13 page
       
       # pill game
       When I click the "Next" link
