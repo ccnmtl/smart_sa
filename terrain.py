@@ -76,7 +76,7 @@ def i_am_taken_to_the_index(step):
     assert len(world.response.redirect_chain) > 0
     (url,status) = world.response.redirect_chain[0]
     assert status == 302, status
-    assert "/" == url, "URL redirected to was %s" % url
+    assert "http://testserver/" == url, "URL redirected to was %s" % (url,)
 
 
 @step(u'I am logged in as a counselor')

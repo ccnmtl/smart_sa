@@ -9,6 +9,7 @@ site_media_root = os.path.join(os.path.dirname(__file__),"media")
 urlpatterns = patterns('',
         # Example:
         # (r'^smart_sa/', include('smart_sa.foo.urls')),
+        (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
         ('^accounts/',include('djangowind.urls')),
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
         (r'^multimedia/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
