@@ -464,6 +464,9 @@ class Participant(models.Model):
     status = models.BooleanField(default=True)
     clinical_notes = models.TextField(default="",blank=True)
 
+    def __unicode__(self):
+        return self.name
+
     def save_game_var(self,key,value):
         gv,created = ParticipantGameVar.objects.get_or_create(participant=self,key=key)
         gv.value = value
@@ -538,21 +541,37 @@ class ParticipantSession(models.Model):
     participant = models.ForeignKey(Participant)
     session = models.ForeignKey(ClientSession)
     status = models.CharField(max_length=256,default="incomplete")
+
+    def __unicode__(self):
+        return "%s -> %s [%s]" % (self.participant.name, self.session.long_title,self.status)
+
     
 class ParticipantActivity(models.Model):
     participant = models.ForeignKey(Participant)
     activity = models.ForeignKey(Activity)
     status = models.CharField(max_length=256,default="incomplete")
 
+    def __unicode__(self):
+        return "%s -> %s [%s]" % (self.participant.name, self.activity.long_title,self.status)
+
+
 class CounselorNote(models.Model):
     participantsession = models.ForeignKey(ParticipantSession)
     counselor = models.ForeignKey(User)
     notes = models.TextField(blank=True,null=True,default="")
 
+    def __unicode__(self):
+        return "%s <-- %s" % (self.participantsession.participant.name, self.counselor.username)
+
+
 class ParticipantGameVar(models.Model):
     participant = models.ForeignKey(Participant)
     key = models.CharField(max_length=256)
     value = models.TextField(default="",blank=True,null=True)
+
+    def __unicode__(self):
+        return "%s -> %s" % (self.participant.name, self.key)
+
 
 class Deployment(models.Model):
     name = models.CharField(max_length=256,default="Clinic")
