@@ -473,6 +473,17 @@ table#choices td
 	margin-left: 280px;
 }
 
+#content img
+{
+	float: right;
+	margin: 0px 0px 20px 20px;
+	padding: 10px;
+	box-shadow: 0 0 14px rgba(0, 0, 0, 1);
+	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 1);
+	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, 1);
+}
+#content br { display: none; } /*hide break from images*/
+
 a.action
 {
 	-webkit-border-radius: 5px;
@@ -1150,3 +1161,4 @@ width: 33%;
 	position: relative;
 	min-height: 350px;
 }
+
