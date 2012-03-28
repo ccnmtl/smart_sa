@@ -155,24 +155,25 @@ table { border-collapse: collapse; }
 
 #toggle-support-selection.toggle-button
 {
-	left: 400px;
-	top: 360px;
-	background-image: none;
+	left: 20px;
+	bottom: 10px;
 }
 
 #toggle-disclosure-selection.toggle-button
 {
-	left: 20px;
-	top: 360px;
-	background-image: none;
+	right: -70px;
+	bottom: 10px;
 }
 
 .toggle-button
 {
+	background-color: #bbb97a;
+	text-align: center;
 	width: 125px;
 	height: 75px;
 	font-size: 13px;
-	color: black;
+	font-weight: bold;
+	color: #6e2305;
 	text-decoration: none;
 	padding: 9px 0 0px 0;
 	text-transform: uppercase;
@@ -183,19 +184,20 @@ table { border-collapse: collapse; }
 	transition: all 0.25s ease-in-out;
 	-webkit-transition: all 0.25s ease-in-out;
 	-moz-transition: all 0.25s ease-in-out;
-	border-radius: 12px;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
-	border: 1px solid rgba(250, 255, 228, 0.2);
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	box-shadow: 0 0 14px rgba(0, 0, 0, 1);
+	-webkit-box-shadow: 0 0 14px rgba(0, 0, 0, 1);
+	-moz-box-shadow: 0 0 14px rgba(0, 0, 0, 1);
 }
 
 .toggle-button.on
 {
-	text-align: center;
-	box-shadow: 0 0 14px rgba(250, 255, 228, 1);
-	-webkit-box-shadow: 0 0 14px rgba(250, 255, 228, 1);
-	-moz-box-shadow: 0 0 14px rgba(250, 255, 228, 1);
-	border: 1px solid rgba(250, 255, 228, 0.8);
+	background-color: #fff7da;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
 }
 
 @media print
