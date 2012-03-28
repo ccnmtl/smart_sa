@@ -71,6 +71,14 @@ def i_am_taken_to_a_login_screen(step):
     assert status == 302, status
     assert "/login/" in url, "URL redirected to was %s" % url
 
+@step(u'I am taken to the index')
+def i_am_taken_to_the_index(step):
+    assert len(world.response.redirect_chain) > 0
+    (url,status) = world.response.redirect_chain[0]
+    assert status == 302, status
+    assert "/" == url, "URL redirected to was %s" % url
+
+
 @step(u'I am logged in as a counselor')
 def i_am_logged_in_as_a_counselor(step):
     if world.using_selenium:
@@ -86,6 +94,15 @@ def i_am_logged_in_as_a_counselor(step):
         assert "testcounselor" in world.firefox.page_source, world.firefox.page_source
     else:
         world.client.login(username='testcounselor',password='test')
+
+@step(u'I log out')
+def i_log_out(step):
+    if world.using_selenium:
+        world.firefox.get(django_url("/accounts/logout/"))
+    else:
+        response = world.client.get(django_url("/accounts/logout/"),follow=True)
+        world.response = response
+        world.dom = html.fromstring(response.content)
 
 @step(u'I am logged in as an admin')
 def given_i_am_logged_in_as_an_admin(step):
