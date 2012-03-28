@@ -134,7 +134,7 @@ h2
 {
 	color: #f6921e;
 	margin: 0px;
-	padding-top: 10px;
+	padding:0px;
 }
 
 h3 
@@ -307,7 +307,7 @@ a#endintervention
 #contentcontainer
 {
 	position: relative;
-	padding: 40px 30px 0px 30px;
+	padding: 0px 30px 0px 30px;
 	min-height: 600px;
 }
 
@@ -340,7 +340,7 @@ text-decoration: underline;
 {
 	position: absolute;
 	left: 10px;
-	top: 50px;
+	top: 40px;
 	width: 260px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -553,7 +553,7 @@ a.action:hover { background-color: #79b985; }
 
 #top-nav-lateral
 {
-	margin-top: -15px;
+	margin-top: 0px;
 	padding: 0px;
 }
 
@@ -1090,7 +1090,7 @@ body.logged-in #home-remote { display: block; }
 	margin: 16px 0px 0px 0px;
 	padding: 4px 4px 4px 30px;
 	color: #666;
-	width: 140px;
+	width: 100px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
