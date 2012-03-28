@@ -150,6 +150,7 @@ h4
 	color: #000;
 	border-bottom: 1px solid #4ea15a;
 	font-size: 18px;
+	clear: both;
 }
 
 /*stop - header*/
@@ -482,7 +483,17 @@ table#choices td
 	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 1);
 	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, 1);
 }
-#content br { display: none; } /*hide break from images*/
+#content br { display: none; } 
+/*hide break that the images create*/
+#content #gamebox img
+{
+	margin: 0px;
+	padding: 0px;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+}
+/*don't apply style to game images*/
 
 a.action
 {
@@ -546,7 +557,7 @@ a.action:hover { background-color: #79b985; }
 	padding: 0px;
 }
 
-#bottom-nav-lateral { margin-top: 40px; }
+#bottom-nav-lateral { margin-top: 40px; clear: both;}
 
 #footer
 {
@@ -1161,4 +1172,3 @@ width: 33%;
 	position: relative;
 	min-height: 350px;
 }
-
