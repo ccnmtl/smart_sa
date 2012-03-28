@@ -157,23 +157,26 @@ table { border-collapse: collapse; }
 {
 	left: 20px;
 	bottom: 10px;
+	background-color: #9e005d;
+	color: #fff;
 }
 
 #toggle-disclosure-selection.toggle-button
 {
 	right: -70px;
 	bottom: 10px;
+	background-color: #f6dc85;
+	color: #6e2305;
 }
 
 .toggle-button
 {
-	background-color: #bbb97a;
+	background-color: #fff7da;
 	text-align: center;
 	width: 125px;
 	height: 75px;
 	font-size: 13px;
 	font-weight: bold;
-	color: #6e2305;
 	text-decoration: none;
 	padding: 9px 0 0px 0;
 	text-transform: uppercase;
@@ -194,7 +197,6 @@ table { border-collapse: collapse; }
 
 .toggle-button.on
 {
-	background-color: #fff7da;
 	box-shadow: none;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
