@@ -183,7 +183,7 @@
                 jQuery("#previous_issue img").hide();
             }
 
-            // Represent selected issue if marked as "personal"
+            // Represent selected issue if marked as "personal", i.e. has an action plan
             var actionPlan = this.actionPlans.get(issueId);
             if (actionPlan) {
                 jQuery("#actionplan").show();
@@ -219,7 +219,6 @@
                 jQuery('html, body').animate({scrollTop: 0}, 0, function() {
                     jQuery("#actionplan_form").hide('fast');
                 });
-
             }
         },
 
@@ -236,7 +235,7 @@
                     } else {
                         // navigate on success
                         window.location = tgt.href;
-		        return true;
+                        return true;
                     }
                 });
             }

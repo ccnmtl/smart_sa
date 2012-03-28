@@ -14,6 +14,8 @@ check very basic things.
       When I fill in "test" in the "id_number" form field
       When I submit the "login-participant-form" form
       Then I am on the Intervention page
+      
+      ## SESSION 1
       When I click on Session 1
       When I click on Activity 1
       Then I am on the Activity 1 page
@@ -21,40 +23,65 @@ check very basic things.
       Then I am on the Activity 2 page
       When I click on Complete Activity
       Then I am on the Activity 3 page
-      # assessment quiz
+      When I click on Complete Activity
+      Then I am on the Activity 4 page
+      When I click on Complete Activity
+      Then I am on the Activity 5 page
+      When I click on Complete Activity
+      Then I am on the Activity 6 page
+      When I click on Complete Activity
+      Then I am on the Activity 7 page
       When I click the "Next" link
+
+      # assessment quiz part 1 - mood
       Then there is a game
       Then there is an assessmentquiz
       When I fill in all 3s in the quiz
       When I click the "Next" link
-      # Then there is a game
-      # Then there is an assessmentquiz
-
-      # When I click on Complete Activity
-      Then I am on the Activity 4 page
-      When I click on Complete Activity
-      Then I am on the Activity 5 page
-      # ssnmtree
+      Then I am on the Activity 8 page
       When I click the "Next" link
+
+      # assessment quiz part 2 - alcohol audit
+      Then there is a game
+      Then there is an assessmentquiz-audit
+      When I fill in all 2s in the quiz
+      When I click the "Next" link
+      Then I am on the Activity 9 page
+
+      # assessment quiz part 3 - drug audit
+      When I click the "Next" link
+      Then there is a game
+      Then there is an assessmentquiz-audit
+      When I fill in all 2s in the quiz
+      When I click the "Next" link
+      Then I am on the Activity 10 page
+      When I click the "Next" link
+
+      # ssnmtree
       Then there is a game
       When I fill in the SSNM Tree
       When I click the "Next" Link
-
-      Then I am on the Activity 6 page
+      Then I am on the Activity 11 page
+      When I click the "Next" link
+      Then I am on the Activity 12 page
       # ssnmtree
       When I click the "Next" link
       Then there is a game
       When I fill in the SSNM Tree
       When I click on Complete Activity
-      Then I am on the Activity 7 page
+      Then I am on the Activity 13 page
+      When I click on Complete Activity
+      Then I am on the Activity 14 page
+      
       # reasons to stay healthy
       When I click the "Next" link
       Then there is a game
       When I click on Complete Activity
-      Then I am on the Activity 8 page
+      Then I am on the Activity 15 page
       When I click on Complete Activity
       Then I am on the Session 1 page
 
+      ## SESSION2
       When I click on Session 2
       When I click on Activity 1
       Then I am on the Activity 1 page
@@ -64,84 +91,99 @@ check very basic things.
       Then I am on the Activity 3 page
       When I click on Complete Activity
       Then I am on the Activity 4 page
-      # watchvideo
-      When I click on Complete Activity
-      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 5 page
+      When I click on Complete Activity
+      Then I am on the Activity 6 page
+      When I click on Complete Activity
+      Then I am on the Activity 7 page
       # island game
       When I click the "Next" link
       Then there is a game
-      When I click on Complete Activity
-      Then I am on the Activity 6 page
-      # ssnmtree
+      When I click the "Next" link
+      Then I am on the Activity 8 page
+      # watch video
       When I click the "Next" link
       Then there is a game
-      When I fill in the SSNM Tree
       When I click on Complete Activity
-      Then I am on the Activity 7 page
+      Then I am on the Activity 9 page
+      # island game part 2
+      When I click the "Next" link
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 10 page
+      When I click on Complete Activity
+      Then I am on the Activity 11 page
       # reasons to stay healthy
       When I click the "Next" link
       Then there is a game
-
       When I click on Complete Activity
-      Then I am on the Activity 8 page
+      Then I am on the Activity 12 page
       When I click on Complete Activity
       Then I am on the Session 2 page
 
+      ## SESSION 3
       When I click on Session 3
       When I click on Activity 1
       Then I am on the Activity 1 page
       When I click on Complete Activity
       Then I am on the Activity 2 page
-      # watchvideo
-      When I click the "Next" link
-      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 3 page
+      # Pill Regimen
+      When I click the "Next" link
+      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 4 page
       When I click on Complete Activity
       Then I am on the Activity 5 page
+      # Watch Video
+      When I click the "Next" link
+      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 6 page
-      # Barriers
-      When I click the "Next" link
-      Then there is a game
-#      When I wait for 3 seconds
-      When I select the first barrier
-#      When I wait for 300 seconds
       When I click on Complete Activity
       Then I am on the Activity 7 page
-      # reasons to stay healthy
-      When I click the "Next" link
-      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 8 page
       When I click on Complete Activity
+      Then I am on the Activity 9 page
+      When I click on Complete Activity
+      Then I am on the Activity 10 page
+      # Reasons To Stay Healthy
+      When I click the "Next" link
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 11 page
+      When I click on Complete Activity
       Then I am on the Session 3 page
 
+      ## SESSION 4
       When I click on Session 4
       When I click on Activity 1
       Then I am on the Activity 1 page
       When I click on Complete Activity
       Then I am on the Activity 2 page
+      When I click on Complete Activity
+      Then I am on the Activity 3 page
+      
       # pill game
       When I click the "Next" link
       Then there is a game
       When I click the "Next" link
-      Then I am on the Activity 3 page
+      Then I am on the Activity 4 page
       When I click the "Next" link
       Then there is a game
-#      When I select the first barrier
+      When I select the first barrier
       When I click on Complete Activity
 
-      # watchvideo
-      Then I am on the Activity 4 page
+      Then I am on the Activity 5 page
       When I click on Complete Activity
       Then I am on the Activity 5 page
       When I click on Complete Activity
       Then I am on the Activity 6 page
+      When I click on Complete Activity
+      Then I am on the Activity 7 page
       When I click on Complete Activity
       Then I am on the Session 4 page
 

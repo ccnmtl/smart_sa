@@ -3,9 +3,10 @@
 }
 
 #pill-game-container {
-    width: 99%;
+    width: 100%;
     height: 450px;
     vertical-align: top;
+    background-color: white;
 }
 
 div.pill-list {
@@ -51,7 +52,7 @@ div#night.pill-bucket {
     font-weight: bold;
     margin: 5px 3px;
     width: 95%;
-    height: 30px;
+    height: 35px;
     border: 1px solid #ccc;
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -60,6 +61,11 @@ div#night.pill-bucket {
 
 .pill-text {
     float: left;
+}
+
+.pill-dosage {
+    font-weight: normal;
+    font-size: 10px;
 }
 
 .pill-image, .draggable {
