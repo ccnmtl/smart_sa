@@ -70,10 +70,10 @@ def set_participant(request):
         name = request.POST.get('name','')
         id_number = request.POST.get('id_number','')
         try:
-            p = Participant.objects.get(name=name)
+            p = Participant.objects.get(name__iexact=name)
             if not p.status:
                 return HttpResponse("this participant is marked as inactive")
-            if p.id_number == id_number:
+            if p.id_number.lower() == id_number.lower():
                 request.session['participant_id'] = p.id
                 return HttpResponseRedirect(request.POST.get('next','/intervention/'))
             else:
