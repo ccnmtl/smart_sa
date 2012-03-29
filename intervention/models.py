@@ -128,7 +128,7 @@ class ClientSession (models.Model):
             return None
 
     def completed_all_activities(self, participant):
-        for a in self.activity_set.all():
+        for a in self.activity_set.all()[1:]:
             if a.get_participant_status(participant) != "complete":
                 return False
         return True
