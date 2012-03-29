@@ -88,7 +88,7 @@
     });
 
     var SupportPersonListView = Backbone.View.extend({
-        edit_mode: 'names',
+        edit_mode: 'disclosure',
 
         events : {
             'click div#toggle-support-selection' : 'toggleSupportSelection',
