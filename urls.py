@@ -19,6 +19,7 @@ urlpatterns = patterns('',
         (r'^home.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
         (r'^index.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
 
+        (r'^testgen/$', 'smart_sa.intervention.views.testgen'),
         (r'^set_participant/$','smart_sa.intervention.views.set_participant'),
         (r'^clear_participant/$','smart_sa.intervention.views.clear_participant'),
         (r'^set_deployment/$','smart_sa.intervention.views.set_deployment'),

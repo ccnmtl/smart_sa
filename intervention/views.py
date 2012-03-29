@@ -192,6 +192,10 @@ def intervention(request, intervention_id):
     return dict(intervention=get_object_or_404(Intervention, id=intervention_id),
                 participant=request.participant)
 
+@render_to('intervention/testgen.html')
+def testgen(request):
+    return dict(interventions=Intervention.objects.all())
+
 @render_to('intervention/session.html')  
 @participant_required
 @login_required
