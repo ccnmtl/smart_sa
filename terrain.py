@@ -54,7 +54,7 @@ def access_url(step, url):
 @step(u'I am not logged in')
 def i_am_not_logged_in(step):
     if world.using_selenium:
-        assert False, "this step needs to be implemented for selenium"
+        world.firefox.get(django_url("/accounts/logout/"))
     else:
         world.client.logout()
 
