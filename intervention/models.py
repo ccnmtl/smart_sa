@@ -434,28 +434,6 @@ class Backup (models.Model):
         return dict(json_data=self.json_data,
                     created=str(self.created))
 
-class Fact (models.Model):
-    """a piece of information connected to a client"""
-    # user
-    fact_key = models.CharField(max_length=100)
-    fact_value = models.TextField(blank=True)
-    help_copy = models.TextField(blank=True)
-    created = models.DateTimeField('date created', auto_now_add=True)
-    modified = models.DateTimeField('date modified', auto_now=True)
-    #activities = models.DateTimeField('date modified')
-    def __unicode__(self):
-        return self.fact_key
-
-    def as_dict(self):
-        return dict(fact_key=self.fact_key,
-                    fact_value=self.fact_value,
-                    help_copy=self.help_copy,
-                    created=str(self.created),
-                    modified=str(self.modified),
-                    )
-
-# These are the model objects that have been living client-side in localStorage/Gears
-
 class Participant(models.Model):
     """ participant in the system """
     name = models.CharField(max_length=256)

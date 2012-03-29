@@ -60,6 +60,8 @@ def i_am_not_logged_in(step):
 
 @step(u'I access the management console')
 def i_access_the_management_console(step):
+    if world.using_selenium:
+        world.firefox.get(django_url("/manage/"))
     response = world.client.get(django_url("/manage/"),follow=True)
     world.response = response
     world.dom = html.fromstring(response.content)
