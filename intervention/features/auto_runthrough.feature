@@ -6,6 +6,7 @@ up to date with changing content. To create this, I run a
 pull_from_prod to the test instance, then run a dev server
 on port 8001 with the settings_test and do
 curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feature
+Don't edit this feature file directly. Edit templates/intervention/testgen.html instead
 
     Scenario: Automated Run-Through
       Using selenium
@@ -27,62 +28,105 @@ curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feat
       
       When I click on Activity 1
       Then I am on the Activity 1 page
+      
       When I click on Session 1
       
       When I click on Activity 2
       Then I am on the Activity 2 page
+      
       When I click on Session 1
       
       When I click on Activity 3
       Then I am on the Activity 3 page
+      
       When I click on Session 1
       
       When I click on Activity 4
       Then I am on the Activity 4 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 1
       
       When I click on Activity 5
       Then I am on the Activity 5 page
+      
       When I click on Session 1
       
       When I click on Activity 6
       Then I am on the Activity 6 page
+      
       When I click on Session 1
       
       When I click on Activity 7
       Then I am on the Activity 7 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 1
       
       When I click on Activity 8
       Then I am on the Activity 8 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 1
       
       When I click on Activity 9
       Then I am on the Activity 9 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 1
       
       When I click on Activity 10
       Then I am on the Activity 10 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 1
       
       When I click on Activity 11
       Then I am on the Activity 11 page
+      
       When I click on Session 1
       
       When I click on Activity 12
       Then I am on the Activity 12 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 1
       
       When I click on Activity 13
       Then I am on the Activity 13 page
+      
       When I click on Session 1
       
       When I click on Activity 14
       Then I am on the Activity 14 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 1
       
       When I click on Activity 15
       Then I am on the Activity 15 page
+      
       When I click on Session 1
       
    
@@ -93,50 +137,78 @@ curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feat
       
       When I click on Activity 1
       Then I am on the Activity 1 page
+      
       When I click on Session 2
       
       When I click on Activity 2
       Then I am on the Activity 2 page
+      
       When I click on Session 2
       
       When I click on Activity 3
       Then I am on the Activity 3 page
+      
       When I click on Session 2
       
       When I click on Activity 4
       Then I am on the Activity 4 page
+      
       When I click on Session 2
       
       When I click on Activity 5
       Then I am on the Activity 5 page
+      
       When I click on Session 2
       
       When I click on Activity 6
       Then I am on the Activity 6 page
+      
       When I click on Session 2
       
       When I click on Activity 7
       Then I am on the Activity 7 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 2
       
       When I click on Activity 8
       Then I am on the Activity 8 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 2
       
       When I click on Activity 9
       Then I am on the Activity 9 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 2
       
       When I click on Activity 10
       Then I am on the Activity 10 page
+      
       When I click on Session 2
       
       When I click on Activity 11
       Then I am on the Activity 11 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 2
       
       When I click on Activity 12
       Then I am on the Activity 12 page
+      
       When I click on Session 2
       
    
@@ -147,46 +219,69 @@ curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feat
       
       When I click on Activity 1
       Then I am on the Activity 1 page
+      
       When I click on Session 3
       
       When I click on Activity 2
       Then I am on the Activity 2 page
+      
       When I click on Session 3
       
       When I click on Activity 3
       Then I am on the Activity 3 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 3
       
       When I click on Activity 4
       Then I am on the Activity 4 page
+      
       When I click on Session 3
       
       When I click on Activity 5
       Then I am on the Activity 5 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 3
       
       When I click on Activity 6
       Then I am on the Activity 6 page
+      
       When I click on Session 3
       
       When I click on Activity 7
       Then I am on the Activity 7 page
+      
       When I click on Session 3
       
       When I click on Activity 8
       Then I am on the Activity 8 page
+      
       When I click on Session 3
       
       When I click on Activity 9
       Then I am on the Activity 9 page
+      
       When I click on Session 3
       
       When I click on Activity 10
       Then I am on the Activity 10 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 3
       
       When I click on Activity 11
       Then I am on the Activity 11 page
+      
       When I click on Session 3
       
    
@@ -197,30 +292,45 @@ curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feat
       
       When I click on Activity 1
       Then I am on the Activity 1 page
+      
       When I click on Session 4
       
       When I click on Activity 2
       Then I am on the Activity 2 page
+      
       When I click on Session 4
       
       When I click on Activity 3
       Then I am on the Activity 3 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 4
       
       When I click on Activity 4
       Then I am on the Activity 4 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 4
       
       When I click on Activity 5
       Then I am on the Activity 5 page
+      
       When I click on Session 4
       
       When I click on Activity 6
       Then I am on the Activity 6 page
+      
       When I click on Session 4
       
       When I click on Activity 7
       Then I am on the Activity 7 page
+      
       When I click on Session 4
       
    
@@ -231,54 +341,99 @@ curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feat
       
       When I click on Activity 1
       Then I am on the Activity 1 page
+      
       When I click on Session 5
       
       When I click on Activity 2
       Then I am on the Activity 2 page
+      
       When I click on Session 5
       
       When I click on Activity 3
       Then I am on the Activity 3 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 5
       
       When I click on Activity 4
       Then I am on the Activity 4 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 5
       
       When I click on Activity 5
       Then I am on the Activity 5 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 5
       
       When I click on Activity 6
       Then I am on the Activity 6 page
+      
       When I click on Session 5
       
       When I click on Activity 7
       Then I am on the Activity 7 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 5
       
       When I click on Activity 8
       Then I am on the Activity 8 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 5
       
       When I click on Activity 9
       Then I am on the Activity 9 page
+      
       When I click on Session 5
       
       When I click on Activity 10
       Then I am on the Activity 10 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 5
       
       When I click on Activity 11
       Then I am on the Activity 11 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 5
       
       When I click on Activity 12
       Then I am on the Activity 12 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 5
       
       When I click on Activity 13
       Then I am on the Activity 13 page
+      
       When I click on Session 5
       
    
@@ -289,18 +444,30 @@ curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feat
       
       When I click on Activity 1
       Then I am on the Activity 1 page
+      
       When I click on Session 6
       
       When I click on Activity 2
       Then I am on the Activity 2 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 6
       
       When I click on Activity 3
       Then I am on the Activity 3 page
+      
+      When I click the "Next" link
+      Then there is a game
+      # TODO: handle tests on individual games
+      
       When I click on Session 6
       
       When I click on Activity 4
       Then I am on the Activity 4 page
+      
       When I click on Session 6
       
    
