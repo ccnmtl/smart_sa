@@ -32,6 +32,8 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click the "Next" link
       Then there is a game
       # TODO: handle tests on individual games
+      {% else %}
+      When I click on Complete Activity
       {% endif %}
       When I click on Session {{session.index}}
       {% endfor %}
