@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block game_content %}
-
+    <div id="barriercontainer">
     <div class="issue-selector">
         {% for issue in game_context.issues %}
             <div id="{{issue.name}}" class="issue-number" unselectable="on">{{issue.ordinality}}</div>
@@ -88,4 +88,5 @@
         {% endfor %}
     </div>
     
+    </div>
 {% endblock %}

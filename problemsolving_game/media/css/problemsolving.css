@@ -1,5 +1,10 @@
 /** Top Numbered Issue Selector **/
 
+#barriercontainer {
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+
 .issue-selector {
     text-align: center;
     vertical-align: middle;
