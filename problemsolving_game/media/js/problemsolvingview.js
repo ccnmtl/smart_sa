@@ -230,14 +230,13 @@
             } else {
                 // Initiate the ajax call to saveState
                 global.Intervention.saveState(function (result) {
-                    if (result.response !== "ok") {
-                        //alert("An error occurred while saving your information. Please try again.");
+                    if (result.responseText !== "ok") {
+                        alert("An error occurred while saving your information. Please try again.");
                     } else {
                         // navigate on success
                         window.location = tgt.href;
                         return true;
                     }
-                    window.location = tgt.href;
                 });
             }
             return false;

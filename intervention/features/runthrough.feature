@@ -237,38 +237,46 @@ check very basic things.
       Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 11 page
-      When I click on Complete Activity
-      Then I am on the Activity 12 page
 
       # tree
       When I click the "Next" link
       Then there is a game
       When I click on Complete Activity
-      Then I am on the Activity 13 page
+      Then I am on the Activity 12 page
       
-      # pill game
+      # reasons to stay healthy
       When I click the "Next" link
       Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 13 page
-      
-      # barrier game - no need to select something
-      When I click the "Next" link
-      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 14 page
+      
+      # video
+      When I click the "Next" link
+      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 15 page
+      
+      # video
+      When I click the "Next" link
+      Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 16 page
-
-      # barrier game redux - no need to select something
-      When I click the "Next" link
+      When I click on Complete Activity
+            
+      # island 1
       Then there is a game
       When I click on Complete Activity
       Then I am on the Activity 17 page
-
-      # reasons to stay healthy redux
+      
+      # island 2
+      When I click the "Next" link
+      Then there is a game
+      When I click on Complete Activity
+      Then I am on the Activity 18 page
+      
+      # tree again
       When I click the "Next" link
       Then there is a game
       When I click on Complete Activity
