@@ -319,10 +319,17 @@ def the_participant_has_completed_activity_in_session_1(step,num_activities,sess
     
 
 @step(u'the participant has completed all activities in session (\d+)')
-def the_participant_has_completed_all_activities_in_session_1(step,session_number):
+def the_participant_has_completed_all_activities(step,session_number):
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in s.activity_set.all():
+        r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
+
+@step(u'the participant has completed all activities except the first in session (\d+)')
+def the_participant_has_completed_all_activities_except_the_first(step,session_number):
+    i = Intervention.objects.all()[0]
+    s = i.clientsession_set.all()[int(session_number) - 1]
+    for a in list(s.activity_set.all())[1:]:
         r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
 
 @step(u'there is a "([^"]*)" button')
