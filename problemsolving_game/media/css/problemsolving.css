@@ -194,9 +194,13 @@ div#actionplan_form textarea {
     max-height: 150px;
 }
 
-div#actionplan_form div#example {
+div#actionplan_form div#example li, div#actionplan_form div#example ul {
     font-style: italic;
-    font-size: 90%;
+    font-size: 80%;
+}
+
+div#actionplan_form div#example ul {
+    margin-top: 5px;
 }
 
 div#actionplan_form input[type=submit] {
