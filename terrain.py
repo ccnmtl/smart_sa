@@ -238,14 +238,6 @@ def there_is_a_game(self):
     else:
         assert world.firefox.find_element_by_id('gamebox')
 
-@step('there is an assessmentquiz')
-def there_is_an_assessmentquiz(self):
-    if not world.using_selenium:
-        assert len(world.dom.cssselect('#assessmentquiz')) > 0
-    else:
-        assert world.firefox.find_element_by_id('assessmentquiz')
-
-
 @step('I go back')
 def i_go_back(self):
     """ need to back out of games currently"""
@@ -253,13 +245,6 @@ def i_go_back(self):
         assert False, "this step needs to be implemented for the django test client"
     world.firefox.back()
 
-@step('I fill in all (\d)s in the quiz')
-def fill_in_quiz(self,value):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
-    for i in world.firefox.find_elements_by_tag_name('input'):
-        if i.get_attribute('type') == 'radio' and i.get_attribute('value') == value:
-            i.click()
 
 @step('I fill in the SSNM Tree')
 def fill_in_ssnmtree(self):
@@ -292,23 +277,25 @@ def participant_has_not_completed_any_sessions(step):
     world.participant.participantactivity_set.all().delete()
 
 
-@step(u'I go to Session (\d+)')
-def i_go_to_session(step,session_number):
-    i = Intervention.objects.all()[0]
-    s = i.clientsession_set.all()[int(session_number) - 1]
-    assert s.index() == int(session_number)
-    response = world.client.get(django_url("/session/%d/" % s.id))
-    world.dom = html.fromstring(response.content)
-    world.response = response
-
-@step(u'I go to Session (\d+), Activity (\d+)')
-def i_go_to_session(step,session_number,activity_number):
+@step(u'I go to Activity (\d+) of Session (\d+)')
+def i_go_to_session(step,activity_number,session_number):
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     assert s.index() == int(session_number)
     a = s.activity_set.all()[int(activity_number) - 1]
     assert a.index() == int(activity_number)
     response = world.client.get(django_url("/activity/%d/" % a.id))
+    world.dom = html.fromstring(response.content)
+    world.response = response
+
+
+
+@step(u'I go to Session (\d+)')
+def i_go_to_session(step,session_number):
+    i = Intervention.objects.all()[0]
+    s = i.clientsession_set.all()[int(session_number) - 1]
+    assert s.index() == int(session_number)
+    response = world.client.get(django_url("/session/%d/" % s.id))
     world.dom = html.fromstring(response.content)
     world.response = response
 
@@ -351,6 +338,7 @@ def then_there_is_button(step, label):
 def then_there_is_navbutton(step, label):
     found = False
     n = len(world.dom.cssselect('a.navlink'))
+#    import pdb; pdb.set_trace()
     for a in world.dom.cssselect('a.navlink'):
 #        assert False, a.text.strip()
         if a.text.strip().lower() == label.strip().lower():
