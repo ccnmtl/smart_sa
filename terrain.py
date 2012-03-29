@@ -195,8 +195,8 @@ def i_click_activity(step, activity_number):
         link = world.firefox.find_element_by_partial_link_text("Activity %s:" % activity_number)
         link.click()
 #        time.sleep(1)
-    except:
-        assert False, world.firefox.page_source
+    except Exception, e:
+        assert False, str(e)
 
 @step(u'I click on Complete Activity')
 def i_click_on_complete_activity(step):

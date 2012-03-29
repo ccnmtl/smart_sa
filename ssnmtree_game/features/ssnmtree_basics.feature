@@ -1,6 +1,6 @@
-Feature: Quiz Basics
+Feature: SSNMTree Basics
 
-Check the basic functionality of the quiz
+Test the basic functionality of the SSNMTree
 
     Scenario: Fill it in
       Using selenium
@@ -13,10 +13,9 @@ Check the basic functionality of the quiz
       When I submit the "login-participant-form" form
       Then I am on the Intervention page
       When I click on Session 1
-      Then I click on Activity 7
+      Then I click on Activity 10
       When I click the "Next" link
-      # assessment quiz part 1 - mood
       Then there is a game
-      Then there is an assessmentquiz
-      When I fill in all 3s in the quiz
+      When I fill in the SSNM Tree
+
       Finished using selenium
