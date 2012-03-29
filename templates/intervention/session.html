@@ -25,7 +25,7 @@
 {% block content %}
 {% participant_completed_all_activities_in_session participant session as ready_to_complete %}
 {% if ready_to_complete %}
-	<a href="#" class="action" id="endintervention" onclick="document.completesession.submit()">We're Done with Session {{ session.index }}!</a> 	   
+	<a href="#" class="action" id="endintervention" onclick="document.completesession.submit()">Click to Complete Session {{ session.index }}!</a> 	   
 {% endif %}
     {{ block.super }}
     

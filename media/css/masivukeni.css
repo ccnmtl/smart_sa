@@ -133,7 +133,7 @@ form.login label
 h2
 {
 	color: #f6921e;
-	margin: 0px;
+	margin-top: 10px;
 	padding:0px;
 }
 
@@ -263,13 +263,20 @@ h4
 
 a#endintervention
 {
-	width: 190px;
-	padding: 6px 0px 6px 24px;
-	margin: 0px 0px -0px 20px;
+	width: 200px;
+	padding: 6px 0px 16px 24px;
 	background-image: url(../images/icon_complete.png);
 	background-repeat: no-repeat;
 	background-position: 8px 7px;
-	margin-top: 14px;
+	-webkit-border-bottom-left-radius: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-moz-border-radius-bottomright: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	position: absolute;
+	top: 54px;
+	right: 253px;
 }
 
 #breadcrumb a#tab-home
@@ -316,7 +323,7 @@ h2#sessioninfo
 	display: block;
 	position: absolute;
 	left: 11px;
-	top: 0px;
+	top: -10px;
 	font-size: 14px;
 	font-weight: bold;
 	color: #000;
@@ -456,7 +463,7 @@ table.manage a.action
 {
 float: left;
 margin-left: 10px;
-width: 200px;
+width: 190px;
 }
 
 table#choices { margin-top: 20px; }
@@ -617,7 +624,7 @@ li span.task
 /*start - session navigator on home page*/
 #navigator
 {
-	width: 940px;
+	width: 910px;
 	min-height: 500px;
 	position: relative;
 	margin-top: -20px;
@@ -636,7 +643,7 @@ li span.task
 
 #navigator ul.primary
 {
-	width: 460px;
+	width: 450px;
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -644,7 +651,7 @@ li span.task
 
 #navigator ul.secondary
 {
-	width: 460px;
+	width: 440px;
 	position: absolute;
 	top: 0px;
 	right: 0px;
