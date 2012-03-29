@@ -4,8 +4,8 @@ from smart_sa.problemsolving_game.models import Issue
 
 class IssueForm(forms.ModelForm):
     text = forms.CharField(widget=forms.Textarea)
-    subtext = forms.CharField(widget=forms.Textarea)
-    example = forms.CharField(widget=forms.Textarea)
+    subtext = forms.CharField(required=False, widget=forms.Textarea)
+    example = forms.CharField(required=False, widget=forms.Textarea)
     class Meta:
         model = Issue
 
