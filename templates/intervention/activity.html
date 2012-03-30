@@ -122,7 +122,10 @@ var game_variables = {{activity.variables|safe}};
 		<p>No content instructions defined for this activity.</p>
 		{% endif %}
 		
-		{% if not activity.game %}
+		{% if activity.collect_buddy_name %}
+		<h4>Buddy</h4>	
+		
+		Your Buddy: <input type="text" name="buddy_name" value="{{participant.buddy_name}}"/>
 		{% endif %}
 		
 		{% if activity.collect_notes %}

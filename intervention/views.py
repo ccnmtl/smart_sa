@@ -237,6 +237,10 @@ def complete_activity(request, activity_id):
             note,created = CounselorNote.objects.get_or_create(participantsession=ps,counselor=request.user)
             note.notes = request.POST.get('counselor_notes','')
             note.save()
+        if request.POST.get('buddy_name',False):
+            participant.buddy_name = request.POST.get('buddy_name','')
+            participant.save()
+
         next_activity = activity.next()
         if activity.game:
             return HttpResponseRedirect("/task/%d/%s/" % (activity.gamepage_set.all()[0].id,activity.pages()[0]))
