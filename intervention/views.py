@@ -240,6 +240,20 @@ def complete_activity(request, activity_id):
         if request.POST.get('buddy_name',False):
             participant.buddy_name = request.POST.get('buddy_name','')
             participant.save()
+        if activity.collect_referral_info:
+            if activity.clientsession.defaulter:
+                participant.defaulter_referral_mental_health = request.POST.get('referral_mental_health','')
+                participant.defaulter_referral_alcohol = request.POST.get('referral_alcohol','')
+                participant.defaulter_referral_drug_use = request.POST.get('referral_drug_use','')
+                participant.defaulter_referral_other = request.POST.get('referral_other','')
+                participant.defaulter_referral_notes = request.POST.get('referral_notes','')
+            else:
+                participant.initial_referral_mental_health = request.POST.get('referral_mental_health','')
+                participant.initial_referral_alcohol = request.POST.get('referral_alcohol','')
+                participant.initial_referral_drug_use = request.POST.get('referral_drug_use','')
+                participant.initial_referral_other = request.POST.get('referral_other','')
+                participant.initial_referral_notes = request.POST.get('referral_notes','')
+            participant.save()
 
         next_activity = activity.next()
         if activity.game:

@@ -127,6 +127,30 @@ var game_variables = {{activity.variables|safe}};
 		
 		Your Buddy: <input type="text" name="buddy_name" value="{{participant.buddy_name}}"/>
 		{% endif %}
+
+		{% if activity.collect_referral_info %}
+		<h4>Referral Info</h4>	
+		<p>Referral given for:</p>
+		{% if activity.clientsession.defaulter %}
+		<ul>
+		  <li><label><input type="checkbox" name="referral_mental_health" {% if participant.defaulter_referral_mental_health %} checked="checked" {% endif %} /> mental health</label></li>
+		  <li><label><input type="checkbox" name="referral_alcohol" {% if participant.defaulter_referral_alcohol %} checked="checked" {% endif %} /> alcohol</label></li>
+		  <li><label><input type="checkbox" name="referral_drug_use" {% if participant.defaulter_referral_drug_use %} checked="checked" {% endif %} /> drug use</label></li> 
+		  <li><label><input type="checkbox" name="referral_other" {% if participant.defaulter_referral_other %} checked="checked" {% endif %} /> other</label></li>
+		</ul>
+		<p>additional notes about the referral(s)</p>
+		<textarea name="referral_notes">{{participant.defaulter_referral_notes}}</textarea>
+		{% else %}
+		<ul>
+		  <li><label><input type="checkbox" name="referral_mental_health" {% if participant.initial_referral_mental_health %} checked="checked" {% endif %} /> mental health</label></li>
+		  <li><label><input type="checkbox" name="referral_alcohol" {% if participant.initial_referral_alcohol %} checked="checked" {% endif %} /> alcohol</label></li>
+		  <li><label><input type="checkbox" name="referral_drug_use" {% if participant.initial_referral_drug_use %} checked="checked" {% endif %} /> drug use</label></li> 
+		  <li><label><input type="checkbox" name="referral_other" {% if participant.initial_referral_other %} checked="checked" {% endif %} /> other</label></li>
+		</ul>
+		<p>additional notes about the referral(s)</p>
+		<textarea name="referral_notes">{{participant.initial_referral_notes}}</textarea>
+		{% endif %}
+		{% endif %}
 		
 		{% if activity.collect_notes %}
 		<h4>{{participant.name}}'s Questions and Concerns</h4>	
