@@ -11,6 +11,14 @@
 
         hasName: function (attrs) {
             return this.get("name").length > 0;
+        }, 
+        
+        as_dict: function () {
+            return { 
+                'name': this.get('name'),
+                'support': this.get('support'),
+                'disclosure': this.get('disclosure')
+            };
         }
     });
 
@@ -149,23 +157,14 @@
             return false;
         }
     });
-
+    
     Backbone.sync = function (method, model, success, error) {
-        // Save the results back to the game state
-        // Don't do a full server-side save on every sync
-        var game_state = global.Intervention.getGameVar('ssnmtree', {});
-        var key = model.get("key");
-
-        if (!_.has(game_state, key)) {
-            game_state[key] = {};
-        }
-
-        game_state[key].name = model.get("name");
-        game_state[key].support = model.get("support");
-        game_state[key].disclosure = model.get("disclosure");
+        global.socialSupportState.setState(model.get("key"), model.as_dict());
     };
 
     jQuery(document).ready(function () {
+        global.socialSupportState = new GameState({ game: 'ssnmtree', el: 'div#defaulter' });
+        
         var collection = new SupportPersonList();
         var ssnmTreeView = new SupportPersonListView({
             collection: collection,
@@ -175,19 +174,16 @@
         // Populate collection from the DOM & the game_state
         // As items are added to the collection, the ListView
         // will be signaled to create a new subview
-        var game_state = global.Intervention.getGameVar('ssnmtree', {});
-
         jQuery("div.fruit").each(function () {
             var person = new SupportPerson();
             person.set("key", this.id);
 
-            if (_.has(game_state, this.id)) {
-                var val = game_state[this.id];
-
+            var state = global.socialSupportState.getState(this.id);
+            if (state) {
                 person.set({
-                    name: val.name,
-                    disclosure: val.disclosure,
-                    support: val.support
+                    name: state.name,
+                    disclosure: state.disclosure,
+                    support: state.support
                 });
             }
 

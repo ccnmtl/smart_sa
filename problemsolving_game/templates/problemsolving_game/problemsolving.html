@@ -4,6 +4,7 @@
     <script type="text/javascript" src="/site_media/js/jquery/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="/site_media/js/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="/site_media/js/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="/site_media/js/gamestate.js"></script>
     <script type="text/javascript" src="/site_media/problemsolving_game/js/problemsolvingview.js"></script> 
 {% endblock %}
 
@@ -104,7 +105,7 @@
    {% endfor %}
 </div>
 
-{% if game.activity.session.defaulter %}
+{% if game.activity.clientsession.defaulter %}
     <div id="defaulter" style="display: none">True</div>
 {% endif %}
 

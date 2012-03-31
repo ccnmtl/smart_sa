@@ -338,7 +338,7 @@
     };
 
     jQuery(document).ready(function () {
-        global.problemSolvingState = new ProblemSolvingGameState({ el: 'div#defaulter' });
+        global.problemSolvingState = new global.GameState({ game: 'problemsolving', el: 'div#defaulter' });
         
         var issues = new IssueList();
         var issueListView = new IssueListView({
