@@ -88,7 +88,7 @@ class ClientSession (models.Model):
             introductory_copy=self.introductory_copy,
             created=str(self.created),
             modified=str(self.modified),
-            defaulters=self.defaulter,
+            defaulter=self.defaulter,
             activities=[a.as_dict() for a in self.activity_set.all()],
             )
 
