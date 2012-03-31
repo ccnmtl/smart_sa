@@ -17,6 +17,10 @@
             this.gameState = gameState[userState];
         },
         
+        getKeys: function() {
+            return _.keys(this.gameState);
+        },
+        
         getState: function(id) {
             return _.has(this.gameState, id) ? this.gameState[id] : null;
         },
