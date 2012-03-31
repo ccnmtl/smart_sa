@@ -111,6 +111,8 @@ class ClientSession (models.Model):
                 modified=a['modified'],
                 game=a['game'],
                 collect_notes=a.get('collect_notes',False),
+                collect_buddy_name=a.get('collect_buddy_name',False),
+                collect_referral_info=a.get('collect_referral_info',False),
                 )
             na.from_dict(a)
 
@@ -128,7 +130,7 @@ class ClientSession (models.Model):
             return None
 
     def completed_all_activities(self, participant):
-        for a in self.activity_set.all():
+        for a in self.activity_set.all()[1:]:
             if a.get_participant_status(participant) != "complete":
                 return False
         return True
@@ -148,6 +150,8 @@ class Activity(models.Model):
     long_title = models.CharField(max_length=512)
     objective_copy = models.TextField(blank=True)
     collect_notes = models.BooleanField(default=False)
+    collect_buddy_name = models.BooleanField(default=False)
+    collect_referral_info = models.BooleanField(default=False)
     
     created = models.DateTimeField('date created', auto_now_add=True)
     modified = models.DateTimeField('date modified', auto_now=True)
@@ -239,6 +243,8 @@ class Activity(models.Model):
             modified=str(self.modified),
             game=self.game,
             collect_notes=self.collect_notes,
+            collect_buddy_name=self.collect_buddy_name,
+            collect_referral_info=self.collect_referral_info,
             gamepages=[gp.as_dict() for gp in self.gamepage_set.all()],
             instructions=[i.as_dict() for i in self.instruction_set.all()],
         )
@@ -250,6 +256,8 @@ class Activity(models.Model):
         self.modified = d['modified']
         self.game = d['game']
         self.collect_notes = d.get('collect_notes',False)
+        self.collect_buddy_name = d.get('collect_buddy_name',False)
+        self.collect_referral_info = d.get('collect_referral_info',False)
         self.save()
         self.gamepage_set.all().delete()
         for gp in d['gamepages']:
@@ -441,6 +449,20 @@ class Participant(models.Model):
     defaulter = models.BooleanField(default=False)
     status = models.BooleanField(default=True)
     clinical_notes = models.TextField(default="",blank=True)
+    buddy_name = models.CharField(max_length=256,default="",blank=True)
+
+    # referral info fields
+    initial_referral_mental_health = models.BooleanField(default=False)
+    initial_referral_alcohol = models.BooleanField(default=False)
+    initial_referral_drug_use = models.BooleanField(default=False)
+    initial_referral_other = models.BooleanField(default=False)
+    initial_referral_notes = models.TextField(default="",blank=True)
+
+    defaulter_referral_mental_health = models.BooleanField(default=False)
+    defaulter_referral_alcohol = models.BooleanField(default=False)
+    defaulter_referral_drugs = models.BooleanField(default=False)
+    defaulter_referral_other = models.BooleanField(default=False)
+    defaulter_referral_notes = models.TextField(default="",blank=True)
 
     def __unicode__(self):
         return self.name
@@ -540,7 +562,6 @@ class CounselorNote(models.Model):
 
     def __unicode__(self):
         return "%s <-- %s" % (self.participantsession.participant.name, self.counselor.username)
-
 
 class ParticipantGameVar(models.Model):
     participant = models.ForeignKey(Participant)

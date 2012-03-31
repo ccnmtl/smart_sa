@@ -195,8 +195,8 @@ def i_click_activity(step, activity_number):
         link = world.firefox.find_element_by_partial_link_text("Activity %s:" % activity_number)
         link.click()
 #        time.sleep(1)
-    except:
-        assert False, world.firefox.page_source
+    except Exception, e:
+        assert False, str(e)
 
 @step(u'I click on Complete Activity')
 def i_click_on_complete_activity(step):
@@ -238,48 +238,12 @@ def there_is_a_game(self):
     else:
         assert world.firefox.find_element_by_id('gamebox')
 
-@step('there is an assessmentquiz')
-def there_is_an_assessmentquiz(self):
-    if not world.using_selenium:
-        assert len(world.dom.cssselect('#assessmentquiz')) > 0
-    else:
-        assert world.firefox.find_element_by_id('assessmentquiz')
-
-
 @step('I go back')
 def i_go_back(self):
     """ need to back out of games currently"""
     if not world.using_selenium:
         assert False, "this step needs to be implemented for the django test client"
     world.firefox.back()
-
-@step('I fill in all (\d)s in the quiz')
-def fill_in_quiz(self,value):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
-    for i in world.firefox.find_elements_by_tag_name('input'):
-        if i.get_attribute('type') == 'radio' and i.get_attribute('value') == value:
-            i.click()
-
-@step('I fill in the SSNM Tree')
-def fill_in_ssnmtree(self):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
-    for i in world.firefox.find_elements_by_tag_name('input'):
-        if i.get_attribute('type') == 'text':
-            i.clear()
-            i.send_keys("asdf")
-
-@step('there is a filled in SSNM Tree')
-def filled_in_ssnmtree(self):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
-    all_filled = True
-    for i in world.firefox.find_elements_by_tag_name('input'):
-        if i.get_attribute('type') == 'text':
-            if i.get_attribute('value') != "asdf":
-                all_filled = False
-    assert all_filled
 
 @step(u'I have logged in a participant')
 def i_have_logged_in_a_participant(step):
@@ -292,23 +256,25 @@ def participant_has_not_completed_any_sessions(step):
     world.participant.participantactivity_set.all().delete()
 
 
-@step(u'I go to Session (\d+)')
-def i_go_to_session(step,session_number):
-    i = Intervention.objects.all()[0]
-    s = i.clientsession_set.all()[int(session_number) - 1]
-    assert s.index() == int(session_number)
-    response = world.client.get(django_url("/session/%d/" % s.id))
-    world.dom = html.fromstring(response.content)
-    world.response = response
-
-@step(u'I go to Session (\d+), Activity (\d+)')
-def i_go_to_session(step,session_number,activity_number):
+@step(u'I go to Activity (\d+) of Session (\d+)')
+def i_go_to_session(step,activity_number,session_number):
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     assert s.index() == int(session_number)
     a = s.activity_set.all()[int(activity_number) - 1]
     assert a.index() == int(activity_number)
     response = world.client.get(django_url("/activity/%d/" % a.id))
+    world.dom = html.fromstring(response.content)
+    world.response = response
+
+
+
+@step(u'I go to Session (\d+)')
+def i_go_to_session(step,session_number):
+    i = Intervention.objects.all()[0]
+    s = i.clientsession_set.all()[int(session_number) - 1]
+    assert s.index() == int(session_number)
+    response = world.client.get(django_url("/session/%d/" % s.id))
     world.dom = html.fromstring(response.content)
     world.response = response
 
@@ -332,10 +298,17 @@ def the_participant_has_completed_activity_in_session_1(step,num_activities,sess
     
 
 @step(u'the participant has completed all activities in session (\d+)')
-def the_participant_has_completed_all_activities_in_session_1(step,session_number):
+def the_participant_has_completed_all_activities(step,session_number):
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in s.activity_set.all():
+        r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
+
+@step(u'the participant has completed all activities except the first in session (\d+)')
+def the_participant_has_completed_all_activities_except_the_first(step,session_number):
+    i = Intervention.objects.all()[0]
+    s = i.clientsession_set.all()[int(session_number) - 1]
+    for a in list(s.activity_set.all())[1:]:
         r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
 
 @step(u'there is a "([^"]*)" button')
@@ -351,6 +324,7 @@ def then_there_is_button(step, label):
 def then_there_is_navbutton(step, label):
     found = False
     n = len(world.dom.cssselect('a.navlink'))
+#    import pdb; pdb.set_trace()
     for a in world.dom.cssselect('a.navlink'):
 #        assert False, a.text.strip()
         if a.text.strip().lower() == label.strip().lower():

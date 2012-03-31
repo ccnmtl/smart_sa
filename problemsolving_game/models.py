@@ -8,6 +8,23 @@ class Issue(models.Model):
     subtext = models.CharField(max_length=1000, null=True, blank=True)
     example = models.CharField(max_length=1000, null=True, blank=True)
     
+    def as_dict(self):
+        return dict(
+            name = self.name,
+            text = self.text,
+            ordinality = self.ordinality,
+            subtext = self.subtext,
+            example = self.example
+            )
+
+    def from_dict(self,d):
+        self.name = d['name']
+        self.text = d['text']
+        self.ordinality = d['ordinality']
+        self.subtext = d['subtext']
+        self.example = d['example']
+        self.save()
+    
     def __unicode__(self):
         return "%s) %s" % (self.ordinality, self.name) 
     

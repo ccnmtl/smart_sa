@@ -223,7 +223,7 @@
                 jQuery("textarea#barriers").val(actionPlan.get("barriers"));
                 jQuery("textarea#proposals").val(actionPlan.get("proposals"));
                 jQuery("textarea#finalPlan").val(actionPlan.get("finalPlan"));
-                jQuery("#actionplan a").html("Edit Plan");
+                jQuery("#actionplan a").html("Make Plan");
             } else {
                 jQuery("#actionplan").hide();
                 jQuery("#checkbox-personal-issue").removeAttr('checked');

@@ -14,6 +14,8 @@ import os.path
 import random
 from functools import wraps
 from django.utils.decorators import available_attrs
+from problemsolving_game.models import Issue
+from intervention.models import Intervention
 
 from aes_v001 import AESModeOfOperation,toNumbers,fromNumbers
 
@@ -237,6 +239,24 @@ def complete_activity(request, activity_id):
             note,created = CounselorNote.objects.get_or_create(participantsession=ps,counselor=request.user)
             note.notes = request.POST.get('counselor_notes','')
             note.save()
+        if request.POST.get('buddy_name',False):
+            participant.buddy_name = request.POST.get('buddy_name','')
+            participant.save()
+        if activity.collect_referral_info:
+            if activity.clientsession.defaulter:
+                participant.defaulter_referral_mental_health = request.POST.get('referral_mental_health','')
+                participant.defaulter_referral_alcohol = request.POST.get('referral_alcohol','')
+                participant.defaulter_referral_drug_use = request.POST.get('referral_drug_use','')
+                participant.defaulter_referral_other = request.POST.get('referral_other','')
+                participant.defaulter_referral_notes = request.POST.get('referral_notes','')
+            else:
+                participant.initial_referral_mental_health = request.POST.get('referral_mental_health','')
+                participant.initial_referral_alcohol = request.POST.get('referral_alcohol','')
+                participant.initial_referral_drug_use = request.POST.get('referral_drug_use','')
+                participant.initial_referral_other = request.POST.get('referral_other','')
+                participant.initial_referral_notes = request.POST.get('referral_notes','')
+            participant.save()
+
         next_activity = activity.next()
         if activity.game:
             return HttpResponseRedirect("/task/%d/%s/" % (activity.gamepage_set.all()[0].id,activity.pages()[0]))
@@ -522,6 +542,8 @@ def content_sync(request):
     zipfile.writestr("version.txt", "1")
     zipfile.writestr("interventions.json",
                      dumps(dict(interventions=[i.as_dict() for i in Intervention.objects.all()])))
+    zipfile.writestr("issues.json",
+                     dumps(dict(issues=[i.as_dict() for i in Issue.objects.all()])))
 
     if request.GET.get('include_uploads',False):
         for fullpath,f,archive_name,public_path in all_uploads():

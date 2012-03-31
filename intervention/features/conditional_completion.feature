@@ -25,4 +25,10 @@ is actually complete instead of a persistent placement?"
       When I go to Session 1
       Then there is a "Click to Complete Session 1!" button
 
-      
+    Scenario: Allow the counselor to skip the first Activity
+      Given I am logged in as a counselor
+      Given I have logged in a participant
+      Given the participant has completed all activities except the first in session 1
+      When I go to Session 1
+      Then there is a "Click to Complete Session 1!" button
+    

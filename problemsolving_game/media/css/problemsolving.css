@@ -1,13 +1,15 @@
 /** Top Numbered Issue Selector **/
 
-#barriercontainer {
-    border: 1px solid #ccc;
-    padding: 2px;
+#gamebox
+{
+	border: 1px solid #ccc !important;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 .issue-selector {
     text-align: center;
-    vertical-align: middle;
     height: 40px;
     margin: 10px 3px 0px 3px;
 }
@@ -40,6 +42,12 @@
     background-image: none;
 }
 
+.issue-number.complete {
+    color: black;
+    background-color: #f58e33;
+    background-image: none;
+}
+
 .issue-number.infocus,
 .issue-number:hover {
     padding: 4px;
@@ -51,7 +59,7 @@
 
 .issue-gallery {
     width: 99%;
-    height: 300px;
+    height:250px;
     margin: 10px;  
 }
 
@@ -86,7 +94,7 @@ div#issue_details {
     padding: 7px;
     margin: 1px 5px 5px 5px;
     text-align: center;
-    background-color: #ffd479;
+    background-color: #fcead7;
     border: 1px solid #ccc;
     color: black;  
 }
@@ -108,7 +116,7 @@ div#issue_details img.issue-image {
 
 div#issue_details div.issue-text-container {
     width: 45%;
-    height: 155px;
+    height: 110px;
     float: left;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -123,12 +131,20 @@ div#issue_details div.issue-text-container {
 
 div#issue_details div.issue-text-container div.issue-text {
     font-weight: bold;
-    font-size: 90%;
+    font-size: 80%;
 }
 
-div#issue_details div.issue-text-container div.issue-subtext {
+div#issue_details div.issue-text-container div.issue-subtext, div#issue_details div.issue-text-container div.issue-subtext li {
     margin-top: 5px;
-    font-size: 80%;
+    font-size: 11px;
+}
+
+div#issue_details div.issue-text-container div.issue-subtext ul {
+    margin: 0px 0px 0px -22px;
+}
+
+div#issue_details div.issue-text-container div.issue-subtext li {
+    line-height: 13px;
 }
 
 div#issue_details div.personal-issue-container {
@@ -149,17 +165,19 @@ div#issue_details div.personal-issue-container div.personal-issue div.personal-i
 }
 
 div#issue_details div.personal-issue-container div.personal-issue div.personal-issue-label {
-    width: 40%;
-    text-align: right;
+    width: 50%;
+    text-align: left;
     margin-right: 10px;
-    margin-top: 7px;
+    margin-top: 0px;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 div#issue_details div#actionplan {
     margin-top: 10px;
     text-align: center; 
     float: right;
-    margin-right: 10px;
+    width: 100%;
 }
 
 div#issue_details div#actionplan a {
@@ -180,7 +198,6 @@ div#issue_details div#actionplan a {
 /** Individual Issue Display **/
 div#actionplan_form {
     margin: 10px;
-    background-color: #ffd479;
     color: black;  
     text-align: left;
     font-size: 80%;
@@ -190,7 +207,13 @@ div#actionplan_form {
 
 div#actionplan_form label {
     display: block;
-    padding-top: 5px;
+    padding: 10px;
+    margin:10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #fff;
+	font-weight: bold;
 }
 
 div#actionplan_form textarea {
@@ -200,7 +223,6 @@ div#actionplan_form textarea {
 }
 
 div#actionplan_form div#example li, div#actionplan_form div#example ul {
-    font-style: italic;
     font-size: 80%;
 }
 
@@ -256,7 +278,9 @@ div#actionplan_form input[type=submit] {
 .iphone-toggle-buttons input[type="checkbox"] + span::before,
 .iphone-toggle-buttons input[type="checkbox"] + span::after
 {
-    display: inline-block;
+	display: inline-block;
+	text-transform: capitalize;
+	font-family: "lucida sans unicode", "lucida grande", sans-serif;
 }
 
 .iphone-toggle-buttons label,
@@ -364,12 +388,12 @@ div#actionplan_form input[type=submit] {
 
 .iphone-toggle-buttons input[type="checkbox"]:checked + span
 {
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1b45bd", endColorstr="#5d96ea");
-    background: -moz-linear-gradient(top, #1b45bd, #5d96ea);
-    background: -webkit-linear-gradient(top, #1b45bd, #5d96ea);
-    background: -o-linear-gradient(top, #1b45bd, #5d96ea);
-    background: -ms-linear-gradient(top, #1b45bd, #5d96ea);
-    background: linear-gradient(top, #1b45bd, #5d96ea);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f3912f", endColorstr="#fad5b0");
+    background: -moz-linear-gradient(top, #f3912f, #fad5b0);
+    background: -webkit-linear-gradient(top, #f3912f, #fad5b0);
+    background: -o-linear-gradient(top, #f3912f, #fad5b0);
+    background: -ms-linear-gradient(top, #f3912f, #fad5b0);
+    background: linear-gradient(top, #f3912f, #fad5b0);
     color: #fff;
     text-shadow: -1px -1px #0d2046;
 }

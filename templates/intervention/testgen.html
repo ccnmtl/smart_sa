@@ -24,16 +24,12 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       ## SESSION {{session.index}}
 
       When I click on Session {{session.index}}
-
-      {% for activity in session.activity_set.all %}
-      When I click on Activity {{activity.index}}
+      {% for activity in session.activity_set.all %}When I click on Activity {{activity.index}}
       Then I am on the Activity {{activity.index}} page
-      {% if activity.game %}
-      When I click the "Next" link
+      {% if activity.game %}When I click the "Next" link
       Then there is a game
-      # TODO: handle tests on individual games
-      {% endif %}
-      When I click on Session {{session.index}}
+      {% else %}When I click on Complete Activity
+      {% endif %}When I click on Session {{session.index}}
       {% endfor %}
    {% endfor %}
 {% endfor %}

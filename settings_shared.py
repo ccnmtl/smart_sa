@@ -98,6 +98,8 @@ SERVER_EMAIL = "masivukeni2@ccnmtl.columbia.edu"
 
 LETTUCE_APPS = (
     'smart_sa.intervention',
+    'smart_sa.intervention.assessmentquiz_task',
+    'smart_sa.intervention.ssnmtree_task',
 )
 
 # WIND settings

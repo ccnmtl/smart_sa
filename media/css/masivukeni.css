@@ -315,7 +315,7 @@ a#endintervention
 {
 	position: relative;
 	padding: 0px 30px 0px 30px;
-	min-height: 600px;
+	min-height: 700px;
 }
 
 h2#sessioninfo
@@ -513,7 +513,7 @@ a.action:hover { background-color: #79b985; }
 .nav-lateral
 {
 	text-align: right;
-	height: 50px;
+	height: 40px;
 }
 
 .nav-lateral a
@@ -552,9 +552,16 @@ a.action:hover { background-color: #79b985; }
 {
 	margin-top: 0px;
 	padding: 0px;
+	border-bottom: 1px solid #ccc;
 }
 
-#bottom-nav-lateral { margin-top: 40px; clear: both;}
+#bottom-nav-lateral
+{
+	margin-top: 40px;
+	clear: both;
+	border-top: 1px solid #ccc;
+	padding-top: 10px;
+}
 
 #footer
 {
@@ -615,7 +622,7 @@ li span.task
 #navigator
 {
 	width: 910px;
-	min-height: 500px;
+	min-height: 600px;
 	position: relative;
 	margin-top: -20px;
 	clear: both;
