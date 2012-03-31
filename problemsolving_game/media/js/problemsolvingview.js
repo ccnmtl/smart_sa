@@ -7,8 +7,48 @@
             proposals: "",
             finalPlan: ""
         },
+        initialize: function (options) {
+            if (options) {
+                this.set('barriers', options.barriers);
+                this.set('proposals', options.proposals);
+                this.set('finalPlan', options.finalPlan);
+            }
+        },
+        isPlanEmpty: function() {
+            return this.get("barriers").length === 0 && this.get("proposals").length === 0 && this.get("finalPlan").length === 0;
+        },
         isPlanValid: function () {
             return this.get("barriers").length > 0 || this.get("proposals").length > 0 || this.get("finalPlan").length > 0;
+        },
+        clone: function (ap) {
+            this.set('barriers', ap.get('barriers'));
+            this.set('proposals', ap.get('proposals'));
+            this.set('finalPlan', ap.get('finalPlan'));
+        },
+        as_dict: function () {
+            return { 
+                'barriers': this.get('barriers'),
+                'proposals': this.get('proposals'),
+                'finalPlan': this.get('finalPlan')
+            };
+        }
+    });
+    
+    var ActionPlanList = Backbone.Collection.extend({ 
+        model: ActionPlan,
+        initialize: function (options) {
+            for (var i = 0; options !== undefined && i < options.length; i++) {
+                var plan = new ActionPlan(options[i]);
+                this.add(plan);
+            }
+        },
+        as_array: function () {
+            var archive = [];
+            this.forEach(function (item) {
+                archive.push(item.as_dict());
+            });
+            
+            return archive;
         }
     });
 
@@ -18,49 +58,121 @@
             image: "",
             text: "",
             subtext: "",
-            examples: "",
+            example: "",
             ordinality: 0,
             actionPlan: null,
-            selected: false,
+            archive: new ActionPlanList(),
+            focus: false,
             editing: false
+        },
+        initialize: function (options) {
+            if (options.state) {
+                if (_.has(options.state, 'archive')) {
+                    this.set('archive', new ActionPlanList(options.state.archive));
+                }
+                
+                if (_.keys(options.state ).length > 1) {
+                    var actionPlan = new ActionPlan(options.state);
+                    this.set('actionPlan', actionPlan);
+                }
+            }
         },
         hasActionPlan: function () {
            return this.get("actionPlan") !== null; 
         },
         hasValidActionPlan: function () {
             return this.hasActionPlan() && this.get("actionPlan").isPlanValid();
+        },
+        addActionPlan: function () {
+            var actionPlan = new ActionPlan();
+            
+            // initialize with the last one in the archive, if it exists
+            var archive = this.get('archive');
+            if (archive.length > 0) {
+                actionPlan.clone(archive.at(archive.length - 1));
+            } 
+            
+            this.set('actionPlan', actionPlan);
+            this.save();
+        },
+        removeActionPlan: function () {
+            if (this.hasValidActionPlan()) {
+                this.get("archive").add(this.get("actionPlan"));
+            }
+            this.set({'editing': false, 'actionPlan': null});
+            this.save();
+        },
+        as_dict: function () {
+            var actionPlan = this.get('actionPlan');
+            var archive = this.get('archive');
+            var d = {};
+            
+            if (actionPlan) {
+                d = actionPlan.as_dict();
+            }
+            
+            if (archive.length > 0) {
+                d.archive = archive.as_array();
+            }
+            
+            return d;
         }
     });
 
     var IssueList = Backbone.Collection.extend({
-        model: Issue
+        model: Issue,
+        issueFocus: null,
+        setFocus: function (issueId) {
+            if (this.issueFocus) {
+                this.issueFocus.set({ "focus": false, "editing": false });
+            }
+            this.issueFocus = this.get(issueId);
+            if (this.issueFocus) {
+                this.issueFocus.set("focus", true);
+            }
+        },
+        getFocus: function () {
+            return this.issueFocus;
+        }
     });
     
-    var IssueSelectorView = Backbone.View.extend({
-        events : {
-        },
+    var IssueView = Backbone.View.extend({
+        events : {},
 
         initialize : function (options) {
             _.bindAll(this, "render");
             this.model.bind("change", this.render);
+            
             this.render();
+            
+            this.parent = options.parent;
         },
                 
         render: function () {
-            if (this.model.get("selected")) {
-                jQuery(".issue-number").removeClass("infocus");
-                jQuery(this.el).addClass("infocus");
+            if (this.model.get("focus")) {
+                jQuery(".issue-number").removeClass("focus");
+                jQuery(this.el).addClass("focus");
+                
+                jQuery("#issue_details div.issue-number").html(this.model.get("ordinality"));
+                jQuery("#issue_details img.issue-image").attr("src", this.model.get("image"));
+                jQuery("#issue_details div.issue-text").html(this.model.get("text"));
+                jQuery("#issue_details div.issue-subtext").html(this.model.get("subtext"));
+                jQuery("div#example").html(this.model.get("example"));
             }
             
             if (this.model.hasActionPlan()) {
                 jQuery(this.el).addClass("marked");
+                jQuery("#actionplan").show();
                 jQuery("#actionplan a").html("Make Plan");
                 jQuery("#checkbox-personal-issue").attr('checked', 'checked');
             } else {
                 jQuery(this.el).removeClass("marked");
+                jQuery("#actionplan").hide();
+                jQuery("#checkbox-personal-issue").removeAttr('checked');
             }
                 
             if (this.model.hasValidActionPlan()) {
+                var actionPlan = this.model.get('actionPlan');
                 jQuery(this.el).addClass("complete");
                 jQuery("textarea#barriers").val(actionPlan.get("barriers"));
                 jQuery("textarea#proposals").val(actionPlan.get("proposals"));
@@ -68,18 +180,28 @@
                 jQuery("#actionplan a").html("Edit Plan");
              } else {
                 jQuery(this.el).removeClass("complete");
+                jQuery("textarea#barriers").val("");
+                jQuery("textarea#proposals").val("");
+                jQuery("textarea#finalPlan").val("");
             }
             
-            jQuery("#issue_details div.issue-number").html(this.model.get("ordinality"));
-            jQuery("#issue_details img.issue-image").attr("src", this.model.get("image"));
-            jQuery("#issue_details div.issue-text").html(this.model.get("text"));
-            jQuery("#issue_details div.issue-subtext").html(this.model.get("subtext"));
-            jQuery("div#example").html(this.model.get("example"));
-            
+            var elt;
             if (this.model.get("editing")) {
-                jQuery("#actionplan").show();
+                jQuery("#actionplan_form").show();
+                jQuery("div.issue-selector").hide();
+                
+                elt = jQuery("#actionplan_form input[type=submit]")[0];
+                jQuery('html, body').animate({scrollTop: jQuery(elt).offset().top}, 1000);
             } else {
-                jQuery("#actionplan").hide();
+                jQuery("div.issue-selector").show();
+                elt = jQuery("#gamebox");
+                jQuery('html, body').animate({scrollTop: 0}, 0, function() {
+                    jQuery("#actionplan_form").hide('fast');
+                });
+            }
+            
+            if (this.model.get("focus")) {
+                this.parent.trigger('issueChanged');
             }
         }
     });
@@ -91,240 +213,138 @@
             'click #next_issue': 'onNextIssue',
             'click input[type=checkbox]': 'onPersonalIssue',
             'click #actionplan': 'onActionPlan',
-            'click #actionplan_form input[type=submit]': 'onCloseActionPlan',
-            'click div#top-nav-lateral a': 'onNavigate',
-            'click div#bottom-nav-lateral a': 'onNavigate'
+            'click #actionplan_form input[type=submit]': 'onCloseActionPlan'
         },
 
         initialize : function (options) {
-            _.bindAll(this, "render", "onIssueNumber", "onPreviousIssue", "onNextIssue", "onNavigate", "onActionPlan", "onCloseActionPlan", "onAddIssue");
-
+            _.bindAll(this, "render", "onAddIssue", "onIssueNumber", "onPreviousIssue", "onNextIssue", "onActionPlan", "onCloseActionPlan");
+            _.extend(this, Backbone.Events);
+            
             this.issues = options.issues;
+            this.issues.parent = this;
             this.issues.bind('add', this.onAddIssue);
+            this.bind('issueChanged', this.render); // fired by the issues list when selection changes
         },
         
         onAddIssue: function (issue) {
             var id = issue.get("id");
             var elt = jQuery("#" + id)[0];
-            new IssueSelectorView({ model: issue, el: elt, parent: this });
+            new IssueView({ model: issue, el: elt, parent: this }).render();
         },
         
         onIssueNumber: function (evt) {
-            // Deselect the old issue number
-            var a = jQuery(".issue-number.infocus").prev(".issue-number");
-            if (a.length > 0) {
-                var issue = this.issues.get(a[0].id);
-                issue.set("selected", false);
-            }
-           
-            // Select the new one & init the detail view with same
             var tgt = evt.target || evt.srcElement;
-            var selected = this.issues.get(tgt);
-            selected.set("selected", true);
+            this.issues.setFocus(tgt);
         },
 
         onPreviousIssue: function (evt) {
-            var a = jQuery(".issue-number.infocus").prev(".issue-number");
+            var a = jQuery(".issue-number.focus").prev(".issue-number");
             if (a.length > 0) {
-                var issue = this.issues.get(a[0].id);
-                issue.set("selected", true);
+                this.issues.setFocus(a[0].id);
             }
         },
 
         onNextIssue: function (evt) {
-            var a = jQuery(".issue-number.infocus").next(".issue-number");
+            var a = jQuery(".issue-number.focus").next(".issue-number");
             if (a.length > 0) {
-                var issue = this.issues.get(a[0].id);
-                issue.set("selected", true);
+                this.issues.setFocus(a[0].id);
             }
         },
 
         onPersonalIssue: function (evt) {
-            /**
-            var issueId = this.model.get("selected");
-            var issue = this.issues.get(issueId);
-
+            var issue = this.issues.getFocus();
             var checked = jQuery("#checkbox-personal-issue").is(':checked');
 
-            if (!checked) {
-                this.model.set("editing_actionplan", false);
-
-                // @todo -- archive out the action plan if a plan is complete
-                // don't do this if the plan is empty or partial
-                this.actionPlans.archive(issueId);
-            } else {
-                if (!this.actionPlans.get(issueId)) {
-                    var actionPlan = new ActionPlan({id: issueId});
-                    actionPlan.save();
-
-                    this.actionPlans.add(actionPlan);
-                }
+            if (!checked && issue.hasActionPlan()) {
+                issue.removeActionPlan();
+            } else if (checked && !issue.hasActionPlan()) {
+                issue.addActionPlan();
             }
-            **/
         },
 
         onActionPlan: function (evt) {
-            //this.model.set("editing_actionplan", true);
+            var issue = this.issues.getFocus();
+            issue.set('editing', true);
         },
 
         onCloseActionPlan: function (evt) {
-            /**
-            // transfer information to the action plan & close if valid
-            var issueId = this.model.get("selected");
-            var actionPlan = this.actionPlans.get(issueId);
+            var issue = this.issues.getFocus();
+            var actionPlan = issue.get('actionPlan');
 
-            actionPlan.set("barriers", jQuery("textarea#barriers").val());
-            actionPlan.set("proposals", jQuery("textarea#proposals").val());
-            actionPlan.set("finalPlan", jQuery("textarea#finalPlan").val());
-
-            if (!actionPlan.isPlanValid()) {
-                this.model.set("editing_actionplan", false);
-            } else {
-                actionPlan.save();
-
-                var self = this;
-
-                // Initiate the ajax call to saveState
-                global.Intervention.saveState(function (result) {
-                    if (result.response !== "ok") {
-                        alert("An error occurred while saving your information. Please try again.");
-                    } else {
-                        self.model.set("editing_actionplan", false);
-                    }
-                });
-            }
-            **/
+            actionPlan.set({ "barriers": jQuery("textarea#barriers").val(), 
+                             "proposals": jQuery("textarea#proposals").val(),
+                             "finalPlan": jQuery("textarea#finalPlan").val()});
+            issue.set("editing", false);
+            issue.save();
         },
 
         render: function () {
+            var editing = this.issues.getFocus().get('editing');
+            
             // enabled/disable next & prev navigation
+            var elt = jQuery(".issue-number.focus");
             a = jQuery(elt).next(".issue-number");
-            if (a.length > 0) {
+            if (!editing && a.length > 0) {
                 jQuery("#next_issue img").show();
             } else {
                 jQuery("#next_issue img").hide();
             }
 
             a = jQuery(elt).prev(".issue-number");
-            if (a.length > 0) {
+            if (!editing && a.length > 0) {
                 jQuery("#previous_issue img").show();
             } else {
                 jQuery("#previous_issue img").hide();
             }
-
-/**            
-            // Represent selected issue if marked as "personal", i.e. has an action plan
-            var actionPlan = this.actionPlans.get(issueId);
-            if (actionPlan) {
-                jQuery("#actionplan").show();
-                jQuery("#checkbox-personal-issue").attr('checked', 'checked');
-                jQuery(elt).addClass("personal");
-
-                jQuery("textarea#barriers").val(actionPlan.get("barriers"));
-                jQuery("textarea#proposals").val(actionPlan.get("proposals"));
-                jQuery("textarea#finalPlan").val(actionPlan.get("finalPlan"));
-                jQuery("#actionplan a").html("Make Plan");
-            } else {
-                jQuery("#actionplan").hide();
-                jQuery("#checkbox-personal-issue").removeAttr('checked');
-                jQuery(elt).removeClass("personal");
-
-                jQuery("textarea#barriers").val("");
-                jQuery("textarea#proposals").val("");
-                jQuery("textarea#finalPlan").val("");
-                jQuery("#actionplan a").html("Make Plan");
-            }
-
-            if (this.model.get("editing_actionplan")) {
-                jQuery("#actionplan_form").show();
-                elt = jQuery("#actionplan_form input[type=submit]")[0];
-                jQuery('html, body').animate({scrollTop: jQuery(elt).offset().top}, 1000);
-                jQuery("#next_issue img").hide();
-                jQuery("#previous_issue img").hide();
-                jQuery("div.issue-selector").hide();
-                jQuery("div#actionplan").hide();
-            } else {
-                jQuery("div.issue-selector").show();
-                elt = jQuery("#gamebox");
-                jQuery('html, body').animate({scrollTop: 0}, 0, function() {
-                    jQuery("#actionplan_form").hide('fast');
-                });
-            }
-**/            
-        },
-
-        onNavigate: function (evt) {
-/**            
-            var tgt = evt.target || evt.srcElement;
-            if (this.actionPlans.length < 1) {
-                evt.preventDefault();
-                alert('Please select at least one barrier before continuing.');
-            } else {
-                // Initiate the ajax call to saveState
-                global.Intervention.saveState(function (result) {
-                    if (result.responseText !== "ok") {
-                        alert("An error occurred while saving your information. Please try again.");
-                    } else {
-                        // navigate on success
-                        window.location = tgt.href;
-                        return true;
-                    }
-                });
-            }
-            return false;
-**/            
+            
+            
         }
     });
 
-    Backbone.sync = function (method, model, success, error) {
+    Backbone.sync = function (method, issue, success, error) {
+        var actionPlan = issue.get('actionPlan');
+        var archive = issue.get('archive');
+        
         // Sync is called on model.save()
         // Transfer the results back to the game state
         var game_state = global.Intervention.getGameVar('problemsolving', {});
-
-        var id = model.get("id");
-
-        if (!_.has(game_state, id)) {
-            game_state[id] = {};
-        }
-
-        game_state[id].id = model.get("id");
-        game_state[id].barriers = model.get("barriers") || "";
-        game_state[id].proposals = model.get("proposals") || "";
-        game_state[id].finalPlan = model.get("finalPlan") || "";
+        var id = issue.get("id");
+        game_state[id] = issue.as_dict();
+        
+        // Initiate the ajax call to saveState
+        global.Intervention.saveState(function (result) {
+            if (result.responseText !== "ok") {
+                alert("An error occurred while saving your information. Please try again.");
+            }
+        });
     };
 
     jQuery(document).ready(function () {
         var issues = new IssueList();
         var issueListView = new IssueListView({
             issues: issues,
-            el: 'div#contentcontainer'
+            el: 'div#gamebox'
         });
         
         // pick up the issues from the DOM
         // add on an action plan if it exists
         var gameState = global.Intervention.getGameVar('problemsolving', {});
         jQuery("div.issue").each(function () {
-            var issueId = jQuery(this).children("div.name").html();
+            var options = { 'id': jQuery(this).children("div.name").html() }; 
+            if (_.has(gameState, options.id)) {
+                options.state = gameState[options.id];
+            }
                 
-            var issue = new Issue();
-            issue.set("id", issueId);
+            var issue = new Issue(options);
             issue.set("text", jQuery(this).children("div.text").html());
             issue.set("subtext", jQuery(this).children("div.subtext").html());
             issue.set("example", jQuery(this).children("div.example").html());
             issue.set("image", jQuery(this).children("div.image").html());
             issue.set("ordinality", jQuery(this).children("div.ordinality").html());
-            
-            if (_.has(gameState, issueId)) {
-                issue.set("actionPlan", new ActionPlan({
-                    "barriers": gameState[issueId].barriers,
-                    "proposals": gameState[issueId].proposals,
-                    "finalPlan": gameState[issueId].finalPlan
-                }));
-            }
             issues.add(issue);
         });
         
-        var elt = jQuery(".issue-number")[0];
-        jQuery(elt).trigger("click");
+        // Select the 1st issue
+        issues.setFocus(issues.at(0));
     });
 }(jQuery));

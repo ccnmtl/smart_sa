@@ -15,7 +15,7 @@
 
 <div class="issue-selector" align="center">
 	{% for issue in game_context.issues %}
-	<div id="{{issue.name}}" class="issue-number" unselectable="on">{{issue.ordinality}}</div>
+	   <div id="{{issue.name}}" class="issue-number" unselectable="on">{{issue.ordinality}}</div>
 	{% endfor %}
 </div>
 
@@ -61,18 +61,21 @@
 	  
 		 <h4>My Plan</h4>        
 		 
-		 <label for="action">How does this challenge keep me from taking my pills?
-		 <textarea id="barriers" rows="3"></textarea>
-		 </label>
+         <div class="question">
+		  <label for="action">How does this challenge keep me from taking my pills?</label>
+		  <textarea id="barriers" rows="3"></textarea>
+         </div>
 		 
-		 <label for="action">What are some ways I can overcome this challenge? For example:
-		 <div id="example"></div>
-		 <textarea id="proposals" rows="3"></textarea>
-		 </label>
+         <div class="question">
+    		 <label for="proposals">What are some ways I can overcome this challenge? For example:</label>
+    		 <div id="example"></div>
+    		 <textarea id="proposals" rows="3"></textarea>
+         </div>
 		 
-		 <label for="action">What is my plan of action?
+		 <div class="question">
+		 <label for="action">What is my plan of action?</label>
 		 <textarea id="finalPlan" rows="3"></textarea>
-		 </label>
+         </div>
 		 
 		 <input type="submit" value="Save Plan" style="margin-top: 10px;"></input>
 		 

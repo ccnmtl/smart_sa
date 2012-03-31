@@ -11,7 +11,8 @@
 .issue-selector {
     text-align: center;
     height: 40px;
-    margin: 10px 3px 0px 3px;
+    margin: 10px 3px 0px 0px;
+    width: 100%;
 }
 
 .issue-number {
@@ -23,9 +24,7 @@
     font-weight: bold;
     font-size: 12px;
     color: #fff;
-    display: block;
-    float: left;
-    margin-left: 3px;
+    display: inline-block;
     width: 16px;
     text-align: center;
     background-color: white;
@@ -36,24 +35,28 @@
    user-select: none;
 }
 
-.issue-number.personal {
+.issue-number.marked {
     color: black;
-    background-color: #ffebc4;
-    background-image: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff", endColorstr="#ccc");
+    background: -moz-linear-gradient(top, #fff, #ccc);
+    background: -webkit-linear-gradient(top, #fff, #ccc);
+    background: -o-linear-gradient(top, #fff, #ccc);
+    background: -ms-linear-gradient(top, #fff, #ccc);
+    background: linear-gradient(top, #fff, #ccc);
+
 }
 
 .issue-number.complete {
     color: black;
-    background-color: #f58e33;
+    background-color: #fad5b0;
     background-image: none;
 }
 
-.issue-number.infocus,
+.issue-number.focus,
 .issue-number:hover {
     padding: 4px;
     border: 3px solid #f58e33; 
 }
-
 
 /** Issue Gallery Container to display individual issues, prev and next navigation **/
 
@@ -101,6 +104,7 @@ div#issue_details {
 
 div#issue_details div.issue-number {
     position: absolute;
+    display: block;
 }
 
 div#issue_details div.issue-number:hover {
@@ -112,6 +116,10 @@ div#issue_details img.issue-image {
     width: 50%;
     height: auto;
     float: left;
+    
+    -moz-user-select: none;
+   -khtml-user-select: none;
+   user-select: none;
 }
 
 div#issue_details div.issue-text-container {
@@ -205,28 +213,34 @@ div#actionplan_form {
     clear: both;
 }
 
-div#actionplan_form label {
+div#actionplan_form div.question {
     display: block;
     padding: 10px;
     margin:10px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background-color: #fff;
-	font-weight: bold;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    font-weight: bold;
 }
 
-div#actionplan_form textarea {
+div#actionplan_form div.question label {
+    display: block;
+}
+
+div#actionplan_form div.question textarea {
+    display: block;
     width: 98%;
     max-width: 485px;
     max-height: 150px;
 }
 
-div#actionplan_form div#example li, div#actionplan_form div#example ul {
+div#actionplan_form div.question div#example, div#actionplan_form div.question div#example li {
+    font-weight: normal;
     font-size: 80%;
 }
 
-div#actionplan_form div#example ul {
+div#actionplan_form div.question div#example ul, div#actionplan_form div.question div#example ol {
     margin-top: 5px;
 }
 
