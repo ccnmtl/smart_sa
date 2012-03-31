@@ -300,16 +300,34 @@
             
         }
     });
-
-    Backbone.sync = function (method, issue, success, error) {
-        var actionPlan = issue.get('actionPlan');
-        var archive = issue.get('archive');
+    
+    var ProblemSolvingGameState = Backbone.View.extend({
+        initialize: function(options) {
+            var gameState = global.Intervention.getGameVar('problemsolving', {});
+            var userState = this.el ? "defaulter" : "regular";
+            
+            if (!_.has(gameState, userState)) {
+                if (!_.has(gameState, userState) && userState === "defaulter" && _.has(gameState, "regular")) {
+                    gameState.defaulter = _.clone(gameState.regular);
+                } else {
+                    gameState[userState] = {};
+                }
+            }
+            
+            this.gameState = gameState[userState];
+        },
         
-        // Sync is called on model.save()
-        // Transfer the results back to the game state
-        var game_state = global.Intervention.getGameVar('problemsolving', {});
-        var id = issue.get("id");
-        game_state[id] = issue.as_dict();
+        getState: function(id) {
+            return _.has(this.gameState, id) ? this.gameState[id] : null;
+        },
+        
+        setState: function(id, obj) {
+            this.gameState[id] = obj;
+        }
+    });
+    
+    Backbone.sync = function (method, issue, success, error) {
+        global.problemSolvingState.setState(issue.get("id"), issue.as_dict());
         
         // Initiate the ajax call to saveState
         global.Intervention.saveState(function (result) {
@@ -320,20 +338,17 @@
     };
 
     jQuery(document).ready(function () {
+        global.problemSolvingState = new ProblemSolvingGameState({ el: 'div#defaulter' });
+        
         var issues = new IssueList();
         var issueListView = new IssueListView({
             issues: issues,
             el: 'div#gamebox'
         });
         
-        // pick up the issues from the DOM
-        // add on an action plan if it exists
-        var gameState = global.Intervention.getGameVar('problemsolving', {});
         jQuery("div.issue").each(function () {
-            var options = { 'id': jQuery(this).children("div.name").html() }; 
-            if (_.has(gameState, options.id)) {
-                options.state = gameState[options.id];
-            }
+            var options = { 'id': jQuery(this).children("div.name").html() };
+            options.state = global.problemSolvingState.getState(options.id);
                 
             var issue = new Issue(options);
             issue.set("text", jQuery(this).children("div.text").html());

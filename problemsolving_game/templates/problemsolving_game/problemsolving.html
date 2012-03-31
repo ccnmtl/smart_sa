@@ -104,4 +104,8 @@
    {% endfor %}
 </div>
 
+{% if game.activity.session.defaulter %}
+    <div id="defaulter" style="display: none">True</div>
+{% endif %}
+
 {% endblock %}
