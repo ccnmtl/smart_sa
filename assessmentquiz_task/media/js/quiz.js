@@ -19,9 +19,12 @@
 
     function loadGoalTask() {
         workform = MD.getElement('assessmentquiz');
-        section = workform.elements.section.value;
-        MS.connect(workform, 'onchange', saveForm);
+        MS.connect(workform, 'onchange', enableRevealScore);
+        MS.connect('reveal_score', 'onclick', revealScore);
         MS.connect(window, 'onunload', saveForm);
+        
+        section = workform.elements.section.value;
+        
 
         if (window.hasAttr(goal_state, section)) {
             for (var a in goal_state[section]) {
@@ -54,6 +57,21 @@
         }
     }
     MD.addLoadEvent(loadGoalTask);
+    
+    function enableRevealScore() {
+        if (saveForm()) {
+            MD.removeElementClass("reveal_score", "disabled");
+        }
+    }
+    
+    function revealScore() {
+        if (MD.hasElementClass("reveal_score", "disabled")) {
+            return false;
+        } else {
+            showTotal();
+            return true;
+        }
+    }
 
     function saveForm() {
         if (!window.hasAttr(goal_state, section)) {
@@ -84,12 +102,17 @@
         }
         if (all_done) {
             goal_state[section].total = total;
-            showTotal(total);
         }
         intervention.saveState();
+        
+        return all_done;
     }
 
-    function showTotal(total) {
+    function showTotal() {
+        document.getElementById("interpretation").style.display = "block";
+        MD.removeElementClass("reveal_score", "disabled");
+
+        var total = goal_state[section].total;
         ML.logDebug('showTotal', total);
         var ranges = MI.list(MD.getElement('interpretation_range').getElementsByTagName('li'));
         var i = ranges.length;
@@ -99,8 +122,10 @@
             if (total >= range && !found) {
                 found = true;
                 MD.addElementClass(ranges[i], 'inrange');
+                MD.removeElementClass(ranges[i], 'outofrange');
             } else {
                 MD.removeElementClass(ranges[i], 'inrange');
+                MD.addElementClass(ranges[i], 'outofrange');
             }
         }
     }

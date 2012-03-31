@@ -461,9 +461,9 @@ table.manage td
 
 table.manage a.action
 {
-float: left;
-margin-left: 10px;
-width: 190px;
+    float: left;
+    margin-left: 10px;
+    width: 190px;
 }
 
 table#choices { margin-top: 20px; }
@@ -508,7 +508,7 @@ a.action
 	text-align: center;
 }
 
-a.action:hover { background-color: #79b985; }
+a.action:hover, a.action.disabled { background-color: #79b985; }
 
 .nav-lateral
 {
