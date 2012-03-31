@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from intervention.models import *
+from intervention.models import Intervention
+from problemsolving_game.models import Issue
 from django.conf import settings
 from restclient import GET
 from zipfile import ZipFile
@@ -30,15 +31,29 @@ class Command(BaseCommand):
 
         buffer = StringIO(zc)
         zipfile = ZipFile(buffer,"r")
+        
+        # Load Intervention objects
         json = loads(zipfile.read("interventions.json"))
 
-        print "clearing database content..."
+        print "clearing intervention prod database content..."
         Intervention.objects.all().delete()
 
         print "importing prod database content..."
         for i in json['interventions']:
             intervention = Intervention.objects.create(name="tmp")
             intervention.from_dict(i)
+            
+        # Load Problem Solving objects
+        json = loads(zipfile.read("issues.json"))
+
+        print "clearing problemsolving database content..."
+        Issue.objects.all().delete()
+
+        print "importing problemsolving prod database content..."
+        for i in json['issues']:
+            issue = Issue.objects.create(name="tmp",ordinality=0)
+            issue.from_dict(i)
+    
 
         if options["dbonly"]:
             return
