@@ -323,7 +323,7 @@ h2#sessioninfo
 	display: block;
 	position: absolute;
 	left: 11px;
-	top: -10px;
+	top: -2px;
 	font-size: 14px;
 	font-weight: bold;
 	color: #000;
@@ -347,7 +347,7 @@ text-decoration: underline;
 {
 	position: absolute;
 	left: 10px;
-	top: 40px;
+	top: 48px;
 	width: 260px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -486,9 +486,9 @@ table#choices td
 	float: right;
 	margin: 0px 0px 20px 20px;
 	padding: 10px;
-	box-shadow: 0 0 14px rgba(0, 0, 0, 1);
-	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 1);
-	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, 1);
+	-moz-box-shadow: 0px 0px 6px #666;
+	-webkit-box-shadow: 0px 0px 6px #666;
+	box-shadow: 0px 0px 6px #666;
 	max-width: 275px;
 }
 
@@ -551,7 +551,7 @@ a.action:hover, a.action.disabled { background-color: #79b985; }
 #top-nav-lateral
 {
 	margin-top: 0px;
-	padding: 0px;
+	padding: 10px 0px 0px 0px;
 	border-bottom: 1px solid #ccc;
 }
 
