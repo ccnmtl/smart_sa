@@ -1,0 +1,197 @@
+{% extends "intervention/game.html" %}
+
+{% block game_js %}
+  <script type="text/javascript" src="/site_media/assessmentquiz_task/js/quiz.js"></script> 
+{% endblock %}
+
+{% block game_css %}
+  <link href="/site_media/assessmentquiz_task/css/assessmentquiz_task.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block game_content %}
+<a name="score"></a>
+<div id="interpretation" style="display: none">
+
+	<h5>
+		Interpretation of Total Score
+	</h5>
+	
+	<div id="interpretation_range">
+	
+		<li id="r0">
+		
+		  There are no issues.
+		
+		</li>
+		
+		<li id="r1">
+		
+		  Give simple advice on drug use.
+		
+    		<div class="script">
+    		
+    			Script
+    			
+    			<ul>
+    			
+    				<li> 
+    				<h2 class="yes">If yes,</h2>
+    				Yes, good. I will give you information to do so at the end of our Masivukeni session today.
+    				</li>
+    				
+    				<li> 
+    				<h2 class="no">If no,</h2>
+    				Are you completely certain? Talking can really help sometimes.
+    				</li>
+    				
+    				<li>
+    				<h2 class="no">If no,</h2>
+    				Okay then. Let's continue with our Masivukeni session.
+    				</li>
+    
+    			</ul>
+    			
+    		</div>
+		</li>
+	</div>
+</div>
+
+<div id="quiz">
+     <form id="assessmentquiz">
+       <input type="hidden" name="section" value="drugaudit" />
+       <ol>
+	 <li>
+	   <div class="q">In the past year, how often did you use non-prescription drugs (e.g., Dagga, Mandrax, Tik) to get high or to change the way you feel?
+	   </div>
+	   <ol class="a" start="0">
+	     <li>
+	       <input type="radio" name="q1" value="0" />
+	       Never
+	     </li>
+	     <li>
+	       <input type="radio" name="q1" value="1" />
+	       Less than monthly
+	     </li>
+	     <li>
+	       <input type="radio" name="q1" value="2" />
+	       Monthly
+	     </li>
+	     <li>
+	       <input type="radio" name="q1" value="3" />
+	       Weekly
+	     </li>
+	     <li>
+	       <input type="radio" name="q1" value="4" />
+	       Daily or almost daily
+	     </li>
+	   </ol>
+	 </li>
+
+
+	 <li>
+	   <div class="q">In the past year, how often did you use drugs prescribed to you or to someone else (e.g., efavirenz) to get high or change the way you feel? 
+
+	   </div>
+	   <ol class="a" start="0">
+	     <li>
+	       <input type="radio" name="q2" value="0" />
+	       Never
+	     </li>
+	     <li>
+	       <input type="radio" name="q2" value="1" />
+	       Less than monthly
+	     </li>
+	     <li>
+	       <input type="radio" name="q2" value="2" />
+	       Monthly
+
+	     </li>
+	     <li>
+	       <input type="radio" name="q2" value="3" />
+	       Weekly
+
+	     </li>
+	     <li>
+	       <input type="radio" name="q2" value="4" />
+	       Daily or almost daily
+
+	     </li>
+	   </ol>
+	 </li>
+	 <li>
+	   <div class="q">In the past year, how often did you use drugs more than you meant to? 
+
+	   </div>
+	   <ol class="a" start="0">
+	     <li>
+	       <input type="radio" name="q3" value="0" />
+	       Never
+	     </li>
+	     <li>
+	       <input type="radio" name="q3" value="1" />
+	       Less than montly
+	     </li>
+	     <li>
+	       <input type="radio" name="q3" value="2" />
+	       Monthly
+	     </li>
+	     <li>
+	       <input type="radio" name="q3" value="3" />
+	       Weekly
+	     </li>
+	     <li>
+	       <input type="radio" name="q3" value="4" />
+	       Daily or almost daily
+	     </li>
+	   </ol>
+	 </li>
+	 <li>
+	   <div class="q">How often did you feel you wanted or needed to cut down on your drug use in the past year, and were not able to? 
+	   </div>
+	   <ol class="a" start="0">
+	     <li>
+	       <input type="radio" name="q4" value="0" />
+	       Never 
+	     </li>
+	     <li>
+	       <input type="radio" name="q4" value="1" />
+	       Less than monthly 
+	     </li>
+	     <li>
+	       <input type="radio" name="q4" value="2" />
+	       Monthly 
+	     </li>
+	     <li>
+	       <input type="radio" name="q4" value="3" />
+	       Weekly 
+	     </li>
+	     <li>
+	       <input type="radio" name="q4" value="4" />
+	       Daily or almost daily
+	     </li>
+	   </ol>
+	 </li>
+	 <li>
+	   <div class="q">In the past year, when not high or intoxicated, did you ever feel extremely energetic or irritable and more talkative than usual? 
+
+	   </div>
+	   <ol class="a" start="0">
+	     <li>
+	       <input type="radio" name="q5" value="0" />
+	       No 
+	     </li>
+	     <li>
+	       <input type="radio" name="q5" value="1" />
+	       Yes 
+	     </li>
+	   </ol>
+	 </li>
+     </form>
+     
+<div align="center" style="margin: 20px 0px 20px 0px;">
+<a id="reveal_score" href="#score" class="action disabled">What is My Score?</a>
+</div>
+
+</div>
+
+{% endblock %}

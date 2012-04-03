@@ -18,5 +18,6 @@ class AssessmentQuizTask(GameInterface):
         return ['assessmentquiz']
 
 InstalledGames.register_game('assessmentquiz','Assessment Quiz Mood', AssessmentQuizTask('kten'))
-InstalledGames.register_game('assessmentquiz-audit','Assessment Quiz Audit', AssessmentQuizTask('audit'))
+InstalledGames.register_game('assessmentquiz-audit','Assessment Quiz Alchohol Audit', AssessmentQuizTask('audit'))
+InstalledGames.register_game('assessmentquiz-drug-audit','Assessment Quiz Drug Audit', AssessmentQuizTask('drugaudit'))
 

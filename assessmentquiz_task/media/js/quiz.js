@@ -94,15 +94,21 @@
                 all_done &= all_form_fields[a];
             }
         }
+        
+        var gs = goal_state[section];
         if (section === 'audit' && !all_done) {
-            var gs = goal_state[section];
             all_done = ((gs.q1 === 0 || 1 * gs.q2 + 1 * gs.q3 === 0) && window.hasAttr(gs, 'q9') && window.hasAttr(gs, 'q10'));
             ML.logDebug(gs.q1 === 0, 1 * gs.q2 + 1 * gs.q3 === 0, window.hasAttr(gs, 'q9'), window.hasAttr(gs, 'q10'));
             ML.logDebug(all_done);
         }
         if (all_done) {
-            goal_state[section].total = total;
+            if (section === 'drugaudit') {
+                goal_state[section].total = (gs.q1 >= 3 || gs.q3 >= 3 || gs.q4 >= 1 || gs.q5 >= 1) ? 1 : 0;
+            } else {
+                goal_state[section].total = total;
+            }
         }
+
         intervention.saveState();
         
         return all_done;
@@ -119,13 +125,15 @@
         var found = false;
         while (--i >= 0) {
             var range = parseInt(ranges[i].id.substr(1), 10);
-            if (total >= range && !found) {
-                found = true;
-                MD.addElementClass(ranges[i], 'inrange');
-                MD.removeElementClass(ranges[i], 'outofrange');
-            } else {
-                MD.removeElementClass(ranges[i], 'inrange');
-                MD.addElementClass(ranges[i], 'outofrange');
+            if (!isNaN(range)) { 
+                if (total >= range && !found) {
+                    found = true;
+                    MD.addElementClass(ranges[i], 'inrange');
+                    MD.removeElementClass(ranges[i], 'outofrange');
+                } else {
+                    MD.removeElementClass(ranges[i], 'inrange');
+                    MD.addElementClass(ranges[i], 'outofrange');
+                }
             }
         }
     }
