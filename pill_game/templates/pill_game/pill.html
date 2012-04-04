@@ -20,40 +20,29 @@
     <div id="mode">{{game_context.mode}}</div>
     
     <div id="pill-game-container">
-        <div class="pill-list">
+        <div id="pill-list">
             {% ifequal game_context.mode "practice" %}
-                <div class="pill">
-                    <div class="pill-text">D4T<br /><span class="pill-dosage">2 pills twice a day</span></div>
-                    <div class="pill-image one">
-                        <span class="draggable one"></span>
-                    </div>
-                </div>
-                <div class="pill">
-                    <div class="pill-text">3TC<br /><span class="pill-dosage">2 pills twice a day</span></div>
-                    <div class="pill-image two">
-                        <span class="draggable two"></span>
-                    </div>
-                </div>
-                <div class="pill">
-                    <div class="pill-text">Efavirenz<br /><span class="pill-dosage">1 pill in the evening</span></div>
-                    <div class="pill-image three">
-                        <span class="draggable three"></span>
-                    </div>
-                </div>
+                <h4>Practice Regimen</h4>
             {% else %}
-                <div id="pill-template">
-                    <div class="pill">
-                        <div class="pill-text"><input type="text"></input></div>
-                        <div class="pill-image"></div>
-                    </div>
-                </div>
+                <h4>Medication List</h4>
+                <div><a class="add-a-pill" href="#">Add a Pill</a></div>
             {% endifequal %}
         </div>
         
+        <div class="pill pill-template">
+            <div class="pill-delete"><input type="image" src="/site_media/pill_game/images/button-delete.2.png" name="image" width="16" height="16"/></div>
+            <div class="pill-image">
+                <span class="draggable"></span>
+            </div>
+            <div class="pill-text"><span></span><input type="text"></input></div>
+        </div>
+            
         <div class="pill-buckets">
-           <div id="day" class="pill-bucket">            
-               <div id="day_pill_info_text" class="printonly">Inline Pill Info</div>
-               <div class="time">
+            <div id="day" class="pill-bucket-container">
+               <div class="pill-bucket day">            
+                   <div id="day_pill_info_text" class="printonly">Inline Pill Info</div>
+                </div>
+                <div id="day_time" class="time">
                    <label for="day_pills_time" class="printonly">Time:</label>
                    <select id="day_pills_time" size="1">
                         <option name="00:00" value="00:00">00:00</option>
@@ -68,13 +57,16 @@
                         <option name="09:00" value="09:00">09:00</option>
                         <option name="10:00" value="10:00">10:00</option>
                         <option name="11:00" value="11:00">11:00</option>
+                        <option name="na_day" value="na_day" class="na">Not taken during day</option>
                     </select>
-                </div>
+               </div>
             </div>
             
-           <div id="night" class="pill-bucket">        
-               <div id="night_pill_info_text" class="printonly">Inline Pill Info</div>
-               <div class="time">
+            <div id="night" class="pill-bucket-container">
+                <div class="pill-bucket night">        
+                    <div id="night_pill_info_text" class="printonly">Inline Pill Info</div>
+                </div>
+                <div id="night_time" class="time">
                    <label for="night_pills_time" class="printonly">Time:</label>
                    <select id="night_pills_time" size="1">
                         <option name="12:00" value="12:00">12:00</option>
@@ -90,6 +82,7 @@
                         <option name="22:00" value="22:00">22:00</option>
                         <option name="23:00" value="23:00">23:00</option>
                         <option name="24:00" value="24:00">24:00</option>
+                        <option name="na_eve" value="na_eve" class="na" >Not taken during evening</option>
                     </select>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-#mode, #pill-template, .printonly {
+#mode, .pill-template, .printonly {
     display: none;
 }
 
@@ -7,19 +7,31 @@
     height: 450px;
     vertical-align: top;
     background-color: white;
+    
 }
 
-div.pill-list {
+div#pill-list {
     float: left;
     height: 95%;
     width: 66%;
-    margin: 10px;
+    margin-right: 10px;
+    text-align: center;
+    border: 1px solid #ccc !important;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px 0px 5px;
+}
+
+div#pill-list h4 {
+    margin-top: 0px;
+    margin-bottom: 10px;
 }
 
 div.pill-buckets {
     float: left;
     width: 29%;
-    margin: 10px 10px 10px 0;
+    margin: 5px 10px 10px 0;
     text-align: center;
 }
 
@@ -30,42 +42,97 @@ div.pill-bucket {
     
 }
 
-div.pill-bucket .time {
-    padding-top: 175px;
+div.pill-bucket.disabled {
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
 }
 
-div#day.pill-bucket {
+div.day.pill-bucket {
     background-image: url('/site_media/pill_game/images/bucket_day.png');
     margin-bottom: 10px;
 }
 
-div#night.pill-bucket {
+div.night.pill-bucket {
     background-image: url('/site_media/pill_game/images/bucket_eve.png');
 }
 
-.pill {
+div#day_time, div#night_time {
+    position: absolute;
+    left: 12px;
+    top: 175px;
+}
+
+div#day_time select, div#night_time select {
+    width: 167px;
+}
+
+.add-a-pill {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #999;
+    padding: 5px 10px 5px 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+    display: block;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#999'); /* for IE */
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#999)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #fff,  #999); /* for firefox 3.6+ */ 
+    width: 24%;
+    margin-left: 36%;
+    margin-right: 38%;  
+    margin-bottom: 5px;
+}
+
+div.pill {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     padding: 6px;
     font-size: 12px;
     font-weight: bold;
-    margin: 5px 3px;
-    width: 95%;
+    margin: 10px 10px 5px;
+    width: 92%;
     height: 35px;
     border: 1px solid #ccc;
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
+    text-align: left;
 }
 
-.pill-text {
+div.pill.practice div.pill-delete,
+div.pill.practice div.pill-text input {
+    display: none;
+}
+
+div.pill div.pill-text {
+    float: right;
+    margin-right: 20px;
+    text-align: right;
+    display: block;
+    margin-top: 8px;
+}
+
+div.pill.practice div.pill-text {
+    margin-top: 0px;
+}
+
+div.pill .pill-text input {
+    font-size: 12px;
+    width: 265px;
+    text-align: right;
+    margin: -5px -5px;
+}
+
+div.pill .pill-delete {
     float: left;
-}
-
-.pill-dosage {
-    font-weight: normal;
-    font-size: 10px;
+    padding: 10px 5px 0 5px;
 }
 
 .pill-image, .draggable {
@@ -88,56 +155,56 @@ div#night.pill-bucket {
    margin-right: -10px;
 }
 
-.one {
+.pill-1 {
     background-image: -moz-radial-gradient(65% 35%
         45deg, circle , #ffffff 1%, blue 100%);
     background-image: -webkit-gradient(radial, 65% 35%, 1,
-     center center, 30, from(#ffffff), to(blue));
+     center center, 30, from(#ffffff), to(rgb(255,0,0)));
 }
 
-.two {
+.pill-2 {
     background-image: -moz-radial-gradient(65% 35%
         45deg, circle , #ffffff 1%, red 100%);
     background-image: -webkit-gradient(radial, 65% 35%, 1,
      center center, 30, from(#ffffff), to(red));
 }
 
-.three {
+.pill-3 {
     background-image: -moz-radial-gradient(65% 35%
         45deg, circle , #ffffff 1%, green 100%);
     background-image: -webkit-gradient(radial, 65% 35%, 1,
      center center, 30, from(#ffffff), to(green));
 }
 
-.four {
+.pill-4 {
     background-image: -moz-radial-gradient(65% 35%
         45deg, circle , #ffffff 1%, darkorange 100%);
     background-image: -webkit-gradient(radial, 65% 35%, 1,
      center center, 30, from(#ffffff), to(darkorange));
 }
 
-.five {
+.pill-5 {
     background-image: -moz-radial-gradient(65% 35%
         45deg, circle , #ffffff 1%, yellow 100%);
     background-image: -webkit-gradient(radial, 65% 35%, 1,
      center center, 30, from(#ffffff), to(yellow));
 }
 
-.six {
+.pill-6 {
     background-image: -moz-radial-gradient(65% 35%
         45deg, circle , #ffffff 1%, black 100%);
     background-image: -webkit-gradient(radial, 65% 35%, 1,
      center center, 30, from(#ffffff), to(black));
 }
 
-.seven {
+.pill-7 {
     background-image: -moz-radial-gradient(65% 35%
         45deg, circle , #ffffff 1%, purple 100%);
     background-image: -webkit-gradient(radial, 65% 35%, 1,
      center center, 30, from(#ffffff), to(purple));
 }
 
-.eight {
+.pill-8 {
     background-image: -moz-radial-gradient(65% 35%
         45deg, circle , #ffffff 1%, darkturquoise 100%);
     background-image: -webkit-gradient(radial, 65% 35%, 1,
