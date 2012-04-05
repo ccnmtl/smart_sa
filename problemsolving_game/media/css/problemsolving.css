@@ -438,3 +438,32 @@ div#actionplan_form input[type=submit] {
 {
     display: none;
 }
+
+@media print
+{
+
+#header, #breadcrumb-main, #breadcrumb, .practice-mode, #side, #footer, .nav-lateral, .issue-selector, #previous-issue img, #next_issue img {display: none;}
+
+#content {margin: 10%;}
+
+#gamebox {border: 1px solid #fff !important;}
+
+#travel,
+#clinic,
+#feartodisclose,
+#notenoughfood,
+#alone,
+#angrynurse,
+#uncomfortablewstaff,
+#happy,
+#feelingill,
+#peopletellmenotto,
+#sickwithcold,
+#forgetful,
+#cantgettoclinic,
+#other,
+#hopeless,
+#treatment_fatigue,
+#dontwantto {display: block;}
+}
+
