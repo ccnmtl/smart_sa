@@ -22,8 +22,9 @@ class InstalledGamesLazySingleton:
     GAME_OBJECTS = dict()
 
     def register_game(self, game_code, view_name, game_obj):
-        self.GAMES_INSTALLED.append( (game_code,view_name,) )
-        self.GAME_OBJECTS[game_code] = game_obj
+        if not self.GAME_OBJECTS.has_key(game_code):
+            self.GAMES_INSTALLED.append( (game_code,view_name,) )
+            self.GAME_OBJECTS[game_code] = game_obj
 
         for p in game_obj.pages():
             if re.findall('\W',p):
