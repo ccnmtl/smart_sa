@@ -15,7 +15,8 @@
     <script type="text/template" id="printable-template">
         <div class="issue-text-printable">
             <h5>Challenge</h5>
-            <%= text %><br /><br />
+            <%= text %><br />
+            <%= customtext %><br /><br />
             <h5>My Plan</h5>
             <div>How does this challenge keep me from taking my pills?</div>
             <div><%= actionPlan.attributes.barriers %></div>
@@ -53,7 +54,7 @@
     	  
     	  <div class="issue-text-container">
     		 <div class="issue-text"></div>
-    		 <div class="issue-subtext"></div>
+    		 <div class="issue-subtext"><span></span><textarea></textarea></div>
     	  </div>
     	  
     	  <div class="personal-issue-container">

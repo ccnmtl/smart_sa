@@ -147,7 +147,14 @@ div#issue_details div.issue-text-container div.issue-text {
     font-size: 80%;
 }
 
-div#issue_details div.issue-text-container div.issue-subtext, div#issue_details div.issue-text-container div.issue-subtext li {
+div#issue_details div.issue-text-container div.issue-subtext textarea {
+    width: 98%;
+    height: 90px;
+    resize: none;
+}
+
+div#issue_details div.issue-text-container div.issue-subtext, 
+div#issue_details div.issue-text-container div.issue-subtext li {
     margin-top: 5px;
     font-size: 11px;
 }

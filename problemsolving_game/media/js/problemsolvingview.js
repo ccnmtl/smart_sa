@@ -57,6 +57,7 @@
             id: "",
             image: "",
             text: "",
+            customtext: "",
             subtext: "",
             example: "",
             ordinality: 0,
@@ -66,14 +67,18 @@
             editing: false
         },
         initialize: function (options) {
-            if (options.state) {
+            if (_.has(options, 'state') && options.state !== null) {
                 if (_.has(options.state, 'archive')) {
                     this.set('archive', new ActionPlanList(options.state.archive));
                 }
                 
-                if (_.keys(options.state).length > 1) {
+                if (_.has(options.state, 'barriers')) {
                     var actionPlan = new ActionPlan(options.state);
                     this.set('actionPlan', actionPlan);
+                }
+                
+                if (_.has(options.state, 'customtext')) {
+                    this.set('customtext', options.state.customtext);
                 }
             }
         },
@@ -115,6 +120,8 @@
                 d.archive = archive.as_array();
             }
             
+            d.customtext = this.get("customtext");
+            
             return d;
         }
     });
@@ -148,7 +155,7 @@
             
             this.parent = options.parent;
         },
-        
+
         onChangeEditing: function () {
             var elt;
             if (this.model.get("editing")) {
@@ -174,24 +181,33 @@
                 jQuery("#issue_details div.issue-number").html(this.model.get("ordinality"));
                 jQuery("#issue_details img.issue-image").attr("src", this.model.get("image"));
                 jQuery("#issue_details div.issue-text").html(this.model.get("text"));
-                jQuery("#issue_details div.issue-subtext").html(this.model.get("subtext"));
+                
+                if (this.model.get("id") === "other") {
+                    jQuery("#issue_details div.issue-subtext textarea").html(this.model.get("customtext"));
+                    jQuery("#issue_details div.issue-subtext span").hide();
+                } else {
+                    jQuery("#issue_details div.issue-subtext span").html(this.model.get("subtext")).show();
+                    jQuery("#issue_details div.issue-subtext textarea").hide();
+                }
                 jQuery("div#example").html(this.model.get("example"));
             }
-            
-            // Always clear out the action plan when changing focus
-            jQuery("textarea#barriers").val("");
-            jQuery("textarea#proposals").val("");
-            jQuery("textarea#finalPlan").val("");
             
             if (this.model.hasActionPlan()) {
                 jQuery(this.el).addClass("marked");
                 jQuery("#actionplan").show();
                 jQuery("#actionplan a").html("Make Plan");
                 jQuery("#checkbox-personal-issue").attr('checked', 'checked');
+                if (this.model.get("id") === "other") {
+                    jQuery("#issue_details div.issue-subtext textarea").show();
+                    jQuery("#issue_details div.issue-subtext textarea").focus();
+                }
             } else {
                 jQuery(this.el).removeClass("marked");
                 jQuery("#actionplan").hide();
                 jQuery("#checkbox-personal-issue").removeAttr('checked');
+                if (this.model.get("id") === "other") {
+                    jQuery("#issue_details div.issue-subtext textarea").hide();
+                }
             }
                 
             if (this.model.hasValidActionPlan()) {
@@ -203,6 +219,9 @@
                 jQuery("#actionplan a").html("Edit Plan");
             } else {
                 jQuery(this.el).removeClass("complete");
+                jQuery("textarea#barriers").val("");
+                jQuery("textarea#proposals").val("");
+                jQuery("textarea#finalPlan").val("");
             }
             
             if (this.model.get("focus")) {
@@ -233,17 +252,28 @@
             'click #next_issue': 'onNextIssue',
             'click input[type=checkbox]': 'onPersonalIssue',
             'click #actionplan': 'onActionPlan',
-            'click #actionplan_form input[type=submit]': 'onCloseActionPlan'
+            'click #actionplan_form input[type=submit]': 'onCloseActionPlan',
+            'keypress div.issue-subtext textarea': 'onCustomText'
         },
 
         initialize : function (options) {
-            _.bindAll(this, "render", "onAddIssue", "onIssueNumber", "onPreviousIssue", "onNextIssue", "onActionPlan", "onCloseActionPlan");
+            _.bindAll(this, "render", "onAddIssue", "onIssueNumber",
+                    "onPreviousIssue", "onNextIssue", "onActionPlan",
+                    "onCloseActionPlan", "onCustomText");
             _.extend(this, Backbone.Events);
             
             this.issues = options.issues;
             this.issues.parent = this;
             this.issues.bind('add', this.onAddIssue);
             this.bind('issueChanged', this.render); // fired by the issues list when selection changes
+        },
+        
+        onCustomText: function (evt) {
+            var srcElement = evt.srcElement || evt.target || evt.originalTarget;
+            var issue = this.issues.getFocus();
+            
+            issue.set("customtext", jQuery(srcElement).val());
+            issue.save();
         },
         
         onAddIssue: function (issue) {
