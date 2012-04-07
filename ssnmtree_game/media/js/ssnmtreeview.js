@@ -160,6 +160,13 @@
     
     Backbone.sync = function (method, model, success, error) {
         global.socialSupportState.setState(model.get("key"), model.as_dict());
+        
+        // Initiate the ajax call to saveState
+        global.Intervention.saveState(function (result) {
+            if (result.responseText !== "ok") {
+                alert("An error occurred while saving your information. Please try again.");
+            }
+        });
     };
 
     jQuery(document).ready(function () {

@@ -1,0 +1,20 @@
+#side, #breadcrumb, #breadcrumb-main, #nav-header, .nav-lateral, #footer {
+    display: none;
+}
+
+.printonly {
+    display: block;   
+}
+
+#header {
+    margin-left: 75px;
+}
+
+#content {
+    margin-left: 50px;
+}
+
+#gamebox {
+    max-width: 825px;
+}
+

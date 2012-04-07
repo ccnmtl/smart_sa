@@ -132,9 +132,11 @@
                         <input id="delete" class="pill-delete-image" type="image" src="/site_media/pill_game/images/button-delete.2.png" name="image" width="16" height="16"/> \
                     </div> \
                     <div class="pill-image" \
-                        style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>))"> \
+                        style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
+                               background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
                         <span data-id="<%= id %>" class="draggable" \
-                            style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>))"> \
+                            style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
+                                   background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
                         </span> \
                     </div> \
                     <div class="pill-text"><span><%= name %></span><input type="text" value="<%= name %>"></input></div> \
@@ -211,7 +213,8 @@
         template: _.template(' \
             <span data-id="<%= id %>" id="<%= viewId %>" class="draggable trashable" \
                 style="background-image: -webkit-gradient(radial, 65% 35%, 1, 50% 50%, 30, from(rgb(255, 255, 255)), to(<%= color %>)); \
-                z-index: 1000; position: absolute; left: <%= left %>; top: <%= top %>; opacity: 1;"> \
+                       background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); \
+                       z-index: 1000; position: absolute; left: <%= left %>; top: <%= top %>; opacity: 1;"> \
             </span>'),
             
         initialize: function (options, render) {

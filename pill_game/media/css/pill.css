@@ -155,63 +155,6 @@ div.pill .pill-delete {
    margin-right: -10px;
 }
 
-.pill-1 {
-    background-image: -moz-radial-gradient(65% 35%
-        45deg, circle , #ffffff 1%, blue 100%);
-    background-image: -webkit-gradient(radial, 65% 35%, 1,
-     center center, 30, from(#ffffff), to(rgb(255,0,0)));
-}
-
-.pill-2 {
-    background-image: -moz-radial-gradient(65% 35%
-        45deg, circle , #ffffff 1%, red 100%);
-    background-image: -webkit-gradient(radial, 65% 35%, 1,
-     center center, 30, from(#ffffff), to(red));
-}
-
-.pill-3 {
-    background-image: -moz-radial-gradient(65% 35%
-        45deg, circle , #ffffff 1%, green 100%);
-    background-image: -webkit-gradient(radial, 65% 35%, 1,
-     center center, 30, from(#ffffff), to(green));
-}
-
-.pill-4 {
-    background-image: -moz-radial-gradient(65% 35%
-        45deg, circle , #ffffff 1%, darkorange 100%);
-    background-image: -webkit-gradient(radial, 65% 35%, 1,
-     center center, 30, from(#ffffff), to(darkorange));
-}
-
-.pill-5 {
-    background-image: -moz-radial-gradient(65% 35%
-        45deg, circle , #ffffff 1%, yellow 100%);
-    background-image: -webkit-gradient(radial, 65% 35%, 1,
-     center center, 30, from(#ffffff), to(yellow));
-}
-
-.pill-6 {
-    background-image: -moz-radial-gradient(65% 35%
-        45deg, circle , #ffffff 1%, black 100%);
-    background-image: -webkit-gradient(radial, 65% 35%, 1,
-     center center, 30, from(#ffffff), to(black));
-}
-
-.pill-7 {
-    background-image: -moz-radial-gradient(65% 35%
-        45deg, circle , #ffffff 1%, purple 100%);
-    background-image: -webkit-gradient(radial, 65% 35%, 1,
-     center center, 30, from(#ffffff), to(purple));
-}
-
-.pill-8 {
-    background-image: -moz-radial-gradient(65% 35%
-        45deg, circle , #ffffff 1%, darkturquoise 100%);
-    background-image: -webkit-gradient(radial, 65% 35%, 1,
-     center center, 30, from(#ffffff), to(darkturquoise));
-}
-
-
 .timeofday {
     
 }

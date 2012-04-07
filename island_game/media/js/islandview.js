@@ -299,7 +299,7 @@
             _.extend(this, Backbone.Events);
             this.on("render", this.render);
             
-            this.model.set("beforeMedication", options.mode == 'before-medication');
+            this.model.set("beforeMedication", options.mode === 'before-medication');
             this.model.set("floor", jQuery(this.el).offset().top + jQuery(this.el).height());
             this.model.bind('change', this.render);
             
@@ -396,7 +396,7 @@
         var islandView = new IslandGameView({
             model: new IslandGame({ beforeMedication: true }),
             el: 'div#island_container',
-            gender: global.Intervention.current_user.gender,
+            gender: "M",
             mode: jQuery('div#mode').html()
         });
     });

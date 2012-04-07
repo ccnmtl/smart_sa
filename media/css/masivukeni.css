@@ -103,6 +103,10 @@ form.login label
 	background-color: #fff;
 }
 
+.printonly {
+    display: none;
+}
+
 /*start - header*/
 #header
 {
@@ -814,15 +818,6 @@ p
 }
 
 .game_instructions { margin: 0 0 20px 5px; }
-
-@media print
-{
-	#content-right.game { display: none; }
-	#container-main { border: none; }
-	#game-content { border: none; }
-	#navbar { display: none; }
-	body { background: none; }
-}
 
 container-home
 {
