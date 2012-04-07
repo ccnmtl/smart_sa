@@ -1,0 +1,44 @@
+#gamebox {
+    width: 800px;
+    border: none !important;  
+}
+
+#issue-gallery-printable {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.issue-selector, .issue-gallery, .activitytitle, .issue-number {
+    display: none;
+}
+
+div.issue-detail-printable {
+    margin: 5px 10px;
+    text-align: left;
+    font-size: 80%;
+    page-break-inside: avoid;  
+}
+
+div.issue-detail-printable div.divider {
+    clear: both;
+    border-bottom: 1px solid #4EA15A;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.issue-detail-printable h5 {
+    margin: 0;
+    font-size: 100%;
+}
+
+div.issue-detail-printable div.issue-text-printable {
+    float: left;
+    width: 68%;
+} 
+
+div.issue-detail-printable img {
+    float: left;
+    width: 200px;
+    height: auto;
+}

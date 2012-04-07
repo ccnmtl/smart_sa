@@ -178,6 +178,11 @@
                 jQuery("div#example").html(this.model.get("example"));
             }
             
+            // Always clear out the action plan when changing focus
+            jQuery("textarea#barriers").val("");
+            jQuery("textarea#proposals").val("");
+            jQuery("textarea#finalPlan").val("");
+            
             if (this.model.hasActionPlan()) {
                 jQuery(this.el).addClass("marked");
                 jQuery("#actionplan").show();
@@ -198,13 +203,25 @@
                 jQuery("#actionplan a").html("Edit Plan");
             } else {
                 jQuery(this.el).removeClass("complete");
-                jQuery("textarea#barriers").val("");
-                jQuery("textarea#proposals").val("");
-                jQuery("textarea#finalPlan").val("");
             }
             
             if (this.model.get("focus")) {
                 this.parent.trigger('issueChanged');
+            }
+        }
+    });
+    
+    var PrintableIssueView = Backbone.View.extend({
+        initialize: function (options) {
+            _.bindAll(this, "render");
+            this.model.bind("change", this.render);
+            this.template = _.template(jQuery("#printable-template").html());
+        },
+        render: function () {
+            if (this.model.hasValidActionPlan()) {
+                this.el.innerHTML = this.template(this.model.toJSON());
+            } else {
+                this.el.innerHTML = "";
             }
         }
     });
@@ -232,7 +249,11 @@
         onAddIssue: function (issue) {
             var id = issue.get("id");
             var elt = jQuery("#" + id)[0];
+            
             new IssueView({ model: issue, el: elt, parent: this }).render();
+            
+            elt = jQuery("#issue-gallery-printable div." + issue.get("id"))[0];
+            new PrintableIssueView({ model: issue, el: elt }).render();
         },
         
         onIssueNumber: function (evt) {
@@ -299,31 +320,6 @@
             } else {
                 jQuery("#previous_issue img").hide();
             }
-        }
-    });
-    
-    var ProblemSolvingGameState = Backbone.View.extend({
-        initialize: function (options) {
-            var gameState = global.Intervention.getGameVar('problemsolving', {});
-            var userState = this.el ? "defaulter" : "regular";
-            
-            if (!_.has(gameState, userState)) {
-                if (!_.has(gameState, userState) && userState === "defaulter" && _.has(gameState, "regular")) {
-                    gameState.defaulter = _.clone(gameState.regular);
-                } else {
-                    gameState[userState] = {};
-                }
-            }
-            
-            this.gameState = gameState[userState];
-        },
-        
-        getState: function (id) {
-            return _.has(this.gameState, id) ? this.gameState[id] : null;
-        },
-        
-        setState: function (id, obj) {
-            this.gameState[id] = obj;
         }
     });
     
