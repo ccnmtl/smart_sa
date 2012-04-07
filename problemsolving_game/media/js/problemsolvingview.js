@@ -140,12 +140,30 @@
         events : {},
 
         initialize : function (options) {
-            _.bindAll(this, "render");
+            _.bindAll(this, "render", "onChangeEditing");
             this.model.bind("change", this.render);
+            this.model.bind("change:editing", this.onChangeEditing);
             
             this.render();
             
             this.parent = options.parent;
+        },
+        
+        onChangeEditing: function () {
+            var elt;
+            if (this.model.get("editing")) {
+                jQuery("#actionplan_form").show();
+                jQuery("div.issue-selector").hide();
+                
+                elt = jQuery("#actionplan_form input[type=submit]")[0];
+                jQuery('html, body').animate({scrollTop: jQuery(elt).offset().top}, 1000);
+            } else {
+                jQuery("div.issue-selector").show();
+                elt = jQuery("#gamebox");
+                jQuery('html, body').animate({scrollTop: 0}, 0, function () {
+                    jQuery("#actionplan_form").hide('fast');
+                });
+            }
         },
                 
         render: function () {
@@ -183,21 +201,6 @@
                 jQuery("textarea#barriers").val("");
                 jQuery("textarea#proposals").val("");
                 jQuery("textarea#finalPlan").val("");
-            }
-            
-            var elt;
-            if (this.model.get("editing")) {
-                jQuery("#actionplan_form").show();
-                jQuery("div.issue-selector").hide();
-                
-                elt = jQuery("#actionplan_form input[type=submit]")[0];
-                jQuery('html, body').animate({scrollTop: jQuery(elt).offset().top}, 1000);
-            } else {
-                jQuery("div.issue-selector").show();
-                elt = jQuery("#gamebox");
-                jQuery('html, body').animate({scrollTop: 0}, 0, function () {
-                    jQuery("#actionplan_form").hide('fast');
-                });
             }
             
             if (this.model.get("focus")) {
