@@ -35,6 +35,10 @@ div.pill-buckets {
     text-align: center;
 }
 
+div.pill-bucket-container {
+    position: relative;
+}
+
 div.pill-bucket {
     background-repeat: no-repeat;
     width: 190px;

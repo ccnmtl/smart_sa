@@ -214,7 +214,7 @@
             <span data-id="<%= id %>" id="<%= viewId %>" class="draggable trashable" \
                 style="background-image: -webkit-gradient(radial, 65% 35%, 1, 50% 50%, 30, from(rgb(255, 255, 255)), to(<%= color %>)); \
                        background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); \
-                       z-index: 1000; position: absolute; left: <%= left %>; top: <%= top %>; opacity: 1;"> \
+                       z-index: 1000; opacity: 1;"> \
             </span>'),
             
         initialize: function (options, render) {
@@ -235,6 +235,7 @@
             json.viewId = this.viewId;
             
             this.el.innerHTML = this.template(json);
+            jQuery(this.el).css({ position: 'absolute', left: this.left, top: this.top });
 
             var elt = jQuery(this.el).find("span.draggable")[0];
             this.draggable = new M.DragAndDrop.Draggable(elt, {
@@ -257,8 +258,8 @@
         as_dict: function () {
             return {
                 'pillId': this.model.get("id"),
-                'left': jQuery("#" + this.viewId).css("left"),
-                'top': jQuery("#" + this.viewId).css("top")
+                'left': jQuery(this.el).css("left"),
+                'top': jQuery(this.el).css("top")
             };
         }
     });
@@ -305,7 +306,7 @@
                     top: options.top
                 });
                 
-                document.body.appendChild(view.el);
+                jQuery(this.el).append(view.el);
                 this.pillViews[view.viewId] = view;
             }
         },
@@ -318,11 +319,12 @@
             if (jQuery(element).hasClass("trashable") && _.has(this.pillViews, element.id)) {
                 global.dropped = true;
             } else {
-                var offset = jQuery(element).offset();
+                var elt = jQuery(element).offset();
+                var me = jQuery(this.el).offset();
                 this.addPillView({
                     'pillId': jQuery(element).data("id"),
-                    'left': offset.left + "px",
-                    'top': offset.top + 5 + "px"
+                    'left': (elt.left - me.left) + "px",
+                    'top': (elt.top - me.top) + "px"
                 });
                 global.dropped = !jQuery(element).hasClass("trashable");
             }

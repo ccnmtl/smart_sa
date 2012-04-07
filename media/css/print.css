@@ -1,3 +1,7 @@
+body {
+    background: none;
+}
+
 #side, #breadcrumb, #breadcrumb-main, #nav-header, .nav-lateral, #footer {
     display: none;
 }

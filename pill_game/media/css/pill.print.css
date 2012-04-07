@@ -1,2 +1,3 @@
-.trashable {
+.pill-delete, .add-a-pill {
+    display: none;
 }
