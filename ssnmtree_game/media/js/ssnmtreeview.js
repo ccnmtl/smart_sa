@@ -11,10 +11,10 @@
 
         hasName: function (attrs) {
             return this.get("name").length > 0;
-        }, 
+        },
         
         as_dict: function () {
-            return { 
+            return {
                 'name': this.get('name'),
                 'support': this.get('support'),
                 'disclosure': this.get('disclosure')
@@ -163,7 +163,7 @@
     };
 
     jQuery(document).ready(function () {
-        global.socialSupportState = new GameState({ game: 'ssnmtree', el: 'div#defaulter' });
+        global.socialSupportState = new global.GameState({ game: 'ssnmtree', el: 'div#defaulter' });
         
         var collection = new SupportPersonList();
         var ssnmTreeView = new SupportPersonListView({
