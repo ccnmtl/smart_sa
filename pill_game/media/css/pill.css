@@ -135,7 +135,7 @@ div.pill .pill-delete {
     padding: 10px 5px 0 5px;
 }
 
-.pill-image, .draggable {
+.pill-image, .draggable, .trashable {
     float: right;
     width: 10px;
     height: 10px;

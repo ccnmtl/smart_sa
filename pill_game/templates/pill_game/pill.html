@@ -4,9 +4,9 @@
     <script type="text/javascript" src="/site_media/js/jquery/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="/site_media/js/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="/site_media/js/backbone/backbone-min.js"></script>
-
     <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script> 
     <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/DragAndDrop.js"></script>
+    <script type="text/javascript" src="/site_media/js/gamestate.js"></script>
     <script type="text/javascript" src="/site_media/pill_game/js/pillview.js"></script> 
 {% endblock %}
 
@@ -30,7 +30,7 @@
         </div>
         
         <div class="pill pill-template">
-            <div class="pill-delete"><input type="image" src="/site_media/pill_game/images/button-delete.2.png" name="image" width="16" height="16"/></div>
+            <div class="pill-delete"><input id="delete" class="pill-delete-image" type="image" src="/site_media/pill_game/images/button-delete.2.png" name="image" width="16" height="16"/></div>
             <div class="pill-image">
                 <span class="draggable"></span>
             </div>
@@ -57,7 +57,7 @@
                         <option name="09:00" value="09:00">09:00</option>
                         <option name="10:00" value="10:00">10:00</option>
                         <option name="11:00" value="11:00">11:00</option>
-                        <option name="na_day" value="na_day" class="na">Not taken during day</option>
+                        <option name="na" value="na" class="na">Not taken during day</option>
                     </select>
                </div>
             </div>
@@ -82,7 +82,7 @@
                         <option name="22:00" value="22:00">22:00</option>
                         <option name="23:00" value="23:00">23:00</option>
                         <option name="24:00" value="24:00">24:00</option>
-                        <option name="na_eve" value="na_eve" class="na" >Not taken during evening</option>
+                        <option name="na" value="na" class="na" >Not taken during evening</option>
                     </select>
                 </div>
             </div>

@@ -14,7 +14,7 @@
                 this.set('finalPlan', options.finalPlan);
             }
         },
-        isPlanEmpty: function() {
+        isPlanEmpty: function () {
             return this.get("barriers").length === 0 && this.get("proposals").length === 0 && this.get("finalPlan").length === 0;
         },
         isPlanValid: function () {
@@ -26,7 +26,7 @@
             this.set('finalPlan', ap.get('finalPlan'));
         },
         as_dict: function () {
-            return { 
+            return {
                 'barriers': this.get('barriers'),
                 'proposals': this.get('proposals'),
                 'finalPlan': this.get('finalPlan')
@@ -34,7 +34,7 @@
         }
     });
     
-    var ActionPlanList = Backbone.Collection.extend({ 
+    var ActionPlanList = Backbone.Collection.extend({
         model: ActionPlan,
         initialize: function (options) {
             for (var i = 0; options !== undefined && i < options.length; i++) {
@@ -71,14 +71,14 @@
                     this.set('archive', new ActionPlanList(options.state.archive));
                 }
                 
-                if (_.keys(options.state ).length > 1) {
+                if (_.keys(options.state).length > 1) {
                     var actionPlan = new ActionPlan(options.state);
                     this.set('actionPlan', actionPlan);
                 }
             }
         },
         hasActionPlan: function () {
-           return this.get("actionPlan") !== null; 
+            return this.get("actionPlan") !== null;
         },
         hasValidActionPlan: function () {
             return this.hasActionPlan() && this.get("actionPlan").isPlanValid();
@@ -90,7 +90,7 @@
             var archive = this.get('archive');
             if (archive.length > 0) {
                 actionPlan.clone(archive.at(archive.length - 1));
-            } 
+            }
             
             this.set('actionPlan', actionPlan);
             this.save();
@@ -178,7 +178,7 @@
                 jQuery("textarea#proposals").val(actionPlan.get("proposals"));
                 jQuery("textarea#finalPlan").val(actionPlan.get("finalPlan"));
                 jQuery("#actionplan a").html("Edit Plan");
-             } else {
+            } else {
                 jQuery(this.el).removeClass("complete");
                 jQuery("textarea#barriers").val("");
                 jQuery("textarea#proposals").val("");
@@ -195,7 +195,7 @@
             } else {
                 jQuery("div.issue-selector").show();
                 elt = jQuery("#gamebox");
-                jQuery('html, body').animate({scrollTop: 0}, 0, function() {
+                jQuery('html, body').animate({scrollTop: 0}, 0, function () {
                     jQuery("#actionplan_form").hide('fast');
                 });
             }
@@ -271,7 +271,7 @@
             var issue = this.issues.getFocus();
             var actionPlan = issue.get('actionPlan');
 
-            actionPlan.set({ "barriers": jQuery("textarea#barriers").val(), 
+            actionPlan.set({ "barriers": jQuery("textarea#barriers").val(),
                              "proposals": jQuery("textarea#proposals").val(),
                              "finalPlan": jQuery("textarea#finalPlan").val()});
             issue.set("editing", false);
@@ -283,7 +283,7 @@
             
             // enabled/disable next & prev navigation
             var elt = jQuery(".issue-number.focus");
-            a = jQuery(elt).next(".issue-number");
+            var a = jQuery(elt).next(".issue-number");
             if (!editing && a.length > 0) {
                 jQuery("#next_issue img").show();
             } else {
@@ -296,13 +296,11 @@
             } else {
                 jQuery("#previous_issue img").hide();
             }
-            
-            
         }
     });
     
     var ProblemSolvingGameState = Backbone.View.extend({
-        initialize: function(options) {
+        initialize: function (options) {
             var gameState = global.Intervention.getGameVar('problemsolving', {});
             var userState = this.el ? "defaulter" : "regular";
             
@@ -317,11 +315,11 @@
             this.gameState = gameState[userState];
         },
         
-        getState: function(id) {
+        getState: function (id) {
             return _.has(this.gameState, id) ? this.gameState[id] : null;
         },
         
-        setState: function(id, obj) {
+        setState: function (id, obj) {
             this.gameState[id] = obj;
         }
     });
