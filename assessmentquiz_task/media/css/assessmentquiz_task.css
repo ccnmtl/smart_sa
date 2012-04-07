@@ -13,10 +13,69 @@ h3 { margin-bottom: 0; }
 
 .inrange
 {
-	background-color: #4ea154;
 	font-weight: bold;
+}
+
+ul.drink li#r0.inrange
+{
+	background-color: #4ea154;
 	color: #fff;
 }
+
+ul.drink li#r8.inrange
+{
+	background-color: yellow;
+	color: #000;
+}
+
+ul.drink li#r16.inrange
+{
+	background-color: orange;
+	color: #fff;
+}
+
+ul.drink li#r20.inrange
+{
+	background-color: red;
+	color: #fff;
+}
+
+ul.mood li#r10.inrange
+{
+	background-color: #4ea154;
+	color: #fff;
+}
+
+ul.mood li#r20.inrange
+{
+	background-color: yellow;
+	color: #000;
+}
+
+ul.mood li#r25.inrange
+{
+	background-color: orange;
+	color: #fff;
+}
+
+ul.mood li#r30.inrange
+{
+	background-color: red;
+	color: #fff;
+}
+
+ul.drug li#r0.inrange
+{
+	background-color: #4ea154;
+	color: #fff;
+}
+
+ul.drug li#r1.inrange
+{
+	background-color: orange;
+	color: #000;
+}
+
 
 .note
 {
@@ -26,6 +85,7 @@ h3 { margin-bottom: 0; }
 
 ol ol {border-bottom: 1px solid #ccc; padding-bottom: 20px; margin-bottom: 20px;}
 
+/*
 ol.a
 {
 	counter-reset: mycounter -1;
@@ -38,6 +98,7 @@ ol.a li:before
 	content: "(" counter(mycounter,decimal) ")""";
 	counter-increment: mycounter;
 }
+*/
 
 ol.a li { list-style: none; }
 
@@ -120,3 +181,4 @@ form#assessmentquiz table th, form#assessmentquiz table td
 	line-height: 18px;
 	padding: 10px;
 }
+

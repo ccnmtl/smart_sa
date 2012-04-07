@@ -240,7 +240,7 @@ h4
 	border-bottom: 1px solid #ccc;
 }
 
-#breadcrumb a#tab-home, #breadcrumb a#tab-home:hover, #breadcrumb a.current#tab-home
+#breadcrumb a#tab-home
 {
 	display: block;
 	width: 90px;
@@ -250,10 +250,25 @@ h4
 	-moz-border-radius-topright: 5px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	border-top: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	border-left: 1px solid #ccc;
+	border: 1px solid #f3912f;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 6px 0px 6px 40px;
+	margin: 0px 0px -1px 10px;
+}
+
+#breadcrumb a#tab-home:hover, #breadcrumb a.current#tab-home
+{
+	display: block;
+	width: 90px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border: 1px solid #ccc;
 	font-size: 14px;
 	font-weight: bold;
 	text-decoration: none;
@@ -281,8 +296,12 @@ a#endintervention
 
 #breadcrumb a#tab-home
 {
+	/*
 	background-color: #fcead7;
 	color: #000;
+	*/
+	background-color: #f3912f;
+	color: #fff;
 }
 
 #breadcrumb a#tab-home:hover
@@ -301,7 +320,8 @@ a#endintervention
 
 #breadcrumb-text
 {
-	display: block;
+	/*display: block;*/
+	display: none;
 	position: absolute;
 	left: 170px;
 	top: 16px;
