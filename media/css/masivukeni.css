@@ -134,6 +134,10 @@ form.login label
 	text-indent: -9999px;
 }
 
+#header img.logo {
+    display: none;
+}
+
 h2
 {
 	color: #f6921e;
