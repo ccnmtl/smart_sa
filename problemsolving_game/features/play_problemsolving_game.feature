@@ -25,6 +25,28 @@ Feature: Problem Solving Activity
         When I select barrier 3
         Then barrier 1 does not have "focus"
         Then barrier 3 has "focus"
+      
+    Scenario: Test Right/Left Navigation
+        Using selenium
+        When I select barrier 1
+        Then barrier 1 has "focus"
+        There there is no left arrow
+        There there is a right arrow
+        
+        When I navigate "right"
+        Then barrier 2 has "focus"
+        There there is a left arrow
+        There there is a right arrow
+        
+        When I navigate "left"
+        Then barrier 1 has "focus"
+        There there is no left arrow
+        There there is a right arrow
+        
+        # Assuming 17 issues
+        When I select barrier 17
+        There there is a left arrow
+        There there is no right arrow
               
     Scenario: Personal Challenge on, navigate, off
         Using selenium
@@ -218,4 +240,45 @@ Feature: Problem Solving Activity
         Then "barriers" reads "abc"
         Then "proposals" reads "def"
         Then "finalPlan" reads "ghi"
+        When I click the Save Plan button
+        Then there is no Action Plan form
+        
+    Scenario: Testing "other" item behavior
+        Using selenium
+        # Assuming "other" barrier is #14. 
+        When I select barrier 14
+        Then barrier 14 has "focus"
+        
+        When I toggle personal challenge
+        Then barrier 14 has "marked"
+        Then I can specify my issue
+        Then I specify my issue as "abc"
+        
+        When I select barrier 13
+        Then barrier 13 has "focus"
+        Then I cannot specify my issue
+        When I select barrier 14
+        Then barrier 14 has "focus"
+        Then I can specify my issue
+        My issue is "abc"
+        
+        When I toggle personal challenge
+        Then barrier 14 does not have "marked"
+        Then I cannot specify my issue
+        
+        When I toggle personal challenge
+        Then barrier 14 has "marked"
+        Then I can specify my issue
+        My issue is "abc"
+        
+        When I click the "Next" link
+        When I click the "Back" link
+        When I select barrier 14
+        Then barrier 14 has "focus"
+        Then barrier 14 has "marked"
+        Then I can specify my issue
+        My issue is "abc"
+        
+        
+         
         

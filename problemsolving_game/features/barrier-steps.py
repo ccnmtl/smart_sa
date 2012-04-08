@@ -5,6 +5,8 @@ import sys, time
 #    sys.stderr.write('BARRIER: %s, ELTS: %s' % (barrier, len(a)))
 #    sys.stderr.flush();
 
+
+
 @step(u'I toggle personal challenge')
 def i_toggle_personal_challenge(step):
     if not world.using_selenium:
@@ -76,6 +78,18 @@ def there_is_no_issue_selector(step):
 def there_is_an_issue_selector(step):
     i = world.firefox.find_element_by_id('issue-selector')
     assert i.is_displayed() == True, "Issue selector should be visible now"
+
+@step(u'i navigate "([^"]*)"')
+def i_navigate_direction(step, direction):
+    if direction == "left":
+        i = world.firefox.find_element_by_css_selector('#previous_issue')
+    elif direction == "right":
+        i = world.firefox.find_element_by_css_selector('#next_issue')
+    
+    try:
+        i.click()
+    except:
+        pass
     
 @step(u'there is no left arrow')
 def there_is_no_left_arrow(step):
@@ -137,5 +151,24 @@ def then_elementId_reads_text(step, elementId, text):
     elt_text = elt.get_attribute("value")
     assert elt_text == text, elt_text
     
+@step(u'Then I can specify my issue')
+def then_i_can_specify_my_issue(step):
+    elt = world.firefox.find_element_by_css_selector('div.issue-subtext textarea')
+    assert elt.is_displayed() == True, "element div.issue-subtext textarea should be visible"
+    
+@step(u'Then I cannot specify my issue')
+def then_i_cannot_specify_my_issue(step):
+    elt = world.firefox.find_element_by_css_selector('div.issue-subtext textarea')
+    assert elt.is_displayed() == False, "element div.issue-subtext textarea should be invisible"
+    
+@step(u'Then I specify my issue as "([^"]*)"')
+def then_i_specify_my_issue(step, text):
+    elt = world.firefox.find_element_by_css_selector('div.issue-subtext textarea')
+    elt.send_keys(text)
 
+@step(u'my issue is "([^"]*)"')
+def my_issue_is(step, text):
+    elt = world.firefox.find_element_by_css_selector('div.issue-subtext textarea')
+    elt_text = elt.get_attribute("value")
+    assert elt_text == text, elt_text
       

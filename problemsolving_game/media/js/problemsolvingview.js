@@ -261,7 +261,8 @@
             'click input[type=checkbox]': 'onPersonalIssue',
             'click #actionplan': 'onActionPlan',
             'click #actionplan_form input[type=submit]': 'onCloseActionPlan',
-            'keypress div.issue-subtext textarea': 'onCustomText'
+            'keypress div.issue-subtext textarea': 'onCustomText',
+            'blur div.issue-subtext textarea': 'onCustomText',
         },
 
         initialize : function (options) {
