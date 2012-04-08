@@ -150,6 +150,7 @@ def i_click_the_link(step, text):
         assert False, "could not find the '%s' link" % text
     else:
         try:
+            time.sleep(1)
             link = world.firefox.find_element_by_partial_link_text(text)
             assert link.is_displayed()
             link.click()
@@ -343,16 +344,6 @@ def there_is_no_navbutton(step, label):
 @step(u'I wait for (\d+) seconds')
 def wait(step,seconds):
     time.sleep(int(seconds))
-
-@step(u'I select the first barrier')
-def select_the_first_barrier(step):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
-    i = world.firefox.find_element_by_css_selector('input[type="checkbox"]')
-    try:
-        i.click()
-    except:
-        pass
         
 
 @step(u'I am not on an activity page')

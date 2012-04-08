@@ -9,9 +9,15 @@
         },
         initialize: function (options) {
             if (options) {
-                this.set('barriers', options.barriers);
-                this.set('proposals', options.proposals);
-                this.set('finalPlan', options.finalPlan);
+                if (_.has(options, 'barriers')) {
+                    this.set('barriers', options.barriers);
+                }
+                if (_.has(options, 'proposals')) {
+                    this.set('proposals', options.proposals);
+                }
+                if (_.has(options, 'finalPlan')) {
+                    this.set('finalPlan', options.finalPlan);
+                }
             }
         },
         isPlanEmpty: function () {
@@ -62,7 +68,7 @@
             example: "",
             ordinality: 0,
             actionPlan: null,
-            archive: new ActionPlanList(),
+            archive: null,
             focus: false,
             editing: false
         },
@@ -81,6 +87,7 @@
                     this.set('customtext', options.state.customtext);
                 }
             }
+            this.set("archive", new ActionPlanList());
         },
         hasActionPlan: function () {
             return this.get("actionPlan") !== null;
@@ -101,10 +108,11 @@
             this.save();
         },
         removeActionPlan: function () {
-            if (this.hasValidActionPlan()) {
-                this.get("archive").add(this.get("actionPlan"));
+            var actionPlan = this.get("actionPlan");
+            if (actionPlan && actionPlan.isPlanValid()) {
+                this.get("archive").add(actionPlan);
             }
-            this.set({'editing': false, 'actionPlan': null});
+            this.set({ "editing": false, "actionPlan": null });
             this.save();
         },
         as_dict: function () {
@@ -358,7 +366,7 @@
         
         // Initiate the ajax call to saveState
         global.Intervention.saveState(function (result) {
-            if (result.responseText !== "ok") {
+            if (result.status !== 200) {
                 alert("An error occurred while saving your information. Please try again.");
             }
         });

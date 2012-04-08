@@ -34,7 +34,7 @@
 
 {% block game_content %}
 
-    <div class="issue-selector" align="center">
+    <div id="issue-selector" class="issue-selector" align="center">
     	{% for issue in game_context.issues %}
     	   <div id="{{issue.name}}" class="issue-number" unselectable="on">{{issue.ordinality}}</div>
     	{% endfor %}
