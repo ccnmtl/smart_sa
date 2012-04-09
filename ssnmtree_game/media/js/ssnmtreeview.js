@@ -117,11 +117,9 @@
 
         toggleSupportSelection: function () {
             var self = this;
-            self.edit_mode = "support";
-
-            jQuery("div#toggle-support-selection").toggleClass('on off');
-
-            if (jQuery("div#toggle-support-selection").hasClass('on')) {
+            if (!jQuery("div#toggle-support-selection").hasClass("on")) {
+                self.edit_mode = "support";
+                jQuery("div#toggle-support-selection").addClass('on');
                 jQuery("div#toggle-disclosure-selection").removeClass('on');
                 jQuery("div#toggle-disclosure-selection").addClass('off');
             }
@@ -129,11 +127,10 @@
 
         toggleDisclosureSelection: function () {
             var self = this;
-            self.edit_mode = "disclosure";
-
-            jQuery("div#toggle-disclosure-selection").toggleClass('on off');
-
-            if (jQuery("div#toggle-disclosure-selection").hasClass('on')) {
+            
+            if (!jQuery("div#toggle-disclosure-selection").hasClass("on")) {
+                self.edit_mode = "disclosure";
+                jQuery("div#toggle-disclosure-selection").addClass('on');
                 jQuery("div#toggle-support-selection").removeClass('on');
                 jQuery("div#toggle-support-selection").addClass('off');
             }
