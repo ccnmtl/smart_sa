@@ -193,6 +193,8 @@
                 if (this.model.get("id") === "other") {
                     jQuery("#issue_details div.issue-subtext textarea").html(this.model.get("customtext"));
                     jQuery("#issue_details div.issue-subtext span").hide();
+                    jQuery("#issue_details div.issue-subtext textarea").show();
+                    jQuery("#issue_details div.issue-subtext textarea").focus();
                 } else {
                     jQuery("#issue_details div.issue-subtext span").html(this.model.get("subtext")).show();
                     jQuery("#issue_details div.issue-subtext textarea").hide();
@@ -205,17 +207,10 @@
                 jQuery("#actionplan").show();
                 jQuery("#actionplan a").html("Make Plan");
                 jQuery("#checkbox-personal-issue").attr('checked', 'checked');
-                if (this.model.get("id") === "other") {
-                    jQuery("#issue_details div.issue-subtext textarea").show();
-                    jQuery("#issue_details div.issue-subtext textarea").focus();
-                }
             } else {
                 jQuery(this.el).removeClass("marked");
                 jQuery("#actionplan").hide();
                 jQuery("#checkbox-personal-issue").removeAttr('checked');
-                if (this.model.get("id") === "other") {
-                    jQuery("#issue_details div.issue-subtext textarea").hide();
-                }
             }
                 
             if (this.model.hasValidActionPlan()) {

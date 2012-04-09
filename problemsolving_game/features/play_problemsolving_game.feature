@@ -248,10 +248,10 @@ Feature: Problem Solving Activity
         # Assuming "other" barrier is #14. 
         When I select barrier 14
         Then barrier 14 has "focus"
+        Then I can specify my issue
         
         When I toggle personal challenge
         Then barrier 14 has "marked"
-        Then I can specify my issue
         Then I specify my issue as "abc"
         
         When I select barrier 13
@@ -264,11 +264,10 @@ Feature: Problem Solving Activity
         
         When I toggle personal challenge
         Then barrier 14 does not have "marked"
-        Then I cannot specify my issue
+        Then I can specify my issue
         
         When I toggle personal challenge
         Then barrier 14 has "marked"
-        Then I can specify my issue
         My issue is "abc"
         
         When I click the "Next" link
