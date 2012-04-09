@@ -103,7 +103,10 @@
         }
         if (all_done) {
             if (section === 'drugaudit') {
-                goal_state[section].total = (gs.q1 >= 3 || gs.q3 >= 3 || gs.q4 >= 1 || gs.q5 >= 1) ? 1 : 0;
+                // Respondent screens positive if response to question 1 or 2 ³ 3,
+                // or response to question 3 or 4 ³ 1.
+                // Question 5 is not scored.
+                goal_state[section].total = (gs.q1 >= 3 || gs.q2 >= 3 || gs.q3 >= 1 || gs.q4 >= 1) ? 1 : 0;
             } else {
                 goal_state[section].total = total;
             }
@@ -125,7 +128,7 @@
         var found = false;
         while (--i >= 0) {
             var range = parseInt(ranges[i].id.substr(1), 10);
-            if (!isNaN(range)) { 
+            if (!isNaN(range)) {
                 if (total >= range && !found) {
                     found = true;
                     MD.addElementClass(ranges[i], 'inrange');
