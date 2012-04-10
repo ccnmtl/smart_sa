@@ -25,78 +25,78 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
 
       When I click on Session 1
       When I click on Activity 1
-      Then I am on the Activity 1 page
+      Then I am on the "Session Objectives" Activity
       When I click on Complete Activity
       When I click on Session 1
       When I click on Activity 2
-      Then I am on the Activity 2 page
+      Then I am on the "Welcome to Masivukeni!" Activity
       When I click on Complete Activity
       When I click on Session 1
       When I click on Activity 3
-      Then I am on the Activity 3 page
+      Then I am on the "Today" Activity
       When I click on Complete Activity
       When I click on Session 1
       When I click on Activity 4
-      Then I am on the Activity 4 page
+      Then I am on the "Working Together" Activity
       When I click on Complete Activity
       When I click on Session 1
       When I click on Activity 5
-      Then I am on the Activity 5 page
+      Then I am on the "What are ARVs" Activity
       When I click on Complete Activity
       When I click on Session 1
       When I click on Activity 6
-      Then I am on the Activity 6 page
+      Then I am on the "Getting to Know ARVs" Activity
       When I click on Complete Activity
       When I click on Session 1
       When I click on Activity 7
-      Then I am on the Activity 7 page
+      Then I am on the "Taking ARVs" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 8
-      Then I am on the Activity 8 page
+      Then I am on the "How Are You?" Activity
       When I click on Complete Activity
       When I click on Session 1
       When I click on Activity 9
-      Then I am on the Activity 9 page
+      Then I am on the "Mood Screen" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 10
-      Then I am on the Activity 10 page
+      Then I am on the "Alcohol Screen" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 11
-      Then I am on the Activity 11 page
+      Then I am on the "Drug Screen" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 12
-      Then I am on the Activity 12 page
+      Then I am on the "Treatment Support" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 13
-      Then I am on the Activity 13 page
+      Then I am on the "Disclosure is Important" Activity
       When I click on Complete Activity
       When I click on Session 1
       When I click on Activity 14
-      Then I am on the Activity 14 page
+      Then I am on the "Choosing a Buddy" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 15
-      Then I am on the Activity 15 page
+      Then I am on the "Next Steps with Buddy" Activity
       When I click on Complete Activity
       When I click on Session 1
       When I click on Activity 16
-      Then I am on the Activity 16 page
+      Then I am on the "Reasons to Stay Healthy" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 17
-      Then I am on the Activity 17 page
+      Then I am on the "End Session" Activity
       When I click on Complete Activity
       When I click on Session 1
       
@@ -105,59 +105,59 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
 
       When I click on Session 2
       When I click on Activity 1
-      Then I am on the Activity 1 page
+      Then I am on the "Session Objectives" Activity
       When I click on Complete Activity
       When I click on Session 2
       When I click on Activity 2
-      Then I am on the Activity 2 page
+      Then I am on the "Welcome" Activity
       When I click on Complete Activity
       When I click on Session 2
       When I click on Activity 3
-      Then I am on the Activity 3 page
+      Then I am on the "Supporting Each Other" Activity
       When I click on Complete Activity
       When I click on Session 2
       When I click on Activity 4
-      Then I am on the Activity 4 page
+      Then I am on the "Today" Activity
       When I click on Complete Activity
       When I click on Session 2
       When I click on Activity 5
-      Then I am on the Activity 5 page
+      Then I am on the "What is HIV" Activity
       When I click on Complete Activity
       When I click on Session 2
       When I click on Activity 6
-      Then I am on the Activity 6 page
+      Then I am on the "How HIV Works" Activity
       When I click on Complete Activity
       When I click on Session 2
       When I click on Activity 7
-      Then I am on the Activity 7 page
+      Then I am on the "What HIV Does" Activity
       When I click on Complete Activity
       When I click on Session 2
       When I click on Activity 8
-      Then I am on the Activity 8 page
+      Then I am on the "HIV Symptoms" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 2
       When I click on Activity 9
-      Then I am on the Activity 9 page
+      Then I am on the "ARVs and Adherence" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 2
       When I click on Activity 10
-      Then I am on the Activity 10 page
+      Then I am on the "How Adherence Works" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 2
       When I click on Activity 11
-      Then I am on the Activity 11 page
+      Then I am on the "Your Questions" Activity
       When I click on Complete Activity
       When I click on Session 2
       When I click on Activity 12
-      Then I am on the Activity 12 page
+      Then I am on the "Reasons to Stay Healthy" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 2
       When I click on Activity 13
-      Then I am on the Activity 13 page
+      Then I am on the "End Session" Activity
       When I click on Complete Activity
       When I click on Session 2
       
@@ -166,59 +166,59 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
 
       When I click on Session 3
       When I click on Activity 1
-      Then I am on the Activity 1 page
+      Then I am on the "Session Objectives" Activity
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 2
-      Then I am on the Activity 2 page
+      Then I am on the "Welcome to Session 3!" Activity
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 3
-      Then I am on the Activity 3 page
+      Then I am on the "Your ARVs" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 3
       When I click on Activity 4
-      Then I am on the Activity 4 page
+      Then I am on the "Your ARVs" Activity
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 5
-      Then I am on the Activity 5 page
+      Then I am on the "Adherence Is Crucial" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 3
       When I click on Activity 6
-      Then I am on the Activity 6 page
+      Then I am on the "Adherence Helpers" Activity
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 7
-      Then I am on the Activity 7 page
+      Then I am on the "Adherence Challenges" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 3
       When I click on Activity 8
-      Then I am on the Activity 8 page
+      Then I am on the "Overcoming Challenges" Activity
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 9
-      Then I am on the Activity 9 page
+      Then I am on the "Your Treatment Team" Activity
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 10
-      Then I am on the Activity 10 page
+      Then I am on the "Healthy Living" Activity
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 11
-      Then I am on the Activity 11 page
+      Then I am on the "Reasons to Stay Healthy" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 3
       When I click on Activity 12
-      Then I am on the Activity 12 page
+      Then I am on the "Commitment to Health" Activity
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 13
-      Then I am on the Activity 13 page
+      Then I am on the "End Session" Activity
       When I click on Complete Activity
       When I click on Session 3
       
@@ -227,87 +227,87 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
 
       When I click on Session 4
       When I click on Activity 1
-      Then I am on the Activity 1 page
+      Then I am on the "Session Objectives" Activity
       When I click on Complete Activity
       When I click on Session 4
       When I click on Activity 2
-      Then I am on the Activity 2 page
+      Then I am on the "Welcome back" Activity
       When I click on Complete Activity
       When I click on Session 4
       When I click on Activity 3
-      Then I am on the Activity 3 page
+      Then I am on the "Mood Screening" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 4
-      Then I am on the Activity 4 page
+      Then I am on the "Alcohol Screening" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 5
-      Then I am on the Activity 5 page
+      Then I am on the "Drug Screening" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 6
-      Then I am on the Activity 6 page
+      Then I am on the "HIV, ARVs, and Health" Activity
       When I click on Complete Activity
       When I click on Session 4
       When I click on Activity 7
-      Then I am on the Activity 7 page
+      Then I am on the "Your Regimen" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 8
-      Then I am on the Activity 8 page
+      Then I am on the "Adherence Challenges" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 9
-      Then I am on the Activity 9 page
+      Then I am on the "Overcoming Challenges" Activity
       When I click on Complete Activity
       When I click on Session 4
       When I click on Activity 10
-      Then I am on the Activity 10 page
+      Then I am on the "Overcoming Challenges" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 11
-      Then I am on the Activity 11 page
+      Then I am on the "Your Community, Your Tree" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 12
-      Then I am on the Activity 12 page
+      Then I am on the "Reasons to Stay Healthy" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 13
-      Then I am on the Activity 13 page
+      Then I am on the "End Session" Activity
       When I click on Complete Activity
       When I click on Session 4
       When I click on Activity 14
-      Then I am on the Activity 14 page
+      Then I am on the "OPTIONAL: Snakes and Soldiers Video" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 15
-      Then I am on the Activity 15 page
+      Then I am on the "OPTIONAL: Joseph and Hope Video" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 16
-      Then I am on the Activity 16 page
+      Then I am on the "OPTIONAL: Island Activity 1" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 17
-      Then I am on the Activity 17 page
+      Then I am on the "OPTIONAL: Island Activity 2" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 18
-      Then I am on the Activity 18 page
+      Then I am on the "OPTIONAL: Support Tree" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 4
@@ -317,58 +317,58 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
 
       When I click on Session 5
       When I click on Activity 1
-      Then I am on the Activity 1 page
+      Then I am on the "Session Objectives" Activity
       When I click on Complete Activity
       When I click on Session 5
       When I click on Activity 2
-      Then I am on the Activity 2 page
+      Then I am on the "Welcome Back" Activity
       When I click on Complete Activity
       When I click on Session 5
       When I click on Activity 3
-      Then I am on the Activity 3 page
+      Then I am on the "HIV, ARVs and Health" Activity
       When I click on Complete Activity
       When I click on Session 5
       When I click on Activity 4
-      Then I am on the Activity 4 page
+      Then I am on the "Overcoming Challenges" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 5
-      Then I am on the Activity 5 page
+      Then I am on the "Overcoming Challenges" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 6
-      Then I am on the Activity 6 page
+      Then I am on the "End Session" Activity
       When I click on Complete Activity
       When I click on Session 5
       When I click on Activity 7
-      Then I am on the Activity 7 page
+      Then I am on the "OPTIONAL: Snakes and Soldiers Video" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 8
-      Then I am on the Activity 8 page
+      Then I am on the "OPTIONAL: Joseph and Hope Video" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 9
-      Then I am on the Activity 9 page
+      Then I am on the "OPTIONAL: Island Activity 1" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 10
-      Then I am on the Activity 10 page
+      Then I am on the "OPTIONAL: Island Activity 2" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 11
-      Then I am on the Activity 11 page
+      Then I am on the "OPTIONAL: Support Tree" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 12
-      Then I am on the Activity 12 page
+      Then I am on the "OPTIONAL: Your Regimen" Activity
       When I click the "Next" link
       Then there is a game
       When I click on Session 5

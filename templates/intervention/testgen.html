@@ -25,7 +25,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
 
       When I click on Session {{session.index}}
       {% for activity in session.activity_set.all %}When I click on Activity {{activity.index}}
-      Then I am on the Activity {{activity.index}} page
+      Then I am on the "{{activity.long_title}}" Activity
       {% if activity.game %}When I click the "Next" link
       Then there is a game
       {% else %}When I click on Complete Activity

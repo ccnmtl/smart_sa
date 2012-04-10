@@ -328,8 +328,8 @@ a#endintervention
 
 #breadcrumb-text
 {
-	/*display: block;*/
-	display: none;
+/*	display: block; */
+	display: none; 
 	position: absolute;
 	left: 170px;
 	top: 16px;
