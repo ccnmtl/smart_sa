@@ -50,7 +50,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 1
       When I click on Activity 7
       Then I am on the "Taking ARVs" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 8
@@ -59,22 +59,22 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 1
       When I click on Activity 9
       Then I am on the "Mood Screen" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 10
       Then I am on the "Alcohol Screen" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 11
       Then I am on the "Drug Screen" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 12
       Then I am on the "Treatment Support" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 13
@@ -83,7 +83,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 1
       When I click on Activity 14
       Then I am on the "Choosing a Buddy" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 15
@@ -92,7 +92,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 1
       When I click on Activity 16
       Then I am on the "Reasons to Stay Healthy" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 1
       When I click on Activity 17
@@ -134,17 +134,17 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 2
       When I click on Activity 8
       Then I am on the "HIV Symptoms" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 2
       When I click on Activity 9
       Then I am on the "ARVs and Adherence" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 2
       When I click on Activity 10
       Then I am on the "How Adherence Works" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 2
       When I click on Activity 11
@@ -153,7 +153,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 2
       When I click on Activity 12
       Then I am on the "Reasons to Stay Healthy" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 2
       When I click on Activity 13
@@ -175,7 +175,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 3
       When I click on Activity 3
       Then I am on the "Your ARVs" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 3
       When I click on Activity 4
@@ -184,7 +184,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 3
       When I click on Activity 5
       Then I am on the "Adherence Is Crucial" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 3
       When I click on Activity 6
@@ -193,7 +193,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 3
       When I click on Activity 7
       Then I am on the "Adherence Challenges" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 3
       When I click on Activity 8
@@ -210,7 +210,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 3
       When I click on Activity 11
       Then I am on the "Reasons to Stay Healthy" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 3
       When I click on Activity 12
@@ -236,17 +236,17 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 4
       When I click on Activity 3
       Then I am on the "Mood Screening" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 4
       Then I am on the "Alcohol Screening" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 5
       Then I am on the "Drug Screening" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 6
@@ -255,12 +255,12 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 4
       When I click on Activity 7
       Then I am on the "Your Regimen" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 8
       Then I am on the "Adherence Challenges" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 9
@@ -269,17 +269,17 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 4
       When I click on Activity 10
       Then I am on the "Overcoming Challenges" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 11
       Then I am on the "Your Community, Your Tree" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 12
       Then I am on the "Reasons to Stay Healthy" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 13
@@ -288,27 +288,27 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 4
       When I click on Activity 14
       Then I am on the "OPTIONAL: Snakes and Soldiers Video" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 15
       Then I am on the "OPTIONAL: Joseph and Hope Video" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 16
       Then I am on the "OPTIONAL: Island Activity 1" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 17
       Then I am on the "OPTIONAL: Island Activity 2" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 18
       Then I am on the "OPTIONAL: Support Tree" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       
@@ -330,12 +330,12 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 5
       When I click on Activity 4
       Then I am on the "Overcoming Challenges" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 5
       Then I am on the "Overcoming Challenges" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 6
@@ -344,32 +344,32 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 5
       When I click on Activity 7
       Then I am on the "OPTIONAL: Snakes and Soldiers Video" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 8
       Then I am on the "OPTIONAL: Joseph and Hope Video" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 9
       Then I am on the "OPTIONAL: Island Activity 1" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 10
       Then I am on the "OPTIONAL: Island Activity 2" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 11
       Then I am on the "OPTIONAL: Support Tree" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 12
       Then I am on the "OPTIONAL: Your Regimen" Activity
-      When I click the "Next" link
+      When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       

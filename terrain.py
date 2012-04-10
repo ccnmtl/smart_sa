@@ -333,9 +333,7 @@ def then_there_is_button(step, label):
 def then_there_is_navbutton(step, label):
     found = False
     n = len(world.dom.cssselect('a.navlink'))
-#    import pdb; pdb.set_trace()
     for a in world.dom.cssselect('a.navlink'):
-#        assert False, a.text.strip()
         if a.text.strip().lower() == label.strip().lower():
             found = True
     assert found
