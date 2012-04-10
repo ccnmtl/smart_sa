@@ -134,15 +134,18 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 2
       When I click on Activity 8
       Then I am on the Activity 8 page
-      When I click on Complete Activity
+      When I click the "Next" link
+      Then there is a game
       When I click on Session 2
       When I click on Activity 9
       Then I am on the Activity 9 page
-      When I click on Complete Activity
+      When I click the "Next" link
+      Then there is a game
       When I click on Session 2
       When I click on Activity 10
       Then I am on the Activity 10 page
-      When I click on Complete Activity
+      When I click the "Next" link
+      Then there is a game
       When I click on Session 2
       When I click on Activity 11
       Then I am on the Activity 11 page
@@ -155,25 +158,6 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 2
       When I click on Activity 13
       Then I am on the Activity 13 page
-      When I click the "Next" link
-      Then there is a game
-      When I click on Session 2
-      When I click on Activity 14
-      Then I am on the Activity 14 page
-      When I click the "Next" link
-      Then there is a game
-      When I click on Session 2
-      When I click on Activity 15
-      Then I am on the Activity 15 page
-      When I click on Complete Activity
-      When I click on Session 2
-      When I click on Activity 16
-      Then I am on the Activity 16 page
-      When I click the "Next" link
-      Then there is a game
-      When I click on Session 2
-      When I click on Activity 17
-      Then I am on the Activity 17 page
       When I click on Complete Activity
       When I click on Session 2
       
@@ -209,7 +193,8 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 3
       When I click on Activity 7
       Then I am on the Activity 7 page
-      When I click on Complete Activity
+      When I click the "Next" link
+      Then there is a game
       When I click on Session 3
       When I click on Activity 8
       Then I am on the Activity 8 page
@@ -230,6 +215,10 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Session 3
       When I click on Activity 12
       Then I am on the Activity 12 page
+      When I click on Complete Activity
+      When I click on Session 3
+      When I click on Activity 13
+      Then I am on the Activity 13 page
       When I click on Complete Activity
       When I click on Session 3
       
