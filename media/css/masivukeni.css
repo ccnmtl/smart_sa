@@ -286,8 +286,8 @@ h4
 
 a#endintervention
 {
-	width: 240px;
-	padding: 6px 0px 16px 24px;
+	width: 220px;
+	padding: 8px 0px 16px 24px;
 	background-image: url(../images/icon_complete.png);
 	background-repeat: no-repeat;
 	background-position: 8px 7px;
@@ -299,7 +299,7 @@ a#endintervention
 	border-bottom-right-radius: 0px;
 	position: absolute;
 	top: 54px;
-	right: 253px;
+	right: 233px;
 }
 
 #breadcrumb a#tab-home
