@@ -200,7 +200,7 @@
                 jQuery(srcElement).hide();
                 return true;
             } else {
-                alert("Please enter a pill name");
+                alert("Please enter a name for this medication before continuing.");
                 jQuery(srcElement).focus();
                 return false;
             }

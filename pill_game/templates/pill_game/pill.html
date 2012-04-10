@@ -25,7 +25,7 @@
                 <h4>Practice Regimen</h4>
             {% else %}
                 <h4>Medication List</h4>
-                <div><a class="add-a-pill" href="#">Add a Pill</a></div>
+                <div><a id="add-a-pill" class="add-a-pill" href="#">Add a Pill</a></div>
             {% endifequal %}
         </div>
         
@@ -39,9 +39,7 @@
             
         <div class="pill-buckets">
             <div id="day" class="pill-bucket-container">
-               <div class="pill-bucket day">            
-                   <div id="day_pill_info_text" class="printonly">Inline Pill Info</div>
-                </div>
+               <div class="pill-bucket day"></div>
                 <div id="day_time" class="time">
                    <label for="day_pills_time" class="printonly">Time:</label>
                    <select id="day_pills_time" size="1">

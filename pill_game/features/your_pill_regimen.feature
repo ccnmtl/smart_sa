@@ -20,6 +20,7 @@ Feature: Your Pill Regimen
     Scenario: Verify Real Mode
         Using selenium
         There is a "Medication List" title
+        There is an Add Pill button
         There are 0 pills
         When I click the "Add a Pill" link
         Then there are 1 pills
