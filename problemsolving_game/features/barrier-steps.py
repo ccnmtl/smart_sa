@@ -2,11 +2,6 @@ from lettuce.django import django_url
 from lettuce import before, after, world, step
 import sys, time
 
-#    sys.stderr.write('BARRIER: %s, ELTS: %s' % (barrier, len(a)))
-#    sys.stderr.flush();
-
-
-
 @step(u'I toggle personal challenge')
 def i_toggle_personal_challenge(step):
     if not world.using_selenium:

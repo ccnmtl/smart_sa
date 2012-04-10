@@ -198,6 +198,11 @@
             if (val.length) {
                 jQuery(srcElement).prev('span').html(val).show();
                 jQuery(srcElement).hide();
+                return true;
+            } else {
+                alert("Please enter a pill name");
+                jQuery(srcElement).focus();
+                return false;
             }
         },
         onRemovePill: function () {
@@ -319,10 +324,18 @@
             if (jQuery(element).hasClass("trashable") && _.has(this.pillViews, element.id)) {
                 global.dropped = true;
             } else {
+                var pillId = jQuery(element).data("id");
+                var pill = this.gameView.pills.get(pillId);
+                if (pill.get("name").length < 1) {
+                    alert("Please enter a name for this medication before continuing.");
+                    return false;
+                }
+                
                 var elt = jQuery(element).offset();
                 var me = jQuery(this.el).offset();
+                
                 this.addPillView({
-                    'pillId': jQuery(element).data("id"),
+                    'pillId': pillId,
                     'left': (elt.left - me.left) + "px",
                     'top': (elt.top - me.top) + "px"
                 });

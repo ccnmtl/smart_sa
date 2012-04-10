@@ -1,7 +1,6 @@
 Feature: Problem Solving Activity
     ## Notes
     ## Barrier is currently in Session 4, Activity 10
-    ## Warning: User data is cleared between scenarios.  
 
     Scenario: Find activity
         Using selenium
