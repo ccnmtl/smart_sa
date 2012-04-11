@@ -26,9 +26,54 @@ Feature: Practice Pill Regimen
         There is a pill named "3TC"
         There is a pill named "Efavirenz"
         
+    Scenario: Specify pill dosage schedule
+        Specify "daytime" schedule as "06:00"
+        Specify "evening" schedule as "19:00"
+        
     Scenario: Drop a pill into the daytime bucket
         Using selenium
-        Drop "D4T" into the "day" slot
-        There is 1 "D4T" in the "day" slot
+        When I drop "D4T" into the "daytime" slot
+        Then there is 1 "D4T" in the "daytime" slot
+        
+    Scenario: Drag a pill from the daytime bucket to the nighttime bucket
+        Using selenium
+        When I drag "D4T" from the "daytime" slot into the "evening" slot
+        Then there is 0 "D4T" in the "daytime" slot
+        Then there is 1 "D4T" in the "evening" slot
+        
+    Scenario: Drop a pill into the nighttime bucket
+        Using selenium
+        When I drop "3TC" into the "evening" slot
+        Then there is 1 "3TC" in the "evening" slot
+        
+    Scenario: State is not saved in practice mode
+        Using selenium
+        When I click the "Next" link
+        When I click the "Back" link
+        Then there are no pills in the "daytime" slot
+        Then there are no pills in the "evening" slot
+        Then the "daytime" schedule is "00:00"
+        Then the "evening" schedule is "12:00"
+        
+    Scenario: Drop disabled when "not available" is selected
+        Using selenium
+        When I specify "daytime" schedule as "Not taken during the day"
+        When I specify "evening" schedule as "Not taken during the day"
+        When I drop "D4T" into the "daytime" slot
+        Then there is 0 "D4T" in the "daytime" slot
+        When I drop "3TC" into the "evening" slot
+        Then there is 0 "3TC" in the "evening" slot
+        
+    Scenario: Pills are deleted when a time slot is disabled
+        Specify "daytime" schedule as "00:00"
+        Specify "evening" schedule as "12:00"
+        When I drop "D4T" into the "daytime" slot
+        Then there is 1 "D4T" in the "daytime" slot
+        When I drop "3TC" into the "evening" slot
+        Then there is 1 "3TC" in the "evening" slot
+        When I specify "daytime" schedule as "Not taken during the day"
+        When I specify "evening" schedule as "Not taken during the day"
+        Then there is 0 "D4T" in the "daytime" slot
+        Then there is 0 "3TC" in the "evening" slot
         
         
