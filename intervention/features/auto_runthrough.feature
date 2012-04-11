@@ -179,7 +179,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       Then there is a game
       When I click on Session 3
       When I click on Activity 4
-      Then I am on the "Your ARVs" Activity
+      Then I am on the "Starting ARVs" Activity
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 5
@@ -209,15 +209,31 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Complete Activity
       When I click on Session 3
       When I click on Activity 11
+      Then I am on the "Eat Well" Activity
+      When I click on Complete Activity
+      When I click on Session 3
+      When I click on Activity 12
+      Then I am on the "Exercise" Activity
+      When I click on Complete Activity
+      When I click on Session 3
+      When I click on Activity 13
+      Then I am on the "Keep Safe" Activity
+      When I click on Complete Activity
+      When I click on Session 3
+      When I click on Activity 14
+      Then I am on the "Find Help" Activity
+      When I click on Complete Activity
+      When I click on Session 3
+      When I click on Activity 15
       Then I am on the "Reasons to Stay Healthy" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 3
-      When I click on Activity 12
+      When I click on Activity 16
       Then I am on the "Commitment to Health" Activity
       When I click on Complete Activity
       When I click on Session 3
-      When I click on Activity 13
+      When I click on Activity 17
       Then I am on the "End Session" Activity
       When I click on Complete Activity
       When I click on Session 3
@@ -250,13 +266,13 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       Then there is a game
       When I click on Session 4
       When I click on Activity 6
-      Then I am on the "HIV, ARVs, and Health" Activity
-      When I click on Complete Activity
-      When I click on Session 4
-      When I click on Activity 7
-      Then I am on the "Your Regimen" Activity
+      Then I am on the "Your ARVs" Activity
       When I click the "Next →" link
       Then there is a game
+      When I click on Session 4
+      When I click on Activity 7
+      Then I am on the "HIV, ARVs, and Health" Activity
+      When I click on Complete Activity
       When I click on Session 4
       When I click on Activity 8
       Then I am on the "Adherence Challenges" Activity
@@ -287,27 +303,27 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Complete Activity
       When I click on Session 4
       When I click on Activity 14
-      Then I am on the "OPTIONAL: Snakes and Soldiers Video" Activity
+      Then I am on the "OPTION: Snakes and Soldiers Video" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 15
-      Then I am on the "OPTIONAL: Joseph and Hope Video" Activity
+      Then I am on the "OPTION: Joseph and Hope Video" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 16
-      Then I am on the "OPTIONAL: Island Activity 1" Activity
+      Then I am on the "OPTION: Island Activity 1" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 17
-      Then I am on the "OPTIONAL: Island Activity 2" Activity
+      Then I am on the "OPTION: Island Activity 2" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 4
       When I click on Activity 18
-      Then I am on the "OPTIONAL: Support Tree" Activity
+      Then I am on the "OPTION: Support Tree" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 4
@@ -343,17 +359,17 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on Complete Activity
       When I click on Session 5
       When I click on Activity 7
-      Then I am on the "OPTIONAL: Snakes and Soldiers Video" Activity
+      Then I am on the "OPTION: Snakes and Soldiers Video" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 8
-      Then I am on the "OPTIONAL: Joseph and Hope Video" Activity
+      Then I am on the "OPTION: Joseph and Hope Video" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 9
-      Then I am on the "OPTIONAL: Island Activity 1" Activity
+      Then I am on the "OPTION: Island Activity 1" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 5
@@ -363,12 +379,12 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       Then there is a game
       When I click on Session 5
       When I click on Activity 11
-      Then I am on the "OPTIONAL: Support Tree" Activity
+      Then I am on the "OPTION: Support Tree" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 5
       When I click on Activity 12
-      Then I am on the "OPTIONAL: Your Regimen" Activity
+      Then I am on the "OPTION: Your Regimen" Activity
       When I click the "Next →" link
       Then there is a game
       When I click on Session 5
