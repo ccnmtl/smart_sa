@@ -20,6 +20,9 @@
 <p><b>Defaulter?</b> <input type="checkbox" name="defaulter" {% if participant.defaulter %}checked="checked" {% endif %}/></p>
 <p><b>Active?</b> <input type="checkbox" name="status" 
 {% if participant.status %}checked="checked"{% endif %} /></p>
+<p><b>Gender</b> <label><input type="radio" name="gender" value="male"
+			       {% ifequal participant.gender "male" %}checked="checked"{% endifequal %} />Male</label>
+<label><input type="radio" name="gender" value="female" {% ifequal participant.gender "female" %}checked="checked"{% endifequal %} />Female</label></p>
 <p><b>Clinical Notes</b><br />
 <textarea name="clinical_notes" rows="5" cols="70">{{participant.clinical_notes}}</textarea></p>
 <input type="submit" value="Done" />

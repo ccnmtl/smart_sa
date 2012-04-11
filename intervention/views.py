@@ -133,6 +133,7 @@ def add_participant(request):
                                        id_number=request.POST.get('id_number',''),
                                        status=request.POST.get('status','') == 'on',
                                        defaulter=(request.POST.get('defaulter','') == 'on'),
+                                       gender=request.POST.get('gender','male'),
                                        clinical_notes=request.POST.get('clinical_notes',''),
                                        )
         return HttpResponseRedirect("/manage/")
@@ -157,8 +158,9 @@ def edit_participant(request,participant_id):
         new_id_number = request.POST.get('new_id_number',False)
         if old_id_number and new_id_number and old_id_number == p.id_number:
             p.id_number = new_id_number
-        p.status = request.POST.get('status') == 'on'
-        p.defaulter = request.POST.get('defaulter') == 'on'
+        p.status = request.POST.get('status','') == 'on'
+        p.defaulter = request.POST.get('defaulter','') == 'on'
+        p.gender = request.POST.get('gender','male')
         p.save()
         return HttpResponseRedirect("/manage/")
     return dict(participant=p)

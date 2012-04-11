@@ -450,6 +450,7 @@ class Participant(models.Model):
     status = models.BooleanField(default=True)
     clinical_notes = models.TextField(default="",blank=True)
     buddy_name = models.CharField(max_length=256,default="",blank=True)
+    gender = models.CharField(max_length=16,default="male",choices=[('male','Male'),('female','Female'),])
 
     # referral info fields
     initial_referral_mental_health = models.BooleanField(default=False)
