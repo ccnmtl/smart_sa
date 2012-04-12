@@ -29,7 +29,8 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       {% if activity.game %}When I click the "Next →" link
       Then there is a game
       {% else %}When I click on Complete Activity
-      {% endif %}When I click on Session {{session.index}}
+      {% endif %}
+      When I click on the Session Home
       {% endfor %}
    {% endfor %}
 {% endfor %}

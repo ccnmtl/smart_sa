@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from lettuce.django import django_url
 from lettuce import before, after, world, step
 from django.test import client
@@ -185,8 +186,22 @@ def i_am_on_the_intervention_page(step):
 def i_click_session(step, session_number):
     if not world.using_selenium:
         assert False, "this step needs to be implemented for the django test client"
-    link = world.firefox.find_element_by_partial_link_text("Session %s:" % session_number)
+    try:
+        link = world.firefox.find_element_by_id("session%s" % session_number)
+    except:
+        import pdb;pdb.set_trace()
     link.click()
+
+@step(u'I click on the Session Home')
+def i_click_on_the_session_home(step):
+    if not world.using_selenium:
+        assert False, "this step needs to be implemented for the django test client"
+    try:
+        link = world.firefox.find_elements_by_css_selector("h2#sessioninfo a")[0]
+        link.click()
+    except:
+        # if we can't find the sessioninfo element, it just means that we're already there
+        pass
 
 @step(u'I click on Activity (\d+)')
 def i_click_activity(step, activity_number):
@@ -204,7 +219,7 @@ def i_click_on_complete_activity(step):
     if not world.using_selenium:
         assert False, "this step needs to be implemented for the django test client"
     try:
-        link = world.firefox.find_element_by_partial_link_text("Next")
+        link = world.firefox.find_element_by_partial_link_text("Next →")
         link.click()
     except:
         link = world.firefox.find_element_by_partial_link_text("Wrap-Up")
