@@ -14,7 +14,7 @@ Feature: Practice Pill Regimen
         
         When I click on Session 1
         When I click on Activity 7
-        When I click the "Next" link
+        When I click the "Next →" link
         Then there is a game
         
     Scenario: Verify Practice Mode
@@ -26,54 +26,65 @@ Feature: Practice Pill Regimen
         There is a pill named "3TC"
         There is a pill named "Efavirenz"
         
-    Scenario: Specify pill dosage schedule
-        Specify "daytime" schedule as "06:00"
-        Specify "evening" schedule as "19:00"
+    Scenario: Specify pill dosage time
+        When I specify "daytime" time as "06:00"
+        When I specify "evening" time as "19:00"
         
     Scenario: Drop a pill into the daytime bucket
         Using selenium
-        When I drop "D4T" into the "daytime" slot
-        Then there is 1 "D4T" in the "daytime" slot
+        When I drop "D4T" onto "daytime"
+        Then there is 1 "D4T" in "daytime"
         
     Scenario: Drag a pill from the daytime bucket to the nighttime bucket
         Using selenium
-        When I drag "D4T" from the "daytime" slot into the "evening" slot
-        Then there is 0 "D4T" in the "daytime" slot
-        Then there is 1 "D4T" in the "evening" slot
+        When I drag "D4T" from "daytime" to "evening"
+        Then there is 0 "D4T" in "daytime"
+        Then there is 1 "D4T" in "evening"
         
     Scenario: Drop a pill into the nighttime bucket
         Using selenium
-        When I drop "3TC" into the "evening" slot
-        Then there is 1 "3TC" in the "evening" slot
+        When I drop "3TC" onto "evening"
+        Then there is 1 "3TC" in "evening"
         
     Scenario: State is not saved in practice mode
         Using selenium
-        When I click the "Next" link
-        When I click the "Back" link
-        Then there are no pills in the "daytime" slot
-        Then there are no pills in the "evening" slot
-        Then the "daytime" schedule is "00:00"
-        Then the "evening" schedule is "12:00"
+        When I click the "Next →" link
+        When I click the "← Back" link
+        Then I wait 1 second
+        Then there are no pills in "daytime"
+        Then there are no pills in "evening"
+        Then the "daytime" time is "00:00"
+        Then the "evening" time is "12:00"
         
     Scenario: Drop disabled when "not available" is selected
         Using selenium
-        When I specify "daytime" schedule as "Not taken during the day"
-        When I specify "evening" schedule as "Not taken during the day"
-        When I drop "D4T" into the "daytime" slot
-        Then there is 0 "D4T" in the "daytime" slot
-        When I drop "3TC" into the "evening" slot
-        Then there is 0 "3TC" in the "evening" slot
+        When I specify "daytime" time as "Not taken during the day"
+        When I specify "evening" time as "Not taken during the day"
+        When I drop "D4T" onto "daytime"
+        Then there is 0 "D4T" in "daytime"
+        When I drop "3TC" onto "evening"
+        Then there is 0 "3TC" in "evening"
         
     Scenario: Pills are deleted when a time slot is disabled
-        Specify "daytime" schedule as "00:00"
-        Specify "evening" schedule as "12:00"
-        When I drop "D4T" into the "daytime" slot
-        Then there is 1 "D4T" in the "daytime" slot
-        When I drop "3TC" into the "evening" slot
-        Then there is 1 "3TC" in the "evening" slot
-        When I specify "daytime" schedule as "Not taken during the day"
-        When I specify "evening" schedule as "Not taken during the day"
-        Then there is 0 "D4T" in the "daytime" slot
-        Then there is 0 "3TC" in the "evening" slot
+        Using selenium
+        Specify "daytime" time as "00:00"
+        Specify "evening" time as "12:00"
+        When I drop "D4T" onto "daytime"
+        Then there is 1 "D4T" in "daytime"
+        When I drop "3TC" onto "evening"
+        Then there is 1 "3TC" in "evening"
+        When I specify "daytime" time as "Not taken during the day"
+        When I specify "evening" time as "Not taken during the day"
+        Then there is 0 "D4T" in "daytime"
+        Then there is 0 "3TC" in "evening"
+        When I specify "daytime" time as "00:00"
+        When I specify "evening" time as "12:00"
+        
+    Scenario: Drag pill off the bucket
+        Using selenium
+        When I drop "D4T" onto "daytime"
+        Then there is 1 "D4T" in "daytime"
+        When I drag "D4T" from "daytime" to "evening"
+    
         
         
