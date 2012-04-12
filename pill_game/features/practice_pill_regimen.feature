@@ -84,7 +84,5 @@ Feature: Practice Pill Regimen
         Using selenium
         When I drop "D4T" onto "daytime"
         Then there is 1 "D4T" in "daytime"
-        When I drag "D4T" from "daytime" to "evening"
-    
-        
-        
+        When I drag "D4T" off "daytime"
+        Then there are no pills in "daytime"

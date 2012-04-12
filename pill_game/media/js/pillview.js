@@ -431,10 +431,9 @@
                     }
                 }
                 
-                
                 // Initiate the ajax call to saveState
                 global.Intervention.saveState(function (result) {
-                    if (result.responseText !== "ok") {
+                    if (result.status !== 200) {
                         alert("An error occurred while saving your information. Please try again.");
                     }
                 });

@@ -3,6 +3,7 @@ from lettuce import before, after, world, step
 from pill_game.models import PillGame
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.common.keys import Keys
 
 def find_pill(name):
     a = world.firefox.find_elements_by_css_selector('div.pill')
@@ -39,6 +40,11 @@ def there_is_a_pill_named_name(step, name):
     pill = find_pill(name)
     assert pill != None, "No pill named %s found" % name
     
+@step(u'There is no pill named "([^"]*)"')
+def there_is_no_pill_named_name(step, name):
+    pill = find_pill(name)
+    assert pill == None, "Pill named %s found" % name    
+    
 @step(u'There is not an Add Pill button')
 def there_is_not_an_add_pill_button(step):
     try:
@@ -59,7 +65,7 @@ def i_click_add_pill_button(step):
     i.click()
     
 @step(u'When I drop "([^"]*)" onto "([^"]*)"')
-def when_i_drop_pill_onto_time_slot(step, pill, time):
+def when_i_drop_pill_onto_time(step, pill, time):
     pill = find_pill(pill)
     assert pill != None, "No pill named %s found." % pill
     
@@ -121,8 +127,14 @@ def then_there_are_no_pills_in_timeslot(step, timeslot):
 
     a = bucket.find_elements_by_css_selector('span.trashable')
     assert len(a) == 0, "Expected no pills in bucket %s, instead it contains %s pills" % (bucket, len(a))
-    
 
+@step(u'Then there are (\d+) pills in "([^"]*)"')
+def then_there_are_count_pills_in_timeslot(step, count, timeslot):
+    bucket = get_bucket(timeslot)
+    assert bucket != None, "Time slot must be specified as day or evening. No time slot called %s found" % time
+
+    a = bucket.find_elements_by_css_selector('span.trashable')
+    assert len(a) == int(count), "Expected %s pills in bucket %s, instead it contains %s pills" % (count, bucket, len(a))
 
 @step(u'When I drag "([^"]*)" from "([^"]*)" to "([^"]*)"')
 def when_i_drag_pill_from_time1_to_time2(step, pill, time1, time2):
@@ -151,6 +163,36 @@ def when_i_drag_pill_from_time1_to_time2(step, pill, time1, time2):
             action = True
             
     assert action, "No dropped pills named %s found in %s slot" % (pill, time1)    
+    
+    
+@step(u'When I drag "([^"]*)" off "([^"]*)"')
+def when_i_drag_pill_off_time(step, pill, time):
+        # get the data id for this pill
+    pill = find_pill(pill)
+    assert pill != None, "No pill named %s found. %s" % (pill, count)
+    draggable = pill.find_element_by_css_selector("div.pill-image span.draggable")
+    assert draggable != None, "This pill is not constructed properly" % pill
+    data_id = draggable.get_attribute("data-id")
+    
+    bucket = get_bucket(time)
+    assert bucket != None, "Source time slot must be specified as day or evening. No time slot called %s found" % time
+    
+    dest = world.firefox.find_element_by_id('pill-game-container')
+    assert dest != None, "Destination time slot must be specified as day or evening. No time slot called %s found" % time
+
+    a = bucket.find_elements_by_css_selector('span.trashable')
+    assert len(a) > 0, "Expected at least 1 pill in bucket %s, instead it contains %s pills" % (bucket, len(a))
+    
+    action = False
+    for dropped in a:
+        if (data_id == dropped.get_attribute("data-id")):
+            # found it, now, drag it to the second bucket
+            action_chains = ActionChains(world.firefox)
+            action_chains.drag_and_drop(dropped, dest).perform()
+            action = True
+            
+    assert action, "No dropped pills named %s found in %s slot" % (pill, time1)    
+    
     
 @step(u'Specify "([^"]*)" time as "([^"]*)"')
 def specify_timeslot_time_as_time(step, timeslot, time):
@@ -184,14 +226,14 @@ def then_the_timeslot_time_is_time(step, timeslot, time):
 
 @step(u"Then I'm asked to enter a pill name")
 def then_i_m_asked_to_enter_a_pill_name(step):
-    time.sleep(1)
     alert = world.firefox.switch_to_alert()
-    time.sleep(1)
-    assert alert.text.startswith("Please enter a name for this medication")
-    time.sleep(1)
+    assert alert.text.startswith("Please enter a name for this medication"), "Alert text valid"
     alert.accept()
-    time.sleep(1)
     
+@step(u"Then I dismiss second dialog")
+def then_i_dismiss_second_dialog(step):
+    alert = world.firefox.switch_to_alert()
+    alert.accept()    
     
 @step(u'When I name pill (\d+) "([^"]*)"')
 def when_i_name_pill_index_name(step, index, name):
@@ -202,17 +244,19 @@ def when_i_name_pill_index_name(step, index, name):
     
     input = pill.find_element_by_css_selector('div.pill-text input')
     input.send_keys(name)
+    
+    # click outside the input box to force blur event
+    elt = world.firefox.find_element_by_id('pill-game-container')
+    elt.click()
 
 @step(u'Then I wait (\d+) second')
 def then_i_wait_count_second(step, count):
     n = int(count)
     time.sleep(n)
     
-
-@step(u'When I name pill 2 "([^"]*)"')
-def when_i_name_pill_2_group1(step, group1):
-    assert False, 'This step must be implemented'
-@step(u'When I name pill 3 "([^"]*)"')
-def when_i_name_pill_3_group1(step, group1):
-    assert False, 'This step must be implemented'
+@step(u'When I delete "([^"]*)"')
+def when_i_delete_pill(step, pill):
+    pill = find_pill(pill)
+    delete_button = pill.find_element_by_css_selector('input.pill-delete-image')
+    delete_button.click()    
 
