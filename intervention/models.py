@@ -113,6 +113,7 @@ class ClientSession (models.Model):
                 collect_notes=a.get('collect_notes',False),
                 collect_buddy_name=a.get('collect_buddy_name',False),
                 collect_referral_info=a.get('collect_referral_info',False),
+                collect_reasons_for_returning=a.get('collect_reasons_for_returning',False),
                 )
             na.from_dict(a)
 
@@ -152,6 +153,7 @@ class Activity(models.Model):
     collect_notes = models.BooleanField(default=False)
     collect_buddy_name = models.BooleanField(default=False)
     collect_referral_info = models.BooleanField(default=False)
+    collect_reasons_for_returning = models.BooleanField(default=False)
     
     created = models.DateTimeField('date created', auto_now_add=True)
     modified = models.DateTimeField('date modified', auto_now=True)
@@ -245,6 +247,7 @@ class Activity(models.Model):
             collect_notes=self.collect_notes,
             collect_buddy_name=self.collect_buddy_name,
             collect_referral_info=self.collect_referral_info,
+            collect_reasons_for_returning=self.collect_reasons_for_returning,
             gamepages=[gp.as_dict() for gp in self.gamepage_set.all()],
             instructions=[i.as_dict() for i in self.instruction_set.all()],
         )
@@ -258,6 +261,7 @@ class Activity(models.Model):
         self.collect_notes = d.get('collect_notes',False)
         self.collect_buddy_name = d.get('collect_buddy_name',False)
         self.collect_referral_info = d.get('collect_referral_info',False)
+        self.collect_reasons_for_returning = d.get('collect_reasons_for_returning',False)
         self.save()
         self.gamepage_set.all().delete()
         for gp in d['gamepages']:
@@ -464,6 +468,8 @@ class Participant(models.Model):
     defaulter_referral_drugs = models.BooleanField(default=False)
     defaulter_referral_other = models.BooleanField(default=False)
     defaulter_referral_notes = models.TextField(default="",blank=True)
+
+    reasons_for_returning = models.TextField(default="",blank=True)
 
     def __unicode__(self):
         return self.name
