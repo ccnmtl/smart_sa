@@ -36,7 +36,8 @@ var game_variables = {{activity.variables|safe}};
     
 		<div id="side">
 			<h2 id="sessioninfo" class="{% get_participant_status participant activity.clientsession %}">
-				<a href="/session/{{activity.clientsession.id}}/">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}}</a>
+				<!--<a href="/session/{{activity.clientsession.id}}/">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}}</a>-->
+				<a href="/session/{{activity.clientsession.id}}/">{{activity.clientsession.long_title}}</a>
 			</h2>
 			<div id="nav-side">
 				<ul>
