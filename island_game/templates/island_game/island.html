@@ -19,6 +19,7 @@
 {% block game_content %}
 
     <div id="mode">{{game_context.mode}}</div>
+    <div id="gender">{% ifequal participant.gender "male" %}M{%else%}F{%endifequal%}</div>
 
     <div id="island_container" class="island-container">
     

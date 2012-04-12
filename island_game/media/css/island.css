@@ -9,6 +9,10 @@
     display: none;
 }
 
+#gender {
+    display: none;
+}
+
 #island {
     z-index: 100;
     position: absolute;
