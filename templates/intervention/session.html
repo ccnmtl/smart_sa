@@ -34,8 +34,12 @@
       <!--
       <h2 id="session{{session.id}}" class="{% get_participant_status participant session %} sessiontitle">Session {{ session.index }}: {{ session.long_title }}</h2>
 	-->
+	{% if not session.defaulter or participant.defaulter %}
       <h2>Session {{ session.index }}: {{ session.long_title }}</h2>
-
+      {% else %}
+      <h2>{{ session.long_title }}</h2>
+      {% endif %}
+      
       {% if session.introductory_copy %}
 	<p class="instructions">{{session.introductory_copy|safe}}</p><hr />
       {% endif %}
@@ -51,6 +55,10 @@
 	{% if not s.defaulter or participant.defaulter %}
 	   <li><a id="session{{s.index }}" class="session {% get_participant_status participant s %} {% ifequal session.id s.id %}current{% endifequal %} {% ifequal s.id next_session.id %}hilite{%else%}default{% endifequal %}" href="/session/{{s.id }}/">
 	     Session {{forloop.counter}}: {{ s.long_title }}
+	    </a></li>
+	{% else %}
+	   <li><a id="session{{s.index }}" class="session {% get_participant_status participant s %} {% ifequal session.id s.id %}current{% endifequal %} {% ifequal s.id next_session.id %}hilite{%else%}default{% endifequal %}" href="/session/{{s.id }}/">
+	    {{ s.long_title }}
 	    </a></li>
 	{% endif %}
         {% endfor %}

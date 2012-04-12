@@ -343,7 +343,7 @@ a#endintervention
 {
 	position: relative;
 	padding: 0px 30px 0px 30px;
-	min-height: 700px;
+	min-height: 800px;
 }
 
 h2#sessioninfo
@@ -650,7 +650,7 @@ li span.task
 #navigator
 {
 	width: 910px;
-	min-height: 600px;
+	min-height: 740px;
 	position: relative;
 	margin-top: -20px;
 	clear: both;

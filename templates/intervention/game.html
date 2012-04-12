@@ -58,7 +58,8 @@
 
 		<div id="side">
 			<h2 id="sessioninfo" class="{% get_participant_status participant game.activity.clientsession %}">
-				<a href="/session/{{game.activity.clientsession.id}}/">Session {{game.activity.clientsession.index}}: {{game.activity.clientsession.long_title}}</a>
+				<!--<a href="/session/{{game.activity.clientsession.id}}/">Session {{game.activity.clientsession.index}}: {{game.activity.clientsession.long_title}}</a>-->
+				<a href="/session/{{game.activity.clientsession.id}}/"> {{game.activity.clientsession.long_title}}</a>
 			</h2>
 			<div id="nav-side">
 				<ul>
