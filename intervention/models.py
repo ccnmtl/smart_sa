@@ -35,6 +35,12 @@ class Intervention(models.Model):
             clientsessions=[cs.as_dict() for cs in self.clientsession_set.all()],
             )
 
+    def completed_all_sessions(self, participant):
+        for cs in self.clientsession_set.all()[1:]:
+            if cs.get_participant_status(participant) != "complete":
+                return False
+        return True
+
     def from_dict(self,d):
         self.name = d['name']
         self.general_instructions = d['general_instructions']

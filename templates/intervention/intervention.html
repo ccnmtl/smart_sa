@@ -25,6 +25,10 @@
     {{ block.super }}
       <h2>Sessions</h2>
 
+{% participant_completed_all_sessions_in_intervention participant intervention as all_done %}
+{% if all_done %}<p>Done with All Sessions</p>
+{% endif %}
+
         <p class="instructions">
        Select a session so <b>{{participant.name}}</b> can get started!
 	  </p>

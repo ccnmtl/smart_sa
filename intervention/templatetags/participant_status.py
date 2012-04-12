@@ -101,3 +101,30 @@ def participant_completed_all_activities_in_session(parser, token):
         # handle "as some_var"
         var_name = token.split_contents()[1:][3]
     return ParticipantCompletedAllActivitiesInSession(participant,session,var_name)
+
+
+class ParticipantCompletedAllSessionsInIntervention(template.Node):
+    def __init__(self,participant,intervention,var_name=None):
+        self.participant = template.Variable(participant)
+        self.intervention = template.Variable(intervention)
+        self.var_name = var_name
+
+    def render(self,context):
+        p = self.participant.resolve(context)
+        i = self.intervention.resolve(context)
+        status = i.completed_all_sessions(p)
+        if self.var_name:
+            context[self.var_name] = status
+            return ''
+        else:
+            return status
+
+@register.tag('participant_completed_all_sessions_in_intervention')
+def participant_completed_all_sessions_in_intervention(parser, token):
+    participant = token.split_contents()[1:][0]
+    intervention = token.split_contents()[1:][1]
+    var_name = None
+    if len(token.split_contents()[1:]) > 2:
+        # handle "as some_var"
+        var_name = token.split_contents()[1:][3]
+    return ParticipantCompletedAllSessionsInIntervention(participant,intervention,var_name)
