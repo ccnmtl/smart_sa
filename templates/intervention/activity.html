@@ -128,6 +128,12 @@ var game_variables = {{activity.variables|safe}};
 		Your Buddy: <input type="text" name="buddy_name" value="{{participant.buddy_name}}"/>
 		{% endif %}
 
+		{% if activity.collect_reasons_for_returning %}
+		<h4>Reasons For Returning</h4>	
+
+		<textarea name="reasons_for_returning">{{participant.reasons_for_returning}}</textarea>		
+		{% endif %}
+
 		{% if activity.collect_referral_info %}
 		<h4>Referral Info</h4>	
 		<p>Referral given for:</p>

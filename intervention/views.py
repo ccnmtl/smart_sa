@@ -244,6 +244,10 @@ def complete_activity(request, activity_id):
         if request.POST.get('buddy_name',False):
             participant.buddy_name = request.POST.get('buddy_name','')
             participant.save()
+        if request.POST.get('reasons_for_returning',False):
+            participant.reasons_for_returning = request.POST.get('reasons_for_returning','')
+            participant.save()
+
         if activity.collect_referral_info:
             if activity.clientsession.defaulter:
                 participant.defaulter_referral_mental_health = request.POST.get('referral_mental_health','')
