@@ -43,7 +43,7 @@ Feature: Problem Solving Activity
         There there is a right arrow
         
         # Assuming 17 issues
-        When I select barrier 17
+        When I select barrier 19
         There there is a left arrow
         There there is no right arrow
               
