@@ -480,6 +480,35 @@ class Participant(models.Model):
     def __unicode__(self):
         return self.name
 
+    def to_json(self):
+        return dict(
+            name = self.name,
+            id_number = self.id_number,
+            defaulter = self.defaulter,
+            status = self.status,
+            clinical_notes = self.clinical_notes,
+            buddy_name = self.buddy_name,
+            gender = self.gender,
+            initial_referral_mental_health = self.initial_referral_mental_health,
+            initial_referral_alcohol = self.initial_referral_alcohol,
+            initial_referral_drug_use = self.initial_referral_drug_use,
+            initial_referral_other = self.initial_referral_other,
+            initial_referral_notes = self.initial_referral_notes,
+            defaulter_referral_mental_health = self.defaulter_referral_mental_health,
+            defaulter_referral_alcohol = self.defaulter_referral_alcohol,
+            defaulter_referral_drugs = self.defaulter_referral_drugs,
+            defaulter_referral_other = self.defaulter_referral_other,
+            defaulter_referral_notes = self.defaulter_referral_notes,
+            reasons_for_returning = self.reasons_for_returning,
+            game_vars = [{pgv.key : pgv.value} for pgv in self.participantgamevar_set.all()],
+            session_progress = [dict(session="Session %d: %s" %(ps.session.index(), ps.session.long_title),
+                                     status=ps.status,
+                                     counselor_notes=[dict(counselor=cn.counselor.username, notes=cn.notes) for cn in ps.counselornote_set.all()],
+                                     ) for ps in self.participantsession_set.all()],
+            activity_progress = [dict(activity="Session %d: Activity %d: %s" %(pa.activity.clientsession.index(), pa.activity.index(), pa.activity.long_title),
+                                      status=pa.status) for pa in self.participantactivity_set.all()],
+            )
+
     def save_game_var(self,key,value):
         gv,created = ParticipantGameVar.objects.get_or_create(participant=self,key=key)
         gv.value = value

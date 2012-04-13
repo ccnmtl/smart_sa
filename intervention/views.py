@@ -6,9 +6,12 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect, QueryDict
 from django.forms.models import modelformset_factory,inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.conf import settings
+from django.core import serializers
+from django.utils import simplejson
 from zipfile import ZipFile
 from cStringIO import StringIO
 from simplejson import dumps,loads
+from datetime import datetime
 import os
 import os.path
 import random
@@ -188,6 +191,29 @@ def add_counselor(request):
     else:
         return dict()
 
+@render_to('intervention/report_index.html')
+@login_required
+def report_index(request):
+    return dict()
+
+#@login_required
+def participant_data_download(request):
+    data = dict(deployment=Deployment.objects.all()[0].name)
+    participants = []
+    for p in Participant.objects.all():
+        participants.append(p.to_json())
+
+    data['participants'] = participants
+    counselors = simplejson.loads(serializers.serialize("json", User.objects.all()))
+    data['counselors'] = counselors
+    json = simplejson.dumps(data)
+    resp = HttpResponse(json,content_type="application/json")
+    clean_deployment_name = Deployment.objects.all()[0].name.lower().replace(" ","_")
+    now = datetime.now()
+    datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (now.year,now.month,now.day,now.hour,now.minute,now.second)
+    resp['Content-Disposition'] = "attachment; filename=%s_%s_participant_data.json" % (clean_deployment_name,datestring)
+    return resp
+    
 
 @render_to('intervention/intervention.html')
 @participant_required
