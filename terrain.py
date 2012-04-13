@@ -151,7 +151,6 @@ def i_click_the_link(step, text):
         assert False, "could not find the '%s' link" % text
     else:
         try:
-            time.sleep(1)
             link = world.firefox.find_element_by_partial_link_text(text)
             assert link.is_displayed()
             link.click()
@@ -210,7 +209,6 @@ def i_click_activity(step, activity_number):
     try:
         link = world.firefox.find_element_by_partial_link_text("Activity %s:" % activity_number)
         link.click()
-#        time.sleep(1)
     except Exception, e:
         assert False, str(e)
 

@@ -1,28 +1,34 @@
+"""
+Main intervention views
+"""
 # Create your views here.
 from annoying.decorators import render_to
-from django.template import RequestContext, loader, TemplateDoesNotExist
-from django.shortcuts import get_object_or_404, render_to_response
-from django.http import HttpResponse, Http404, HttpResponseRedirect, QueryDict
-from django.forms.models import modelformset_factory,inlineformset_factory
-from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
+from django.template import RequestContext, loader
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from django.forms.models import inlineformset_factory
+from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
 from django.core import serializers
 from django.utils import simplejson
+from django.contrib.auth.models import User
 from zipfile import ZipFile
 from cStringIO import StringIO
-from simplejson import dumps,loads
+from simplejson import dumps, loads
 from datetime import datetime
 import os
 import os.path
-import random
 from functools import wraps
 from django.utils.decorators import available_attrs
 from problemsolving_game.models import Issue
 from intervention.models import Intervention
 
-from aes_v001 import AESModeOfOperation,toNumbers,fromNumbers
+from aes_v001 import AESModeOfOperation, toNumbers, fromNumbers
 
-from smart_sa.intervention.models import *
+from smart_sa.intervention.models import Participant, ClientSession, Activity
+from smart_sa.intervention.models import Deployment, ParticipantSession, ParticipantActivity
+from smart_sa.intervention.models import CounselorNote, GamePage, Backup, Instruction
+#from smart_sa.intervention.models import *
 
 ENCRYPTION_ARGS = [AESModeOfOperation.modeOfOperation["OFB"], #mode
                    toNumbers(settings.INTERVENTION_BACKUP_HEXKEY),
@@ -47,7 +53,7 @@ def no_vars(request, template_name='intervention/blank.html'):
 def participant_required(function=None):
     def decorator(view_func):
         def get_participant(session):
-            participant_id = session.get('participant_id',False)
+            participant_id = session.get('participant_id', False)
             if not participant_id:
                 return None
             try:
@@ -106,8 +112,8 @@ def set_deployment(request):
     return HttpResponseRedirect("/manage/")
 
 @login_required
-def start_practice_mode(request,intervention_id):
-    p,created = Participant.objects.get_or_create(name='practice')
+def start_practice_mode(request, intervention_id):
+    p, created = Participant.objects.get_or_create(name='practice')
     p.clear_all_data()
     request.session['participant_id'] = p.id
     return HttpResponseRedirect("/intervention/%d/" % int(intervention_id))
@@ -144,41 +150,41 @@ def add_participant(request):
         return dict()
 
 @login_required
-def delete_participant(request,participant_id):
+def delete_participant(request, participant_id):
     # TODO: confirmation
-    p = get_object_or_404(Participant,id=participant_id)
+    p = get_object_or_404(Participant, id=participant_id)
     p.delete()
     return HttpResponseRedirect("/manage/")
 
 @render_to('intervention/edit_participant.html')
 @login_required
-def edit_participant(request,participant_id):
-    p = get_object_or_404(Participant,id=participant_id)
+def edit_participant(request, participant_id):
+    p = get_object_or_404(Participant, id=participant_id)
     if request.method == 'POST':
-        p.name = request.POST.get('name','')
+        p.name = request.POST.get('name', '')
         p.clinical_notes = request.POST.get('clinical_notes','')
-        old_id_number = request.POST.get('old_id_number',False)
-        new_id_number = request.POST.get('new_id_number',False)
+        old_id_number = request.POST.get('old_id_number', False)
+        new_id_number = request.POST.get('new_id_number', False)
         if old_id_number and new_id_number and old_id_number == p.id_number:
             p.id_number = new_id_number
-        p.status = request.POST.get('status','') == 'on'
-        p.defaulter = request.POST.get('defaulter','') == 'on'
-        p.gender = request.POST.get('gender','male')
+        p.status = request.POST.get('status', '') == 'on'
+        p.defaulter = request.POST.get('defaulter', '') == 'on'
+        p.gender = request.POST.get('gender', 'male')
         p.save()
         return HttpResponseRedirect("/manage/")
     return dict(participant=p)
 
 @render_to('intervention/view_participant.html')
 @login_required
-def view_participant(request,participant_id):
-    p = get_object_or_404(Participant,id=participant_id)
+def view_participant(request, participant_id):
+    p = get_object_or_404(Participant, id=participant_id)
     return dict(participant=p)
 
 @render_to('intervention/view_counselor.html')
 @login_required
-def view_counselor(request,counselor_id):
-    c = get_object_or_404(User,id=counselor_id)
-    return dict(counselor=c,notes=CounselorNote.objects.filter(counselor=c))
+def view_counselor(request, counselor_id):
+    c = get_object_or_404(User, id=counselor_id)
+    return dict(counselor=c, notes=CounselorNote.objects.filter(counselor=c))
 
 @render_to('intervention/add_counselor.html')
 @login_required
@@ -207,11 +213,11 @@ def participant_data_download(request):
     counselors = simplejson.loads(serializers.serialize("json", User.objects.all()))
     data['counselors'] = counselors
     json = simplejson.dumps(data)
-    resp = HttpResponse(json,content_type="application/json")
+    resp = HttpResponse(json, content_type="application/json")
     clean_deployment_name = Deployment.objects.all()[0].name.lower().replace(" ","_")
     now = datetime.now()
-    datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (now.year,now.month,now.day,now.hour,now.minute,now.second)
-    resp['Content-Disposition'] = "attachment; filename=%s_%s_participant_data.json" % (clean_deployment_name,datestring)
+    datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (now.year, now.month, now.day, now.hour, now.minute, now.second)
+    resp['Content-Disposition'] = "attachment; filename=%s_%s_participant_data.json" % (clean_deployment_name, datestring)
     return resp
     
 
@@ -231,8 +237,8 @@ def testgen(request):
 @login_required
 def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
-    participant=request.participant
-    ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
+    participant = request.participant
+    ps, created = ParticipantSession.objects.get_or_create(session=session, participant=participant)
     activities = session.activity_set.all()
     return dict(session=session, activities=activities,
                 participant=request.participant)
@@ -243,8 +249,8 @@ def complete_session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
 
     if request.method == "POST":
-        participant=request.participant
-        ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
+        participant = request.participant
+        ps, created = ParticipantSession.objects.get_or_create(session=session, participant=participant)
         ps.status = "complete"
         ps.save()
         return HttpResponseRedirect(session.intervention.get_absolute_url())
@@ -257,41 +263,41 @@ def complete_activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
 
     if request.method == "POST":
-        participant=request.participant
-        pa,created = ParticipantActivity.objects.get_or_create(activity=activity,participant=participant)
+        participant = request.participant
+        pa, created = ParticipantActivity.objects.get_or_create(activity=activity, participant=participant)
         pa.status = "complete"
         pa.save()
-        if request.POST.get('counselor_notes',False):
+        if request.POST.get('counselor_notes', False):
             session = activity.clientsession
-            ps,created = ParticipantSession.objects.get_or_create(session=session,participant=participant)
-            note,created = CounselorNote.objects.get_or_create(participantsession=ps,counselor=request.user)
-            note.notes = request.POST.get('counselor_notes','')
+            ps, created = ParticipantSession.objects.get_or_create(session=session, participant=participant)
+            note, created = CounselorNote.objects.get_or_create(participantsession=ps, counselor=request.user)
+            note.notes = request.POST.get('counselor_notes', '')
             note.save()
-        if request.POST.get('buddy_name',False):
-            participant.buddy_name = request.POST.get('buddy_name','')
+        if request.POST.get('buddy_name', False):
+            participant.buddy_name = request.POST.get('buddy_name', '')
             participant.save()
-        if request.POST.get('reasons_for_returning',False):
-            participant.reasons_for_returning = request.POST.get('reasons_for_returning','')
+        if request.POST.get('reasons_for_returning', False):
+            participant.reasons_for_returning = request.POST.get('reasons_for_returning', '')
             participant.save()
 
         if activity.collect_referral_info:
             if activity.clientsession.defaulter:
-                participant.defaulter_referral_mental_health = request.POST.get('referral_mental_health','')
-                participant.defaulter_referral_alcohol = request.POST.get('referral_alcohol','')
-                participant.defaulter_referral_drug_use = request.POST.get('referral_drug_use','')
-                participant.defaulter_referral_other = request.POST.get('referral_other','')
-                participant.defaulter_referral_notes = request.POST.get('referral_notes','')
+                participant.defaulter_referral_mental_health = request.POST.get('referral_mental_health', '')
+                participant.defaulter_referral_alcohol = request.POST.get('referral_alcohol', '')
+                participant.defaulter_referral_drug_use = request.POST.get('referral_drug_use', '')
+                participant.defaulter_referral_other = request.POST.get('referral_other', '')
+                participant.defaulter_referral_notes = request.POST.get('referral_notes', '')
             else:
-                participant.initial_referral_mental_health = request.POST.get('referral_mental_health','')
-                participant.initial_referral_alcohol = request.POST.get('referral_alcohol','')
-                participant.initial_referral_drug_use = request.POST.get('referral_drug_use','')
-                participant.initial_referral_other = request.POST.get('referral_other','')
-                participant.initial_referral_notes = request.POST.get('referral_notes','')
+                participant.initial_referral_mental_health = request.POST.get('referral_mental_health', '')
+                participant.initial_referral_alcohol = request.POST.get('referral_alcohol', '')
+                participant.initial_referral_drug_use = request.POST.get('referral_drug_use', '')
+                participant.initial_referral_other = request.POST.get('referral_other', '')
+                participant.initial_referral_notes = request.POST.get('referral_notes', '')
             participant.save()
 
         next_activity = activity.next()
         if activity.game:
-            return HttpResponseRedirect("/task/%d/%s/" % (activity.gamepage_set.all()[0].id,activity.pages()[0]))
+            return HttpResponseRedirect("/task/%d/%s/" % (activity.gamepage_set.all()[0].id, activity.pages()[0]))
         else:
             if next_activity is None:
                 return HttpResponseRedirect(activity.clientsession.get_absolute_url())
@@ -305,13 +311,13 @@ def complete_activity(request, activity_id):
 @participant_required
 @login_required
 def activity(request, activity_id):
-    activity=get_object_or_404(Activity, pk=activity_id)
-    participant=request.participant
-    ps,created = ParticipantSession.objects.get_or_create(session=activity.clientsession,participant=participant)
-    pa,created = ParticipantActivity.objects.get_or_create(activity=activity,participant=participant)
-    cn,created = CounselorNote.objects.get_or_create(participantsession=ps,counselor=request.user)
+    activity = get_object_or_404(Activity, pk=activity_id)
+    participant = request.participant
+    ps, created = ParticipantSession.objects.get_or_create(session=activity.clientsession, participant=participant)
+    pa, created = ParticipantActivity.objects.get_or_create(activity=activity, participant=participant)
+    cn, created = CounselorNote.objects.get_or_create(participantsession=ps, counselor=request.user)
     counselor_notes = cn.notes
-    return dict(activity=activity,participant=request.participant,counselor_notes=counselor_notes)
+    return dict(activity=activity, participant=request.participant, counselor_notes=counselor_notes)
 
 @participant_required
 @login_required
@@ -328,16 +334,16 @@ def game(request, game_id, page_id):
          we can silently ignore this exception 
          -Anders
          """
-        if not request.META.get('HTTP_REFERER',None):
+        if not request.META.get('HTTP_REFERER', None):
             return HttpResponse("orphan gamepage. please contact developers if you are seeing this")
 
     my_game.page_id = page_id
-    template,game_context = my_game.template(page_id)
+    template, game_context = my_game.template(page_id)
     variables = []
     for k in my_game.variables(page_id):
-        variables.append(dict(key=k,value=request.participant.get_game_var(k)))
+        variables.append(dict(key=k, value=request.participant.get_game_var(k)))
     t = loader.get_template(template)
-    c = RequestContext(request,{
+    c = RequestContext(request, {
         'game' :  my_game,
         'game_context' : game_context,
         'game_variables' : variables,
@@ -353,7 +359,7 @@ def save_game_state(request):
     try:
         json = loads(request.raw_post_data)
         for k in json.keys():
-            request.participant.save_game_var(k,dumps(json[k]))
+            request.participant.save_game_var(k, dumps(json[k]))
     except Exception, e:
         return HttpResponse("not ok")
     return HttpResponse("ok")
@@ -385,11 +391,11 @@ def restore_from_backup(request):
         backup = Backup.objects.get(pk=request.GET['id'])
         plaintext_json = backup.json_data
         moo = AESModeOfOperation()
-        mode,orig_len,restoral_data = moo.encrypt(backup.json_data, *ENCRYPTION_ARGS)
-        ctx = {'date_string':backup.created.strftime('%Y-%m-%d'),
-               'restoral_data':fromNumbers(restoral_data),
+        mode, orig_len, restoral_data = moo.encrypt(backup.json_data, *ENCRYPTION_ARGS)
+        ctx = {'date_string': backup.created.strftime('%Y-%m-%d'),
+               'restoral_data': fromNumbers(restoral_data),
                }
-    c = RequestContext(request,ctx)
+    c = RequestContext(request, ctx)
     response = HttpResponse(t.render(c))
     response['Content-Disposition'] = 'attachment; filename=restore.html'
     return response
@@ -406,7 +412,7 @@ def save_backup_htmlupload(request):
             try:
                 hex_ciphtext = html_data.split('<div id="data">').pop().split('</div>').pop(0)
                 moo = AESModeOfOperation()
-                plaintext_json = moo.decrypt(toNumbers(hex_ciphtext),None,*ENCRYPTION_ARGS)
+                plaintext_json = moo.decrypt(toNumbers(hex_ciphtext), None, *ENCRYPTION_ARGS)
                 try:
                     Backup.objects.create(json_data=plaintext_json)
                     errors = 'Successfully saved the backup file'
@@ -443,13 +449,13 @@ def intervention_admin(request, intervention_id):
             if formset.new_objects:
                 formset.cleaned_data[-1]['id'] = formset.new_objects[0]
                 if formset.cleaned_data[-1]['ORDER'] is None:
-                    formset.cleaned_data[-1]['ORDER']=9999999
+                    formset.cleaned_data[-1]['ORDER'] = 9999999
 
             #after save, so we can order new elements
-            new_order = [x.get('id').id for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
+            new_order = [x.get('id').id for x in sorted(formset.cleaned_data, key=lambda x:x.get('ORDER')) if x!={}]
             intervention.set_clientsession_order(new_order)
     formset = ClientSessionFormSet(instance=intervention)
-    return {'intervention' : intervention,'formset' : formset,}
+    return {'intervention' : intervention, 'formset' : formset,}
 
 @permission_required('intervention.add_clientsession')
 @render_to('intervention/admin/session_admin.html')
@@ -469,21 +475,16 @@ def session_admin(request, session_id):
             if formset.new_objects:
                 formset.cleaned_data[-1]['id'] = formset.new_objects[0]
                 if formset.cleaned_data[-1]['ORDER'] is None:
-                    formset.cleaned_data[-1]['ORDER']=9999999
+                    formset.cleaned_data[-1]['ORDER'] = 9999999
                     
             #after save, so we can order new elements
-            new_order = [x.get('id').id for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
+            new_order = [x.get('id').id for x in sorted(formset.cleaned_data, key=lambda x:x.get('ORDER')) if x!={}]
             clientsession.set_activity_order(new_order)
             #refresh
             formset = ActivityFormSet(instance=clientsession)
     else:
         formset = ActivityFormSet(instance=clientsession)
-    return {'clientsession' : clientsession,'formset' : formset,}
-
-#def as_sky(self):
-#    "Returns this form rendered as HTML <p>s."
-#    return self._html_output(u'<p class="hello">%(label)s %(field)s%(help_text)s</p>', u'%s', '</p>', u' %s', True)
-
+    return {'clientsession' : clientsession, 'formset' : formset,}
 
 @permission_required('intervention.add_clientsession')
 @render_to('intervention/admin/activity_admin.html')
@@ -507,19 +508,19 @@ def activity_admin(request, activity_id):
             #prepare new objects for ordering
             #more complicated than session,intervention because we have 3
             new_forms = [f.cleaned_data for f in formset.forms[-3:] if f.has_changed()]
-            for i,new_object in enumerate(formset.new_objects):
+            for i, new_object in enumerate(formset.new_objects):
                 new_forms[i]['id'] = new_object
                 if new_forms[i]['ORDER'] is None:
-                    new_forms[i]['ORDER']=9999999+new_object.id
+                    new_forms[i]['ORDER'] = 9999999 + new_object.id
 
             #after save, so we can order new elements
-            new_order = [x.get('id').id for x in sorted(formset.cleaned_data,key=lambda x:x.get('ORDER')) if x!={}]
+            new_order = [x.get('id').id for x in sorted(formset.cleaned_data, key=lambda x:x.get('ORDER')) if x!={}]
             activity.set_instruction_order(new_order)
             #refresh
             formset = InstructionFormSet(instance=activity)            
     else:
         formset = InstructionFormSet(instance=activity)
-    return {'activity' : activity,'formset' : formset,}
+    return {'activity' : activity, 'formset' : formset,}
 
 @permission_required('intervention.add_clientsession')
 @render_to('intervention/admin/gamepage_admin.html')
@@ -527,7 +528,7 @@ def gamepage_admin(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
     
     InstructionFormSet = inlineformset_factory(Activity, GamePage,
-                                        fields=('instructions','title',
+                                        fields=('instructions', 'title',
                                                 ),
                                         can_delete=False,
                                         extra=0
@@ -553,9 +554,9 @@ def all_uploads():
             if f.startswith("."):
                 continue
             fullpath = os.path.join(root, f)
-            archive_name = os.path.join("uploads",archive_root, f)
-            public_path = os.path.join(settings.MEDIA_URL,archive_root,f)
-            yield fullpath,f,archive_name,public_path
+            archive_name = os.path.join("uploads", archive_root, f)
+            public_path = os.path.join(settings.MEDIA_URL, archive_root, f)
+            yield fullpath, f, archive_name, public_path
 
 def content_sync(request):
     """ give the user a zip file of all the content for the intervention
@@ -577,8 +578,8 @@ def content_sync(request):
     zipfile.writestr("issues.json",
                      dumps(dict(issues=[i.as_dict() for i in Issue.objects.all()])))
 
-    if request.GET.get('include_uploads',False):
-        for fullpath,f,archive_name,public_path in all_uploads():
+    if request.GET.get('include_uploads', False):
+        for fullpath, f, archive_name, public_path in all_uploads():
             zipfile.write(fullpath, archive_name)                
     zipfile.close()
 
@@ -588,9 +589,9 @@ def content_sync(request):
 
 def list_uploads(request):
     urls = []
-    for fullpath,f,archive_name,public_path in all_uploads():
+    for fullpath, f, archive_name, public_path in all_uploads():
         url = "http://" + request.get_host() + public_path
         urls.append(url)
-    return HttpResponse("\n".join(urls),content_type="text/plain")
+    return HttpResponse("\n".join(urls), content_type="text/plain")
 
 
