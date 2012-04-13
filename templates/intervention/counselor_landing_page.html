@@ -20,6 +20,7 @@
 	    <col id="text" />
 		
 {% if request.user.is_superuser %}		
+{% if deployment.is_online %}
 	    <tr>
 	      <td>
 		<a class="action" href="/intervention_admin/1/">Edit Content</a>
@@ -28,6 +29,7 @@
 		Administrators can add and edit content for the intervention here.
 	      </td>
 	    </tr>
+{% endif %}
 {% endif %}
 	    <tr>
 	      <td>
@@ -57,6 +59,16 @@
 	      </td>
 	    </tr>
 
+	    <tr>
+	      <td>
+		<a class="action" href="/report/">Report</a>
+	      </td>
+	      <td class="disabled">
+		Administrators can create reports.
+	      </td>
+	    </tr>
+
+
 {% if deployment.is_online %}
 	    <tr>
 	      <td>
@@ -67,14 +79,6 @@
 	      </td>
 	    </tr>
 		
-	    <tr>
-	      <td>
-		<a class="action" href="">Report</a>
-	      </td>
-	      <td class="disabled">
-		Administrators can create reports.
-	      </td>
-	    </tr>
 {% endif %}
 {% endif %}		
 		
