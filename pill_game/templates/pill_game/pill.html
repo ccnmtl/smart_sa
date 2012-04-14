@@ -8,6 +8,13 @@
     <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/DragAndDrop.js"></script>
     <script type="text/javascript" src="/site_media/js/gamestate.js"></script>
     <script type="text/javascript" src="/site_media/pill_game/js/pillview.js"></script> 
+    
+    <script type="text/template" id="printable-bucket-template">
+        <div>
+            At <%= time %> take:
+            <% _.each(pills, function(pill) { %> <li> <%= pill.count %> <%= pill.name %></li> <% }); %>
+        </div>    
+    </script>
 {% endblock %}
 
 {% block game_css %}
@@ -18,6 +25,10 @@
 
 {% block game_content %}
     <div id="mode">{{game_context.mode}}</div>
+    
+    <div id="medication-reminder" class="printonly">
+        <div><h4>Remember</h4></div>
+    </div>
     
     <div id="pill-game-container">
         <div id="pill-list">
@@ -39,9 +50,10 @@
             
         <div class="pill-buckets">
             <div id="day" class="pill-bucket-container">
+               <img src="/site_media/pill_game/images/bucket_day.png" class="printonly" />
                <div class="pill-bucket day"></div>
                 <div id="day_time" class="time">
-                   <label for="day_pills_time" class="printonly">Time:</label>
+                   <span class="printonly timelabel">Take medication at:</span>
                    <select id="day_pills_time" size="1">
                         <option name="00:00" value="00:00">00:00</option>
                         <option name="01:00" value="01:00">01:00</option>
@@ -61,11 +73,10 @@
             </div>
             
             <div id="night" class="pill-bucket-container">
-                <div class="pill-bucket night">        
-                    <div id="night_pill_info_text" class="printonly">Inline Pill Info</div>
-                </div>
+                <img src="/site_media/pill_game/images/bucket_eve.png" class="printonly" />
+                <div class="pill-bucket night"></div>
                 <div id="night_time" class="time">
-                   <label for="night_pills_time" class="printonly">Time:</label>
+                   <span class="printonly timelabel">Take medication at:</span>
                    <select id="night_pills_time" size="1">
                         <option name="12:00" value="12:00">12:00</option>
                         <option name="13:00" value="13:00">13:00</option>
@@ -86,8 +97,6 @@
             </div>
          </div>
     </div>
-            
-        
 
 {% endblock %}
 

@@ -1,3 +1,38 @@
 .pill-delete, .add-a-pill {
     display: none;
 }
+
+.printonly {
+    display: block;
+}
+
+.pill-bucket-container {
+    width: 190px;
+    height: 210px;
+    margin-bottom: 10px;
+}
+
+.time {
+    text-align: left;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.time span {
+    width: 110px;
+    font-size: 70%;
+    display: inline;
+}
+
+.time select {
+    width: 80px !important;
+}
+
+#medication-reminder {
+    margin-bottom: 20px;
+    border-bottom:  1px solid #4EA15A;      
+}
+
+#medication-reminder div {
+    margin-bottom: 20px;
+}

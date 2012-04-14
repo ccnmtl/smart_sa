@@ -221,7 +221,6 @@
                        background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); \
                        z-index: 1000; opacity: 1;"> \
             </span>'),
-            
         initialize: function (options, render) {
             _.bindAll(this, "render", "unrender", "revertEffect", "as_dict");
             this.model.bind("destroy", this.unrender); // If a draggable pill is deleted by the user
@@ -275,11 +274,17 @@
         },
         
         initialize : function (options) {
-            _.bindAll(this, "onSelectTime", "onTrashPill", "addPillView", "dropPill", "as_dict");
+            _.bindAll(this, "onSelectTime", "onTrashPill", "addPillView", "dropPill", "render", "as_dict");
             _.extend(this, Backbone.Events);
             this.on("trashPill", this.onTrashPill);
             this.gameView = options.gameView;
             this.pillViews = {};
+            
+            if (options.printContainer) {
+                this.printEl = jQuery("<div/>")[0];
+                options.printContainer.append(this.printEl);
+                this.template = _.template(jQuery("#printable-bucket-template").html());
+            }
             
             if (options.selected) {
                 if (options.selected === "na") {
@@ -341,12 +346,14 @@
                 });
                 global.dropped = !jQuery(element).hasClass("trashable");
             }
+            this.render();
             this.gameView.trigger("save");
         },
         
         // triggered when a DroppedPillView is removed (unrendered)
         onTrashPill: function (viewId) {
             delete this.pillViews[viewId];
+            this.render();
             this.gameView.trigger("save");
         },
         
@@ -363,8 +370,31 @@
             } else {
                 jQuery(srcElement).parent().prev(".pill-bucket").removeClass("disabled");
             }
+            this.render();
             this.gameView.trigger("save");
         },
+        
+        render: function (evt) {
+            if (this.printEl) {
+                var context = { time: jQuery(this.el).find("select").val(), pills: {} };
+                for (var viewId in this.pillViews) {
+                    if (this.pillViews.hasOwnProperty(viewId)) {
+                        var p = this.pillViews[viewId].model;
+                        var name = p.get("name");
+                        if (!_.has(context.pills, name)) {
+                            context.pills[name] = { name: name, count: 0 };
+                        }
+                        context.pills[name].count++;
+                    }
+                }
+                if (_.size(context.pills) > 0) {
+                    this.printEl.innerHTML = this.template(context);
+                } else {
+                    this.printEl.innerHTML = "";
+                }
+            }
+        },
+        
         as_dict: function () {
             var d = { id: this.el.id, views: [] };
             for (var viewId in this.pillViews) {
@@ -475,8 +505,11 @@
                 options = global.pillRegimenState.getState(this.id) || {};
                 options.el = this;
                 options.gameView = pillGameView;
+                options.printContainer = jQuery("#medication-reminder");
             }
-            pillGameView.buckets.push(new BucketView(options));
+            var bucketView = new BucketView(options);
+            pillGameView.buckets.push(bucketView);
+            bucketView.render();
         });
 
     });

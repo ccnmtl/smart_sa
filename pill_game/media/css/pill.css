@@ -152,6 +152,7 @@ div.pill .pill-delete {
     color: #E8F3F8;
     border: 1px solid #ccc;
     cursor: pointer;
+    -webkit-print-color-adjust:exact;
 }
 
 .draggable {
@@ -163,5 +164,5 @@ div.pill .pill-delete {
     
 }
 
-
 #pill-list h4 {border: 0px;}
+
