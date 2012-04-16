@@ -49,6 +49,7 @@ img.bare-tree
 	z-index: 5;
 	width: 100%;
 	height: 100%;
+	-webkit-print-color-adjust:exact;
 }
 
 #fruittree .circle
@@ -58,6 +59,7 @@ img.bare-tree
 	z-index: 10;
 	width: 100%;
 	height: 100%;
+	-webkit-print-color-adjust:exact;
 }
 
 #fruittree .leftup .ripe.turned-on { background-image: url(../images/ripe_fruit_rtlean.png); }
@@ -204,7 +206,6 @@ table { border-collapse: collapse; }
 	content:'Adding: ';
 }
 
-@media print
-{
-	#controls { display: none; }
+.fruit-key {
+    display: none;
 }

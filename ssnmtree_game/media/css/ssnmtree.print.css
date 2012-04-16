@@ -1,0 +1,47 @@
+#controls { 
+    display: none; 
+}
+
+#fruittree-toggles {
+    display: none;
+}
+
+.fruit-key {
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    clear: both;
+    display: block;
+}
+
+.fruit-key h4 {
+    border: none;
+    margin-bottom: 10px;
+}
+
+.fruit-key h5 {
+    margin-top: 5px;
+    margin-bottom: 3px;
+    font-weight: bold;
+    text-align: center;
+    font-size: .9em;
+}
+
+.fruit-key-item {
+    width: 150px;
+    float: left;
+    margin: 3px;
+    font-size: 80%;    
+    text-align: center;
+}
+
+.fruit-key-item div {
+    text-align: left;
+    padding: 0px 16px;
+}
+
+.fruit-key-item img {
+    border: 1px solid black;
+}
+
+
