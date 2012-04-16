@@ -6,7 +6,7 @@
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; Working with <b>{{participant.name}}</b> 
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; Working with <b>{{participant.display_name}}</b> 
 </div>
 {% endblock %}
 
@@ -46,7 +46,7 @@
       {% if activities %}   
       
        <p class="instructions">
-	 Great! Now, click on an activity for <b>{{participant.name}}</b> to work on.
+	 Great! Now, click on an activity for <b>{{participant.display_name}}</b> to work on.
 	  </p>
 	  
    	<div id="navigator">

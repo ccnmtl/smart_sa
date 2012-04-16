@@ -556,6 +556,12 @@ class Participant(models.Model):
         "template helper"
         return self.name == "practice"
 
+    def display_name(self):
+        if self.is_practice():
+            return "Practice Participant"
+        else:
+            return self.name
+
     def next_session(self):
         """ which session the participant should be sent to """
         all_sessions = ClientSession.objects.all()

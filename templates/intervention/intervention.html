@@ -4,7 +4,7 @@
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; Working with <b>{{participant.name}}</b> 	   
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; Working with <b>{{participant.display_name}}</b> 	   
 </div>
 {% endblock %}
 
@@ -30,7 +30,7 @@
 {% endif %}
 
         <p class="instructions">
-       Select a session so <b>{{participant.name}}</b> can get started!
+       Select a session so <b>{{participant.display_name}}</b> can get started!
 	  </p>
 
 	<div id="navigator">
