@@ -42,7 +42,7 @@
 			 {% get_participant_status participant session %}
 			 {% ifequal session.id next_session.id %}hilite{%else%}default{% endifequal %}" 
 		  href="/session/{{session.id}}/">
-	     Session {{forloop.counter}}: {{ session.long_title }}
+	     {{ session.long_title }}
 	    </a></li>
         {% else %}
 	   <li><a id="session{{session.index }}" 

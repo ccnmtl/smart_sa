@@ -54,7 +54,7 @@
         {% for s in session.intervention.clientsession_set.all %}
 	{% if not s.defaulter or participant.defaulter %}
 	   <li><a id="session{{s.index }}" class="session {% get_participant_status participant s %} {% ifequal session.id s.id %}current{% endifequal %} {% ifequal s.id next_session.id %}hilite{%else%}default{% endifequal %}" href="/session/{{s.id }}/">
-	     Session {{forloop.counter}}: {{ s.long_title }}
+	     {{ s.long_title }}
 	    </a></li>
 	{% else %}
 	   <li><a id="session{{s.index }}" class="session {% get_participant_status participant s %} {% ifequal session.id s.id %}current{% endifequal %} {% ifequal s.id next_session.id %}hilite{%else%}default{% endifequal %}" href="/session/{{s.id }}/">
