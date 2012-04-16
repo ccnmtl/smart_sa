@@ -138,19 +138,16 @@
 
         saveState: function (evt) {
             var srcElement = evt.srcElement || evt.target || evt.originalTarget;
-            if (!this.collection.isValid()) {
-                evt.preventDefault();
-                alert('Please enter at least one name.');
-            } else {
-                // Initiate the ajax call to saveState
-                global.Intervention.saveState(function (result) {
-                    if (result.responseText !== "ok") {
-                        alert("An error occurred while saving your information. Please try again.");
-                    } else {
-                        window.location = srcElement.href;
-                    }
-                });
-            }
+
+            // Initiate the ajax call to saveState
+            global.Intervention.saveState(function (result) {
+                if (result.responseText !== "ok") {
+                    alert("An error occurred while saving your information. Please try again.");
+                } else {
+                    window.location = srcElement.href;
+                }
+            });
+            
             return false;
         }
     });

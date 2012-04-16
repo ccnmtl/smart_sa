@@ -24,6 +24,22 @@ def get_bucket(name):
         
     return bucket
 
+@step(u'I cannot edit "([^"]*)"')
+def i_cannot_edit_pill(step, pill):
+    pill = find_pill(pill)
+    span = pill.find_element_by_css_selector('div.pill-text span')
+    span.click()
+    input = pill.find_element_by_css_selector('div.pill-text input')
+    assert not input.is_displayed(), "Input element is visible"
+
+@step(u'I can edit "([^"]*)"')
+def i_can_edit_pill(step, pill):
+    pill = find_pill(pill)
+    span = pill.find_element_by_css_selector('div.pill-text span')
+    span.click()
+    input = pill.find_element_by_css_selector('div.pill-text input')
+    assert input.is_displayed(), "Input element is visible"
+
 
 @step(u'There is a "([^"]*)" title')
 def there_is_a_group1_title(step, group1):

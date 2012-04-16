@@ -26,9 +26,11 @@ Feature: Your Pill Regimen
         Then there are 1 pills
         When I drop pill 1 onto "daytime"
         Then I'm asked to enter a pill name
-        Then I dismiss second dialog # Test artifact. dialog appears onBlur, which appears to happen twice with testing
         When I name pill 1 "Foo"
         Then there is a pill named "Foo"
+        I can edit "Foo"
+        When I name pill 1 "ish"
+        Then there is a pill named "Fooish"
         
     Scenario: A few more pills
         Using selenium
@@ -46,14 +48,14 @@ Feature: Your Pill Regimen
         
     Scenario: Drop a pill into the daytime bucket
         Using selenium
-        When I drop "Foo" onto "daytime"
-        Then there is 1 "Foo" in "daytime"
+        When I drop "Fooish" onto "daytime"
+        Then there is 1 "Fooish" in "daytime"
         
     Scenario: Drag a pill from the daytime bucket to the nighttime bucket
         Using selenium
-        When I drag "Foo" from "daytime" to "evening"
-        Then there is 0 "Foo" in "daytime"
-        Then there is 1 "Foo" in "evening"
+        When I drag "Fooish" from "daytime" to "evening"
+        Then there is 0 "Fooish" in "daytime"
+        Then there is 1 "Fooish" in "evening"
         
     Scenario: Drop a pill into the nighttime bucket
         Using selenium
@@ -68,11 +70,11 @@ Feature: Your Pill Regimen
         When I click the "← Back" link
         Then I wait 1 second
         Then there are 3 pills
-        Then there is a pill named "Foo"
+        Then there is a pill named "Fooish"
         Then there is a pill named "Sam"
         Then there is a pill named "Bar"
         Then there is 1 "Bar" in "evening"
-        Then there is 1 "Foo" in "evening"
+        Then there is 1 "Fooish" in "evening"
         Then the "daytime" time is "03:00"
         Then the "evening" time is "19:00"
         
@@ -98,19 +100,19 @@ Feature: Your Pill Regimen
         
     Scenario: Deleting a pill removes it from its bucket, other pills remain
         Using selenium
-        When I drop "Foo" onto "daytime"
-        When I drop "Foo" onto "daytime"
-        When I drop "Foo" onto "daytime"
-        When I drop "Foo" onto "evening"
-        When I drop "Foo" onto "evening"
-        Then there is 3 "Foo" in "daytime"
-        Then there is 2 "Foo" in "evening"
+        When I drop "Fooish" onto "daytime"
+        When I drop "Fooish" onto "daytime"
+        When I drop "Fooish" onto "daytime"
+        When I drop "Fooish" onto "evening"
+        When I drop "Fooish" onto "evening"
+        Then there is 3 "Fooish" in "daytime"
+        Then there is 2 "Fooish" in "evening"
         When I drop "Sam" onto "daytime"
         When I drop "Sam" onto "evening"
         When I drop "Bar" onto "daytime"
         When I drop "Bar" onto "evening"            
-        When I delete "Foo"
-        Then there is no pill named "Foo"
+        When I delete "Fooish"
+        Then there is no pill named "Fooish"
         Then there are 2 pills in "daytime"
         Then there are 2 pills in "evening"
         Then there is 1 "Sam" in "daytime"

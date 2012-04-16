@@ -187,9 +187,11 @@
             this.gameView.trigger("save");
         },
         onEdit: function (evt) {
-            var srcElement = evt.srcElement || evt.target || evt.originalTarget;
-            jQuery(srcElement).next('input').show().focus();
-            jQuery(srcElement).hide();
+            if (this.model.get("mode") !== "practice") {
+                var srcElement = evt.srcElement || evt.target || evt.originalTarget;
+                jQuery(srcElement).next('input').show().focus();
+                jQuery(srcElement).hide();
+            }
         },
         onReadOnly: function (evt) {
             var srcElement = evt.srcElement || evt.target || evt.originalTarget;
@@ -199,10 +201,6 @@
                 jQuery(srcElement).prev('span').html(val).show();
                 jQuery(srcElement).hide();
                 return true;
-            } else {
-                alert("Please enter a name for this medication before continuing.");
-                jQuery(srcElement).focus();
-                return false;
             }
         },
         onRemovePill: function () {
@@ -332,7 +330,7 @@
                 var pillId = jQuery(element).data("id");
                 var pill = this.gameView.pills.get(pillId);
                 if (pill.get("name").length < 1) {
-                    alert("Please enter a name for this medication before continuing.");
+                    alert("Please enter a name for this medication before continuing, or delete the line by clicking the red x at the left.");
                     return false;
                 }
                 
@@ -393,6 +391,11 @@
                     this.printEl.innerHTML = "";
                 }
             }
+            
+            // also update the time span for printing purposes
+            var val = jQuery(this.el).find("select").val();
+            var span = jQuery(this.el).find("span.timelabel")[0];
+            jQuery(span).html("Take medication at: " + val);
         },
         
         as_dict: function () {

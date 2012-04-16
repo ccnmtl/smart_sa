@@ -19,12 +19,13 @@ Feature: Practice Pill Regimen
         
     Scenario: Verify Practice Mode
         Using selenium
-        There is a "Practice Regimen" title
+        There is a "Practice ARVs" title
         There is not an Add Pill button
         There are 3 pills
         There is a pill named "D4T"
         There is a pill named "3TC"
         There is a pill named "Efavirenz"
+        I cannot edit "D4T"
         
     Scenario: Specify pill dosage time
         When I specify "daytime" time as "06:00"

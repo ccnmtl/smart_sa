@@ -1,4 +1,4 @@
-.pill-delete, .add-a-pill {
+.pill-delete, .add-a-pill, .pill-bucket, .time select {
     display: none;
 }
 

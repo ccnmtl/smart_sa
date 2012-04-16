@@ -33,7 +33,7 @@
     <div id="pill-game-container">
         <div id="pill-list">
             {% ifequal game_context.mode "practice" %}
-                <h4>Practice Regimen</h4>
+                <h4>Practice ARVs</h4>
             {% else %}
                 <h4>Medication List</h4>
                 <div><a id="add-a-pill" class="add-a-pill" href="#">Add a Pill</a></div>
@@ -53,7 +53,7 @@
                <img src="/site_media/pill_game/images/bucket_day.png" class="printonly" />
                <div class="pill-bucket day"></div>
                 <div id="day_time" class="time">
-                   <span class="printonly timelabel">Take medication at:</span>
+                   <span class="timelabel printonly"></span>
                    <select id="day_pills_time" size="1">
                         <option name="00:00" value="00:00">00:00</option>
                         <option name="01:00" value="01:00">01:00</option>
@@ -76,7 +76,7 @@
                 <img src="/site_media/pill_game/images/bucket_eve.png" class="printonly" />
                 <div class="pill-bucket night"></div>
                 <div id="night_time" class="time">
-                   <span class="printonly timelabel">Take medication at:</span>
+                   <span class="timelabel printonly"></span>
                    <select id="night_pills_time" size="1">
                         <option name="12:00" value="12:00">12:00</option>
                         <option name="13:00" value="13:00">13:00</option>
