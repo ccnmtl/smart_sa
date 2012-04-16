@@ -14,7 +14,11 @@
 
 <h3>{{participant.name}}'s Notes</h3>
 
+{% if participant.clinical_notes %}
 <p>{{participant.clinical_notes}}</p>
+{% else %}
+<p>No clinical notes have been entered</p>
+{% endif %}
 
 <h3>{{participant.name}}'s Questions and Concerns</h3>
 
@@ -24,11 +28,13 @@
   <th>notes</th>
 </tr>
 {% for cn in participant.all_counselor_notes %}
+{% if cn.notes %}
 <tr>
 <th>{{cn.participantsession.session.long_title}}</th>
 <th>{{cn.counselor.username}}</th>
 <td>{{cn.notes}}</td>
 </tr>
+{% endif %}
 {% endfor %}
 </table>
 
