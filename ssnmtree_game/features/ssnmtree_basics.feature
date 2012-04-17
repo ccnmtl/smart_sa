@@ -5,15 +5,8 @@ Feature: SSNMTree Basics
     Scenario: Fill in the tree & test state save
         Using selenium
         Given I am logged in as a counselor
-        When I access the url "/"
-        When I click the "Let's get started!" link
-        When I click the "Intervene" link
-        When I fill in "test" in the "name" form field
-        When I fill in "test" in the "id_number" form field
-        When I submit the "login-participant-form" form
-        Then I am on the Intervention page
-        When I click on Session 1
-        Then I click on Activity 12
+        Given I have logged in a participant
+        When I go to Activity 12 of Session 1
         When I click the "Next →" link
         Then there is a game
         When I fill in the SSNM Tree with "regular"
@@ -24,10 +17,18 @@ Feature: SSNMTree Basics
         Then I wait 1 second
         When I click the "← Back" link
         There is a filled in SSNM Tree with "regular"
+        Finished using Selenium
         
     Scenario: Test disclosure & support buttons
         Using selenium
         # Disclosure
+        Given I am logged in as a counselor
+        Given I have logged in a participant
+        When I go to Activity 12 of Session 1
+        When I click the "Next →" link
+        Then there is a game
+        When I fill in the SSNM Tree with "regular"
+        There is a filled in SSNM Tree with "regular"
         Then "disclosure" is selected
         When I click the circle
         Then the circle is "gold"
@@ -64,9 +65,17 @@ Feature: SSNMTree Basics
         # Circles cannot have attributes w/o a name
         When I click the circle
         Then the circle is not "gold"
+        Finished using Selenium
         
     Scenario: Test Defaulter saving
         Using selenium
+        Given I am logged in as a counselor
+        Given I have logged in a participant
+        When I go to Activity 12 of Session 1
+        When I click the "Next →" link
+        Then there is a game
+        When I fill in the SSNM Tree with "regular"
+        There is a filled in SSNM Tree with "regular"
         
         # Need a state save event before navigate
         # otherwise, the json data is not saved
@@ -109,7 +118,7 @@ Feature: SSNMTree Basics
         Then there is a game
         There is a filled in SSNM Tree with "regular"  
         Then the circle is "purple"      
-                
+        Finished using Selenium                
         
         
             

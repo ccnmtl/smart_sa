@@ -273,8 +273,19 @@ def i_go_back(self):
 
 @step(u'I have logged in a participant')
 def i_have_logged_in_a_participant(step):
-    response = world.client.post(django_url('/set_participant/'), {'name': 'test', 'id_number': 'test'})
-    world.participant = Participant.objects.filter(name='test')[0]
+    if world.using_selenium:
+        step.behave_as("""
+        When I access the url "/"
+        When I click the "Let's get started!" link
+        When I click the "Intervene" link
+        When I fill in "test" in the "name" form field
+        When I fill in "test" in the "id_number" form field
+        When I submit the "login-participant-form" form
+        Then I am on the Intervention page
+    """)
+    else:
+        response = world.client.post(django_url('/set_participant/'), {'name': 'test', 'id_number': 'test'})
+        world.participant = Participant.objects.filter(name='test')[0]
 
 @step(u'the participant has not completed any sessions')
 def participant_has_not_completed_any_sessions(step):
@@ -289,9 +300,13 @@ def i_go_to_session(step,activity_number,session_number):
     assert s.index() == int(session_number)
     a = s.activity_set.all()[int(activity_number) - 1]
     assert a.index() == int(activity_number)
-    response = world.client.get(django_url("/activity/%d/" % a.id))
-    world.dom = html.fromstring(response.content)
-    world.response = response
+
+    if world.using_selenium:
+        world.firefox.get(django_url("/activity/%d/" % a.id))
+    else:
+        response = world.client.get(django_url("/activity/%d/" % a.id))
+        world.dom = html.fromstring(response.content)
+        world.response = response
 
 
 
