@@ -100,6 +100,10 @@ LETTUCE_APPS = (
     'smart_sa.intervention',
     'smart_sa.intervention.assessmentquiz_task',
     'smart_sa.intervention.ssnmtree_task',
+    'smart_sa.problemsolving_game',
+    'smart_sa.pill_game',
+    'smart_sa.lifegoal_task',
+    'smart_sa.ssnmtree_game',
 )
 
 # WIND settings
