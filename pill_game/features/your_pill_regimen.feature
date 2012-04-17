@@ -119,4 +119,19 @@ Feature: Your Pill Regimen
         Then there is 1 "Sam" in "evening"
         Then there is 1 "Bar" in "daytime"
         Then there is 1 "Bar" in "evening"
+            
+    Scenario: Limit of 10 pills
+        Using selenium
+        Then there are 2 pills
+        When I click Add Pill
+        When I click Add Pill
+        When I click Add Pill
+        When I click Add Pill
+        When I click Add Pill
+        When I click Add Pill
+        When I click Add Pill
+        When I click Add Pill
+        Then there are 10 pills
+        When I click Add Pill
+        Then I'm told I can only enter 10 pills        
         

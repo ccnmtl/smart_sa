@@ -246,6 +246,13 @@ def then_i_m_asked_to_enter_a_pill_name(step):
     assert alert.text.startswith("Please enter a name for this medication"), "Alert text valid"
     alert.accept()
     
+@step(u"Then I'm told I can only enter 10 pills")
+def then_i_m_told_i_can_only_enter_10_pills(step):
+    alert = world.firefox.switch_to_alert()
+    assert alert.text.startswith("You can only enter 10 pills"), "Alert text valid"
+    alert.accept()
+    
+    
 @step(u"Then I dismiss second dialog")
 def then_i_dismiss_second_dialog(step):
     alert = world.firefox.switch_to_alert()

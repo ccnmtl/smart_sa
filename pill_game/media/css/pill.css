@@ -12,8 +12,8 @@
 
 div#pill-list {
     float: left;
-    height: 95%;
     width: 66%;
+    min-height: 425px;
     margin-right: 10px;
     text-align: center;
     border: 1px solid #ccc !important;

@@ -446,10 +446,15 @@
         },
         
         onNewPill: function (evt) {
-            var rgb = this.colorGenerator.rgb();
-            var pill = new Pill({ 'id': "pill_" + (Math.random() + "").substring(2, 6), 'color': rgb });
-            this.pills.add(pill);
-            this.trigger("save");
+            // Let's limit this to 10 pills
+            if (this.pills.length >= 10) {
+                alert("You can only enter 10 pills. Please delete one before continuing");
+            } else {
+                var rgb = this.colorGenerator.rgb();
+                var pill = new Pill({ 'id': "pill_" + (Math.random() + "").substring(2, 6), 'color': rgb });
+                this.pills.add(pill);
+                this.trigger("save");
+            }
         },
         
         saveState: function () {
