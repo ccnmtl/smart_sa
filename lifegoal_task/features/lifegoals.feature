@@ -5,20 +5,20 @@ Feature: Life goals
     Scenario: Find the activity
         Using selenium
         Given I am logged in as a counselor
-        When I access the url "/"
-        When I click the "Let's get started!" link
-        When I click the "Intervene" link
-        When I fill in "test" in the "name" form field
-        When I fill in "test" in the "id_number" form field
-        When I submit the "login-participant-form" form
-        Then I am on the Intervention page
-        When I click on Session 1
-        Then I click on Activity 16
+        Given I have logged in a participant
+        When I go to Activity 16 of Session 1
         When I click the "Next →" link
         Then there is a game
+        Finished using selenium
     
     Scenario: Fill in the steps and goal
         Using selenium
+        Given I am logged in as a counselor
+        Given I have logged in a participant
+        When I go to Activity 16 of Session 1
+        When I click the "Next →" link
+        Then there is a game
+
         When I enter "abc" for "Step 2"
         When I enter "def" for "Step 3"
         When I enter "ghi" for "Step 4"
@@ -77,3 +77,4 @@ Feature: Life goals
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
         Then "Goal" is "jkl"
+        Finished using selenium
