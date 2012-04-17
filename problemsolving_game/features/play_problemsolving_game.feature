@@ -1,6 +1,7 @@
 Feature: Problem Solving Activity
     ## Notes
     ## Barrier is currently in Session 4, Activity 10
+    ## The "Other" activity is assumed to be #19
 
     Scenario: Find activity
         Using selenium
@@ -244,36 +245,36 @@ Feature: Problem Solving Activity
         
     Scenario: Testing "other" item behavior
         Using selenium
-        # Assuming "other" barrier is #14. 
-        When I select barrier 14
-        Then barrier 14 has "focus"
+        # Assuming "other" barrier is #19. 
+        When I select barrier 19
+        Then barrier 19 has "focus"
         Then I can specify my issue
         
         When I toggle personal challenge
-        Then barrier 14 has "marked"
+        Then barrier 19 has "marked"
         Then I specify my issue as "abc"
         
         When I select barrier 13
         Then barrier 13 has "focus"
         Then I cannot specify my issue
-        When I select barrier 14
-        Then barrier 14 has "focus"
+        When I select barrier 19
+        Then barrier 19 has "focus"
         Then I can specify my issue
         My issue is "abc"
         
         When I toggle personal challenge
-        Then barrier 14 does not have "marked"
+        Then barrier 19 does not have "marked"
         Then I can specify my issue
         
         When I toggle personal challenge
-        Then barrier 14 has "marked"
+        Then barrier 19 has "marked"
         My issue is "abc"
         
         When I click the "Next" link
         When I click the "Back" link
-        When I select barrier 14
-        Then barrier 14 has "focus"
-        Then barrier 14 has "marked"
+        When I select barrier 19
+        Then barrier 19 has "focus"
+        Then barrier 19 has "marked"
         Then I can specify my issue
         My issue is "abc"
         

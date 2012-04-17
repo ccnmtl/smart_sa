@@ -58,6 +58,7 @@ Feature: Life goals
         When I click the "Next →" link
         Then I wait 1 second
         When I click the "← Back" link
+        Then I wait 1 second
         
         Then "Step 2" is "mno"
         Then "Step 3" is "pqr"
