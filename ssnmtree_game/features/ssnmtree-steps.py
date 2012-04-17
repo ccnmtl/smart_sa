@@ -29,7 +29,11 @@ def when_i_clear_the_circle(step):
     
 @step(u'When I name the circle "([^"]*)"')
 def when_i_name_the_circle_name(step, name):    
-    fruit = world.firefox.find_element_by_id("top1-fruit")
+    try:
+        fruit = world.firefox.find_element_by_id("top1-fruit")
+    except:
+        time.sleep(1)
+        fruit = world.firefox.find_element_by_id("top1-fruit")
     elt = fruit.find_element_by_tag_name('input')
     elt.clear()
     elt.send_keys(name)
@@ -44,7 +48,11 @@ def when_i_click_the_circle(step):
     
 @step(u'Then the circle is "([^"]*)"')
 def then_the_circle_is_color(step, color):
-    elt = world.firefox.find_element_by_id("top1-fruit")
+    try:
+        elt = world.firefox.find_element_by_id("top1-fruit")
+    except:
+        import pdb;pdb.set_trace()
+
     assert elt != None
     
     if color == "gold":
