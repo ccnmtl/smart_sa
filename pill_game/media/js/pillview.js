@@ -490,9 +490,9 @@
         });
         
         if (mode === 'practice') {
-            pills.add(new Pill({ id: 'd4t', name: 'D4T<br />2 pills twice a day', mode: 'practice', color: "red" }));
-            pills.add(new Pill({ id: '3tc', name: '3TC<br />2 pills twice a day', mode: 'practice', color: "blue" }));
-            pills.add(new Pill({ id: 'efavirenz', name: 'Efavirenz<br />1 pill in the evening', mode: 'practice', color: "green" }));
+            pills.add(new Pill({ id: 'tdf', name: 'Tenofovir (TDF)<br />1 pill in the evening', mode: 'practice', color: "red" }));
+            pills.add(new Pill({ id: '3tc', name: 'Lamivudine (3TC)<br />1 pill in the evening', mode: 'practice', color: "blue" }));
+            pills.add(new Pill({ id: 'efavirenz', name: 'Efavirennz (EFV)<br />1 pill in the evening', mode: 'practice', color: "green" }));
         } else {
             var savedPills = global.pillRegimenState.getState("pills");
             for (var i = 0; savedPills && i < savedPills.length; i++) {

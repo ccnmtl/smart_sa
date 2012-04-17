@@ -22,10 +22,10 @@ Feature: Practice Pill Regimen
         There is a "Practice ARVs" title
         There is not an Add Pill button
         There are 3 pills
-        There is a pill named "D4T"
-        There is a pill named "3TC"
-        There is a pill named "Efavirenz"
-        I cannot edit "D4T"
+        There is a pill named "Tenofovir (TDF)"
+        There is a pill named "Lamivudine (3TC)"
+        There is a pill named "Efavirennz (EFV)"
+        I cannot edit "Tenofovir (TDF)"
         
     Scenario: Specify pill dosage time
         When I specify "daytime" time as "06:00"
@@ -33,19 +33,19 @@ Feature: Practice Pill Regimen
         
     Scenario: Drop a pill into the daytime bucket
         Using selenium
-        When I drop "D4T" onto "daytime"
-        Then there is 1 "D4T" in "daytime"
+        When I drop "Tenofovir (TDF)" onto "daytime"
+        Then there is 1 "Tenofovir (TDF)" in "daytime"
         
     Scenario: Drag a pill from the daytime bucket to the nighttime bucket
         Using selenium
-        When I drag "D4T" from "daytime" to "evening"
-        Then there is 0 "D4T" in "daytime"
-        Then there is 1 "D4T" in "evening"
+        When I drag "Tenofovir (TDF)" from "daytime" to "evening"
+        Then there is 0 "Tenofovir (TDF)" in "daytime"
+        Then there is 1 "Tenofovir (TDF)" in "evening"
         
     Scenario: Drop a pill into the nighttime bucket
         Using selenium
-        When I drop "3TC" onto "evening"
-        Then there is 1 "3TC" in "evening"
+        When I drop "Lamivudine (3TC)" onto "evening"
+        Then there is 1 "Lamivudine (3TC)" in "evening"
         
     Scenario: State is not saved in practice mode
         Using selenium
@@ -61,29 +61,29 @@ Feature: Practice Pill Regimen
         Using selenium
         When I specify "daytime" time as "Not taken during the day"
         When I specify "evening" time as "Not taken during the day"
-        When I drop "D4T" onto "daytime"
-        Then there is 0 "D4T" in "daytime"
-        When I drop "3TC" onto "evening"
-        Then there is 0 "3TC" in "evening"
+        When I drop "Tenofovir (TDF)" onto "daytime"
+        Then there is 0 "Tenofovir (TDF)" in "daytime"
+        When I drop "Lamivudine (3TC)" onto "evening"
+        Then there is 0 "Lamivudine (3TC)" in "evening"
         
     Scenario: Pills are deleted when a time slot is disabled
         Using selenium
         Specify "daytime" time as "00:00"
         Specify "evening" time as "12:00"
-        When I drop "D4T" onto "daytime"
-        Then there is 1 "D4T" in "daytime"
-        When I drop "3TC" onto "evening"
-        Then there is 1 "3TC" in "evening"
+        When I drop "Tenofovir (TDF)" onto "daytime"
+        Then there is 1 "Tenofovir (TDF)" in "daytime"
+        When I drop "Lamivudine (3TC)" onto "evening"
+        Then there is 1 "Lamivudine (3TC)" in "evening"
         When I specify "daytime" time as "Not taken during the day"
         When I specify "evening" time as "Not taken during the day"
-        Then there is 0 "D4T" in "daytime"
-        Then there is 0 "3TC" in "evening"
+        Then there is 0 "Tenofovir (TDF)" in "daytime"
+        Then there is 0 "Lamivudine (3TC)" in "evening"
         When I specify "daytime" time as "00:00"
         When I specify "evening" time as "12:00"
         
     Scenario: Drag pill off the bucket
         Using selenium
-        When I drop "D4T" onto "daytime"
-        Then there is 1 "D4T" in "daytime"
-        When I drag "D4T" off "daytime"
+        When I drop "Tenofovir (TDF)" onto "daytime"
+        Then there is 1 "Tenofovir (TDF)" in "daytime"
+        When I drag "Tenofovir (TDF)" off "daytime"
         Then there are no pills in "daytime"
