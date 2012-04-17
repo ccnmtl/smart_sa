@@ -250,6 +250,7 @@ def i_am_on_the_activity_with_title(step, title):
     if not world.using_selenium:
         assert False, "this step needs to be implemented for the django test client"
     current_activity = world.firefox.find_elements_by_css_selector("h3")[0]
+    title = title.replace("  "," ")
     assert current_activity.text == title, current_activity.text
 
 

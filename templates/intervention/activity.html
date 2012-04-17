@@ -12,7 +12,7 @@ var game_variables = {{activity.variables|safe}};
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; Working with <b>{{participant.name}}</b> 
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; Working with <b>{{participant.display_name}}</b> 
 </div>
 {% endblock %}
 
@@ -26,7 +26,7 @@ var game_variables = {{activity.variables|safe}};
 </div>
 
 {% if participant.is_practice %}
-<div class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</div>
+<div class="practice-mode">You are in Practice Mode. Changes will not be saved.</div>
 {% endif %}
 {% endblock %}
 
@@ -183,7 +183,7 @@ var game_variables = {{activity.variables|safe}};
 		{% endif %}
 		
 		{% if activity.collect_notes %}
-		<h4>{{participant.name}}'s Questions and Concerns</h4>	
+		<h4>{{participant.display_name}}'s Questions and Concerns</h4>	
 		
 		<textarea name="counselor_notes" rows="5" cols="70" id="counselor-notes" >{{counselor_notes}}</textarea>
 		{% endif %}

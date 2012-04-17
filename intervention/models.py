@@ -532,6 +532,9 @@ class Participant(models.Model):
                                     status=pa.status) for pa in self.participantactivity_set.all()],
             )
 
+    def all_counselor_notes(self):
+        return CounselorNote.objects.filter(participantsession__participant=self)
+
     def save_game_var(self, key, value):
         "create or update a game variable"
         gv, created = ParticipantGameVar.objects.get_or_create(participant=self, key=key)
@@ -555,6 +558,12 @@ class Participant(models.Model):
     def is_practice(self):
         "template helper"
         return self.name == "practice"
+
+    def display_name(self):
+        if self.is_practice():
+            return "Practice Participant"
+        else:
+            return self.name
 
     def next_session(self):
         """ which session the participant should be sent to """

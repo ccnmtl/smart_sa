@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load participant_status %}
+
 {% block title %}Notes for {{participant.name}}{% endblock %}
 
 {% block breadcrumb-main %}
@@ -12,38 +14,54 @@
 
 <h3>{{participant.name}}'s Notes</h3>
 
+{% if participant.clinical_notes %}
 <p>{{participant.clinical_notes}}</p>
+{% else %}
+<p>No clinical notes have been entered</p>
+{% endif %}
 
 <h3>{{participant.name}}'s Questions and Concerns</h3>
 
+<table>
+<tr><th>session</th>
+  <th>counselor</th>
+  <th>notes</th>
+</tr>
+{% for cn in participant.all_counselor_notes %}
+{% if cn.notes %}
+<tr>
+<th>{{cn.participantsession.session.long_title}}</th>
+<th>{{cn.counselor.username}}</th>
+<td>{{cn.notes}}</td>
+</tr>
+{% endif %}
+{% endfor %}
+</table>
+
 <h3>{{participant.name}}'s Alerts</h3>
 
-<h3>{{participant.name}}'s Sessions</h3>
+<h3>{{participant.name}}'s Progress</h3>
 
-<h4>Sessions</h4>
-<ul>
-{% for ps in participant.participantsession_set.all %}
-<li>[<span class="{{ps.status}}">{{ps.status}}</span>] {{ps.session.long_title}}
-{% if ps.counselornote_set.count %}
-<ul>
-{% for n in ps.counselornote_set.all %}
-{% if n.notes %}
-<li><b>Note from {{n.counselor.username}}</b><br />
-{{n.notes}}</li>
-{% endif %}
-{% endfor %}
-</ul>
-{% endif %}
-</li>
-{% endfor %}
-</ul>
+<table>
+{% for intervention in all_interventions %}
+{% for session in intervention.clientsession_set.all %}
+<tr>
+  <th>{{session.long_title}}</th>
+  <td>{% get_participant_status participant session %}</td>
+</tr>
 
-<h4>Activities</h4>
-<ul>
-{% for pa in participant.participantactivity_set.all %}
-<li>[<span class="{{pa.status}}">{{pa.status}}</span>] {{pa.activity.clientsession.long_title}}/{{pa.activity.long_title}}</li>
+{% for activity in session.activity_set.all %}
+{% get_participant_status participant activity as astatus %}
+{% if  astatus %}<tr>
+  <td>{{activity.long_title}}</td>
+  <td>{% get_participant_status participant activity %}</td>
+</tr>{% endif %}
+
 {% endfor %}
-</ul>
+{% endfor %}
+{% endfor %}
+</table>
+
 
 
 <a href="/manage/" class="action">Done</a>

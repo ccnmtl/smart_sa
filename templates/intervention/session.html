@@ -6,7 +6,7 @@
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; Working with <b>{{participant.name}}</b> 
+	<a href="/intervention/">Home</a> &rarr; Intervene &rarr; Working with <b>{{participant.display_name}}</b> 
 </div>
 {% endblock %}
 
@@ -18,7 +18,7 @@
 </div>
 {%endif%}  
     {% if participant.is_practice %}
-    <div class="practice-mode">Practice Mode - This intervention is for demonstration purposes only.</div>
+    <div class="practice-mode">You are in Practice Mode. Changes will not be saved.</div>
     {% endif %}
 {% endblock %}
 
@@ -46,7 +46,7 @@
       {% if activities %}   
       
        <p class="instructions">
-	 Great! Now, click on an activity for <b>{{participant.name}}</b> to work on.
+	 Great! Now, click on an activity for <b>{{participant.display_name}}</b> to work on.
 	  </p>
 	  
    	<div id="navigator">
@@ -54,7 +54,7 @@
         {% for s in session.intervention.clientsession_set.all %}
 	{% if not s.defaulter or participant.defaulter %}
 	   <li><a id="session{{s.index }}" class="session {% get_participant_status participant s %} {% ifequal session.id s.id %}current{% endifequal %} {% ifequal s.id next_session.id %}hilite{%else%}default{% endifequal %}" href="/session/{{s.id }}/">
-	     Session {{forloop.counter}}: {{ s.long_title }}
+	     {{ s.long_title }}
 	    </a></li>
 	{% else %}
 	   <li><a id="session{{s.index }}" class="session {% get_participant_status participant s %} {% ifequal session.id s.id %}current{% endifequal %} {% ifequal s.id next_session.id %}hilite{%else%}default{% endifequal %}" href="/session/{{s.id }}/">
