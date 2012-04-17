@@ -12,9 +12,11 @@
 
 
 {% for note in notes %}
+{% if note.notes %}
 <h2>Notes for Participant
   {{note.participantsession.participant.name}}, Session {{note.participantsession.session.title}}</h2>
 <p>{{note.notes}}</p>
+{% endif %}
 {% endfor %}
 
 <a href="/manage/" class="action">Done</a>
