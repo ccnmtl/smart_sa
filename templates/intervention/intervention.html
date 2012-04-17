@@ -26,8 +26,20 @@
       <h2>Sessions</h2>
 
 {% participant_completed_all_sessions_in_intervention participant intervention as all_done %}
-{% if all_done %}<p>Done with All Sessions</p>
+{% if all_done %}
+<div id="closemessage">
+
+	<h3>Congratulations!</h3>
+
+	<p style="text-align: center; padding-bottom: 20px;">
+	You've completed all the sessions!
+	</p>
+
+	<a style="display: inline;" class="action" href="#" onclick="document.getElementById('closemessage').style.display = 'none';">Close this Window</a>
+	
+</div>
 {% endif %}
+
 
         <p class="instructions">
        Select a session so <b>{{participant.display_name}}</b> can get started!
