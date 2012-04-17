@@ -9,6 +9,7 @@ import time
 try:
     from lxml import html
     from selenium import webdriver
+    from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
     from selenium.common.exceptions import NoSuchElementException
     from selenium.webdriver.common.keys import Keys
     import selenium
@@ -17,7 +18,9 @@ except:
 
 @before.all
 def setup_browser():
-    world.firefox = webdriver.Firefox()
+    ff_profile = FirefoxProfile() 
+    ff_profile.set_preference("webdriver_enable_native_events", False) 
+    world.firefox = webdriver.Firefox(ff_profile)
     world.client = client.Client()
     world.using_selenium = False
 
