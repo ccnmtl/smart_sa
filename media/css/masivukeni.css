@@ -477,14 +477,14 @@ table.manage th
 	border: 1px solid #ccc;
 	background-color: #eee;
 	text-align: center;
-	padding: 5px;
+	padding: 8px 4px 8px 4px;
 }
 
 table.manage td
 {
 	border: 1px solid #ccc;
 	text-align: center;
-	padding: 10px 0px 10px 0px;
+	padding: 8px 4px 8px 4px;
 }
 
 table.manage a.action
@@ -494,6 +494,7 @@ table.manage a.action
     width: 190px;
 }
 
+.addcell {background-color: #ccc;}
 table#choices { margin-top: 20px; }
 
 table#choices td

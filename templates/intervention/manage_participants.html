@@ -29,8 +29,8 @@
 	<col id="status" /> 
 	<col id="actions" /> 
 	<tr>
-	<td colspan="3">
-<a class="action" href="/manage/add_participant/">+ Add Participant</a>	
+	<td colspan="3" class="addcell">
+<a class="action" href="/manage/add_participant/">+ Add a Participant</a>	
 </td>
 	</tr>
 	<tr>
@@ -58,7 +58,7 @@
 <table class="manage" cellspacing="0">
 	<col id="firstname" /> <col id="status" /> <col id="actions" /> 
 	<tr>
-	<td colspan="3">
+	<td colspan="3" class="addcell">
 	  {% if request.user.is_superuser %}
 	    <a class="action" href="/manage/add_counselor/">+ Add a Counselor</a>	
           {% endif %}
