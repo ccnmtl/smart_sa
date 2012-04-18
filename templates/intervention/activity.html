@@ -132,7 +132,7 @@ var game_variables = {{activity.variables|safe}};
 		{% if activity.collect_reasons_for_returning %}
 		<h4>Reasons For Returning</h4>	
 
-		<textarea name="reasons_for_returning">{{participant.reasons_for_returning}}</textarea>		
+		<textarea name="reasons_for_returning" rows="5" cols="70">{{participant.reasons_for_returning}}</textarea>		
 		{% endif %}
 
 		{% if activity.collect_referral_info %}
@@ -157,7 +157,7 @@ var game_variables = {{activity.variables|safe}};
 		  </p>
 
 		<h5>Additional notes about the referral(s):</h5>
-		<textarea name="referral_notes">{{participant.defaulter_referral_notes}}</textarea>
+		<textarea name="referral_notes" rows="5" cols="70">{{participant.defaulter_referral_notes}}</textarea>
 		{% else %}
 
 		  <p>
