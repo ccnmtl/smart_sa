@@ -70,6 +70,15 @@ def i_access_the_management_console(step):
     world.response = response
     world.dom = html.fromstring(response.content)
 
+@step(u'I access the counselor landing page')
+def i_access_the_counselor_landing_page(step):
+    if world.using_selenium:
+        world.firefox.get(django_url("/intervention/"))
+    response = world.client.get(django_url("/intervention/"),follow=True)
+    world.response = response
+    world.dom = html.fromstring(response.content)
+
+
 @step(u'I am taken to a login screen')
 def i_am_taken_to_a_login_screen(step):
     assert len(world.response.redirect_chain) > 0

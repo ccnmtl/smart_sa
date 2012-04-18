@@ -18,3 +18,4 @@ Test out the management interface.
       Then there is an "+ Add Participant" link
       Then there is an "+ Add a Counselor" link
       Then there is a location edit form
+
