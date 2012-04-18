@@ -49,7 +49,6 @@
 	      </td>
 	    </tr>
 
-{% if request.user.is_superuser %}		
 	    <tr>
 	      <td>
 		<a class="action" href="/manage/">Administrate</a>
@@ -58,6 +57,8 @@
 		Counselors and administrators can manage participant information.
 	      </td>
 	    </tr>
+
+{% if request.user.is_superuser %}		
 
 	    <tr>
 	      <td>
