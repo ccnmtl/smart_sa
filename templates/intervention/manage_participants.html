@@ -42,7 +42,7 @@
 	<tr>
 		<td>{{participant.name}}</td>
 		<td>{% if participant.status %}Active{% else %}Inactive{% endif %}</td>
-		<td> <a class="action" href="/manage/participant/{{participant.id}}/view/">View Notes for {{participant.name}}</a> <a class="action" href="/manage/participant/{{participant.id}}/edit/">Edit Notes for {{participant.name}}</a> </td>
+		<td> <a class="action" href="/manage/participant/{{participant.id}}/view/">View Info for {{participant.name}}</a> <a class="action" href="/manage/participant/{{participant.id}}/edit/">Edit Notes for {{participant.name}}</a> </td>
 	</tr>
 	{% endfor %} 
 </table>
@@ -73,7 +73,7 @@
 	<tr>
 		<td>{{counselor.username}}</td>
 		<td>{% if counselor.is_active %}Active{% else %}Inactive{% endif %}</td>
-		<td><a class="action" href="/manage/counselor/{{counselor.id}}/view/">View Notes for {{counselor.username}}</a> <a class="action" href="/admin/auth/user/{{counselor.id}}/">Edit Notes for {{counselor.username}}</a> </td>
+		<td><a class="action" href="/manage/counselor/{{counselor.id}}/view/">View Info for {{counselor.username}}</a> <a class="action" href="/admin/auth/user/{{counselor.id}}/">Edit Notes for {{counselor.username}}</a> </td>
 	</tr>
 	{% endfor %} 
 </table>

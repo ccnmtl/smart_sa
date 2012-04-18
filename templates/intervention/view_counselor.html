@@ -1,20 +1,19 @@
 {% extends "base.html" %}
-{% block title %}Notes for {{counselor.username}}{% endblock %}
+{% block title %}Information for {{counselor.username}}{% endblock %}
 
 {% block breadcrumb-main %}
 	<div id="breadcrumb-main">
-	<a href="/intervention/">Home</a> &rarr; <a href="/manage/">Administrate</a> &rarr; Notes for {{counselor.username}}
+	<a href="/intervention/">Home</a> &rarr; <a href="/manage/">Administrate</a> &rarr; Information for {{counselor.username}}
 	</div>
 {% endblock %}
 
 {% block content %}
-<h2>Notes for {{counselor.username}}</h2>
+<h2>Information for {{counselor.username}}</h2>
 
 
 {% for note in notes %}
 {% if note.notes %}
-<h2>Notes for Participant
-  {{note.participantsession.participant.name}}, Session {{note.participantsession.session.title}}</h2>
+<h4>Information for Participant {{note.participantsession.participant.name}}, Session {{note.participantsession.session.title}}</h4>
 <p>{{note.notes}}</p>
 {% endif %}
 {% endfor %}

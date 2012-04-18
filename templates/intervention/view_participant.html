@@ -1,69 +1,73 @@
 {% extends "base.html" %}
 {% load participant_status %}
 
-{% block title %}Notes for {{participant.name}}{% endblock %}
+{% block title %}Information for {{participant.name}}{% endblock %}
 
 {% block breadcrumb-main %}
 	<div id="breadcrumb-main">
-	<a href="/intervention/">Home</a> &rarr; <a href="/manage/">Administrate</a> &rarr; Notes for {{participant.name}}
+	<a href="/intervention/">Home</a> &rarr; <a href="/manage/">Administrate</a> &rarr; Information for {{participant.name}}
 	</div>
 {% endblock %}
 
 {% block content %}
-<h2>Notes for {{participant.name}}</h2>
+<h2>Information for {{participant.name}}</h2>
 
-<h3>{{participant.name}}'s Notes</h3>
+<h4>Notes</h4>
 
 {% if participant.clinical_notes %}
 <p>{{participant.clinical_notes}}</p>
 {% else %}
-<p>No clinical notes have been entered</p>
+<p>No clinical notes have been entered.</p>
 {% endif %}
 
-<h3>{{participant.name}}'s Questions and Concerns</h3>
+<h4>Questions and Concerns</h4>
 
-<table>
-<tr><th>session</th>
-  <th>counselor</th>
-  <th>notes</th>
+<table class="manage" cellspacing="0">
+<tr>
+<th>Session</th>
+<th>Counselor</th>
+<th>Notes</th>
 </tr>
 {% for cn in participant.all_counselor_notes %}
 {% if cn.notes %}
 <tr>
-<th>{{cn.participantsession.session.long_title}}</th>
-<th>{{cn.counselor.username}}</th>
+<td>{{cn.participantsession.session.long_title}}</td>
+<td>{{cn.counselor.username}}</td>
 <td>{{cn.notes}}</td>
 </tr>
+{% else %}
+foo
 {% endif %}
 {% endfor %}
 </table>
 
-<h3>{{participant.name}}'s Alerts</h3>
+<!--
+<h4>Alerts</h4>
+-->
 
-<h3>{{participant.name}}'s Progress</h3>
+<h4>Progress</h4>
 
-<table>
+<table class="manage" cellspacing="0">
 {% for intervention in all_interventions %}
 {% for session in intervention.clientsession_set.all %}
 <tr>
-  <th>{{session.long_title}}</th>
-  <td>{% get_participant_status participant session %}</td>
+<th style="text-align: left;">{{session.long_title}}</th>
+<th style="text-align: left;">{% get_participant_status participant session %}</th>
 </tr>
-
 {% for activity in session.activity_set.all %}
 {% get_participant_status participant activity as astatus %}
-{% if  astatus %}<tr>
-  <td>{{activity.long_title}}</td>
-  <td>{% get_participant_status participant activity %}</td>
+{% if  astatus %}
+<tr>
+<td>{{activity.long_title}}</td>
+<td>{% get_participant_status participant activity %}</td>
 </tr>{% endif %}
-
 {% endfor %}
 {% endfor %}
 {% endfor %}
 </table>
 
-
-
+<div align="center" style="margin-top: 20px;">
 <a href="/manage/" class="action">Done</a>
+</div>
 
 {% endblock %}
