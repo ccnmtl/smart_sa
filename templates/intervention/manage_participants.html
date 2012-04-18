@@ -52,6 +52,7 @@
 	no participants
 </p>
 {% endif %} 
+{% if request.user.is_superuser %}
 <h4>
 	Counselors 
 </h4>
@@ -82,4 +83,6 @@
 <p>
 	no counselors
 </p>
-{% endif %} {% endblock %} 
+{% endif %}
+{% endif %}
+{% endblock %} 
