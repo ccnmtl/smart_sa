@@ -17,14 +17,15 @@
 </h4>
 
 {% if request.user.is_superuser %}
+<a style="float: right; margin-top: -5px;" class="action" href="/manage/report/download/">Download Participant Data</a>
+
 <form action="/set_deployment/" method="post">
 <p>Location Name: <input type="text" name="name"
 		      value="{{deployment.name}}" />
-<input type="submit" value="save" /></p>
+<input type="submit" value="Save" /></p>
 </form>
 {% endif %}
 
-<a class="action" href="/manage/add_participant/">+ Add a Participant</a>	
 
 {% if participants %} 
 <table class="manage" cellspacing="0">
@@ -33,7 +34,7 @@
 	<col id="actions" /> 
 	<tr>
 	<td colspan="3" class="addcell">
-
+<a class="action" href="/manage/add_participant/">+ Add a Participant</a>	
 </td>
 	</tr>
 	<tr>
@@ -88,12 +89,5 @@
 {% endif %}
 {% endif %}
 
-{% if request.user.is_superuser %}
-
-<h4>Download Participant Data</h4>
-
-<a class="action" href="/manage/report/download/">Download Participant Data</a>
-
-{% endif %}
 
 {% endblock %} 
