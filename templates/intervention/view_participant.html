@@ -33,7 +33,7 @@
 <tr>
 <td>{{cn.participantsession.session.long_title}}</td>
 <td>{{cn.counselor.username}}</td>
-<td>{{cn.notes}}</td>
+<td style="text-align: left;">{{cn.notes}}</td>
 </tr>
 {% endif %}
 {% endfor %}
@@ -56,15 +56,16 @@
 {% get_participant_status participant activity as astatus %}
 {% if  astatus %}
 <tr>
-<td>{{activity.long_title}}</td>
-<td style="text-align: center;">{% get_participant_status participant activity %}</td>
-</tr>{% endif %}
+<td style="text-align: left;">{{activity.long_title}}</td>
+<td>{% get_participant_status participant activity %}</td>
+</tr>
+{% endif %}
 {% endfor %}
 {% endfor %}
 {% endfor %}
 </table>
 
-<div align="center" style="margin-top: 20px;">
+<div style="margin: 40px;">
 <a href="/manage/" class="action">Done</a>
 </div>
 
