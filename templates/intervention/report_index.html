@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
+{% block title %}Report{% endblock %}
+
+{% block breadcrumb-main %} 
+<div id="breadcrumb-main">
+	<a href="/intervention/">Home</a> &rarr; Report 
+</div>
+{% endblock %} 
+
 {% block content %}
-<h1>Download Participant Data</h1>
 
-<p><a href="/manage/report/download/">here</a>.</p>
+<h2>Report</h2>
 
-<p>What else should go here?</p>
+<p>
+Administrators can create reports using this data, which is available for download.
+</p>
+
+<a class="action" href="/manage/report/download/">Download Participant Data</a>
 
 {% endblock %}

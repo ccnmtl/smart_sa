@@ -15,6 +15,16 @@ body {
     margin-top: 100px;
 }
 
+.practice-mode {
+    display: none;
+}
+
+
+#suggestedtime {
+    display: none;
+}
+
+
 #header h1 {
     display: none;
 }
@@ -27,10 +37,22 @@ body {
 }
 
 #content {
-    margin-left: 50px;
+   padding: 0px 50px 50px 50px;
+   margin: 0px;
 }
 
 #gamebox {
     max-width: 825px;
 }
 
+#content img.inlineimage
+{
+	float: right;
+	margin: 0px 0px 20px 20px;
+	padding: 10px;
+	border: 1px solid #666;
+	max-width: 275px;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
