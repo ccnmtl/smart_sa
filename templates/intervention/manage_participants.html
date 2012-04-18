@@ -12,9 +12,6 @@
 <h2>
 	Administrate
 </h2>
-<h4>
-	Participants
-</h4>
 
 {% if request.user.is_superuser %}
 <a style="float: right; margin-top: -5px;" class="action" href="/manage/report/download/">Download Participant Data</a>
@@ -25,6 +22,10 @@
 <input type="submit" value="Save" /></p>
 </form>
 {% endif %}
+
+<h4>
+	Participants
+</h4>
 
 
 {% if participants %} 
