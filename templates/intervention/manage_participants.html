@@ -16,12 +16,13 @@
 	Participants
 </h4>
 
+{% if request.user.is_superuser %}
 <form action="/set_deployment/" method="post">
 <p>Location Name: <input type="text" name="name"
 		      value="{{deployment.name}}" />
 <input type="submit" value="save" /></p>
 </form>
-
+{% endif %}
 
 {% if participants %} 
 <table class="manage" cellspacing="0">
