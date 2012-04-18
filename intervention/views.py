@@ -180,12 +180,6 @@ def view_participant(request, participant_id):
     p = get_object_or_404(Participant, id=participant_id)
     return dict(participant=p,all_interventions=Intervention.objects.all())
 
-@render_to('intervention/view_counselor.html')
-@login_required
-def view_counselor(request, counselor_id):
-    c = get_object_or_404(User, id=counselor_id)
-    return dict(counselor=c, notes=CounselorNote.objects.filter(counselor=c))
-
 @render_to('intervention/add_counselor.html')
 @login_required
 def add_counselor(request):
