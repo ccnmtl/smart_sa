@@ -85,4 +85,13 @@
 </p>
 {% endif %}
 {% endif %}
+
+{% if request.user.is_superuser %}
+
+<h4>Download Participant Data</h4>
+
+<a class="action" href="/manage/report/download/">Download Participant Data</a>
+
+{% endif %}
+
 {% endblock %} 

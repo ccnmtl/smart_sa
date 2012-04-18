@@ -60,6 +60,7 @@
 
 {% if request.user.is_superuser %}		
 
+{% if deployment.is_online %}
 	    <tr>
 	      <td>
 		<a class="action" href="/manage/report/">Report</a>
@@ -69,8 +70,6 @@
 	      </td>
 	    </tr>
 
-
-{% if deployment.is_online %}
 	    <tr>
 	      <td>
 		<a class="action" href="">Upload</a>
