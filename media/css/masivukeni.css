@@ -1199,13 +1199,17 @@ width: 33%;
 
 #closemessage
 {
+	background-image: url(/site_media/images/starburst.png);
+	background-repeat: no-repeat;
+	background-position: center center;
 	text-align: center;
 	position: absolute;
+	top: 0px;
 	left: 50%;
-	width: 300px;
-	margin-left: -150px;
+	width: 400px;
+	margin-left: -200px;
 	padding: 30px;
-	background-color: #fff;
+	background-color: #FFF;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
