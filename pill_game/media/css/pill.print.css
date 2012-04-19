@@ -3,10 +3,7 @@
 }
 
 h3.activitytitle {
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
-    -webkit-margin-before: 0em;
-    -webkit-margin-after: 0em;
+    display: none !important;
 }
 
 .printonly {
@@ -40,7 +37,7 @@ h3.activitytitle {
 }
 
 #medication-reminder {
-    
+    font-size: 80%;
 }
 
 #medication-reminder div.medication_reminder_bucket {
