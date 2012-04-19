@@ -37,7 +37,7 @@
 {% block breadcrumb-session %}
     {%if game %}
 <div id="breadcrumb">
-      <a class="incomplete" id="tab-home" href="/intervention/{{game.activity.clientsession.intervention.id}}/">Sessions</a>
+      <a class="complete" id="tab-home" href="/intervention/{{game.activity.clientsession.intervention.id}}/">Sessions</a>
 	<div id="breadcrumb-text">
 		You are currently in: <span class="breadcrumb-text-current">Session {{game.activity.clientsession.index}}: {{game.activity.clientsession.long_title}} &rarr; Activity {{game.activity.index}}: {{ game.activity.long_title }}</span>
 	</div>
