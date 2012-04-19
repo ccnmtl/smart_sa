@@ -12,6 +12,47 @@
 {% block content %}
 <h2>Information for {{participant.name}}</h2>
 
+<h4>Buddy Name</h4>
+
+<p>{{participant.buddy_name|default:"no buddy name given" }}</p>
+
+<h4>Initial Referral</h4>
+
+<p>Referred for:</p>
+<ul>
+  {% if participant.initial_referral_mental_health %}<li>mental health</li>{% endif %}
+  {% if participant.initial_referral_alcohol %}<li>alcohol</li>{% endif %}
+  {% if participant.initial_referral_drug_use %}<li>drug use</li>{% endif %}
+  {% if participant.initial_referral_other %}<li>other</li>{% endif %}
+</ul>
+		  
+{% if participant.initial_referral_notes %}
+<h5>Initial Referral Notes</h5>
+<p>{{participant.initial_referral_notes}}</p>
+{% endif %}
+
+{% if participant.defaulter %}
+<h4>Defaulter Referral</h4>
+
+<p>Referred for:</p>
+<ul>
+  {% if participant.defaulter_referral_mental_health %}<li>mental health</li>{% endif %}
+  {% if participant.defaulter_referral_alcohol %}<li>alcohol</li>{% endif %}
+  {% if participant.defaulter_referral_drug_use %}<li>drug use</li>{% endif %}
+  {% if participant.defaulter_referral_other %}<li>other</li>{% endif %}
+</ul>
+
+      {% if participant.defaulter_referral_notes %}
+      <h5>Defaulter Referral Notes</h5>
+      <p>{{participant.defaulter_referral_notes}}</p>
+      {% endif %}
+
+      {% if participant.reasons_for_returning %}
+      <h5>Reasons For Returning</h5>
+      <p>{{participant.reasons_for_returning}}</p>
+      {% endif %}
+{% endif %}
+
 <h4>Notes</h4>
 
 {% if participant.clinical_notes %}
