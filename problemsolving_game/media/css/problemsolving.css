@@ -118,7 +118,7 @@ div#issue_details div.issue-number:hover {
 }
 
 div#issue_details img.issue-image {
-    width: 250px;
+    width: 245px;
     height: auto;
     float: left;
     
@@ -135,7 +135,7 @@ div#issue_details div.issue-text-container {
     -moz-border-radius: 5px;
     border-radius: 5px;
     padding: 7px;
-    margin: 5px 5px 0px 5px;
+    margin: 5px 5px 0px 8px;
     text-align: left;
     vertical-align: center;
     background-color: white;
