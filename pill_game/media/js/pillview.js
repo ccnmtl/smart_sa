@@ -279,7 +279,7 @@
             this.pillViews = {};
             
             if (options.printContainer) {
-                this.printEl = jQuery("<div/>")[0];
+                this.printEl = jQuery("<div class='medication_reminder_bucket'></div>")[0];
                 options.printContainer.append(this.printEl);
                 this.template = _.template(jQuery("#printable-bucket-template").html());
             }

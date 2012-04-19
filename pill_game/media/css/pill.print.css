@@ -2,6 +2,13 @@
     display: none;
 }
 
+h3.activitytitle {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+}
+
 .printonly {
     display: block;
 }
@@ -10,6 +17,10 @@
     width: 190px;
     height: 210px;
     margin-bottom: 10px;
+}
+
+#pill-game-container {
+    clear: both;
 }
 
 .time {
@@ -29,10 +40,11 @@
 }
 
 #medication-reminder {
-    margin-bottom: 20px;
-    border-bottom:  1px solid #4EA15A;      
+    
 }
 
-#medication-reminder div {
+#medication-reminder div.medication_reminder_bucket {
+    float: left;
+    width: 50%;
     margin-bottom: 20px;
 }
