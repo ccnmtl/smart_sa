@@ -281,8 +281,11 @@ def update_intervention_content(request):
         if deployment.is_online():
             return HttpResponse("you should only use this feature on a clinic machine")
 
-    zc = TODO_read_content_from_request(request)
-    uploads = TODO_get_list_of_uploads_from_zip()
+    # TODO: read in chunks
+    zc = request.FILES['intervention_content'].read()
+
+#    uploads = TODO_get_list_of_uploads_from_zip()
+    uploads = [] # TODO: handle uploads
 
     buffer = StringIO(zc)
     zipfile = ZipFile(buffer,"r")
