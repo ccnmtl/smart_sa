@@ -131,6 +131,8 @@ PROD_MEDIA_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/multimedia/"
 
 DISABLE_OFFLINE = False
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 try:
     from release_id import LAST_GIT_HEAD
 except ImportError:
