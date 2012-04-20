@@ -661,18 +661,7 @@ def all_uploads():
             public_path = os.path.join(settings.MEDIA_URL, archive_root, f)
             yield fullpath, f, archive_name, public_path
 
-def content_sync(request):
-    """ give the user a zip file of all the content for the intervention
-    this means Intervention, ClientSession, etc objects in json format as well
-    as all the images/videos that have been uploaded. 
-
-    It does NOT include user data. 
-
-    This is to enable a "pull content from production" command to update
-    a developer's or staging database. Doing this since a lot of the functionality
-    of the site is closely tied to content in the database.
-    """
-
+def content_zip(request):
     buffer = StringIO()
     zipfile = ZipFile(buffer,"w")
     zipfile.writestr("version.txt", "1")
@@ -686,9 +675,31 @@ def content_sync(request):
             zipfile.write(fullpath, archive_name)                
     zipfile.close()
 
-    resp = HttpResponse(buffer.getvalue())
+    return buffer.getvalue()
+
+def content_sync(request):
+    """ give the user a zip file of all the content for the intervention
+    this means Intervention, ClientSession, etc objects in json format as well
+    as all the images/videos that have been uploaded. 
+
+    It does NOT include user data. 
+
+    This is to enable a "pull content from production" command to update
+    a developer's or staging database. Doing this since a lot of the functionality
+    of the site is closely tied to content in the database.
+    """
+    resp = HttpResponse(content_zip(request))
     resp['Content-Disposition'] = "attachment; filename=masivukeni.zip" 
     return resp
+
+def zip_download(request):
+    """ same as content_sync, but puts a timestamp into the filename to make it nicer for a user to download """
+    resp = HttpResponse(content_zip(request))
+    now = datetime.now()
+    datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (now.year, now.month, now.day, now.hour, now.minute, now.second)
+    resp['Content-Disposition'] = "attachment; filename=masivukeni-%s.zip" % datestring
+    return resp
+
 
 def list_uploads(request):
     urls = []
