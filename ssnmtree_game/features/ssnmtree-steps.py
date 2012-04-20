@@ -98,6 +98,8 @@ def when_i_click_the_name_button(step, name):
 @step(u'Then "([^"]*)" is selected')
 def then_button_is_selected(step, button):
     elts = world.firefox.find_elements_by_class_name("on")
+    if len(elts) != 1:
+        import pdb; pdb.set_trace()
     assert len(elts) == 1, "There should only be one button selected. There are %s" % len(elts)
     
     if button == "disclosure":

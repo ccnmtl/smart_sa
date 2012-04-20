@@ -6,7 +6,7 @@ Feature: SSNMTree Basics
         Using selenium
         Given I am logged in as a counselor
         Given I have logged in a participant
-        When I go to Activity 12 of Session 1
+        When I go to Activity 13 of Session 1
         When I click the "Next →" link
         Then there is a game
         When I fill in the SSNM Tree with "regular"
@@ -14,7 +14,6 @@ Feature: SSNMTree Basics
         
         # Verify state saved
         When I click the "Next →" link
-        Then I wait 1 second
         When I click the "← Back" link
         There is a filled in SSNM Tree with "regular"
         Finished using Selenium
@@ -24,7 +23,7 @@ Feature: SSNMTree Basics
         # Disclosure
         Given I am logged in as a counselor
         Given I have logged in a participant
-        When I go to Activity 12 of Session 1
+        When I go to Activity 13 of Session 1
         When I click the "Next →" link
         Then there is a game
         When I fill in the SSNM Tree with "regular"
@@ -71,7 +70,7 @@ Feature: SSNMTree Basics
         Using selenium
         Given I am logged in as a counselor
         Given I have logged in a participant
-        When I go to Activity 12 of Session 1
+        When I go to Activity 13 of Session 1
         When I click the "Next →" link
         Then there is a game
         When I fill in the SSNM Tree with "regular"
@@ -89,7 +88,7 @@ Feature: SSNMTree Basics
         When I click the "Sessions" link
         Then I am on the Intervention page
         When I click on Session 4
-        When I click on Activity 13
+        When I click on Activity 14
         When I click the "Next →" link
         Then there is a game
         There is a filled in SSNM Tree with "regular"
@@ -113,7 +112,7 @@ Feature: SSNMTree Basics
         When I click the "Sessions" link
         Then I am on the Intervention page
         When I click on Session 1
-        Then I click on Activity 12
+        Then I click on Activity 13
         When I click the "Next →" link
         Then there is a game
         There is a filled in SSNM Tree with "regular"  
