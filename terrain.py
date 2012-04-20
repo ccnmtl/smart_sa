@@ -16,15 +16,15 @@ try:
 except:
     pass
 
-@before.all
-def setup_browser():
+@before.harvest
+def setup_browser(variables):
     ff_profile = FirefoxProfile() 
     ff_profile.set_preference("webdriver_enable_native_events", False) 
     world.firefox = webdriver.Firefox(ff_profile)
     world.client = client.Client()
     world.using_selenium = False
 
-@after.all
+@after.harvest
 def teardown_browser(total):
     world.firefox.quit()
 
