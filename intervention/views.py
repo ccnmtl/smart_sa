@@ -22,6 +22,7 @@ from functools import wraps
 from django.utils.decorators import available_attrs
 from problemsolving_game.models import Issue
 from intervention.models import Intervention
+from pprint import pprint
 
 from aes_v001 import AESModeOfOperation, toNumbers, fromNumbers
 
@@ -196,7 +197,7 @@ def add_counselor(request):
 def report_index(request):
     return dict()
 
-#@login_required
+@login_required
 def participant_data_download(request):
     data = dict(deployment=Deployment.objects.all()[0].name)
     participants = []
@@ -213,7 +214,115 @@ def participant_data_download(request):
     datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (now.year, now.month, now.day, now.hour, now.minute, now.second)
     resp['Content-Disposition'] = "attachment; filename=%s_%s_participant_data.json" % (clean_deployment_name, datestring)
     return resp
+
+@render_to("intervention/restore_participants.html")
+@login_required
+def restore_participants(request):
+    logs = []
+    if Deployment.objects.count() > 0:
+        deployment = Deployment.objects.all()[0]
+        if deployment.is_online():
+            logs.append(dict(error="you should only use this feature on a clinic machine"))
+            return dict(logs=logs)
+
+    try:
+        json_data = request.FILES['participants_data'].read()
+        json = simplejson.loads(json_data)
+    except Exception, e:
+        logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))
+        return dict(logs=logs)
+
+    # clear existing counselors (skipping the current user since 
+    # they are an admin rather than a counselor and we don't want to log them out)
+    User.objects.all().exclude(username=request.user.username).delete()
+    logs.append(dict(info="existing counselors cleared"))
+    # add counselors
+    for counselor_data in json['counselors']:
+        try:
+            fields = counselor_data['fields']
+            if fields['username'] == request.user.username:
+                logs.append(dict(info="Admin account %s skipped" % fields['username']))
+                # skip this user, since it's the admin doing the restore
+                continue
+            u = User.objects.create(
+                username = fields['username'],
+                first_name = fields['first_name'],
+                last_name = fields['last_name'],
+                password = fields['password'],
+                is_active = fields['is_active'],
+                is_superuser = fields['is_superuser'],
+                is_staff = fields['is_staff'],
+                last_login = fields['last_login'],
+                email = fields['email'],
+                date_joined = fields['date_joined'],
+                )
+            logs.append(dict(info="Counselor %s restored" % u.username))
+        except Exception, e:
+            logs.append(dict(warn="Could not restore counselor (%s): %s" % (str(e), str(counselor_data))))
+    # delete existing participant data
+    Participant.objects.all().delete()
+    logs.append(dict(info="existing participant data cleared"))
+    # update participants
+    for p in json['participants']:
+        try:
+            np,plogs = Participant.from_json(p)
+            logs.extend(plogs)
+            logs.append(dict(info="Restored participant %s" % np.name))
+        except Exception, e:
+            logs.append(dict(warn="Could not fully restore participant (%s): %s" % (str(e), str(p))))
+
+    return dict(logs=logs)
     
+
+@login_required
+def update_intervention_content(request):
+    if Deployment.objects.count() > 0:
+        deployment = Deployment.objects.all()[0]
+        if deployment.is_online():
+            return HttpResponse("you should only use this feature on a clinic machine")
+
+    zc = TODO_read_content_from_request(request)
+    uploads = TODO_get_list_of_uploads_from_zip()
+
+    buffer = StringIO(zc)
+    zipfile = ZipFile(buffer,"r")
+
+    # Load Intervention objects
+    json = loads(zipfile.read("interventions.json"))
+
+    # clearing intervention prod database content...
+    Intervention.objects.all().delete()
+
+    # importing prod database content...
+    for i in json['interventions']:
+        intervention = Intervention.objects.create(name="tmp")
+        intervention.from_dict(i)
+
+    # Load Problem Solving objects
+    json = loads(zipfile.read("issues.json"))
+
+    # clearing problemsolving database content...
+    Issue.objects.all().delete()
+
+    # importing problemsolving prod database content...
+    for i in json['issues']:
+        issue = Issue.objects.create(name="tmp",ordinality=0)
+        issue.from_dict(i)
+
+    # updating uploaded files..."
+    base_len = len(settings.PROD_MEDIA_BASE_URL)
+    for upload in uploads:
+        relative_path = upload[base_len:]
+        relative_dir = os.path.join(*os.path.split(relative_path)[:-1])
+        full_dir = os.path.join(settings.MEDIA_ROOT,relative_dir)
+        try:
+            os.makedirs(full_dir)
+        except OSError:
+            pass
+        with open(os.path.join(settings.MEDIA_ROOT,relative_path),"w") as f:
+            #   writing %s to %s" % (upload,relative_path)
+            f.write(GET(upload))
+    return HttpResponse("intervention content has been updated")
 
 @render_to('intervention/intervention.html')
 @participant_required

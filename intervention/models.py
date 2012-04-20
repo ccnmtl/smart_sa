@@ -15,6 +15,8 @@ Facts
 from django.db import models
 from django.contrib.auth.models import User
 from intervention.installed_games import InstalledGames
+import re
+from pprint import pprint
 
 class Intervention(models.Model):
     """SMART is an intervention--i.e. the top object"""
@@ -60,6 +62,9 @@ class Intervention(models.Model):
                 modified=c['modified'],
                 )
             cs.from_dict(c)
+
+    def get_session_by_index(self,index):
+        return self.clientsession_set.all()[index - 1]
 
 class ClientSession (models.Model):
     """One day of activities for a client"""
@@ -150,6 +155,9 @@ class ClientSession (models.Model):
             if a.get_participant_status(participant) != "complete":
                 return False
         return True
+
+    def get_activity_by_index(self,index):
+        return self.activity_set.all()[index - 1]
 
 
 class Activity(models.Model):
@@ -531,6 +539,70 @@ class Participant(models.Model):
                                                                               pa.activity.index(), pa.activity.long_title),
                                     status=pa.status) for pa in self.participantactivity_set.all()],
             )
+
+    @classmethod
+    def from_json(cls,data):
+        logs = []
+        p = Participant.objects.create(
+            name=data['name'],
+            id_number=data['id_number'],
+            defaulter=data['defaulter'],
+            status=data['status'],
+            clinical_notes=data['clinical_notes'],
+            buddy_name=data['buddy_name'],
+            gender=data['gender'],
+            initial_referral_mental_health=data['initial_referral_mental_health'],
+            initial_referral_alcohol=data['initial_referral_alcohol'],
+            initial_referral_drug_use=data['initial_referral_drug_use'],
+            initial_referral_other=data['initial_referral_other'],
+            initial_referral_notes=data['initial_referral_notes'],
+            defaulter_referral_mental_health=data['defaulter_referral_mental_health'],
+            defaulter_referral_alcohol=data['defaulter_referral_alcohol'],
+            defaulter_referral_drugs=data['defaulter_referral_drugs'],
+            defaulter_referral_other=data['defaulter_referral_other'],
+            defaulter_referral_notes=data['defaulter_referral_notes'],
+            reasons_for_returning=data['reasons_for_returning'],
+            )
+        logs.append(dict(info="participant created"))
+
+        for gv in data['game_vars']:
+            for key in gv.keys():
+                p.save_game_var(key,gv[key])
+        logs.append(dict(info="game variables restored"))
+
+        intervention = Intervention.objects.all()[0]
+        session_pattern = re.compile(r'Session (?P<index>\d+): (?P<long_title>.+)')
+        for sp in data['session_progress']:
+            session_string = sp['session']
+            m = session_pattern.match(session_string)
+            session_index = int(m.groupdict()['index'])
+            session_long_title = m.groupdict()['long_title']
+            session = intervention.get_session_by_index(session_index)
+            if session.long_title != session_long_title:
+                logs.append(dict(warn="session title mismatch. might be a problem"))
+
+            ps = ParticipantSession.objects.create(participant=p,session=session,status=sp['status'])
+            for cn in sp['counselor_notes']:
+                counselor = User.objects.get(username=cn['counselor'])
+                ncn = CounselorNote.objects.create(participantsession=ps,counselor=counselor,notes=cn['notes'])
+        logs.append(dict(info="session progress restored"))
+
+        activity_pattern = re.compile(r'Session (?P<session_index>\d+): Activity (?P<activity_index>\d+): (?P<long_title>.+)')
+        for ap in data['activity_progress']:
+            activity_string = ap['activity']
+            m = activity_pattern.match(activity_string)
+            session_index = int(m.groupdict()['session_index'])
+            activity_index = int(m.groupdict()['activity_index'])
+            long_title = m.groupdict()['long_title']
+            session = intervention.get_session_by_index(session_index)
+            activity = session.get_activity_by_index(activity_index)
+            if activity.long_title != long_title:
+                logs.append(dict(warn="activity title mismatch. might be a problem"))
+
+            pa = ParticipantActivity.objects.create(activity=activity,participant=p,status=ap['status'])
+        logs.append(dict(info="activity progress restored"))
+        return p, logs
+
 
     def all_counselor_notes(self):
         return CounselorNote.objects.filter(participantsession__participant=self)

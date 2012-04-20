@@ -90,5 +90,35 @@
 {% endif %}
 {% endif %}
 
+{% if not deployment.is_online %}
+{% if request.user.is_superuser %}
+<h4>Restore Participant/Counselor Data</h4>
+<p>Warning: this will overwrite the participant/counselor data on this
+  machine. Only do this as an emergency recovery procedure. Please
+  make sure you have selected the correct backup file to restore
+  from. </p>
 
+<form action="/manage/restore_participants/" method="post"
+  enctype="multipart/form-data" />
+<p>Select that participant data file that you wish to restore from (it
+  will be named something like <b>"&lt;clinic&gt;_&lt;timestamp&gt;_participant_data.json"</b>)
+<input type="file" name="participants_data" /></p>
+<input type="submit" value="restore" />
+</form>
+
+<h4>Update Intervention Content</h4>
+<p>If the intervention content (text, images, and/or video) has been
+  updated, this is where you update the Clinic deployment by uploading
+  the .zip file of the new content.</p>
+
+<form action="/manage/update_intervention_content/" method="post" enctype="multipart/form-data" />
+<p>Select that intervention content file that you wish to restore from (it
+  will be named something like <b>"&lt;timestamp&gt;_content.zip"</b>)
+<input type="file" name="intervention_content.zip" /></p>
+<input type="submit" value="update content" />
+</form>
+
+
+{% endif %}
+{% endif %}
 {% endblock %} 
