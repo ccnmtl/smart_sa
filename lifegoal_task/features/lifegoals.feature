@@ -6,7 +6,7 @@ Feature: Life goals
         Using selenium
         Given I am logged in as a counselor
         Given I have logged in a participant
-        When I go to Activity 16 of Session 1
+        When I go to Activity 17 of Session 1
         When I click the "Next →" link
         Then there is a game
         Finished using selenium
@@ -15,7 +15,7 @@ Feature: Life goals
         Using selenium
         Given I am logged in as a counselor
         Given I have logged in a participant
-        When I go to Activity 16 of Session 1
+        When I go to Activity 17 of Session 1
         When I click the "Next →" link
         Then there is a game
 
@@ -70,7 +70,7 @@ Feature: Life goals
         When I click the "Sessions" link
         Then I am on the Intervention page
         When I click on Session 1
-        Then I click on Activity 16
+        Then I click on Activity 17
         When I click the "Next →" link
         Then there is a game
         Then "Step 2" is "abc"
