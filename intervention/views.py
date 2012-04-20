@@ -692,6 +692,7 @@ def content_sync(request):
     resp['Content-Disposition'] = "attachment; filename=masivukeni.zip" 
     return resp
 
+@login_required
 def zip_download(request):
     """ same as content_sync, but puts a timestamp into the filename to make it nicer for a user to download """
     resp = HttpResponse(content_zip(request))
