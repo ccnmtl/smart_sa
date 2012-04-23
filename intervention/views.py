@@ -115,7 +115,7 @@ def set_deployment(request):
 
 @login_required
 def start_practice_mode(request, intervention_id):
-    p, created = Participant.objects.get_or_create(name='practice')
+    p, created = get_or_create_first(Participant, name='practice')
     p.clear_all_data()
     request.session['participant_id'] = p.id
     return HttpResponseRedirect("/intervention/%d/" % int(intervention_id))
@@ -345,7 +345,7 @@ def testgen(request):
 def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     participant = request.participant
-    ps, created = ParticipantSession.objects.get_or_create(session=session, participant=participant)
+    ps, created = get_or_create_first(ParticipantSession, session=session, participant=participant)
     activities = session.activity_set.all()
     return dict(session=session, activities=activities,
                 participant=request.participant)
@@ -357,12 +357,22 @@ def complete_session(request, session_id):
 
     if request.method == "POST":
         participant = request.participant
-        ps, created = ParticipantSession.objects.get_or_create(session=session, participant=participant)
+        ps, created = get_or_create_first(ParticipantSession, session=session, participant=participant)
         ps.status = "complete"
         ps.save()
         return HttpResponseRedirect(session.intervention.get_absolute_url())
     else:
         return HttpResponseRedirect(session.get_absolute_url())
+
+def get_or_create_first(obj,**params):
+    """ obj.get_or_create(), but handle duplicates by
+    always using the first one returned.
+    """
+    try:
+        return obj.objects.get_or_create(**params)
+    except MultipleObjectsReturned:
+        r = obj.objects.filter(**params)[0]
+        return r, False
 
 @participant_required
 @login_required
@@ -371,16 +381,13 @@ def complete_activity(request, activity_id):
 
     if request.method == "POST":
         participant = request.participant
-        try:
-            pa, created = ParticipantActivity.objects.get_or_create(activity=activity, participant=participant)
-        except MultipleObjectsReturned:
-            pa = ParticipantActivity.objects.filter(activity=activity, participant=participant)[0]
+        pa, created = get_or_create_first(ParticipantActivity,activity=activity,participant=participant)
         pa.status = "complete"
         pa.save()
         if request.POST.get('counselor_notes', False):
             session = activity.clientsession
-            ps, created = ParticipantSession.objects.get_or_create(session=session, participant=participant)
-            note, created = CounselorNote.objects.get_or_create(participantsession=ps, counselor=request.user)
+            ps, created = get_or_create_first(ParticipantSession,session=session, participant=participant)
+            note, created = get_or_create_first(CounselorNote,participantsession=ps, counselor=request.user)
             note.notes = request.POST.get('counselor_notes', '')
             note.save()
         if request.POST.get('buddy_name', False):
@@ -423,9 +430,9 @@ def complete_activity(request, activity_id):
 def activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
     participant = request.participant
-    ps, created = ParticipantSession.objects.get_or_create(session=activity.clientsession, participant=participant)
-    pa, created = ParticipantActivity.objects.get_or_create(activity=activity, participant=participant)
-    cn, created = CounselorNote.objects.get_or_create(participantsession=ps, counselor=request.user)
+    ps, created = get_or_create_first(ParticipantSession, session=activity.clientsession, participant=participant)
+    pa, created = get_or_create_first(ParticipantActivity, activity=activity, participant=participant)
+    cn, created = get_or_create_first(CounselorNote, participantsession=ps, counselor=request.user)
     counselor_notes = cn.notes
     return dict(activity=activity, participant=request.participant, counselor_notes=counselor_notes)
 

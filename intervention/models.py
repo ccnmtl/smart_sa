@@ -15,6 +15,7 @@ Facts
 from django.db import models
 from django.contrib.auth.models import User
 from intervention.installed_games import InstalledGames
+from django.core.exceptions import MultipleObjectsReturned
 import re
 from pprint import pprint
 
@@ -609,7 +610,10 @@ class Participant(models.Model):
 
     def save_game_var(self, key, value):
         "create or update a game variable"
-        gv, created = ParticipantGameVar.objects.get_or_create(participant=self, key=key)
+        try:
+            gv, created = ParticipantGameVar.objects.get_or_create(participant=self, key=key)
+        except MultipleObjectsReturned:
+            gv = ParticipantGameVar.objects.filter(participant=self, key=key)[0]
         gv.value = value
         gv.save()
 
