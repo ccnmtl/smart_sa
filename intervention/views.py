@@ -10,6 +10,7 @@ from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
 from django.core import serializers
+from django.core.exceptions import MultipleObjectsReturned
 from django.utils import simplejson
 from django.contrib.auth.models import User
 from zipfile import ZipFile
@@ -370,7 +371,10 @@ def complete_activity(request, activity_id):
 
     if request.method == "POST":
         participant = request.participant
-        pa, created = ParticipantActivity.objects.get_or_create(activity=activity, participant=participant)
+        try:
+            pa, created = ParticipantActivity.objects.get_or_create(activity=activity, participant=participant)
+        except MultipleObjectsReturned:
+            pa = ParticipantActivity.objects.filter(activity=activity, participant=participant)[0]
         pa.status = "complete"
         pa.save()
         if request.POST.get('counselor_notes', False):
