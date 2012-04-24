@@ -133,10 +133,12 @@
                     </div> \
                     <div class="pill-image" \
                         style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
-                               background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
+                               background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); \
+                               filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="<%= color %>"); "> \
                         <span data-id="<%= id %>" class="draggable" \
                             style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
-                                   background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
+                                   background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); \
+                                   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="<%= color %>"); "> \
                         </span> \
                     </div> \
                     <div class="pill-text"><span><%= name %></span><input type="text" value="<%= name %>"></input></div> \

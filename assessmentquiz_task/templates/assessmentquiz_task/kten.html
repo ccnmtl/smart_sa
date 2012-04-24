@@ -9,6 +9,10 @@
 {% endblock %}
 
 {% block game_content %}
+{% if game.activity.clientsession.defaulter %}
+    <div id="defaulter" style="display: none">True</div>
+{% endif %}
+
 <a name="score"></a>
 <div id="interpretation" style="display: none">
 

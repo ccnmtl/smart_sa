@@ -6,8 +6,8 @@
 
     var global = this;
     var intervention = global.Intervention;
-    var goal_state = intervention.getGameVar('assessmentquiz', {});
-
+    var goal_state = null;
+    
     var workform = null;
     var section = '';
 
@@ -24,8 +24,15 @@
         MS.connect(window, 'onunload', saveForm);
         
         section = workform.elements.section.value;
+    
+        var quizState = intervention.getGameVar('assessmentquiz', {});
+        var userState = document.getElementById("defaulter") ? "defaulter" : "regular";
+        if (!quizState.hasOwnProperty(userState)) {
+            quizState[userState] = {};
+        }
         
-
+        goal_state = quizState[userState];
+        
         if (window.hasAttr(goal_state, section)) {
             for (var a in goal_state[section]) {
                 if (goal_state[section].hasOwnProperty(a)) {
