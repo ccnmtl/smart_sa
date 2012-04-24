@@ -1,5 +1,11 @@
 import sys, time
 from lettuce import world, step
+from smart_sa.intervention.models import Participant
+from lettuce.django import django_url
+try:
+    from lxml import html
+except ImportError:
+    pass
 
 @step(u'there is an edit deployment form')
 def there_is_an_edit_deployment_form(step):
@@ -34,4 +40,23 @@ def there_is_not_a_counselors_table(step):
         assert True
 
 
+@step(u'I go to the Edit Participant page for "([^"]*)"')
+def i_go_to_the_edit_participant_page(step, participant_name):
+    p = Participant.objects.get(name=participant_name)
+    world.firefox.get(django_url("/manage/participant/%d/edit/" % p.id))
+
+@step(u'I toggle the Defaulter checkbox')
+def i_toggle_the_defaulter(step):
+    cb = world.firefox.find_element_by_xpath("//input[@name=\"defaulter\"]")
+    cb.click()
+
+@step(u'I save')
+def i_save(step):
+    s = world.firefox.find_element_by_xpath("//input[@type=\"submit\"]")
+    s.click()
+
+@step(u'the "([^"]*)" field has the value "([^"]*)"')
+def the_field_has_the_value(step, field_name, field_value):
+    f = world.firefox.find_element_by_xpath("//input[@name=\"%s\"]" % field_name)
+    assert f.get_attribute('value') == field_value
 

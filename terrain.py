@@ -122,7 +122,16 @@ def i_log_out(step):
 @step(u'I am logged in as an admin')
 def given_i_am_logged_in_as_an_admin(step):
     if world.using_selenium:
-        assert False, "this step needs to be implemented for selenium"
+        world.firefox.get(django_url("/accounts/logout/"))
+        world.firefox.get(django_url("/accounts/login/?next=/intervention/"))
+        username_field = world.firefox.find_element_by_id("id_username")
+        password_field = world.firefox.find_element_by_id("id_password")
+        form = world.firefox.find_element_by_id("login-form")
+        username_field.send_keys("testadmin")
+        password_field.send_keys("test")
+        form.submit()
+        assert world.firefox.current_url.endswith("/intervention/"), world.firefox.current_url
+        assert "testadmin" in world.firefox.page_source, world.firefox.page_source
     else:
         world.client.login(username='testadmin',password='test')
 
