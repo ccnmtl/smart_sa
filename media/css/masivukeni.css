@@ -600,6 +600,7 @@ a.action:hover, a.action.disabled { background-color: #79b985; }
 	font-weight: bold;
 	font-size: 11px;
 	padding: 10px 0px 10px 0px;
+	margin: 40px 0px 40px 0px;
 }
 
 #footer a

@@ -69,7 +69,7 @@
 </table>
 {% else %} 
 <p>
-	no participants
+	There are no participants.
 </p>
 {% endif %} 
 {% if request.user.is_superuser %}
@@ -102,40 +102,55 @@
 </table>
 {% else %} 
 <p>
-	no counselors
+	There are no counselors.
 </p>
 {% endif %}
 {% endif %}
 
 {% if not deployment.is_online %}
 {% if request.user.is_superuser %}
-<a name="restoreparticipantcounselordata"></a>
-<h4>Restore Participant/Counselor Data</h4>
-<p>Warning: this will overwrite the participant/counselor data on this
-  machine. Only do this as an emergency recovery procedure. Please
-  make sure you have selected the correct backup file to restore
-  from. </p>
 
-<form action="/manage/restore_participants/" method="post"
-  enctype="multipart/form-data" />
-<p>Select that participant data file that you wish to restore from (it
-  will be named something like <b>"&lt;clinic&gt;_&lt;timestamp&gt;_participant_data.json"</b>)
-<input type="file" name="participants_data" /></p>
+<a name="restoreparticipantcounselordata"></a>
+
+<h4>Restore Participant/Counselor Data</h4>
+
+<p style="color: red; background-color: #ffc; padding: 4px; text-align: left;">
+Warning: this will overwrite the participant/counselor data on this machine. Only do this as an emergency recovery procedure. Please make sure you have selected the correct backup file to restore from. 
+</p>
+
+<p style="text-align: left;">
+Select that participant data file that you wish to restore from. It will be named something like:
+</p>
+
+<p style="text-align: left;">
+<b>&lt;CLINIC&gt;_&lt;TIMESTAMP&gt;_participant_data.json</b>
+</p>
+
+<form action="/manage/restore_participants/" method="post" enctype="multipart/form-data" />
+<input type="file" name="participants_data" />
 <input type="submit" value="Restore" />
 </form>
+
 <a name="updateinterventioncontent"></a>
+
 <h4>Update Intervention Content</h4>
-<p>If the intervention content (text, images, and/or video) has been
-  updated, this is where you update the Clinic deployment by uploading
-  the .zip file of the new content.</p>
+
+<p style="text-align: left;">
+If the intervention content (text, images, and/or video) has been updated, this is where you update the Clinic deployment by uploading the .zip file of the new content.
+</p>
+
+<p style="text-align: left;">
+Select that intervention content file that you wish to restore from. It will be named something like 
+</p>
+
+<p style="text-align: left;">
+<b>&lt;TIMESTAMP&gt;_content.zip</b>
+</p>
 
 <form action="/manage/update_intervention_content/" method="post" enctype="multipart/form-data" />
-<p>Select that intervention content file that you wish to restore from (it
-  will be named something like <b>"&lt;timestamp&gt;_content.zip"</b>)
-<input type="file" name="intervention_content" /></p>
+<input type="file" name="intervention_content" />
 <input type="submit" value="Update Content" />
 </form>
-
 
 {% endif %}
 {% endif %}
