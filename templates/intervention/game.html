@@ -52,7 +52,7 @@
   {{ block.super }}
   
   {% with game.activity.next as next_activity %}
-  {% with game.activity.prev as prev_activity %}
+  {% with game.activity as prev_activity %}
   {% with game.next_url as game_next_url %}
   {% with game.previous_url as game_previous_url %}
 
