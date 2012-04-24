@@ -483,6 +483,7 @@ class Participant(models.Model):
     """ participant in the system """
     name = models.CharField(max_length=256)
     id_number = models.CharField(max_length=256)
+    patient_id = models.CharField("ID for linking patient to other research data", max_length=256, default="")
     defaulter = models.BooleanField(default=False)
     status = models.BooleanField(default=True)
     clinical_notes = models.TextField(default="", blank=True)
@@ -513,6 +514,7 @@ class Participant(models.Model):
         return dict(
             name=self.name,
             id_number=self.id_number,
+            patient_id=self.patient_id,
             defaulter=self.defaulter,
             status=self.status,
             clinical_notes=self.clinical_notes,
@@ -547,6 +549,7 @@ class Participant(models.Model):
         p = Participant.objects.create(
             name=data['name'],
             id_number=data['id_number'],
+            patient_id=data['patient_id'],
             defaulter=data['defaulter'],
             status=data['status'],
             clinical_notes=data['clinical_notes'],

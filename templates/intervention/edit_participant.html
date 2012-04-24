@@ -17,6 +17,10 @@
 <input type="text" name="old_id_number" /></p>
 <p><b>New Participant ID</b><br />
 <input type="text" name="new_id_number" /></p>
+
+<p><b>Patient ID</b> (for linking with other research data)<br />
+<input type="text" name="name" value="{{participant.patient_id}}" /></p>
+
 <p><b>Defaulter?</b> <input type="checkbox" name="defaulter" {% if participant.defaulter %}checked="checked" {% endif %}/></p>
 <p><b>Active?</b> <input type="checkbox" name="status" 
 {% if participant.status %}checked="checked"{% endif %} /></p>
