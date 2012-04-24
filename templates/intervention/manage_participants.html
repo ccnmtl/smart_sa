@@ -96,7 +96,7 @@
 	<tr>
 		<td>{{counselor.username}}</td>
 		<td>{% if counselor.is_active %}Active{% else %}Inactive{% endif %}</td>
-		<td><a class="action" href="/admin/auth/user/{{counselor.id}}/">Edit Info for {{counselor.username}}</a> </td>
+		<td><a class="action" href="/manage/counselor/{{counselor.id}}/edit/">Edit Info for {{counselor.username}}</a> </td>
 	</tr>
 	{% endfor %} 
 </table>

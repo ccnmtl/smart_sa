@@ -176,6 +176,20 @@ def edit_participant(request, participant_id):
         return HttpResponseRedirect("/manage/")
     return dict(participant=p)
 
+@render_to('intervention/edit_counselor.html')
+@login_required
+def edit_counselor(request, counselor_id):
+    u = get_object_or_404(User, id=counselor_id)
+    if request.method == 'POST':
+        u.username = request.POST.get('username',u.username)
+        u.is_active = request.POST.get('status',False)
+        new_password = request.POST.get('new_password',"")
+        if new_password != "":
+            u.set_password(new_password)
+        u.save()
+        return HttpResponseRedirect("/manage/")
+    return dict(counselor=u)
+
 @render_to('intervention/view_participant.html')
 @login_required
 def view_participant(request, participant_id):
