@@ -2,7 +2,7 @@ Feature: SSNMTree Basics
 ## The tree is in Session 1, Activity 12 & 14
 ## Defaulter Session 4, Activity 65
 
-    Scenario: Fill in the tree & test state save
+    Scenario: 1 - Fill in the tree & test state save
         Using selenium
         Given I am logged in as a counselor
         Given I have logged in a participant
@@ -18,7 +18,7 @@ Feature: SSNMTree Basics
         There is a filled in SSNM Tree with "regular"
         Finished using Selenium
         
-    Scenario: Test disclosure & support buttons
+    Scenario: 2 - Test disclosure & support buttons
         Using selenium
         # Disclosure
         Given I am logged in as a counselor
@@ -51,7 +51,7 @@ Feature: SSNMTree Basics
         
         # Verify state saved
         When I click the "Next →" link
-        Then I wait 1 second
+        Then I wait 1 seconds
         When I click the "← Back" link
         Then the circle is "gold and purple"
         
@@ -64,9 +64,14 @@ Feature: SSNMTree Basics
         # Circles cannot have attributes w/o a name
         When I click the circle
         Then the circle is not "gold"
+        
+        # Restore the state
+        When I name the circle "regular"
+        There is a filled in SSNM Tree with "regular"
+        
         Finished using Selenium
         
-    Scenario: Test Defaulter saving
+    Scenario: 3 - Test Defaulter saving
         Using selenium
         Given I am logged in as a counselor
         Given I have logged in a participant
@@ -76,35 +81,43 @@ Feature: SSNMTree Basics
         When I fill in the SSNM Tree with "regular"
         There is a filled in SSNM Tree with "regular"
         
-        # Need a state save event before navigate
-        # otherwise, the json data is not saved
-        When I name the circle "regular"
         When I click the circle
         Then the circle is "gold"
         When I click the "support" button
         When I click the circle
         Then the circle is "gold and purple"
+        Then I wait 1 seconds
         
         When I click the "Sessions" link
         Then I am on the Intervention page
         When I click on Session 4
         When I click on Activity 14
         When I click the "Next →" link
+        Then I wait 2 seconds
         Then there is a game
         There is a filled in SSNM Tree with "regular"
+        Then I wait 1 seconds
         Then the circle is "gold and purple"
         When I fill in the SSNM Tree with "defaulter"
-        Then "disclosure" is selected
         
-        # Clearing out the name (via fill-in), clears out the attributes
+        # Clearing out the name (via the fill-in command), clears out the attributes
+        Then "disclosure" is selected
         Then the circle is not "gold"
         Then the circle is not "purple"
+        
+        # Add back some attributes
         When I click the circle
         Then the circle is "gold"
+        Then I wait 3 seconds
         
+        # Verify data saved
+        When I click the "Sessions" link
+        Then I am on the Intervention page
+        When I click on Session 4
+        When I click on Activity 14
+        Then I wait 1 seconds
         When I click the "Next →" link
-        Then I wait 1 second
-        When I click the "← Back" link
+        Then I wait 4 seconds
         There is a filled in SSNM Tree with "defaulter"
         Then the circle is "gold"
         

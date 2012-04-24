@@ -107,8 +107,8 @@ def then_button_is_selected(step, button):
     elif button == "support": 
         assert elts[0].get_attribute("id") == "toggle-support-selection"
     
-@step(u'Then I wait (\d+) second')
-def then_i_wait_count_second(step, count):
+@step(u'Then I wait (\d+) seconds')
+def then_i_wait_count_seconds(step, count):
     n = int(count)
     time.sleep(n)
     
