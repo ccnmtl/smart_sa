@@ -514,6 +514,8 @@ table#choices td
 
 #content img.inlineimage
 {
+	/*OLD*/
+	/*
 	float: right;
 	margin: 0px 0px 20px 20px;
 	padding: 10px;
@@ -521,6 +523,13 @@ table#choices td
 	-webkit-box-shadow: 0px 0px 6px #666;
 	box-shadow: 0px 0px 6px #666;
 	max-width: 275px;
+	*/
+	margin: 10px;
+	padding: 10px;
+	-moz-box-shadow: 0px 0px 6px #666;
+	-webkit-box-shadow: 0px 0px 6px #666;
+	box-shadow: 0px 0px 6px #666;
+	max-width: 375px;
 }
 
 a.action

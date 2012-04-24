@@ -111,7 +111,11 @@ var game_variables = {{activity.variables|safe}};
 		<h4>{{instruction.title}}</h4> 
 		{%endif%}
 		{%if instruction.image %}
+		<!--OLD-->
+		<!--<img class="inlineimage" src="{{instruction.image.url}}" />-->
+		<div style="text-align: center;">
 		<img class="inlineimage" src="{{instruction.image.url}}" />
+		</div>
 		{%endif%}
 		
 		<!--  {%if instruction.style %}
