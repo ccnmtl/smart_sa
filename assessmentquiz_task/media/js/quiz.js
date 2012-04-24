@@ -60,12 +60,16 @@
     
     function enableRevealScore() {
         if (saveForm()) {
-            MD.removeElementClass("reveal_score", "disabled");
+            MD.removeElementClass("reveal_score", "inactive");
+        } else {
+            MD.addElementClass("reveal_score", "inactive");
+            document.getElementById("interpretation").style.display = "none";
         }
     }
     
     function revealScore() {
-        if (MD.hasElementClass("reveal_score", "disabled")) {
+        if (MD.hasElementClass("reveal_score", "inactive")) {
+            alert("Please answer all the questions before checking your score");
             return false;
         } else {
             showTotal();
@@ -97,9 +101,7 @@
         
         var gs = goal_state[section];
         if (section === 'audit' && !all_done) {
-            all_done = ((gs.q1 === 0 || 1 * gs.q2 + 1 * gs.q3 === 0) && window.hasAttr(gs, 'q9') && window.hasAttr(gs, 'q10'));
-            ML.logDebug(gs.q1 === 0, 1 * gs.q2 + 1 * gs.q3 === 0, window.hasAttr(gs, 'q9'), window.hasAttr(gs, 'q10'));
-            ML.logDebug(all_done);
+            all_done = ((gs.q1 === "0" || 1 * gs.q2 + 1 * gs.q3 === 0) && window.hasAttr(gs, 'q9') && window.hasAttr(gs, 'q10'));
         }
         if (all_done) {
             if (section === 'drugaudit') {
@@ -119,7 +121,7 @@
 
     function showTotal() {
         document.getElementById("interpretation").style.display = "block";
-        MD.removeElementClass("reveal_score", "disabled");
+        MD.removeElementClass("reveal_score", "inactive");
 
         var total = goal_state[section].total;
         ML.logDebug('showTotal', total);

@@ -121,6 +121,11 @@ ol.a li { list-style: none; }
 	border-radius: 5px;
 }
 
+#interpretation_range li .headline 
+{
+    padding: 0px 5px;
+}
+
 #interpretation_range .script
 {
 	display: none;
@@ -139,7 +144,7 @@ ol.a li { list-style: none; }
 
 #interpretation_range .script ul
 {
-	margin-top: -15px;
+	margin-top: 0px;
 	padding-bottom: 5px;
 }
 
@@ -147,7 +152,12 @@ ol.a li { list-style: none; }
 {
 	font-size: 14px;
 	font-weight: normal;
-	margin-bottom: -25px;
+	margin-bottom: -10px;
+}
+
+#interpretation_range .script li h2 
+{
+    margin-bottom: 0px;
 }
 
 #interpretation_range li.inrange .script { display: block; }
