@@ -18,13 +18,13 @@
 <col style="width: 33%;"></col>
 <col></col>
 <tr>
-<th>Buddy Name:</th>
-<td>{{participant.buddy_name|default:"no buddy name given" }}</td>
+<th style="text-align: right;">Buddy Name:</th>
+<td style="text-align: left;">{{participant.buddy_name|default:"no buddy name given" }}</td>
 </tr>
 
 <tr>
-<th>Initial Referral for:</th>
-<td>
+<th style="text-align: right;">Initial Referral for:</th>
+<td style="text-align: left;">
 <ul>
   {% if participant.initial_referral_mental_health %}<li>mental health</li>{% endif %}
   {% if participant.initial_referral_alcohol %}<li>alcohol</li>{% endif %}
@@ -37,10 +37,10 @@
 
 {% if participant.initial_referral_notes %}
 <tr>
-<th>
-Initial Referral Notes
+<th style="text-align: right;">
+Initial Referral Notes:
 </th>
-<td>
+<td style="text-align: left;">
 {{participant.initial_referral_notes}}
 </td>
 </tr>
@@ -49,8 +49,8 @@ Initial Referral Notes
 {% if participant.defaulter %}
 
 <tr>
-<th>Defaulter Referral for:</th>
-<td>
+<th style="text-align: right;">Defaulter Referral for:</th>
+<td style="text-align: left;">
 <ul>
 {% if participant.defaulter_referral_mental_health %}<li>mental health</li>{% endif %}
 {% if participant.defaulter_referral_alcohol %}<li>alcohol</li>{% endif %}
@@ -62,23 +62,23 @@ Initial Referral Notes
 
 {% if participant.defaulter_referral_notes %}
 <tr>
-<th>Defaulter Referral Notes</th>
-<td>{{participant.defaulter_referral_notes}}</td>
+<th style="text-align: right;">Defaulter Referral Notes:</th>
+<td style="text-align: left;">{{participant.defaulter_referral_notes}}</td>
 </tr>
 {% endif %}
 
 {% if participant.reasons_for_returning %}
 <tr>
-<th>Reasons For Returning</th>
-<td>{{participant.reasons_for_returning}}</td>
+<th style="text-align: right;">Reasons For Returning:</th>
+<td style="text-align: left;">{{participant.reasons_for_returning}}</td>
 </tr>
 {% endif %}
 
 {% endif %}
 
 <tr>
-<th>Notes</th>
-<td>
+<th style="text-align: right;">Notes:</th>
+<td style="text-align: left;">
 {% if participant.clinical_notes %}
 {{participant.clinical_notes}}
 {% else %}
@@ -88,13 +88,15 @@ No clinical notes have been entered.
 </tr>
 
 <tr>
-<th>
-Questions and Concerns
+<th style="text-align: right;">
+Questions and Concerns:
 </th>
-<td>
+<td style="text-align: left;">
 {% for cn in participant.all_counselor_notes %}
 {% if cn.notes %}
-{{cn.notes}} <br/>({{cn.participantsession.session.long_title}}, {{cn.counselor.username}})
+{{cn.notes}} 
+<br/>
+({{cn.participantsession.session.long_title}}, {{cn.counselor.username}})
 {% endif %}
 {% endfor %}
 </td>
@@ -110,6 +112,8 @@ Questions and Concerns
 <h4>Progress</h4>
 
 <table class="manage" cellspacing="0">
+<col style="width: 50%;"></col>
+<col></col>
 <tr>
 <th style="text-align: left; background-color: #666; color: #fff;">Sessions and Activities</th>
 <th style="background-color: #666; color: #fff;">Complete/Incomplete</th>
