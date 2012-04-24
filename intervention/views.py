@@ -432,6 +432,10 @@ def activity(request, activity_id):
     participant = request.participant
     ps, created = get_or_create_first(ParticipantSession, session=activity.clientsession, participant=participant)
     pa, created = get_or_create_first(ParticipantActivity, activity=activity, participant=participant)
+    if not activity.game:
+        # no game, so just loading the page should mark it complete
+        pa.status = "complete"
+        pa.save()
     cn, created = get_or_create_first(CounselorNote, participantsession=ps, counselor=request.user)
     counselor_notes = cn.notes
     return dict(activity=activity, participant=request.participant, counselor_notes=counselor_notes)
