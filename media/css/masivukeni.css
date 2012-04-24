@@ -472,6 +472,8 @@ table.manage col#firstname { width: 25%}
 table.manage col#status { width: 25%}
 table.manage col#actions { width: 50%}
 
+table.manage th, table.manage td {vertical-align: top;}
+
 table.manage th
 {
 	border: 1px solid #ccc;
@@ -1219,4 +1221,33 @@ width: 33%;
 	-webkit-box-shadow: 0px 2px 2px 0px #000;
 	box-shadow: 0px 2px 2px 0px #000;
 	z-index: 1;
+}
+
+#adminsubnav
+{border-bottom: 1px solid #ccc; padding-top: 10px;}
+
+#adminsubnav a
+
+{
+	color: #666;
+	text-decoration: none;
+	border: 1px solid #ccc;
+	padding: 5px 10px 2px 10px;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 0px 5px 0px 5px;
+	background-color: #eee;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+#adminsubnav a:hover
+
+{
+	color: #f6921e;
+	background-color: #fff;
+	border-bottom: 1px solid #fff;
 }

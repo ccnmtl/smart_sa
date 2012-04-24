@@ -23,8 +23,24 @@
 </form>
 {% endif %}
 
+<div id="adminsubnav" align="center">
+{% if participants %} 
+<a href="#manageparticipants">Manage Participants</a>
+{% endif %} 
+{% if request.user.is_superuser %}
+<a href="#managecounselors">Manage Counselors</a>
+{% endif %} 
+{% if not deployment.is_online %}
+{% if request.user.is_superuser %}
+<a href="#restoreparticipantcounselordata">Restore Participant/Counselor Data</a>
+<a href="#updateinterventioncontent">Update Intervention Content</a>
+{% endif %}
+{% endif %}
+</div>
+
+<a name="manageparticipants"></a>
 <h4>
-	Participants
+	Manage Participants
 </h4>
 
 
@@ -57,8 +73,9 @@
 </p>
 {% endif %} 
 {% if request.user.is_superuser %}
+<a name="managecounselors"></a>
 <h4>
-	Counselors 
+	Manage Counselors 
 </h4>
 {% if counselors %} 
 <table id="counselors" class="manage" cellspacing="0">
@@ -92,6 +109,7 @@
 
 {% if not deployment.is_online %}
 {% if request.user.is_superuser %}
+<a name="restoreparticipantcounselordata"></a>
 <h4>Restore Participant/Counselor Data</h4>
 <p>Warning: this will overwrite the participant/counselor data on this
   machine. Only do this as an emergency recovery procedure. Please
@@ -103,9 +121,9 @@
 <p>Select that participant data file that you wish to restore from (it
   will be named something like <b>"&lt;clinic&gt;_&lt;timestamp&gt;_participant_data.json"</b>)
 <input type="file" name="participants_data" /></p>
-<input type="submit" value="restore" />
+<input type="submit" value="Restore" />
 </form>
-
+<a name="updateinterventioncontent"></a>
 <h4>Update Intervention Content</h4>
 <p>If the intervention content (text, images, and/or video) has been
   updated, this is where you update the Clinic deployment by uploading
@@ -115,7 +133,7 @@
 <p>Select that intervention content file that you wish to restore from (it
   will be named something like <b>"&lt;timestamp&gt;_content.zip"</b>)
 <input type="file" name="intervention_content" /></p>
-<input type="submit" value="update content" />
+<input type="submit" value="Update Content" />
 </form>
 
 
