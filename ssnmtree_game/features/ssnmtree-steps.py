@@ -8,7 +8,10 @@ def fill_in_ssnmtree(self, text):
     for i in world.firefox.find_elements_by_tag_name('input'):
         if i.get_attribute('type') == 'text':
             i.clear()
-            i.send_keys(text)
+            for c in text:
+                i.send_keys(c)
+        assert i.get_attribute("value") == text
+            
 
 @step('there is a filled in SSNM Tree with "([^"]*)"')
 def filled_in_ssnmtree(self, text):
@@ -44,14 +47,14 @@ def when_i_click_the_circle(step):
     elt = world.firefox.find_element_by_css_selector("div.circle")
     assert elt != None
     elt.click();
-    time.sleep(2)
     
 @step(u'Then the circle is "([^"]*)"')
 def then_the_circle_is_color(step, color):
     try:
         elt = world.firefox.find_element_by_id("top1-fruit")
     except:
-        import pdb;pdb.set_trace()
+        time.sleep(3)
+        elt = world.firefox.find_element_by_id("top1-fruit")
 
     assert elt != None
     

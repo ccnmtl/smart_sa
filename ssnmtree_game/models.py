@@ -22,7 +22,3 @@ class SSNMTreeReview(SSNMTreeGame):
 InstalledGames.register_game('ssnmTree',
                              'Social Support Network Tree',
                              SSNMTreeGame())
-InstalledGames.register_game('ssnmTreeReview',
-                             'Social Support Network Review with Peer',
-                             SSNMTreeReview())
-

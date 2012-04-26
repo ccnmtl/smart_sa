@@ -176,8 +176,14 @@ def i_click_the_link(step, text):
             assert link.is_displayed()
             link.click()
         except:
-            world.firefox.get_screenshot_as_file("/tmp/selenium.png")
-            assert False, link.location
+            try:
+                time.sleep(1)
+                link = world.firefox.find_element_by_partial_link_text(text)
+                assert link.is_displayed()
+                link.click()
+            except:
+                world.firefox.get_screenshot_as_file("/tmp/selenium.png")
+                assert False, link.location
 
 
 @step(u'I fill in "([^"]*)" in the "([^"]*)" form field')

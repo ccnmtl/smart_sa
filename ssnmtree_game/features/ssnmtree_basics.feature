@@ -1,6 +1,6 @@
 Feature: SSNMTree Basics
 ## The tree is in Session 1, Activity 12 & 14
-## Defaulter Session 4, Activity 65
+## Defaulter Session 4, Activity 13
 
     Scenario: 1 - Fill in the tree & test state save
         Using selenium
@@ -51,7 +51,6 @@ Feature: SSNMTree Basics
         
         # Verify state saved
         When I click the "Next →" link
-        Then I wait 1 seconds
         When I click the "← Back" link
         Then the circle is "gold and purple"
         
@@ -86,19 +85,18 @@ Feature: SSNMTree Basics
         When I click the "support" button
         When I click the circle
         Then the circle is "gold and purple"
-        Then I wait 1 seconds
+        There is a filled in SSNM Tree with "regular"
         
         When I click the "Sessions" link
         Then I am on the Intervention page
         When I click on Session 4
-        When I click on Activity 14
+        When I click on Activity 13
         When I click the "Next →" link
-        Then I wait 2 seconds
         Then there is a game
         There is a filled in SSNM Tree with "regular"
-        Then I wait 1 seconds
         Then the circle is "gold and purple"
         When I fill in the SSNM Tree with "defaulter"
+        There is a filled in SSNM Tree with "defaulter"
         
         # Clearing out the name (via the fill-in command), clears out the attributes
         Then "disclosure" is selected
@@ -108,16 +106,13 @@ Feature: SSNMTree Basics
         # Add back some attributes
         When I click the circle
         Then the circle is "gold"
-        Then I wait 3 seconds
         
         # Verify data saved
         When I click the "Sessions" link
         Then I am on the Intervention page
         When I click on Session 4
-        When I click on Activity 14
-        Then I wait 1 seconds
+        When I click on Activity 13
         When I click the "Next →" link
-        Then I wait 4 seconds
         There is a filled in SSNM Tree with "defaulter"
         Then the circle is "gold"
         
