@@ -1,9 +1,9 @@
 from settings_shared import *
 TEMPLATE_DIRS = (
-    "C:/Users/CCNMTLSTAFF/Downloads/smart_sa/templates/",
+    "C:/smart_sa/templates/",
 )
 
-MEDIA_ROOT = 'C:/Users/CCNMTLSTAFF/Downloads/smart_sa/uploads/'
+MEDIA_ROOT = 'C:/smart_sa/uploads/'
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -13,8 +13,17 @@ INTERVENTION_BACKUP_IV = "899f6762313185a9593480e6f015b0d5053464daa5ecadd00dc4e7
 
 DISABLE_OFFLINE=True
 
-DATABASE_ENGINE = 'sqlite3' # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'masivukeni.sqlite' # Or path to database file if using sqlite3.
+DATABASES = {
+    'default' : {
+        'ENGINE' : 'django.db.backends.postgresql_psycopg2',
+        'NAME' : 'masivukeni',
+        'HOST' : '',
+        'PORT' : '5432',
+        'USER' : 'postgres',
+        'PASSWORD' : 'masivukeni',
+        }
+}
+
 
 try:
     from local_settings import *
