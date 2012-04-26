@@ -6,6 +6,7 @@ Feature: Problem Solving Activity
     Scenario: Find activity
         Using selenium
         Given I am logged in as a counselor
+        Given participant "test" is a defaulter
         When I access the url "/"
         When I click the "Let's get started!" link
         When I click the "Intervene" link

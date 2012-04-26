@@ -6,6 +6,7 @@ Feature: Life goals
         Using selenium
         Given I am logged in as a counselor
         Given I have logged in a participant
+        Given participant "test" is a defaulter
         When I go to Activity 17 of Session 1
         When I click the "Next →" link
         Then there is a game
@@ -15,6 +16,7 @@ Feature: Life goals
         Using selenium
         Given I am logged in as a counselor
         Given I have logged in a participant
+        Given participant "test" is a defaulter
         When I go to Activity 17 of Session 1
         When I click the "Next →" link
         Then there is a game

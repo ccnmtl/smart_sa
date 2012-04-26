@@ -11,6 +11,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
     Scenario: Automated Run-Through
       Using selenium
       Given I am logged in as a counselor
+      Given participant "test" is a defaulter
       When I access the url "/"
       When I click the "Let's get started!" link
       When I click the "Intervene" link
@@ -358,89 +359,83 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       
       When I click on the Session Home
       When I click on Activity 8
-      Then I am on the "Adherence Challenges" Activity
-      When I click the "Next →" link
-      Then there is a game
+      Then I am on the "Moving Forward" Activity
+      When I click on Complete Activity
       
       When I click on the Session Home
       When I click on Activity 9
       Then I am on the "Overcoming Challenges" Activity
-      When I click on Complete Activity
-      
-      When I click on the Session Home
-      When I click on Activity 10
-      Then I am on the "Overcoming Challenges" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 11
+      When I click on Activity 10
       Then I am on the "Reasons to Stay Healthy" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 12
+      When I click on Activity 11
       Then I am on the "End Session" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 13
+      When I click on Activity 12
       Then I am on the "OPTION: ARV Concerns" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 14
+      When I click on Activity 13
       Then I am on the "OPTION: Support Tree" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 15
+      When I click on Activity 14
       Then I am on the "OPTION: What is HIV" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 16
+      When I click on Activity 15
       Then I am on the "OPTION: How HIV Works" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 17
+      When I click on Activity 16
       Then I am on the "OPTION: What HIV Does" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 18
+      When I click on Activity 17
       Then I am on the "OPTION: HIV Symptoms" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 19
+      When I click on Activity 18
       Then I am on the "OPTION: Island Activity (no ARVs)" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 20
+      When I click on Activity 19
       Then I am on the "OPTION: Snakes and Soldiers Video" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 21
+      When I click on Activity 20
       Then I am on the "OPTION: Island Activity (on ARVs)" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 22
+      When I click on Activity 21
       Then I am on the "OPTION: Joseph and Hope Video" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 23
+      When I click on Activity 22
       Then I am on the "OPTION: Moving Forward Video" Activity
       When I click on Complete Activity
       
@@ -467,83 +462,77 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       
       When I click on the Session Home
       When I click on Activity 4
-      Then I am on the "Overcoming Challenges" Activity
-      When I click the "Next →" link
-      Then there is a game
-      
-      When I click on the Session Home
-      When I click on Activity 5
       Then I am on the "HIV, ARVs, and Health" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 6
+      When I click on Activity 5
       Then I am on the "End Session" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 7
+      When I click on Activity 6
       Then I am on the "OPTION: ARV Concerns" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 8
+      When I click on Activity 7
       Then I am on the "OPTION: Your Regimen" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 9
+      When I click on Activity 8
       Then I am on the "OPTION: Support Tree" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 10
+      When I click on Activity 9
       Then I am on the "OPTION: What is HIV" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 11
+      When I click on Activity 10
       Then I am on the "OPTION: How HIV Works" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 12
+      When I click on Activity 11
       Then I am on the "OPTION: What HIV Does" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 13
+      When I click on Activity 12
       Then I am on the "OPTION: HIV Symptoms" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 14
+      When I click on Activity 13
       Then I am on the "OPTION: Island Activity (no ARVs)" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 15
+      When I click on Activity 14
       Then I am on the "OPTION: Snakes and Soldiers Video" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 16
+      When I click on Activity 15
       Then I am on the "OPTION: Island Activity (on ARVs)" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 17
+      When I click on Activity 16
       Then I am on the "OPTION: Joseph and Hope Video" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 18
+      When I click on Activity 17
       Then I am on the "OPTION: Moving Forward Video" Activity
       When I click on Complete Activity
       

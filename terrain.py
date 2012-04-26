@@ -247,7 +247,7 @@ def i_click_on_complete_activity(step):
         link = world.firefox.find_element_by_partial_link_text("Next →")
         link.click()
     except:
-        link = world.firefox.find_element_by_partial_link_text("Wrap-Up")
+        link = world.firefox.find_element_by_partial_link_text("Wrap Up")
         link.click()
 
 @step(u'I am on the Session (\d+) page')
@@ -421,3 +421,9 @@ def i_am_not_on_an_activity_page(step):
 @step(u'I am on a game page')
 def i_am_on_a_game_page(step):
     assert len(world.dom.cssselect("#gamebox")) > 0, "not a game page"
+
+@step(u'Participant "([^"]*)" is a defaulter')
+def participant_is_a_defaulter(step,participant_name):
+    p = Participant.objects.get(name=participant_name)
+    p.defaulter = True
+    p.save()
