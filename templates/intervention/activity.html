@@ -73,7 +73,7 @@ var game_variables = {{activity.variables|safe}};
 		        {% if next_activity %}
 		          <a class="navlink" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit();return false">Next &rarr;</a> 
 			{% else %}
-			  <a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit();return false">Wrap-Up Session {{activity.clientsession.index}}!</a> 
+			  <a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit();return false">Wrap Up This Session</a> 
 			{% endif %}
 	              {% endwith %}
   		  {%endif%}
@@ -111,11 +111,7 @@ var game_variables = {{activity.variables|safe}};
 		<h4>{{instruction.title}}</h4> 
 		{%endif%}
 		{%if instruction.image %}
-		<!--OLD-->
-		<!--<img class="inlineimage" src="{{instruction.image.url}}" />-->
-		<div style="text-align: center;">
 		<img class="inlineimage" src="{{instruction.image.url}}" />
-		</div>
 		{%endif%}
 		
 		<!--  {%if instruction.style %}
@@ -205,7 +201,7 @@ var game_variables = {{activity.variables|safe}};
 		        {% if next_activity %}
 		          <a class="navlink" href="/activity/{{next_activity.id }}/" onclick="document.completeactivity.submit();return false">Next &rarr;</a> 
 			{% else %}
-			  <a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit();return false">Wrap-Up Session {{activity.clientsession.index}}!</a> 
+			  <a href="/session/{{activity.clientsession.id}}/" onclick="document.completeactivity.submit();return false">Wrap Up This Session</a> 
 			{% endif %}
 	              {% endwith %}
   		  {%endif%}

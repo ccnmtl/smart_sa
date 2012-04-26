@@ -116,12 +116,14 @@ Questions and Concerns:
 <col></col>
 <tr>
 <th style="text-align: left; background-color: #666; color: #fff;">Sessions and Activities</th>
+<th style="background-color: #666; color: #fff;">Counselor</th>
 <th style="background-color: #666; color: #fff;">Complete/Incomplete</th>
 </tr>
 {% for intervention in all_interventions %}
 {% for session in intervention.clientsession_set.all %}
 <tr>
 <th style="text-align: left;">{{session.long_title}}</th>
+<th>{{cn.counselor.username}}</th>
 <th>{% get_participant_status participant session %}</th>
 </tr>
 {% for activity in session.activity_set.all %}
@@ -129,6 +131,7 @@ Questions and Concerns:
 {% if  astatus %}
 <tr>
 <td style="text-align: left;">{{activity.long_title}}</td>
+<td>{{cn.counselor.username}}</td>
 <td>{% get_participant_status participant activity %}</td>
 </tr>
 {% endif %}

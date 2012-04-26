@@ -14,7 +14,7 @@
 </h2>
 
 {% if request.user.is_superuser %}
-<a style="float: right; margin-top: -5px;" class="action" href="/manage/report/download/">Download Participant Data</a>
+<a style="float: right; margin-top: -5px; width: 320px;" class="action" href="/manage/report/download/">Download Participant Data for Reporting</a>
 
 <form action="/set_deployment/" method="post">
 <p>Location Name: <input type="text" name="name"
@@ -22,7 +22,7 @@
 <input type="submit" value="Save" /></p>
 </form>
 {% endif %}
-
+<a name="top"></a>
 <div id="adminsubnav" align="center">
 {% if participants %} 
 <a href="#manageparticipants">Manage Participants</a>
@@ -34,6 +34,7 @@
 {% if request.user.is_superuser %}
 <a href="#restoreparticipantcounselordata">Restore Participant/Counselor Data</a>
 <a href="#updateinterventioncontent">Update Intervention Content</a>
+<a href="#uploaddata">Upload Data</a>
 {% endif %}
 {% endif %}
 </div>
@@ -72,6 +73,9 @@
 	There are no participants.
 </p>
 {% endif %} 
+
+<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
+
 {% if request.user.is_superuser %}
 <a name="managecounselors"></a>
 <h4>
@@ -105,6 +109,10 @@
 	There are no counselors.
 </p>
 {% endif %}
+
+<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
+
+
 {% endif %}
 
 {% if not deployment.is_online %}
@@ -130,6 +138,7 @@ Select that participant data file that you wish to restore from. It will be name
 <input type="file" name="participants_data" />
 <input type="submit" value="Restore" />
 </form>
+<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
 <a name="updateinterventioncontent"></a>
 
@@ -151,6 +160,22 @@ Select that intervention content file that you wish to restore from. It will be 
 <input type="file" name="intervention_content" />
 <input type="submit" value="Update Content" />
 </form>
+
+<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
+
+<a name="uploaddata"></a>
+
+<h4>Upload Data</h4>
+
+<p style="text-align: left;">
+Administrators can send data if online. More instructions for uploading data go here.
+</p>
+
+<form action="#" method="post" enctype="multipart/form-data" />
+<input type="file" name="" />
+<input type="submit" value="Upload" />
+</form>
+<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
 {% endif %}
 {% endif %}
