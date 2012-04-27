@@ -13,3 +13,4 @@ lettuce.db
 .pydevproject
 .settings/
 uploads/
+data/
