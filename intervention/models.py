@@ -41,9 +41,16 @@ class Intervention(models.Model):
             )
 
     def completed_all_sessions(self, participant):
-        for cs in self.clientsession_set.all()[1:]:
-            if cs.get_participant_status(participant) != "complete":
-                return False
+        for cs in self.clientsession_set.all():
+            if not cs.defaulter:
+                # all non-defaulter sessions have to be completed
+                if cs.get_participant_status(participant) != "complete":
+                    return False
+            else:
+                # defaulter sessions must be completed by defaulters
+                if participant.defaulter:
+                    if cs.get_participant_status(participant) != "complete":
+                        return False
         return True
 
     def from_dict(self, d):
