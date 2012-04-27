@@ -14,36 +14,38 @@
 </h2>
 
 {% if request.user.is_superuser %}
-
-<form action="/set_deployment/" method="post">
-<p>Clinic Location: <input type="text" name="name"
-		      value="{{deployment.name}}" />
-<input type="submit" value="Save" /></p>
-</form>
+  <form action="/set_deployment/" method="post">
+  <p>Clinic Location: <input type="text" name="name"
+  		      value="{{deployment.name}}" />
+  <input type="submit" value="Save" /></p>
+  </form>
 {% endif %}
+
 <a name="top"></a>
 <div id="adminsubnav" align="center">
+
 {% if participants %} 
-<a href="#manageparticipants">Manage Participants</a>
+  <a href="#manageparticipants">Manage Participants</a>
 {% endif %} 
+
 {% if request.user.is_superuser %}
-<a href="#managecounselors">Manage Counselors</a>
-{% endif %} 
-{% if not deployment.is_online %}
-{% if request.user.is_superuser %}
-<a href="#restoreparticipantcounselordata">Restore Participant Data</a>
-<a href="#updateinterventioncontent">Update Intervention</a>
-<a href="#uploaddata">Upload Participant Data</a>
-<a href="#downloaddata">Download Participant Data</a>
+  <a href="#managecounselors">Manage Counselors</a>
+  {% if not deployment.is_online %}
+    <a href="#restoreparticipantcounselordata">Restore Participant Data</a>
+    <a href="#updateinterventioncontent">Update Intervention</a>
+    <a href="#downloaddata">Download Participant Data</a>
+  {% else %}
+    <a href="#uploaddata">Upload Participant Data</a>
+  {% endif %} 
 {% endif %}
-{% endif %}
+
 </div>
+
 
 <a name="manageparticipants"></a>
 <h4>
 	Manage Participants
 </h4>
-
 
 {% if participants %} 
 <table class="manage" cellspacing="0">
@@ -112,11 +114,7 @@
 
 <div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
-
-{% endif %}
-
 {% if not deployment.is_online %}
-{% if request.user.is_superuser %}
 
 <a name="restoreparticipantcounselordata"></a>
 
@@ -163,6 +161,20 @@ Select that intervention content file that you wish to restore from. It will be 
 
 <div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
+<a name="downloaddata"></a>
+
+<h4>Download Participant Data</h4>
+
+<p style="text-align: left;">
+Administrators can <a href="/manage/report/download/">download data here</a> for reporting if online.
+</p>
+
+
+<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
+
+{% else %}
+
+
 <a name="uploaddata"></a>
 
 <h4>Upload Participant Data</h4>
@@ -175,18 +187,6 @@ Administrators can send data if online.
 <input type="file" name="" />
 <input type="submit" value="Upload" />
 </form>
-<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
-
-
-<a name="downloaddata"></a>
-
-<h4>Download Participant Data</h4>
-
-<p style="text-align: left;">
-Administrators can <a href="/manage/report/download/">download data here</a> for reporting if online.
-</p>
-
-
 <div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
 {% endif %}
