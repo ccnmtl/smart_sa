@@ -609,7 +609,7 @@ class Participant(models.Model):
 
 
     def all_counselor_notes(self):
-        return CounselorNote.objects.filter(participantsession__participant=self)
+        return CounselorNote.objects.filter(participantsession__participant=self).order_by("participantsession__session")
 
     def save_game_var(self, key, value):
         "create or update a game variable"
