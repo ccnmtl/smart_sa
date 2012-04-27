@@ -9,40 +9,6 @@
 
  	<div id="home-widgets"">
 
-		<!--
-		<div align="center">
-		<form class="login" method="post" action="/intervention/"">
-		<div class="formtitle">Log In to Masivukeni</div>
-		{% if form.has_errors %}
-		<p>Your username and password didn't match. Please try again.</p>
-		{% endif %}
-		<div class="formrow">
-		<label for="id_username">User ID</label><input type="text" name="username"/>
-		</div>
-		<div class="formrow">
-		<label for="id_password">Password</label><input type="password" name="password"/>
-		</div>
-		<div class="formrow">
-		<input type="submit" value="Log In" />
-		<input type="hidden" name="next" value="/intervention/" />
-		</div>
-		</form>
-		</div>
-		
-		{% if deployment.is_online %}	
-		<div align="center">
-		<form class="login cu" method="get" action="https://wind.columbia.edu/login">
-		<div class="formtitle">Columbia University</div>
-		<div class="formrow">
-		<input type="submit" value="Log in to Masivukeni with UNI" />
-		<input type="hidden" name="service" value="cnmtl_full_np" />
-		<input type="hidden" name="destination" value="http://masivukeni2.ccnmtl.columbia.edu/accounts/windlogin/?next=/intervention/" />
-		</div>
-		</form>
-		</div>
-		{% endif %}
-		-->
-		
 		<div align="center">
 		{% if deployment.is_online %}	
 		<iframe style="border: 0px;" width="320" height="247" src="http://www.youtube.com/embed/MOGlicrnko0" frameborder="0" allowfullscreen></iframe>
@@ -72,20 +38,11 @@
 		<p>
 		The study is funded by the NIMH under a grant titled 'A Multimedia Social Support Intervention: Adherence to HIV Care in South Africa' and is in its second year.
 		</p>
-		<!--remove space between {} and % to restore code -->
-		<!--{ % if deployment.is_online % }-->	
+		{% if deployment.is_online %}
 		<p>
 		For detailed information, visit CCNMTL's <a href="http://ccnmtl.columbia.edu/portfolio/medicine_and_health/masivukeni.html" target="blank">Masivukeni Project Page</a>.
 		</p>
-		<!--{ % endif % }-->	
-		<!--
-		<ul>
-		{% if user.is_superuser %}
-		<li><a href="/intervention_admin/1/">Administer Intervention Content</a></li>
 		{% endif %}
-		<li><a href="/intervention/">Begin Intervention</a></li>
-		</ul>
-		-->
 	
 	</div>
 	
