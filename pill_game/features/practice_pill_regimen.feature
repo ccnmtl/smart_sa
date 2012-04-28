@@ -1,12 +1,12 @@
 Feature: Practice Pill Regimen
     ## The practice pill regimen is currently in Session 1, Activity 7
 
-    Scenario: Find activity
+    Scenario: runthrough
         Using selenium
         Given I am logged in as a counselor
         When I access the url "/"
         When I click the "Let's get started!" link
-        When I click the "Intervene" link
+        When I click the "Counsel" link
         When I fill in "test" in the "name" form field
         When I fill in "test" in the "id_number" form field
         When I submit the "login-participant-form" form
@@ -17,7 +17,7 @@ Feature: Practice Pill Regimen
         When I click the "Next →" link
         Then there is a game
         
-    Scenario: Verify Practice Mode
+        #Verify Practice Mode
         Using selenium
         There is a "Practice ARVs" title
         There is not an Add Pill button
@@ -27,28 +27,24 @@ Feature: Practice Pill Regimen
         There is a pill named "Efavirennz (EFV)"
         I cannot edit "Tenofovir (TDF)"
         
-    Scenario: Specify pill dosage time
+        # Specify pill dosage time
         When I specify "daytime" time as "06:00"
         When I specify "evening" time as "19:00"
         
-    Scenario: Drop a pill into the daytime bucket
-        Using selenium
+        #Drop a pill into the daytime bucket
         When I drop "Tenofovir (TDF)" onto "daytime"
         Then there is 1 "Tenofovir (TDF)" in "daytime"
         
-    Scenario: Drag a pill from the daytime bucket to the nighttime bucket
-        Using selenium
+        # Drag a pill from the daytime bucket to the nighttime bucket
         When I drag "Tenofovir (TDF)" from "daytime" to "evening"
         Then there is 0 "Tenofovir (TDF)" in "daytime"
         Then there is 1 "Tenofovir (TDF)" in "evening"
         
-    Scenario: Drop a pill into the nighttime bucket
-        Using selenium
+        # Drop a pill into the nighttime bucket
         When I drop "Lamivudine (3TC)" onto "evening"
         Then there is 1 "Lamivudine (3TC)" in "evening"
         
-    Scenario: State is not saved in practice mode
-        Using selenium
+        # State is not saved in practice mode
         When I click the "Next →" link
         When I click the "← Back" link
         Then I wait 1 second
@@ -57,8 +53,7 @@ Feature: Practice Pill Regimen
         Then the "daytime" time is "00:00"
         Then the "evening" time is "12:00"
         
-    Scenario: Drop disabled when "not available" is selected
-        Using selenium
+        # Drop disabled when "not available" is selected
         When I specify "daytime" time as "Not taken during the day"
         When I specify "evening" time as "Not taken during the day"
         When I drop "Tenofovir (TDF)" onto "daytime"
@@ -66,8 +61,7 @@ Feature: Practice Pill Regimen
         When I drop "Lamivudine (3TC)" onto "evening"
         Then there is 0 "Lamivudine (3TC)" in "evening"
         
-    Scenario: Pills are deleted when a time slot is disabled
-        Using selenium
+        # Pills are deleted when a time slot is disabled
         Specify "daytime" time as "00:00"
         Specify "evening" time as "12:00"
         When I drop "Tenofovir (TDF)" onto "daytime"
@@ -81,9 +75,10 @@ Feature: Practice Pill Regimen
         When I specify "daytime" time as "00:00"
         When I specify "evening" time as "12:00"
         
-    Scenario: Drag pill off the bucket
-        Using selenium
+        # Drag pill off the bucket
         When I drop "Tenofovir (TDF)" onto "daytime"
         Then there is 1 "Tenofovir (TDF)" in "daytime"
         When I drag "Tenofovir (TDF)" off "daytime"
         Then there are no pills in "daytime"
+        
+        Finished using selenium

@@ -1,6 +1,6 @@
 Feature: Life goals
 ## The life goals regular session is Session 1, Activity 16
-## The life goal defaulter session is Session 4, Activity 11
+## The life goal defaulter session is Session 4, Activity 10
 
     Scenario: Find the activity
         Using selenium
@@ -41,7 +41,7 @@ Feature: Life goals
         When I click the "Sessions" link
         Then I am on the Intervention page
         When I click on Session 4
-        When I click on Activity 11
+        When I click on Activity 10
         When I click the "Next →" link
         Then there is a game
         

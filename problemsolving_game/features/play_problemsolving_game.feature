@@ -1,34 +1,35 @@
 Feature: Problem Solving Activity
     ## Notes
-    ## Barrier is currently in Session 4, Activity 10
-    ## The "Other" activity is assumed to be #19
+    ## Barrier is currently in Session 4, Activity 9
 
-    Scenario: Find activity
+    Scenario: Runthrough
         Using selenium
+        
+        # Find Activity
         Given I am logged in as a counselor
         Given participant "test" is a defaulter
         When I access the url "/"
         When I click the "Let's get started!" link
-        When I click the "Intervene" link
+        When I click the "Counsel" link
         When I fill in "test" in the "name" form field
         When I fill in "test" in the "id_number" form field
         When I submit the "login-participant-form" form
         Then I am on the Intervention page
         
         When I click on Session 4
-        When I click on Activity 10
+        When I click on Activity 9
         When I click the "Next" link
         Then there is a game
         
-    Scenario: Test focus change
-        Using selenium
+    # Test focus change
+        
         Then barrier 1 has "focus"  
         When I select barrier 3
         Then barrier 1 does not have "focus"
         Then barrier 3 has "focus"
       
-    Scenario: Test Right/Left Navigation
-        Using selenium
+    # Test Right/Left Navigation
+        
         When I select barrier 1
         Then barrier 1 has "focus"
         There there is no left arrow
@@ -49,8 +50,8 @@ Feature: Problem Solving Activity
         There there is a left arrow
         There there is no right arrow
               
-    Scenario: Personal Challenge on, navigate, off
-        Using selenium
+    # Personal Challenge on, navigate, off
+        
         When I select barrier 1
         Then barrier 1 has "focus"
         There is no action plan button
@@ -64,8 +65,8 @@ Feature: Problem Solving Activity
         When I toggle personal challenge
         Then barrier 1 does not have "marked"
         
-    Scenario: Action plan displayed, then toggled off
-        Using selenium   
+    # Action plan displayed, then toggled off
+           
         When I select barrier 3
         Then barrier 3 has "focus"
         Then barrier 3 does not have "marked"
@@ -89,8 +90,8 @@ Feature: Problem Solving Activity
         There there is a right arrow
         Then barrier 3 does not have "marked"
         
-     Scenario: Action plan displayed, then closed through save
-        Using selenium   
+     # Action plan displayed, then closed through save
+           
         When I select barrier 3
         Then barrier 3 has "focus"
         Then barrier 3 does not have "marked"
@@ -113,8 +114,8 @@ Feature: Problem Solving Activity
         There there is a right arrow
         Then barrier 3 has "marked"
         
-    Scenario: Action Plan Complete, then toggled off while editing
-        Using selenium
+    # Action Plan Complete, then toggled off while editing
+        
         Then barrier 3 has "focus"
         Then barrier 3 has "marked"
         Then there is a Make Plan button
@@ -148,8 +149,8 @@ Feature: Problem Solving Activity
         Then barrier 1 has "marked"
         Then there is a Make Plan button
         
-     Scenario: Testing out the archive
-        Using selenium
+     # Testing out the archive
+        
         When I select barrier 3 
         Then barrier 3 has "focus"
         Then barrier 3 does not have "marked"
@@ -189,8 +190,8 @@ Feature: Problem Solving Activity
         There there is a left arrow
         There there is a right arrow
         
-    Scenario: Testing out multiple barrier plan selection.
-        Using selenium
+    # Testing out multiple barrier plan selection.
+        
         When I select barrier 1
         Then barrier 1 has "focus"
         Then barrier 1 has "marked"
@@ -244,8 +245,8 @@ Feature: Problem Solving Activity
         When I click the Save Plan button
         Then there is no Action Plan form
         
-    Scenario: Testing "other" item behavior
-        Using selenium
+    # Testing "other" item behavior
+        
         # Assuming "other" barrier is #19. 
         When I select barrier 19
         Then barrier 19 has "focus"
@@ -280,5 +281,5 @@ Feature: Problem Solving Activity
         My issue is "abc"
         
         
-         
+        Finished using selenium
         

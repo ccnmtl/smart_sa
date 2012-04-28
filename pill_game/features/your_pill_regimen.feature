@@ -1,12 +1,13 @@
 Feature: Your Pill Regimen
     ## The your pill regimen is currently in Session 3, Activity 3
 
-    Scenario: Find activity
+    Scenario: runthrough 
+        # Find activity
         Using selenium
         Given I am logged in as a counselor
         When I access the url "/"
         When I click the "Let's get started!" link
-        When I click the "Intervene" link
+        When I click the "Counsel" link
         When I fill in "test" in the "name" form field
         When I fill in "test" in the "id_number" form field
         When I submit the "login-participant-form" form
@@ -17,8 +18,7 @@ Feature: Your Pill Regimen
         When I click the "Next" link
         Then there is a game
         
-    Scenario: Verify Real Mode
-        Using selenium
+        # Verify Real Mode
         There is a "Medication List" title
         There is an Add Pill button
         There are 0 pills
@@ -32,8 +32,7 @@ Feature: Your Pill Regimen
         When I name pill 1 "ish"
         Then there is a pill named "Fooish"
         
-    Scenario: A few more pills
-        Using selenium
+        # A few more pills
         When I click Add Pill 
         When I name pill 2 "Sam"
         Then there is a pill named "Sam"
@@ -42,28 +41,24 @@ Feature: Your Pill Regimen
         Then there is a pill named "Bar"
         Then there are 3 pills
         
-    Scenario: Specify pill dosage time
+        # Specify pill dosage time
         When I specify "daytime" time as "06:00"
         When I specify "evening" time as "19:00"
         
-    Scenario: Drop a pill into the daytime bucket
-        Using selenium
+        # Drop a pill into the daytime bucket
         When I drop "Fooish" onto "daytime"
         Then there is 1 "Fooish" in "daytime"
         
-    Scenario: Drag a pill from the daytime bucket to the nighttime bucket
-        Using selenium
+        # Drag a pill from the daytime bucket to the nighttime bucket
         When I drag "Fooish" from "daytime" to "evening"
         Then there is 0 "Fooish" in "daytime"
         Then there is 1 "Fooish" in "evening"
         
-    Scenario: Drop a pill into the nighttime bucket
-        Using selenium
+        # Drop a pill into the nighttime bucket
         When I drop "Bar" onto "evening"
         Then there is 1 "Bar" in "evening"
     
-    Scenario: State is saved in real mode
-        Using selenium
+        # State is saved in real mode
         # State save event required at the beginning of a scenaro
         When I specify "daytime" time as "03:00"
         When I click the "Next →" link
@@ -78,8 +73,7 @@ Feature: Your Pill Regimen
         Then the "daytime" time is "03:00"
         Then the "evening" time is "19:00"
         
-    Scenario: Drop disabled when "not available" is selected
-        Using selenium
+        # Drop disabled when "not available" is selected
         When I specify "daytime" time as "Not taken during the day"
         When I specify "evening" time as "Not taken during the day"
         Then there are no pills in "daytime"
@@ -89,8 +83,7 @@ Feature: Your Pill Regimen
         When I drop "Sam" onto "evening"
         Then there is 0 "Sam" in "evening"
                 
-    Scenario: Drag pill off the bucket
-        Using selenium
+        # Drag pill off the bucket
         When I specify "daytime" time as "06:00"
         When I specify "evening" time as "19:00"
         When I drop "Sam" onto "daytime"
@@ -98,8 +91,7 @@ Feature: Your Pill Regimen
         When I drag "Sam" off "daytime"
         Then there are no pills in "daytime"
         
-    Scenario: Deleting a pill removes it from its bucket, other pills remain
-        Using selenium
+        # Deleting a pill removes it from its bucket, other pills remain
         When I drop "Fooish" onto "daytime"
         When I drop "Fooish" onto "daytime"
         When I drop "Fooish" onto "daytime"
@@ -120,8 +112,7 @@ Feature: Your Pill Regimen
         Then there is 1 "Bar" in "daytime"
         Then there is 1 "Bar" in "evening"
             
-    Scenario: Limit of 10 pills
-        Using selenium
+        # Limit of 10 pills
         Then there are 2 pills
         When I click Add Pill
         When I click Add Pill
@@ -133,5 +124,7 @@ Feature: Your Pill Regimen
         When I click Add Pill
         Then there are 10 pills
         When I click Add Pill
-        Then I'm told I can only enter 10 pills        
+        Then I'm told I can only enter 10 pills
+        
+        Finished using selenium      
         

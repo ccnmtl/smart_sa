@@ -301,7 +301,7 @@ def i_have_logged_in_a_participant(step):
         step.behave_as("""
         When I access the url "/"
         When I click the "Let's get started!" link
-        When I click the "Intervene" link
+        When I click the "Counsel" link
         When I fill in "test" in the "name" form field
         When I fill in "test" in the "id_number" form field
         When I submit the "login-participant-form" form
