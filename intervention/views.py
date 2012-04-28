@@ -289,6 +289,26 @@ def restore_participants(request):
 
     return dict(logs=logs)
     
+@render_to("intervention/upload_participants.html")
+@login_required
+def upload_participant_data(request):
+    logs = []
+    if Deployment.objects.count() > 0:
+        deployment = Deployment.objects.all()[0]
+        if not deployment.is_online():
+            logs.append(dict(error="you should only use this feature on the CCNMTL deployment"))
+            return dict(logs=logs)
+
+    try:
+        json_data = request.FILES['participants_data'].read()
+        json = simplejson.loads(json_data)
+    except Exception, e:
+        logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))
+        return dict(logs=logs)
+
+    b = Backup.objects.create(json_data=json_data)
+    return HttpResponse("participant data successfully backed up")
+
 
 @login_required
 def update_intervention_content(request):

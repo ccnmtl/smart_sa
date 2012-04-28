@@ -478,9 +478,6 @@ class Instruction (models.Model):
 class Backup (models.Model):
     json_data = models.TextField(blank=True)
     created = models.DateTimeField('date created', auto_now_add=True)
-    def save(self, *args, **kwargs):
-        json.loads(self.json_data)
-        super(Backup, self).save(*args, **kwargs)
 
     def as_dict(self):
         return dict(json_data=self.json_data,
