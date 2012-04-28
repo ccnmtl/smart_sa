@@ -41,7 +41,7 @@
 
 .issue-number.marked {
     color: black;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff", endColorstr="#ccc");
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#cccccc");
     background: -moz-linear-gradient(top, #fff, #ccc);
     background: -webkit-linear-gradient(top, #fff, #ccc);
     background: -o-linear-gradient(top, #fff, #ccc);

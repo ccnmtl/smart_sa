@@ -88,13 +88,9 @@
                     </div> \
                     <div class="pill-image" \
                         style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
-                               filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE6,IE7 */ \
-                               -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE8 */ \
                                background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
                         <span data-id="<%= id %>" class="draggable" \
                             style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
-                                   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE6,IE7 */ \
-                                   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE8 */ \
                                    background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
                         </span> \
                     </div> \
@@ -176,8 +172,6 @@
             <span data-id="<%= id %>" id="<%= viewId %>" class="draggable trashable" \
                 style="background-image: -webkit-gradient(radial, 65% 35%, 1, 50% 50%, 30, from(rgb(255, 255, 255)), to(<%= color %>)); \
                        background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); \
-                       filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE6,IE7 */ \
-                       -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE8 */ \
                        z-index: 1000; opacity: 1;"> \
             </span>'),
         initialize: function (options, render) {
