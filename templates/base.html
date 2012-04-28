@@ -71,9 +71,9 @@
     </div>
 
     <div id="footer">
-		<a href="/">About</a> | 
-		<a href="/credits/">Credits</a> | 
+		{% if deployment.is_online %}
 		<a href="mailto:ccnmtl-masivukeni@columbia.edu">Contact</a>
+		{% endif %}
 		{% block footer %}{% endblock %}
 	</div>
 

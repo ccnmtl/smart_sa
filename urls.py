@@ -47,7 +47,6 @@ urlpatterns = patterns('',
         (r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$', 'smart_sa.intervention.views.game'),
         (r'^save_game_state/$','smart_sa.intervention.views.save_game_state'),                       
 
-        (r'^help/backup.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),
         (r'^help/credits.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/credits.html'}),
 
         # page 13, 14
