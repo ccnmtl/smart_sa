@@ -143,6 +143,7 @@ def add_participant(request):
         p = Participant.objects.create(name=request.POST.get('name','unnamed'),
                                        id_number=request.POST.get('id_number',''),
                                        status=request.POST.get('status','') == 'on',
+                                       patient_id=request.POST.get('patient_id',''),
                                        defaulter=(request.POST.get('defaulter','') == 'on'),
                                        gender=request.POST.get('gender','male'),
                                        clinical_notes=request.POST.get('clinical_notes',''),
