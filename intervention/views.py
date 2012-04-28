@@ -302,11 +302,12 @@ def upload_participant_data(request):
     try:
         json_data = request.FILES['participants_data'].read()
         json = simplejson.loads(json_data)
+        print str(json.keys())
     except Exception, e:
         logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))
         return dict(logs=logs)
 
-    b = Backup.objects.create(json_data=json_data)
+    b = Backup.objects.create(json_data=json_data,deployment=json['deployment'])
     return HttpResponse("participant data successfully backed up")
 
 

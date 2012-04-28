@@ -478,6 +478,7 @@ class Instruction (models.Model):
 class Backup (models.Model):
     json_data = models.TextField(blank=True)
     created = models.DateTimeField('date created', auto_now_add=True)
+    deployment = models.CharField(max_length=256, default="Clinic")
 
     def as_dict(self):
         return dict(json_data=self.json_data,
