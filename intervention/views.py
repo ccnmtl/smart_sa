@@ -302,7 +302,7 @@ def upload_participant_data(request):
     try:
         json_data = request.FILES['participants_data'].read()
         json = simplejson.loads(json_data)
-        print str(json.keys())
+
     except Exception, e:
         logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))
         return dict(logs=logs)
