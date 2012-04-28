@@ -1,5 +1,31 @@
-Windows Installation
-====================
+Bitnami Windows Installation
+============================
+
+* plug in USB thumb drive
+* select "view files"
+* copy bitnami installer to desktop
+* copy smart_sa folder to C:\
+* double-click bitnami installer on desktop
+** use default C:\Program Files\Bitnami DjangoStack\ install location
+** unselect MySQL (unneeded)
+** set postgresql password to "masivukeni"
+** do not create a new project
+** don't associate .py files with bitnami python
+* go into C:\smart_sa\
+* right click on admin_initialize.bat and "Run as Administrator"
+** if prompted, enter "masivukeni" as database password (twice)
+* double-click "initialize.bat" 
+* Start -> All Programs -> Bitnami DjangoStack -> Manager
+** select "apache2" and restart it
+* open Chrome and go to "http://localhost/"
+** login as 'admin' (anders will give you the password)
+** go to "administrate"
+** set up clinic name (aka "deployment")
+** add counselor accounts
+
+
+Old Windows Installation (non-bitnami)
+======================================
 
 * Install Python 2.7 (assuming to C:\Python27)
 * Install setuptools
