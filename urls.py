@@ -7,17 +7,10 @@ admin.autodiscover()
 site_media_root = os.path.join(os.path.dirname(__file__),"media")
 
 urlpatterns = patterns('',
-        # Example:
-        # (r'^smart_sa/', include('smart_sa.foo.urls')),
         (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
         ('^accounts/',include('djangowind.urls')),
         (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': site_media_root}),
         (r'^multimedia/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
-
-        (r'^smart_sa$', 'smart_sa.intervention.views.no_vars', {'template_name': 'intervention/index.html'}),
-
-        (r'^home.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
-        (r'^index.html$', 'smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
 
         (r'^testgen/$', 'smart_sa.intervention.views.testgen'),
         (r'^set_participant/$','smart_sa.intervention.views.set_participant'),
@@ -47,9 +40,6 @@ urlpatterns = patterns('',
         (r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$', 'smart_sa.intervention.views.game'),
         (r'^save_game_state/$','smart_sa.intervention.views.save_game_state'),                       
 
-        (r'^help/credits.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/credits.html'}),
-
-        # page 13, 14
         ########
         # ADMIN view
         ########
