@@ -14,7 +14,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       Given participant "test" is a defaulter
       When I access the url "/"
       When I click the "Let's get started!" link
-      When I click the "Intervene" link
+      When I click the "Counsel" link
       When I fill in "test" in the "name" form field
       When I fill in "test" in the "id_number" form field
       When I submit the "login-participant-form" form
