@@ -31,6 +31,7 @@ urlpatterns = patterns('',
         (r'manage/restore_participants/$','smart_sa.intervention.views.restore_participants'),
         (r'manage/update_intervention_content/$','smart_sa.intervention.views.update_intervention_content'),                               
         (r'manage/upload_participant_data/$','smart_sa.intervention.views.upload_participant_data'),
+        (r'manage/download_backup/(?P<backup_id>\d+)/$','smart_sa.intervention.views.download_backup'),
 
         (r'^practice/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.start_practice_mode'),
         (r'^intervention/(?P<intervention_id>\d+)/$','smart_sa.intervention.views.intervention'),

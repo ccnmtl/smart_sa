@@ -30,7 +30,6 @@ from aes_v001 import AESModeOfOperation, toNumbers, fromNumbers
 from smart_sa.intervention.models import Participant, ClientSession, Activity
 from smart_sa.intervention.models import Deployment, ParticipantSession, ParticipantActivity
 from smart_sa.intervention.models import CounselorNote, GamePage, Backup, Instruction
-#from smart_sa.intervention.models import *
 
 # bump this if anything changes with Participant/Counselor serialization
 API_VERSION = "001-2012-04-28"
@@ -137,6 +136,7 @@ def counselor_landing_page(request):
 @login_required
 def manage_participants(request):
     return dict(participants=Participant.objects.all(),
+                backups=Backup.objects.all(),
                 counselors=User.objects.all())
 
 @render_to('intervention/add_participant.html')
@@ -234,6 +234,18 @@ def participant_data_download(request):
     datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (now.year, now.month, now.day, now.hour, now.minute, now.second)
     resp['Content-Disposition'] = "attachment; filename=%s_%s_participant_data.json" % (clean_deployment_name, datestring)
     return resp
+
+@login_required
+def download_backup(request,backup_id):
+    b = get_object_or_404(Backup,id=backup_id)
+    json = b.json_data
+    resp = HttpResponse(json, content_type="application/json")
+    clean_deployment_name = b.deployment.lower().replace(" ","_")
+    now = b.created
+    datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (now.year, now.month, now.day, now.hour, now.minute, now.second)
+    resp['Content-Disposition'] = "attachment; filename=%s_%s_participant_data.json" % (clean_deployment_name, datestring)
+    return resp
+
 
 @render_to("intervention/restore_participants.html")
 @login_required

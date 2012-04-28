@@ -189,6 +189,23 @@ Administrators can send data if online.
 </form>
 <div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
+{% if backups %}
+<h4>Download Previous Backups</h4>
+
+<table>
+	<tr>
+		<th>deployment</th>
+		<th>date</th>
+	</tr>
+{% for b in backups %}
+<tr>
+	<td><a href="/manage/download_backup/{{b.id}}/">{{b.deployment}}</a></td>
+	<td><a href="/manage/download_backup/{{b.id}}/">{{b.created}}</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
 {% endif %}
 {% endif %}
 {% endblock %} 
