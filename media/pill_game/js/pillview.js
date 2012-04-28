@@ -3,80 +3,35 @@
     var global = this;
     global.dropped = false;
     
-    var RandomColorGenerator = Backbone.Model.extend({
+    var ColorStack = Backbone.Model.extend({
         defaults: {
-            golden_ratio_conjugate: 0.618033988749895,
-            h: Math.random()
+            colors: [ "#000", // black
+                      "#F69E94", // salmon
+                      "#964B00", // brown
+                      "#FBFF00", // yellow
+                      "#A020F0 ", // purple
+                      "#FF7B00", // orange
+                      "#FF1493", // deep pink
+                      "#00FF00", // green
+                      "#0000FF", // blue
+                      "#FF0000" // red
+                     ]
         },
         
-        /**
-         * http://mjijackson.com/2008/02/rgb-to-hsl-and-rgb-to-hsv-color-model-conversion-algorithms-in-javascript
-         * Converts an HSV color value to RGB. Conversion formula
-         * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
-         * Assumes h, s, and v are contained in the set [0, 1] and
-         * returns r, g, and b in the set [0, 255].
-         *
-         * @param   Number  h       The hue
-         * @param   Number  s       The saturation
-         * @param   Number  v       The value
-         * @return  Array           The RGB representation
-         */
-        hsvToRgb: function (h, s, v) {
-            var r, g, b;
-
-            var i = Math.floor(h * 6);
-            var f = h * 6 - i;
-            var p = v * (1 - s);
-            var q = v * (1 - f * s);
-            var t = v * (1 - (1 - f) * s);
-
-            switch (i % 6) {
-            case 0:
-                r = v;
-                g = t;
-                b = p;
-                break;
-            case 1:
-                r = q;
-                g = v;
-                b = p;
-                break;
-            case 2:
-                r = p;
-                g = v;
-                b = t;
-                break;
-            case 3:
-                r = p;
-                g = q;
-                b = v;
-                break;
-            case 4:
-                r = t;
-                g = p;
-                b = v;
-                break;
-            case 5:
-                r = v;
-                g = p;
-                b = q;
-                break;
+        get: function () {
+            return this.attributes.colors.pop();
+        },
+        
+        put: function (color) {
+            this.attributes.colors.push(color);
+        },
+        
+        remove: function (color) {
+            for (var i = 0; i < this.attributes.colors.length; i++) {
+                if (this.attributes.colors[i] === color) {
+                    this.attributes.colors.splice(i, 1);
+                }
             }
-
-            return [Math.floor(r * 255), Math.floor(g * 255), Math.floor(b * 255)   ];
-        },
-        
-        hue: function () {
-            var h = this.get("h");
-            h += this.get("golden_ratio_conjugate");
-            h %= 1;
-            this.set("h", h);
-            return h;
-        },
-        
-        rgb: function () {
-            var a = this.hsvToRgb(this.hue(), 0.99, 0.99);
-            return "rgb(" + a[0] + "," + a[1] + "," + a[2] + ")";
         }
     });
     
@@ -133,9 +88,13 @@
                     </div> \
                     <div class="pill-image" \
                         style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
+                               filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE6,IE7 */ \
+                               -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE8 */ \
                                background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
                         <span data-id="<%= id %>" class="draggable" \
                             style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
+                                   filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE6,IE7 */ \
+                                   -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE8 */ \
                                    background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
                         </span> \
                     </div> \
@@ -217,6 +176,8 @@
             <span data-id="<%= id %>" id="<%= viewId %>" class="draggable trashable" \
                 style="background-image: -webkit-gradient(radial, 65% 35%, 1, 50% 50%, 30, from(rgb(255, 255, 255)), to(<%= color %>)); \
                        background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); \
+                       filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE6,IE7 */ \
+                       -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorStr="#ffffff", EndColorStr="<%= color %>"); /* IE8 */ \
                        z-index: 1000; opacity: 1;"> \
             </span>'),
         initialize: function (options, render) {
@@ -422,7 +383,7 @@
             
             this.mode = options.mode;
             
-            this.colorGenerator = new RandomColorGenerator();
+            this.colorStack = new ColorStack();
             
             this.pills = options.pills;
             
@@ -436,11 +397,14 @@
         
         addPill: function (pill) {
             var view = new PillView({ model: pill, gameView: this });
+            this.colorStack.remove(pill.get("color"));
             jQuery("#pill-list").append(view.el);
             view.focus();
         },
         
         removePill: function (pillId) {
+            var pill = this.pills.get(pillId);
+            this.colorStack.put(pill.get("color"));
             this.pills.remove(pillId);
             this.trigger("save");
         },
@@ -450,7 +414,7 @@
             if (this.pills.length >= 10) {
                 alert("You can only enter 10 pills. Please delete one before continuing");
             } else {
-                var rgb = this.colorGenerator.rgb();
+                var rgb = this.colorStack.get();
                 var pill = new Pill({ 'id': "pill_" + (Math.random() + "").substring(2, 6), 'color': rgb });
                 this.pills.add(pill);
                 this.trigger("save");
