@@ -50,6 +50,7 @@ def then_barrier_number_has_state(step, number, state):
             assert state in clazz, clazz
             break  
 
+
 @step(u'Then barrier (\d+) does not have "([^"]*)"')
 def then_barrier_number_does_not_have_state(step, number, state):
     if not world.using_selenium:
