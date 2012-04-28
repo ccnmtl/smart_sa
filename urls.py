@@ -50,13 +50,6 @@ urlpatterns = patterns('',
         (r'^help/backup.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/backup_help.html'}),
         (r'^help/credits.html$', 'django.views.generic.simple.direct_to_template',{'template':'flatpages/credits.html'}),
 
-        ########
-        # SERVER VIEW
-        ########
-        (r'^store_backup$', 'smart_sa.intervention.views.store_backup'),
-        (r'^intervention_admin/save_backup$', 'smart_sa.intervention.views.save_backup_htmlupload'),
-        (r'^intervention_admin/restore$', 'smart_sa.intervention.views.restore_from_backup'),
-
         # page 13, 14
         ########
         # ADMIN view
@@ -69,15 +62,6 @@ urlpatterns = patterns('',
         (r'^intervention_admin/content_sync/$','smart_sa.intervention.views.content_sync'),
         (r'^intervention_admin/zip_download/$','smart_sa.intervention.views.zip_download'),
         (r'^intervention_admin/list_uploads/$','smart_sa.intervention.views.list_uploads'),                       
-
-        (r'^Masivukeni/Masivukeni/client_login.html', 'django.views.generic.simple.redirect_to', {'url':'/client_login.html'}),
-
-        #semi-static help pages, etc.
-        #(r'^background/(?P<content_label>\d+)/$', 'smart_sa.intervention.views.background'),
-
-        # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
-        # to INSTALLED_APPS to enable admin documentation:
-        #(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
         (r'^admin/', include(admin.site.urls)),
         ('^$','smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),

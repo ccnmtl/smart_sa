@@ -501,68 +501,6 @@ def save_game_state(request):
 
 
 #####################################
-# BACKUP/RESTORE pages
-#####################################
-
-
-@permission_required('intervention.add_backup')
-def store_backup(request):
-    if request.method == 'POST' and request.POST.has_key('backup'):
-        try: #check that we got valid json
-            Backup.objects.create(json_data=request.POST['backup'])
-            return HttpResponse('ok')
-        except ValueError:
-            return HttpResponse('FAIL!')
-        return HttpResponse('FAIL!')
-    else:
-        return HttpResponse('FAIL!')
-
-
-@permission_required('intervention.add_backup')
-def restore_from_backup(request):
-    t = loader.get_template('intervention/restore.html')
-    ctx = {}
-    if request.GET.has_key('id'):
-        backup = Backup.objects.get(pk=request.GET['id'])
-        plaintext_json = backup.json_data
-        moo = AESModeOfOperation()
-        mode, orig_len, restoral_data = moo.encrypt(backup.json_data, *ENCRYPTION_ARGS)
-        ctx = {'date_string': backup.created.strftime('%Y-%m-%d'),
-               'restoral_data': fromNumbers(restoral_data),
-               }
-    c = RequestContext(request, ctx)
-    response = HttpResponse(t.render(c))
-    response['Content-Disposition'] = 'attachment; filename=restore.html'
-    return response
-
-
-@permission_required('intervention.add_backup')
-@render_to('intervention/upload_backup.html')
-def save_backup_htmlupload(request):
-    errors = ''
-
-    if request.method == 'POST':
-        if request.FILES.has_key('backup'):
-            html_data = request.FILES['backup'].read()
-            try:
-                hex_ciphtext = html_data.split('<div id="data">').pop().split('</div>').pop(0)
-                moo = AESModeOfOperation()
-                plaintext_json = moo.decrypt(toNumbers(hex_ciphtext), None, *ENCRYPTION_ARGS)
-                try:
-                    Backup.objects.create(json_data=plaintext_json)
-                    errors = 'Successfully saved the backup file'
-                except:
-                    errors = 'Unable to parse data correctly or save to the database.'
-            except:
-                errors = 'Unable to decrypt contents'
-
-    previous_backups = Backup.objects.all()
-            
-    return {'errors':errors,
-            'backups':previous_backups,
-            }
-
-#####################################
 # ADMIN pages
 #####################################
 
