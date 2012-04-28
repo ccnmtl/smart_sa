@@ -32,6 +32,9 @@ from smart_sa.intervention.models import Deployment, ParticipantSession, Partici
 from smart_sa.intervention.models import CounselorNote, GamePage, Backup, Instruction
 #from smart_sa.intervention.models import *
 
+# bump this if anything changes with Participant/Counselor serialization
+API_VERSION = "001-2012-04-28"
+
 ENCRYPTION_ARGS = [AESModeOfOperation.modeOfOperation["OFB"], #mode
                    toNumbers(settings.INTERVENTION_BACKUP_HEXKEY),
                    AESModeOfOperation.aes.keySize['SIZE_256'],
@@ -223,6 +226,7 @@ def participant_data_download(request):
     data['participants'] = participants
     counselors = simplejson.loads(serializers.serialize("json", User.objects.all()))
     data['counselors'] = counselors
+    data['API_VERSION'] = API_VERSION
     json = simplejson.dumps(data)
     resp = HttpResponse(json, content_type="application/json")
     clean_deployment_name = Deployment.objects.all()[0].name.lower().replace(" ","_")
