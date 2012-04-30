@@ -32,7 +32,10 @@ from smart_sa.intervention.models import Deployment, ParticipantSession, Partici
 from smart_sa.intervention.models import CounselorNote, GamePage, Backup, Instruction
 
 # bump this if anything changes with Participant/Counselor serialization
-API_VERSION = "001-2012-04-28"
+API_VERSION = "002-2012-04-30"
+
+# previous API Version Changes
+# 001-2012-04-28 -> 002-2012-04-30 -- counselornotes are not per-session anymore
 
 ENCRYPTION_ARGS = [AESModeOfOperation.modeOfOperation["OFB"], #mode
                    toNumbers(settings.INTERVENTION_BACKUP_HEXKEY),

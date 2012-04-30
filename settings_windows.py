@@ -24,6 +24,7 @@ DATABASES = {
         }
 }
 
+TIME_ZONE = 'Africa/Johannesburg'
 
 try:
     from local_settings import *
