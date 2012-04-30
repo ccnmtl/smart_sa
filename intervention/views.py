@@ -198,7 +198,16 @@ def edit_counselor(request, counselor_id):
 @login_required
 def view_participant(request, participant_id):
     p = get_object_or_404(Participant, id=participant_id)
-    return dict(participant=p,all_interventions=Intervention.objects.all())
+    if request.method == 'POST':
+        password = request.POST['password']
+        if p.id_number.lower() == password.lower():
+            return dict(participant=p, all_interventions=Intervention.objects.all(), 
+                        show_login_form=False)
+        else:
+            return HttpResponse("incorrect password. permission denied")
+    else:
+        return dict(participant=p, all_interventions=Intervention.objects.all(),
+                    show_login_form=True)
 
 @render_to('intervention/add_counselor.html')
 @login_required

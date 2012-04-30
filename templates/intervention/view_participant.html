@@ -12,6 +12,12 @@
 {% block content %}
 <h2>Information for {{participant.name}}</h2>
 
+{% if show_login_form %}
+<form action="." method="post">
+<p>Please enter password for {{participant.name}}: <input type="password" name="password" /></p>
+<input type="submit" value="view information" />
+</form>
+{% else %}
 <h4>Personal</h4>
 
 <table class="manage" cellspacing="0">
@@ -143,5 +149,5 @@ Questions and Concerns:
 <div style="margin: 40px 0px 40px 0px;">
 <a href="/manage/" class="action">Done</a>
 </div>
-
+{% endif %}
 {% endblock %}
