@@ -135,9 +135,9 @@ def counselor_landing_page(request):
 @render_to('intervention/manage_participants.html')
 @login_required
 def manage_participants(request):
-    return dict(participants=Participant.objects.all(),
-                backups=Backup.objects.all(),
-                counselors=User.objects.all())
+    return dict(participants=Participant.objects.all().order_by("name"),
+                backups=Backup.objects.all().order_by("-created"),
+                counselors=User.objects.all().order_by("username"))
 
 @render_to('intervention/add_participant.html')
 @login_required
