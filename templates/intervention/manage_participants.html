@@ -30,12 +30,15 @@
 
 {% if request.user.is_superuser %}
   <a href="#managecounselors">Manage Counselors</a>
+    <a href="#downloaddata">Download Participant Data</a>
   {% if not deployment.is_online %}
     <a href="#restoreparticipantcounselordata">Restore Participant Data</a>
     <a href="#updateinterventioncontent">Update Intervention</a>
-    <a href="#downloaddata">Download Participant Data</a>
   {% else %}
     <a href="#uploaddata">Upload Participant Data</a>
+    {% if backups %}
+    <a href="#previousbackups">Backups</a>
+  {% endif %} 
   {% endif %} 
 {% endif %}
 
@@ -114,6 +117,18 @@
 
 <div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
+<a name="downloaddata"></a>
+
+<h4>Download Participant Data</h4>
+
+<p style="text-align: left;">
+Administrators can <a href="/manage/report/download/">download data here</a> for reporting if online.
+</p>
+
+
+<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
+
+
 {% if not deployment.is_online %}
 
 <a name="restoreparticipantcounselordata"></a>
@@ -161,16 +176,6 @@ Select that intervention content file that you wish to restore from. It will be 
 
 <div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
-<a name="downloaddata"></a>
-
-<h4>Download Participant Data</h4>
-
-<p style="text-align: left;">
-Administrators can <a href="/manage/report/download/">download data here</a> for reporting if online.
-</p>
-
-
-<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
 {% else %}
 
@@ -190,12 +195,15 @@ Administrators can send data if online.
 <div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
 {% if backups %}
+
+<a name="previousbackups"></a>
+
 <h4>Download Previous Backups</h4>
 
-<table>
+<table class="manage" cellspacing="0">
 	<tr>
-		<th>deployment</th>
-		<th>date</th>
+		<th>Deployment</th>
+		<th>Date</th>
 	</tr>
 {% for b in backups %}
 <tr>
@@ -204,6 +212,9 @@ Administrators can send data if online.
 </tr>
 {% endfor %}
 </table>
+
+<div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
+
 {% endif %}
 
 {% endif %}
