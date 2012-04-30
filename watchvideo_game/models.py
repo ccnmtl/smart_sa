@@ -9,7 +9,7 @@ class WatchVideoGame1(GameInterface):
         return ('soldiers_snakes',)
 
     def template(self,page_id):
-        game_context = {'video':'video/%s.mov' % page_id ,
+        game_context = {'video':'video/%s.mp4' % page_id ,
                         #'video':page_id,
                         'width':530, #320,
                         'height':413, #255,

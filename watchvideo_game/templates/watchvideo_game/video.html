@@ -8,16 +8,9 @@
 {% endblock %}
 
 {% block game_content %}
+
    <div class="video" style="position:relative;height:475px;width:545px;margin-left:50px;">
-     <object classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B' width="{{game_context.width}}"
-        height="{{game_context.height}}" codebase='http://www.apple.com/qtactivex/qtplugin.cab'>
-        <param name='src' value="{{MEDIA_URL}}{{game_context.video}}">
-        <param name='autoplay' value="false">
-        <param name='controller' value="true">
-        <param name='loop' value="false">
-        <embed src="{{MEDIA_URL}}{{game_context.video}}" width="{{game_context.width}}" height="{{game_context.height}}" autoplay="false" 
-        controller="true" loop="false" pluginspage='http://www.apple.com/quicktime/download/'>
-        </embed>
-      </object>
+     <video src="{{MEDIA_URL}}{{game_context.video}}" poster="" width="{{game_context.width}}" controls>
+     </video>
    </div>
 {% endblock %}
