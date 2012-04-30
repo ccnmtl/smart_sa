@@ -439,7 +439,7 @@ def complete_activity(request, activity_id):
         if request.POST.get('counselor_notes', False):
             session = activity.clientsession
             ps, created = get_or_create_first(ParticipantSession,session=session, participant=participant)
-            note, created = get_or_create_first(CounselorNote,participantsession=ps, counselor=request.user)
+            note, created = get_or_create_first(CounselorNote,participant=participant, counselor=request.user)
             note.notes = request.POST.get('counselor_notes', '')
             note.save()
         if request.POST.get('buddy_name', False):
@@ -488,7 +488,7 @@ def activity(request, activity_id):
         # no game, so just loading the page should mark it complete
         pa.status = "complete"
         pa.save()
-    cn, created = get_or_create_first(CounselorNote, participantsession=ps, counselor=request.user)
+    cn, created = get_or_create_first(CounselorNote, participant=participant, counselor=request.user)
     counselor_notes = cn.notes
     return dict(activity=activity, participant=request.participant, counselor_notes=counselor_notes)
 

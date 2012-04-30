@@ -539,10 +539,9 @@ class Participant(models.Model):
             game_vars=[{pgv.key : pgv.value} for pgv in self.participantgamevar_set.all()],
             session_progress=[dict(session="Session %d: %s" % (ps.session.index(), 
                                                                ps.session.long_title),
-                                   status=ps.status,
-                                   counselor_notes=[dict(counselor=cn.counselor.username, notes=cn.notes) 
-                                                    for cn in ps.counselornote_set.all()],
-                                   ) for ps in self.participantsession_set.all()],
+                                   status=ps.status) for ps in self.participantsession_set.all()],
+            counselor_notes=[dict(counselor=cn.counselor.username, notes=cn.notes) 
+                                                    for cn in self.counselornote_set.all()],
             activity_progress=[dict(activity="Session %d: Activity %d: %s" % (pa.activity.clientsession.index(), 
                                                                               pa.activity.index(), pa.activity.long_title),
                                     status=pa.status) for pa in self.participantactivity_set.all()],
@@ -591,9 +590,9 @@ class Participant(models.Model):
                 logs.append(dict(warn="session title mismatch. might be a problem"))
 
             ps = ParticipantSession.objects.create(participant=p,session=session,status=sp['status'])
-            for cn in sp['counselor_notes']:
-                counselor = User.objects.get(username=cn['counselor'])
-                ncn = CounselorNote.objects.create(participantsession=ps,counselor=counselor,notes=cn['notes'])
+        for cn in data['counselor_notes']:
+            counselor = User.objects.get(username=cn['counselor'])
+            ncn = CounselorNote.objects.create(participant=p,counselor=counselor,notes=cn['notes'])
         logs.append(dict(info="session progress restored"))
 
         activity_pattern = re.compile(r'Session (?P<session_index>\d+): Activity (?P<activity_index>\d+): (?P<long_title>.+)')
@@ -614,7 +613,7 @@ class Participant(models.Model):
 
 
     def all_counselor_notes(self):
-        return CounselorNote.objects.filter(participantsession__participant=self).order_by("participantsession__session")
+        return CounselorNote.objects.filter(participant=self)
 
     def save_game_var(self, key, value):
         "create or update a game variable"
@@ -721,13 +720,13 @@ class ParticipantActivity(models.Model):
 
 
 class CounselorNote(models.Model):
-    """ notes entered by a counselor on a participant (for a particular session) """
-    participantsession = models.ForeignKey(ParticipantSession)
+    """ notes entered by a counselor on a participant"""
+    participant = models.ForeignKey(Participant,null=True)
     counselor = models.ForeignKey(User)
     notes = models.TextField(blank=True, null=True, default="")
 
     def __unicode__(self):
-        return "%s <-- %s" % (self.participantsession.participant.name, self.counselor.username)
+        return "%s <-- %s" % (self.participant.name, self.counselor.username)
 
 class ParticipantGameVar(models.Model):
     """ One game variable for a Participant"""
