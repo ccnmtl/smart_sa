@@ -468,6 +468,16 @@ table.manage
 	width: 100%;
 }
 
+table.manage a
+{
+	color: #f6921e;
+}
+
+table.manage a.action
+{
+	color: #fff;
+}
+
 table.manage col#firstname { width: 25%}
 table.manage col#status { width: 25%}
 table.manage col#actions { width: 50%}
@@ -1234,9 +1244,9 @@ width: 33%;
 	text-decoration: none;
 	border: 1px solid #ccc;
 	padding: 3px 3px 3px 3px;
-	font-size: 10px;
+	font-size: 9px;
 	font-weight: bold;
-	margin: 0px 4px 0px 4px;
+	margin: 0px 3px 0px 4px;
 	background-color: #eee;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
