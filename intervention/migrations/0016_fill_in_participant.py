@@ -10,8 +10,15 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
         for cn in CounselorNote.objects.all():
-            cn.participant = cn.participantsession.participant
-            cn.save()
+            try:
+                cn.participant = cn.participantsession.participant
+                cn.save()
+            except:
+                # anders screwed up the data migration the first time
+                # the CounselorNote class won't have a participantsession attribute
+                # by the time this runs
+                cn.participant = 0
+                cn.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
