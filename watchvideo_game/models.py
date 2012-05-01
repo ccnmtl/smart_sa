@@ -24,9 +24,17 @@ class WatchVideoGame2(WatchVideoGame1):
     def pages(self):
         return ('joseph_hope',)
 
+class WatchVideoGame3(WatchVideoGame1):
+    "watch another video"
+    def pages(self):
+        return ('problem_solving_smart_sa_new_vo',)
+
 InstalledGames.register_game('video-soldiers',
                              'Soldiers and Snakes',
                              WatchVideoGame1() )
 InstalledGames.register_game('video-joseph',
                              'Joseph and Hope',
                              WatchVideoGame2() )
+InstalledGames.register_game('video-problem-solving',
+                             'Problem Solving Video',
+                             WatchVideoGame3() )
