@@ -21,6 +21,12 @@
     width:  640px;
 }
 
+div#island img {
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   user-select: none;
+} 
+
 #water {
     z-index: 200;
     position: absolute;
@@ -76,7 +82,7 @@
 }
 
 #infection_label  {
-    left: 42px;
+    left: 44px;
 }
 
 #viral_load_slider,
@@ -85,7 +91,7 @@
 }
 
 #viral_load_label {
-    left: 92px;
+    left: 94px;
 }
 
 #cd4_count_slider,
@@ -94,7 +100,7 @@
 }
 
 #cd4_count_label {
-    left: 142px;    
+    left: 144px;    
 }
 
 #adherence_slider,
@@ -109,7 +115,7 @@
 }
 
 #no_adherence_label {
-    top: 150px;
+    top: 185px;
 }
 
 #island_view_navigation {

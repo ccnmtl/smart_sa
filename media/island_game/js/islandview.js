@@ -169,7 +169,7 @@
         initialize : function (options) {
             _.bindAll(this, "snap", "render");
             this.model.bind('change:enabled', this.render);
-            this.model.set("vertical_range", 90);
+            this.model.set("vertical_range", 118);
 
             var self = this;
             this.draggable = M.DragAndDrop.Draggable(this.el, {
