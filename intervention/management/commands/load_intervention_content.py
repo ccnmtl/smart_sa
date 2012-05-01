@@ -24,9 +24,7 @@ class Command(BaseCommand):
             print "this should never be run on production"
             return
 
-        zc = open(os.path.join("data","intervention.zip")).read()
-        buffer = StringIO(zc)
-        zipfile = ZipFile(buffer,"r")
+        zipfile = ZipFile(os.path.join("data","intervention.zip"),"r")
         
         # Load Intervention objects
         json = loads(zipfile.read("interventions.json"))
