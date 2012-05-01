@@ -30,8 +30,8 @@
 
 {% if request.user.is_superuser %}
   <a href="#managecounselors">Manage Counselors</a>
-    <a href="#downloaddata">Download Participant Data</a>
   {% if not deployment.is_online %}
+    <a href="#downloaddata">Download Participant Data</a>
     <a href="#restoreparticipantcounselordata">Restore Participant Data</a>
     <a href="#updateinterventioncontent">Update Intervention</a>
   {% else %}
@@ -117,6 +117,10 @@
 
 <div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
+
+
+{% if not deployment.is_online %}
+
 <a name="downloaddata"></a>
 
 <h4>Download Participant Data</h4>
@@ -128,8 +132,6 @@ Administrators can <a href="/manage/report/download/">download data here</a> for
 
 <div style="margin-top: 30px;"><a class="action" href="#top">Back to Top</a></div>
 
-
-{% if not deployment.is_online %}
 
 <a name="restoreparticipantcounselordata"></a>
 
