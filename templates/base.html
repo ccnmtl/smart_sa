@@ -52,8 +52,12 @@
 		<a class="loginlogout loginlogout-remote" href="/intervention/">Log In</a>
 		</li>
 		{% endif %}
-		<li><span id="deployment">{{deployment.name}}</span></li>
-		
+		<li>
+		<span id="deployment">
+		{{deployment.name}} 
+		{% if deployment.is_online %}<span style="color: green">(Online Mode)</span>{% else %}<span style="color: red">(Offline Mode)</span>{% endif %}
+		</span>
+		</li>
 		</ul>
 		
 		</div>
