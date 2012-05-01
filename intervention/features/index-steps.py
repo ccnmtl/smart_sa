@@ -18,7 +18,7 @@ def see_title(step, text):
 
 @step(r'the deployment is displayed as "(.*)"')
 def check_deployment(step, name):
-    deployment = world.dom.cssselect("#deployment")[0].text
+    deployment = world.dom.cssselect("#deployment")[0].text.strip()
     assert name == deployment, "Got %s" % deployment
 
 @step(u'Then I see a counselor login form')
