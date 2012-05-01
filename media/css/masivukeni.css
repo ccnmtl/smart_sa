@@ -1235,18 +1235,22 @@ width: 33%;
 }
 
 #adminsubnav
-{border-bottom: 1px solid #ccc; padding-top: 10px;}
+{
+background-color: #999;
+background: #ccc; /* for non-css3 browsers */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#999999', endColorstr='#ffffff'); /* for IE */
+background: -webkit-gradient(linear, left top, left bottom, from(#999), to(#fff)); /* for webkit browsers */
+background: -moz-linear-gradient(top,  #999,  #fff); /* for firefox 3.6+ */ }
 
 #adminsubnav a
 
 {
 	color: #666;
 	text-decoration: none;
-	border: 1px solid #ccc;
-	padding: 3px 3px 3px 3px;
+	margin: 0px;
+	padding: 3px 3px 0px 3px;
 	font-size: 9px;
 	font-weight: bold;
-	margin: 0px 3px 0px 4px;
 	background-color: #eee;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
@@ -1254,11 +1258,12 @@ width: 33%;
 	-moz-border-radius-topright: 5px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+	display: inline-block;
+	height: 18px;
 }
 #adminsubnav a:hover
 
 {
 	color: #f6921e;
 	background-color: #fff;
-	border-bottom: 1px solid #fff;
 }
