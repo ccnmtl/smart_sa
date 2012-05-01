@@ -170,7 +170,7 @@
                 jQuery("#actionplan_form").show();
                 jQuery("div.issue-selector").hide();
                 
-                elt = jQuery("#actionplan_form input[type=submit]")[0];
+                elt = jQuery("#actionplan_form h4")[0];
                 jQuery('html, body').animate({scrollTop: jQuery(elt).offset().top}, 1000);
             } else {
                 jQuery("div.issue-selector").show();
