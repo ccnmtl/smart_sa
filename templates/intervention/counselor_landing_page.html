@@ -19,18 +19,21 @@
 	    <col id="buttons" />
 	    <col id="text" />
 		
-{% if request.user.is_superuser %}		
-{% if deployment.is_online %}
-	    <tr>
-	      <td>
+		<!--
+		{% if request.user.is_superuser %}		
+		{% if deployment.is_online %}
+		<tr>
+		 <td>
 		<a class="action" href="/intervention_admin/1/">Edit Content</a>
-	      </td>
-	      <td>
+		 </td>
+		 <td>
 		Administrators can add and edit content for the intervention here.
-	      </td>
-	    </tr>
-{% endif %}
-{% endif %}
+		 </td>
+		</tr>
+		{% endif %}
+		{% endif %}
+		-->
+		
 	    <tr>
 	      <td>
 		<a class="action" href="/clear_participant/?next={{intervention.get_absolute_url}}">Counsel</a>
