@@ -25,7 +25,7 @@
 <col></col>
 <tr>
 <th style="text-align: right;">Buddy Name:</th>
-<td style="text-align: left;">{{participant.buddy_name|default:"no buddy name given" }}</td>
+<td style="text-align: left;">{{participant.buddy_name|default:"No buddy name has been given." }}</td>
 </tr>
 
 <tr>
@@ -100,9 +100,9 @@ Questions and Concerns:
 <td style="text-align: left;">
 {% for cn in participant.all_counselor_notes %}
 {% if cn.notes %}
-{{cn.notes}} 
-<br/>
-({{cn.counselor.username}})
+<b>Notes (from {{cn.counselor.username}}):</b> {{cn.notes}} 
+<br />
+<div style="border: 1px dotted #ccc; margin: 10px 100px 10px 100px;"></div>
 {% endif %}
 {% endfor %}
 </td>
