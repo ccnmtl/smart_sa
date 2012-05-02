@@ -81,6 +81,11 @@
 
 <div style="margin: 30px 0px 120px 0px;"><a class="action" href="#top">Back to Top</a></div>
 
+{% if not request.user.is_superuser %}
+<h4>Edit Your Info</h4>
+<a class="action"
+   href="/manage/counselor/{{request.user.id}}/edit/">Edit Info for {{request.user.username}}</a>
+{% endif %}
 {% if request.user.is_superuser %}
 <a name="managecounselors"></a>
 <h4>
