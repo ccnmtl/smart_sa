@@ -12,14 +12,15 @@ var game_variables = {{activity.variables|safe}};
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="/intervention/">Home</a> &rarr; Counsel &rarr; Working with <b>{{participant.display_name}}</b> 
+	<a href="/intervention/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">Home</a> &rarr; Counsel &rarr; Working with <b>{{participant.display_name}}</b> 
 </div>
 {% endblock %}
 
 {% block breadcrumb-session %}
 
 <div id="breadcrumb">
-      <a class="complete" id="tab-home" href="/intervention/{{activity.clientsession.intervention.id}}/">Sessions</a>
+      <a class="complete" id="tab-home"
+      href="/intervention/{{activity.clientsession.intervention.id}}/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">Sessions</a>
 	<div id="breadcrumb-text">
 		You are currently in: <span class="breadcrumb-text-current">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; Activity {{activity.index}}: {{ activity.long_title }}</span>
 	</div>
@@ -37,13 +38,13 @@ var game_variables = {{activity.variables|safe}};
 		<div id="side">
 			<h2 id="sessioninfo" class="{% get_participant_status participant activity.clientsession %}">
 				<!--<a href="/session/{{activity.clientsession.id}}/">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}}</a>-->
-				<a href="/session/{{activity.clientsession.id}}/">{{activity.clientsession.long_title}}</a>
+				<a href="/session/{{activity.clientsession.id}}/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">{{activity.clientsession.long_title}}</a>
 			</h2>
 			<div id="nav-side">
 				<ul>
 				{% for a in activity.clientsession.activity_set.all %}
 				<li>
-				<a class="
+				<a onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}" class="
 				{% get_participant_status participant a %} 
 				{% if forloop.first %}first{% endif %}
 				{% if forloop.last %}last{% endif %} 	
@@ -60,6 +61,7 @@ var game_variables = {{activity.variables|safe}};
 
 
 	    <form name="completeactivity" action="complete/" method="post">
+	      <input type="hidden" name="next" value="" />
 	
 	    <div id="session{{activity.clientsession.id}}" class="parentsession"></div>
 
@@ -80,10 +82,11 @@ var game_variables = {{activity.variables|safe}};
 				  {% with activity.prev as prev_activity %}
 					{% if prev_activity %}
 			                   {% if prev_activity.game %}
-				              <a href="/task/{{prev_activity.last_gamepage_obj.id }}/{{prev_activity.last_gamepage}}/">&larr; Back</a> 
+				              <a href="/task/{{prev_activity.last_gamepage_obj.id }}/{{prev_activity.last_gamepage}}/"
+					    onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">&larr; Back</a> 
 					   {% else %}
 					      <!--debug message-No game on previous activity-->
-			                      <a href="/activity/{{prev_activity.id }}/">&larr; Back</a> 
+			                      <a href="/activity/{{prev_activity.id }}/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">&larr; Back</a> 
 					   {% endif %}
 					{% else %}
 					<!--START - There's no activity before this.-->
@@ -209,10 +212,12 @@ var game_variables = {{activity.variables|safe}};
                         {% with activity.prev as prev_activity %}
 					{% if prev_activity %}
 			                   {% if prev_activity.game %}
-				              <a href="/task/{{prev_activity.last_gamepage_obj.id }}/{{prev_activity.last_gamepage}}/">&larr; Back</a> 
+				              <a href="/task/{{prev_activity.last_gamepage_obj.id }}/{{prev_activity.last_gamepage}}/"
+					    onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}"
+					   >&larr; Back</a> 
 					   {% else %}
 					      <!--debug message-No game on previous activity-->
-			                      <a href="/activity/{{prev_activity.id }}/">&larr; Back</a> 
+			                      <a href="/activity/{{prev_activity.id }}/"  onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">&larr; Back</a> 
 					   {% endif %}
 					{% else %}
 					<!--START - There's no activity before this.-->

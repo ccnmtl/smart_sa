@@ -477,6 +477,9 @@ def complete_activity(request, activity_id):
                 participant.initial_referral_notes = request.POST.get('referral_notes', '')
             participant.save()
 
+        next_url = request.POST.get('next',None)
+        if next_url:
+            return HttpResponseRedirect(next_url)
         next_activity = activity.next()
         if activity.game:
             return HttpResponseRedirect("/task/%d/%s/" % (activity.gamepage_set.all()[0].id, activity.pages()[0]))

@@ -25,7 +25,7 @@
 	
 		<h1>
 		{% if user.is_authenticated %}
-		<a href="/intervention/" id="masivukeni-home">Masivukeni</a> 
+		<a href="/intervention/" id="masivukeni-home"  onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">Masivukeni</a> 
 		{% else %}
 		<a href="/" id="masivukeni-home">Masivukeni</a> 
 		{% endif %}
@@ -41,10 +41,10 @@
 		
 		<li>
 		<span id="username" {% if user.is_authenticated %} class="logged_in" {% endif %}>
-		{% if user.is_authenticated %}<a href="/intervention/">{{user}}'s Home Page</a> &rarr;{% endif %}
+		{% if user.is_authenticated %}<a href="/intervention/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">{{user}}'s Home Page</a> &rarr;{% endif %}
 		</span> 
 		{% if user.is_authenticated %}
-		<a class="loginlogout loginlogout-remote" href="/accounts/logout/">Log Out</a>
+		<a class="loginlogout loginlogout-remote" href="/accounts/logout/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">Log Out</a>
 		<!--new cu admin login button on splash page-->
 		<li>&bull;</li>
 		{% else %}
