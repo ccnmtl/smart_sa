@@ -380,7 +380,7 @@ text-decoration: underline;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	border: 1px solid #ccc;
+	border: 1px solid #aaa;
 }
 
 #nav-side ul
@@ -593,14 +593,14 @@ a.action:hover, a.action.disabled { background-color: #79b985; }
 {
 	margin-top: 0px;
 	padding: 10px 0px 0px 0px;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #aaa;
 }
 
 #bottom-nav-lateral
 {
 	margin-top: 40px;
 	clear: both;
-	border-top: 1px solid #ccc;
+	border-top: 1px solid #aaa;
 	padding-top: 10px;
 }
 
