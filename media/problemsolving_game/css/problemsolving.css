@@ -2,7 +2,7 @@
 
 #gamebox
 {
-	border: 1px solid #ccc !important;
+	border: 1px solid #aaaaaa !important;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
@@ -31,7 +31,7 @@
     display: inline-block;
     width: 14px;
     background-color: white;
-    border: 1px solid #ccc;
+    border: 1px solid #aaaaaa;
     color: gray;
     -moz-user-select: none;
    -khtml-user-select: none;
@@ -41,18 +41,18 @@
 
 .issue-number.marked {
     color: black;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#cccccc");
-    background: -moz-linear-gradient(top, #fff, #ccc);
-    background: -webkit-linear-gradient(top, #fff, #ccc);
-    background: -o-linear-gradient(top, #fff, #ccc);
-    background: -ms-linear-gradient(top, #fff, #ccc);
-    background: linear-gradient(top, #fff, #ccc);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#aaaaaa");
+    background: -moz-linear-gradient(top, #fff, #aaaaaa);
+    background: -webkit-linear-gradient(top, #fff, #aaaaaa);
+    background: -o-linear-gradient(top, #fff, #aaaaaa);
+    background: -ms-linear-gradient(top, #fff, #aaaaaa);
+    background: linear-gradient(top, #fff, #aaaaaa);
 
 }
 
 .issue-number.complete {
     color: black;
-    background-color: #fad5b0;
+    background-color: #f2b579;
     background-image: none;
 }
 
@@ -101,8 +101,8 @@ div#issue_details {
     padding: 7px;
     margin: 1px 5px 5px 5px;
     text-align: center;
-    background-color: #fcead7;
-    border: 1px solid #ccc;
+    background-color: #f2b579;
+    border: 1px solid #aaaaaa;
     color: black;  
     /* Do not set height */
 }
@@ -113,7 +113,7 @@ div#issue_details div.issue-number {
 }
 
 div#issue_details div.issue-number:hover {
-    border: 1px solid #ccc;
+    border: 1px solid #aaaaaa;
     padding: 7px;
 }
 
