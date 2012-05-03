@@ -26,9 +26,13 @@ Feature: Life goals
         When I enter "ghi" for "Step 4"
         When I enter "jkl" for "Goal"
         
+        Then "Step 2" is "abc"
+        Then "Step 3" is "def"
+        Then "Step 4" is "ghi"
+        Then "Goal" is "jkl"
+        
         # Verify state saved
         When I click the "Next →" link
-        Then I wait 1 second
         When I click the "← Back" link
         Then I wait 1 second
         

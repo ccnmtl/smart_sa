@@ -22,7 +22,8 @@ def get_input(name):
 def when_i_enter_value_for_input(step, value, input):
     elt = get_input(input)
     elt.clear()
-    elt.send_keys(value)
+    for c in value:
+        elt.send_keys(c)
 
 @step(u'Then "([^"]*)" is "([^"]*)"')
 def then_input_is_value(step, input, value):
