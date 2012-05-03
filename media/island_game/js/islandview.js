@@ -221,7 +221,7 @@
             if (this.model.get("enabled")) {
                 jQuery("." + this.model.get("name")).css('opacity', 1);
             } else {
-                jQuery("." + this.model.get("name")).css('opacity', 0.5);
+                jQuery("." + this.model.get("name")).css('opacity', 0.65);
             }
 
             if (this.model.get("visible")) {
