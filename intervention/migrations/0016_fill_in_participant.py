@@ -17,7 +17,7 @@ class Migration(DataMigration):
                 # anders screwed up the data migration the first time
                 # the CounselorNote class won't have a participantsession attribute
                 # by the time this runs
-                cn.participant = 0
+                cn.participant__id = 0
                 cn.save()
 
     def backwards(self, orm):
