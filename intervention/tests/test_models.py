@@ -2,6 +2,7 @@ from django.test import TestCase
 from smart_sa.intervention.models import Activity
 from smart_sa.intervention.models import ClientSession
 from smart_sa.intervention.models import Deployment
+from smart_sa.intervention.models import Instruction
 from smart_sa.intervention.models import Intervention
 
 class InterventionModelTest(TestCase):
@@ -115,11 +116,57 @@ class ActivityModelTest(TestCase):
         self.assertEqual(a2.collect_buddy_name,False)
         self.assertEqual(a2.collect_referral_info,False)
         self.assertEqual(a2.collect_reasons_for_returning,False)
-        
 
 
 class InstructionModelTest(TestCase):
-    pass
+    def setUp(self):
+        self.i = Intervention.objects.create(name="test intervention",
+                                             intervention_id="1",
+                                             general_instructions="this is for testing")
+        self.cs = ClientSession.objects.create(intervention = self.i,
+                                               short_title = "Test Session 1",
+                                               long_title = "Test Session 1 Long Title",
+                                               introductory_copy = "Introductory Copy Here",
+                                               defaulter = False)
+        self.activity = Activity.objects.create(clientsession = self.cs,
+                                                short_title = "Activity 1",
+                                                long_title = "Activity 1 Long Title",
+                                                objective_copy = "Objective Copy for Activity 1 Here",
+                                                collect_notes = False,
+                                                collect_buddy_name = False,
+                                                collect_referral_info = False,
+                                                collect_reasons_for_returning = False)
+
+        self.instruction = Instruction.objects.create(activity = self.activity,
+                                                      title = "Instruction 1",
+                                                      style = "do",
+                                                      instruction_text = "Instruction Text for Instruction 1",
+                                                      help_copy = "Help Copy for Instruction 1",
+                                                      notes = "Notes for Instruction 1")
+        
+    def test_basics(self):
+        self.assertEqual(self.instruction.index(),1)
+
+    def test_isolated_serialization(self):
+        d = self.instruction.as_dict()
+        self.assertEqual(d['title'],"Instruction 1")
+        self.assertEqual(d['style'],"do")
+        self.assertEqual(d['instruction_text'],"Instruction Text for Instruction 1")
+        self.assertEqual(d['help_copy'],"Help Copy for Instruction 1")
+        self.assertEqual(d['notes'],"Notes for Instruction 1")
+        # try round-tripping
+        i2 = Instruction.objects.create(activity = self.activity,
+                                        title = "Instruction 2",
+                                        style = "say",
+                                        instruction_text = "Instruction Text for Instruction 2",
+                                        help_copy = "Help Copy for Instruction 2",
+                                        notes = "Notes for Instruction 2")
+        i2.from_dict(d)
+        self.assertEqual(i2.title,"Instruction 1")
+        self.assertEqual(i2.style,"do")
+        self.assertEqual(i2.instruction_text,"Instruction Text for Instruction 1")
+        self.assertEqual(i2.help_copy,"Help Copy for Instruction 1")
+        self.assertEqual(i2.notes,"Notes for Instruction 1")
 
 class GamePageModelTest(TestCase):
     pass
