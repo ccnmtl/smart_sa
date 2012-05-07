@@ -88,7 +88,33 @@ class ActivityModelTest(TestCase):
         self.assertEqual(unicode(self.activity),"Activity 1")
         self.assertEqual(self.activity.get_absolute_url().startswith("/activity/"),True)
         self.assertEqual(self.activity.index(),1)
-        
+
+    def test_isolated_serialization(self):
+        d = self.activity.as_dict()
+        self.assertEqual(d['short_title'],"Activity 1")
+        self.assertEqual(d['long_title'],"Activity 1 Long Title")
+        self.assertEqual(d['objective_copy'],"Objective Copy for Activity 1 Here")
+        self.assertEqual(d['collect_notes'],False)
+        self.assertEqual(d['collect_buddy_name'],False)
+        self.assertEqual(d['collect_referral_info'],False)
+        self.assertEqual(d['collect_reasons_for_returning'],False)
+        # try round-tripping
+        a2 = Activity.objects.create(clientsession = self.cs,
+                                     short_title = "Activity 2",
+                                     long_title = "Activity 2 Long Title",
+                                     objective_copy = "Objective Copy for Activity 2 Here",
+                                     collect_notes = True,
+                                     collect_buddy_name = True,
+                                     collect_referral_info = True,
+                                     collect_reasons_for_returning = True)
+        a2.from_dict(d)
+        self.assertEqual(unicode(a2),"Activity 1")
+        self.assertEqual(a2.long_title,"Activity 1 Long Title")
+        self.assertEqual(a2.objective_copy,"Objective Copy for Activity 1 Here")
+        self.assertEqual(a2.collect_notes,False)
+        self.assertEqual(a2.collect_buddy_name,False)
+        self.assertEqual(a2.collect_referral_info,False)
+        self.assertEqual(a2.collect_reasons_for_returning,False)
         
 
 
