@@ -1,0 +1,3 @@
+
+* "Click to Complete This" instead of "Click to Complete Session"
+
