@@ -1,4 +1,5 @@
 from django.test import TestCase
+from smart_sa.intervention.models import Activity
 from smart_sa.intervention.models import ClientSession
 from smart_sa.intervention.models import Deployment
 from smart_sa.intervention.models import Intervention
@@ -61,9 +62,35 @@ class ClientSessionModelTest(TestCase):
         self.assertEqual(cs2.long_title,"Test Session 1 Long Title")
         self.assertEqual(cs2.introductory_copy,"Introductory Copy Here")
         self.assertEqual(cs2.defaulter,False)
+        # we didn't delete self.cs, so this one should appear as second
+        self.assertEqual(cs2.index(),2)
 
 class ActivityModelTest(TestCase):
-    pass
+    def setUp(self):
+        self.i = Intervention.objects.create(name="test intervention",
+                                             intervention_id="1",
+                                             general_instructions="this is for testing")
+        self.cs = ClientSession.objects.create(intervention = self.i,
+                                               short_title = "Test Session 1",
+                                               long_title = "Test Session 1 Long Title",
+                                               introductory_copy = "Introductory Copy Here",
+                                               defaulter = False)
+        self.activity = Activity.objects.create(clientsession = self.cs,
+                                                short_title = "Activity 1",
+                                                long_title = "Activity 1 Long Title",
+                                                objective_copy = "Objective Copy for Activity 1 Here",
+                                                collect_notes = False,
+                                                collect_buddy_name = False,
+                                                collect_referral_info = False,
+                                                collect_reasons_for_returning = False)
+
+    def test_basics(self):
+        self.assertEqual(unicode(self.activity),"Activity 1")
+        self.assertEqual(self.activity.get_absolute_url().startswith("/activity/"),True)
+        self.assertEqual(self.activity.index(),1)
+        
+        
+
 
 class InstructionModelTest(TestCase):
     pass
