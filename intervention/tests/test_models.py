@@ -168,6 +168,18 @@ class InstructionModelTest(TestCase):
         self.assertEqual(i2.help_copy,"Help Copy for Instruction 1")
         self.assertEqual(i2.notes,"Notes for Instruction 1")
 
+class FullSerializationTest(TestCase):
+    fixtures = ["full_testdb.json"]
+    def test_serialization(self):
+        i = Intervention.objects.all()[0]
+        d = i.as_dict()
+        i2 = Intervention.objects.create(name="i2")
+        i2.from_dict(d)
+
+        self.assertEquals(i.clientsession_set.count(),i2.clientsession_set.count())
+        for idx in range(i.clientsession_set.count()):
+            self.assertEquals(unicode(i.get_session_by_index(idx+1)),unicode(i2.get_session_by_index(idx+1)))
+
 class GamePageModelTest(TestCase):
     pass
 
