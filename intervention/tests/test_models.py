@@ -5,6 +5,7 @@ from smart_sa.intervention.models import ClientSession
 from smart_sa.intervention.models import Deployment
 from smart_sa.intervention.models import Instruction
 from smart_sa.intervention.models import Intervention
+from smart_sa.intervention.models import Participant
 
 class InterventionModelTest(TestCase):
     def setUp(self):
@@ -171,7 +172,7 @@ class InstructionModelTest(TestCase):
 
 class FullSerializationTest(TestCase):
     fixtures = ["full_testdb.json"]
-    def test_serialization(self):
+    def test_intervention_serialization(self):
         i = Intervention.objects.all()[0]
         d = i.as_dict()
         i2 = Intervention.objects.create(name="i2")
@@ -215,6 +216,16 @@ class FullSerializationTest(TestCase):
                     ii2 = a2.instruction_set.all()[iidx]
                     self.assertEquals(ii1.index(),ii2.index())
                     
+    def test_participant_serialization(self):
+        for p in Participant.objects.all():
+            d = p.to_json()
+            p2,logs = Participant.from_json(d)
+            for l in logs:
+                self.assertEquals('info' in l, True)
+            self.assertEquals(logs[0],{'info': 'participant created'})
+            self.assertEquals(p.name,p2.name)
+            self.assertEquals(p.display_name(),p2.display_name())
+            
 
         
 
