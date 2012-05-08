@@ -191,6 +191,29 @@ class FullSerializationTest(TestCase):
                 self.assertEquals(unicode(a1.next()),unicode(a2.next()))
                 self.assertEquals(unicode(a1.prev()),unicode(a2.prev()))
                 self.assertEquals(unicode(a1.index()),unicode(a2.index()))
+                self.assertEquals(unicode(a1.last_gamepage()),unicode(a2.last_gamepage()))
+#                self.assertEquals(unicode(a1.last_gamepage_obj()),unicode(a2.last_gamepage_obj()))
+                self.assertEquals(unicode(a1.variables()),unicode(a2.variables()))
+
+                pages1 = a1.pages()
+                pages2 = a2.pages()
+                
+                # TODO: understand why .gamepage_set.count() can be higher than len(.pages())
+                for pidx in range(min(a1.gamepage_set.count(),len(a1.pages()))):
+                    p1 = a1.gamepage_set.all()[pidx]
+                    p2 = a2.gamepage_set.all()[pidx]
+                    self.assertEquals(p1.index(),p2.index())
+                    print a1.gamepage_set.count()
+                    self.assertEquals(p1.page_name(),p2.page_name())
+                    self.assertEquals(p1.prev_title(),p2.prev_title())
+                    self.assertEquals(p1.next_title(),p2.next_title())
+                    self.assertEquals(str(p1.variables()),str(p2.variables()))
+
+                for iidx in range(a1.instruction_set.count()):
+                    ii1 = a1.instruction_set.all()[iidx]
+                    ii2 = a2.instruction_set.all()[iidx]
+                    self.assertEquals(ii1.index(),ii2.index())
+                    
 
         
 
