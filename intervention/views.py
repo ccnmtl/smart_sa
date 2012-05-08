@@ -25,8 +25,6 @@ from problemsolving_game.models import Issue
 from intervention.models import Intervention
 from pprint import pprint
 
-from aes_v001 import AESModeOfOperation, toNumbers, fromNumbers
-
 from smart_sa.intervention.models import Participant, ClientSession, Activity
 from smart_sa.intervention.models import Deployment, ParticipantSession, ParticipantActivity
 from smart_sa.intervention.models import CounselorNote, GamePage, Backup, Instruction
@@ -36,12 +34,6 @@ API_VERSION = "002-2012-04-30"
 
 # previous API Version Changes
 # 001-2012-04-28 -> 002-2012-04-30 -- counselornotes are not per-session anymore
-
-ENCRYPTION_ARGS = [AESModeOfOperation.modeOfOperation["OFB"], #mode
-                   toNumbers(settings.INTERVENTION_BACKUP_HEXKEY),
-                   AESModeOfOperation.aes.keySize['SIZE_256'],
-                   toNumbers(settings.INTERVENTION_BACKUP_IV)
-                   ]
 
 def inject_deployment(request):
     """injects the current Deployment into the context"""
