@@ -482,6 +482,7 @@ class Backup (models.Model):
 
     def as_dict(self):
         return dict(json_data=self.json_data,
+                    deployment=self.deployment,
                     created=str(self.created))
 
 class Participant(models.Model):

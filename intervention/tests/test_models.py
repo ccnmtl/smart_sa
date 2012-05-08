@@ -1,5 +1,6 @@
 from django.test import TestCase
 from smart_sa.intervention.models import Activity
+from smart_sa.intervention.models import Backup
 from smart_sa.intervention.models import ClientSession
 from smart_sa.intervention.models import Deployment
 from smart_sa.intervention.models import Instruction
@@ -245,4 +246,12 @@ class ParticipantGameVarModelTest(TestCase):
     pass
 
 class BackupModelTest(TestCase):
-    pass
+    def setUp(self):
+        self.b = Backup.objects.create(deployment="Clinic",
+                                       json_data="""{'foo':'bar'}""")
+
+    def test_as_dict(self):
+        d = self.b.as_dict()
+        self.assertEquals(d['deployment'],self.b.deployment)
+        self.assertEquals(d['json_data'],self.b.json_data)
+
