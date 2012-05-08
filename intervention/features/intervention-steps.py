@@ -60,3 +60,23 @@ def the_field_has_the_value(step, field_name, field_value):
     f = world.firefox.find_element_by_xpath("//input[@name=\"%s\"]" % field_name)
     assert f.get_attribute('value') == field_value
 
+
+@step(u'participant named "([^"]*)" exists')
+def participant_exists(step, name):
+    if Participant.objects.filter(name=name).count() == 0:
+        p = Participant.objects.create(name=name,id_number=name,patient_id=name)
+
+@step(u'I go to the Add Participant Page')
+def i_go_to_the_add_participant_page(step):
+    if world.using_selenium:
+        world.firefox.get(django_url("/manage/add_participant/"))
+    response = world.client.get(django_url("/manage/add_participant/"),follow=True)
+    world.response = response
+    world.dom = html.fromstring(response.content)
+
+@step(u'there is an error message')
+def there_is_an_error_message(step):
+    if not world.using_selenium:
+        assert False, 'This step must be implemented for django test client'
+    m = world.firefox.find_element_by_xpath("//p[@class=\"error\"]")
+    

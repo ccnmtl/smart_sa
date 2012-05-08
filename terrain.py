@@ -188,6 +188,7 @@ def i_click_the_link(step, text):
 
 @step(u'I fill in "([^"]*)" in the "([^"]*)" form field')
 def i_fill_in_the_form_field(step, value, field_name):
+    # note: relies on input having id set, not just name
     if not world.using_selenium:
         assert False, "this step needs to be implemented for the django test client"
 

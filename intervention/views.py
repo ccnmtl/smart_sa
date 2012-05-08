@@ -138,6 +138,9 @@ def manage_participants(request):
 @login_required
 def add_participant(request):
     if request.method == 'POST':
+        if Participant.objects.filter(name=request.POST.get('name','unnamed')).count() > 0:
+            return dict(error="A participant with this name already exists. Please chose a unique name",
+                        form_data=request.POST)
         p = Participant.objects.create(name=request.POST.get('name','unnamed'),
                                        id_number=request.POST.get('id_number',''),
                                        status=request.POST.get('status','') == 'on',
