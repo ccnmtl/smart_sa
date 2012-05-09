@@ -131,10 +131,18 @@ class InterventionAdminViewTest(TestCase):
         resp = self.client.get("/manage/participant/%d/edit/" % t.id)
         self.assertEqual(resp.status_code, 200)
 
-    # def test_edit_counselor(self):
-    #     pass
+    def test_view_participant(self):
+        t = Participant.objects.get(name="test")
+        resp = self.client.get("/manage/participant/%d/view/" % t.id)
+        self.assertEqual(resp.status_code, 200)
+        # check that it asks for password
+        self.assertEqual("Please enter password" in resp.content, True)
+        # make a POST request with password to actually see the page
+        resp = self.client.post("/manage/participant/%d/view/" % t.id, {'password' : "test"})
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual("Please enter password" in resp.content, False)
 
-    # def test_view_participant(self):
+    # def test_edit_counselor(self):
     #     pass
 
     # def test_add_counselor(self):
