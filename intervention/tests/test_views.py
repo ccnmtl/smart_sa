@@ -65,15 +65,30 @@ class InterventionViewTest(TestCase):
         resp = self.client.post('/set_participant/', {'name' : 'notapatient', 'id_number': 'foo'})
         self.assertEqual(resp.content,"no participant with that name")
 
-    # def test_login_inactive_participant(self):
-    #     pass
+    def test_login_inactive_participant(self):
+        p = Participant.objects.get(name='test')
+        p.status = False
+        p.save()
+        resp = self.client.post('/set_participant/', {'name': 'test', 'id_number': 'test'})
+        self.assertEqual(resp.content,"this participant is marked as inactive")
 
     def test_login_participant_with_wrong_password(self):
         resp = self.client.post('/set_participant/', {'name' : 'test', 'id_number': 'wrong password'})
         self.assertEqual(resp.content,"id number does not match")
 
-    # def test_set_deployment(self):
-    #     pass
+
+class InterventionAdminViewTest(TestCase):
+
+    fixtures = ["full_testdb.json"]
+
+    def setUp(self):
+        self.client = client.Client()
+        self.client.login(username='testadmin',password='test')
+
+    def test_set_deployment(self):
+        resp = self.client.post("/set_deployment/",{"name" : "new clinic name"})
+        resp = self.client.get("/")
+        self.assertEqual("new clinic name" in resp.content, True)
 
     # def test_practice_mode(self):
     #     pass
