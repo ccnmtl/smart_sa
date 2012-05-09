@@ -61,8 +61,9 @@ class InterventionViewTest(TestCase):
         self.assertEqual(status,302)
         self.assertEqual("/set_participant/" in url, True)
 
-    # def test_login_nonexistant_participant(self):
-    #     pass
+    def test_login_nonexistant_participant(self):
+        resp = self.client.post('/set_participant/', {'name' : 'notapatient', 'id_number': 'foo'})
+        self.assertEqual(resp.content,"no participant with that name")
 
     # def test_login_inactive_participant(self):
     #     pass
