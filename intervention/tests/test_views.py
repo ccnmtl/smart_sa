@@ -171,8 +171,15 @@ class InterventionAdminViewTest(TestCase):
         resp = self.client.get("/intervention_admin/%d/" % i.id)
         self.assertEqual(resp.status_code, 200)
 
-    # def test_activity_admin(self):
-    #     pass
+    def test_session_admin(self):
+        s = ClientSession.objects.all()[0]
+        resp = self.client.get("/intervention_admin/session/%d/" % s.id)
+        self.assertEqual(resp.status_code, 200)
+
+    def test_activity_admin(self):
+        a = Activity.objects.all()[0]
+        resp = self.client.get("/intervention_admin/activity/%d/" % a.id)
+        self.assertEqual(resp.status_code, 200)
 
     # def test_gamepage_admin(self):
     #     pass
