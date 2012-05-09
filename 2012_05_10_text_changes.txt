@@ -1,4 +1,4 @@
-Kessler
+Kessler (S1A10)
 
 Sometimes how people feel can get in the way of how they take HIV
 medicines. So we ask everyone some questions about how they have
@@ -10,7 +10,7 @@ have been feeling in the past month.
 (first page of questions) During the past month, that is, from [date
 one month ago] to yesterday, about how often did you feel:
 
-AUDIT 
+AUDIT (S1A11)
 
 Alcohol use may also interfere with taking your HIV medicines, as well
 as affect many areas of your health. That is why it is important for
@@ -18,13 +18,13 @@ us to ask everyone about drinking.  Now I’m going to ask you some
 questions about drinking. Please try to be as honest and as accurate
 as you can be.
 
-SAMISS
+SAMISS (S1A12)
 
 Because drug use can also interfere with taking your HIV medicines, we
 ask everyone about drug use. Now I’m going to ask you some questions
 about drug use. Please try to be as honest and accurate as possible.
 
-s3 a4 starting arvs:
+Starting ARVs (S3A4) 
 
 "don't just stop taking them" as last phrase on this page
 
@@ -33,3 +33,16 @@ add a line about medication diary before PRINT in end session of s3:
 Medication  Diary Here  is a  diary that  will help  you  register you
 pills,remind  you  to  take  them   and  help  you  keep  your  clinic
 appointments.
+
+
+* arv concerns typo should be lipodystrophy
+* video swap
+* potential removal of some solutions
+* add paragraph about how to present the screeners to preceding pages (6 pages)
+
+Files to copy over:
+
+			* assessmentquiz_task/templates/assessmentquiz_task/kten.html
+			* intervention/views.py
+			* templates/intervention/add_participant.html
+			* templates/intervention/manage_participants.html
