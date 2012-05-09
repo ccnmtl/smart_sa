@@ -66,17 +66,19 @@ def i_am_not_logged_in(step):
 def i_access_the_management_console(step):
     if world.using_selenium:
         world.firefox.get(django_url("/manage/"))
-    response = world.client.get(django_url("/manage/"),follow=True)
-    world.response = response
-    world.dom = html.fromstring(response.content)
+    else:
+        response = world.client.get(django_url("/manage/"),follow=True)
+        world.response = response
+        world.dom = html.fromstring(response.content)
 
 @step(u'I access the counselor landing page')
 def i_access_the_counselor_landing_page(step):
     if world.using_selenium:
         world.firefox.get(django_url("/intervention/"))
-    response = world.client.get(django_url("/intervention/"),follow=True)
-    world.response = response
-    world.dom = html.fromstring(response.content)
+    else:
+        response = world.client.get(django_url("/intervention/"),follow=True)
+        world.response = response
+        world.dom = html.fromstring(response.content)
 
 
 @step(u'I am taken to a login screen')
