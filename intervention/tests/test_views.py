@@ -68,8 +68,9 @@ class InterventionViewTest(TestCase):
     # def test_login_inactive_participant(self):
     #     pass
 
-    # def test_login_participant_with_wrong_password(self):
-    #     pass
+    def test_login_participant_with_wrong_password(self):
+        resp = self.client.post('/set_participant/', {'name' : 'test', 'id_number': 'wrong password'})
+        self.assertEqual(resp.content,"id number does not match")
 
     # def test_set_deployment(self):
     #     pass
