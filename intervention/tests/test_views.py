@@ -80,6 +80,11 @@ class InterventionViewTest(TestCase):
          for i in Intervention.objects.all():
              resp = self.client.get("/practice/%d/" % i.id, follow=True)
              self.assertEqual("You are in Practice Mode. Changes will not be saved." in resp.content, True)
+             for s in i.clientsession_set.all():
+                 resp = self.client.get(s.get_absolute_url())
+                 self.assertEqual("You are in Practice Mode. Changes will not be saved." in resp.content, True)
+                 
+                 
 
     # def test_complete_session(self):
     #     pass
