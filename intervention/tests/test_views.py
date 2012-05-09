@@ -116,9 +116,9 @@ class InterventionAdminViewTest(TestCase):
         resp = self.client.get("/")
         self.assertEqual("new clinic name" in resp.content, True)
 
-
-    # def test_manage_participants(self):
-    #     pass
+    def test_manage_participants(self):
+        resp = self.client.get("/manage/")
+        self.assertEqual(resp.status_code, 200)
 
     # def test_add_participant(self):
     #     pass
