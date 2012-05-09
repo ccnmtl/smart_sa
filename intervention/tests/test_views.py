@@ -76,8 +76,22 @@ class InterventionViewTest(TestCase):
         resp = self.client.post('/set_participant/', {'name' : 'test', 'id_number': 'wrong password'})
         self.assertEqual(resp.content,"id number does not match")
 
+    def test_practice_mode(self):
+         for i in Intervention.objects.all():
+             resp = self.client.get("/practice/%d/" % i.id, follow=True)
+             self.assertEqual("You are in Practice Mode. Changes will not be saved." in resp.content, True)
+
+    # def test_complete_session(self):
+    #     pass
+
+    # def test_complete_activity(self):
+    #     pass
+
+    # def test_save_game_state(self):
+    #     pass
 
 class InterventionAdminViewTest(TestCase):
+    """ test functionality that needs an admin logged in"""
 
     fixtures = ["full_testdb.json"]
 
@@ -90,8 +104,6 @@ class InterventionAdminViewTest(TestCase):
         resp = self.client.get("/")
         self.assertEqual("new clinic name" in resp.content, True)
 
-    # def test_practice_mode(self):
-    #     pass
 
     # def test_manage_participants(self):
     #     pass
@@ -127,15 +139,6 @@ class InterventionAdminViewTest(TestCase):
     #     pass
 
     # def test_update_intervention_content(self):
-    #     pass
-
-    # def test_complete_session(self):
-    #     pass
-
-    # def test_complete_activity(self):
-    #     pass
-
-    # def test_save_game_state(self):
     #     pass
 
     # def test_intervention_admin(self):
