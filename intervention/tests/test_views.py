@@ -166,8 +166,10 @@ class InterventionAdminViewTest(TestCase):
     # def test_update_intervention_content(self):
     #     pass
 
-    # def test_intervention_admin(self):
-    #     pass
+    def test_intervention_admin(self):
+        i = Intervention.objects.all()[0]
+        resp = self.client.get("/intervention_admin/%d/" % i.id)
+        self.assertEqual(resp.status_code, 200)
 
     # def test_activity_admin(self):
     #     pass
