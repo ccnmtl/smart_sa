@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.test import client
-from smart_sa.intervention.models import Intervention, ClientSession, Activity, Participant
+from smart_sa.intervention.models import Intervention, ClientSession, Activity, Participant, Backup
 
 
 class IndexViewTest(TestCase):
@@ -150,10 +150,12 @@ class InterventionAdminViewTest(TestCase):
 
     def test_participant_data_download(self):
         resp = self.client.get("/manage/report/download/")
-        self.assertEqual(resp.status_code,200)
+        self.assertEqual(resp.status_code, 200)
 
-    # def test_download_backup(self):
-    #     pass
+    def test_download_backup(self):
+        b = Backup.objects.all()[0]
+        resp = self.client.get("/manage/download_backup/%d/" % b.id)
+        self.assertEqual(resp.status_code, 200)
 
     # def test_restore_participants(self):
     #     pass
