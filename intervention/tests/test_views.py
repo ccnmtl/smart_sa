@@ -87,11 +87,17 @@ class InterventionViewTest(TestCase):
                      resp = self.client.get(a.get_absolute_url())
                      self.assertEqual("You are in Practice Mode. Changes will not be saved." in resp.content, True)
 
-    # def test_complete_session(self):
-    #     pass
+    def test_complete_session(self):
+        resp = self.client.post('/set_participant/', {'name': 'test', 'id_number': 'test'})
+        for s in ClientSession.objects.all():
+            resp = self.client.post(s.get_absolute_url() + "complete/")
+            self.assertEqual(resp.status_code, 302)
 
-    # def test_complete_activity(self):
-    #     pass
+    def test_complete_activity(self):
+        resp = self.client.post('/set_participant/', {'name': 'test', 'id_number': 'test'})
+        for a in Activity.objects.all():
+            resp = self.client.post(a.get_absolute_url() + "complete/")
+            self.assertEqual(resp.status_code, 302)
 
     # def test_save_game_state(self):
     #     pass
