@@ -138,8 +138,9 @@ class InterventionAdminViewTest(TestCase):
     # def test_add_counselor(self):
     #     pass
 
-    # def test_participant_data_download(self):
-    #     pass
+    def test_participant_data_download(self):
+        resp = self.client.get("/manage/report/download/")
+        self.assertEqual(resp.status_code,200)
 
     # def test_download_backup(self):
     #     pass
