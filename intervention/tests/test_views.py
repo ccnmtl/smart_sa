@@ -126,8 +126,10 @@ class InterventionAdminViewTest(TestCase):
     # def test_delete_participant(self):
     #     pass
 
-    # def test_edit_participant(self):
-    #     pass
+    def test_edit_participant(self):
+        t = Participant.objects.get(name="test")
+        resp = self.client.get("/manage/participant/%d/edit/" % t.id)
+        self.assertEqual(resp.status_code, 200)
 
     # def test_edit_counselor(self):
     #     pass
