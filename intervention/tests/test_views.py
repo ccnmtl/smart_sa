@@ -178,3 +178,7 @@ class InterventionAdminViewTest(TestCase):
     def test_zip_download(self):
         resp = self.client.get("/intervention_admin/zip_download/")
         self.assertEqual(resp.status_code, 200)
+
+    def test_list_uploads(self):
+        resp = self.client.get("/intervention_admin/list_uploads/")
+        self.assertEqual(resp.status_code, 200)
