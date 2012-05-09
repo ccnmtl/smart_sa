@@ -175,5 +175,6 @@ class InterventionAdminViewTest(TestCase):
     # def test_gamepage_admin(self):
     #     pass
 
-    # def test_zip_download(self):
-    #     pass
+    def test_zip_download(self):
+        resp = self.client.get("/intervention_admin/zip_download/")
+        self.assertEqual(resp.status_code, 200)
