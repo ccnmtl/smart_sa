@@ -66,11 +66,13 @@
 		<th>Actions</th>
 	</tr>
 	{% for participant in participants %} 
+	{% if not participant.is_practice %}
 	<tr>
 		<td>{{participant.name}}</td>
 		<td>{% if participant.status %}Active{% else %}Inactive{% endif %}</td>
 		<td> <a class="action" href="/manage/participant/{{participant.id}}/view/">View Info for {{participant.name}}</a> <a class="action" href="/manage/participant/{{participant.id}}/edit/">Edit Info for {{participant.name}}</a> </td>
 	</tr>
+	{% endif %}
 	{% endfor %} 
 </table>
 {% else %} 
