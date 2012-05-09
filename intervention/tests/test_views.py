@@ -45,9 +45,9 @@ class InterventionViewTest(TestCase):
             
     def test_activity_pages(self):
         resp = self.client.post('/set_participant/', {'name': 'test', 'id_number': 'test'})
-        for a in Activity.objects.all():
-            resp = self.client.get(a.get_absolute_url())
-            self.assertEqual(resp.status_code, 200)
+        a = Activity.objects.all()[0]
+        resp = self.client.get(a.get_absolute_url())
+        self.assertEqual(resp.status_code, 200)
 
     def test_clear_participant(self):
         # make sure we have one logged in
@@ -80,12 +80,12 @@ class InterventionViewTest(TestCase):
          for i in Intervention.objects.all():
              resp = self.client.get("/practice/%d/" % i.id, follow=True)
              self.assertEqual("You are in Practice Mode. Changes will not be saved." in resp.content, True)
-             for s in i.clientsession_set.all():
-                 resp = self.client.get(s.get_absolute_url())
-                 self.assertEqual("You are in Practice Mode. Changes will not be saved." in resp.content, True)
-                 for a in s.activity_set.all():
-                     resp = self.client.get(a.get_absolute_url())
-                     self.assertEqual("You are in Practice Mode. Changes will not be saved." in resp.content, True)
+         s = ClientSession.objects.all()[0]
+         resp = self.client.get(s.get_absolute_url())
+         self.assertEqual("You are in Practice Mode. Changes will not be saved." in resp.content, True)
+         a = s.activity_set.all()[0]
+         resp = self.client.get(a.get_absolute_url())
+         self.assertEqual("You are in Practice Mode. Changes will not be saved." in resp.content, True)
 
     def test_complete_session(self):
         resp = self.client.post('/set_participant/', {'name': 'test', 'id_number': 'test'})
@@ -95,9 +95,9 @@ class InterventionViewTest(TestCase):
 
     def test_complete_activity(self):
         resp = self.client.post('/set_participant/', {'name': 'test', 'id_number': 'test'})
-        for a in Activity.objects.all():
-            resp = self.client.post(a.get_absolute_url() + "complete/")
-            self.assertEqual(resp.status_code, 302)
+        a = Activity.objects.all()[0]
+        resp = self.client.post(a.get_absolute_url() + "complete/")
+        self.assertEqual(resp.status_code, 302)
 
     # def test_save_game_state(self):
     #     pass
