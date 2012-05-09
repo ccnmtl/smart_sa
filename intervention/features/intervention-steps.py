@@ -1,6 +1,6 @@
 import sys, time
 from lettuce import world, step
-from smart_sa.intervention.models import Participant
+from smart_sa.intervention.models import Participant, Deployment
 from lettuce.django import django_url
 try:
     from lxml import html
@@ -80,3 +80,8 @@ def there_is_an_error_message(step):
         assert False, 'This step must be implemented for django test client'
     m = world.firefox.find_element_by_xpath("//p[@class=\"error\"]")
     
+@step(u'the deployment is set to "([^"]*)"')
+def the_deployment_is_set_to(step,name):
+    d = Deployment.objects.all()[0]
+    d.name = name
+    d.save()
