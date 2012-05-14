@@ -19,11 +19,29 @@ from django.core.exceptions import MultipleObjectsReturned
 import re
 from pprint import pprint
 
+def dict_serialize(obj):
+    d = dict()
+    if not hasattr(obj,'SerializeMeta'):
+        return d
+    for fname in obj.SerializeMeta.simple_dict_fields:
+        if type(fname) == type(tuple()):
+            (field_name,func) = fname
+            d[field_name] = func(getattr(obj,field_name))
+        else:
+            d[fname] = getattr(obj,fname)
+    for (fname,s) in obj.SerializeMeta.children_dict_fields:
+        d[fname] = [dict_serialize(c) for c in getattr(obj,s).all()]
+    return d
+
 class Intervention(models.Model):
     """SMART is an intervention--i.e. the top object"""
     name = models.CharField(max_length=200)
     intervention_id = models.CharField(max_length=8, default="1")
     general_instructions = models.TextField(blank=True)
+
+    class SerializeMeta:
+        simple_dict_fields = ['name','intervention_id','general_instructions']
+        children_dict_fields = [('clientsessions','clientsession_set')]
     
     def __unicode__(self):
         return self.name
@@ -88,6 +106,10 @@ class ClientSession (models.Model):
 
     class Meta:
         order_with_respect_to = 'intervention'
+
+    class SerializeMeta:
+        simple_dict_fields = ['short_title','long_title','introductory_copy',('created',str),('modified',str),'defaulter']
+        children_dict_fields = [('activities','activity_set')]
     
     def __unicode__(self):
         return self.short_title
@@ -175,6 +197,13 @@ class Activity(models.Model):
     class Meta:
         verbose_name_plural = "activities"
         order_with_respect_to = 'clientsession'
+
+    class SerializeMeta:
+        simple_dict_fields = ['short_title', 'long_title', 'objective_copy', 
+                              ('created', str), ('modified', str), 'game', 
+                              'collect_notes', 'collect_buddy_name', 'collect_referral_info', 
+                              'collect_reasons_for_returning']
+        children_dict_fields = [('gamepages','gamepage_set'),('instructions','instruction_set')]
         
     clientsession = models.ForeignKey(ClientSession)
     
