@@ -56,3 +56,10 @@ body {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
+
+/* start - food pyramid graphic print resizing hack from "Session 3: Good Adherence and Healthy Living - Eat Well*/
+#content img#activity159
+{
+	max-width: 415px !important;
+}
+/* stop - food pyramid graphic print resizing hack from "Session 3: Good Adherence and Healthy Living - Eat Well*/
