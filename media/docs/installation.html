@@ -1,0 +1,124 @@
+<html>
+	<head>
+		<title>Masivukeni Installation</title>
+	</head>
+	<body>
+
+		<h1>Installation</h1>
+
+<h2>Preparation</h2>
+
+<p>Download the latest install zip
+	from <a href="http://behemoth.ccnmtl.columbia.edu/masivukeni_installer.zip">http://behemoth.ccnmtl.columbia.edu/masivukeni_installer.zip</a>
+	and unzip it to a USB thumb drive. It should contain a "smart_sa"
+	folder, a "bitnami-djangostack-..." installer and a
+	"ChromeStandaloneSetup" which can be used to install the Chrome
+	browser if the computer doesn't already come with it (which it
+	should).</p>
+
+<p>If you are replacing a broken or lost clinic laptop, you should
+	also download the most recent backup file for that clinic from the
+	online site.</p>
+
+<h2>Netbook Installation</h2>
+<p>Insert the USB drive with the install media. Open it for browsing.</p>
+<img src="/site_media/images/screenshots/installation/01.png" />
+<img src="/site_media/images/screenshots/installation/02.png" />
+<p>Open up another explorer window</p>
+<img src="/site_media/images/screenshots/installation/03.png" />
+<p>Copy the "smart_sa" folder from the USB drive to "C:"</p>
+<img src="/site_media/images/screenshots/installation/04.png" />
+<h3>Bitnami Install</h3>
+<p>Bitnami is a package that provides a lot of the base technologies
+	that Masivukeni relies on.</p>
+<p>Copy the "bitnami-djangostack..." installer program to the desktop
+	(or anywhere else you can find it easily)</p>
+<img src="/site_media/images/screenshots/installation/05.png" />
+<p>Double-click it to run the Bitnami installer</p>
+<img src="/site_media/images/screenshots/installation/06.png" />
+<p>Uncheck "MySQL", but leave the others checked.</p>
+<img src="/site_media/images/screenshots/installation/07.png" />
+<p>Leave the default installation directory</p>
+<img src="/site_media/images/screenshots/installation/08.png" />
+<p>When it prompts for the PostgreSQL password, enter "masivukeni" in
+	both fields</p> 
+<img src="/site_media/images/screenshots/installation/09.png" />
+<p>Let it associate .py files with the bundled Python</p>
+<img src="/site_media/images/screenshots/installation/10.png" />
+<p>Do <b>not</b> set up a default project</p>
+<img src="/site_media/images/screenshots/installation/11.png" />
+<p>Uncheck the "learn more about Bitnami Cloud Hosting" checkbox. That
+	will just try to open a browser to their site.</p>
+<img src="/site_media/images/screenshots/installation/12.png" />
+<p>Similarly, uncheck "Launch Bitnami DjangoStack"</p>
+<img src="/site_media/images/screenshots/installation/13.png" />
+<h3>Masivukeni Install</h3>
+<p>Go back to "C:" and open up "smart_sa"</p>
+<img src="/site_media/images/screenshots/installation/14.png" />
+<p><b>Right click</b> on "admin_initialize" and select "Run as
+	Administrator". It will open up a terminal window and a bunch of
+	stuff will start scrolling by.</p>
+<img src="/site_media/images/screenshots/installation/15.png" />
+<p>When that has finished (which could take a while), <b>double
+		click</b> "initialize". This will open another terminal window.</p>
+<p>It will pretty quickly ask you for a password though. Enter
+	"masivukeni" as the password here</p>
+<img src="/site_media/images/screenshots/installation/16.png" />
+<p>And again here:</p>
+<img src="/site_media/images/screenshots/installation/17.png" />
+<p>A lot of messages will scroll by. A few will look like
+	errors. Particularly, here:</p>
+<img src="/site_media/images/screenshots/installation/18.png" />
+<p><b>Don't panic!</b> That's ok. It'll keep going.</p>
+<p>When it has finished, select "Manager tool" from the Windows Start
+	Menu. Select "Apache" and hit the "Restart" button:</p>
+<img src="/site_media/images/screenshots/installation/19.png" />
+
+<p>The Masivukeni app should now be running and ready to connect to
+	with a browser. Open up Chrome and type "http://localhost/" in the
+	URL bar. You should see the intro page for the site:</p>
+
+<img src="/site_media/images/screenshots/installation/20.png" />
+
+<p>Login as the admin user (you should already know the standard
+	default admin password)</p>
+<img src="/site_media/images/screenshots/installation/21.png" />
+
+<p>Go into "Administrate" and set the laptop's "Clinic Name" (and hit
+	"Save"). That will allow us to connect the data from the laptop to
+	the correct clinic later.</p>
+
+<img src="/site_media/images/screenshots/installation/22.png" />
+
+<h2>Restore Data from backups</h2>
+
+<p>If you are replacing a broken laptop, go down to "Restore
+	Participant Data" and upload the most recent backup file (which you
+	can get from the online site)</p>
+<img src="/site_media/images/screenshots/installation/23.png" />
+
+<h2>Set it up to start automatically</h2>
+<p>Click the wrench icon in the top-right of Chrome and select
+	"Options". Under "Home Page", make sure "Open This Page:" is
+	selected, and type in "http://localhost/". That will make sure that
+	Chrome goes directly to Masivukeni each time it's launched.</p>
+<img src="/site_media/images/screenshots/installation/24.png" />
+
+<p>Now, to make Chrome start up automatically when Windows starts,
+	open the Windows Start Menu, Click "All Programs", scroll down so
+	you can see the "Startup" folder. <b>Right click</b> it and select "Open".</p>
+<img src="/site_media/images/screenshots/installation/25.png" />
+
+<p>Drag a Chrome shortcut icon in there from the Desktop or Application folder.</p>
+<img src="/site_media/images/screenshots/installation/26.png" />
+
+<p>For a Clinic laptop, it's probably also a good idea to clean things
+	up a bit and delete all the extraneous icons from the Desktop and
+	the toolbar. Maybe rename the Chrome icon to "Masivukeni" to make it
+	as obvious as possible.</p>
+
+<p>Congratulations! You're done. Then next time this computer is
+	started, Chrome should start up and go directly to Masivukeni.</p>
+
+</body>
+</html>
