@@ -107,6 +107,12 @@ if 'test' in sys.argv:
 SOUTH_TESTS_MIGRATE = False
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=intervention',
+]
+
+
 SOUTH_AUTO_FREEZE_APP = True
 THUMBNAIL_SUBDIR = "thumbs"
 EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
