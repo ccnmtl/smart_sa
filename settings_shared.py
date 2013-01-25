@@ -10,12 +10,28 @@ ADMINS = tuple()
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'postgresql_psycopg2' # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = 'masivukeni2' # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3. AND NOT USED ON PRODUCTION
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'masivukeni2',
+        'HOST': '',
+        'PORT': 5432,
+        'USER': '',
+        'PASSWORD': '',
+        }
+}
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default' : {
+            'ENGINE' : 'django.db.backends.sqlite3',
+            'NAME' : ':memory:',
+            'HOST' : '',
+            'PORT' : '',
+            'USER' : '',
+            'PASSWORD' : '',
+            }
+    }
 
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
@@ -25,7 +41,7 @@ USE_I18N = False
 MEDIA_ROOT = "uploads/"  #local file directory for dev
 MEDIA_URL = '/multimedia/'
 ADMIN_MEDIA_PREFIX = '/media/'
-SECRET_KEY = ')ng#)ef_u@_^zvvu@dxm7ql-yb^_!a6%v3v^j3b(mp+)l+5%@h'
+SECRET_KEY = 'dummy-asdfasdfasdf'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
