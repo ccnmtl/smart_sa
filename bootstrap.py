@@ -36,6 +36,10 @@ if len(sys.argv) > 1:
                                "--requirement",os.path.join(pwd,"requirements/dev.txt")])
         if ret: exit(ret)
 
+if sys.version_info < (2, 7, 0):
+    ret = subprocess.call([os.path.join(vedir, 'bin', 'pip'), "install",
+                           "-E", vedir,
+                           os.path.join(pwd,"requirements/src/importlib-1.0.1.tar.gz")])
 
 
 ret = subprocess.call(["python","virtualenv.py","--relocatable",vedir])

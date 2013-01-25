@@ -57,6 +57,7 @@ urlpatterns = patterns('',
         (r'^intervention_admin/list_uploads/$','smart_sa.intervention.views.list_uploads'),                       
 
         (r'^admin/', include(admin.site.urls)),
+        (r'^smoketest/', include('smoketest.urls')),
         ('^$','smart_sa.intervention.views.no_vars',{'template_name':'intervention/index.html'}),
                        
 )

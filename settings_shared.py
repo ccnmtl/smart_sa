@@ -98,6 +98,7 @@ INSTALLED_APPS = (
     'south',
     'lettuce.django',
     'django_nose',
+    'smoketest',
 )
 
 
