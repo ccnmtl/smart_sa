@@ -95,6 +95,7 @@ INSTALLED_APPS = (
     'smart_sa.watchvideo_game',
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
+    'smart_sa.dashboard',
     'south',
     'lettuce.django',
     'django_nose',
