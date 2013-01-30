@@ -15,6 +15,7 @@ DEPLOYMENTS = [
     'Mzamomhle 1',
     'Mzamomhle 2',
     'Town II 1',
+    'Town 2',
 ]
 
 
