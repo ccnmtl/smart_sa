@@ -16,3 +16,6 @@ requirements/src/selenium-2.20.0.tar.gz
 # required by sentry
 requirements/src/uuid-1.30.tar.gz
 requirements/src/statsd-0.5.1.tar.gz
+requirements/src/pep8-1.4.tar.gz
+requirements/src/pyflakes-0.5.0.tar.gz
+requirements/src/flake8-1.7.0.tar.gz
