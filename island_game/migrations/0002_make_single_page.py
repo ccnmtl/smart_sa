@@ -1,3 +1,4 @@
+# flake8: noqa
 # encoding: utf-8
 from south.v2 import DataMigration
 from intervention.models import Activity, GamePage
@@ -13,8 +14,6 @@ class Migration(DataMigration):
     def backwards(self, orm):
         raise RuntimeError("Cannot reverse this migration.")
 
-    models = {
-        
-    }
+    models = {}
 
     complete_apps = ['island_game']

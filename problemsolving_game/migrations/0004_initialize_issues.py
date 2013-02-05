@@ -1,3 +1,4 @@
+# flake8: noqa
 # encoding: utf-8
 from south.v2 import DataMigration
 from django.core import management

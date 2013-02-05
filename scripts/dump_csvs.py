@@ -7,45 +7,50 @@ cursor.execute("SELECT key,value FROM webappsstore WHERE key LIKE 'USER%'")
 
 game_fields = []
 
-def ssnmtree_dict(dic,id=None):
+
+def ssnmtree_dict(dic, id=None):
     tree = []
-    for k,v in dic.items():
-        if not isinstance(v,dict):
+    for k, v in dic.items():
+        if not isinstance(v, dict):
             continue
-        tree.append(id +[k,
+        tree.append(id + [k,
                      v['disclosure'],
                      v['support'],
-                     v['name'][0:1],])
+                     v['name'][0:1], ])
 
     return tree
 
-def pillgame_dict(dic,id=None):
+
+def pillgame_dict(dic, id=None):
     meds = []
     for v in dic['day_pills'].values():
-        meds.append(id +[v['where'],v['pill_type'], ])
+        meds.append(id + [v['where'], v['pill_type'], ])
     for v in dic['night_pills'].values():
-        meds.append(id +[v['where'],v['pill_type'], ])
+        meds.append(id + [v['where'], v['pill_type'], ])
     return meds
 
-def problemsolving_dict(dic,id=None):
+
+def problemsolving_dict(dic, id=None):
     my_issues = []
-    for k,v in dic['my_issues'].items():
-        my_issues.append(id +[k,
-                          v.get('action',''),
-                          v.get('aim',''),
-                          v.get('alternatives',''),
-                          v.get('alternatives2',''),
-                          v.get('alternatives3',''),
-                          v.get('ask',''),
+    for k, v in dic['my_issues'].items():
+        my_issues.append(id + [k,
+                          v.get('action', ''),
+                          v.get('aim', ''),
+                          v.get('alternatives', ''),
+                          v.get('alternatives2', ''),
+                          v.get('alternatives3', ''),
+                          v.get('ask', ''),
                           ])
     return my_issues
 
-def timelog_dict(dic,id=None):
+
+def timelog_dict(dic, id=None):
     logs = []
-    for date,pages in dic.items():
+    for date, pages in dic.items():
         for page in pages:
-            logs.append(id+[date, page['page'], page['time'], ])
+            logs.append(id + [date, page['page'], page['time'], ])
     return logs
+
 
 #users that were tests or admins
 user_black_list = [
@@ -71,78 +76,82 @@ user_black_list = [
     ]
 
 exceptions = {
-    'pill_game_state':{
-        'path':'games.pill_game_state',
-        'select':['day_pills_time_menu_selected_index','night_pills_time_menu_selected_index','treatment_line'],
-        'new_table':pillgame_dict,
-        'table_cols':['Time of Day','Pill'],
+    'pill_game_state': {
+        'path': 'games.pill_game_state',
+        'select': ['day_pills_time_menu_selected_index',
+                   'night_pills_time_menu_selected_index',
+                   'treatment_line'],
+        'new_table': pillgame_dict,
+        'table_cols': ['Time of Day', 'Pill'],
         },
-    'problemsolving':{
-        'path':'games.problemsolving',
-        'select':['chosen-issue','default_page'],
-        'new_table':problemsolving_dict,
-        'table_cols':['Issue',
-                      'Action','Aim','Alternatives',
-                      'Alternatives2','Alternatives3','Ask',],
+    'problemsolving': {
+        'path': 'games.problemsolving',
+        'select': ['chosen-issue', 'default_page'],
+        'new_table': problemsolving_dict,
+        'table_cols': ['Issue',
+                      'Action', 'Aim', 'Alternatives',
+                      'Alternatives2', 'Alternatives3', 'Ask', ],
         },
-    'ssnmtree':{
-        'path':'games.ssnmtree',
-        'select':[],
-        'new_table':ssnmtree_dict,
-        'table_cols':['Position','Disclosure','Support','Name']
+    'ssnmtree': {
+        'path': 'games.ssnmtree',
+        'select': [],
+        'new_table': ssnmtree_dict,
+        'table_cols': ['Position', 'Disclosure', 'Support', 'Name']
         },
-    'sessions':{
-        'select':[],
+    'sessions': {
+        'select': [],
         },
-    'admin':{
-        'select':[],
+    'admin': {
+        'select': [],
         },
-    'timelog':{
-        'path':'timelog',
-        'select':[],
-        'new_table':timelog_dict,
-        'table_cols':['Date','Page','Seconds on page']
+    'timelog': {
+        'path': 'timelog',
+        'select': [],
+        'new_table': timelog_dict,
+        'table_cols': ['Date', 'Page', 'Seconds on page']
         },
-    'firstname':{
-        'select':[],
+    'firstname': {
+        'select': [],
         },
-    'fullname':{
-        'select':[],
+    'fullname': {
+        'select': [],
         },
 }
+
 
 def dict_fields(dic):
     "recursively return fields that are not"
     to_return = []
-    for k,v in dic.items():
+    for k, v in dic.items():
         if k in exceptions:
             for a in exceptions[k]['select']:
-                to_return.append([k,a])
+                to_return.append([k, a])
             #ar = dict_fields(exceptions[k]['new_table'](v))
             #for a in ar:
             #    to_return.append([k]+a)
-        elif isinstance(v,dict) and len(v) >0:
+        elif isinstance(v, dict) and len(v) > 0:
             ar = dict_fields(v)
             for a in ar:
-                to_return.append([k]+a)
+                to_return.append([k] + a)
         else:
             if k != 'games':
                 to_return.append([k])
     return to_return
 
 
-def getval(dic,keys):
+def getval(dic, keys):
     val = dic
     for k in keys.split('.'):
-        if val.has_key(k):
+        if k in val:
             val = val[k]
         else:
             return ''
     return val
 
+
 def cols(rows):
     "returns unique list of all column names"
-    m = set()    
+    m = set()
     for r in rows:
         data = json.loads(r[1])
         games = dict_fields(data)
@@ -150,14 +159,16 @@ def cols(rows):
             m.add('.'.join(i))
     return sorted(m)
 
+
 def csv_info(rows):
     main_file_cols = cols(rows)
     main = []
-    main.append(['Patient ID']+main_file_cols) #header row
+    main.append(['Patient ID'] + main_file_cols)
     extras = {}
-    for k,v in exceptions.items():
-        if v.has_key('new_table'):
-            extras[k] = [['Patient ID','patientnumber']+v['table_cols'] ] #header
+    for k, v in exceptions.items():
+        if 'new_table' in v:
+            extras[k] = [['Patient ID', 'patientnumber']
+                         + v['table_cols']]
 
     for r in rows:
         if r[0] in user_black_list:
@@ -165,33 +176,32 @@ def csv_info(rows):
         user = [r[0]]
         data = json.loads(r[1])
         for col in main_file_cols:
-            user.append( getval(data,col) )
+            user.append(getval(data, col))
         main.append(user)
-        for k,v in extras.items():
-            edata = getval(data,exceptions[k]['path'])
+        for k, v in extras.items():
+            edata = getval(data, exceptions[k]['path'])
             if edata:
-                v.extend( exceptions[k]['new_table'](edata, [r[0],data['patientnumber']]) )
+                v.extend(
+                    exceptions[k]['new_table'](
+                        edata, [r[0], data['patientnumber']]))
 
-    return main,extras
+    return main, extras
+
 
 def write_csvs(stuff):
     import csv
     main = stuff[0]
     extras = stuff[1]
-    
-    main_csv = csv.writer(open('masivukeni.csv','wb'))
+
+    main_csv = csv.writer(open('masivukeni.csv', 'wb'))
     main_csv.writerows(main)
 
-    for k,v in extras.items():
-        csv_extra = csv.writer(open('%s-masivukeni.csv'%k,'wb'))
+    for k, v in extras.items():
+        csv_extra = csv.writer(open('%s-masivukeni.csv' % k, 'wb'))
         csv_extra.writerows(v)
 
 rows = list(cursor.fetchall())
 for line in cols(rows):
     print line
 
-write_csvs( csv_info(rows) )
-
-
-
-
+write_csvs(csv_info(rows))

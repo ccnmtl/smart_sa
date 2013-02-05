@@ -5,10 +5,11 @@ from django.conf import settings
 from restclient import GET
 from zipfile import ZipFile
 from cStringIO import StringIO
-from simplejson import dumps,loads
+from simplejson import loads
 import os
 import os.path
 from optparse import make_option
+
 
 class Command(BaseCommand):
     args = ''
@@ -16,7 +17,7 @@ class Command(BaseCommand):
 
     option_list = BaseCommand.option_list + (
         make_option('-d', '--db-only', dest='dbonly',
-                    default=False,help='only pull the database content'),
+                    default=False, help='only pull the database content'),
     )
 
     def handle(self, *args, **options):
@@ -27,11 +28,13 @@ class Command(BaseCommand):
         print "fetching content from prod..."
         zc = GET(settings.PROD_BASE_URL + "intervention_admin/content_sync/")
         if not options["dbonly"]:
-            uploads = GET(settings.PROD_BASE_URL + "intervention_admin/list_uploads/").split("\n")
+            uploads = GET(
+                settings.PROD_BASE_URL + "intervention_admin/list_uploads/"
+            ).split("\n")
 
         buffer = StringIO(zc)
-        zipfile = ZipFile(buffer,"r")
-        
+        zipfile = ZipFile(buffer, "r")
+
         # Load Intervention objects
         json = loads(zipfile.read("interventions.json"))
 
@@ -42,7 +45,7 @@ class Command(BaseCommand):
         for i in json['interventions']:
             intervention = Intervention.objects.create(name="tmp")
             intervention.from_dict(i)
-            
+
         # Load Problem Solving objects
         json = loads(zipfile.read("issues.json"))
 
@@ -51,9 +54,8 @@ class Command(BaseCommand):
 
         print "importing problemsolving prod database content..."
         for i in json['issues']:
-            issue = Issue.objects.create(name="tmp",ordinality=0)
+            issue = Issue.objects.create(name="tmp", ordinality=0)
             issue.from_dict(i)
-    
 
         if options["dbonly"]:
             return
@@ -63,12 +65,12 @@ class Command(BaseCommand):
         for upload in uploads:
             relative_path = upload[base_len:]
             relative_dir = os.path.join(*os.path.split(relative_path)[:-1])
-            full_dir = os.path.join(settings.MEDIA_ROOT,relative_dir)
+            full_dir = os.path.join(settings.MEDIA_ROOT, relative_dir)
             try:
                 os.makedirs(full_dir)
             except OSError:
                 pass
-            with open(os.path.join(settings.MEDIA_ROOT,relative_path),"w") as f:
-                print "   writing %s to %s" % (upload,relative_path)
+            with open(os.path.join(settings.MEDIA_ROOT, relative_path),
+                      "w") as f:
+                print "   writing %s to %s" % (upload, relative_path)
                 f.write(GET(upload))
-            

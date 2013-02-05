@@ -63,10 +63,10 @@ class Participant(object):
 
     def initial_referral_status(self):
         return "%s|%s|%s|%s" % (
-            ["-","X"][int(self.data['initial_referral_alcohol'])],
-            ["-","X"][int(self.data['initial_referral_drug_use'])],
-            ["-","X"][int(self.data['initial_referral_mental_health'])],
-            ["-","X"][int(self.data['initial_referral_other'])],
+            ["-", "X"][int(self.data['initial_referral_alcohol'])],
+            ["-", "X"][int(self.data['initial_referral_drug_use'])],
+            ["-", "X"][int(self.data['initial_referral_mental_health'])],
+            ["-", "X"][int(self.data['initial_referral_other'])],
             )
 
     def defaulter_status(self):
@@ -74,10 +74,10 @@ class Participant(object):
             return "False"
         else:
             return "True: %s|%s|%s|%s" % (
-            ["-","X"][int(self.data['defaulter_referral_alcohol'])],
-            ["-","X"][int(self.data['defaulter_referral_drugs'])],
-            ["-","X"][int(self.data['defaulter_referral_mental_health'])],
-            ["-","X"][int(self.data['defaulter_referral_other'])],
+            ["-", "X"][int(self.data['defaulter_referral_alcohol'])],
+            ["-", "X"][int(self.data['defaulter_referral_drugs'])],
+            ["-", "X"][int(self.data['defaulter_referral_mental_health'])],
+            ["-", "X"][int(self.data['defaulter_referral_other'])],
             )
 
     def has_counselor_notes(self):

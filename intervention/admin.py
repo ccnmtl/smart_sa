@@ -1,12 +1,22 @@
-from smart_sa.intervention.models import *
+from smart_sa.intervention.models import Intervention, Activity
+from smart_sa.intervention.models import ClientSession, GamePage
+from smart_sa.intervention.models import Participant, ParticipantSession
+from smart_sa.intervention.models import ParticipantActivity
+from smart_sa.intervention.models import ParticipantGameVar
+from smart_sa.intervention.models import CounselorNote
+from smart_sa.intervention.models import Deployment
+from smart_sa.intervention.models import Instruction
 from django.contrib import admin
+
 
 class InterventionAdmin(admin.ModelAdmin):
     fields = ['name']
 
+
 class ClientSessionAdmin(admin.ModelAdmin):
     fieldsets = [
-        ('General',  {'fields': ['intervention', 'short_title', 'long_title']}),
+        ('General',
+         {'fields': ['intervention', 'short_title', 'long_title']}),
     ]
     list_filter = ['short_title']
 

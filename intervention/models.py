@@ -17,21 +17,22 @@ from django.contrib.auth.models import User
 from intervention.installed_games import InstalledGames
 from django.core.exceptions import MultipleObjectsReturned
 import re
-from pprint import pprint
+
 
 def dict_serialize(obj):
     d = dict()
-    if not hasattr(obj,'SerializeMeta'):
+    if not hasattr(obj, 'SerializeMeta'):
         return d
     for fname in obj.SerializeMeta.simple_dict_fields:
         if type(fname) == type(tuple()):
-            (field_name,func) = fname
-            d[field_name] = func(getattr(obj,field_name))
+            (field_name, func) = fname
+            d[field_name] = func(getattr(obj, field_name))
         else:
-            d[fname] = getattr(obj,fname)
-    for (fname,s) in obj.SerializeMeta.children_dict_fields:
-        d[fname] = [dict_serialize(c) for c in getattr(obj,s).all()]
+            d[fname] = getattr(obj, fname)
+    for (fname, s) in obj.SerializeMeta.children_dict_fields:
+        d[fname] = [dict_serialize(c) for c in getattr(obj, s).all()]
     return d
+
 
 class Intervention(models.Model):
     """SMART is an intervention--i.e. the top object"""
@@ -40,9 +41,10 @@ class Intervention(models.Model):
     general_instructions = models.TextField(blank=True)
 
     class SerializeMeta:
-        simple_dict_fields = ['name','intervention_id','general_instructions']
-        children_dict_fields = [('clientsessions','clientsession_set')]
-    
+        simple_dict_fields = ['name', 'intervention_id',
+                              'general_instructions']
+        children_dict_fields = [('clientsessions', 'clientsession_set')]
+
     def __unicode__(self):
         return self.name
 
@@ -56,7 +58,7 @@ class Intervention(models.Model):
             intervention_id=self.intervention_id,
             general_instructions=self.general_instructions,
             clientsessions=clientsessions,
-            )
+        )
 
     def completed_all_sessions(self, participant):
         for cs in self.clientsession_set.all():
@@ -83,19 +85,20 @@ class Intervention(models.Model):
                 short_title=c['short_title'],
                 long_title=c['long_title'],
                 introductory_copy=c['introductory_copy'],
-                defaulter=c.get('defaulter',False),
+                defaulter=c.get('defaulter', False),
                 created=c['created'],
                 modified=c['modified'],
-                )
+            )
             cs.from_dict(c)
 
-    def get_session_by_index(self,index):
+    def get_session_by_index(self, index):
         return self.clientsession_set.all()[index - 1]
+
 
 class ClientSession (models.Model):
     """One day of activities for a client"""
     intervention = models.ForeignKey(Intervention)
-    
+
     short_title = models.CharField(max_length=512)
     long_title = models.CharField(max_length=512)
     introductory_copy = models.TextField(blank=True)
@@ -108,9 +111,12 @@ class ClientSession (models.Model):
         order_with_respect_to = 'intervention'
 
     class SerializeMeta:
-        simple_dict_fields = ['short_title','long_title','introductory_copy',('created',str),('modified',str),'defaulter']
-        children_dict_fields = [('activities','activity_set')]
-    
+        simple_dict_fields = ['short_title', 'long_title',
+                              'introductory_copy',
+                              ('created', str),
+                              ('modified', str), 'defaulter']
+        children_dict_fields = [('activities', 'activity_set')]
+
     def __unicode__(self):
         return self.short_title
 
@@ -135,7 +141,7 @@ class ClientSession (models.Model):
             modified=str(self.modified),
             defaulter=self.defaulter,
             activities=[a.as_dict() for a in self.activity_set.all()],
-            )
+        )
 
     def from_dict(self, d):
         "instantiate from a nested dict"
@@ -156,12 +162,13 @@ class ClientSession (models.Model):
                 created=a['created'],
                 modified=a['modified'],
                 game=a['game'],
-                collect_notes=a.get('collect_notes',False),
-                collect_buddy_name=a.get('collect_buddy_name',False),
-                collect_referral_info=a.get('collect_referral_info',False),
-                collect_reasons_for_returning=a.get('collect_reasons_for_returning',
-                                                    False),
-                )
+                collect_notes=a.get('collect_notes', False),
+                collect_buddy_name=a.get('collect_buddy_name', False),
+                collect_referral_info=a.get('collect_referral_info', False),
+                collect_reasons_for_returning=a.get(
+                    'collect_reasons_for_returning',
+                    False),
+            )
             na.from_dict(a)
 
     def get_participant_status(self, participant):
@@ -186,7 +193,7 @@ class ClientSession (models.Model):
                 return False
         return True
 
-    def get_activity_by_index(self,index):
+    def get_activity_by_index(self, index):
         return self.activity_set.all()[index - 1]
 
 
@@ -199,14 +206,17 @@ class Activity(models.Model):
         order_with_respect_to = 'clientsession'
 
     class SerializeMeta:
-        simple_dict_fields = ['short_title', 'long_title', 'objective_copy', 
-                              ('created', str), ('modified', str), 'game', 
-                              'collect_notes', 'collect_buddy_name', 'collect_referral_info', 
+        simple_dict_fields = ['short_title', 'long_title', 'objective_copy',
+                              ('created', str), ('modified', str), 'game',
+                              'collect_notes', 'collect_buddy_name',
+                              'collect_referral_info',
                               'collect_reasons_for_returning']
-        children_dict_fields = [('gamepages','gamepage_set'),('instructions','instruction_set')]
-        
+        children_dict_fields = [
+            ('gamepages', 'gamepage_set'),
+            ('instructions', 'instruction_set')]
+
     clientsession = models.ForeignKey(ClientSession)
-    
+
     short_title = models.CharField(max_length=512)
     long_title = models.CharField(max_length=512)
     objective_copy = models.TextField(blank=True)
@@ -214,12 +224,13 @@ class Activity(models.Model):
     collect_buddy_name = models.BooleanField(default=False)
     collect_referral_info = models.BooleanField(default=False)
     collect_reasons_for_returning = models.BooleanField(default=False)
-    
+
     created = models.DateTimeField('date created', auto_now_add=True)
     modified = models.DateTimeField('date modified', auto_now=True)
 
-    game = models.CharField(max_length=64, choices=InstalledGames, blank=True, null=True)
-    
+    game = models.CharField(max_length=64, choices=InstalledGames,
+                            blank=True, null=True)
+
     def __unicode__(self):
         return self.short_title
 
@@ -315,6 +326,7 @@ class Activity(models.Model):
             gamepages=[gp.as_dict() for gp in self.gamepage_set.all()],
             instructions=[i.as_dict() for i in self.instruction_set.all()],
         )
+
     def from_dict(self, d):
         "instantiate from a dict"
         self.short_title = d['short_title']
@@ -326,7 +338,8 @@ class Activity(models.Model):
         self.collect_notes = d.get('collect_notes', False)
         self.collect_buddy_name = d.get('collect_buddy_name', False)
         self.collect_referral_info = d.get('collect_referral_info', False)
-        self.collect_reasons_for_returning = d.get('collect_reasons_for_returning', False)
+        self.collect_reasons_for_returning = d.get(
+            'collect_reasons_for_returning', False)
         self.save()
         self.gamepage_set.all().delete()
         for gp in d['gamepages']:
@@ -336,7 +349,7 @@ class Activity(models.Model):
                 subtitle=gp['subtitle'],
                 description=gp['description'],
                 instructions=gp['instructions'],
-                )
+            )
             ngp.from_dict(gp)
         self.instruction_set.all().delete()
         for i in d['instructions']:
@@ -350,7 +363,7 @@ class Activity(models.Model):
                 image=i['image'],
                 created=i['created'],
                 modified=i['modified'],
-                )
+            )
             ni.from_dict(i)
 
     def get_participant_status(self, participant):
@@ -361,10 +374,12 @@ class Activity(models.Model):
         else:
             return ""
 
+
 class GamePage (models.Model):
     """A javascript 'game' associated with an activity."""
-    #make null possible so 'deleting' is possible but recoverable
-    activity  = models.ForeignKey(Activity, blank=True, null=True)
+    # make null possible so 'deleting' is possible but recoverable
+    activity = models.ForeignKey(Activity, blank=True, null=True)
+
     class Meta:
         order_with_respect_to = 'activity'
 
@@ -373,7 +388,7 @@ class GamePage (models.Model):
     description = models.TextField(blank=True)
     instructions = models.TextField(blank=True)
 
-    page_id = None #blessed by view with name of the page
+    page_id = None  # blessed by view with name of the page
 
     def __unicode__(self):
         return self.title or self.page_id or str(self.id)
@@ -402,7 +417,7 @@ class GamePage (models.Model):
             return '%s/%s' % (id, pages[ind-2])
         else:
             return None
-        
+
     def next_url(self):
         "helper for next nav in templates"
         pages = self.activity.pages()
@@ -429,7 +444,7 @@ class GamePage (models.Model):
             return self.get_next_in_order().title
         except:
             return ''
-    
+
     #GAME code, we LOVE delegation!
     def template(self, page_id):
         return InstalledGames.template(self.activity.game, page_id)
@@ -444,7 +459,7 @@ class GamePage (models.Model):
             subtitle=self.subtitle,
             description=self.description,
             instructions=self.instructions,
-            )
+        )
 
     def from_dict(self, d):
         "instantiate from a dict"
@@ -454,6 +469,7 @@ class GamePage (models.Model):
         self.instructions = d['instructions']
         self.save()
 
+
 class Instruction (models.Model):
     """A unit of interaction between facilitator and client
     Multiple per activity
@@ -462,18 +478,21 @@ class Instruction (models.Model):
 
     class Meta:
         order_with_respect_to = 'activity'
-    
+
     title = models.CharField(max_length=512, blank=True)
     STYLE_CHOICES = [('do', 'Do'), ('say', 'Say')]
-    style = models.CharField(max_length=64, choices=STYLE_CHOICES, blank=True, null=True)
+    style = models.CharField(max_length=64, choices=STYLE_CHOICES,
+                             blank=True, null=True)
     instruction_text = models.TextField(blank=True)
-    image = models.FileField(upload_to='intervention_images', blank=True, null=True)
+    image = models.FileField(upload_to='intervention_images',
+                             blank=True, null=True)
 
     help_copy = models.TextField(blank=True)
-    #image_path = models.CharField(max_length=300)
+    # image_path = models.CharField(max_length=300)
     notes = models.TextField(blank=True)
     created = models.DateTimeField('date created', auto_now_add=True)
     modified = models.DateTimeField('date modified', auto_now=True)
+
     def __unicode__(self):
         return unicode(self.id)
 
@@ -492,6 +511,7 @@ class Instruction (models.Model):
                     created=str(self.created),
                     modified=str(self.modified)
                     )
+
     def from_dict(self, d):
         "instantiate from a dict"
         self.title = d['title']
@@ -504,6 +524,7 @@ class Instruction (models.Model):
         self.modified = d['modified']
         self.save()
 
+
 class Backup (models.Model):
     json_data = models.TextField(blank=True)
     created = models.DateTimeField('date created', auto_now_add=True)
@@ -514,17 +535,20 @@ class Backup (models.Model):
                     deployment=self.deployment,
                     created=str(self.created))
 
+
 class Participant(models.Model):
     """ participant in the system """
     name = models.CharField(max_length=256)
     id_number = models.CharField(max_length=256)
-    patient_id = models.CharField("ID for linking patient to other research data", max_length=256, default="")
+    patient_id = models.CharField(
+        "ID for linking patient to other research data",
+        max_length=256, default="")
     defaulter = models.BooleanField(default=False)
     status = models.BooleanField(default=True)
     clinical_notes = models.TextField(default="", blank=True)
     buddy_name = models.CharField(max_length=256, default="", blank=True)
     gender = models.CharField(max_length=16, default="male",
-                              choices=[('male', 'Male'), ('female','Female')])
+                              choices=[('male', 'Male'), ('female', 'Female')])
 
     # referral info fields
     initial_referral_mental_health = models.BooleanField(default=False)
@@ -546,6 +570,7 @@ class Participant(models.Model):
 
     def to_json(self):
         "return a dict for serializing"
+        sdrmh = self.defaulter_referral_mental_health
         return dict(
             name=self.name,
             id_number=self.id_number,
@@ -560,20 +585,21 @@ class Participant(models.Model):
             initial_referral_drug_use=self.initial_referral_drug_use,
             initial_referral_other=self.initial_referral_other,
             initial_referral_notes=self.initial_referral_notes,
-            defaulter_referral_mental_health=self.defaulter_referral_mental_health,
+            defaulter_referral_mental_health=sdrmh,
             defaulter_referral_alcohol=self.defaulter_referral_alcohol,
             defaulter_referral_drugs=self.defaulter_referral_drugs,
             defaulter_referral_other=self.defaulter_referral_other,
             defaulter_referral_notes=self.defaulter_referral_notes,
             reasons_for_returning=self.reasons_for_returning,
             game_vars=[
-                {pgv.key : pgv.value} for pgv
+                {pgv.key: pgv.value} for pgv
                 in self.participantgamevar_set.all()],
             session_progress=[
-                dict(session="Session %d: %s" % (
+                dict(
+                    session="Session %d: %s" % (
                         ps.session.index(),
                         ps.session.long_title),
-                     status=ps.status)
+                    status=ps.status)
                 for ps in self.participantsession_set.all()],
             counselor_notes=[
                 dict(counselor=cn.counselor.username, notes=cn.notes)
@@ -586,22 +612,22 @@ class Participant(models.Model):
                     status=pa.status)
                 for pa in self.participantactivity_set.all()],
             session_visits=[
-                dict(session="Session %d: %s" % (
+                dict(
+                    session="Session %d: %s" % (
                         sv.session.index(),
                         sv.session.long_title),
                     timestamp=str(sv.logged))
-                for sv in self.sessionvisit_set.all()
-                ],
+                for sv in self.sessionvisit_set.all()],
             activity_visits=[
-                dict(activity="Session %d: Activity %d: %s" % (
+                dict(
+                    activity="Session %d: Activity %d: %s" % (
                         av.activity.clientsession.index(),
                         av.activity.index(), av.activity.long_title),
-                     timestamp=str(av.logged))
-                for av in self.activityvisit_set.all()],
-            )
+                    timestamp=str(av.logged))
+                for av in self.activityvisit_set.all()], )
 
     @classmethod
-    def from_json(cls,data):
+    def from_json(cls, data):
         logs = []
         p = Participant.objects.create(
             name=data['name'],
@@ -612,27 +638,30 @@ class Participant(models.Model):
             clinical_notes=data['clinical_notes'],
             buddy_name=data['buddy_name'],
             gender=data['gender'],
-            initial_referral_mental_health=data['initial_referral_mental_health'],
+            initial_referral_mental_health=data[
+                'initial_referral_mental_health'],
             initial_referral_alcohol=data['initial_referral_alcohol'],
             initial_referral_drug_use=data['initial_referral_drug_use'],
             initial_referral_other=data['initial_referral_other'],
             initial_referral_notes=data['initial_referral_notes'],
-            defaulter_referral_mental_health=data['defaulter_referral_mental_health'],
+            defaulter_referral_mental_health=data[
+                'defaulter_referral_mental_health'],
             defaulter_referral_alcohol=data['defaulter_referral_alcohol'],
             defaulter_referral_drugs=data['defaulter_referral_drugs'],
             defaulter_referral_other=data['defaulter_referral_other'],
             defaulter_referral_notes=data['defaulter_referral_notes'],
             reasons_for_returning=data['reasons_for_returning'],
-            )
+        )
         logs.append(dict(info="participant created"))
 
         for gv in data['game_vars']:
             for key in gv.keys():
-                p.save_game_var(key,gv[key])
+                p.save_game_var(key, gv[key])
         logs.append(dict(info="game variables restored"))
 
         intervention = Intervention.objects.all()[0]
-        session_pattern = re.compile(r'Session (?P<index>\d+): (?P<long_title>.+)')
+        session_pattern = re.compile(
+            r'Session (?P<index>\d+): (?P<long_title>.+)')
         for sp in data['session_progress']:
             session_string = sp['session']
             m = session_pattern.match(session_string)
@@ -640,15 +669,21 @@ class Participant(models.Model):
             session_long_title = m.groupdict()['long_title']
             session = intervention.get_session_by_index(session_index)
             if session.long_title != session_long_title:
-                logs.append(dict(warn="session title mismatch. might be a problem"))
+                logs.append(
+                    dict(warn="session title mismatch. might be a problem"))
 
-            ps = ParticipantSession.objects.create(participant=p,session=session,status=sp['status'])
+            ParticipantSession.objects.create(participant=p,
+                                              session=session,
+                                              status=sp['status'])
         for cn in data['counselor_notes']:
             counselor = User.objects.get(username=cn['counselor'])
-            ncn = CounselorNote.objects.create(participant=p,counselor=counselor,notes=cn['notes'])
+            CounselorNote.objects.create(
+                participant=p, counselor=counselor, notes=cn['notes'])
         logs.append(dict(info="session progress restored"))
 
-        activity_pattern = re.compile(r'Session (?P<session_index>\d+): Activity (?P<activity_index>\d+): (?P<long_title>.+)')
+        activity_pattern = re.compile(
+            (r'Session (?P<session_index>\d+): '
+             r'Activity (?P<activity_index>\d+): (?P<long_title>.+)'))
         for ap in data['activity_progress']:
             activity_string = ap['activity']
             m = activity_pattern.match(activity_string)
@@ -658,9 +693,11 @@ class Participant(models.Model):
             session = intervention.get_session_by_index(session_index)
             activity = session.get_activity_by_index(activity_index)
             if activity.long_title != long_title:
-                logs.append(dict(warn="activity title mismatch. might be a problem"))
+                logs.append(
+                    dict(warn="activity title mismatch. might be a problem"))
 
-            pa = ParticipantActivity.objects.create(activity=activity,participant=p,status=ap['status'])
+            ParticipantActivity.objects.create(
+                activity=activity, participant=p, status=ap['status'])
         logs.append(dict(info="activity progress restored"))
 
         if 'session_visits' in data:
@@ -671,12 +708,14 @@ class Participant(models.Model):
                 session_long_title = m.groupdict()['long_title']
                 session = intervention.get_session_by_index(session_index)
                 if session.long_title != session_long_title:
-                    logs.append(dict(warn="session title mismatch. might be a problem"))
+                    logs.append(
+                        dict(
+                            warn="session title mismatch. might be a problem"))
                 SessionVisit.objects.create(
                     participant=p,
                     session=session,
                     logged=sv['timestamp'],
-                    )
+                )
         logs.append(dict(info="session visits restored"))
 
         if 'activity_visits' in data:
@@ -689,17 +728,19 @@ class Participant(models.Model):
                 session = intervention.get_session_by_index(session_index)
                 activity = session.get_activity_by_index(activity_index)
                 if activity.long_title != long_title:
-                    logs.append(dict(warn="activity title mismatch. might be a problem"))
+                    logs.append(
+                        dict(
+                            warn="activity title mismatch. might be a problem"
+                        ))
 
                 ActivityVisit.objects.create(
                     participant=p,
                     activity=activity,
                     logged=sv['timestamp'],
-                    )
+                )
         logs.append(dict(info="activity visits restored"))
 
         return p, logs
-
 
     def all_counselor_notes(self):
         return CounselorNote.objects.filter(participant=self)
@@ -707,9 +748,11 @@ class Participant(models.Model):
     def save_game_var(self, key, value):
         "create or update a game variable"
         try:
-            gv, created = ParticipantGameVar.objects.get_or_create(participant=self, key=key)
+            gv, created = ParticipantGameVar.objects.get_or_create(
+                participant=self, key=key)
         except MultipleObjectsReturned:
-            gv = ParticipantGameVar.objects.filter(participant=self, key=key)[0]
+            gv = ParticipantGameVar.objects.filter(
+                participant=self, key=key)[0]
         gv.value = value
         gv.save()
 
@@ -742,12 +785,19 @@ class Participant(models.Model):
         all_sessions = ClientSession.objects.all()
 
         if self.participantsession_set.count() == 0:
-            # has not visited any sessions yet, 
+            # has not visited any sessions yet,
             # so send them to the first one
             return all_sessions[0]
 
-        complete_sessions = [ps.session for ps in self.participantsession_set.filter(status="complete").order_by("session___order")]
-        incomplete_sessions = [ps.session for ps in self.participantsession_set.filter(status="incomplete").order_by("session___order")]
+        complete_sessions = [
+            ps.session
+            for ps
+            in self.participantsession_set.filter(
+                status="complete").order_by("session___order")]
+        incomplete_sessions = [
+            ps.session for ps
+            in self.participantsession_set.filter(
+                status="incomplete").order_by("session___order")]
 
         if len(incomplete_sessions) > 0:
             # easy, just send them to the first incomplete session
@@ -756,11 +806,11 @@ class Participant(models.Model):
         if len(complete_sessions) == len(all_sessions):
             # they have completed all sessions
             return None
-        
+
         # if we make it here, it means they have some completed sesssions,
-        # but haven't completed them all and there are no incomplete ones. 
+        # but haven't completed them all and there are no incomplete ones.
         # so we get the last completed session and send them to the next
-        return complete_session[-1].get_next()
+        return complete_sessions[-1].get_next()
 
     def next_activity(self):
         """ which activity the participant should be sent to """
@@ -770,9 +820,15 @@ class Participant(models.Model):
             # has not visited any activities yet, so send them to the first one
             return all_activities[0]
 
-        paq = self.participantactivity_set.filter(status="complete").order_by("activity__clientsession___order","activity___order")
+        paq = self.participantactivity_set.filter(
+            status="complete").order_by(
+                "activity__clientsession___order", "activity___order")
         complete_activities = [ps.activity for ps in paq]
-        incomplete_activities = [ps.activity for ps in self.participantactivity_set.filter(status="incomplete").order_by("activity__clientsession___order","activity___order")]
+        incomplete_activities = [
+            ps.activity for ps
+            in self.participantactivity_set.filter(
+                status="incomplete").order_by(
+                    "activity__clientsession___order", "activity___order")]
 
         if len(incomplete_activities) > 0:
             # easy, just send them to the first incomplete activity
@@ -781,9 +837,9 @@ class Participant(models.Model):
         if len(complete_activities) == len(all_activities):
             # they have completed all activities
             return None
-        
+
         # if we make it here, it means they have some completed sesssions,
-        # but haven't completed them all and there are no incomplete ones. 
+        # but haven't completed them all and there are no incomplete ones.
         # so we get the last completed activity and send them to the next
         return complete_activities[-1].get_next()
 
@@ -795,9 +851,10 @@ class ParticipantSession(models.Model):
     status = models.CharField(max_length=256, default="incomplete")
 
     def __unicode__(self):
-        return "%s -> %s [%s]" % (self.participant.name, self.session.long_title, self.status)
+        return "%s -> %s [%s]" % (self.participant.name,
+                                  self.session.long_title, self.status)
 
-    
+
 class ParticipantActivity(models.Model):
     """ participant's progress on an activity """
     participant = models.ForeignKey(Participant)
@@ -805,17 +862,19 @@ class ParticipantActivity(models.Model):
     status = models.CharField(max_length=256, default="incomplete")
 
     def __unicode__(self):
-        return "%s -> %s [%s]" % (self.participant.name, self.activity.long_title, self.status)
+        return "%s -> %s [%s]" % (self.participant.name,
+                                  self.activity.long_title, self.status)
 
 
 class CounselorNote(models.Model):
     """ notes entered by a counselor on a participant"""
-    participant = models.ForeignKey(Participant,null=True)
+    participant = models.ForeignKey(Participant, null=True)
     counselor = models.ForeignKey(User)
     notes = models.TextField(blank=True, null=True, default="")
 
     def __unicode__(self):
         return "%s <-- %s" % (self.participant.name, self.counselor.username)
+
 
 class ParticipantGameVar(models.Model):
     """ One game variable for a Participant"""

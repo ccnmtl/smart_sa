@@ -2,13 +2,12 @@ from django.core.management.base import BaseCommand
 from intervention.models import Intervention
 from problemsolving_game.models import Issue
 from django.conf import settings
-from restclient import GET
 from zipfile import ZipFile
-from cStringIO import StringIO
-from simplejson import dumps,loads
+from simplejson import loads
 import os
 import os.path
 from optparse import make_option
+
 
 class Command(BaseCommand):
     args = ''
@@ -16,7 +15,7 @@ class Command(BaseCommand):
 
     option_list = BaseCommand.option_list + (
         make_option('-d', '--db-only', dest='dbonly',
-                    default=False,help='only pull the database content'),
+                    default=False, help='only pull the database content'),
     )
 
     def handle(self, *args, **options):
@@ -24,8 +23,8 @@ class Command(BaseCommand):
             print "this should never be run on production"
             return
 
-        zipfile = ZipFile(os.path.join("data","intervention.zip"),"r")
-        
+        zipfile = ZipFile(os.path.join("data", "intervention.zip"), "r")
+
         # Load Intervention objects
         json = loads(zipfile.read("interventions.json"))
 
@@ -36,7 +35,7 @@ class Command(BaseCommand):
         for i in json['interventions']:
             intervention = Intervention.objects.create(name="tmp")
             intervention.from_dict(i)
-            
+
         # Load Problem Solving objects
         json = loads(zipfile.read("issues.json"))
 
@@ -45,7 +44,5 @@ class Command(BaseCommand):
 
         print "importing problemsolving prod database content..."
         for i in json['issues']:
-            issue = Issue.objects.create(name="tmp",ordinality=0)
+            issue = Issue.objects.create(name="tmp", ordinality=0)
             issue.from_dict(i)
-    
-            
