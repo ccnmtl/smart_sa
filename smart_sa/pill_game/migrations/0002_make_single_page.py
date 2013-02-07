@@ -1,0 +1,22 @@
+# flake8: noqa
+# encoding: utf-8
+from south.v2 import DataMigration
+from smart_sa.intervention.models import Activity, GamePage
+
+class Migration(DataMigration):
+
+    def forwards(self, orm):
+        activities = Activity.objects.filter(game='pill_game')
+        for a in activities:
+            GamePage.objects.filter(activity=a, _order__gte=1).delete()
+
+
+    def backwards(self, orm):
+        "Write your backwards methods here."
+
+
+    models = {
+        
+    }
+
+    complete_apps = ['pill_game']

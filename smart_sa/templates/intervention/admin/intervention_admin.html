@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block js %}
+  <script type="text/javascript" src="/site_media/js/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
+  <script type="text/javascript" src="/site_media/js/simple_tinymce.js"></script>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+
+{% if intervention %}
+    <div>
+      <a class="admin_link" href="/intervention/{{intervention.id}}/">See client view of session list</a>
+      <a class="admin_link" href="#new" class="jumpnew">Jump to new session</a>
+    </div>
+    <h1>Edit Session list</h1>
+    <h2>Jump to Sessions:</h2>
+    {% if intervention.clientsession_set.count %}
+        <ul>
+        {% for session in intervention.clientsession_set.all %}
+            <li><a href = "/intervention_admin/session/{{session.id }}/">{{ session }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else  %}
+        <p>No sessions defined for this intervention.</p>
+    {% endif %}
+    
+    <h2>Session Details:</h2>
+    
+    <form id="subitem-management" method="POST" action="">
+    {{ formset.management_form }}
+      <input type="submit" value="Save" />
+      <ul class="form-list">
+        {% for form in formset.forms %}
+	  <li {%if form.instance.id %}
+ 	        id="session{{form.instance.id}}"
+	      {%else%}
+	        id="new"
+	      {%endif%}
+	      >
+	    <ul class="field-list">
+	      {{ form.as_ul }}
+	    </ul>
+	  </li>
+        {% endfor %}
+      </ul>
+      <input type="submit" value="Save" />
+    </form>
+
+
+{% else %}
+    <p>No intervention defined...</p>
+{% endif %}
+
+<h4>Download .zip of Intervention Content</h4>
+
+<p><a href="/intervention_admin/zip_download/">download</a></p>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Sessions{% endblock %}
+{% load participant_status %}
+
+{% block breadcrumb-main %}
+<div id="breadcrumb-main">
+	<a href="/intervention/">Home</a> &rarr; Counsel &rarr; Working with <b>{{participant.display_name}}</b> 	   
+</div>
+{% endblock %}
+
+{% block breadcrumb-session %}
+<div id="breadcrumb">
+	<a class="complete current" href="#" id="tab-home">Sessions</a> 
+	<!--
+	<div id="breadcrumb-text">
+		You are currently in: Session #: TITLE &rarr; <span class="breadcrumb-text-current">Activity #: TITLE</span>
+	</div>
+	--></div>
+    {% if participant.is_practice %}
+    <div class="practice-mode">You are in Practice Mode. Changes will not be saved.</div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+      <h2>Sessions</h2>
+
+{% participant_completed_all_sessions_in_intervention participant intervention as all_done %}
+{% if all_done %}
+<div id="closemessage">
+
+	<h3>Congratulations!</h3>
+
+	<p style="text-align: center; padding-bottom: 20px;">
+	You've completed all the sessions!
+	</p>
+
+	<a style="display: inline;" class="action" href="#" onclick="document.getElementById('closemessage').style.display = 'none';">Close this Window</a>
+	
+</div>
+{% endif %}
+
+        <p class="instructions">
+       Select a session so <b>{{participant.display_name}}</b> can get started!
+	  </p>
+
+	<div id="navigator">
+	  <ul class="primary">
+        {% for session in intervention.clientsession_set.all %}
+	{% if not session.defaulter or participant.defaulter %}
+	   <li><a id="session{{session.index }}" 
+		  class="session 
+			 {% get_participant_status participant session %}
+			 {% ifequal session.id next_session.id %}hilite{%else%}default{% endifequal %}" 
+		  href="/session/{{session.id}}/">
+	     {{ session.long_title }}
+	    </a></li>
+         {% endif %}
+        {% endfor %}
+	  </ul>
+	  <ul class="secondary" style="background-color: #fff;">
+	  </ul>
+	</div>
+     
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {{ block.super }}
+    {%if errors %}
+      <b style="font-size:14px;color:red;">{{errors}}</b>
+    {%endif%}
+    <h1>Upload Backup File to Server</h1>
+    <p>
+      From the admin screen of your laptop, you saved a special
+      'Backup File.' Upload that file here. This will save all client
+      data to the research database and will also allow you to restore
+      the data on your laptop should you need to do so.
+    </p>
+    <p>
+      The contents of the backup file are encrypted, so no one spying
+      on this connection should be able to read the contents.
+    </p>
+    <form enctype="multipart/form-data" method="POST">
+      <input type="file" name="backup" />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <h2>Previous Backups</h2>
+    <ul>
+    {%for b in backups %}
+      <li>
+	{{b.created}} <a href="restore?id={{b.id}}">download restore file</a>
+      </li>
+    {%endfor%}
+    </ul>
+    <h3>Instructions for restoral</h3>
+    <ol>
+      <li>Save the appropriate download here as <b>restore.html</b></li>
+      <li>Copy it to the laptop, putting it in your "My Documents" folder.  
+      NOTE: You may have to overwrite the current file there
+      </li>
+      <li>Do <b>NOT</b> open the file directly</li>
+      <li>Open Masivukeni as usual.</li>
+      <li>Do NOT log in immediately.  Click 'Go to restore.html in My Documents' link</li>
+      <lh>This will open the restore file. It is necessary to open this file once before going through the rest of the restore procedure. </lh>
+      <li>Click the link to 'Administrator Log In'</li>
+      <li>Log in with your password</li>
+      <li>Look for Restore From Backup and click the button that says 'show available backups'. You should see a link that includes today's date. Click this link. The restore process will now begin. This may take up to two minutes. Do not reload or leave the page until a message appears that says the data is restored.</li>
+    </ol>
+    
+    <br />
+    <br />
+    <a href="/intervention_admin/1/">Administer Intervention Content</a>
+
+{% endblock %}
