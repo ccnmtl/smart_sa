@@ -1,0 +1,16 @@
+{% if main_intervention %}
+    <div>{{ main_intervention }}</div>
+    <div>Sessions:</div>
+    {% if main_intervention.clientsession_set.count %}
+        <ul>
+        {% for session in main_intervention.clientsession_set.all %}
+            <li>{{ session }}</li>
+        {% endfor %}
+        </ul>
+    {% else  %}
+        <p>No sessions defined for this intervention.</p>
+    {% endif %}
+{% else %}
+    <p>No intervention defined.</p>
+{% endif %}
+

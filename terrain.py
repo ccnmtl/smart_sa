@@ -2,7 +2,7 @@
 from lettuce.django import django_url
 from lettuce import before, after, world, step
 from django.test import client
-from intervention.models import Intervention, Participant, ClientSession, Activity
+from smart_sa.intervention.models import Intervention, Participant, ClientSession, Activity
 import sys
 
 import time

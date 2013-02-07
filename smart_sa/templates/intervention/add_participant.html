@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Add Participant{% endblock %}
+{% block breadcrumb-main %}
+	<div id="breadcrumb-main">
+	<a href="/intervention/">Home</a> &rarr; <a href="/manage/">Administrate</a> &rarr; Add Participant
+	</div>
+{% endblock %}
+
+{% block content %}
+<h2>Add Participant</h2>
+{% if error %}
+<p class="error">{{error}}</p>
+{% endif %}
+<form action="." method="post">
+<p><b>Name</b><br />
+<input type="text" name="name" id="name" value="{{form_data.name}}"/></p>
+<p><b>Participant Password</b><br />
+<input type="text" name="id_number" id="id_number" value="{{form_data.id_number}}"/></p>
+<p><b>Patient ID</b> (for linking with other research data)<br />
+<input type="text" name="patient_id" id="patient_id" value="{{form_data.patient_id}}"/></p>
+<p><b>Defaulter?</b> <input type="checkbox" name="defaulter" /></p>
+<p><b>Active?</b> <input type="checkbox" name="status" checked="checked" /></p>
+<p><b>Gender</b> <label><input type="radio" name="gender" value="male"
+			       checked="checked" />Male</label>
+<label><input type="radio" name="gender" value="female" />Female</label></p>
+<p><b>Clinical Notes</b><br />
+<textarea name="clinical_notes" rows="5" cols="70">{{form_data.clinical_notes}}</textarea></p>
+<input type="submit" value="add" />
+</form>
+
+{% endblock %}

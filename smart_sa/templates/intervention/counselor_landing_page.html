@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %} {{user}}'s Home Page{% endblock %}
+
+{% block breadcrumb-main %}
+	<div id="breadcrumb-main">
+	<a href="/intervention/">Home</a>
+	</div>
+{% endblock %}
+
+{% block content %}
+      <h2>
+	<span id="user_fullname">{{request.user.username}}'s Home Page</span>
+      </h2>
+      
+      <div align="center">
+      
+	  <table id="choices">
+	    <col id="buttons" />
+	    <col id="text" />
+		
+		{% if request.user.is_superuser %}		
+		{% if deployment.is_online %}
+		<tr>
+		 <td>
+		<a class="action" href="/intervention_admin/1/">Edit Content</a>
+		 </td>
+		 <td>
+		Administrators can add and edit content for the intervention here.
+		 </td>
+		</tr>
+		{% endif %}
+		{% endif %}
+		
+		
+	    <tr>
+	      <td>
+		<a class="action" href="/clear_participant/?next={{intervention.get_absolute_url}}">Counsel</a>
+	      </td>
+	      <td>
+		Counselors and administrators can counsel participants.
+	      </td>
+	    </tr>
+		
+	    <tr>
+	      <td>
+		<a class="action" href="/practice/{{intervention.id}}/">Practice</a>
+	      </td>
+	      <td>
+		Counselors and administrators can practice their counselling skills.
+	      </td>
+	    </tr>
+
+	    <tr>
+	      <td>
+		<a class="action" href="/manage/">Administrate</a>
+	      </td>
+	      <td class="disabled">
+		Counselors and administrators can manage participant information.
+	      </td>
+	    </tr>
+
+{% if request.user.is_superuser %}		
+
+
+{% if deployment.is_online %}
+	    <!--
+	    <tr>
+	      <td>
+		<a class="action" href="/manage/report/">Report</a>
+	      </td>
+	      <td class="disabled">
+		Administrators can create reports.
+	      </td>
+	    </tr>
+
+	   <tr>
+	      <td>
+		<a class="action" href="">Upload</a>
+	      </td>
+	      <td class="disabled">
+		Administrators can send data.
+	      </td>
+	    </tr>
+		-->
+{% endif %}
+
+
+{% endif %}		
+		
+	  </table>
+	  
+      </div>
+{% endblock %}
