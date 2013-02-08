@@ -53,6 +53,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 APPEND_SLASH = True
 
@@ -96,6 +97,7 @@ INSTALLED_APPS = (
     'lettuce.django',
     'django_nose',
     'smoketest',
+    'debug_toolbar',
 )
 
 
@@ -151,6 +153,19 @@ PROD_MEDIA_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/multimedia/"
 DISABLE_OFFLINE = False
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+INTERNAL_IPS = ('127.0.0.1', )
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+)
 
 try:
     from release_id import LAST_GIT_HEAD
