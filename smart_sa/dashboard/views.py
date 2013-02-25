@@ -96,6 +96,24 @@ class Participant(object):
         return len([ap for ap in self.data['activity_progress']
                     if ap['status'] == 'complete'])
 
+    def num_activity_visits(self):
+        if 'activity_visits' in self.data:
+            return len(self.data['activity_visits'])
+        else:
+            return 0
+
+    def num_session_visits(self):
+        if 'session_visits' in self.data:
+            return len(self.data['session_visits'])
+        else:
+            return 0
+
+    def session_visits(self):
+        return self.data['session_visits']
+
+    def activity_visits(self):
+        return self.data['activity_visits']
+
 
 @render_to("dashboard/index.html")
 @login_required
