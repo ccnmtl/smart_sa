@@ -3,6 +3,11 @@
 {% block content %}
 <h1>Admin Data Dashboard</h1>
 
+{% if missing_deployments %}
+<h2>Missing Deployment Data</h2>
+<p>Please check to make sure you have uploaded backups for each
+	deployment</p>
+{% else %}
 <h2>Data Summary</h2>
 
 <table border="1">
@@ -66,4 +71,5 @@
 </table>
 {% endfor %}
 
+{% endif %}
 {% endblock %}

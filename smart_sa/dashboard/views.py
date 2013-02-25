@@ -100,5 +100,14 @@ class Participant(object):
 @render_to("dashboard/index.html")
 @login_required
 def index(request):
-    clinics = [ClinicData(d) for d in DEPLOYMENTS]
-    return dict(clinics=clinics)
+    missing_deployments = False
+    for deployment in DEPLOYMENTS:
+        if Backup.objects.filter(
+            deployment=deployment
+            ).count() < 1:
+            missing_deployments = True
+    if not missing_deployments:
+        clinics = [ClinicData(d) for d in DEPLOYMENTS]
+        return dict(clinics=clinics)
+    else:
+        return dict(missing_deployments=missing_deployments)
