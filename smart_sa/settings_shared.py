@@ -23,7 +23,7 @@ DATABASES = {
         }
 }
 
-if 'test' in sys.argv:
+if 'test' in sys.argv or 'jenkins' in sys.argv:
     DATABASES = {
         'default' : {
             'ENGINE' : 'django.db.backends.sqlite3',
@@ -103,6 +103,7 @@ INSTALLED_APPS = (
     'smoketest',
     'debug_toolbar',
     'django_statsd',
+    'django_jenkins',
 )
 
 STATSD_CLIENT = 'statsd.client'
@@ -120,6 +121,24 @@ NOSE_ARGS = [
     '--cover-package=smart_sa',
 ]
 
+JENKINS_TASKS = (
+    'django_jenkins.tasks.run_pylint',
+    'django_jenkins.tasks.with_coverage',
+    'django_jenkins.tasks.django_tests',
+    'django_jenkins.tasks.run_pep8',
+    'django_jenkins.tasks.run_pyflakes',
+)
+PROJECT_APPS = [
+    'smart_sa.assessmentquiz_task',
+    'smart_sa.lifegoal_task',
+    'smart_sa.pill_game',
+    'smart_sa.island_game',
+    'smart_sa.ssnmtree_game',
+    'smart_sa.watchvideo_game',
+    'smart_sa.problemsolving_game',
+    'smart_sa.intervention',
+    'smart_sa.dashboard',
+]
 
 SOUTH_AUTO_FREEZE_APP = True
 THUMBNAIL_SUBDIR = "thumbs"
