@@ -104,7 +104,7 @@ def index(request):
     for deployment in DEPLOYMENTS:
         if Backup.objects.filter(
             deployment=deployment
-            ).count() < 1:
+        ).count() < 1:
             missing_deployments = True
     if not missing_deployments:
         clinics = [ClinicData(d) for d in DEPLOYMENTS]

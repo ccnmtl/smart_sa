@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.test import client
 from smart_sa.dashboard.views import Participant
 
 
