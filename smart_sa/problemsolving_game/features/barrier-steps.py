@@ -79,13 +79,13 @@ def then_barrier_number_does_not_have_state(step, number, state):
 @step(u'there is no issue selector')
 def there_is_no_issue_selector(step):
     i = world.firefox.find_element_by_id('issue-selector')
-    assert i.is_displayed() == False, "Issue selector should be invisible now"
+    assert not i.is_displayed(), "Issue selector should be invisible now"
 
 
 @step(u'there is an issue selector')
 def there_is_an_issue_selector(step):
     i = world.firefox.find_element_by_id('issue-selector')
-    assert i.is_displayed() == True, "Issue selector should be visible now"
+    assert i.is_displayed(), "Issue selector should be visible now"
 
 
 @step(u'i navigate "([^"]*)"')
@@ -103,44 +103,44 @@ def i_navigate_direction(step, direction):
 @step(u'there is no left arrow')
 def there_is_no_left_arrow(step):
     i = world.firefox.find_element_by_css_selector('#previous_issue img')
-    assert i.is_displayed() == False, "Left arrow should be invisible now"
+    assert not i.is_displayed(), "Left arrow should be invisible now"
 
 
 @step(u'there is a left arrow')
 def there_is_a_left_arrow(step):
     i = world.firefox.find_element_by_css_selector('#previous_issue img')
-    assert i.is_displayed() == True, "Left arrow should be visible now"
+    assert i.is_displayed(), "Left arrow should be visible now"
 
 
 @step(u'there is no right arrow')
 def there_is_no_right_arrow(step):
     i = world.firefox.find_element_by_css_selector('#next_issue img')
-    assert i.is_displayed() == False, "right arrow should be invisible now"
+    assert not i.is_displayed(), "right arrow should be invisible now"
 
 
 @step(u'there is a right arrow')
 def there_is_a_right_arrow(step):
     i = world.firefox.find_element_by_css_selector('#next_issue img')
-    assert i.is_displayed() == True, "right arrow should be visible now"
+    assert i.is_displayed(), "right arrow should be visible now"
 
 
 @step(u'there is no action plan button')
 def there_is_no_action_plan_button(step):
     i = world.firefox.find_element_by_css_selector('#actionplan a')
-    assert i.is_displayed() == False, "Make Plan should be invisible now"
+    assert not i.is_displayed(), "Make Plan should be invisible now"
 
 
 @step(u'Then there is a Make Plan button')
 def then_there_is_a_make_plan_button(step):
     i = world.firefox.find_element_by_css_selector('#actionplan a')
-    assert i.is_displayed() == True, "element #actionplan a is visible"
+    assert i.is_displayed(), "element #actionplan a is visible"
     assert i.text == "Make Plan", i.text
 
 
 @step(u'Then there is an Edit Plan button')
 def then_there_is_an_edit_plan_button(step):
     i = world.firefox.find_element_by_css_selector('#actionplan a')
-    assert i.is_displayed() == True, "element #actionplan a is visible"
+    assert i.is_displayed(), "element #actionplan a is visible"
     assert i.text == "Edit Plan", i.text
 
 
@@ -148,14 +148,14 @@ def then_there_is_an_edit_plan_button(step):
 def then_there_is_no_action_plan_form(step):
     time.sleep(1)
     elt = world.firefox.find_element_by_id('actionplan_form')
-    assert (elt.is_displayed() == False,
+    assert (not elt.is_displayed(),
             "element #actionplan_form should not be visible")
 
 
 @step(u'Then there is an Action Plan form')
 def then_there_is_an_action_plan_form(step):
     elt = world.firefox.find_element_by_id('actionplan_form')
-    assert (elt.is_displayed() == True,
+    assert (elt.is_displayed(),
             "element #actionplan_form should be visible")
 
 
@@ -176,7 +176,7 @@ def then_elementId_reads_text(step, elementId, text):
 def then_i_can_specify_my_issue(step):
     elt = world.firefox.find_element_by_css_selector(
         'div.issue-subtext textarea')
-    assert (elt.is_displayed() == True,
+    assert (elt.is_displayed(),
             "element div.issue-subtext textarea should be visible")
 
 
@@ -184,7 +184,7 @@ def then_i_can_specify_my_issue(step):
 def then_i_cannot_specify_my_issue(step):
     elt = world.firefox.find_element_by_css_selector(
         'div.issue-subtext textarea')
-    assert (elt.is_displayed() == False,
+    assert (not elt.is_displayed(),
             "element div.issue-subtext textarea should be invisible")
 
 

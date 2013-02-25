@@ -26,7 +26,7 @@ class ClinicData(object):
         self.deployment = deployment
         self.backup = Backup.objects.filter(
             deployment=deployment
-            ).order_by("-created")[0]
+        ).order_by("-created")[0]
         self.created = self.backup.created
         self.data = loads(self.backup.json_data)
 
@@ -67,17 +67,17 @@ class Participant(object):
             ["-", "X"][int(self.data['initial_referral_drug_use'])],
             ["-", "X"][int(self.data['initial_referral_mental_health'])],
             ["-", "X"][int(self.data['initial_referral_other'])],
-            )
+        )
 
     def defaulter_status(self):
         if not self.data['defaulter']:
             return "False"
         else:
             return "True: %s|%s|%s|%s" % (
-            ["-", "X"][int(self.data['defaulter_referral_alcohol'])],
-            ["-", "X"][int(self.data['defaulter_referral_drugs'])],
-            ["-", "X"][int(self.data['defaulter_referral_mental_health'])],
-            ["-", "X"][int(self.data['defaulter_referral_other'])],
+                ["-", "X"][int(self.data['defaulter_referral_alcohol'])],
+                ["-", "X"][int(self.data['defaulter_referral_drugs'])],
+                ["-", "X"][int(self.data['defaulter_referral_mental_health'])],
+                ["-", "X"][int(self.data['defaulter_referral_other'])],
             )
 
     def has_counselor_notes(self):

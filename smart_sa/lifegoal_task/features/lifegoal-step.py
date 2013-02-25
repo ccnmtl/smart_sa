@@ -12,7 +12,7 @@ def get_input(name):
         elt = world.firefox.find_element_by_css_selector("div#step4 input")
     elif name == "Goal":
         elt = world.firefox.find_element_by_css_selector("div#goal input")
-    assert elt != None, "%s does not exist" % input
+    assert elt, "%s does not exist" % input
     assert elt.get_attribute('type') == 'text'
     return elt
 

@@ -11,7 +11,7 @@ class WatchVideoGame1(GameInterface):
             'video': 'video/%s.mp4' % page_id,
             'width': 530,  # 320,
             'height': 413,  # 255,
-            }
+        }
         return ('watchvideo_game/video.html', game_context)
 
     def variables(self, page_id=None):

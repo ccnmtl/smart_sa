@@ -1,3 +1,4 @@
+# flake8: noqa
 from settings_shared import *
 TEMPLATE_DIRS = (
     "/var/www/masivukeni2/smart_sa/smart_sa/templates",

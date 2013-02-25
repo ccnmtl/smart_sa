@@ -16,7 +16,7 @@ class Issue(models.Model):
             ordinality=self.ordinality,
             subtext=self.subtext,
             example=self.example
-            )
+        )
 
     def from_dict(self, d):
         self.name = d['name']

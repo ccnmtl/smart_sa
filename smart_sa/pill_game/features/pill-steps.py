@@ -57,13 +57,13 @@ def there_are_n_pills(step, n):
 @step(u'There is a pill named "([^"]*)"')
 def there_is_a_pill_named_name(step, name):
     pill = find_pill(name)
-    assert pill != None, "No pill named %s found" % name
+    assert pill is not None, "No pill named %s found" % name
 
 
 @step(u'There is no pill named "([^"]*)"')
 def there_is_no_pill_named_name(step, name):
     pill = find_pill(name)
-    assert pill == None, "Pill named %s found" % name
+    assert pill is None, "Pill named %s found" % name
 
 
 @step(u'There is not an Add Pill button')
@@ -79,29 +79,30 @@ def there_is_not_an_add_pill_button(step):
 @step(u'There is an Add Pill button')
 def there_is_an_add_pill_button(step):
     i = world.firefox.find_element_by_id('add-a-pill')
-    assert i != None
+    assert i is not None
 
 
 @step(u'I click Add Pill')
 def i_click_add_pill_button(step):
     i = world.firefox.find_element_by_id('add-a-pill')
-    assert i != None
+    assert i is not None
     i.click()
 
 
 @step(u'When I drop "([^"]*)" onto "([^"]*)"')
 def when_i_drop_pill_onto_time(step, pill, time):
     pill = find_pill(pill)
-    assert pill != None, "No pill named %s found." % pill
+    assert pill is not None, "No pill named %s found." % pill
 
     # get the draggable span within
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
-    assert draggable != None, "This pill is not constructed properly" % pill
+    assert (draggable is not None,
+            "This pill is not constructed properly" % pill)
 
     bucket = get_bucket(time)
     assert (
-        bucket != None,
+        bucket is not None,
         ("Time slot must be specified as day or evening. "
          "No time slot called %s found" % time))
     action_chains = ActionChains(world.firefox)
@@ -119,10 +120,11 @@ def when_i_drop_pill_index_onto_time(step, index, time):
     pill = a[idx]
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
-    assert draggable != None, "This pill is not constructed properly" % pill
+    assert (draggable is not None,
+            "This pill is not constructed properly" % pill)
     bucket = get_bucket(time)
     assert (
-        bucket != None,
+        bucket is not None,
         ("Time slot must be specified as day or evening. "
          "No time slot called %s found" % time))
     action_chains = ActionChains(world.firefox)
@@ -132,16 +134,17 @@ def when_i_drop_pill_index_onto_time(step, index, time):
 @step(u'Then there is (\d+) "([^"]*)" in "([^"]*)"')
 def then_there_is_count_pill_in_time(step, count, pill, time):
     pill = find_pill(pill)
-    assert pill != None, "No pill named %s found. %s" % (pill, count)
+    assert pill is not None, "No pill named %s found. %s" % (pill, count)
     # get the draggable span within
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
-    assert draggable != None, "This pill is not constructed properly" % pill
+    assert (draggable is not None,
+            "This pill is not constructed properly" % pill)
     # get the data-id
     data_id = draggable.get_attribute("data-id")
     bucket = get_bucket(time)
     assert (
-        bucket != None,
+        bucket is not None,
         ("Time slot must be specified as day or evening. "
          "No time slot called %s found" % time))
 
@@ -160,7 +163,7 @@ def then_there_is_count_pill_in_time(step, count, pill, time):
 def then_there_are_no_pills_in_timeslot(step, timeslot):
     bucket = get_bucket(timeslot)
     assert (
-        bucket != None,
+        bucket is not None,
         ("Time slot must be specified as day or evening. "
          "No time slot called %s found" % time))
 
@@ -175,7 +178,7 @@ def then_there_are_no_pills_in_timeslot(step, timeslot):
 def then_there_are_count_pills_in_timeslot(step, count, timeslot):
     bucket = get_bucket(timeslot)
     assert (
-        bucket != None,
+        bucket is not None,
         ("Time slot must be specified as day or evening. No time slot "
          "called %s found" % time))
 
@@ -190,19 +193,20 @@ def then_there_are_count_pills_in_timeslot(step, count, timeslot):
 def when_i_drag_pill_from_time1_to_time2(step, pill, time1, time2):
     # get the data id for this pill
     pill = find_pill(pill)
-    assert pill != None, "No pill named %s found." % pill
+    assert pill is not None, "No pill named %s found." % pill
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
-    assert draggable != None, "This pill is not constructed properly" % pill
+    assert (draggable is not None,
+            "This pill is not constructed properly" % pill)
     data_id = draggable.get_attribute("data-id")
     bucket = get_bucket(time1)
     assert (
-        bucket != None,
+        bucket is not None,
         ("Source time slot must be specified as day or evening. "
          "No time slot called %s found" % time))
     dest = get_bucket(time2)
     assert (
-        dest != None,
+        dest is not None,
         ("Destination time slot must be specified as day or evening. "
          "No time slot called %s found" % time))
 
@@ -227,30 +231,32 @@ def when_i_drag_pill_from_time1_to_time2(step, pill, time1, time2):
 def when_i_drag_pill_off_time(step, pill, time):
         # get the data id for this pill
     pill = find_pill(pill)
-    assert pill != None, "No pill named %s found." % (pill)
+    assert pill is not None, "No pill named %s found." % (pill)
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
-    assert draggable != None, "This pill is not constructed properly" % pill
+    assert (draggable is not None,
+            "This pill is not constructed properly" % pill)
     data_id = draggable.get_attribute("data-id")
 
     bucket = get_bucket(time)
     assert (
-        bucket != None,
+        bucket is not None,
         ("Source time slot must be specified as day or evening. "
          "No time slot called %s found" % time))
 
     dest = world.firefox.find_element_by_id('pill-game-container')
     assert (
-        dest != None,
+        dest is not None,
         ("Destination time slot must be specified as day or evening. "
          "No time slot called %s found" % time))
 
     a = bucket.find_elements_by_css_selector('span.trashable')
     assert (
         len(a) > 0,
-        ("Expected at least 1 pill in bucket %s, "
-         "instead it contains %s pills" % (
-            bucket, len(a))))
+        (
+            "Expected at least 1 pill in bucket %s, "
+            "instead it contains %s pills" % (
+                bucket, len(a))))
 
     action = False
     for dropped in a:
@@ -272,12 +278,12 @@ def specify_timeslot_time_as_time(step, timeslot, time):
     elif timeslot == "evening":
         id = "night_pills_time"
     assert (
-        id != None,
+        id is not None,
         ("Time slot must be specified as day or evening. "
          "No time slot called %s found" % timeslot))
 
     elt = world.firefox.find_element_by_id(id)
-    assert elt != None, "Select element not found %s" % id
+    assert elt is not None, "Select element not found %s" % id
 
     select = Select(elt)
     select.select_by_visible_text(time)
@@ -291,12 +297,12 @@ def then_the_timeslot_time_is_time(step, timeslot, time):
     elif timeslot == "evening":
         id = "night_pills_time"
     assert (
-        id != None,
+        id is not None,
         ("Time slot must be specified as day or evening. "
          "No time slot called %s found" % timeslot))
 
     elt = world.firefox.find_element_by_id(id)
-    assert elt != None, "Select element not found %s" % id
+    assert elt is not None, "Select element not found %s" % id
 
     value = elt.get_attribute("value")
     assert (

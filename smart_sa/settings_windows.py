@@ -1,3 +1,4 @@
+# flake8: noqa
 from settings_shared import *
 TEMPLATE_DIRS = (
     "C:/smart_sa/templates/",

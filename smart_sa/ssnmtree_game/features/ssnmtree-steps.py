@@ -53,7 +53,7 @@ def when_i_name_the_circle_name(step, name):
 def when_i_click_the_circle(step):
     world.firefox.find_element_by_id("top1-fruit")
     elt = world.firefox.find_element_by_css_selector("div.circle")
-    assert elt != None
+    assert elt is not None
     elt.click()
 
 
@@ -65,7 +65,7 @@ def then_the_circle_is_color(step, color):
         time.sleep(3)
         elt = world.firefox.find_element_by_id("top1-fruit")
 
-    assert elt != None
+    assert elt is not None
 
     if color == "gold":
         gold = elt.find_element_by_css_selector("div.ripe.turned-on")
@@ -83,7 +83,7 @@ def then_the_circle_is_color(step, color):
 @step(u'Then the circle is not "([^"]*)"')
 def then_the_circle_is_not_color(step, color):
     elt = world.firefox.find_element_by_id("top1-fruit")
-    assert elt != None
+    assert elt is not None
     try:
         if color == "gold":
             elt.find_element_by_css_selector("div.ripe.turned-on")
