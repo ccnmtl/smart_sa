@@ -143,6 +143,9 @@ class Participant(object):
         sessions.sort(key=lambda s: s['session'])
         return strip_session_title(sessions[-1])
 
+    def reasons_for_returning(self):
+        return self.data.get('reasons_for_returning', '')
+
 
 
 @render_to("dashboard/index.html")
