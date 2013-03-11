@@ -18,6 +18,17 @@ DEPLOYMENTS = [
     'Town 2',
 ]
 
+# how many activities, per session we know exist
+# so we can go through and see which ones a participant
+# may have skipped
+EXPECTED_ACTIVITIES = [
+    18,
+    13,
+    22,
+    22,  # defaulter 1
+    17,  # defaulter 2
+]
+
 
 class ClinicData(object):
     """ a more useful class for dealing with clinic data
@@ -111,9 +122,12 @@ class Participant(object):
         return len([sp for sp in self.data['session_progress']
                     if sp['status'] == 'incomplete'])
 
+    def completed_activities(self):
+        return [ap for ap in self.data['activity_progress']
+                if ap['status'] == 'complete']
+
     def num_completed_activities(self):
-        return len([ap for ap in self.data['activity_progress']
-                    if ap['status'] == 'complete'])
+        return len(self.completed_activities())
 
     def num_activity_visits(self):
         if 'activity_visits' in self.data:
@@ -143,9 +157,34 @@ class Participant(object):
         sessions.sort(key=lambda s: s['session'])
         return strip_session_title(sessions[-1])
 
+    def max_completed_session_number(self):
+        return int(self.most_recently_completed_session()[-1])
+
     def reasons_for_returning(self):
         return self.data.get('reasons_for_returning', '')
 
+    def skipped_activities(self):
+        """ any skipped activities up through end of most
+        recent completed session """
+        if self.num_completed_sessions() < 1:
+            return ""
+        all_skipped = []
+        for s in range(0, self.max_completed_session_number()):
+            expected = EXPECTED_ACTIVITIES[s]
+            for a in range(expected):
+                if not self.is_activity_completed(s + 1, a + 1):
+                    all_skipped.append(
+                        "Session %d: Activity %d" % (s + 1, a + 1))
+        return ",".join(all_skipped)
+
+    def is_activity_completed(self, session, activity):
+        """ did this user complete the specified session/activity """
+        for ap in self.completed_activities():
+            if ap['activity'].startswith(
+                    "Session %d: Activity %d:" % (session, activity)):
+                return True
+        else:
+            return False
 
 
 @render_to("dashboard/index.html")
