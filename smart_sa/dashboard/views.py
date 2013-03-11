@@ -44,6 +44,15 @@ class ClinicData(object):
                 for p in self.data['participants'] if p['patient_id']]
 
 
+def strip_session_title(session):
+    """ session titles are kind of ugly, like:
+        Session 2: Session 2: Learning About HIV Treatment
+    we let them put the number in there twice and didn't catch it
+    before it launched. For the dashboard page, just "Session 2"
+    should be identifying enough """
+    return session['session'][:9]
+
+
 class Participant(object):
     """ more useful object than the raw dict form """
     def __init__(self, data):
@@ -91,9 +100,12 @@ class Participant(object):
         return len([cn for cn in self.data['counselor_notes']
                     if cn['notes'] != u'']) > 0
 
+    def completed_sessions(self):
+        return [sp for sp in self.data['session_progress']
+                if sp['status'] == 'complete']
+
     def num_completed_sessions(self):
-        return len([sp for sp in self.data['session_progress']
-                    if sp['status'] == 'complete'])
+        return len(self.completed_sessions())
 
     def num_incomplete_sessions(self):
         return len([sp for sp in self.data['session_progress']
@@ -123,6 +135,14 @@ class Participant(object):
 
     def clinical_notes(self):
         return self.data.get('clinical_notes', '')
+
+    def most_recently_completed_session(self):
+        if self.num_completed_sessions() < 1:
+            return None
+        sessions = self.completed_sessions()
+        sessions.sort(key=lambda s: s['session'])
+        return strip_session_title(sessions[-1])
+
 
 
 @render_to("dashboard/index.html")
