@@ -52,6 +52,9 @@ class Participant(object):
     def patient_id(self):
         return self.data['patient_id']
 
+    def pprint(self):
+        return pprint.pformat(self.data)
+
     def id_number(self):
         return self.data['id_number']
 
@@ -79,6 +82,10 @@ class Participant(object):
                 ["-", "X"][int(self.data['defaulter_referral_mental_health'])],
                 ["-", "X"][int(self.data['defaulter_referral_other'])],
             )
+
+    def counselor_notes(self):
+        return [cn for cn in self.data.get('counselor_notes', [])
+                if cn['notes'] != u'']
 
     def has_counselor_notes(self):
         return len([cn for cn in self.data['counselor_notes']
@@ -113,6 +120,9 @@ class Participant(object):
 
     def activity_visits(self):
         return self.data['activity_visits']
+
+    def clinical_notes(self):
+        return self.data.get('clinical_notes', '')
 
 
 @render_to("dashboard/index.html")

@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<style type="text/css">
+th { vertical-align: top;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+
+}
+td { vertical-align: top;
+  border-bottom: 1px solid #999;
+  border-right: 1px solid #999;
+}
+
+</style>
+
+{% endblock %}
+
 {% block content %}
 <h1>Admin Data Dashboard</h1>
 
@@ -37,7 +53,7 @@
 <h3>{{clinic.deployment}}</h3>
 
 
-<table border="1">
+<table style="background-color: #fff">
 	<thead>
 		<tr>
 			<th>patient id</th>
@@ -46,16 +62,46 @@
 			<th>buddy?</th>
 			<th>Initial Referral<br />(A|D|M|O)</th>
 			<th>Defaulter?<br />(A|D|M|O)</th>
-			<th>Counselor Notes?</th>
+			<th>Questions &amp; Concerns</th>
+      <th>Clinical Notes</th>
 			<th># completed sessions</th>
 			<th># incomplete sessions</th>
 			<th># completed activities</th>
 			<th># session visits</th>
 			<th># activity visits</th>
+      <th>most recent completed session and that session's date</th>
+      <th>any skipped activities up through end of most recent
+      completed session (comma separated)</th>
+			<th>session durations for completed sessions (comma
+			separated)</th>
+			<th>mood, alcohol, drug scores (comma separated)</th>
+			<th>number of names on tree</th>
+			<th>number of names on tree marked with support</th>
+			<th>number of names of tree marked with status</th>
+			<th>number of names on tree marked with both support and
+			status</th>
+			<th>referral boxes checked</th>
+			<th>referral comments</th>
+			<th>your arvs: names of pills entered</th>
+
+			<th>Session durations for 4 and or 5</th>
+			<th>reasons for returning</th>
+			<th>s4/5 mood, alcohol, drug scores (comma separated)</th>
+			<th>s4/5 your arvs: names of pills (comma separated)</th>
+			<th>s4/5 questions and concerns</th>
+			<th>s4/5 number of names on tree</th>
+			<th>barriers selected (comma separated)</th>
+			<th>barriers with plans (comma separated)</th>
+
 		</tr>
 	</thead>
 	<tbody>
 {% for participant in clinic.participants %}
+{% comment %}
+    <tr>
+      <td colspan="13"><pre>{{participant.pprint}}</pre></td>
+    </tr>
+{% endcomment %}
     <tr>
 			<td>{{participant.patient_id}}</td>
 			<td>{{participant.id_number}}</td>
@@ -63,7 +109,16 @@
 			<td>{{participant.has_buddy}}</td>
 			<td>{{participant.initial_referral_status}}</td>
 			<td>{{participant.defaulter_status}}</td>
-			<td>{{participant.has_counselor_notes}}</td>
+			<td>
+{% if participant.has_counselor_notes %}
+<ul>
+{% for cn in participant.counselor_notes %}
+<li>{{cn.notes}}</li>
+{% endfor %}
+</ul>
+{% endif %}
+			</td>
+      <td>{{participant.clinical_notes}}</td>
 			<td>{{participant.num_completed_sessions}}</td>
 			<td>{{participant.num_incomplete_sessions}}</td>
 			<td>{{participant.num_completed_activities}}</td>
@@ -84,7 +139,27 @@
 				{% endfor %}
 				</ul>
 				{% endif %}
-</td>
+      </td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
+			<td>Not Implemented</td>
 		</tr>
 {% endfor %}
   </tbody>
