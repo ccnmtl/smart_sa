@@ -111,38 +111,20 @@ td { vertical-align: top;
 			<td>{{participant.defaulter_status}}</td>
 			<td>
 {% if participant.has_counselor_notes %}
-<ul>
 {% for cn in participant.counselor_notes %}
-<li>{{cn.notes}}</li>
+{{cn.notes}}
 {% endfor %}
-</ul>
 {% endif %}
 			</td>
       <td>{{participant.clinical_notes}}</td>
 			<td>{{participant.num_completed_sessions}}</td>
 			<td>{{participant.num_incomplete_sessions}}</td>
 			<td>{{participant.num_completed_activities}}</td>
-			<td>{{participant.num_session_visits}}
-				{% if participant.num_session_visits %}
-				<ul>
-				{% for sv in participant.session_visits %}
-				<li>{{sv.timestamp}}: {{sv.session}}</li>
-				{% endfor %}
-				</ul>
-				{% endif %}
-			</td>
-			<td>{{participant.num_activity_visits}}
-				{% if participant.num_activity_visits %}
-				<ul>
-				{% for av in participant.activity_visits %}
-				<li>{{av.timestamp}}: {{av.activity}}</li>
-				{% endfor %}
-				</ul>
-				{% endif %}
-      </td>
+			<td>{{participant.num_session_visits}}</td>
+			<td>{{participant.num_activity_visits}}</td>
 			<td>{{ participant.most_recently_completed_session }} [Date not implemented yet]</td>
 			<td>{{ participant.skipped_activities }}</td>
-			<td>Not Implemented</td>
+			<td>{{ participant.completed_session_durations }}</td>
 			<td>Not Implemented</td>
 			<td>Not Implemented</td>
 			<td>Not Implemented</td>

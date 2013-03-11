@@ -2,6 +2,7 @@ from annoying.decorators import render_to
 from smart_sa.intervention.models import Backup
 from django.contrib.auth.decorators import login_required
 from simplejson import loads
+import dateutil.parser
 import pprint
 
 # list of the deployments that we want to view data for
@@ -179,12 +180,83 @@ class Participant(object):
 
     def is_activity_completed(self, session, activity):
         """ did this user complete the specified session/activity """
+
+        # obviously, it would be more efficient to make this into
+        # a dictionary first instead of looping over the list
+        # over and over again, but so far it doesn't seem to actually
+        # be a bottleneck
         for ap in self.completed_activities():
             if ap['activity'].startswith(
                     "Session %d: Activity %d:" % (session, activity)):
                 return True
         else:
             return False
+
+    def session_duration(self, session):
+        """ approximate number of minutes participant spent
+        on a given session
+
+        since we just care about a total, not whether it was all
+        continuous or not, we can "cheat" and take advantage
+        of the fact that the front end logs every minute and just
+        count the number of relevant visit logs.
+
+        That can go wrong if they are flying through and visiting
+        more than one page a minute; we'd get a higher number from
+        the count than the actual total time. So we compare our
+        count to the absolute difference between the earliest and
+        latest timestamps we have and take the min.
+
+        This can still be inaccurate if they flew through parts
+        and then had gaps (computer shut off, logged out, etc)
+        in other parts. So a proper run through merging timestamps
+        that are less than a minute apart into runs would be ideal.
+        But this should get us pretty close without too much craziness.
+        Since the logging is pretty rough at best, this is probably
+        good enough, at least for now.
+        """
+        timestamps = self.relevant_timestamps(session)
+        simple_count = len(timestamps)
+
+        if simple_count < 2:
+            # zero or 1 timestamps logged, so this is as
+            # accurate as we can get
+            return simple_count
+
+        # otherwise, double check against absolute time interval
+        timestamps.sort()
+        earliest = dateutil.parser.parse(timestamps[0])
+        latest = dateutil.parser.parse(timestamps[-1])
+        delta = latest - earliest
+        if (delta.seconds / 60.0) < simple_count:
+            return delta.seconds / 60
+        else:
+            return simple_count
+
+    def relevant_timestamps(self, session):
+        """ all the timestamps for a session and activities in that session """
+        return (self.session_timestamps(session)
+                + self.session_activity_timestamps(session))
+
+    def session_timestamps(self, session):
+        if 'session_visits' not in self.data:
+            return []
+        return [sv['timestamp'] for sv in self.data['session_visits']
+                if sv['session'].startswith("Session %d:" % session)]
+
+    def session_activity_timestamps(self, session):
+        if 'activity_visits' not in self.data:
+            return []
+        return [sv['timestamp'] for sv in self.data['activity_visits']
+                if sv['activity'].startswith("Session %d:" % session)]
+
+    def completed_session_durations(self):
+        if self.num_completed_sessions() < 1:
+            return ""
+        durations = []
+        for s in range(1, self.max_completed_session_number() + 1):
+            durations.append(self.session_duration(s))
+        return ",".join([str(d) for d in durations])
 
 
 @render_to("dashboard/index.html")
