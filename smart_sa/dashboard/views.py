@@ -97,6 +97,9 @@ class Participant(object):
             ["-", "X"][int(self.data['initial_referral_other'])],
         )
 
+    def initial_referral_notes(self):
+        return self.data.get('initial_referral_notes', '')
+
     def defaulter_status(self):
         if not self.data['defaulter']:
             return "False"
