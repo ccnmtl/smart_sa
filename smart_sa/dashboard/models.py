@@ -294,3 +294,18 @@ class Participant(object):
         for s in [4, 5]:
             durations.append(self.session_duration(s))
         return ",".join([str(d) for d in durations])
+
+    def game_vars(self, name):
+        for d in self.data[u'game_vars']:
+            if name in d:
+                return loads(d[name])
+        return {}
+
+    def ssnmtree_data(self):
+        return self.game_vars(u'ssnmtree')
+
+    def assessmentquiz_data(self):
+        return self.game_vars(u'assessmentquiz')
+
+    def lifegoals_data(self):
+        return self.game_vars(u'lifegoals')

@@ -22,6 +22,7 @@ class ParticipantTest(TestCase):
                 'counselor_notes': [],
                 'session_progress': [],
                 'activity_progress': [],
+                'game_vars': [],
                 u'session_visits': [
                     {u'session': u'Session 1: Session 1: Getting Started',
                      u'timestamp': u'2013-02-12 12:58:17.340000'},
@@ -124,3 +125,12 @@ class ParticipantTest(TestCase):
 
     def test_session_duration(self):
         self.assertEquals(self.p1.session_duration(1), 8)
+
+    def test_ssnmtree_data(self):
+        self.assertEquals(self.p1.ssnmtree_data(), {})
+
+    def test_assessmentquiz_data(self):
+        self.assertEquals(self.p1.assessmentquiz_data(), {})
+
+    def test_lifegoals_data(self):
+        self.assertEquals(self.p1.lifegoals_data(), {})
