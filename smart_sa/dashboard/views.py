@@ -65,6 +65,10 @@ def strip_session_title(session):
     return session['session'][:9]
 
 
+def extract_session_number(session):
+    return int(session['session'][8])
+
+
 class Participant(object):
     """ more useful object than the raw dict form """
     def __init__(self, data):
@@ -157,6 +161,29 @@ class Participant(object):
         sessions = self.completed_sessions()
         sessions.sort(key=lambda s: s['session'])
         return strip_session_title(sessions[-1])
+
+    def most_recently_completed_session_date(self):
+        if self.num_completed_sessions() < 1:
+            return None
+        sessions = self.completed_sessions()
+        sessions.sort(key=lambda s: s['session'])
+        most_recent_session = extract_session_number(sessions[-1])
+        # we don't actually have any way of knowing when
+        # a session was completed, so we have to settle
+        # for the last time it was visited
+        return self.last_session_visit(most_recent_session)
+
+    def last_session_visit(self, session_number):
+        if 'session_visits' not in self.data:
+            return None
+        if 'activity_visits' not in self.data:
+            return None
+        timestamps = self.relevant_timestamps(session_number)
+        timestamps.sort()
+        if len(timestamps) > 0:
+            return dateutil.parser.parse(timestamps[-1])
+        else:
+            return None
 
     def max_completed_session_number(self):
         return int(self.most_recently_completed_session()[-1])
@@ -266,7 +293,6 @@ class Participant(object):
         for s in [4, 5]:
             durations.append(self.session_duration(s))
         return ",".join([str(d) for d in durations])
-
 
 
 @render_to("dashboard/index.html")

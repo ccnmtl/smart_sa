@@ -67,8 +67,6 @@ td { vertical-align: top;
 			<th># completed sessions</th>
 			<th># incomplete sessions</th>
 			<th># completed activities</th>
-			<th># session visits</th>
-			<th># activity visits</th>
       <th>most recent completed session and that session's date</th>
       <th>any skipped activities up through end of most recent
       completed session (comma separated)</th>
@@ -120,9 +118,8 @@ td { vertical-align: top;
 			<td>{{participant.num_completed_sessions}}</td>
 			<td>{{participant.num_incomplete_sessions}}</td>
 			<td>{{participant.num_completed_activities}}</td>
-			<td>{{participant.num_session_visits}}</td>
-			<td>{{participant.num_activity_visits}}</td>
-			<td>{{ participant.most_recently_completed_session }} [Date not implemented yet]</td>
+			<td>{{ participant.most_recently_completed_session }}
+				<i>{{ participant.most_recently_completed_session_date|date:"M d, Y"  }}</i></td>
 			<td>{{ participant.skipped_activities }}</td>
 			<td>{{ participant.completed_session_durations }}</td>
 			<td>Not Implemented</td>
