@@ -87,6 +87,76 @@ class ParticipantTest(TestCase):
                      u'timestamp': u'2013-02-12 13:06:32.364000'}],
             })
 
+        self.p2 = Participant(
+            {
+                u'game_vars': [
+                {u'pill_game': u'{"regular": {"pills": [{"color": "#FF0000", \
+                 "id": "pill_8913", "name": "Efaverinez EFV"}, \
+                 {"color": "#0000FF", "id": "pill_2044", \
+                 "name": "Tenofivir TNV"}, {"color": "#00FF00", \
+                 "id": "pill_9305", "name": "Lamudivine 3TC"}], \
+                 "day": {"selected": "06:00", "id": "day", \
+                 "views": [{"top": "105px", "pillId": "pill_8913", \
+                 "left": "116px"}, {"top": "105px", "pillId": "pill_2044", \
+                 "left": "62px"}, {"top": "135px", "pillId": "pill_9305", \
+                 "left": "62px"}]}, "night": {"selected": "na", \
+                 "id": "night", "views": []}}}'},
+                {u'assessmentquiz': u'{"defaulter": {"audit": {"total": 7}, \
+                 "drugaudit": {"total": 0}, "kten": {"total": 27}}, \
+                 "regular": {"audit": {}, "kten": {"total": 18}}}'},
+                {u'ssnmtree': u'{"defaulter": {"middle1-fruit": \
+                {"disclosure": true, "support": true, "name": "person1"}, \
+                "bottom1-fruit": {"disclosure": false, "support": false, \
+                "name": "person2"}, "bottom2-fruit": {"disclosure": true, \
+                "support": true, "name": "person3"}, "top2-fruit": \
+                {"disclosure": false, "support": false, "name": "person4"}, \
+                "middle4-fruit": {"disclosure": false, "support": true, \
+                "name": "person5"}, "middle3-fruit": {"disclosure": true, \
+                "support": true, "name": "person6"}}, "regular": \
+                {"middle1-fruit": {"disclosure": true, "support": true, \
+                "name": "person7"}, "bottom1-fruit": {"disclosure": false, \
+                "support": false, "name": "person8"}, "bottom2-fruit": \
+                {"disclosure": true, "support": false, "name": "person9"}, \
+                "top2-fruit": {"disclosure": false, "support": false, "name": \
+                "person10"}, "middle4-fruit": {"disclosure": false, \
+                "support": true, "name": "person11"}, "middle3-fruit": \
+                {"disclosure": true, "support": true, "name": ""}}}'},
+                {u'ssnmtree': u'{"regular": {"middle1-fruit": \
+                {"disclosure": true, "support": true, "name": "sizwe"}, \
+                "bottom1-fruit": {"disclosure": false, "support": false, \
+                "name": "koko"}, "bottom2-fruit": {"disclosure": true, \
+                "support": false, "name": "vuvu"}, "top2-fruit": \
+                {"disclosure": false, "support": false, "name": "zody"}, \
+                "middle4-fruit": {"disclosure": false, "support": false, \
+                "name": ""}, "middle3-fruit": {"disclosure": true, \
+                "support": true, "name": "lolo"}}}'},
+                {u'lifegoals': u'{"regular": {"step4": "educate my self", \
+                "step3": "see my kids grow", "step2": "get healtheir", \
+                "goal": "buy a car"}}'},
+                {u'problemsolving': u'{"defaulter": {"peopletellmenotto": \
+                {"customtext": ""}, "forgetful": {"barriers": \
+                "tirednesss.confusion", "finalPlan": "setphone as a \
+                reminder.speak to dr", "proposals": "get a relative to \
+                help you to remember.\\n\\ntreatment buddy,speaking to dr \
+                \\n\\n", "archive": [{"barriers": "wheniam drunk \
+                iforget to drink my arv`s", "finalPlan": "Before i go to \
+                drink i will ask my daughter to remind me my meds when i \
+                come backor wake me up if i fall asleep before my next \
+                dose.", "proposals": "get a relative to help you to \
+                remember."}], "customtext": ""}, "cantgettoclinic": \
+                {"customtext": ""}, "angrynurse": {"customtext": ""}, \
+                "nonsense": {"customtext": ""}, \
+                "confused": {"customtext": ""}, \
+                "otherpatients": {"customtext": ""}, \
+                "other": {"customtext": ""}, "hopeless": {"customtext": ""}, \
+                "notenoughfood": {"customtext": ""}, \
+                "feelingill": {"customtext": ""}, \
+                "alone": {"barriers": "", "finalPlan": "", "proposals": "", \
+                "customtext": ""}, "treatment_fatigue": {"customtext": ""}, \
+                "dontwantto": {"customtext": ""}, \
+                "happy": {"customtext": ""}}}'}],
+            })
+
     def test_patient_id(self):
         assert self.p1.patient_id() == 'test_patient_1'
 
@@ -134,3 +204,51 @@ class ParticipantTest(TestCase):
 
     def test_lifegoals_data(self):
         self.assertEquals(self.p1.lifegoals_data(), {})
+
+    def test_assessmentquiz_scores(self):
+        self.assertEquals(self.p2.mood_alcohol_drug_scores(),
+                          "18,,")
+        self.assertEquals(self.p2.defaulter_mood_alcohol_drug_scores(),
+                          "27,7,0")
+
+    def test_ssnmtree_count(self):
+        self.assertEquals(self.p1.ssnmtree_total(), 0)
+        self.assertEquals(self.p1.ssnmtree_total('defaulter'), 0)
+        self.assertEquals(self.p2.ssnmtree_total(), 5)
+        self.assertEquals(self.p2.ssnmtree_total('defaulter'), 6)
+
+    def test_ssnmtree_supporters(self):
+        self.assertEquals(self.p1.ssnmtree_supporters(), 0)
+        self.assertEquals(self.p1.ssnmtree_supporters('defaulter'), 0)
+        self.assertEquals(self.p2.ssnmtree_supporters(), 2)
+        self.assertEquals(self.p2.ssnmtree_supporters('defaulter'), 4)
+
+    def test_ssnmtree_confidants(self):
+        self.assertEquals(self.p1.ssnmtree_confidants(), 0)
+        self.assertEquals(self.p1.ssnmtree_confidants('defaulter'), 0)
+        self.assertEquals(self.p2.ssnmtree_confidants(), 2)
+        self.assertEquals(self.p2.ssnmtree_confidants('defaulter'), 3)
+
+    def test_ssnmtree_supporters_and_confidants(self):
+        self.assertEquals(self.p1.ssnmtree_supporters_and_confidants(), 0)
+        self.assertEquals(
+            self.p1.ssnmtree_supporters_and_confidants('defaulter'), 0)
+        self.assertEquals(self.p2.ssnmtree_supporters_and_confidants(), 1)
+        self.assertEquals(
+            self.p2.ssnmtree_supporters_and_confidants('defaulter'), 3)
+
+    def test_pillgame_list(self):
+        self.assertEquals(self.p1.medication_list(), "")
+        self.assertEquals(self.p1.defaulter_medication_list(), "")
+        self.assertEquals(self.p2.medication_list(),
+                          "Efaverinez EFV,Tenofivir TNV,Lamudivine 3TC")
+        self.assertEquals(self.p2.defaulter_medication_list(),
+                          "")
+
+    def test_barriers(self):
+        self.assertEquals(self.p1.barriers(), "")
+        self.assertEquals(self.p1.barriers('defaulter'), "")
+        self.assertEquals(self.p2.barriers(), "")
+        self.assertEquals(self.p2.defaulter_barriers(), "forgetful,alone")
+        self.assertEquals(self.p2.defaulter_barriers_with_plans(),
+                          "forgetful")

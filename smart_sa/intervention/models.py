@@ -127,7 +127,8 @@ class ClientSession (models.Model):
         "1-based index of the session"
         sessions = self.intervention.get_clientsession_order()
         if sessions:
-            return 1+self.intervention.get_clientsession_order().index(self.id)
+            n = 1 + self.intervention.get_clientsession_order().index(self.id)
+            return n
         else:
             return 1
 
@@ -267,7 +268,8 @@ class Activity(models.Model):
         "1-based index of activity wrt session"
         activities = self.clientsession.get_activity_order()
         if activities:
-            return 1+self.clientsession.get_activity_order().index(self.id)
+            n = 1 + self.clientsession.get_activity_order().index(self.id)
+            return n
         else:
             return 1
 
@@ -396,12 +398,12 @@ class GamePage (models.Model):
     def index(self):
         "1-based index"
         if self.page_id:
-            return 1+list(self.activity.pages()).index(self.page_id)
+            return 1 + list(self.activity.pages()).index(self.page_id)
         else:
-            return 1+self.activity.get_gamepage_order().index(self.id)
+            return 1 + self.activity.get_gamepage_order().index(self.id)
 
     def page_name(self):
-        return self.page_id or self.activity.pages()[self.index()-1]
+        return self.page_id or self.activity.pages()[self.index() - 1]
 
     #we keep these methods separate from get_gamepage_order()
     #so they can work independent of a good DB (like in the test pages)
@@ -410,11 +412,11 @@ class GamePage (models.Model):
         ind = self.index()
         if ind > 1:
             try:
-                id = str(self.get_previous_in_order().id)
+                prev_id = str(self.get_previous_in_order().id)
             except:
-                id = ''
+                prev_id = ''
             pages = self.activity.pages()
-            return '%s/%s' % (id, pages[ind-2])
+            return '%s/%s' % (prev_id, pages[ind - 2])
         else:
             return None
 
@@ -498,7 +500,7 @@ class Instruction (models.Model):
 
     def index(self):
         "1-based index"
-        return 1+self.activity.get_instruction_order().index(self.id)
+        return 1 + self.activity.get_instruction_order().index(self.id)
 
     def as_dict(self):
         "return a dict for serializing"

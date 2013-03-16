@@ -210,14 +210,14 @@ class FullSerializationTest(TestCase):
         for idx in range(i.clientsession_set.count()):
             self.assertEquals(unicode(i.get_session_by_index(idx + 1)),
                               unicode(i2.get_session_by_index(idx + 1)))
-            s1 = i.get_session_by_index(idx+1)
-            s2 = i2.get_session_by_index(idx+1)
+            s1 = i.get_session_by_index(idx + 1)
+            s2 = i2.get_session_by_index(idx + 1)
 
             self.assertEquals(unicode(s1.next()), unicode(s2.next()))
 
             for aidx in range(s1.activity_set.count()):
-                a1 = s1.get_activity_by_index(idx+1)
-                a2 = s2.get_activity_by_index(idx+1)
+                a1 = s1.get_activity_by_index(idx + 1)
+                a2 = s2.get_activity_by_index(idx + 1)
                 self.assertEquals(unicode(a1), unicode(a2))
                 self.assertEquals(unicode(a1.next()), unicode(a2.next()))
                 self.assertEquals(unicode(a1.prev()), unicode(a2.prev()))

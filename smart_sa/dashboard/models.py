@@ -301,11 +301,115 @@ class Participant(object):
                 return loads(d[name])
         return {}
 
-    def ssnmtree_data(self):
-        return self.game_vars(u'ssnmtree')
-
     def assessmentquiz_data(self):
         return self.game_vars(u'assessmentquiz')
 
+    def mood_alcohol_drug_scores(self, session='regular'):
+        quiz_vars = self.assessmentquiz_data()
+
+        try:
+            mood = quiz_vars[session]['kten']['total']
+        except KeyError:
+            mood = ''
+
+        try:
+            alcohol = quiz_vars[session]['audit']['total']
+        except KeyError:
+            alcohol = ''
+
+        try:
+            drug = quiz_vars[session]['drugaudit']['total']
+        except KeyError:
+            drug = ''
+
+        s = '%s,%s,%s' % (mood, alcohol, drug)
+        return s
+
+    def defaulter_mood_alcohol_drug_scores(self):
+        return self.mood_alcohol_drug_scores(session='defaulter')
+
+    def ssnmtree_data(self):
+        return self.game_vars(u'ssnmtree')
+
+    def _count_valid_keys(self, d, sub, test):
+        try:
+            count = 0
+            for key, value in d[sub].items():
+                if test(value):
+                    count += 1
+            return count
+        except KeyError:
+            return 0
+
+    def ssnmtree_total(self, session='regular'):
+        return self._count_valid_keys(self.ssnmtree_data(),
+                                      session,
+                                      lambda x: len(x['name']) > 0)
+
+    def defaulter_ssnmtree_total(self):
+        return self.ssnmtree_total(session='defaulter')
+
+    def ssnmtree_supporters(self, session='regular'):
+        return self._count_valid_keys(
+            self.ssnmtree_data(), session,
+            lambda x: len(x['name']) > 0 and x['support'])
+
+    def ssnmtree_confidants(self, session='regular'):
+        return self._count_valid_keys(
+            self.ssnmtree_data(),
+            session,
+            lambda x: len(x['name']) > 0 and x['disclosure'])
+
+    def ssnmtree_supporters_and_confidants(self, session='regular'):
+        return self._count_valid_keys(
+            self.ssnmtree_data(),
+            session,
+            lambda x: len(x['name']) > 0 and x['disclosure'] and x['support'])
+
+    def pillgame_data(self):
+        return self.game_vars(u'pill_game')
+
+    def medication_list(self, session='regular'):
+        data = self.pillgame_data()
+        try:
+            return ",".join([str(p['name']) for p in data[session]['pills']])
+        except KeyError:
+            return ""
+
+    def defaulter_medication_list(self):
+        return self.medication_list('defaulter')
+
     def lifegoals_data(self):
         return self.game_vars(u'lifegoals')
+
+    def problem_solving_data(self):
+        return self.game_vars(u'problemsolving')
+
+    def barriers(self, session="regular"):
+        data = self.problem_solving_data()
+        try:
+            return ",".join(k for k, v in data[session].items()
+                            if 'barriers' in v and
+                            'proposals' in v and
+                            'finalPlan' in v)
+        except KeyError:
+            return ""
+
+    def defaulter_barriers(self):
+        return self.barriers("defaulter")
+
+    def barriers_with_plans(self, session="regular"):
+        data = self.problem_solving_data()
+        try:
+            return ",".join(k for k, v in data[session].items()
+                            if 'barriers' in v and
+                            'proposals' in v and
+                            'finalPlan' in v and
+                            (len(v['barriers']) > 0 or
+                             len(v['proposals']) > 0 or
+                             len(v['finalPlan']) > 0))
+        except KeyError:
+            return ""
+
+    def defaulter_barriers_with_plans(self):
+        return self.barriers_with_plans("defaulter")
