@@ -58,8 +58,6 @@ td {
             <th>gender</th>
             <th>buddy?</th>
             <th>Defaulter?<br />(A|D|M|O)</th>
-            <th>Questions &amp; Concerns</th>
-            <th>Clinical Notes</th>
             <th># completed sessions</th>
             <th># incomplete sessions</th>
             <th># completed activities</th>
@@ -102,12 +100,6 @@ td {
             <td>{{participant.gender}}</td>
             <td>{{participant.has_buddy}}</td>
             <td>{{participant.defaulter_status}}</td>
-            <td>{% if participant.has_counselor_notes %}
-                {% for cn in participant.counselor_notes %}
-                    {{cn.notes}}
-                {% endfor %}{% endif %}
-            </td>
-            <td>{{participant.clinical_notes}}</td>
             <td>{{participant.num_completed_sessions}}</td>
             <td>{{participant.num_incomplete_sessions}}</td>
             <td>{{participant.num_completed_activities}}</td>
