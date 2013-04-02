@@ -4,6 +4,7 @@ from lettuce import before, after, world, step
 from django.conf import settings
 from django.test import client
 from smart_sa.intervention.models import Intervention, Participant, ClientSession, Activity
+import os
 import sys
 
 import time
@@ -35,6 +36,19 @@ def setup_browser(variables):
 @after.harvest
 def teardown_browser(total):
     world.firefox.quit()
+
+
+@before.harvest
+def setup_database(_foo):
+    # make sure we have a fresh test database
+    os.system("rm -f lettuce.db")
+    os.system("cp test_data/test.db lettuce.db")
+
+
+@after.harvest
+def teardown_database(_foo):
+    os.system("rm -f lettuce.db")
+
 
 @before.each_scenario
 def clear_participant_data(_foo):
