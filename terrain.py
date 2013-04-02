@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from lettuce.django import django_url
 from lettuce import before, after, world, step
+from django.conf import settings
 from django.test import client
 from smart_sa.intervention.models import Intervention, Participant, ClientSession, Activity
 import sys
@@ -14,13 +15,20 @@ try:
     from selenium.webdriver.common.keys import Keys
     import selenium
 except:
-    pass
+    print "selenium/lettuce requirements are not installed"
+    print "you probably want to do './bootstrap.py --full'"
 
 @before.harvest
 def setup_browser(variables):
-    ff_profile = FirefoxProfile() 
-    ff_profile.set_preference("webdriver_enable_native_events", False) 
-    world.firefox = webdriver.Firefox(ff_profile)
+    browser = getattr(settings, 'BROWSER', None)
+    if browser == 'Headless':
+        # this should really be called 'world.browser'
+        # but we'll fix that later
+        world.firefox = webdriver.PhantomJS()
+    else:
+        ff_profile = FirefoxProfile()
+        ff_profile.set_preference("webdriver_enable_native_events", False)
+        world.firefox = webdriver.Firefox(ff_profile)
     world.client = client.Client()
     world.using_selenium = False
 

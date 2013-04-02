@@ -1,10 +1,11 @@
 # flake8: noqa
 from settings_shared import *
-DATABASE_ENGINE = 'sqlite3' 
+import os
+DATABASE_ENGINE = 'sqlite3'
 DATABASE_NAME = 'lettuce.db'
 
 # Running tests
-# 
+#
 # The database needs to exist & be current Prior to first run
 # sqlite3 test_masivukeni2.db
 # ./manage.py syncdb --settings=settings_test
@@ -13,7 +14,11 @@ DATABASE_NAME = 'lettuce.db'
 # ./manage.py pull_from_prod --settings=settings_test
 # ./manage.py loaddata intervention/fixtures/counselors.json --settings=settings_test
 # ./manage.py loaddata intervention/fixtures/default_participants.json --settings=settings_test
-# 
+#
 # Subsequent runs
-# python manage.py --settings=settings_test harvest 
- 
+# python manage.py --settings=settings_test harvest
+
+if os.environ.get('SELENIUM_BROWSER', False):
+    # it's handy to be able to set this from an
+    # environment variable
+    BROWSER = os.environ.get('SELENIUM_BROWSER')
