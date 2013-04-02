@@ -195,6 +195,7 @@ def i_click_the_link(step, text):
                     return
         assert False, "could not find the '%s' link" % text
     else:
+        link = None
         try:
             link = world.firefox.find_element_by_partial_link_text(text)
             assert link.is_displayed()

@@ -212,101 +212,102 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       
       When I click on the Session Home
       When I click on Activity 3
-      Then I am on the "Your ARVs" Activity
-      When I click the "Next →" link
-      Then there is a game
-      
-      When I click on the Session Home
-      When I click on Activity 4
       Then I am on the "Starting ARVs" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 5
+      When I click on Activity 4
       Then I am on the "Adherence Is Crucial" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 6
+      When I click on Activity 5
       Then I am on the "Adherence Helpers" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 7
+      When I click on Activity 6
       Then I am on the "Adherence Challenges" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 8
+      When I click on Activity 7
       Then I am on the "No Support" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 9
+      When I click on Activity 8
       Then I am on the "Getting to Clinic" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 10
+      When I click on Activity 9
       Then I am on the "Confused" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 11
+      When I click on Activity 10
       Then I am on the "Feeling Good" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 12
+      When I click on Activity 11
       Then I am on the "Forgetting" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 13
+      When I click on Activity 12
       Then I am on the "Overcoming Challenges" Activity
-      When I click on Complete Activity
+      When I click the "Next →" link
+      Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 14
+      When I click on Activity 13
       Then I am on the "Your Treatment Team" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 15
+      When I click on Activity 14
       Then I am on the "Healthy Living" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 16
+      When I click on Activity 15
       Then I am on the "Eat Well" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 17
+      When I click on Activity 16
       Then I am on the "Exercise" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 18
+      When I click on Activity 17
       Then I am on the "Keep Safe" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 19
+      When I click on Activity 18
       Then I am on the "Find Help" Activity
       When I click on Complete Activity
       
       When I click on the Session Home
-      When I click on Activity 20
+      When I click on Activity 19
       Then I am on the "Reasons to Stay Healthy" Activity
       When I click the "Next →" link
       Then there is a game
       
       When I click on the Session Home
-      When I click on Activity 21
+      When I click on Activity 20
       Then I am on the "Commitment to Health" Activity
       When I click on Complete Activity
+      
+      When I click on the Session Home
+      When I click on Activity 21
+      Then I am on the "Your ARVs" Activity
+      When I click the "Next →" link
+      Then there is a game
       
       When I click on the Session Home
       When I click on Activity 22
@@ -360,7 +361,8 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on the Session Home
       When I click on Activity 8
       Then I am on the "Moving Forward" Activity
-      When I click on Complete Activity
+      When I click the "Next →" link
+      Then there is a game
       
       When I click on the Session Home
       When I click on Activity 9
@@ -437,7 +439,8 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on the Session Home
       When I click on Activity 22
       Then I am on the "OPTION: Moving Forward Video" Activity
-      When I click on Complete Activity
+      When I click the "Next →" link
+      Then there is a game
       
       When I click on the Session Home
       
@@ -534,7 +537,8 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       When I click on the Session Home
       When I click on Activity 17
       Then I am on the "OPTION: Moving Forward Video" Activity
-      When I click on Complete Activity
+      When I click the "Next →" link
+      Then there is a game
       
       When I click on the Session Home
       

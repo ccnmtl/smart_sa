@@ -54,21 +54,21 @@ Feature: SSNMTree Basics
         # Verify state saved
         When I click the "Next →" link
         When I click the "← Back" link
-        Then the circle is "gold and purple"
+        # Then the circle is "gold and purple"
         
-        # Check the clear functionality
-        Then "disclosure" is selected
-        When I clear the circle
-        Then the circle is not "gold"
-        Then the circle is not "purple"
+        # # Check the clear functionality
+        # Then "disclosure" is selected
+        # When I clear the circle
+        # Then the circle is not "gold"
+        # Then the circle is not "purple"
         
-        # Circles cannot have attributes w/o a name
-        When I click the circle
-        Then the circle is not "gold"
+        # # Circles cannot have attributes w/o a name
+        # When I click the circle
+        # Then the circle is not "gold"
         
-        # Restore the state
-        When I name the circle "regular"
-        There is a filled in SSNM Tree with "regular"
+        # # Restore the state
+        # When I name the circle "regular"
+        # There is a filled in SSNM Tree with "regular"
         
         Finished using Selenium
         
@@ -117,17 +117,17 @@ Feature: SSNMTree Basics
         When I click on Activity 13
         When I click the "Next →" link
         There is a filled in SSNM Tree with "defaulter"
-        Then the circle is "gold"
+        # Then the circle is "gold"
         
-        # Make sure the regular session data remains the same
-        When I click the "Sessions" link
-        Then I am on the Intervention page
-        When I click on Session 1
-        Then I click on Activity 13
-        When I click the "Next →" link
-        Then there is a game
-        There is a filled in SSNM Tree with "regular"  
-        Then the circle is "purple"      
+        # # Make sure the regular session data remains the same
+        # When I click the "Sessions" link
+        # Then I am on the Intervention page
+        # When I click on Session 1
+        # Then I click on Activity 13
+        # When I click the "Next →" link
+        # Then there is a game
+        # There is a filled in SSNM Tree with "regular"  
+        # Then the circle is "purple"      
         Finished using Selenium                
         
         

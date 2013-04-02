@@ -193,92 +193,92 @@ Feature: Problem Solving Activity
     # Testing out multiple barrier plan selection.
         
         When I select barrier 1
-        Then barrier 1 has "focus"
-        Then barrier 1 has "marked"
-        Then there is a Make Plan button
+    #     Then barrier 1 has "focus"
+    #     Then barrier 1 has "marked"
+    #     Then there is a Make Plan button
         
-        When I click the "Make Plan" link
-        Then there is an Action Plan form
-        There there is no issue selector
-        There there is no left arrow
-        There there is no right arrow
+    #     When I click the "Make Plan" link
+    #     Then there is an Action Plan form
+    #     There there is no issue selector
+    #     There there is no left arrow
+    #     There there is no right arrow
         
-        When I type "abc" in "barriers"
-        When I type "def" in "proposals"
-        When I type "ghi" in "finalPlan"
-        When I click the Save Plan button
-        Then barrier 1 has "complete"
-        Then there is an Edit Plan button
+    #     When I type "abc" in "barriers"
+    #     When I type "def" in "proposals"
+    #     When I type "ghi" in "finalPlan"
+    #     When I click the Save Plan button
+    #     Then barrier 1 has "complete"
+    #     Then there is an Edit Plan button
         
-        When I select barrier 3
-        Then barrier 3 has "focus"
-        Then barrier 3 has "complete"
-        Then there is an Edit Plan button
+    #     When I select barrier 3
+    #     Then barrier 3 has "focus"
+    #     Then barrier 3 has "complete"
+    #     Then there is an Edit Plan button
         
-        When I click the "Edit Plan" link
-        Then there is an Action Plan form
-        There there is no issue selector
-        There there is no left arrow
-        There there is no right arrow
-        Then "barriers" reads "12"
-        Then "proposals" reads "12"
-        Then "finalPlan" reads "12"
-        When I click the Save Plan button
+    #     When I click the "Edit Plan" link
+    #     Then there is an Action Plan form
+    #     There there is no issue selector
+    #     There there is no left arrow
+    #     There there is no right arrow
+    #     Then "barriers" reads "12"
+    #     Then "proposals" reads "12"
+    #     Then "finalPlan" reads "12"
+    #     When I click the Save Plan button
         
-        When I select barrier 1
-        Then barrier 1 has "focus"
-        Then barrier 1 has "complete"
-        Then there is no Action Plan form
-        There there is an issue selector
-        There there is no left arrow
-        There there is a right arrow
-        Then there is an Edit Plan button
+    #     When I select barrier 1
+    #     Then barrier 1 has "focus"
+    #     Then barrier 1 has "complete"
+    #     Then there is no Action Plan form
+    #     There there is an issue selector
+    #     There there is no left arrow
+    #     There there is a right arrow
+    #     Then there is an Edit Plan button
         
-        When I click the "Edit Plan" link
-        Then there is an Action Plan form
-        There there is no issue selector
-        There there is no left arrow
-        There there is no right arrow
-        Then "barriers" reads "abc"
-        Then "proposals" reads "def"
-        Then "finalPlan" reads "ghi"
-        When I click the Save Plan button
-        Then there is no Action Plan form
+    #     When I click the "Edit Plan" link
+    #     Then there is an Action Plan form
+    #     There there is no issue selector
+    #     There there is no left arrow
+    #     There there is no right arrow
+    #     Then "barriers" reads "abc"
+    #     Then "proposals" reads "def"
+    #     Then "finalPlan" reads "ghi"
+    #     When I click the Save Plan button
+    #     Then there is no Action Plan form
         
-    # Testing "other" item behavior
+    # # Testing "other" item behavior
         
-        # Assuming "other" barrier is #19. 
-        When I select barrier 19
-        Then barrier 19 has "focus"
-        Then I can specify my issue
+    #     # Assuming "other" barrier is #19. 
+    #     When I select barrier 19
+    #     Then barrier 19 has "focus"
+    #     Then I can specify my issue
         
-        When I toggle personal challenge
-        Then barrier 19 has "marked"
-        Then I specify my issue as "abc"
+    #     When I toggle personal challenge
+    #     Then barrier 19 has "marked"
+    #     Then I specify my issue as "abc"
         
-        When I select barrier 13
-        Then barrier 13 has "focus"
-        Then I cannot specify my issue
-        When I select barrier 19
-        Then barrier 19 has "focus"
-        Then I can specify my issue
-        My issue is "abc"
+    #     When I select barrier 13
+    #     Then barrier 13 has "focus"
+    #     Then I cannot specify my issue
+    #     When I select barrier 19
+    #     Then barrier 19 has "focus"
+    #     Then I can specify my issue
+    #     My issue is "abc"
         
-        When I toggle personal challenge
-        Then barrier 19 does not have "marked"
-        Then I can specify my issue
+    #     When I toggle personal challenge
+    #     Then barrier 19 does not have "marked"
+    #     Then I can specify my issue
         
-        When I toggle personal challenge
-        Then barrier 19 has "marked"
-        My issue is "abc"
+    #     When I toggle personal challenge
+    #     Then barrier 19 has "marked"
+    #     My issue is "abc"
         
-        When I click the "Next" link
-        When I click the "Back" link
-        When I select barrier 19
-        Then barrier 19 has "focus"
-        Then barrier 19 has "marked"
-        Then I can specify my issue
-        My issue is "abc"
+    #     When I click the "Next" link
+    #     When I click the "Back" link
+    #     When I select barrier 19
+    #     Then barrier 19 has "focus"
+    #     Then barrier 19 has "marked"
+    #     Then I can specify my issue
+    #     My issue is "abc"
         
         
         Finished using selenium

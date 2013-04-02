@@ -5,7 +5,7 @@ content in the database. Hopefully, this will help us keep
 up to date with changing content. To create this, I run a 
 pull_from_prod to the test instance, then run a dev server
 on port 8001 with the settings_test and do
-curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feature
+curl http://localhost:8001/testgen/ > smart_sa/intervention/features/auto_runthrough.feature
 Don't edit this feature file directly. Edit templates/intervention/testgen.html instead
 
     Scenario: Automated Run-Through
@@ -14,7 +14,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       Given participant "test" is a defaulter
       When I access the url "/"
       When I click the "Let's get started!" link
-      When I click the "Intervene" link
+      When I click the "Counsel" link
       When I fill in "test" in the "name" form field
       When I fill in "test" in the "id_number" form field
       When I submit the "login-participant-form" form
