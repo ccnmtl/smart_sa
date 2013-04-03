@@ -80,6 +80,7 @@ ROOT_URLCONF = 'smart_sa.urls'
 
 TEMPLATE_DIRS = (
     "/var/www/masivukeni2/templates/",
+    "/var/www/masivukeni/templates/",
     os.path.join(os.path.dirname(__file__), "templates"),
 )
 
