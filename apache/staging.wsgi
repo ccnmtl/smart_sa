@@ -1,6 +1,6 @@
 import os, sys, site
 
-sys.path.append('/var/www/masivukeni2/smart_sa/')
+sys.path.append('/var/www/masivukeni/smart_sa/')
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'smart_sa.settings_staging'
 
