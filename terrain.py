@@ -16,8 +16,8 @@ try:
     from selenium.webdriver.common.keys import Keys
     import selenium
 except:
-    print "selenium/lettuce requirements are not installed"
-    print "you probably want to do './bootstrap.py --full'"
+    pass
+
 
 @before.harvest
 def setup_browser(variables):
@@ -32,6 +32,7 @@ def setup_browser(variables):
         world.firefox = webdriver.Firefox(ff_profile)
     world.client = client.Client()
     world.using_selenium = False
+
 
 @after.harvest
 def teardown_browser(total):
