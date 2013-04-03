@@ -48,7 +48,7 @@
 		<!--new cu admin login button on splash page-->
 		<li>&bull;</li>
 		{% else %}
-		<!--<a class="loginlogout loginlogout-remote" href="http://{{request.get_host}}/accounts/windlogin/?next={{ next }}">Administrative Login</a>-->
+		<!--<a class="loginlogout loginlogout-remote" href="http{% if request.is_secure %}s{% endif %}://{{request.get_host}}/accounts/windlogin/?next={{ next }}">Administrative Login</a>-->
 		<a class="loginlogout loginlogout-remote" href="/intervention/">Log In</a>
 		</li>
 		{% endif %}

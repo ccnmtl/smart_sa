@@ -43,7 +43,7 @@
 		<div class="formrow">
 		<input type="submit" value="Log In" />
 		<input type="hidden" name="service" value="cnmtl_full_np" />
-		<input type="hidden" name="destination" value="http://{{ request.get_host }}/accounts/windlogin/?next={{next|default:'/intervention/'}}" />
+		<input type="hidden" name="destination" value="http{% if request.is_secure %}s{% endif %}://{{ request.get_host }}/accounts/windlogin/?next={{next|default:'/intervention/'}}" />
 		</div>
 		</form>
 	
