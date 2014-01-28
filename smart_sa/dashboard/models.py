@@ -286,6 +286,12 @@ class Participant(object):
             durations.append(self.session_duration(s))
         return ",".join([str(d) for d in durations])
 
+    def all_session_durations(self):
+        durations = []
+        for s in range(1, 6):
+            durations.append(self.session_duration(s))
+        return ",".join([str(d) for d in durations])
+
     def session_45_durations(self):
         """ explicitly calculate durations for sessions 4 and 5 """
         if self.num_completed_sessions() < 1:

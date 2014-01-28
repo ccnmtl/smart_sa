@@ -67,6 +67,8 @@ td {
                 recent completed session (comma separated)</th>
             <th>session durations for completed sessions (comma
                 separated)</th>
+            <th>session durations for all sessions (comma
+                separated)</th>
             <th>mood, alcohol, drug scores (comma separated)</th>
             <th>number of names on tree</th>
             <th>number of names on tree marked with support</th>
@@ -107,6 +109,7 @@ td {
             </i></td>
             <td>{{ participant.skipped_activities }}</td>
             <td>{{ participant.completed_session_durations }}</td>
+            <td>{{ participant.all_session_durations }}</td>
             <td>{{ participant.mood_alcohol_drug_scores }}</td>
             <td>{{ participant.ssnmtree_total }}</td>
             <td>{{ participant.ssnmtree_supporters }}</td>

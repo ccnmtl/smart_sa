@@ -196,6 +196,15 @@ class ParticipantTest(TestCase):
     def test_session_duration(self):
         self.assertEquals(self.p1.session_duration(1), 8)
 
+    def test_completed_session_durations(self):
+        self.assertEquals(self.p1.completed_session_durations(), "")
+
+    def test_all_session_durations(self):
+        self.assertEquals(self.p1.all_session_durations(), "8,0,0,0,0")
+
+    def test_session_45_durations(self):
+        self.assertEquals(self.p1.session_45_durations(), "")
+
     def test_ssnmtree_data(self):
         self.assertEquals(self.p1.ssnmtree_data(), {})
 
