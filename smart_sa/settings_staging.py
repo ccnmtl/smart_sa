@@ -27,18 +27,9 @@ INTERVENTION_BACKUP_IV = "899f6762313185a9593480e6f015b0d5053464daa5ecadd00dc4e7
 
 SENTRY_SITE = 'masivukeni-staging'
 STATSD_PREFIX = 'masivukeni-staging'
-SENTRY_SERVERS = ['http://sentry.ccnmtl.columbia.edu/sentry/store/']
 
 if 'migrate' not in sys.argv:
-    import logging
-    from raven.contrib.django.handlers import SentryHandler
-    logger = logging.getLogger()
-    # ensure we havent already registered the handler
-    if SentryHandler not in map(type, logger.handlers):
-        logger.addHandler(SentryHandler())
-        logger = logging.getLogger('sentry.errors')
-        logger.propagate = False
-        logger.addHandler(logging.StreamHandler())
+    INSTALLED_APPS.append('raven.contrib.django.raven_compat')
 
 try:
     from local_settings import *

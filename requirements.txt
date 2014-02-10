@@ -38,7 +38,7 @@ djangowind==0.11.0
 django-indexer==0.2.1
 django-templatetag-sugar==0.1
 django-paging==0.2.2
-raven==0.7.0
+raven==4.0.3
 South==0.8.1
 django-annoying==0.7.6
 django-nose==1.2
