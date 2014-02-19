@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Masivukeni: installing timeout patch</title>
+  </head>
+  <body>
+
+    <h1>Timeout Patch installation</h1>
+    <h2>1) Get the patch</h2>
+
+    <p>Get it
+      from <a href="patch_timeout_2014.zip">here</a>. Unzip it onto
+      a USB key. It should result in a directory named
+      "patch_timeout_2014".</p>
+
+    <h2>Copy on C:</h2>
+    <p>Plug the USB key into the laptop, open it for
+      browsing. Open up "C:" in another window and copy the
+      "patch_timeout_2014" folder there.</p>
+
+    <img src="/site_media/images/screenshots/update-2014-02-19/01.png" />
+
+		<h2>Run installer</h2>
+		<p>Go into the "C:\patch_timeout_2014\" folder, right
+      click on the "install" file and select "Run as Administrator".</p>
+    <img src="/site_media/images/screenshots/update-2014-02-19/02.png"
+      />
+
+		<h2>Restart Webserver</h2>
+
+		<p>Running that installer changed a config file for
+      the webserver. Now it needs to be restarted for the
+      change to take effect. This step is actually optional;
+      you could instead just reboot the machine and will be
+      fine. Doing it this way is a little faster though.</p>
+
+		<p>Run the Bitnami Manager tool. You can find it under
+      "Bitnami DjangoStack" in the start menu, or search for
+      "Manager Tool". It will look like this:</p>
+
+    <img src="/site_media/images/screenshots/update-2014-02-19/03.png"
+         />
+
+		<p>Select "Apache Web Server" and hit the "Restart"
+      button on the right.</p>
+
+		<p>That should do it. The webserver's timeout has now been changed
+		from 5 minutes to 50 minutes, which ought to be long enough...</p>
+</body>
+</html>
