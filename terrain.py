@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from lettuce.django import get_server
+get_server()
 from lettuce.django import django_url
 from lettuce import before, after, world, step
 from django.conf import settings

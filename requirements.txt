@@ -1,4 +1,4 @@
-Django==1.5.4
+Django==1.5.7
 resolver==0.2.1
 selector==0.8.11
 Paste==1.7.2
@@ -19,9 +19,14 @@ fuzzywuzzy==0.2
 sure==1.2.2
 ipython==0.13.2
 ipdb==0.7
-lettuce==0.2.14
+extras==0.0.3
+python-mimeparse==0.1.4
+testtools==0.9.35
+testscenarios==0.4
+python-subunit==0.0.18
+lettuce==0.2.19ccnmtl
 rdflib==3.1.0
-selenium==2.31.0
+selenium==2.41.0
 uuid==1.30
 statsd==2.0.2
 pep8==1.4

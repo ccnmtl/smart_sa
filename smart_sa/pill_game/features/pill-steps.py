@@ -98,7 +98,7 @@ def when_i_drop_pill_onto_time(step, pill, time):
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
     assert (draggable is not None,
-            "This pill is not constructed properly" % pill)
+            "This pill is not constructed properly: %s" % pill)
 
     bucket = get_bucket(time)
     assert (
@@ -121,7 +121,7 @@ def when_i_drop_pill_index_onto_time(step, index, time):
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
     assert (draggable is not None,
-            "This pill is not constructed properly" % pill)
+            "This pill is not constructed properly: %s" % pill)
     bucket = get_bucket(time)
     assert (
         bucket is not None,
@@ -139,7 +139,7 @@ def then_there_is_count_pill_in_time(step, count, pill, time):
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
     assert (draggable is not None,
-            "This pill is not constructed properly" % pill)
+            "This pill is not constructed properly: %s" % pill)
     # get the data-id
     data_id = draggable.get_attribute("data-id")
     bucket = get_bucket(time)
@@ -197,7 +197,7 @@ def when_i_drag_pill_from_time1_to_time2(step, pill, time1, time2):
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
     assert (draggable is not None,
-            "This pill is not constructed properly" % pill)
+            "This pill is not constructed properly: %s" % pill)
     data_id = draggable.get_attribute("data-id")
     bucket = get_bucket(time1)
     assert (
@@ -235,7 +235,7 @@ def when_i_drag_pill_off_time(step, pill, time):
     draggable = pill.find_element_by_css_selector(
         "div.pill-image span.draggable")
     assert (draggable is not None,
-            "This pill is not constructed properly" % pill)
+            "This pill is not constructed properly: %s" % pill)
     data_id = draggable.get_attribute("data-id")
 
     bucket = get_bucket(time)
@@ -285,8 +285,12 @@ def specify_timeslot_time_as_time(step, timeslot, time):
     elt = world.firefox.find_element_by_id(id)
     assert elt is not None, "Select element not found %s" % id
 
+    then_i_wait_count_second(step, 1)
     select = Select(elt)
-    select.select_by_visible_text(time)
+    try:
+        select.select_by_visible_text(time)
+    except:
+        pass
 
 
 @step(u'Then the "([^"]*)" time is "([^"]*)"')
