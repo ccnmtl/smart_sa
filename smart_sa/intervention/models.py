@@ -704,7 +704,16 @@ class Participant(models.Model):
             ParticipantActivity.objects.create(
                 activity=activity, participant=p, status=ap['status'])
         logs.append(dict(info="activity progress restored"))
+        logs = cls.restore_session_visits(cls, data, session_pattern,
+                                          intervention, p, logs)
+        logs = cls.restore_activity_visits(
+            data, activity_pattern, intervention, p, logs)
 
+        return p, logs
+
+    @classmethod
+    def restore_session_visits(cls, data, session_pattern, intervention,
+                               p, logs):
         if 'session_visits' in data:
             for sv in data['session_visits']:
                 session_string = sv['session']
@@ -722,14 +731,11 @@ class Participant(models.Model):
                     logged=sv['timestamp'],
                 )
         logs.append(dict(info="session visits restored"))
-        logs = cls.restore_activity_visits(
-            data, activity_pattern, intervention, p, sv, logs)
-
-        return p, logs
+        return logs
 
     @classmethod
     def restore_activity_visits(cls, data, activity_pattern,
-                                intervention, p, sv, logs):
+                                intervention, p, logs):
         if 'activity_visits' in data:
             for av in data['activity_visits']:
                 activity_string = av['activity']
@@ -748,7 +754,7 @@ class Participant(models.Model):
                 ActivityVisit.objects.create(
                     participant=p,
                     activity=activity,
-                    logged=sv['timestamp'],
+                    logged=av['timestamp'],
                 )
         logs.append(dict(info="activity visits restored"))
         return logs
