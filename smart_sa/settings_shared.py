@@ -90,8 +90,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'django.contrib.markup',
     'django.contrib.admin',
+    'django.contrib.staticfiles',
     'raven.contrib.django',
     'smart_sa.assessmentquiz_task',
     'smart_sa.lifegoal_task',
@@ -109,14 +109,13 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_statsd',
     'django_jenkins',
+    'django_markwhat',
 ]
 
 STATSD_CLIENT = 'statsd.client'
 STATSD_PREFIX = 'masivukeni'
 STATSD_HOST = '127.0.0.1'
 STATSD_PORT = 8125
-STATSD_PATCHES = ['django_statsd.patches.db', ]
-
 
 SOUTH_TESTS_MIGRATE = False
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
@@ -129,7 +128,6 @@ NOSE_ARGS = [
 JENKINS_TASKS = (
     'django_jenkins.tasks.run_pylint',
     'django_jenkins.tasks.with_coverage',
-    'django_jenkins.tasks.django_tests',
     'django_jenkins.tasks.run_pep8',
     'django_jenkins.tasks.run_pyflakes',
 )
@@ -198,13 +196,11 @@ INTERNAL_IPS = ('127.0.0.1', )
 DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.version.VersionDebugPanel',
     'debug_toolbar.panels.timer.TimerDebugPanel',
-    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
     'debug_toolbar.panels.headers.HeaderDebugPanel',
     'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
     'debug_toolbar.panels.template.TemplateDebugPanel',
     'debug_toolbar.panels.sql.SQLDebugPanel',
     'debug_toolbar.panels.signals.SignalDebugPanel',
-    'debug_toolbar.panels.logger.LoggingPanel',
 )
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')

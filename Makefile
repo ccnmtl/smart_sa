@@ -52,6 +52,8 @@ rebase:
 # database, etc. You probably *DON'T* want
 # to run it after that, though.
 install: ./ve/bin/python validate jenkins
-	createdb $(APP)
+	createdb masivukeni2
 	$(MANAGE) syncdb --noinput
+	$(MANAGE) migrate $(APP).intervention
 	make migrate
+	$(MANAGE) load_intervention_content
