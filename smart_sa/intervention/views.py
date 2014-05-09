@@ -491,73 +491,77 @@ def get_or_create_first(obj, **params):
         return r, False
 
 
+def complete_activity_post(request, activity):
+    participant = request.participant
+    pa, created = get_or_create_first(
+        ParticipantActivity, activity=activity, participant=participant)
+    pa.status = "complete"
+    pa.save()
+    if request.POST.get('counselor_notes', False):
+        session = activity.clientsession
+        ps, created = get_or_create_first(
+            ParticipantSession, session=session, participant=participant)
+        note, created = get_or_create_first(
+            CounselorNote, participant=participant, counselor=request.user)
+        note.notes = request.POST.get('counselor_notes', '')
+        note.save()
+    if request.POST.get('buddy_name', False):
+        participant.buddy_name = request.POST.get('buddy_name', '')
+        participant.save()
+    if request.POST.get('reasons_for_returning', False):
+        participant.reasons_for_returning = request.POST.get(
+            'reasons_for_returning', '')
+        participant.save()
+
+    if activity.collect_referral_info:
+        if activity.clientsession.defaulter:
+            participant.defaulter_referral_mental_health = \
+                request.POST.get('referral_mental_health', '')
+            participant.defaulter_referral_alcohol = request.POST.get(
+                'referral_alcohol', '')
+            participant.defaulter_referral_drug_use = request.POST.get(
+                'referral_drug_use', '')
+            participant.defaulter_referral_other = request.POST.get(
+                'referral_other', '')
+            participant.defaulter_referral_notes = request.POST.get(
+                'referral_notes', '')
+        else:
+            participant.initial_referral_mental_health = request.POST.get(
+                'referral_mental_health', '')
+            participant.initial_referral_alcohol = request.POST.get(
+                'referral_alcohol', '')
+            participant.initial_referral_drug_use = request.POST.get(
+                'referral_drug_use', '')
+            participant.initial_referral_other = request.POST.get(
+                'referral_other', '')
+            participant.initial_referral_notes = request.POST.get(
+                'referral_notes', '')
+        participant.save()
+
+    next_url = request.POST.get('next', None)
+    if next_url:
+        return HttpResponseRedirect(next_url)
+    next_activity = activity.next()
+    if activity.game:
+        return HttpResponseRedirect(
+            "/task/%d/%s/" % (
+                activity.gamepage_set.all()[0].id,
+                activity.pages()[0]))
+    else:
+        if next_activity is None:
+            return HttpResponseRedirect(
+                activity.clientsession.get_absolute_url())
+        else:
+            return HttpResponseRedirect(next_activity.get_absolute_url())
+
+
 @participant_required
 @login_required
 def complete_activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
 
     if request.method == "POST":
-        participant = request.participant
-        pa, created = get_or_create_first(
-            ParticipantActivity, activity=activity, participant=participant)
-        pa.status = "complete"
-        pa.save()
-        if request.POST.get('counselor_notes', False):
-            session = activity.clientsession
-            ps, created = get_or_create_first(
-                ParticipantSession, session=session, participant=participant)
-            note, created = get_or_create_first(
-                CounselorNote, participant=participant, counselor=request.user)
-            note.notes = request.POST.get('counselor_notes', '')
-            note.save()
-        if request.POST.get('buddy_name', False):
-            participant.buddy_name = request.POST.get('buddy_name', '')
-            participant.save()
-        if request.POST.get('reasons_for_returning', False):
-            participant.reasons_for_returning = request.POST.get(
-                'reasons_for_returning', '')
-            participant.save()
-
-        if activity.collect_referral_info:
-            if activity.clientsession.defaulter:
-                participant.defaulter_referral_mental_health = \
-                    request.POST.get('referral_mental_health', '')
-                participant.defaulter_referral_alcohol = request.POST.get(
-                    'referral_alcohol', '')
-                participant.defaulter_referral_drug_use = request.POST.get(
-                    'referral_drug_use', '')
-                participant.defaulter_referral_other = request.POST.get(
-                    'referral_other', '')
-                participant.defaulter_referral_notes = request.POST.get(
-                    'referral_notes', '')
-            else:
-                participant.initial_referral_mental_health = request.POST.get(
-                    'referral_mental_health', '')
-                participant.initial_referral_alcohol = request.POST.get(
-                    'referral_alcohol', '')
-                participant.initial_referral_drug_use = request.POST.get(
-                    'referral_drug_use', '')
-                participant.initial_referral_other = request.POST.get(
-                    'referral_other', '')
-                participant.initial_referral_notes = request.POST.get(
-                    'referral_notes', '')
-            participant.save()
-
-        next_url = request.POST.get('next', None)
-        if next_url:
-            return HttpResponseRedirect(next_url)
-        next_activity = activity.next()
-        if activity.game:
-            return HttpResponseRedirect(
-                "/task/%d/%s/" % (
-                    activity.gamepage_set.all()[0].id,
-                    activity.pages()[0]))
-        else:
-            if next_activity is None:
-                return HttpResponseRedirect(
-                    activity.clientsession.get_absolute_url())
-            else:
-                return HttpResponseRedirect(next_activity.get_absolute_url())
+        return complete_activity_post(request, activity)
     else:
         return HttpResponseRedirect(activity.get_absolute_url())
 
