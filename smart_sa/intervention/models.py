@@ -722,7 +722,14 @@ class Participant(models.Model):
                     logged=sv['timestamp'],
                 )
         logs.append(dict(info="session visits restored"))
+        logs = cls.restore_activity_visits(
+            data, activity_pattern, intervention, p, sv, logs)
 
+        return p, logs
+
+    @classmethod
+    def restore_activity_visits(cls, data, activity_pattern,
+                                intervention, p, sv, logs):
         if 'activity_visits' in data:
             for av in data['activity_visits']:
                 activity_string = av['activity']
@@ -744,8 +751,7 @@ class Participant(models.Model):
                     logged=sv['timestamp'],
                 )
         logs.append(dict(info="activity visits restored"))
-
-        return p, logs
+        return logs
 
     def all_counselor_notes(self):
         return CounselorNote.objects.filter(participant=self)
