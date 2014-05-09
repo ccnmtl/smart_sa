@@ -491,28 +491,7 @@ def get_or_create_first(obj, **params):
         return r, False
 
 
-def complete_activity_post(request, activity):
-    participant = request.participant
-    pa, created = get_or_create_first(
-        ParticipantActivity, activity=activity, participant=participant)
-    pa.status = "complete"
-    pa.save()
-    if request.POST.get('counselor_notes', False):
-        session = activity.clientsession
-        ps, created = get_or_create_first(
-            ParticipantSession, session=session, participant=participant)
-        note, created = get_or_create_first(
-            CounselorNote, participant=participant, counselor=request.user)
-        note.notes = request.POST.get('counselor_notes', '')
-        note.save()
-    if request.POST.get('buddy_name', False):
-        participant.buddy_name = request.POST.get('buddy_name', '')
-        participant.save()
-    if request.POST.get('reasons_for_returning', False):
-        participant.reasons_for_returning = request.POST.get(
-            'reasons_for_returning', '')
-        participant.save()
-
+def save_referral_info(activity, request, participant):
     if activity.collect_referral_info:
         if activity.clientsession.defaulter:
             participant.defaulter_referral_mental_health = \
@@ -538,21 +517,43 @@ def complete_activity_post(request, activity):
                 'referral_notes', '')
         participant.save()
 
+
+def complete_activity_post(request, activity):
+    participant = request.participant
+    pa, created = get_or_create_first(
+        ParticipantActivity, activity=activity, participant=participant)
+    pa.status = "complete"
+    pa.save()
+    if request.POST.get('counselor_notes', False):
+        session = activity.clientsession
+        ps, created = get_or_create_first(
+            ParticipantSession, session=session, participant=participant)
+        note, created = get_or_create_first(
+            CounselorNote, participant=participant, counselor=request.user)
+        note.notes = request.POST.get('counselor_notes', '')
+        note.save()
+    if request.POST.get('buddy_name', False):
+        participant.buddy_name = request.POST.get('buddy_name', '')
+        participant.save()
+    if request.POST.get('reasons_for_returning', False):
+        participant.reasons_for_returning = request.POST.get(
+            'reasons_for_returning', '')
+        participant.save()
+
+    save_referral_info(activity, request, participant)
     next_url = request.POST.get('next', None)
     if next_url:
         return HttpResponseRedirect(next_url)
-    next_activity = activity.next()
     if activity.game:
         return HttpResponseRedirect(
             "/task/%d/%s/" % (
                 activity.gamepage_set.all()[0].id,
                 activity.pages()[0]))
-    else:
-        if next_activity is None:
-            return HttpResponseRedirect(
-                activity.clientsession.get_absolute_url())
-        else:
-            return HttpResponseRedirect(next_activity.get_absolute_url())
+    next_activity = activity.next()
+    if next_activity is None:
+        return HttpResponseRedirect(
+            activity.clientsession.get_absolute_url())
+    return HttpResponseRedirect(next_activity.get_absolute_url())
 
 
 @participant_required
