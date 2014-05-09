@@ -704,7 +704,7 @@ class Participant(models.Model):
             ParticipantActivity.objects.create(
                 activity=activity, participant=p, status=ap['status'])
         logs.append(dict(info="activity progress restored"))
-        logs = cls.restore_session_visits(cls, data, session_pattern,
+        logs = cls.restore_session_visits(data, session_pattern,
                                           intervention, p, logs)
         logs = cls.restore_activity_visits(
             data, activity_pattern, intervention, p, logs)
