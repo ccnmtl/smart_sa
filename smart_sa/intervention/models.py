@@ -238,14 +238,17 @@ class Activity(models.Model):
     def get_absolute_url(self):
         return "/activity/%d/" % self.id
 
-    def save(self, *args, **kwargs):
-        "We want to precreate game pages, based on the game chosen"
+    def get_old_game_pages(self):
         old_game_pages = tuple()
         if self._get_pk_val():
             old = Activity.objects.get(pk=self._get_pk_val())
             if old.game:
                 old_game_pages = old.pages()
+        return old_game_pages
 
+    def save(self, *args, **kwargs):
+        "We want to precreate game pages, based on the game chosen"
+        old_game_pages = self.get_old_game_pages()
         super(Activity, self).save(*args, **kwargs)
 
         new_pages = tuple()
