@@ -35,15 +35,14 @@
 
 	<div class="login-panel" id="login-cu">
 	
-		<form class="login cu" method="get" action="https://wind.columbia.edu/login">
+		<form class="login cu" method="get" action="{{CAS_BASE}}cas/login">
 		<div class="formtitle">Columbia University Users</div>
 		<div class="formrow">
 		Access Masivukeni using your UNI.
 		</div>
 		<div class="formrow">
 		<input type="submit" value="Log In" />
-		<input type="hidden" name="service" value="cnmtl_full_np" />
-		<input type="hidden" name="destination" value="http{% if request.is_secure %}s{% endif %}://{{ request.get_host }}/accounts/windlogin/?next={{next|default:'/intervention/'}}" />
+		<input type="hidden" name="destination" value="http{% if request.is_secure %}s{% endif %}://{{ request.get_host }}/accounts/caslogin/?next={{next|default:'/intervention/'}}" />
 		</div>
 		</form>
 	

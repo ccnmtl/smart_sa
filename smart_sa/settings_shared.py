@@ -162,10 +162,9 @@ LETTUCE_APPS = (
 # WIND settings
 
 AUTHENTICATION_BACKENDS = (
-    'djangowind.auth.WindAuthBackend',
+    'djangowind.auth.SAMLAuthBackend',
     'django.contrib.auth.backends.ModelBackend',)
-WIND_BASE = "https://wind.columbia.edu/"
-WIND_SERVICE = "cnmtl_full_np"
+CAS_BASE = "https://cas.columbia.edu/"
 WIND_PROFILE_HANDLERS = []
 WIND_AFFIL_HANDLERS = [
     'djangowind.auth.AffilGroupMapper',
@@ -182,6 +181,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     'stagingcontext.staging_processor',
     "django.core.context_processors.request",
+    'djangowind.context.context_processor',
     "smart_sa.intervention.views.inject_deployment",
 )
 

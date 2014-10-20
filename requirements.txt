@@ -40,7 +40,7 @@ python-dateutil==1.5
 django-stagingcontext==0.1.0
 sqlparse==0.1.11
 
-djangowind==0.12.1
+djangowind==0.13.2
 django-indexer==0.2.1
 django-templatetag-sugar==0.1
 django-paging==0.2.2
