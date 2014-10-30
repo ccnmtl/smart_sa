@@ -1,4 +1,4 @@
-Django==1.6.8
+Django==1.7.1
 resolver==0.2.1
 selector==0.8.11
 Paste==1.7.2
@@ -45,7 +45,6 @@ django-indexer==0.2.1
 django-templatetag-sugar==0.1
 django-paging==0.2.2
 raven==4.0.3
-South==1.0
 django-annoying==0.8.0
 django-nose==1.2
 django-statsd-mozilla==0.3.11

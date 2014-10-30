@@ -102,8 +102,6 @@ INSTALLED_APPS = [
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
     'smart_sa.dashboard',
-    'south',
-    'lettuce.django',
     'django_nose',
     'smoketest',
     'debug_toolbar',

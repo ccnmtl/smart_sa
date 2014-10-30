@@ -54,6 +54,4 @@ rebase:
 install: ./ve/bin/python validate jenkins
 	createdb masivukeni2
 	$(MANAGE) syncdb --noinput
-	$(MANAGE) migrate $(APP).intervention
 	make migrate
-	$(MANAGE) load_intervention_content

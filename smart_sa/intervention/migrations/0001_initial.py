@@ -1,190 +1,255 @@
 # flake8: noqa
-# encoding: utf-8
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
-class Migration(SchemaMigration):
-
-    def forwards(self, orm):
-        
-        # Adding model 'Intervention'
-        db.create_table('intervention_intervention', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=200)),
-            ('general_instructions', self.gf('django.db.models.fields.TextField')(blank=True)),
-        ))
-        db.send_create_signal('intervention', ['Intervention'])
-
-        # Adding model 'ClientSession'
-        db.create_table('intervention_clientsession', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('intervention', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['intervention.Intervention'])),
-            ('short_title', self.gf('django.db.models.fields.CharField')(max_length=512)),
-            ('long_title', self.gf('django.db.models.fields.CharField')(max_length=512)),
-            ('introductory_copy', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('_order', self.gf('django.db.models.fields.IntegerField')(default=0)),
-        ))
-        db.send_create_signal('intervention', ['ClientSession'])
-
-        # Adding model 'Activity'
-        db.create_table('intervention_activity', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('clientsession', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['intervention.ClientSession'])),
-            ('short_title', self.gf('django.db.models.fields.CharField')(max_length=512)),
-            ('long_title', self.gf('django.db.models.fields.CharField')(max_length=512)),
-            ('objective_copy', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('game', self.gf('django.db.models.fields.CharField')(max_length=64, null=True, blank=True)),
-            ('_order', self.gf('django.db.models.fields.IntegerField')(default=0)),
-        ))
-        db.send_create_signal('intervention', ['Activity'])
-
-        # Adding model 'GamePage'
-        db.create_table('intervention_gamepage', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('activity', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['intervention.Activity'], null=True, blank=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=512, blank=True)),
-            ('subtitle', self.gf('django.db.models.fields.CharField')(max_length=512, blank=True)),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('instructions', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('_order', self.gf('django.db.models.fields.IntegerField')(default=0)),
-        ))
-        db.send_create_signal('intervention', ['GamePage'])
-
-        # Adding model 'Instruction'
-        db.create_table('intervention_instruction', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('activity', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['intervention.Activity'])),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=512, blank=True)),
-            ('style', self.gf('django.db.models.fields.CharField')(max_length=64, null=True, blank=True)),
-            ('instruction_text', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
-            ('help_copy', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('notes', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('_order', self.gf('django.db.models.fields.IntegerField')(default=0)),
-        ))
-        db.send_create_signal('intervention', ['Instruction'])
-
-        # Adding model 'Backup'
-        db.create_table('intervention_backup', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('json_data', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-        ))
-        db.send_create_signal('intervention', ['Backup'])
-
-        # Adding model 'Fact'
-        db.create_table('intervention_fact', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('fact_key', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('fact_value', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('help_copy', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-        ))
-        db.send_create_signal('intervention', ['Fact'])
+from django.db import models, migrations
+from django.conf import settings
 
 
-    def backwards(self, orm):
-        
-        # Deleting model 'Intervention'
-        db.delete_table('intervention_intervention')
+class Migration(migrations.Migration):
 
-        # Deleting model 'ClientSession'
-        db.delete_table('intervention_clientsession')
+    dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+    ]
 
-        # Deleting model 'Activity'
-        db.delete_table('intervention_activity')
-
-        # Deleting model 'GamePage'
-        db.delete_table('intervention_gamepage')
-
-        # Deleting model 'Instruction'
-        db.delete_table('intervention_instruction')
-
-        # Deleting model 'Backup'
-        db.delete_table('intervention_backup')
-
-        # Deleting model 'Fact'
-        db.delete_table('intervention_fact')
-
-
-    models = {
-        'intervention.activity': {
-            'Meta': {'ordering': "('_order',)", 'object_name': 'Activity'},
-            '_order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'clientsession': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['intervention.ClientSession']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'game': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'long_title': ('django.db.models.fields.CharField', [], {'max_length': '512'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'objective_copy': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'short_title': ('django.db.models.fields.CharField', [], {'max_length': '512'})
-        },
-        'intervention.backup': {
-            'Meta': {'object_name': 'Backup'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'json_data': ('django.db.models.fields.TextField', [], {'blank': 'True'})
-        },
-        'intervention.clientsession': {
-            'Meta': {'ordering': "('_order',)", 'object_name': 'ClientSession'},
-            '_order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'intervention': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['intervention.Intervention']"}),
-            'introductory_copy': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'long_title': ('django.db.models.fields.CharField', [], {'max_length': '512'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'short_title': ('django.db.models.fields.CharField', [], {'max_length': '512'})
-        },
-        'intervention.fact': {
-            'Meta': {'object_name': 'Fact'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'fact_key': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'fact_value': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'help_copy': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
-        },
-        'intervention.gamepage': {
-            'Meta': {'ordering': "('_order',)", 'object_name': 'GamePage'},
-            '_order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'activity': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['intervention.Activity']", 'null': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'instructions': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'subtitle': ('django.db.models.fields.CharField', [], {'max_length': '512', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '512', 'blank': 'True'})
-        },
-        'intervention.instruction': {
-            'Meta': {'ordering': "('_order',)", 'object_name': 'Instruction'},
-            '_order': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'activity': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['intervention.Activity']"}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'help_copy': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'instruction_text': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'notes': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'style': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '512', 'blank': 'True'})
-        },
-        'intervention.intervention': {
-            'Meta': {'object_name': 'Intervention'},
-            'general_instructions': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '200'})
-        }
-    }
-
-    complete_apps = ['intervention']
+    operations = [
+        migrations.CreateModel(
+            name='Activity',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('short_title', models.CharField(max_length=512)),
+                ('long_title', models.CharField(max_length=512)),
+                ('objective_copy', models.TextField(blank=True)),
+                ('collect_notes', models.BooleanField(default=False)),
+                ('collect_buddy_name', models.BooleanField(default=False)),
+                ('collect_referral_info', models.BooleanField(default=False)),
+                ('collect_reasons_for_returning', models.BooleanField(default=False)),
+                ('created', models.DateTimeField(auto_now_add=True, verbose_name=b'date created')),
+                ('modified', models.DateTimeField(auto_now=True, verbose_name=b'date modified')),
+                ('game', models.CharField(blank=True, max_length=64, null=True, choices=[(b'assessmentquiz', b'Assessment Quiz Mood'), (b'assessmentquiz-audit', b'Assessment Quiz Alchohol Audit'), (b'assessmentquiz-drug-audit', b'Assessment Quiz Drug Audit'), (b'lifegoals', b'Life Goals'), (b'pills', b'Pill Game - Practice'), (b'pills-my-regimen', b'Pill Game - My Regimen'), (b'island', b'Island Before Medication'), (b'island-after-medication', b'Island After Medication'), (b'ssnmTree', b'Social Support Network Tree'), (b'video-soldiers', b'Soldiers and Snakes'), (b'video-joseph', b'Joseph and Hope'), (b'video-problem-solving', b'Problem Solving Video'), (b'problemsolving', b'Problem Solving')])),
+            ],
+            options={
+                'verbose_name_plural': 'activities',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ActivityVisit',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('logged', models.DateTimeField(auto_now_add=True, verbose_name=b'start timestamp')),
+                ('activity', models.ForeignKey(to='intervention.Activity')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Backup',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('json_data', models.TextField(blank=True)),
+                ('created', models.DateTimeField(auto_now_add=True, verbose_name=b'date created')),
+                ('deployment', models.CharField(default=b'Clinic', max_length=256)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ClientSession',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('short_title', models.CharField(max_length=512)),
+                ('long_title', models.CharField(max_length=512)),
+                ('introductory_copy', models.TextField(blank=True)),
+                ('created', models.DateTimeField(auto_now_add=True, verbose_name=b'date created')),
+                ('modified', models.DateTimeField(auto_now=True, verbose_name=b'date modified')),
+                ('defaulter', models.BooleanField(default=False, verbose_name=b'only show to defaulters')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='CounselorNote',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('notes', models.TextField(default=b'', null=True, blank=True)),
+                ('counselor', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Deployment',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(default=b'Clinic', max_length=256)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='GamePage',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=512, blank=True)),
+                ('subtitle', models.CharField(max_length=512, blank=True)),
+                ('description', models.TextField(blank=True)),
+                ('instructions', models.TextField(blank=True)),
+                ('activity', models.ForeignKey(blank=True, to='intervention.Activity', null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Instruction',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=512, blank=True)),
+                ('style', models.CharField(blank=True, max_length=64, null=True, choices=[(b'do', b'Do'), (b'say', b'Say')])),
+                ('instruction_text', models.TextField(blank=True)),
+                ('image', models.FileField(null=True, upload_to=b'intervention_images', blank=True)),
+                ('help_copy', models.TextField(blank=True)),
+                ('notes', models.TextField(blank=True)),
+                ('created', models.DateTimeField(auto_now_add=True, verbose_name=b'date created')),
+                ('modified', models.DateTimeField(auto_now=True, verbose_name=b'date modified')),
+                ('activity', models.ForeignKey(to='intervention.Activity')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Intervention',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=200)),
+                ('intervention_id', models.CharField(default=b'1', max_length=8)),
+                ('general_instructions', models.TextField(blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Participant',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=256)),
+                ('id_number', models.CharField(max_length=256)),
+                ('patient_id', models.CharField(default=b'', max_length=256, verbose_name=b'ID for linking patient to other research data')),
+                ('defaulter', models.BooleanField(default=False)),
+                ('status', models.BooleanField(default=True)),
+                ('clinical_notes', models.TextField(default=b'', blank=True)),
+                ('buddy_name', models.CharField(default=b'', max_length=256, blank=True)),
+                ('gender', models.CharField(default=b'male', max_length=16, choices=[(b'male', b'Male'), (b'female', b'Female')])),
+                ('initial_referral_mental_health', models.BooleanField(default=False)),
+                ('initial_referral_alcohol', models.BooleanField(default=False)),
+                ('initial_referral_drug_use', models.BooleanField(default=False)),
+                ('initial_referral_other', models.BooleanField(default=False)),
+                ('initial_referral_notes', models.TextField(default=b'', blank=True)),
+                ('defaulter_referral_mental_health', models.BooleanField(default=False)),
+                ('defaulter_referral_alcohol', models.BooleanField(default=False)),
+                ('defaulter_referral_drugs', models.BooleanField(default=False)),
+                ('defaulter_referral_other', models.BooleanField(default=False)),
+                ('defaulter_referral_notes', models.TextField(default=b'', blank=True)),
+                ('reasons_for_returning', models.TextField(default=b'', blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ParticipantActivity',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('status', models.CharField(default=b'incomplete', max_length=256)),
+                ('activity', models.ForeignKey(to='intervention.Activity')),
+                ('participant', models.ForeignKey(to='intervention.Participant')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ParticipantGameVar',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('key', models.CharField(max_length=256)),
+                ('value', models.TextField(default=b'', null=True, blank=True)),
+                ('participant', models.ForeignKey(to='intervention.Participant')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ParticipantSession',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('status', models.CharField(default=b'incomplete', max_length=256)),
+                ('participant', models.ForeignKey(to='intervention.Participant')),
+                ('session', models.ForeignKey(to='intervention.ClientSession')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='SessionVisit',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('logged', models.DateTimeField(auto_now_add=True, verbose_name=b'start timestamp')),
+                ('participant', models.ForeignKey(to='intervention.Participant')),
+                ('session', models.ForeignKey(to='intervention.ClientSession')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AlterOrderWithRespectTo(
+            name='instruction',
+            order_with_respect_to='activity',
+        ),
+        migrations.AlterOrderWithRespectTo(
+            name='gamepage',
+            order_with_respect_to='activity',
+        ),
+        migrations.AddField(
+            model_name='counselornote',
+            name='participant',
+            field=models.ForeignKey(to='intervention.Participant', null=True),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='clientsession',
+            name='intervention',
+            field=models.ForeignKey(to='intervention.Intervention'),
+            preserve_default=True,
+        ),
+        migrations.AlterOrderWithRespectTo(
+            name='clientsession',
+            order_with_respect_to='intervention',
+        ),
+        migrations.AddField(
+            model_name='activityvisit',
+            name='participant',
+            field=models.ForeignKey(to='intervention.Participant'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='activity',
+            name='clientsession',
+            field=models.ForeignKey(to='intervention.ClientSession'),
+            preserve_default=True,
+        ),
+        migrations.AlterOrderWithRespectTo(
+            name='activity',
+            order_with_respect_to='clientsession',
+        ),
+    ]
