@@ -11,11 +11,10 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
 from django.core import serializers
 from django.core.exceptions import MultipleObjectsReturned
-from django.utils import simplejson
 from django.contrib.auth.models import User
 from zipfile import ZipFile
 from cStringIO import StringIO
-from simplejson import dumps, loads
+from json import dumps, loads
 from datetime import datetime
 import os
 import os.path
@@ -259,11 +258,11 @@ def participant_data_download(request):
         participants.append(p.to_json())
 
     data['participants'] = participants
-    counselors = simplejson.loads(
+    counselors = loads(
         serializers.serialize("json", User.objects.all()))
     data['counselors'] = counselors
     data['API_VERSION'] = API_VERSION
-    json = simplejson.dumps(data)
+    json = dumps(data)
     resp = HttpResponse(json, content_type="application/json")
     clean_deployment_name = Deployment.objects.all()[0].name.lower().replace(
         " ", "_")
@@ -304,7 +303,7 @@ def restore_participants(request):
 
     try:
         json_data = request.FILES['participants_data'].read()
-        json = simplejson.loads(json_data)
+        json = loads(json_data)
     except Exception, e:
         logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))
         return dict(logs=logs)
@@ -372,7 +371,7 @@ def upload_participant_data(request):
 
     try:
         json_data = request.FILES['participants_data'].read()
-        json = simplejson.loads(json_data)
+        json = loads(json_data)
 
     except Exception, e:
         logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))

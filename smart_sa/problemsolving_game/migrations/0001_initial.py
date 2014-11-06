@@ -1,22 +1,28 @@
 # flake8: noqa
-# encoding: utf-8
-import datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
-class Migration(SchemaMigration):
-
-    def forwards(self, orm):
-        pass
+from django.db import models, migrations
 
 
-    def backwards(self, orm):
-        pass
+class Migration(migrations.Migration):
 
+    dependencies = [
+    ]
 
-    models = {
-        
-    }
-
-    complete_apps = ['problemsolving_game']
+    operations = [
+        migrations.CreateModel(
+            name='Issue',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=100)),
+                ('text', models.CharField(max_length=500)),
+                ('ordinality', models.IntegerField()),
+                ('subtext', models.CharField(max_length=1000, null=True, blank=True)),
+                ('example', models.CharField(max_length=1000, null=True, blank=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+    ]
