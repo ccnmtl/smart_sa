@@ -35,7 +35,7 @@ flake8==1.7.0
 unittest2==0.5.1
 logilab-common==0.59.0
 logilab-astng==0.24.1
-pylint==0.26.0
+pylint==1.4.1
 python-dateutil==1.5
 django-stagingcontext==0.1.0
 sqlparse==0.1.11
