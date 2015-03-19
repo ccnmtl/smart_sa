@@ -47,7 +47,7 @@ django-paging==0.2.2
 raven==5.1.1
 django-annoying==0.8.0
 django-nose==1.2
-django-statsd-mozilla==0.3.11
+django-statsd-mozilla==0.3.14
 django-smoketest==0.3.0
 django-debug-toolbar==1.1
 django-jenkins==0.16.3
