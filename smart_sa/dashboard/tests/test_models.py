@@ -87,23 +87,22 @@ class ParticipantTest(TestCase):
                      u'timestamp': u'2013-02-12 13:06:32.364000'}],
             })
 
-        self.p2 = Participant(
-            {
-                u'game_vars': [
+        self.p2 = Participant({
+            u'game_vars': [
                 {u'pill_game': u'{"regular": {"pills": [{"color": "#FF0000", \
-                 "id": "pill_8913", "name": "Efaverinez EFV"}, \
-                 {"color": "#0000FF", "id": "pill_2044", \
-                 "name": "Tenofivir TNV"}, {"color": "#00FF00", \
-                 "id": "pill_9305", "name": "Lamudivine 3TC"}], \
-                 "day": {"selected": "06:00", "id": "day", \
-                 "views": [{"top": "105px", "pillId": "pill_8913", \
-                 "left": "116px"}, {"top": "105px", "pillId": "pill_2044", \
-                 "left": "62px"}, {"top": "135px", "pillId": "pill_9305", \
-                 "left": "62px"}]}, "night": {"selected": "na", \
-                 "id": "night", "views": []}}}'},
+                "id": "pill_8913", "name": "Efaverinez EFV"}, \
+                {"color": "#0000FF", "id": "pill_2044", \
+                "name": "Tenofivir TNV"}, {"color": "#00FF00", \
+                "id": "pill_9305", "name": "Lamudivine 3TC"}], \
+                "day": {"selected": "06:00", "id": "day", \
+                "views": [{"top": "105px", "pillId": "pill_8913", \
+                "left": "116px"}, {"top": "105px", "pillId": "pill_2044", \
+                "left": "62px"}, {"top": "135px", "pillId": "pill_9305", \
+                "left": "62px"}]}, "night": {"selected": "na", \
+                "id": "night", "views": []}}}'},
                 {u'assessmentquiz': u'{"defaulter": {"audit": {"total": 7}, \
-                 "drugaudit": {"total": 0}, "kten": {"total": 27}}, \
-                 "regular": {"audit": {}, "kten": {"total": 18}}}'},
+                "drugaudit": {"total": 0}, "kten": {"total": 27}}, \
+                "regular": {"audit": {}, "kten": {"total": 18}}}'},
                 {u'ssnmtree': u'{"defaulter": {"middle1-fruit": \
                 {"disclosure": true, "support": true, "name": "person1"}, \
                 "bottom1-fruit": {"disclosure": false, "support": false, \

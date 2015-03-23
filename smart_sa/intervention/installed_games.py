@@ -36,7 +36,7 @@ class InstalledGamesLazySingleton:
     def __iter__(self):
         return iter(self.GAMES_INSTALLED)
 
-    #more delegation, 2nd round
+    # more delegation, 2nd round
     def pages(self, game_code):
         return self.GAME_OBJECTS[game_code].pages()
 
