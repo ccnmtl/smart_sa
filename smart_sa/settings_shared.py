@@ -39,7 +39,7 @@ TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 USE_I18N = False
-#MEDIA_ROOT = "/var/www/smart_sa/uploads/"
+
 MEDIA_ROOT = "uploads/"  # local file directory for dev
 MEDIA_URL = '/multimedia/'
 STATIC_URL = '/media/'
@@ -61,16 +61,16 @@ MIDDLEWARE_CLASSES = (
 )
 APPEND_SLASH = True
 
-#generate these most easily by going to:
-#http://www.josh-davis.org/ecmaScrypt
+# generate these most easily by going to:
+# http://www.josh-davis.org/ecmaScrypt
 #  setting the Key Size to 256 and Mode of Op to OFB
-#for public consumption on public site
+# for public consumption on public site
 FAKE_INTERVENTION_BACKUP_HEXKEY = (
     "f8bb022b420b66ab585065366073eed24705932289279be63ee20896c335a1aa")
 FAKE_INTERVENTION_BACKUP_IV = (
     "209b8b7cea877f069df46a0994af20c36d86bbcd33cb4b79bde43dee55fc9c85")
 
-#for actual consumption for people logged in, and on the desktop app
+# for actual consumption for people logged in, and on the desktop app
 INTERVENTION_BACKUP_HEXKEY = (
     "f8bb022b420b66ab585065366073eed24705932289279be63ee20896c335a1aa")
 INTERVENTION_BACKUP_IV = (
@@ -169,7 +169,6 @@ WIND_AFFIL_HANDLERS = [
 WIND_STAFF_MAPPER_GROUPS = ['tlcxml.cunix.local:columbia.edu']
 WIND_SUPERUSER_MAPPER_GROUPS = ['anp8', 'jb2410', 'zm4', 'sld2131', 'mar227']
 
-#TEMPLATES
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     "django.core.context_processors.debug",

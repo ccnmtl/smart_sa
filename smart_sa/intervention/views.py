@@ -47,7 +47,6 @@ def inject_deployment(request):
         return dict(deployment=Deployment.objects.all()[0])
 
 
-#VIEWS
 def no_vars(request, template_name='intervention/blank.html'):
     t = loader.get_template(template_name)
     c = RequestContext(request)
@@ -345,16 +344,21 @@ def restore_participants(request):
     logs.append(dict(info="existing participant data cleared"))
     # update participants
     for p in json['participants']:
-        try:
-            np, plogs = Participant.from_json(p)
-            logs.extend(plogs)
-            logs.append(dict(info="Restored participant %s" % np.name))
-        except Exception, e:
-            logs.append(dict(
-                warn="Could not fully restore participant (%s): %s" % (
-                    str(e), str(p))))
+        logs = update_participant(p, logs)
 
     return dict(logs=logs)
+
+
+def update_participant(p, logs):
+    try:
+        np, plogs = Participant.from_json(p)
+        logs.extend(plogs)
+        logs.append(dict(info="Restored participant %s" % np.name))
+    except Exception, e:
+        logs.append(dict(
+            warn="Could not fully restore participant (%s): %s" % (
+                str(e), str(p))))
+    return logs
 
 
 @render_to("intervention/upload_participants.html")
@@ -658,13 +662,13 @@ def intervention_admin(request, intervention_id):
                                        instance=intervention)
         if formset.is_valid():
             formset.save()
-            #prepare new objects for ordering
+            # prepare new objects for ordering
             if formset.new_objects:
                 formset.cleaned_data[-1]['id'] = formset.new_objects[0]
                 if formset.cleaned_data[-1]['ORDER'] is None:
                     formset.cleaned_data[-1]['ORDER'] = 9999999
 
-            #after save, so we can order new elements
+            # after save, so we can order new elements
             new_order = [x.get('id').id for x
                          in sorted(formset.cleaned_data,
                                    key=lambda x: x.get('ORDER'))
@@ -689,19 +693,19 @@ def session_admin(request, session_id):
                                   instance=clientsession)
         if formset.is_valid():
             formset.save()
-            #prepare new objects for ordering
+            # prepare new objects for ordering
             if formset.new_objects:
                 formset.cleaned_data[-1]['id'] = formset.new_objects[0]
                 if formset.cleaned_data[-1]['ORDER'] is None:
                     formset.cleaned_data[-1]['ORDER'] = 9999999
 
-            #after save, so we can order new elements
+            # after save, so we can order new elements
             new_order = [x.get('id').id for x
                          in sorted(formset.cleaned_data,
                                    key=lambda x: x.get('ORDER'))
                          if x != {}]
             clientsession.set_activity_order(new_order)
-            #refresh
+            # refresh
             formset = ActivityFormSet(instance=clientsession)
     else:
         formset = ActivityFormSet(instance=clientsession)
@@ -737,14 +741,14 @@ def activity_admin(request, activity_id):
                 if new_forms[i]['ORDER'] is None:
                     new_forms[i]['ORDER'] = 9999999 + new_object.id
 
-            #after save, so we can order new elements
+            # after save, so we can order new elements
             new_order = [
                 x.get('id').id for x
                 in sorted(formset.cleaned_data,
                           key=lambda x: x.get('ORDER'))
                 if x != {}]
             activity.set_instruction_order(new_order)
-            #refresh
+            # refresh
             formset = InstructionFormSet(instance=activity)
     else:
         formset = InstructionFormSet(instance=activity)

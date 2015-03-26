@@ -254,12 +254,12 @@ class Activity(models.Model):
         new_pages = tuple()
         if self.game:
             new_pages = self.pages()
-        #we compare page tuples in case the game code itself changes
-        #or two games are 'compatible' in page #'s etc.
-        #may cause confusion.  we can change later
+        # we compare page tuples in case the game code itself changes
+        # or two games are 'compatible' in page #'s etc.
+        # may cause confusion.  we can change later
         if new_pages != old_game_pages:
             if old_game_pages != tuple():
-                #delete old Game Pages? nah,
+                # delete old Game Pages? nah,
                 for gamepage in GamePage.objects.filter(activity=self):
                     gamepage.activity = None
                     gamepage.save()
@@ -290,7 +290,7 @@ class Activity(models.Model):
         except Activity.DoesNotExist:
             return None
 
-    #GAME code, we LOVE delegation!
+    # GAME code, we LOVE delegation!
     def pages(self):
         if self.game:
             return InstalledGames.pages(self.game)
@@ -408,8 +408,8 @@ class GamePage (models.Model):
     def page_name(self):
         return self.page_id or self.activity.pages()[self.index() - 1]
 
-    #we keep these methods separate from get_gamepage_order()
-    #so they can work independent of a good DB (like in the test pages)
+    # we keep these methods separate from get_gamepage_order()
+    # so they can work independent of a good DB (like in the test pages)
     def previous_url(self):
         "helper for prev nav in templates"
         ind = self.index()
@@ -450,7 +450,7 @@ class GamePage (models.Model):
         except:
             return ''
 
-    #GAME code, we LOVE delegation!
+    # GAME code, we LOVE delegation!
     def template(self, page_id):
         return InstalledGames.template(self.activity.game, page_id)
 
