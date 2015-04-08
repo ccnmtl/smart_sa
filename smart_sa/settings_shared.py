@@ -92,7 +92,6 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'django.contrib.admin',
     'django.contrib.staticfiles',
-    'raven.contrib.django',
     'smart_sa.assessmentquiz_task',
     'smart_sa.lifegoal_task',
     'smart_sa.pill_game',
