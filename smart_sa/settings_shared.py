@@ -42,7 +42,21 @@ USE_I18N = False
 
 MEDIA_ROOT = "uploads/"  # local file directory for dev
 MEDIA_URL = '/multimedia/'
+
+COMPRESS_URL = "/media/"
+COMPRESS_ROOT = "media/"
+
 STATIC_URL = '/media/'
+STATICFILES_DIRS = (
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "../media/")),
+)
+STATIC_ROOT = ""
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
 SECRET_KEY = 'dummy-asdfasdfasdf'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -107,6 +121,7 @@ INSTALLED_APPS = [
     'django_statsd',
     'django_jenkins',
     'django_markwhat',
+    'compressor',
 ]
 
 STATSD_CLIENT = 'statsd.client'
@@ -176,6 +191,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'stagingcontext.staging_processor',
     "django.core.context_processors.request",
     'djangowind.context.context_processor',
+    'django.core.context_processors.static',
     "smart_sa.intervention.views.inject_deployment",
 )
 
