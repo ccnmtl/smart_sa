@@ -55,12 +55,12 @@ div.pill-bucket.disabled {
 }
 
 div.day.pill-bucket {
-    background-image: url('/site_media/pill_game/images/bucket_day.png');
+    background-image: url('../pill_game/images/bucket_day.png');
     margin-bottom: 10px;
 }
 
 div.night.pill-bucket {
-    background-image: url('/site_media/pill_game/images/bucket_eve.png');
+    background-image: url('../pill_game/images/bucket_eve.png');
 }
 
 div#day_time, div#night_time {

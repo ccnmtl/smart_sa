@@ -84,7 +84,7 @@
         template: _.template(' \
                 <div id=<%= id %> class="pill <%= mode %>"> \
                     <div class="pill-delete"> \
-                        <input id="delete" class="pill-delete-image" type="image" src="/site_media/pill_game/images/button-delete.2.png" name="image" width="16" height="16"/> \
+                        <input id="delete" class="pill-delete-image" type="image" src="../pill_game/images/button-delete.2.png" name="image" width="16" height="16"/> \
                     </div> \
                     <div class="pill-image" \
                         style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \

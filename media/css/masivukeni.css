@@ -3,7 +3,7 @@ body
 	margin: 0px;
 	padding: 0px;
 	background-color: #B4DCC0;
-	background-image: url(/site_media/images/background.png);
+	background-image: url(../images/background.png);
 	background-repeat: repeat-x;
 	font-family: "lucida sans unicode", "lucida grande", sans-serif;
 }
@@ -628,21 +628,21 @@ a.action:hover, a.action.disabled { background-color: #79b985; }
 /* start - icons */
 .default
 {
-	background-image: url(/site_media/images/icon_default.png);
+	background-image: url(../images/icon_default.png);
 	background-repeat: no-repeat;
 	background-position: 10px 6px;
 }
 
 .complete
 {
-	background-image: url(/site_media/images/icon_complete.png);
+	background-image: url(../images/icon_complete.png);
 	background-repeat: no-repeat;
 	background-position: 10px 6px;
 }
 
 .incomplete
 {
-	background-image: url(/site_media/images/icon_incomplete.png);
+	background-image: url(../images/icon_incomplete.png);
 	background-repeat: no-repeat;
 	background-position: 10px 6px;
 }
@@ -654,7 +654,7 @@ li span.task
 	right: 5px;
 	width: 35px;
 	height: 15px;
-	background-image: url(/site_media/images/icon_task.png);
+	background-image: url(../images/icon_task.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-indent: -9999px;
@@ -843,7 +843,7 @@ container-home
 	background-color: #FFF;
 	margin: 0px auto;
 	border: 1px solid #dedede;
-	background-image: url(/site_media/images/home_bg.jpg);
+	background-image: url(../images/home_bg.jpg);
 	background-repeat: repeat-x;
 }
 
@@ -875,104 +875,9 @@ table#login_form td.label
 
 table#login_form td.button { 12px 12px 12px 90px: ; }
 
-/*
-.hilite
-{
-	width: 190px;
-	height: 35px;
-	text-align: center;
-	font-size: 13px;
-	color: #fff;
-	background-image: url(/site_media/images/button_short_green.png);
-	background-repeat: no-repeat;
-	display: block;
-	text-decoration: none;
-	padding: 9px 0 0px 0;
-	text-transform: uppercase;
-}
-
-input.hilite
-{
-	border: none;
-	background-color: transparent;
-	font-family: "Lucida Sans", Arial, sans-serif;
-	padding-bottom: 10px;
-}
-
-.hilite:hover { background-image: url(/site_media/images/button_short_green_over.png); }
-
-.off
-{
-	width: 190px;
-	height: 35px;
-	text-align: center;
-	font-size: 13px;
-	color: #fff;
-	background-image: url(/site_media/images/button_short_gray.png);
-	background-repeat: no-repeat;
-	display: block;
-	text-decoration: none;
-	padding-top: 9px;
-	text-transform: lowercase;
-}
-
-.off:hover { background-image: url(/site_media/images/button_short_gray_over.png); }
-
-a.off_right
-{
-	width: 190px;
-	height: 35px;
-	text-align: center;
-	font-size: 13px;
-	color: #fff;
-	background-image: url(/site_media/images/button_short_gray.png);
-	background-repeat: no-repeat;
-	display: block;
-	text-decoration: none;
-	padding-top: 9px;
-	text-transform: lowercase;
-	float: right;
-	margin: 0px 5px 15px 0;
-}
-
-a.off_right:hover { background-image: url(/site_media/images/button_short_gray_over.png); }
-
-a.hilite_right
-{
-	width: 190px;
-	height: 35px;
-	text-align: center;
-	font-size: 13px;
-	color: #fff;
-	background-image: url(/site_media/images/button_short_green.png);
-	background-repeat: no-repeat;
-	display: block;
-	text-decoration: none;
-	padding-top: 9px;
-	text-transform: uppercase;
-	float: right;
-	margin: 0px 5px 15px 0;
-}
-
-a.hilite_right:hover { background-image: url(/site_media/images/button_short_green_over.png); }
-*/
-
-/* a.session, a.session_off 
-{
-	width: 207px;
-	height: 88px;
-	background-image: url(../images/button_tall_gray.png);
-	background-repeat: no-repeat;
-	display: block;
-	float: left;
-	margin: 0 10px 20px 30px;
-	position: relative;
-	text-decoration: none;
-} */
-
-a.session_off:hover { background-image: url(/site_media/images/button_tall_gray_over.png); }
-a.session_next:hover { background-image: url(/site_media/images/button_tall_green_over.png); }
-a.session_complete:hover { background-image: url(/site_media/images/button_tall_orangecheck_over.png); }
+a.session_off:hover { background-image: url(../images/button_tall_gray_over.png); }
+a.session_next:hover { background-image: url(../images/button_tall_green_over.png); }
+a.session_complete:hover { background-image: url(../images/button_tall_orangecheck_over.png); }
 
 a.session_complete
 {
@@ -981,7 +886,7 @@ a.session_complete
 	text-align: center;
 	font-size: 13px;
 	color: #fff;
-	background-image: url(/site_media/images/button_tall_orangecheck.png);
+	background-image: url(../images/button_tall_orangecheck.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-decoration: none;
@@ -1003,7 +908,7 @@ a.session_next
 	text-align: center;
 	font-size: 13px;
 	color: #fff;
-	background-image: url(/site_media/images/button_tall_green.png);
+	background-image: url(../images/button_tall_green.png);
 	background-repeat: no-repeat;
 	display: block;
 	text-decoration: none;
@@ -1121,7 +1026,7 @@ body.logged-in #home-remote { display: block; }
 {
 	font-size: 12px;
 	font-weight: bold;
-	background-image: url(/site_media/images/clock-icon.jpg);
+	background-image: url(../images/clock-icon.jpg);
 	background-repeat: no-repeat;
 	background-position: 4px 4px;
 	margin: 16px 0px 0px 0px;
@@ -1199,20 +1104,13 @@ width: 33%;
 
 #gamebox
 {
-	/*
-	border: 1px solid #ccc;
-	background-color: #EEE;
-	background-image: url(/site_media/images/logo_repeat.png);
-	background-repeat: repeat;
-	background-position: center center;
-	*/
 	position: relative;
 	min-height: 350px;
 }
 
 #closemessage
 {
-	background-image: url(/site_media/images/starburst.png);
+	background-image: url(../images/starburst.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	text-align: center;

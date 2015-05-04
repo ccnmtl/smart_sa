@@ -1,7 +1,7 @@
 .island-container {
     height: 467px;
     width: 100%; 
-    background-image: url(/site_media/island_game/images/background.jpg);
+    background-image: url(../island_game/images/background.jpg);
     background-repeat: no-repeat;
 }
 

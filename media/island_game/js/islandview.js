@@ -259,7 +259,7 @@
             'woman/xhosawoman.gif'
         ],
 
-        media_path: "/site_media/island_game/images/",
+        media_path: "../island_game/images/",
 
         selectImage: function (value) {
             var images = (this.model.get("gender") === "M") ? this.male_images : this.female_images;
@@ -346,7 +346,7 @@
                 jQuery("img#right").show();
                 jQuery("img#left").hide();
                 jQuery("span#island_view_label").html("BEFORE GOING ON ARVS");
-                jQuery("img#island").attr("src", "/site_media/island_game/images/island_part1.png");
+                jQuery("img#island").attr("src", "../island_game/images/island_part1.png");
 
                 this.views.adherence.hide();
                 this.views.infection.enable();
@@ -367,7 +367,7 @@
                 jQuery("img#right").hide();
                 jQuery("img#left").show();
                 jQuery("span#island_view_label").html("ON ARVS");
-                jQuery("img#island").attr("src", "/site_media/island_game/images/island_part2.png");
+                jQuery("img#island").attr("src", "../island_game/images/island_part2.png");
 
                 this.views.figure1.hide();
                 this.views.figure2.show();
