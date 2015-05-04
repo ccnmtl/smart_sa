@@ -7,8 +7,8 @@
 
 	<title>Masivukeni: {% block title %}{% endblock %}</title>
   
-	<link href="/site_media/css/masivukeni.css" rel="stylesheet" type="text/css" />
-    <link href="/site_media/css/print.css" rel="stylesheet" media="print" />
+	<link href="{{STATIC_URL}}css/masivukeni.css" rel="stylesheet" type="text/css" />
+    <link href="{{STATIC_URL}}css/print.css" rel="stylesheet" media="print" />
   
 	{% block css %}{% endblock %}
 	{% block js %}{% endblock %}
@@ -31,7 +31,7 @@
 		{% endif %}
 		</h1>
 		
-        <img class="logo" src="/site_media/images/logo_masivukeni.png">
+        <img class="logo" src="{{STATIC_URL}}images/logo_masivukeni.png">
         
 		<div id="nav-header">
 		
