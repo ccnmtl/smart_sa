@@ -122,6 +122,7 @@ INSTALLED_APPS = [
     'django_jenkins',
     'django_markwhat',
     'compressor',
+    'gunicorn',
 ]
 
 STATSD_CLIENT = 'statsd.client'
