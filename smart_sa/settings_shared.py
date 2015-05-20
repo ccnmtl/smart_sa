@@ -115,7 +115,6 @@ INSTALLED_APPS = [
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
     'smart_sa.dashboard',
-    'django_nose',
     'smoketest',
     'debug_toolbar',
     'django_statsd',
@@ -131,12 +130,7 @@ STATSD_HOST = '127.0.0.1'
 STATSD_PORT = 8125
 
 SOUTH_TESTS_MIGRATE = False
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=smart_sa',
-]
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 JENKINS_TASKS = (
     'django_jenkins.tasks.run_pep8',
