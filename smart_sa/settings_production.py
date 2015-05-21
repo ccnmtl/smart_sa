@@ -21,9 +21,6 @@ DATABASES = {
         }
 }
 
-STATICFILES_DIRS = ()
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), "../media")
-
 AWS_S3_CUSTOM_DOMAIN = "d6wadfi3s9mi3.cloudfront.net"
 
 AWS_STORAGE_BUCKET_NAME = "ccnmtl-masivukeni-static-prod"

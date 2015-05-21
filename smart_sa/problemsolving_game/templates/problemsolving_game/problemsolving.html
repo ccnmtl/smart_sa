@@ -1,17 +1,22 @@
 {% extends "intervention/game.html" %}
+{% load compress %}
 
 {% block game_css %}
-  <link href="/site_media/problemsolving_game/css/problemsolving.css" rel="stylesheet" type="text/css" />
-  <link href="/site_media/problemsolving_game/css/problemsolving.print.css" rel="stylesheet" type="text/css" media="print" />
+{% compress css %}
+  <link href="{{STATIC_URL}}problemsolving_game/css/problemsolving.css" rel="stylesheet" type="text/css" />
+  <link href="{{STATIC_URL}}problemsolving_game/css/problemsolving.print.css" rel="stylesheet" type="text/css" media="print" />
+{% endcompress %}
 {% endblock %}
 
 
 {% block game_js %}
-    <script type="text/javascript" src="/site_media/js/jquery/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="/site_media/js/underscore/underscore-min.js"></script>
-    <script type="text/javascript" src="/site_media/js/backbone/backbone-min.js"></script>
-    <script type="text/javascript" src="/site_media/js/gamestate.js"></script>
-    <script type="text/javascript" src="/site_media/problemsolving_game/js/problemsolvingview.js"></script>
+{% compress js %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/gamestate.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}problemsolving_game/js/problemsolvingview.js"></script>
+{% endcompress %}
     <script type="text/template" id="printable-template">
         <div class="issue-text-printable">
             <h5>Challenge</h5>
@@ -43,7 +48,7 @@
     <div class="issue-gallery">
     
        <div id="previous_issue" class="issue-navigation issue-gallery-item">
-    	  <span unselectable="on"></span><img style="display: none" src="/site_media/images/leftarrow.png"></img>
+    	  <span unselectable="on"></span><img style="display: none" src="{{STATIC_URL}}images/leftarrow.png"></img>
        </div>
        
        <div id="issue_details" class="issue-gallery-item">
@@ -105,7 +110,7 @@
        </div>
        
        <div id="next_issue" class="issue-navigation issue-gallery-item">
-    	  <span unselectable="on"></span><img src="/site_media/images/rightarrow.png"></img>
+    	  <span unselectable="on"></span><img src="{{STATIC_URL}}images/rightarrow.png"></img>
        </div>
        
     </div>
@@ -127,7 +132,7 @@
     		 <div class="text">{{issue.text}}</div>
     		 <div class="subtext">{% if issue.subtext %}{{issue.subtext|safe}}{% endif %}</div>
     		 <div class="example">{% if issue.example %}{{issue.example|safe}}{% endif %}</div>
-    		 <div class="image">/site_media/problemsolving_game/images/issues/barrier_{{issue.name}}.jpg</div>
+    		 <div class="image">{{STATIC_URL}}problemsolving_game/images/issues/barrier_{{issue.name}}.jpg</div>
     		 <div class="ordinality">{{issue.ordinality}}</div>
     	  </div>
        {% endfor %}
