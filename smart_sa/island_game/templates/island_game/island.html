@@ -1,18 +1,23 @@
 {% extends "intervention/game.html" %}
+{% load compress %}
 
 {% block game_js %}
-    <script type="text/javascript" src="/site_media/js/jquery/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="/site_media/js/underscore/underscore-min.js"></script>
-    <script type="text/javascript" src="/site_media/js/backbone/backbone-min.js"></script>
+{% compress js %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/backbone/backbone-min.js"></script>
 
-    <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/MochiKit.js"></script> 
-    <script type="text/javascript" src="/site_media/js/mochikit/MochiKit/DragAndDrop.js"></script>
-    <script type="text/javascript" src="/site_media/island_game/js/islandview.js"></script> 
+    <script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/MochiKit.js"></script> 
+    <script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/DragAndDrop.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}island_game/js/islandview.js"></script> 
+{% endcompress %}
 {% endblock %}
 
 {% block game_css %}
-    <link rel="stylesheet" href="/site_media/island_game/css/island.print.css" type="text/css" media="print" />
-    <link rel="stylesheet" href="/site_media/island_game/css/island.css" type="text/css" />
+{% compress css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}island_game/css/island.print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="{{STATIC_URL}}island_game/css/island.css" type="text/css" />
+{% endcompress %}
 {% endblock %}
 
 
@@ -23,35 +28,35 @@
 
     <div id="island_container" class="island-container">
     
-        <img src="/site_media/island_game/images/island_part1.png" id="island" alt="island"></img> 
+        <img src="{{STATIC_URL}}island_game/images/island_part1.png" id="island" alt="island"></img> 
             
-        <img src="/site_media/island_game/images/water.png" id="water" alt="water"></img>
+        <img src="{{STATIC_URL}}island_game/images/water.png" id="water" alt="water"></img>
             
         <img id="figure1" alt="figure" class="figure"></img>
         <img id="figure2" alt="figure" class="figure"></img>
         
         <div>
             <div id="infection_label" class="slider_label infection"><br />oi</div>
-            <img src="/site_media/island_game/images/slider_bar.png" id="infection_slider" class="slider infection" />
-            <img src="/site_media/island_game/images/slider_handle.png" id="infection" class="slider_thumb infection" />
+            <img src="{{STATIC_URL}}island_game/images/slider_bar.png" id="infection_slider" class="slider infection" />
+            <img src="{{STATIC_URL}}island_game/images/slider_handle.png" id="infection" class="slider_thumb infection" />
         </div>
         
         <div>
             <div id="viral_load_label" class="slider_label viral_load">viral<br />load</div>
-            <img src="/site_media/island_game/images/slider_bar.png" id="viral_load_slider" class="slider viral_load" />
-            <img src="/site_media/island_game/images/slider_handle.png" id="viral_load" class="slider_thumb viral_load" />
+            <img src="{{STATIC_URL}}island_game/images/slider_bar.png" id="viral_load_slider" class="slider viral_load" />
+            <img src="{{STATIC_URL}}island_game/images/slider_handle.png" id="viral_load" class="slider_thumb viral_load" />
         </div>
           
         <div>
             <div id="cd4_count_label" class="slider_label cd4_count">cd4<br />count</div>
-            <img src="/site_media/island_game/images/slider_bar.png" id="cd4_count_slider" class="slider cd4_count" />
-            <img src="/site_media/island_game/images/slider_handle.png" id="cd4_count" class="slider_thumb cd4_count" />
+            <img src="{{STATIC_URL}}island_game/images/slider_bar.png" id="cd4_count_slider" class="slider cd4_count" />
+            <img src="{{STATIC_URL}}island_game/images/slider_handle.png" id="cd4_count" class="slider_thumb cd4_count" />
         </div>
 
         <div>
             <div id="good_adherence_label" class="slider_label adherence">good</br>adherence</div>
-            <img src="/site_media/island_game/images/slider_bar.png" id="adherence_slider" class="slider adherence" />
-            <img src="/site_media/island_game/images/slider_handle.png" id="adherence" class="slider_thumb adherence" />
+            <img src="{{STATIC_URL}}island_game/images/slider_bar.png" id="adherence_slider" class="slider adherence" />
+            <img src="{{STATIC_URL}}island_game/images/slider_handle.png" id="adherence" class="slider_thumb adherence" />
             <div id="no_adherence_label" class="slider_label adherence">no</br>adherence</div>
         </div>
         

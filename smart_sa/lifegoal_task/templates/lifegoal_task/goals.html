@@ -1,15 +1,20 @@
 {% extends "intervention/game.html" %}
+{% load compress %}
 
 {% block game_js %}
-    <script type="text/javascript" src="/site_media/js/jquery/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="/site_media/js/underscore/underscore-min.js"></script>
-    <script type="text/javascript" src="/site_media/js/backbone/backbone-min.js"></script>
-    <script type="text/javascript" src="/site_media/js/gamestate.js"></script>
-    <script type="text/javascript" src="/site_media/lifegoal_task/js/goals.js"></script> 
+{% compress js %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/gamestate.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}lifegoal_task/js/goals.js"></script> 
+{% endcompress %}
 {% endblock %}
 
 {% block game_css %}
-  <link href="/site_media/lifegoal_task/css/lifegoal.css" rel="stylesheet" type="text/css" />
+{% compress css %}
+  <link href="{{STATIC_URL}}lifegoal_task/css/lifegoal.css" rel="stylesheet" type="text/css" />
+{% endcompress %}
 {% endblock %}
 
 {% block game_content %}
@@ -19,7 +24,7 @@
    
      <form id="lifegoals">
      
-   		<img src="/site_media/lifegoal_task/images/background-island.jpg" id="printable" />
+   		<img src="{{STATIC_URL}}lifegoal_task/images/background-island.jpg" id="printable" />
    		
 		<div class="step" id="step2"><input type="text" name="step2" /></label></div>
 		
