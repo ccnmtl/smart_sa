@@ -37,7 +37,7 @@ gunicorn==19.3.0
 boto==2.38.0
 
 
-djangowind==0.13.2
+djangowind==0.13.3
 django-indexer==0.2.1
 django-templatetag-sugar==0.1
 django-paging==0.2.2
