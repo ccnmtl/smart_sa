@@ -136,7 +136,7 @@ def counselor_landing_page(request):
         del request.session['participant_id']
     except KeyError:
         pass
-    return dict(intervention=Intervention.objects.all()[0])
+    return dict(intervention=Intervention.objects.first())
 
 
 @render_to('intervention/manage_participants.html')
