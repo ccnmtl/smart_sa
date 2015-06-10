@@ -143,7 +143,7 @@ def counselor_landing_page(request):
 @login_required
 def manage_participants(request):
     return dict(participants=Participant.objects.all().order_by("name"),
-                backups=Backup.objects.all().order_by("-created"),
+                backups=Backup.objects.all().order_by("-created")[:20],
                 counselors=User.objects.all().order_by("username"))
 
 
