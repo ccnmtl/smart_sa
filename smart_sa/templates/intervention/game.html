@@ -17,8 +17,9 @@ setTimeout(logstatus, 0);
 </script>
 {% endif %}
 
+<script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/MochiKit.js"></script>
+
 {% compress js %}
-   <script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/MochiKit.js"></script>
    <script type="text/javascript" src="{{STATIC_URL}}js/static_auth/local_session.js"></script>    
    <script type="text/javascript" src="{{STATIC_URL}}js/static_auth/intervention_storage.js"></script>    
 {% endcompress %}   

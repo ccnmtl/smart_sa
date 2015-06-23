@@ -237,7 +237,6 @@ class FullSerializationTest(TestCase):
                     p1 = a1.gamepage_set.all()[pidx]
                     p2 = a2.gamepage_set.all()[pidx]
                     self.assertEquals(p1.index(), p2.index())
-                    print a1.gamepage_set.count()
                     self.assertEquals(p1.page_name(), p2.page_name())
                     self.assertEquals(p1.prev_title(), p2.prev_title())
                     self.assertEquals(p1.next_title(), p2.next_title())
