@@ -22,6 +22,7 @@
 
 
 {% block game_content %}
+    <input type="hidden" id="static-url" value="{{STATIC_URL}}" />
 
     <div id="mode">{{game_context.mode}}</div>
     <div id="gender">{% ifequal participant.gender "male" %}M{%else%}F{%endifequal%}</div>

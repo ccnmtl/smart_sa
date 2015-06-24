@@ -17,6 +17,23 @@
             <% _.each(pills, function(pill) { %> <li> <%= pill.count %> <%= pill.name %></li> <% }); %>
         </div>    
     </script>
+    
+    <script type="text/template" id="individual-pill-view">
+        <div id=<%= id %> class="pill <%= mode %>">
+            <div class="pill-delete">
+                <input id="delete" class="pill-delete-image" type="image" src="{{STATIC_URL}}pill_game/images/button-delete.2.png" name="image" width="16" height="16"/>
+            </div>
+            <div class="pill-image"
+             style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>));
+             background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); ">
+                <span data-id="<%= id %>" class="draggable"
+                 style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>));
+                 background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); ">
+                </span>
+            </div>
+            <div class="pill-text"><span><%= name %></span><input type="text" value="<%= name %>"></input></div>
+        </div>
+    </script>
 {% endblock %}
 
 {% block game_css %}

@@ -635,7 +635,7 @@ def save_game_state(request):
     if not request.method == "POST":
         return HttpResponse("must be a POST")
     try:
-        json = loads(request.raw_post_data)
+        json = loads(request.body)
         for k in json.keys():
             request.participant.save_game_var(k, dumps(json[k]))
     except:

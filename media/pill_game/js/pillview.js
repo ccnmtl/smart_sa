@@ -81,26 +81,11 @@
             'keypress .pill-text input': 'onChangeName',
             'keyup .pill-text input': 'onChangeName'
         },
-        template: _.template(' \
-                <div id=<%= id %> class="pill <%= mode %>"> \
-                    <div class="pill-delete"> \
-                        <input id="delete" class="pill-delete-image" type="image" src="../pill_game/images/button-delete.2.png" name="image" width="16" height="16"/> \
-                    </div> \
-                    <div class="pill-image" \
-                        style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
-                               background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
-                        <span data-id="<%= id %>" class="draggable" \
-                            style="background-image: -webkit-gradient(radial, 65% 35%, 1, center center, 30, from(#ffffff), to(<%= color %>)); \
-                                   background-image: -moz-radial-gradient(65% 35% 45deg, circle , #ffffff 1%, <%= color %> 100%); "> \
-                        </span> \
-                    </div> \
-                    <div class="pill-text"><span><%= name %></span><input type="text" value="<%= name %>"></input></div> \
-                </div>'),
-
         initialize: function (options, render) {
             _.bindAll(this, "render", "unrender", "revertEffect", "onRemovePill", "onEdit", "onReadOnly", "onChangeName");
             this.gameView = options.gameView;
             this.model.bind("destroy", this.unrender);
+            this.template = _.template(jQuery("#individual-pill-view").html());
             this.render();
         },
         focus: function () {
