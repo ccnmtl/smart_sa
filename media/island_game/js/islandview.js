@@ -259,17 +259,16 @@
             'woman/xhosawoman.gif'
         ],
 
-        media_path: "../island_game/images/",
-
         selectImage: function (value) {
+            var media_path = jQuery('#static-url').val() + 'island_game/images/';
             var images = (this.model.get("gender") === "M") ? this.male_images : this.female_images;
 
             if (value === 0) {
-                this.el.src = this.media_path + images[0];
+                this.el.src = media_path + images[0];
             } else {
                 var i = Math.ceil(value * images.length) - 1;
                 if (i >= 0 && i <= images.length) {
-                    this.el.src = this.media_path + images[i];
+                    this.el.src = media_path + images[i];
                 }
             }
         },
@@ -293,7 +292,6 @@
 
     var IslandGameView = Backbone.View.extend({
         events: {},
-
         initialize : function (options) {
             _.bindAll(this, "render", "gameFloor", "addGameElement", "waterLevel");
             _.extend(this, Backbone.Events);
@@ -342,11 +340,12 @@
         },
 
         render: function () {
+            var media_path = jQuery('#static-url').val();
             if (this.model.get("beforeMedication")) {
                 jQuery("img#right").show();
                 jQuery("img#left").hide();
                 jQuery("span#island_view_label").html("BEFORE GOING ON ARVS");
-                jQuery("img#island").attr("src", "../island_game/images/island_part1.png");
+                jQuery("img#island").attr("src", media_path + "island_game/images/island_part1.png");
 
                 this.views.adherence.hide();
                 this.views.infection.enable();
@@ -367,7 +366,7 @@
                 jQuery("img#right").hide();
                 jQuery("img#left").show();
                 jQuery("span#island_view_label").html("ON ARVS");
-                jQuery("img#island").attr("src", "../island_game/images/island_part2.png");
+                jQuery("img#island").attr("src", media_path + "island_game/images/island_part2.png");
 
                 this.views.figure1.hide();
                 this.views.figure2.show();
