@@ -40,7 +40,7 @@ boto==2.38.0
 djangowind==0.13.3
 django-indexer==0.3.0
 django-templatetag-sugar==0.1
-django-paging==0.2.2
+django-paging==0.2.5
 raven==5.2.0
 django-annoying==0.8.1
 django-statsd-mozilla==0.3.14
