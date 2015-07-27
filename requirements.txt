@@ -9,7 +9,7 @@ cssselect==0.9.1
 lxml==3.4.4
 pyparsing==2.0.3
 tornado==3.1.1
-fuzzywuzzy==0.4.0
+fuzzywuzzy==0.6.0
 sure==1.2.12
 ipython==3.0.0
 ipdb==0.8
