@@ -20,6 +20,7 @@ DATABASES = {
         'PORT': 5432,
         'USER': '',
         'PASSWORD': '',
+        'ATOMIC_REQUESTS': True,
     }
 }
 
@@ -32,6 +33,7 @@ if 'test' in sys.argv or 'jenkins' in sys.argv:
             'PORT': '',
             'USER': '',
             'PASSWORD': '',
+            'ATOMIC_REQUESTS': True,
         }
     }
 
@@ -70,7 +72,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 APPEND_SLASH = True
@@ -180,13 +181,12 @@ WIND_SUPERUSER_MAPPER_GROUPS = ['anp8', 'jb2410', 'zm4', 'sld2131', 'mar227']
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
+    'django.template.context_processors.debug',
+    'django.template.context_processors.request',
+    'django.template.context_processors.static',
+    'django.template.context_processors.media',
     'stagingcontext.staging_processor',
-    "django.core.context_processors.request",
     'djangowind.context.context_processor',
-    'django.core.context_processors.static',
     "smart_sa.intervention.views.inject_deployment",
 )
 

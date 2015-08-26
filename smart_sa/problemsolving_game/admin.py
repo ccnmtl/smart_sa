@@ -10,6 +10,7 @@ class IssueForm(forms.ModelForm):
 
     class Meta:
         model = Issue
+        exclude = []
 
 
 class IssueAdmin(admin.ModelAdmin):

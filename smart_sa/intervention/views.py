@@ -655,7 +655,8 @@ def intervention_admin(request, intervention_id):
     ClientSessionFormSet = inlineformset_factory(Intervention, ClientSession,
                                                  can_delete=True,
                                                  can_order=True,
-                                                 extra=1
+                                                 extra=1,
+                                                 exclude=[],
                                                  )
     if request.method == 'POST':
         formset = ClientSessionFormSet(request.POST, request.FILES,
@@ -686,7 +687,8 @@ def session_admin(request, session_id):
     ActivityFormSet = inlineformset_factory(ClientSession, Activity,
                                             can_delete=True,
                                             can_order=True,
-                                            extra=1
+                                            extra=1,
+                                            exclude=[],
                                             )
     if request.method == 'POST':
         formset = ActivityFormSet(request.POST, request.FILES,
