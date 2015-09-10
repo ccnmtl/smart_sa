@@ -28,7 +28,7 @@ mccabe==0.3.1
 flake8==2.2.5
 logilab-common==1.0.2
 logilab-astng==0.24.1
-pylint==1.4.1
+pylint==1.4.4
 python-dateutil==2.4.2
 django-stagingcontext==0.1.0
 sqlparse==0.1.14
