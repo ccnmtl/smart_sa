@@ -20,7 +20,7 @@ testscenarios==0.5.0
 python-subunit==1.1.0
 lettuce==0.2.19ccnmtl
 rdflib==3.1.0
-selenium==2.46.1
+selenium==2.47.1
 statsd==3.1
 pep8==1.5.7
 pyflakes==0.8.1
