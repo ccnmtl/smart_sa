@@ -263,8 +263,8 @@ class Participant(object):
 
     def relevant_timestamps(self, session):
         """ all the timestamps for a session and activities in that session """
-        return (self.session_timestamps(session)
-                + self.session_activity_timestamps(session))
+        return (self.session_timestamps(session) +
+                self.session_activity_timestamps(session))
 
     def session_timestamps(self, session):
         if 'session_visits' not in self.data:

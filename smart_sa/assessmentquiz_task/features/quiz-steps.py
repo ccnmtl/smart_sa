@@ -16,8 +16,8 @@ def fill_in_quiz(self, value):
         assert (False,
                 "this step needs to be implemented for the django test client")
     for i in world.firefox.find_elements_by_tag_name('input'):
-        if (i.get_attribute('type') == 'radio'
-                and i.get_attribute('value') == value):
+        if (i.get_attribute('type') == 'radio' and
+                i.get_attribute('value') == value):
             i.click()
 
 
@@ -26,8 +26,8 @@ def i_fill_in_value_for_question_number(step, value, number):
     name = "q%s" % number
     elts = world.firefox.find_elements_by_name(name)
     for i in elts:
-        if (i.get_attribute('type') == 'radio'
-                and i.get_attribute('value') == value):
+        if (i.get_attribute('type') == 'radio' and
+                i.get_attribute('value') == value):
             i.click()
 
 
