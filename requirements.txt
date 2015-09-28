@@ -31,7 +31,7 @@ logilab-astng==0.24.3
 pylint==1.4.4
 python-dateutil==2.4.2
 django-stagingcontext==0.1.0
-sqlparse==0.1.14
+sqlparse==0.1.16
 six==1.9.0
 gunicorn==19.3.0
 boto==2.38.0
