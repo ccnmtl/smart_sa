@@ -11,7 +11,14 @@ pyparsing==2.0.3
 tornado==4.2.1
 fuzzywuzzy==0.6.0
 sure==1.2.12
-ipython==3.0.0
+traitlets==4.0.0
+ipython_genutils==0.1.0
+decorator==4.0.2
+pexpect==3.3
+pickleshare==0.5
+simplegeneric==0.8.1
+path.py==8.1.1
+ipython==4.0.0
 ipdb==0.8.1
 extras==0.0.3
 python-mimeparse==0.1.4
@@ -31,7 +38,7 @@ logilab-astng==0.24.3
 pylint==1.4.4
 python-dateutil==2.4.2
 django-stagingcontext==0.1.0
-sqlparse==0.1.14
+sqlparse==0.1.16
 six==1.9.0
 gunicorn==19.3.0
 boto==2.38.0
