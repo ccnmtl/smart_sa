@@ -24,7 +24,7 @@ def dict_serialize(obj):
     if not hasattr(obj, 'SerializeMeta'):
         return d
     for fname in obj.SerializeMeta.simple_dict_fields:
-        if type(fname) == type(tuple()):
+        if isinstance(fname, tuple):
             (field_name, func) = fname
             d[field_name] = func(getattr(obj, field_name))
         else:
