@@ -10,7 +10,7 @@ lxml==3.4.4
 pyparsing==2.0.3
 tornado==4.2.1
 fuzzywuzzy==0.6.1
-sure==1.2.12
+sure==1.2.24
 traitlets==4.0.0
 ipython_genutils==0.1.0
 decorator==4.0.2
