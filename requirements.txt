@@ -1,4 +1,4 @@
-Django==1.8.4
+Django==1.8.6
 httplib2==0.9.1
 restclient==0.11.0
 simplejson==3.7.3
