@@ -1,13 +1,14 @@
-(function () {
+(function() {
     var global = this;
     var intervention = global.Intervention;
     var goal_state = null;
     var workform = null;
 
     function loadGoalTask() {
-        goal_state = new global.GameState({ game: 'lifegoals', el: 'div#defaulter' });
+        goal_state = new global.GameState({game: 'lifegoals',
+                                           el: 'div#defaulter'});
         workform = MochiKit.DOM.getElement('lifegoals');
-        
+
         var keys = goal_state.getKeys();
         for (var i = 0; i < keys.length; i++) {
             if (window.hasAttr(workform.elements, keys[i])) {
@@ -23,7 +24,7 @@
     MochiKit.DOM.addLoadEvent(loadGoalTask);
 
     function saveForm() {
-        MochiKit.Iter.forEach(workform.elements, function (elt) {
+        MochiKit.Iter.forEach(workform.elements, function(elt) {
             goal_state.setState(elt.name, elt.value);
         });
         intervention.saveState();
