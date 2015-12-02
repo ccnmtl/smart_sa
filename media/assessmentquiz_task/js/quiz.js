@@ -1,4 +1,4 @@
-(function () {
+(function() {
     /* two special values: 'section' and 'total'
      * 'section' MUST NOT have any numbers in it
      * 'total' is the summary of all the values
@@ -7,7 +7,7 @@
     var global = this;
     var intervention = global.Intervention;
     var goal_state = null;
-    
+
     var workform = null;
     var section = '';
 
@@ -22,17 +22,26 @@
         MS.connect(workform, 'onchange', enableRevealScore);
         MS.connect('reveal_score', 'onclick', revealScore);
         MS.connect(window, 'onunload', saveForm);
-        
+
         section = workform.elements.section.value;
-    
+
         var quizState = intervention.getGameVar('assessmentquiz', {});
-        var userState = document.getElementById("defaulter") ? "defaulter" : "regular";
+        var userState = document
+            .getElementById('defaulter') ? 'defaulter' : 'regular';
         if (!quizState.hasOwnProperty(userState)) {
             quizState[userState] = {};
         }
-        
+
         goal_state = quizState[userState];
-        
+
+        var makeSelectFunction = function(goal_state, a) {
+            return function(selection) {
+                if (selection.value === goal_state[section][a]) {
+                    selection.checked = true;
+                }
+            };
+        };
+
         if (window.hasAttr(goal_state, section)) {
             for (var a in goal_state[section]) {
                 if (goal_state[section].hasOwnProperty(a)) {
@@ -47,36 +56,35 @@
 
                     if (window.hasAttr(form_elt, 'type')) {
                         if (form_elt.type !== 'checkbox') {
-                            workform.elements[a].checked = goal_state[section][a] === workform.elements[a].value;
+                            workform.elements[a]
+                                .checked = goal_state[section][a] === workform
+                                .elements[a].value;
                         } else {
                             workform.elements[a].value = goal_state[section][a];
                         }
-                    } else {///radio -- TODO:might need to do the same for <select>
+                    } else {
+                        // radio -- TODO:might need to do the same for <select>
                         ML.logDebug(form_elt, a);
-                        MI.forEach(form_elt, function (selection) {
-                            if (selection.value === goal_state[section][a]) {
-                                selection.checked = true;
-                            }
-                        });
+                        MI.forEach(form_elt, makeSelectFunction(goal_state, a));
                     }
                 }
             }
         }
     }
     MD.addLoadEvent(loadGoalTask);
-    
+
     function enableRevealScore() {
         if (saveForm()) {
-            MD.removeElementClass("reveal_score", "inactive");
+            MD.removeElementClass('reveal_score', 'inactive');
         } else {
-            MD.addElementClass("reveal_score", "inactive");
-            document.getElementById("interpretation").style.display = "none";
+            MD.addElementClass('reveal_score', 'inactive');
+            document.getElementById('interpretation').style.display = 'none';
         }
     }
-    
+
     function revealScore() {
-        if (MD.hasElementClass("reveal_score", "inactive")) {
-            alert("Please answer all the questions before checking your score");
+        if (MD.hasElementClass('reveal_score', 'inactive')) {
+            alert('Please answer all the questions before checking your score');
             return false;
         } else {
             showTotal();
@@ -90,7 +98,7 @@
         }
         var all_form_fields = {};
         var total = 0;
-        MI.forEach(workform.elements, function (elt) {
+        MI.forEach(workform.elements, function(elt) {
             if (elt.type !== 'radio' || elt.checked) {
                 goal_state[section][elt.name] = elt.value;
                 all_form_fields[elt.name] = true;
@@ -105,33 +113,39 @@
                 all_done &= all_form_fields[a];
             }
         }
-        
+
         var gs = goal_state[section];
         if (section === 'audit' && !all_done) {
-            all_done = ((gs.q1 === "0" || 1 * gs.q2 + 1 * gs.q3 === 0) && window.hasAttr(gs, 'q9') && window.hasAttr(gs, 'q10'));
+            all_done = ((gs.q1 === '0' || 1 * gs.q2 + 1 * gs.q3 === 0) &&
+                        window.hasAttr(gs, 'q9') && window.hasAttr(gs, 'q10'));
         }
         if (all_done) {
             if (section === 'drugaudit') {
-                // Respondent screens positive if response to question 1 or 2^3 3,
+                // Respondent screens positive
+                // if response to question 1 or 2^3 3,
                 // or response to question 3 or 4^3 1.
-                goal_state[section].total = (gs.q1 >= 3 || gs.q2 >= 3 || gs.q3 >= 1 || gs.q4 >= 1) ? 1 : 0;
+                goal_state[section].total = (gs.q1 >= 3 ||
+                                             gs.q2 >= 3 ||
+                                             gs.q3 >= 1 ||
+                                             gs.q4 >= 1) ? 1 : 0;
             } else {
                 goal_state[section].total = total;
             }
         }
 
         intervention.saveState();
-        
+
         return all_done;
     }
 
     function showTotal() {
-        document.getElementById("interpretation").style.display = "block";
-        MD.removeElementClass("reveal_score", "inactive");
+        document.getElementById('interpretation').style.display = 'block';
+        MD.removeElementClass('reveal_score', 'inactive');
 
         var total = goal_state[section].total;
         ML.logDebug('showTotal', total);
-        var ranges = MI.list(MD.getElement('interpretation_range').getElementsByTagName('li'));
+        var ranges = MI.list(MD.getElement('interpretation_range')
+                             .getElementsByTagName('li'));
         var i = ranges.length;
         var found = false;
         while (--i >= 0) {

@@ -2,7 +2,7 @@ MANAGE=./manage.py
 APP=smart_sa
 FLAKE8=./ve/bin/flake8
 
-jenkins: ./ve/bin/python check test flake8
+jenkins: ./ve/bin/python check flake8 jshint jscs test
 
 ./ve/bin/python: requirements.txt bootstrap.py virtualenv.py
 	./bootstrap.py
@@ -24,6 +24,23 @@ check: ./ve/bin/python
 
 shell: ./ve/bin/python
 	$(MANAGE) shell_plus
+
+jshint: node_modules/jshint/bin/jshint
+	./node_modules/jshint/bin/jshint media/js/gamestate.js \
+	    media/assessmentquiz_task/js/ media/island_game/js/ media/lifegoal_task/js/ \
+	    media/pill_game/js/ media/problemsolving_game/js/ media/ssnmtree_game/js/
+
+jscs: node_modules/jscs/bin/jscs
+	./node_modules/jscs/bin/jscs media/js/gamestate.js \
+	    media/assessmentquiz_task/js/ media/island_game/js/ media/lifegoal_task/js/ \
+	    media/pill_game/js/ media/problemsolving_game/js/ media/ssnmtree_game/js/
+
+node_modules/jshint/bin/jshint:
+	npm install jshint --prefix .
+
+node_modules/jscs/bin/jscs:
+	npm install jscs --prefix .
+
 
 clean:
 	rm -rf ve
