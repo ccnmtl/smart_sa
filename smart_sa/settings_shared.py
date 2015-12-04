@@ -1,16 +1,10 @@
 # Django settings for smart_sa clone - masivukeni2
 import os.path
-import sys
+from ccnmtlsettings.shared import common
 
-DEBUG = True
-INTERNAL_IPS = ('128.59.153.16',)
-TEMPLATE_DEBUG = DEBUG
-
-ADMINS = tuple()
-
-MANAGERS = ADMINS
-
-ALLOWED_HOSTS = ['.ccnmtl.columbia.edu', 'localhost']
+project = 'smart_sa'
+base = os.path.dirname(__file__)
+locals().update(common(project=project, base=base))
 
 DATABASES = {
     'default': {
@@ -24,57 +18,7 @@ DATABASES = {
     }
 }
 
-if 'test' in sys.argv or 'jenkins' in sys.argv:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:',
-            'HOST': '',
-            'PORT': '',
-            'USER': '',
-            'PASSWORD': '',
-            'ATOMIC_REQUESTS': True,
-        }
-    }
-
-TIME_ZONE = 'America/New_York'
-LANGUAGE_CODE = 'en-us'
-SITE_ID = 1
-USE_I18N = False
-
-MEDIA_ROOT = "uploads/"  # local file directory for dev
 MEDIA_URL = '/multimedia/'
-
-COMPRESS_URL = "/media/"
-COMPRESS_ROOT = "media/"
-
-STATIC_URL = '/media/'
-STATICFILES_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), "../media/")),
-)
-STATIC_ROOT = ""
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-)
-
-SECRET_KEY = 'dummy-asdfasdfasdf'
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
-
-MIDDLEWARE_CLASSES = (
-    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
-    'django_statsd.middleware.GraphiteMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
-APPEND_SLASH = True
 
 # generate these most easily by going to:
 # http://www.josh-davis.org/ecmaScrypt
@@ -91,22 +35,7 @@ INTERVENTION_BACKUP_HEXKEY = (
 INTERVENTION_BACKUP_IV = (
     "209b8b7cea877f069df46a0994af20c36d86bbcd33cb4b79bde43dee55fc9c85")
 
-ROOT_URLCONF = 'smart_sa.urls'
-
-TEMPLATE_DIRS = (
-    "/var/www/masivukeni2/templates/",
-    "/var/www/masivukeni/templates/",
-    os.path.join(os.path.dirname(__file__), "templates"),
-)
-
-INSTALLED_APPS = [
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.flatpages',
-    'django.contrib.admin',
-    'django.contrib.staticfiles',
+INSTALLED_APPS += [  # noqa
     'smart_sa.assessmentquiz_task',
     'smart_sa.lifegoal_task',
     'smart_sa.pill_game',
@@ -116,27 +45,10 @@ INSTALLED_APPS = [
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
     'smart_sa.dashboard',
-    'smoketest',
-    'debug_toolbar',
-    'django_statsd',
-    'django_jenkins',
-    'django_markwhat',
-    'compressor',
-    'gunicorn',
 ]
 
-STATSD_CLIENT = 'statsd.client'
 STATSD_PREFIX = 'masivukeni'
-STATSD_HOST = '127.0.0.1'
-STATSD_PORT = 8125
 
-SOUTH_TESTS_MIGRATE = False
-TEST_RUNNER = 'django.test.runner.DiscoverRunner'
-
-JENKINS_TASKS = (
-    'django_jenkins.tasks.run_pep8',
-    'django_jenkins.tasks.run_pyflakes',
-)
 PROJECT_APPS = [
     'smart_sa.assessmentquiz_task',
     'smart_sa.lifegoal_task',
@@ -149,10 +61,7 @@ PROJECT_APPS = [
     'smart_sa.dashboard',
 ]
 
-SOUTH_AUTO_FREEZE_APP = True
-THUMBNAIL_SUBDIR = "thumbs"
 EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
-EMAIL_HOST = 'localhost'
 SERVER_EMAIL = "masivukeni2@ccnmtl.columbia.edu"
 
 LETTUCE_APPS = (
@@ -165,52 +74,13 @@ LETTUCE_APPS = (
     'smart_sa.ssnmtree_game',
 )
 
-# WIND settings
-
-AUTHENTICATION_BACKENDS = (
-    'djangowind.auth.SAMLAuthBackend',
-    'django.contrib.auth.backends.ModelBackend',)
-CAS_BASE = "https://cas.columbia.edu/"
-WIND_PROFILE_HANDLERS = []
-WIND_AFFIL_HANDLERS = [
-    'djangowind.auth.AffilGroupMapper',
-    'djangowind.auth.StaffMapper',
-    'djangowind.auth.SuperuserMapper']
-WIND_STAFF_MAPPER_GROUPS = ['tlcxml.cunix.local:columbia.edu']
-WIND_SUPERUSER_MAPPER_GROUPS = ['anp8', 'jb2410', 'zm4', 'sld2131', 'mar227']
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.template.context_processors.debug',
-    'django.template.context_processors.request',
-    'django.template.context_processors.static',
-    'django.template.context_processors.media',
-    'stagingcontext.staging_processor',
-    'djangowind.context.context_processor',
+TEMPLATE_CONTEXT_PROCESSORS += [  # noqa
     "smart_sa.intervention.views.inject_deployment",
-)
+]
 
-PROD_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/"
-PROD_MEDIA_BASE_URL = "http://masivukeni2.ccnmtl.columbia.edu/multimedia/"
+PROD_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/"
+PROD_MEDIA_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/multimedia/"
 
 DISABLE_OFFLINE = False
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-INTERNAL_IPS = ('127.0.0.1', )
-DEBUG_TOOLBAR_PANELS = (
-    'debug_toolbar.panels.version.VersionDebugPanel',
-    'debug_toolbar.panels.timer.TimerDebugPanel',
-    'debug_toolbar.panels.headers.HeaderDebugPanel',
-    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-    'debug_toolbar.panels.template.TemplateDebugPanel',
-    'debug_toolbar.panels.sql.SQLDebugPanel',
-    'debug_toolbar.panels.signals.SignalDebugPanel',
-)
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-}
