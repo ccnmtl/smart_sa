@@ -1,22 +1,24 @@
 # Django settings for smart_sa clone - masivukeni2
 import os.path
+import sys
 from ccnmtlsettings.shared import common
 
 project = 'smart_sa'
 base = os.path.dirname(__file__)
 locals().update(common(project=project, base=base))
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'masivukeni2',
-        'HOST': '',
-        'PORT': 5432,
-        'USER': '',
-        'PASSWORD': '',
-        'ATOMIC_REQUESTS': True,
+if 'test' not in sys.argv and 'jenkins' not in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'masivukeni2',
+            'HOST': '',
+            'PORT': 5432,
+            'USER': '',
+            'PASSWORD': '',
+            'ATOMIC_REQUESTS': True,
+        }
     }
-}
 
 MEDIA_URL = '/multimedia/'
 
