@@ -1,0 +1,22 @@
+{
+  "name": "smart_sa",
+  "version": "0.0.0",
+  "description": "0. DETAILS/REQUIREMENTS/INSTALLATION   #  Project Title:          Multimedia Social Support Intervention:             Adherence to HIV Care in South Africa.   # Project Summary:       Intervention intended to support South African people on an HIV drug      treatment plan. Intervention will promote adherence to the drug's      requirements and coping with side effects. Problem solving to get past      barriers to adherence is a major theme. Patients will identify one or      more support people to attend some sessions with them. The      intervention will use the Social Support Network Map.   # Project Page:       http://ccnmtl.columbia.edu/portfolio/medicine_and_health/smart_sa.html   # Public Code Repository:       http://github.com/ccnmtl/smart_sa/tree/master   # Public Instance:       http://smartsa.ccnmtl.columbia.edu/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ccnmtl/smart_sa.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ccnmtl/smart_sa/issues"
+  },
+  "devDependencies": {
+    "jshint": "~2.9.1-rc1",
+    "jscs": "~2.7.0"
+  }
+}
