@@ -185,16 +185,24 @@
             this.model.set('vertical_range', 118);
 
             var self = this;
-            this.draggable = jQuery(this.el).draggable(
-                {
-                    axis: 'y',
-                    containment: '#adherence_slider',
-                    drag: function() {
-                        if (self.model.get('enabled')) {
-                            self.parent.trigger('render');
-                        }
+
+            this.draggable = jQuery(this.el).draggable({
+                axis: 'y',
+                containment: jQuery(self.el.parentNode).children()[1],
+                start: function(event, ui) {
+                    // remember where it starts
+                    self.dragStart = ui.position;
+                },
+                drag: function(event, ui) {
+                    if (self.model.get('enabled')) {
+                        self.parent.trigger('render');
+                    } else {
+                        // force it back to where it's supposed to be
+                        ui.position.top = self.dragStart.top;
+                        ui.position.left = self.dragStart.left;
                     }
-                });
+                }
+            });
             GameElementView.prototype.initialize.call(this, options);
         },
 
