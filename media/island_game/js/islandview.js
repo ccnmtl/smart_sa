@@ -1,6 +1,5 @@
 (function(jQuery) {
     var global = this;
-    var M = MochiKit;
 
     var GameElement = Backbone.Model.extend({
         defaults: {
@@ -186,20 +185,24 @@
             this.model.set('vertical_range', 118);
 
             var self = this;
-            this.draggable = M.DragAndDrop.Draggable(this.el, {
-                snap: function(x, y) {
+
+            this.draggable = jQuery(this.el).draggable({
+                axis: 'y',
+                containment: jQuery(self.el.parentNode).children()[1],
+                start: function(event, ui) {
+                    // remember where it starts
+                    self.dragStart = ui.position;
+                },
+                drag: function(event, ui) {
                     if (self.model.get('enabled')) {
-                        return self.snap(x, y);
+                        self.parent.trigger('render');
+                    } else {
+                        // force it back to where it's supposed to be
+                        ui.position.top = self.dragStart.top;
+                        ui.position.left = self.dragStart.left;
                     }
                 }
             });
-            this.draggable.options.slider_id = this.el.id;
-            this.draggable.options.onchange = function() {
-                if (self.model.get('enabled')) {
-                    self.parent.trigger('render');
-                }
-            };
-
             GameElementView.prototype.initialize.call(this, options);
         },
 

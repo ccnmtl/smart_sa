@@ -4,11 +4,10 @@
 {% block game_js %}
 {% compress js %}
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-ui.min.js"></script>  
     <script type="text/javascript" src="{{STATIC_URL}}js/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/backbone/backbone-min.js"></script>
 
-    <script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/MochiKit.js"></script> 
-    <script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/DragAndDrop.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}island_game/js/islandview.js"></script> 
 {% endcompress %}
 {% endblock %}
