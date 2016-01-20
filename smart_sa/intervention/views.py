@@ -342,11 +342,15 @@ def restore_participants(request):
     # delete existing participant data
     Participant.objects.all().delete()
     logs.append(dict(info="existing participant data cleared"))
-    # update participants
+
+    logs = update_participants(json, logs)
+    return dict(logs=logs)
+
+
+def update_participants(json, logs):
     for p in json['participants']:
         logs = update_participant(p, logs)
-
-    return dict(logs=logs)
+    return logs
 
 
 def update_participant(p, logs):
