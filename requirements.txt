@@ -4,7 +4,7 @@ httplib2==0.9.2
 restclient==0.11.0
 simplejson==3.7.3
 psycopg2==2.6.1
-coverage==3.7.1
+coverage==4.0.3
 BeautifulSoup==3.2.1
 cssselect==0.9.1
 lxml==3.5.0
@@ -56,7 +56,7 @@ django-annoying==0.8.5
 django-statsd-mozilla==0.3.16
 django-smoketest==0.3.0
 django-debug-toolbar==1.4
-django-jenkins==0.17.0
+django-jenkins==0.18.1
 django-markwhat==1.4
 django-appconf==1.0.1
 django-compressor==1.6
