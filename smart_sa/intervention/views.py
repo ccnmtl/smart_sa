@@ -312,7 +312,18 @@ def restore_participants(request):
     # want to log them out)
     User.objects.all().exclude(username=request.user.username).delete()
     logs.append(dict(info="existing counselors cleared"))
-    # add counselors
+
+    logs = add_counselors(json, request, logs)
+
+    # delete existing participant data
+    Participant.objects.all().delete()
+    logs.append(dict(info="existing participant data cleared"))
+
+    logs = update_participants(json, logs)
+    return dict(logs=logs)
+
+
+def add_counselors(json, request, logs):
     for counselor_data in json['counselors']:
         try:
             fields = counselor_data['fields']
@@ -339,14 +350,13 @@ def restore_participants(request):
             logs.append(dict(
                 warn="Could not restore counselor (%s): %s" % (
                     str(e), str(counselor_data))))
-    # delete existing participant data
-    Participant.objects.all().delete()
-    logs.append(dict(info="existing participant data cleared"))
-    # update participants
+    return logs
+
+
+def update_participants(json, logs):
     for p in json['participants']:
         logs = update_participant(p, logs)
-
-    return dict(logs=logs)
+    return logs
 
 
 def update_participant(p, logs):
