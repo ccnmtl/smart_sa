@@ -51,7 +51,7 @@ ndg-httpsclient==0.4.0
 djangowind==0.14.3
 django-indexer==0.3.0
 django-paging==0.2.5
-raven==5.8.1
+raven==5.10.1
 django-annoying==0.8.5
 django-statsd-mozilla==0.3.16
 django-smoketest==0.3.0
