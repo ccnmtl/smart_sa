@@ -60,6 +60,9 @@ class Command(BaseCommand):
         if options["dbonly"]:
             return
 
+        self.update_uploaded_files(uploads)
+
+    def update_uploaded_files(self, uploads):
         print "updating uploaded files..."
         base_len = len(settings.PROD_MEDIA_BASE_URL)
         for upload in uploads:
