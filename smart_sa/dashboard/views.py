@@ -1,12 +1,11 @@
 from smart_sa.intervention.models import Backup
-from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
 from smart_sa.dashboard.models import DEPLOYMENTS
 from smart_sa.dashboard.models import ClinicData
 
 
-@render_to("dashboard/index.html")
 @login_required
 def index(request):
     missing_deployments = False
@@ -17,6 +16,8 @@ def index(request):
             missing_deployments = True
     if not missing_deployments:
         clinics = [ClinicData(d) for d in DEPLOYMENTS]
-        return dict(clinics=clinics)
+        return render(request, "dashboard/index.html",
+                      dict(clinics=clinics))
     else:
-        return dict(missing_deployments=missing_deployments)
+        return render(request, "dashboard/index.html",
+                      dict(missing_deployments=missing_deployments))
