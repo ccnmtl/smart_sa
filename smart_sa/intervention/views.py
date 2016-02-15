@@ -2,9 +2,8 @@
 Main intervention views
 """
 # Create your views here.
-from annoying.decorators import render_to
 from django.template import RequestContext, loader
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required
@@ -78,7 +77,6 @@ def participant_required(function=None):
     return decorator(function)
 
 
-@render_to('intervention/set_participant.html')
 @login_required
 def set_participant(request):
     if request.method == 'POST':
@@ -98,7 +96,8 @@ def set_participant(request):
             return HttpResponse("no participant with that name")
     # on a GET request, we make sure to clear it
     request.session.participant_id = ''
-    return dict(next=request.GET.get('next', '/intervention/'))
+    return render(request, 'intervention/set_participant.html',
+                  dict(next=request.GET.get('next', '/intervention/')))
 
 
 @login_required
@@ -127,7 +126,6 @@ def start_practice_mode(request, intervention_id):
     return HttpResponseRedirect("/intervention/%d/" % int(intervention_id))
 
 
-@render_to('intervention/counselor_landing_page.html')
 @login_required
 def counselor_landing_page(request):
     # if they come here, we want to clear out the
@@ -136,26 +134,27 @@ def counselor_landing_page(request):
         del request.session['participant_id']
     except KeyError:
         pass
-    return dict(intervention=Intervention.objects.first())
+    return render(request, 'intervention/counselor_landing_page.html',
+                  dict(intervention=Intervention.objects.first()))
 
 
-@render_to('intervention/manage_participants.html')
 @login_required
 def manage_participants(request):
-    return dict(participants=Participant.objects.all().order_by("name"),
-                backups=Backup.objects.all().order_by("-created")[:20],
-                counselors=User.objects.all().order_by("username"))
+    return render(request, 'intervention/manage_participants.html',
+                  dict(participants=Participant.objects.all().order_by("name"),
+                       backups=Backup.objects.all().order_by("-created")[:20],
+                       counselors=User.objects.all().order_by("username")))
 
 
-@render_to('intervention/add_participant.html')
 @login_required
 def add_participant(request):
     if request.method == 'POST':
         if Participant.objects.filter(
                 name=request.POST.get('name', 'unnamed')).count() > 0:
-            return dict(error=("A participant with this name already "
-                               "exists. Please chose a unique name"),
-                        form_data=request.POST)
+            return render(request, 'intervention/add_participant.html',
+                          dict(error=("A participant with this name already "
+                                      "exists. Please chose a unique name"),
+                               form_data=request.POST))
         Participant.objects.create(
             name=request.POST.get('name', 'unnamed'),
             id_number=request.POST.get('id_number', ''),
@@ -167,7 +166,7 @@ def add_participant(request):
         )
         return HttpResponseRedirect("/manage/")
     else:
-        return dict()
+        return render(request, 'intervention/add_participant.html', dict())
 
 
 @login_required
@@ -178,7 +177,6 @@ def delete_participant(request, participant_id):
     return HttpResponseRedirect("/manage/")
 
 
-@render_to('intervention/edit_participant.html')
 @login_required
 def edit_participant(request, participant_id):
     p = get_object_or_404(Participant, id=participant_id)
@@ -195,10 +193,10 @@ def edit_participant(request, participant_id):
         p.gender = request.POST.get('gender', 'male')
         p.save()
         return HttpResponseRedirect("/manage/")
-    return dict(participant=p)
+    return render(request, 'intervention/edit_participant.html',
+                  dict(participant=p))
 
 
-@render_to('intervention/edit_counselor.html')
 @login_required
 def edit_counselor(request, counselor_id):
     u = get_object_or_404(User, id=counselor_id)
@@ -210,28 +208,29 @@ def edit_counselor(request, counselor_id):
             u.set_password(new_password)
         u.save()
         return HttpResponseRedirect("/manage/")
-    return dict(counselor=u)
+    return render(request, 'intervention/edit_counselor.html',
+                  dict(counselor=u))
 
 
-@render_to('intervention/view_participant.html')
 @login_required
 def view_participant(request, participant_id):
     p = get_object_or_404(Participant, id=participant_id)
     if request.method == 'POST':
         password = request.POST['password']
         if p.id_number.lower() == password.lower():
-            return dict(participant=p,
-                        all_interventions=Intervention.objects.all(),
-                        show_login_form=False)
+            return render(request, 'intervention/view_participant.html',
+                          dict(participant=p,
+                               all_interventions=Intervention.objects.all(),
+                               show_login_form=False))
         else:
             return HttpResponse("incorrect password. permission denied")
     else:
-        return dict(participant=p,
-                    all_interventions=Intervention.objects.all(),
-                    show_login_form=True)
+        return render(request, 'intervention/view_participant.html',
+                      dict(participant=p,
+                           all_interventions=Intervention.objects.all(),
+                           show_login_form=True))
 
 
-@render_to('intervention/add_counselor.html')
 @login_required
 def add_counselor(request):
     if request.method == 'POST':
@@ -240,13 +239,12 @@ def add_counselor(request):
         u.save()
         return HttpResponseRedirect("/manage/")
     else:
-        return dict()
+        return render(request, 'intervention/add_counselor.html', dict())
 
 
-@render_to('intervention/report_index.html')
 @login_required
 def report_index(request):
-    return dict()
+    return render(request, 'intervention/report_index.html', dict())
 
 
 @login_required
@@ -289,7 +287,6 @@ def download_backup(request, backup_id):
     return resp
 
 
-@render_to("intervention/restore_participants.html")
 @login_required
 def restore_participants(request):
     logs = []
@@ -298,14 +295,16 @@ def restore_participants(request):
         if deployment.is_online():
             logs.append(dict(
                 error="you should only use this feature on a clinic machine"))
-            return dict(logs=logs)
+            return render(request, "intervention/restore_participants.html",
+                          dict(logs=logs))
 
     try:
         json_data = request.FILES['participants_data'].read()
         json = loads(json_data)
     except Exception, e:
         logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))
-        return dict(logs=logs)
+        return render(request, "intervention/restore_participants.html",
+                      dict(logs=logs))
 
     # clear existing counselors (skipping the current user since
     # they are an admin rather than a counselor and we don't
@@ -320,7 +319,8 @@ def restore_participants(request):
     logs.append(dict(info="existing participant data cleared"))
 
     logs = update_participants(json, logs)
-    return dict(logs=logs)
+    return render(request, "intervention/restore_participants.html",
+                  dict(logs=logs))
 
 
 def add_counselors(json, request, logs):
@@ -371,7 +371,6 @@ def update_participant(p, logs):
     return logs
 
 
-@render_to("intervention/upload_participants.html")
 @login_required
 def upload_participant_data(request):
     logs = []
@@ -381,7 +380,8 @@ def upload_participant_data(request):
             logs.append(dict(
                 error=("you should only use this feature on the "
                        "CCNMTL deployment")))
-            return dict(logs=logs)
+            return render(request, "intervention/upload_participants.html",
+                          dict(logs=logs))
 
     try:
         json_data = request.FILES['participants_data'].read()
@@ -389,7 +389,8 @@ def upload_participant_data(request):
 
     except Exception, e:
         logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))
-        return dict(logs=logs)
+        return render(request, "intervention/upload_participants.html",
+                      dict(logs=logs))
 
     Backup.objects.create(json_data=json_data, deployment=json['deployment'])
     return HttpResponse("participant data successfully backed up")
@@ -450,21 +451,19 @@ def update_intervention_content(request):
     return HttpResponse("intervention content has been updated")
 
 
-@render_to('intervention/intervention.html')
 @participant_required
 @login_required
 def intervention(request, intervention_id):
-    return dict(
+    return render(request, 'intervention/intervention.html', dict(
         intervention=get_object_or_404(Intervention, id=intervention_id),
-        participant=request.participant)
+        participant=request.participant))
 
 
-@render_to('intervention/testgen.html')
 def testgen(request):
-    return dict(interventions=Intervention.objects.all())
+    return render(request, 'intervention/testgen.html',
+                  dict(interventions=Intervention.objects.all()))
 
 
-@render_to('intervention/session.html')
 @participant_required
 @login_required
 def session(request, session_id):
@@ -473,8 +472,9 @@ def session(request, session_id):
     ps, created = get_or_create_first(
         ParticipantSession, session=session, participant=participant)
     activities = session.activity_set.all()
-    return dict(session=session, activities=activities,
-                participant=request.participant)
+    return render(request, 'intervention/session.html',
+                  dict(session=session, activities=activities,
+                       participant=request.participant))
 
 
 @participant_required
@@ -580,7 +580,6 @@ def complete_activity(request, activity_id):
         return HttpResponseRedirect(activity.get_absolute_url())
 
 
-@render_to('intervention/activity.html')
 @participant_required
 @login_required
 def activity(request, activity_id):
@@ -598,9 +597,10 @@ def activity(request, activity_id):
     cn, created = get_or_create_first(
         CounselorNote, participant=participant, counselor=request.user)
     counselor_notes = cn.notes
-    return dict(
-        activity=activity, participant=request.participant,
-        counselor_notes=counselor_notes)
+    return render(request, 'intervention/activity.html',
+                  dict(
+                      activity=activity, participant=request.participant,
+                      counselor_notes=counselor_notes))
 
 
 @participant_required
@@ -658,7 +658,6 @@ def save_game_state(request):
 #####################################
 
 @permission_required('intervention.add_clientsession')
-@render_to('intervention/admin/intervention_admin.html')
 def intervention_admin(request, intervention_id):
     intervention = get_object_or_404(
         Intervention, intervention_id=intervention_id)
@@ -686,12 +685,11 @@ def intervention_admin(request, intervention_id):
                          if x != {}]
             intervention.set_clientsession_order(new_order)
     formset = ClientSessionFormSet(instance=intervention)
-    return {'intervention': intervention,
-            'formset': formset, }
+    return render(request, 'intervention/admin/intervention_admin.html',
+                  {'intervention': intervention, 'formset': formset, })
 
 
 @permission_required('intervention.add_clientsession')
-@render_to('intervention/admin/session_admin.html')
 def session_admin(request, session_id):
     clientsession = get_object_or_404(ClientSession, pk=session_id)
     ActivityFormSet = inlineformset_factory(ClientSession, Activity,
@@ -721,11 +719,11 @@ def session_admin(request, session_id):
             formset = ActivityFormSet(instance=clientsession)
     else:
         formset = ActivityFormSet(instance=clientsession)
-    return {'clientsession': clientsession, 'formset': formset, }
+    return render(request, 'intervention/admin/session_admin.html',
+                  {'clientsession': clientsession, 'formset': formset, })
 
 
 @permission_required('intervention.add_clientsession')
-@render_to('intervention/admin/activity_admin.html')
 def activity_admin(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
     InstructionFormSet = inlineformset_factory(
@@ -764,11 +762,11 @@ def activity_admin(request, activity_id):
             formset = InstructionFormSet(instance=activity)
     else:
         formset = InstructionFormSet(instance=activity)
-    return {'activity': activity, 'formset': formset, }
+    return render(request, 'intervention/admin/activity_admin.html',
+                  {'activity': activity, 'formset': formset, })
 
 
 @permission_required('intervention.add_clientsession')
-@render_to('intervention/admin/gamepage_admin.html')
 def gamepage_admin(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
 
@@ -786,7 +784,8 @@ def gamepage_admin(request, activity_id):
             formset.save()
     else:
         formset = InstructionFormSet(instance=activity)
-    return {'activity': activity, 'formset': formset, }
+    return render(request, 'intervention/admin/gamepage_admin.html',
+                  {'activity': activity, 'formset': formset, })
 
 
 def all_uploads():
