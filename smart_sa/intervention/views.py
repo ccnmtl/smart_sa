@@ -420,16 +420,18 @@ def update_intervention_content(request):
     # clearing intervention prod database content...
     Intervention.objects.all().delete()
 
-    # importing prod database content...
-    for i in json['interventions']:
-        intervention = Intervention.objects.create(name="tmp")
-        intervention.from_dict(i)
-
+    import_prod_database_content(json)
     json = load_problemsolving_objects(zipfile)
     clear_problemsolving_database_content()
     import_problemsolving_database_content(json)
     update_uploaded_files(uploads)
     return HttpResponse("intervention content has been updated")
+
+
+def import_prod_database_content(json):
+    for i in json['interventions']:
+        intervention = Intervention.objects.create(name="tmp")
+        intervention.from_dict(i)
 
 
 def load_problemsolving_objects(zipfile):
