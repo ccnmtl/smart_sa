@@ -431,13 +431,15 @@ def update_intervention_content(request):
     # clearing problemsolving database content...
     Issue.objects.all().delete()
 
-    # importing problemsolving prod database content...
+    import_problemsolving_database_content(json)
+    update_uploaded_files(uploads)
+    return HttpResponse("intervention content has been updated")
+
+
+def import_problemsolving_database_content(json):
     for i in json['issues']:
         issue = Issue.objects.create(name="tmp", ordinality=0)
         issue.from_dict(i)
-
-    update_uploaded_files(uploads)
-    return HttpResponse("intervention content has been updated")
 
 
 def update_uploaded_files(uploads):
