@@ -414,14 +414,18 @@ def update_intervention_content(request):
     buffer = StringIO(zc)
     zipfile = ZipFile(buffer, "r")
 
-    json = load_intervention_objects(zipfile)
-    clear_intervention_prod_database_content()
-    import_prod_database_content(json)
+    update_intervention_data_from_zipfile(zipfile)
     json = load_problemsolving_objects(zipfile)
     clear_problemsolving_database_content()
     import_problemsolving_database_content(json)
     update_uploaded_files(uploads)
     return HttpResponse("intervention content has been updated")
+
+
+def update_intervention_data_from_zipfile(zipfile):
+    json = load_intervention_objects(zipfile)
+    clear_intervention_prod_database_content()
+    import_prod_database_content(json)
 
 
 def load_intervention_objects(zipfile):
