@@ -425,13 +425,15 @@ def update_intervention_content(request):
         intervention = Intervention.objects.create(name="tmp")
         intervention.from_dict(i)
 
-    # Load Problem Solving objects
-    json = loads(zipfile.read("issues.json"))
-
+    json = load_problemsolving_objects(zipfile)
     clear_problemsolving_database_content()
     import_problemsolving_database_content(json)
     update_uploaded_files(uploads)
     return HttpResponse("intervention content has been updated")
+
+
+def load_problemsolving_objects(zipfile):
+    return loads(zipfile.read("issues.json"))
 
 
 def clear_problemsolving_database_content():
