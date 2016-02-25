@@ -52,18 +52,19 @@ def no_vars(request, template_name='intervention/blank.html'):
     return HttpResponse(t.render(c))
 
 
+def get_participant(session):
+    participant_id = session.get('participant_id', False)
+    if not participant_id:
+        return None
+    try:
+        p = Participant.objects.get(id=participant_id)
+        return p
+    except:
+        return None
+
+
 def participant_required(function=None):
     def decorator(view_func):
-        def get_participant(session):
-            participant_id = session.get('participant_id', False)
-            if not participant_id:
-                return None
-            try:
-                p = Participant.objects.get(id=participant_id)
-                return p
-            except:
-                return None
-
         @wraps(view_func, assigned=available_attrs(view_func))
         def _wrapped_view(request, *args, **kwargs):
             p = get_participant(request.session)
