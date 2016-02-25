@@ -39,9 +39,7 @@ def then_i_m_asked_to_enter_all_the_questions(step):
     alert.accept()
 
 
-def verify_score(text):
-    score = world.firefox.find_element_by_css_selector("li.inrange")
-
+def find_score_by_headline(score, text):
     found = False
     try:
         headline = score.find_element_by_css_selector("div.headline")
@@ -49,7 +47,13 @@ def verify_score(text):
             found = headline.text.find(text) >= 0
     except:
         pass
+    return found
 
+
+def verify_score(text):
+    score = world.firefox.find_element_by_css_selector("li.inrange")
+
+    found = find_score_by_headline(score, text)
     if not found:
         try:
             script = score.find_element_by_css_selector("div.script")
