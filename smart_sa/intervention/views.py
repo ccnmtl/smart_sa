@@ -428,12 +428,14 @@ def update_intervention_content(request):
     # Load Problem Solving objects
     json = loads(zipfile.read("issues.json"))
 
-    # clearing problemsolving database content...
-    Issue.objects.all().delete()
-
+    clear_problemsolving_database_content()
     import_problemsolving_database_content(json)
     update_uploaded_files(uploads)
     return HttpResponse("intervention content has been updated")
+
+
+def clear_problemsolving_database_content():
+    Issue.objects.all().delete()
 
 
 def import_problemsolving_database_content(json):
