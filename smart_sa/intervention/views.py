@@ -436,7 +436,11 @@ def update_intervention_content(request):
         issue = Issue.objects.create(name="tmp", ordinality=0)
         issue.from_dict(i)
 
-    # updating uploaded files..."
+    update_uploaded_files(uploads)
+    return HttpResponse("intervention content has been updated")
+
+
+def update_uploaded_files(uploads):
     base_len = len(settings.PROD_MEDIA_BASE_URL)
     for upload in uploads:
         relative_path = upload[base_len:]
@@ -449,7 +453,6 @@ def update_intervention_content(request):
         with open(os.path.join(settings.MEDIA_ROOT, relative_path), "w") as f:
             #   writing %s to %s" % (upload, relative_path)
             f.write(GET(upload))
-    return HttpResponse("intervention content has been updated")
 
 
 @participant_required
