@@ -417,15 +417,17 @@ def update_intervention_content(request):
     # Load Intervention objects
     json = loads(zipfile.read("interventions.json"))
 
-    # clearing intervention prod database content...
-    Intervention.objects.all().delete()
-
+    clear_intervention_prod_database_content()
     import_prod_database_content(json)
     json = load_problemsolving_objects(zipfile)
     clear_problemsolving_database_content()
     import_problemsolving_database_content(json)
     update_uploaded_files(uploads)
     return HttpResponse("intervention content has been updated")
+
+
+def clear_intervention_prod_database_content():
+    Intervention.objects.all().delete()
 
 
 def import_prod_database_content(json):
