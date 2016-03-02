@@ -52,18 +52,19 @@ def no_vars(request, template_name='intervention/blank.html'):
     return HttpResponse(t.render(c))
 
 
+def get_participant(session):
+    participant_id = session.get('participant_id', False)
+    if not participant_id:
+        return None
+    try:
+        p = Participant.objects.get(id=participant_id)
+        return p
+    except:
+        return None
+
+
 def participant_required(function=None):
     def decorator(view_func):
-        def get_participant(session):
-            participant_id = session.get('participant_id', False)
-            if not participant_id:
-                return None
-            try:
-                p = Participant.objects.get(id=participant_id)
-                return p
-            except:
-                return None
-
         @wraps(view_func, assigned=available_attrs(view_func))
         def _wrapped_view(request, *args, **kwargs):
             p = get_participant(request.session)
@@ -413,29 +414,53 @@ def update_intervention_content(request):
     buffer = StringIO(zc)
     zipfile = ZipFile(buffer, "r")
 
-    # Load Intervention objects
-    json = loads(zipfile.read("interventions.json"))
+    update_intervention_data_from_zipfile(zipfile)
+    update_problemsolving_data_from_zipfile(zipfile)
+    update_uploaded_files(uploads)
+    return HttpResponse("intervention content has been updated")
 
-    # clearing intervention prod database content...
+
+def update_intervention_data_from_zipfile(zipfile):
+    json = load_intervention_objects(zipfile)
+    clear_intervention_prod_database_content()
+    import_prod_database_content(json)
+
+
+def update_problemsolving_data_from_zipfile(zipfile):
+    json = load_problemsolving_objects(zipfile)
+    clear_problemsolving_database_content()
+    import_problemsolving_database_content(json)
+
+
+def load_intervention_objects(zipfile):
+    return loads(zipfile.read("interventions.json"))
+
+
+def clear_intervention_prod_database_content():
     Intervention.objects.all().delete()
 
-    # importing prod database content...
+
+def import_prod_database_content(json):
     for i in json['interventions']:
         intervention = Intervention.objects.create(name="tmp")
         intervention.from_dict(i)
 
-    # Load Problem Solving objects
-    json = loads(zipfile.read("issues.json"))
 
-    # clearing problemsolving database content...
+def load_problemsolving_objects(zipfile):
+    return loads(zipfile.read("issues.json"))
+
+
+def clear_problemsolving_database_content():
     Issue.objects.all().delete()
 
-    # importing problemsolving prod database content...
+
+def import_problemsolving_database_content(json):
     for i in json['issues']:
         issue = Issue.objects.create(name="tmp", ordinality=0)
         issue.from_dict(i)
 
-    # updating uploaded files..."
+
+def update_uploaded_files(uploads):
     base_len = len(settings.PROD_MEDIA_BASE_URL)
     for upload in uploads:
         relative_path = upload[base_len:]
@@ -448,7 +473,6 @@ def update_intervention_content(request):
         with open(os.path.join(settings.MEDIA_ROOT, relative_path), "w") as f:
             #   writing %s to %s" % (upload, relative_path)
             f.write(GET(upload))
-    return HttpResponse("intervention content has been updated")
 
 
 @participant_required

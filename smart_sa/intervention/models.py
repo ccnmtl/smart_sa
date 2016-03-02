@@ -659,9 +659,7 @@ class Participant(models.Model):
         )
         logs.append(dict(info="participant created"))
 
-        for gv in data['game_vars']:
-            for key in gv.keys():
-                p.save_game_var(key, gv[key])
+        p.load_game_vars(data)
         logs.append(dict(info="game variables restored"))
 
         intervention = Intervention.objects.all()[0]
@@ -859,6 +857,11 @@ class Participant(models.Model):
         # but haven't completed them all and there are no incomplete ones.
         # so we get the last completed activity and send them to the next
         return complete_activities[-1].get_next()
+
+    def load_game_vars(self, data):
+        for gv in data['game_vars']:
+            for key in gv.keys():
+                self.save_game_var(key, gv[key])
 
 
 class ParticipantSession(models.Model):
