@@ -95,6 +95,18 @@ class Participant(object):
             ["-", "X"][int(self.data['initial_referral_other'])],
         )
 
+    def referral_a(self):
+        return ["0", "1"][int(self.data['initial_referral_alcohol'])]
+
+    def referral_d(self):
+        return ["0", "1"][int(self.data['initial_referral_drug_use'])]
+
+    def referral_m(self):
+        return ["0", "1"][int(self.data['initial_referral_mental_health'])]
+
+    def referral_o(self):
+        return ["0", "1"][int(self.data['initial_referral_other'])]
+
     def initial_referral_notes(self):
         return self.data.get('initial_referral_notes', '')
 
@@ -108,6 +120,21 @@ class Participant(object):
                 ["-", "X"][int(self.data['defaulter_referral_mental_health'])],
                 ["-", "X"][int(self.data['defaulter_referral_other'])],
             )
+
+    def is_defaulter(self):
+        return self.data['defaulter']
+
+    def defaulter_a(self):
+        return ["0", "1"][int(self.data['defaulter_referral_alcohol'])]
+
+    def defaulter_d(self):
+        return ["0", "1"][int(self.data['defaulter_referral_drugs'])]
+
+    def defaulter_m(self):
+        return ["0", "1"][int(self.data['defaulter_referral_mental_health'])]
+
+    def defaulter_o(self):
+        return ["0", "1"][int(self.data['defaulter_referral_other'])]
 
     def counselor_notes(self):
         return [cn for cn in self.data.get('counselor_notes', [])
