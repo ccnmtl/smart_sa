@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test import client
 from smart_sa.intervention.models import Intervention, ClientSession
@@ -16,6 +17,9 @@ class InterventionViewTest(TestCase):
 
     def setUp(self):
         self.client = client.Client()
+        u = User.objects.get(username='testcounselor')
+        u.set_password('test')
+        u.save()
         self.client.login(username='testcounselor', password='test')
 
     def test_logged_out_index(self):
@@ -129,6 +133,9 @@ class InterventionAdminViewTest(TestCase):
 
     def setUp(self):
         self.client = client.Client()
+        u = User.objects.get(username='testadmin')
+        u.set_password('test')
+        u.save()
         self.client.login(username='testadmin', password='test')
 
     def test_set_deployment(self):
