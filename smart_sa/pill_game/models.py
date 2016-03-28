@@ -9,7 +9,7 @@ class PillGame(GameInterface):
         return ('pills',)
 
     def template(self, page_id):
-        game_context = {'mode':  self.mode}
+        game_context = {'mode': self.mode}
 
         return ('pill_game/pill.html', game_context)
 

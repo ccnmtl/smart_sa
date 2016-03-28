@@ -154,7 +154,7 @@ class ParticipantTest(TestCase):
                 "customtext": ""}, "treatment_fatigue": {"customtext": ""}, \
                 "dontwantto": {"customtext": ""}, \
                 "happy": {"customtext": ""}}}'}],
-            })
+        })
 
     def test_patient_id(self):
         assert self.p1.patient_id() == 'test_patient_1'
