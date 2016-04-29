@@ -3,9 +3,9 @@ this is prep for making the windows install USB key """
 
 from django.core.management.base import BaseCommand
 from django.conf import settings
-from restclient import GET
 import os
 import os.path
+import requests
 from optparse import make_option
 
 
@@ -24,11 +24,13 @@ class Command(BaseCommand):
             return
 
         print "fetching content from prod..."
-        zc = GET(settings.PROD_BASE_URL + "intervention_admin/content_sync/")
+        r = requests.get(
+            settings.PROD_BASE_URL + "intervention_admin/content_sync/")
+        zc = r.text
         if not options["dbonly"]:
-            uploads = GET(
-                settings.PROD_BASE_URL + "intervention_admin/list_uploads/"
-            ).split("\n")
+            r = requests.get(
+                settings.PROD_BASE_URL + "intervention_admin/list_uploads/")
+            uploads = r.text.split("\n")
 
         with open("data/intervention.zip", "w") as zipfile:
             zipfile.write(zc)
@@ -46,7 +48,8 @@ class Command(BaseCommand):
                 os.makedirs(full_dir)
             except OSError:
                 pass
+            r = requests.get(upload)
             with open(os.path.join(settings.MEDIA_ROOT, relative_path),
                       "w") as f:
                 print "   writing %s to %s" % (upload, relative_path)
-                f.write(GET(upload))
+                f.write(r.text)
