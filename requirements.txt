@@ -51,7 +51,6 @@ rjsmin==1.0.12
 requests==2.9.1
 
 djangowind==0.14.3
-django-indexer==0.3.0
 raven==5.12.0
 django-statsd-mozilla==0.3.16
 django-smoketest==1.0.0
