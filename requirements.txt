@@ -41,7 +41,7 @@ django-stagingcontext==0.1.0
 sqlparse==0.1.19
 six==1.10.0
 gunicorn==19.3.0
-boto==2.38.0
+boto==2.40.0
 pyasn1==0.1.9
 pyOpenSSL==16.0.0
 ndg-httpsclient==0.4.0
