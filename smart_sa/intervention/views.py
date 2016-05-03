@@ -21,7 +21,7 @@ from functools import wraps
 from django.utils.decorators import available_attrs
 from smart_sa.problemsolving_game.models import Issue
 from smart_sa.intervention.models import Intervention
-from restclient import GET
+import requests
 
 from smart_sa.intervention.models import Participant, ClientSession, Activity
 from smart_sa.intervention.models import Deployment, ParticipantSession
@@ -470,9 +470,10 @@ def update_uploaded_files(uploads):
             os.makedirs(full_dir)
         except OSError:
             pass
+        r = requests.get(upload)
         with open(os.path.join(settings.MEDIA_ROOT, relative_path), "w") as f:
             #   writing %s to %s" % (upload, relative_path)
-            f.write(GET(upload))
+            f.write(r.text)
 
 
 @participant_required
