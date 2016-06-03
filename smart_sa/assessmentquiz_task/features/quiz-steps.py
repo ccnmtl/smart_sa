@@ -13,8 +13,8 @@ def there_is_an_assessmentquiz(self):
 @step('I fill in all (\d)s in the quiz')
 def fill_in_quiz(self, value):
     if not world.using_selenium:
-        assert (False,
-                "this step needs to be implemented for the django test client")
+        assert False, ("this step needs to be implemented for "
+                       "the django test client")
     for i in world.firefox.find_elements_by_tag_name('input'):
         if (i.get_attribute('type') == 'radio' and
                 i.get_attribute('value') == value):
@@ -34,8 +34,8 @@ def i_fill_in_value_for_question_number(step, value, number):
 @step(u"Then I'm asked to answer all the questions")
 def then_i_m_asked_to_enter_all_the_questions(step):
     alert = world.firefox.switch_to_alert()
-    assert (alert.text.startswith("Please answer all the questions"),
-            "Alert text valid")
+    assert alert.text.startswith("Please answer all the questions"), (
+        "Alert text valid")
     alert.accept()
 
 

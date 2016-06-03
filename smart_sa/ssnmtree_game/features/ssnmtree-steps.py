@@ -5,8 +5,7 @@ import time
 @step('I fill in the SSNM Tree with "([^"]*)"')
 def fill_in_ssnmtree(self, text):
     if not world.using_selenium:
-        assert (  # noqa
-            False,
+        assert False, (
             "this step needs to be implemented for the django test client")
     for i in world.firefox.find_elements_by_tag_name('input'):
         if i.get_attribute('type') == 'text':
@@ -19,8 +18,7 @@ def fill_in_ssnmtree(self, text):
 @step('there is a filled in SSNM Tree with "([^"]*)"')
 def filled_in_ssnmtree(self, text):
     if not world.using_selenium:
-        assert (  # noqa
-            False,
+        assert False, (
             "this step needs to be implemented for the django test client")
     all_filled = True
     assert all_filled
@@ -107,8 +105,7 @@ def then_button_is_selected(step, button):
     if len(elts) != 1:
         # import pdb; pdb.set_trace()
         pass
-    assert (  # noqa
-        len(elts) == 1,
+    assert len(elts) == 1, (
         "There should only be one button selected. There are %s" % len(elts))
 
     if button == "disclosure":
