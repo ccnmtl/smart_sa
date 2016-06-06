@@ -5,8 +5,8 @@ import time
 @step(u'I toggle personal challenge')
 def i_toggle_personal_challenge(step):
     if not world.using_selenium:
-        assert (False,
-                "this step needs to be implemented for the django test client")
+        assert False, (
+            "this step needs to be implemented for the django test client")
     i = world.firefox.find_element_by_css_selector('input[type="checkbox"]')
     try:
         i.click()
@@ -28,8 +28,8 @@ def when_i_click_the_save_plan_button(step):
 @step(u'I select barrier (\d+)')
 def i_select_barrier(step, barrier):
     if not world.using_selenium:
-        assert (False,
-                "this step needs to be implemented for the django test client")
+        assert False, (
+            "this step needs to be implemented for the django test client")
 
     barrier_idx = int(barrier) - 1  # Assumes 1 based indexing
     elts = world.firefox.find_elements_by_css_selector(
@@ -46,8 +46,8 @@ def i_select_barrier(step, barrier):
 @step(u'Then barrier (\d+) has "([^"]*)"')
 def then_barrier_number_has_state(step, number, state):
     if not world.using_selenium:
-        assert (False,
-                "this step needs to be implemented for the django test client")
+        assert False, (
+            "this step needs to be implemented for the django test client")
 
     barrier_idx = int(number) - 1
     elts = world.firefox.find_elements_by_css_selector(
@@ -63,8 +63,8 @@ def then_barrier_number_has_state(step, number, state):
 @step(u'Then barrier (\d+) does not have "([^"]*)"')
 def then_barrier_number_does_not_have_state(step, number, state):
     if not world.using_selenium:
-        assert (False,
-                "this step needs to be implemented for the django test client")
+        assert False, (
+            "this step needs to be implemented for the django test client")
 
     barrier_idx = int(number) - 1
     elts = world.firefox.find_elements_by_css_selector(
@@ -148,15 +148,15 @@ def then_there_is_an_edit_plan_button(step):
 def then_there_is_no_action_plan_form(step):
     time.sleep(1)
     elt = world.firefox.find_element_by_id('actionplan_form')
-    assert (not elt.is_displayed(),
-            "element #actionplan_form should not be visible")
+    assert not elt.is_displayed(), (
+        "element #actionplan_form should not be visible")
 
 
 @step(u'Then there is an Action Plan form')
 def then_there_is_an_action_plan_form(step):
     elt = world.firefox.find_element_by_id('actionplan_form')
-    assert (elt.is_displayed(),
-            "element #actionplan_form should be visible")
+    assert elt.is_displayed(), (
+        "element #actionplan_form should be visible")
 
 
 @step(u'When I type "([^"]*)" in "([^"]*)"')
@@ -176,16 +176,16 @@ def then_elementId_reads_text(step, elementId, text):
 def then_i_can_specify_my_issue(step):
     elt = world.firefox.find_element_by_css_selector(
         'div.issue-subtext textarea')
-    assert (elt.is_displayed(),
-            "element div.issue-subtext textarea should be visible")
+    assert elt.is_displayed(), (
+        "element div.issue-subtext textarea should be visible")
 
 
 @step(u'Then I cannot specify my issue')
 def then_i_cannot_specify_my_issue(step):
     elt = world.firefox.find_element_by_css_selector(
         'div.issue-subtext textarea')
-    assert (not elt.is_displayed(),
-            "element div.issue-subtext textarea should be invisible")
+    assert not elt.is_displayed(), (
+        "element div.issue-subtext textarea should be invisible")
 
 
 @step(u'Then I specify my issue as "([^"]*)"')

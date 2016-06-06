@@ -29,9 +29,8 @@ def when_i_enter_value_for_input(step, value, input):
 def then_input_is_value(step, input, value):
     elt = get_input(input)
     actual = elt.get_attribute("value")
-    assert (actual == value,
-            "Expected %s to equal %s. Actually is %s" % (input,
-                                                         value, actual))
+    assert actual == value, (
+        "Expected %s to equal %s. Actually is %s" % (input, value, actual))
 
 
 @step(u'Then I wait (\d+) second')
