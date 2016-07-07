@@ -67,4 +67,4 @@ django-impersonate==1.0.1
 django-waffle==0.11.1
 django-ga-context==0.1.0
 
-ccnmtlsettings==0.2.0
+ccnmtlsettings==0.3.0
