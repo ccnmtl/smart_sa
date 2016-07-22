@@ -37,7 +37,7 @@ logilab-common==1.2.2
 pycodestyle==2.0.0
 flake8==2.6.2
 logilab-astng==0.24.3
-pylint==1.5.6
+pylint==1.6.4
 python-dateutil==2.5.3
 django-stagingcontext==0.1.0
 sqlparse==0.2.0
