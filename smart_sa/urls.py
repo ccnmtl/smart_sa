@@ -1,95 +1,86 @@
-from django.conf.urls import patterns, include
+import os.path
+
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
-import os.path
+from smart_sa.intervention.views import (
+    game, log_activity_visit, save_game_state, intervention_admin,
+    session_admin, activity_admin, gamepage_admin, content_sync,
+    zip_download, list_uploads, no_vars, participant_data_download,
+    restore_participants, download_backup, intervention, session,
+    view_participant, add_counselor, edit_counselor, report_index,
+    activity, complete_activity, log_session_visit, complete_session,
+    start_practice_mode, upload_participant_data,
+    update_intervention_content, delete_participant, set_deployment,
+    testgen, set_participant, clear_participant, counselor_landing_page,
+    manage_participants, add_participant, edit_participant,
+)
+
 admin.autodiscover()
 
 site_media_root = os.path.join(os.path.dirname(__file__), "../media")
 
-urlpatterns = patterns(
-    '',
-    (r'^accounts/logout/$',
-     'django.contrib.auth.views.logout', {'next_page': '/'}),
-    ('^accounts/', include('djangowind.urls')),
-    (r'^site_media/(?P<path>.*)$',
-     'django.views.static.serve', {'document_root': site_media_root}),
-    (r'^multimedia/(?P<path>.*)$',
-     'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+urlpatterns = [
+    url(r'^accounts/logout/$',
+        'django.contrib.auth.views.logout', {'next_page': '/'}),
+    url('^accounts/', include('djangowind.urls')),
+    url(r'^site_media/(?P<path>.*)$',
+        'django.views.static.serve', {'document_root': site_media_root}),
+    url(r'^multimedia/(?P<path>.*)$',
+        'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 
-    (r'^testgen/$', 'smart_sa.intervention.views.testgen'),
-    (r'^set_participant/$', 'smart_sa.intervention.views.set_participant'),
-    (r'^clear_participant/$', 'smart_sa.intervention.views.clear_participant'),
-    (r'^set_deployment/$', 'smart_sa.intervention.views.set_deployment'),
-    (r'^intervention/$', 'smart_sa.intervention.views.counselor_landing_page'),
-    (r'^manage/$', 'smart_sa.intervention.views.manage_participants'),
-    (r'^manage/add_participant/$',
-     'smart_sa.intervention.views.add_participant'),
-    (r'^manage/participant/(?P<participant_id>\d+)/delete/$',
-     'smart_sa.intervention.views.delete_participant'),
-    (r'^manage/participant/(?P<participant_id>\d+)/edit/$',
-     'smart_sa.intervention.views.edit_participant'),
-    (r'^manage/participant/(?P<participant_id>\d+)/view/$',
-     'smart_sa.intervention.views.view_participant'),
+    url(r'^testgen/$', testgen),
+    url(r'^set_participant/$', set_participant),
+    url(r'^clear_participant/$', clear_participant),
+    url(r'^set_deployment/$', set_deployment),
+    url(r'^intervention/$', counselor_landing_page),
+    url(r'^manage/$', manage_participants),
+    url(r'^manage/add_participant/$', add_participant),
+    url(r'^manage/participant/(?P<participant_id>\d+)/delete/$',
+        delete_participant),
+    url(r'^manage/participant/(?P<participant_id>\d+)/edit/$',
+        edit_participant),
+    url(r'^manage/participant/(?P<participant_id>\d+)/view/$',
+        view_participant),
 
-    (r'^manage/add_counselor/$',
-     'smart_sa.intervention.views.add_counselor'),
-    (r'^manage/counselor/(?P<counselor_id>\d+)/edit/$',
-     'smart_sa.intervention.views.edit_counselor'),
+    url(r'^manage/add_counselor/$', add_counselor),
+    url(r'^manage/counselor/(?P<counselor_id>\d+)/edit/$', edit_counselor),
 
-    (r'manage/report/$', 'smart_sa.intervention.views.report_index'),
-    (r'manage/report/download/$',
-     'smart_sa.intervention.views.participant_data_download'),
-    (r'manage/restore_participants/$',
-     'smart_sa.intervention.views.restore_participants'),
-    (r'manage/update_intervention_content/$',
-     'smart_sa.intervention.views.update_intervention_content'),
-    (r'manage/upload_participant_data/$',
-     'smart_sa.intervention.views.upload_participant_data'),
-    (r'manage/download_backup/(?P<backup_id>\d+)/$',
-     'smart_sa.intervention.views.download_backup'),
+    url(r'manage/report/$', report_index),
+    url(r'manage/report/download/$', participant_data_download),
+    url(r'manage/restore_participants/$', restore_participants),
+    url(r'manage/update_intervention_content/$', update_intervention_content),
+    url(r'manage/upload_participant_data/$', upload_participant_data),
+    url(r'manage/download_backup/(?P<backup_id>\d+)/$', download_backup),
 
-    (r'^practice/(?P<intervention_id>\d+)/$',
-     'smart_sa.intervention.views.start_practice_mode'),
-    (r'^intervention/(?P<intervention_id>\d+)/$',
-     'smart_sa.intervention.views.intervention'),
-    (r'^session/(?P<session_id>\d+)/$', 'smart_sa.intervention.views.session'),
-    (r'^session/(?P<session_id>\d+)/complete/$',
-     'smart_sa.intervention.views.complete_session'),
-    (r'^session/(?P<session_id>\d+)/visit/$',
-     'smart_sa.intervention.views.log_session_visit'),
-    (r'^activity/(?P<activity_id>\d+)/$',
-     'smart_sa.intervention.views.activity'),
-    (r'^activity/(?P<activity_id>\d+)/complete/$',
-     'smart_sa.intervention.views.complete_activity'),
-    (r'^activity/(?P<activity_id>\d+)/visit/$',
-     'smart_sa.intervention.views.log_activity_visit'),
-    (r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$',
-     'smart_sa.intervention.views.game'),
-    (r'^save_game_state/$',
-     'smart_sa.intervention.views.save_game_state'),
+    url(r'^practice/(?P<intervention_id>\d+)/$', start_practice_mode),
+    url(r'^intervention/(?P<intervention_id>\d+)/$', intervention),
+    url(r'^session/(?P<session_id>\d+)/$', session),
+    url(r'^session/(?P<session_id>\d+)/complete/$', complete_session),
+    url(r'^session/(?P<session_id>\d+)/visit/$', log_session_visit),
+    url(r'^activity/(?P<activity_id>\d+)/$', activity),
+    url(r'^activity/(?P<activity_id>\d+)/complete/$', complete_activity),
+    url(r'^activity/(?P<activity_id>\d+)/visit/$', log_activity_visit),
+    url(r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$', game),
+    url(r'^save_game_state/$', save_game_state),
 
     ########
     # ADMIN view
     ########
-    (r'^intervention_admin/(?P<intervention_id>\d+)/$',
-     'smart_sa.intervention.views.intervention_admin'),
-    (r'^intervention_admin/session/(?P<session_id>\d+)/$',
-     'smart_sa.intervention.views.session_admin'),
-    (r'^intervention_admin/activity/(?P<activity_id>\d+)/$',
-     'smart_sa.intervention.views.activity_admin'),  # page 12
-    (r'^intervention_admin/task/(?P<activity_id>\d+)/$',
-     'smart_sa.intervention.views.gamepage_admin'),  # page 12
+    url(r'^intervention_admin/(?P<intervention_id>\d+)/$', intervention_admin),
+    url(r'^intervention_admin/session/(?P<session_id>\d+)/$', session_admin),
+    # page 12
+    url(r'^intervention_admin/activity/(?P<activity_id>\d+)/$',
+        activity_admin),
+    # page 12
+    url(r'^intervention_admin/task/(?P<activity_id>\d+)/$', gamepage_admin),
 
-    (r'^intervention_admin/content_sync/$',
-     'smart_sa.intervention.views.content_sync'),
-    (r'^intervention_admin/zip_download/$',
-     'smart_sa.intervention.views.zip_download'),
-    (r'^intervention_admin/list_uploads/$',
-     'smart_sa.intervention.views.list_uploads'),
+    url(r'^intervention_admin/content_sync/$', content_sync),
+    url(r'^intervention_admin/zip_download/$', zip_download),
+    url(r'^intervention_admin/list_uploads/$', list_uploads),
 
-    (r'^admin/', include(admin.site.urls)),
-    (r'^smoketest/', include('smoketest.urls')),
-    (r'^dashboard/', include('smart_sa.dashboard.urls')),
-    ('^$', 'smart_sa.intervention.views.no_vars',
-     {'template_name': 'intervention/index.html'}),
-)
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^smoketest/', include('smoketest.urls')),
+    url(r'^dashboard/', include('smart_sa.dashboard.urls')),
+    url('^$', no_vars, {'template_name': 'intervention/index.html'}),
+]

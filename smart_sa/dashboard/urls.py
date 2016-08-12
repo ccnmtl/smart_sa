@@ -1,7 +1,7 @@
-from django.conf.urls import patterns
+from django.conf.urls import url
+from .views import index, download
 
-urlpatterns = patterns(
-    '',
-    (r'^$', 'smart_sa.dashboard.views.index'),
-    (r'^download/$', 'smart_sa.dashboard.views.download'),
-)
+urlpatterns = [
+    url(r'^$', index),
+    url(r'^download/$', download),
+]
