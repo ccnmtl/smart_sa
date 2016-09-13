@@ -10,7 +10,7 @@ pyparsing==2.1.9
 tornado==4.4.1
 fuzzywuzzy==0.11.1
 sure==1.4.0
-traitlets==4.2.2
+traitlets==4.3.0
 ipython_genutils==0.1.0
 decorator==4.0.10
 ptyprocess==0.5.1
