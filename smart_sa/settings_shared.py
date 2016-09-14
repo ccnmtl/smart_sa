@@ -78,6 +78,7 @@ LETTUCE_APPS = (
 
 TEMPLATE_CONTEXT_PROCESSORS += [  # noqa
     "smart_sa.intervention.views.inject_deployment",
+    "django.core.context_processors.media",
 ]
 
 PROD_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/"
