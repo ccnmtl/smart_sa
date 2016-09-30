@@ -76,10 +76,9 @@ LETTUCE_APPS = (
     'smart_sa.ssnmtree_game',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS += [  # noqa
+TEMPLATES[0]['OPTIONS']['context_processors'].append(  # noqa
     "smart_sa.intervention.views.inject_deployment",
-    "django.core.context_processors.media",
-]
+)
 
 PROD_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/"
 PROD_MEDIA_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/multimedia/"
