@@ -1,6 +1,6 @@
 --index-url https://pypi.ccnmtl.columbia.edu/
 Django==1.9.10
-simplejson==3.8.2
+simplejson==3.9.0
 psycopg2==2.6.2
 coverage==4.2
 BeautifulSoup==3.2.1
