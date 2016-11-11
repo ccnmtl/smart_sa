@@ -40,7 +40,7 @@ configparser==3.5.0
 flake8==3.0.4
 logilab-astng==0.24.3
 pylint==1.6.4
-python-dateutil==2.5.3
+python-dateutil==2.6.0
 django-stagingcontext==0.1.0
 sqlparse==0.2.2
 six==1.10.0
