@@ -52,7 +52,7 @@ ndg-httpsclient==0.4.2
 contextlib2==0.5.4
 rcssmin==1.0.6
 rjsmin==1.0.12
-requests==2.11.1
+requests==2.12.1
 
 djangowind==0.16.0
 raven==5.32.0
