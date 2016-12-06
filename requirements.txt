@@ -54,7 +54,7 @@ rcssmin==1.0.6
 rjsmin==1.0.12
 requests==2.12.3
 
-djangowind==0.16.0
+djangowind==0.16.1
 raven==5.32.0
 django-statsd-mozilla==0.3.16
 django-smoketest==1.0.0
