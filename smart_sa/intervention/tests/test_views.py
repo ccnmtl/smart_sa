@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test import client
-from smart_sa.intervention.models import Intervention, ClientSession
-from smart_sa.intervention.models import Activity, Participant, Backup
+from smart_sa.intervention.models import (
+    Intervention, ClientSession, Activity, Participant, Backup)
 
 
 class IndexViewTest(TestCase):

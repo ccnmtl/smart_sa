@@ -1,12 +1,17 @@
 import os.path
 
+import django.contrib.auth.views
+import django.views.static
+
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
+from django.views.generic import TemplateView
+
 from smart_sa.intervention.views import (
     game, log_activity_visit, save_game_state, intervention_admin,
     session_admin, activity_admin, gamepage_admin, content_sync,
-    zip_download, list_uploads, no_vars, participant_data_download,
+    zip_download, list_uploads, participant_data_download,
     restore_participants, download_backup, intervention, session,
     view_participant, add_counselor, edit_counselor, report_index,
     activity, complete_activity, log_session_visit, complete_session,
@@ -22,12 +27,12 @@ site_media_root = os.path.join(os.path.dirname(__file__), "../media")
 
 urlpatterns = [
     url(r'^accounts/logout/$',
-        'django.contrib.auth.views.logout', {'next_page': '/'}),
+        django.contrib.auth.views.logout, {'next_page': '/'}),
     url('^accounts/', include('djangowind.urls')),
     url(r'^site_media/(?P<path>.*)$',
-        'django.views.static.serve', {'document_root': site_media_root}),
+        django.views.static.serve, {'document_root': site_media_root}),
     url(r'^multimedia/(?P<path>.*)$',
-        'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+        django.views.static.serve, {'document_root': settings.MEDIA_ROOT}),
 
     url(r'^testgen/$', testgen),
     url(r'^set_participant/$', set_participant),
@@ -82,5 +87,11 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^smoketest/', include('smoketest.urls')),
     url(r'^dashboard/', include('smart_sa.dashboard.urls')),
-    url('^$', no_vars, {'template_name': 'intervention/index.html'}),
+    url('^$', TemplateView.as_view(template_name='intervention/index.html')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
