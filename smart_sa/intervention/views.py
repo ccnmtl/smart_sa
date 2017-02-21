@@ -46,12 +46,6 @@ def inject_deployment(request):
         return dict(deployment=Deployment.objects.all()[0])
 
 
-def no_vars(request, template_name='intervention/blank.html'):
-    t = loader.get_template(template_name)
-    c = RequestContext(request)
-    return HttpResponse(t.render(c))
-
-
 def get_participant(session):
     participant_id = session.get('participant_id', False)
     if not participant_id:
