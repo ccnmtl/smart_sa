@@ -2,7 +2,6 @@
 Main intervention views
 """
 # Create your views here.
-from django.template import RequestContext, loader
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.forms.models import inlineformset_factory
@@ -648,14 +647,12 @@ def game(request, game_id, page_id):
     for k in my_game.variables(page_id):
         variables.append(
             dict(key=k, value=request.participant.get_game_var(k)))
-    t = loader.get_template(template)
-    c = RequestContext(request, {
+    return render(request, template, {
         'game': my_game,
         'game_context': game_context,
         'game_variables': variables,
         'participant': request.participant,
     })
-    return HttpResponse(t.render(c))
 
 
 @participant_required
