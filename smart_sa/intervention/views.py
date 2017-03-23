@@ -523,30 +523,35 @@ def get_or_create_first(obj, **params):
         return r, False
 
 
+def checkbox_to_boolean(request, key):
+    v = request.POST.get(key, '')
+    return v == 'on'
+
+
 def save_referral_info(activity, request, participant):
     if activity.collect_referral_info:
         if activity.clientsession.defaulter:
             participant.defaulter_referral_mental_health = \
-                request.POST.get('referral_mental_health', '')
-            participant.defaulter_referral_alcohol = request.POST.get(
-                'referral_alcohol', '')
-            participant.defaulter_referral_drug_use = request.POST.get(
-                'referral_drug_use', '')
-            participant.defaulter_referral_other = request.POST.get(
-                'referral_other', '')
-            participant.defaulter_referral_notes = request.POST.get(
-                'referral_notes', '')
+                checkbox_to_boolean(request, 'referral_mental_health')
+            participant.defaulter_referral_alcohol = checkbox_to_boolean(
+                request, 'referral_alcohol')
+            participant.defaulter_referral_drug_use = checkbox_to_boolean(
+                request, 'referral_drug_use')
+            participant.defaulter_referral_other = checkbox_to_boolean(
+                request, 'referral_other')
+            participant.defaulter_referral_notes = checkbox_to_boolean(
+                request, 'referral_notes')
         else:
-            participant.initial_referral_mental_health = request.POST.get(
-                'referral_mental_health', '')
-            participant.initial_referral_alcohol = request.POST.get(
-                'referral_alcohol', '')
-            participant.initial_referral_drug_use = request.POST.get(
-                'referral_drug_use', '')
-            participant.initial_referral_other = request.POST.get(
-                'referral_other', '')
-            participant.initial_referral_notes = request.POST.get(
-                'referral_notes', '')
+            participant.initial_referral_mental_health = checkbox_to_boolean(
+                request, 'referral_mental_health')
+            participant.initial_referral_alcohol = checkbox_to_boolean(
+                request, 'referral_alcohol')
+            participant.initial_referral_drug_use = checkbox_to_boolean(
+                request, 'referral_drug_use')
+            participant.initial_referral_other = checkbox_to_boolean(
+                request, 'referral_other')
+            participant.initial_referral_notes = checkbox_to_boolean(
+                request, 'referral_notes')
         participant.save()
 
 
