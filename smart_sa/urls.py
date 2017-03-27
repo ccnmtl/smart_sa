@@ -86,7 +86,6 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^smoketest/', include('smoketest.urls')),
-    url(r'^dashboard/', include('smart_sa.dashboard.urls')),
     url('^$', TemplateView.as_view(template_name='intervention/index.html')),
 ]
 
