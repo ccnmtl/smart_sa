@@ -34,11 +34,6 @@
     <a href="#downloaddata">Download Participant Data</a>
     <a href="#restoreparticipantcounselordata">Restore Participant Data</a>
     <a href="#updateinterventioncontent">Update Intervention</a>
-  {% else %}
-    <a href="#uploaddata">Upload Participant Data</a>
-    {% if backups %}
-    <a href="#previousbackups">Backups</a>
-  {% endif %} 
   {% endif %} 
 {% endif %}
 
@@ -189,43 +184,6 @@ Select that intervention content file that you wish to restore from. It will be 
 
 {% else %}
 
-
-<a name="uploaddata"></a>
-
-<h4>Upload Participant Data</h4>
-
-<p style="text-align: left;">
-Administrators can send data if online.
-</p>
-
-<form action="/manage/upload_participant_data/" method="post" enctype="multipart/form-data" />
-<input type="file" name="participants_data" />
-<input type="submit" value="Upload" />
-</form>
-<div style="margin: 30px 0px 120px 0px;"><a class="action" href="#top">Back to Top</a></div>
-
-{% if backups %}
-
-<a name="previousbackups"></a>
-
-<h4>Download Previous Backups</h4>
-
-<table class="manage" cellspacing="0">
-	<tr>
-		<th>Deployment</th>
-		<th>Date</th>
-	</tr>
-{% for b in backups %}
-<tr>
-	<td><a href="/manage/download_backup/{{b.id}}/">{{b.deployment}}</a></td>
-	<td><a href="/manage/download_backup/{{b.id}}/">{{b.created}}</a></td>
-</tr>
-{% endfor %}
-</table>
-
-<div style="margin: 30px 0px 120px 0px;"><a class="action" href="#top">Back to Top</a></div>
-
-{% endif %}
 
 {% endif %}
 {% endif %}

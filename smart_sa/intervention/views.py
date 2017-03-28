@@ -25,7 +25,7 @@ import requests
 from smart_sa.intervention.models import Participant, ClientSession, Activity
 from smart_sa.intervention.models import Deployment, ParticipantSession
 from smart_sa.intervention.models import ParticipantActivity
-from smart_sa.intervention.models import CounselorNote, GamePage, Backup
+from smart_sa.intervention.models import CounselorNote, GamePage
 from smart_sa.intervention.models import Instruction
 from smart_sa.intervention.models import SessionVisit, ActivityVisit
 
@@ -136,7 +136,6 @@ def counselor_landing_page(request):
 def manage_participants(request):
     return render(request, 'intervention/manage_participants.html',
                   dict(participants=Participant.objects.all().order_by("name"),
-                       backups=Backup.objects.all().order_by("-created")[:20],
                        counselors=User.objects.all().order_by("username")))
 
 
@@ -267,21 +266,6 @@ def participant_data_download(request):
 
 
 @login_required
-def download_backup(request, backup_id):
-    b = get_object_or_404(Backup, id=backup_id)
-    json = b.json_data
-    resp = HttpResponse(json, content_type="application/json")
-    clean_deployment_name = b.deployment.lower().replace(" ", "_")
-    now = b.created
-    datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (
-        now.year, now.month, now.day, now.hour, now.minute, now.second)
-    resp['Content-Disposition'] = (
-        "attachment; filename=%s_%s_participant_data.json" % (
-            clean_deployment_name, datestring))
-    return resp
-
-
-@login_required
 def restore_participants(request):
     logs = []
     if Deployment.objects.count() > 0:
@@ -363,31 +347,6 @@ def update_participant(p, logs):
             warn="Could not fully restore participant (%s): %s" % (
                 str(e), str(p))))
     return logs
-
-
-@login_required
-def upload_participant_data(request):
-    logs = []
-    if Deployment.objects.count() > 0:
-        deployment = Deployment.objects.all()[0]
-        if not deployment.is_online():
-            logs.append(dict(
-                error=("you should only use this feature on the "
-                       "CCNMTL deployment")))
-            return render(request, "intervention/upload_participants.html",
-                          dict(logs=logs))
-
-    try:
-        json_data = request.FILES['participants_data'].read()
-        json = loads(json_data)
-
-    except Exception, e:
-        logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))
-        return render(request, "intervention/upload_participants.html",
-                      dict(logs=logs))
-
-    Backup.objects.create(json_data=json_data, deployment=json['deployment'])
-    return HttpResponse("participant data successfully backed up")
 
 
 @login_required

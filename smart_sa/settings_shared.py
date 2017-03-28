@@ -46,7 +46,6 @@ INSTALLED_APPS += [  # noqa
     'smart_sa.watchvideo_game',
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
-    'smart_sa.dashboard',
 ]
 
 STATSD_PREFIX = 'masivukeni'
@@ -60,7 +59,6 @@ PROJECT_APPS = [
     'smart_sa.watchvideo_game',
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
-    'smart_sa.dashboard',
 ]
 
 EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
