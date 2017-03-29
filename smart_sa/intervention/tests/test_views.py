@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.test import client
 from smart_sa.intervention.models import (
-    Intervention, ClientSession, Activity, Participant, Backup)
+    Intervention, ClientSession, Activity, Participant)
 
 
 class IndexViewTest(TestCase):
@@ -175,15 +175,7 @@ class InterventionAdminViewTest(TestCase):
         resp = self.client.get("/manage/report/download/")
         self.assertEqual(resp.status_code, 200)
 
-    def test_download_backup(self):
-        b = Backup.objects.all()[0]
-        resp = self.client.get("/manage/download_backup/%d/" % b.id)
-        self.assertEqual(resp.status_code, 200)
-
     # def test_restore_participants(self):
-    #     pass
-
-    # def test_upload_participant_data(self):
     #     pass
 
     # def test_update_intervention_content(self):
