@@ -6,7 +6,6 @@ import django.views.static
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
-from django.views.generic import TemplateView
 
 from smart_sa.intervention.views import (
     game, log_activity_visit, save_game_state, intervention_admin,
@@ -19,6 +18,7 @@ from smart_sa.intervention.views import (
     update_intervention_content, delete_participant, set_deployment,
     testgen, set_participant, clear_participant, counselor_landing_page,
     manage_participants, add_participant, edit_participant,
+    IndexView,
 )
 
 admin.autodiscover()
@@ -84,7 +84,8 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^smoketest/', include('smoketest.urls')),
-    url('^$', TemplateView.as_view(template_name='intervention/index.html')),
+
+    url('^$', IndexView.as_view()),
 ]
 
 if settings.DEBUG:

@@ -10,6 +10,7 @@ from django.conf import settings
 from django.core import serializers
 from django.core.exceptions import MultipleObjectsReturned
 from django.contrib.auth.models import User
+from django.views.generic import TemplateView
 from zipfile import ZipFile
 from cStringIO import StringIO
 from json import dumps, loads
@@ -69,6 +70,13 @@ def participant_required(function=None):
             return HttpResponseRedirect(set_participant_url)
         return _wrapped_view
     return decorator(function)
+
+
+class IndexView(TemplateView):
+    template_name = "intervention/index.html"
+
+    def get_context_data(self, **kwargs):
+        return dict(intervention=Intervention.objects.first())
 
 
 @login_required

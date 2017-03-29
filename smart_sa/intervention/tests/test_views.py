@@ -138,12 +138,6 @@ class InterventionAdminViewTest(TestCase):
         u.save()
         self.client.login(username='testadmin', password='test')
 
-    def test_set_deployment(self):
-        resp = self.client.post("/set_deployment/",
-                                {"name": "new clinic name"})
-        resp = self.client.get("/")
-        self.assertEqual("new clinic name" in resp.content, True)
-
     def test_manage_participants(self):
         resp = self.client.get("/manage/")
         self.assertEqual(resp.status_code, 200)
