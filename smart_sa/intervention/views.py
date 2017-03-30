@@ -120,7 +120,6 @@ def set_deployment(request):
     return HttpResponseRedirect("/manage/")
 
 
-@login_required
 def start_practice_mode(request, intervention_id):
     p, created = get_or_create_first(Participant, name='practice')
     p.clear_all_data()
@@ -437,7 +436,6 @@ def update_uploaded_files(uploads):
 
 
 @participant_required
-@login_required
 def intervention(request, intervention_id):
     return render(request, 'intervention/intervention.html', dict(
         intervention=get_object_or_404(Intervention, id=intervention_id),
@@ -450,7 +448,6 @@ def testgen(request):
 
 
 @participant_required
-@login_required
 def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     participant = request.participant
@@ -463,7 +460,6 @@ def session(request, session_id):
 
 
 @participant_required
-@login_required
 def complete_session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
 
@@ -527,7 +523,8 @@ def complete_activity_post(request, activity):
         ParticipantActivity, activity=activity, participant=participant)
     pa.status = "complete"
     pa.save()
-    if request.POST.get('counselor_notes', False):
+    if (request.POST.get('counselor_notes', False) and
+            request.user.is_authenticated):
         session = activity.clientsession
         ps, created = get_or_create_first(
             ParticipantSession, session=session, participant=participant)
@@ -560,7 +557,6 @@ def complete_activity_post(request, activity):
 
 
 @participant_required
-@login_required
 def complete_activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
 
@@ -571,7 +567,6 @@ def complete_activity(request, activity_id):
 
 
 @participant_required
-@login_required
 def activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
     participant = request.participant
@@ -584,9 +579,11 @@ def activity(request, activity_id):
         # no game, so just loading the page should mark it complete
         pa.status = "complete"
         pa.save()
-    cn, created = get_or_create_first(
-        CounselorNote, participant=participant, counselor=request.user)
-    counselor_notes = cn.notes
+    counselor_notes = ""
+    if request.user.is_authenticated:
+        cn, created = get_or_create_first(
+            CounselorNote, participant=participant, counselor=request.user)
+        counselor_notes = cn.notes
     return render(request, 'intervention/activity.html',
                   dict(
                       activity=activity, participant=request.participant,
@@ -594,7 +591,6 @@ def activity(request, activity_id):
 
 
 @participant_required
-@login_required
 def game(request, game_id, page_id):
     my_game = get_object_or_404(GamePage, pk=game_id)
     if not my_game.activity:
@@ -628,7 +624,6 @@ def game(request, game_id, page_id):
 
 
 @participant_required
-@login_required
 def save_game_state(request):
     if not request.method == "POST":
         return HttpResponse("must be a POST")
