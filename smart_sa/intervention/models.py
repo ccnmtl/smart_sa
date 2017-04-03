@@ -572,6 +572,10 @@ class Participant(models.Model):
 
     reasons_for_returning = models.TextField(default="", blank=True)
 
+    # used for practice participants so we can more easily
+    # clear out old ones
+    created = models.DateTimeField(auto_now_add=True)
+
     def __unicode__(self):
         return self.name
 
@@ -789,7 +793,7 @@ class Participant(models.Model):
 
     def is_practice(self):
         "template helper"
-        return self.name == "practice"
+        return self.name.startswith("practice")
 
     def display_name(self):
         if self.is_practice():
