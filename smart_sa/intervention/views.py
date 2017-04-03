@@ -2,6 +2,11 @@
 Main intervention views
 """
 # Create your views here.
+import os
+import os.path
+import requests
+import uuid
+
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.forms.models import inlineformset_factory
@@ -15,13 +20,10 @@ from zipfile import ZipFile
 from cStringIO import StringIO
 from json import dumps, loads
 from datetime import datetime
-import os
-import os.path
 from functools import wraps
 from django.utils.decorators import available_attrs
 from smart_sa.problemsolving_game.models import Issue
 from smart_sa.intervention.models import Intervention
-import requests
 
 from smart_sa.intervention.models import Participant, ClientSession, Activity
 from smart_sa.intervention.models import Deployment, ParticipantSession
@@ -121,7 +123,9 @@ def set_deployment(request):
 
 
 def start_practice_mode(request, intervention_id):
-    p, created = get_or_create_first(Participant, name='practice')
+    unique_id = str(uuid.uuid1())
+    p, created = get_or_create_first(Participant,
+                                     name="practice %s" % unique_id)
     p.clear_all_data()
     request.session['participant_id'] = p.id
     return HttpResponseRedirect("/intervention/%d/" % int(intervention_id))

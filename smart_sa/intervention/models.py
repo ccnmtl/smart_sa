@@ -789,7 +789,7 @@ class Participant(models.Model):
 
     def is_practice(self):
         "template helper"
-        return self.name == "practice"
+        return self.name.startswith("practice")
 
     def display_name(self):
         if self.is_practice():
