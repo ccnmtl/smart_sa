@@ -125,7 +125,8 @@ def set_deployment(request):
 def start_practice_mode(request, intervention_id):
     unique_id = str(uuid.uuid1())
     p, created = get_or_create_first(Participant,
-                                     name="practice %s" % unique_id)
+                                     name="practice %s" % unique_id,
+                                     defaulter=True)
     p.clear_all_data()
     request.session['participant_id'] = p.id
     return HttpResponseRedirect("/intervention/%d/" % int(intervention_id))
