@@ -39,6 +39,7 @@ enum34==1.1.6
 configparser==3.5.0
 flake8==3.3.0
 logilab-astng==0.24.3
+editdistance==0.3.1
 pylint==1.7.0
 python-dateutil==2.6.0
 django-stagingcontext==0.1.0
