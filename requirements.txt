@@ -1,5 +1,5 @@
 --index-url https://pypi.ccnmtl.columbia.edu/
-Django==1.10.7
+Django==1.11
 simplejson==3.10.0
 psycopg2==2.7.1
 coverage==4.3.4
@@ -42,6 +42,7 @@ logilab-astng==0.24.3
 editdistance==0.3.1
 pylint==1.7.0
 python-dateutil==2.6.0
+pytz==2017.2
 django-stagingcontext==0.1.0
 sqlparse==0.2.3
 six==1.10.0
