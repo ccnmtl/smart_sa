@@ -452,6 +452,17 @@ def testgen(request):
                   dict(interventions=Intervention.objects.all()))
 
 
+class InterventionReport(TemplateView):
+    template_name = "intervention/report.html"
+
+    def get_context_data(self, pk, **kwargs):
+        p = get_object_or_404(Participant, pk=pk)
+        return dict(
+            participant=p,
+            intervention=Intervention.objects.first(),
+        )
+
+
 @participant_required
 def session(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)

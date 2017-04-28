@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Sessions{% endblock %}
+
+{% block breadcrumb-main %}
+    <div id="breadcrumb-main">
+	      <a href="/">Home</a> &rarr; Counsel &rarr; Working with <b>{{participant.display_name}}</b> 	   
+    </div>
+    <div id="breadcrumb">
+	      <form name="completesession" action="complete/" method="post"></form>
+        <a class="complete" id="tab-home" href="/intervention/{{intervention.id}}/">Sessions</a>
+    </div>
+
+{% endblock %}
+
+
+{% block content %}
+    <h1>Report for <b>{{participant.display_name}}</b></h1>
+    
+    {% if participant.is_practice %}
+        <div class="practice-mode">You are in Practice Mode. Changes will not be saved.</div>
+    {% endif %}
+
+    {% if participant.sessionvisit_set.exists %}
+        <h2>Sessions</h2>
+        <ul>
+        {% for ps in participant.sessionvisit_set.all %}
+            <li>Session {{ps.session.index}}: {{ps.session.long_title}} [{{ps.logged}} minutes]</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No sessions visited</p>
+    {% endif %}
+
+
+    {% if participant.activityvisit_set.exists %}
+        <h2>Activities</h2>
+        <ul>
+            {% for ps in participant.activityvisit_set.all %}
+                <li>Session {{ps.activity.clientsession.index}}: Activity {{ps.activity.index}}: {{ps.activity.long_title}} [{{ps.logged}} minutes]</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No activities visited</p>
+    {% endif %}
+
+{% endblock %}

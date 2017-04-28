@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test import client
 from smart_sa.intervention.models import (
@@ -59,6 +60,17 @@ class InterventionViewTest(TestCase):
         a = Activity.objects.all()[0]
         resp = self.client.get(a.get_absolute_url())
         self.assertEqual(resp.status_code, 200)
+
+    def test_intervention_report(self):
+        resp = self.client.post(
+            '/set_participant/', {'name': 'test', 'id_number': 'test'})
+        p = Participant.objects.first()
+        resp = self.client.get(reverse('intervention-report', args=[p.pk]))
+        self.assertEqual(resp.status_code, 200)
+        # the report hasn't really been designed yet, so there
+        # isn't much to check for that won't change a lot.
+        # but I guess we can at least check for the header for now.
+        self.assertTrue("Report for" in resp.content)
 
     def test_clear_participant(self):
         # make sure we have one logged in
