@@ -18,7 +18,7 @@ from smart_sa.intervention.views import (
     update_intervention_content, delete_participant, set_deployment,
     testgen, set_participant, clear_participant, counselor_landing_page,
     manage_participants, add_participant, edit_participant,
-    IndexView,
+    IndexView, InterventionReport,
 )
 
 admin.autodiscover()
@@ -58,6 +58,8 @@ urlpatterns = [
 
     url(r'^practice/(?P<intervention_id>\d+)/$', start_practice_mode),
     url(r'^intervention/(?P<intervention_id>\d+)/$', intervention),
+    url(r'^intervention/(?P<pk>\d+)/report/$',
+        InterventionReport.as_view(), name='intervention-report'),
     url(r'^session/(?P<session_id>\d+)/$', session),
     url(r'^session/(?P<session_id>\d+)/complete/$', complete_session),
     url(r'^session/(?P<session_id>\d+)/visit/$', log_session_visit),
