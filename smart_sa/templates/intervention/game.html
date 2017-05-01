@@ -4,7 +4,7 @@
 
 {% load participant_status %}
 {% block js %}
-{% if not participant.is_practice %}
+
 <script>
 var logstatus = function(e) {
    var xmlHttp = new XMLHttpRequest();
@@ -15,7 +15,7 @@ var logstatus = function(e) {
 };
 setTimeout(logstatus, 0);
 </script>
-{% endif %}
+
 
 <script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/MochiKit.js"></script>
 

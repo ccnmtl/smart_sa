@@ -10,7 +10,7 @@ var game_variables = {{activity.variables|safe}};
 </script>
 
 {% if activity %}
-{% if not participant.is_practice %}
+
 <script>
 var logstatus = function(e) {
    var xmlHttp = new XMLHttpRequest();
@@ -21,7 +21,7 @@ var logstatus = function(e) {
 };
 setTimeout(logstatus, 0);
 </script>
-{% endif %}
+
 {% endif %}
 
 {% endblock %}
