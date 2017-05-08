@@ -60,7 +60,7 @@ djangowind==1.0.0
 raven==6.0.0
 django-statsd-mozilla==0.3.16
 django-smoketest==1.0.0
-django-debug-toolbar==1.7
+django-debug-toolbar==1.8
 django-jenkins==0.110.0
 django-markwhat==1.5.1
 django-appconf==1.0.2
