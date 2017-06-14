@@ -15,6 +15,7 @@ class AssessmentQuizTask(GameInterface):
     def variables(self, page_id=None):
         return ['assessmentquiz']
 
+
 InstalledGames.register_game(
     'assessmentquiz',
     'Assessment Quiz Mood',

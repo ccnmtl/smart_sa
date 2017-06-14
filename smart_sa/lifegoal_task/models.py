@@ -12,4 +12,5 @@ class LifeGoalsTask(GameInterface):
     def variables(self, page_id=None):
         return ['lifegoals']
 
+
 InstalledGames.register_game('lifegoals', 'Life Goals', LifeGoalsTask())

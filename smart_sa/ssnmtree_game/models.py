@@ -23,6 +23,7 @@ class SSNMTreeReview(SSNMTreeGame):
     def pages(self):
         return ('review', )
 
+
 InstalledGames.register_game('ssnmTree',
                              'Social Support Network Tree',
                              SSNMTreeGame())

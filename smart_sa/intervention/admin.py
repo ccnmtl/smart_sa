@@ -20,6 +20,7 @@ class ClientSessionAdmin(admin.ModelAdmin):
     ]
     list_filter = ['short_title']
 
+
 admin.site.register(Intervention)
 admin.site.register(ClientSession, ClientSessionAdmin)
 admin.site.register(Activity)

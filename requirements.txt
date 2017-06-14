@@ -17,7 +17,7 @@ pexpect==4.2.1
 pickleshare==0.7.4
 simplegeneric==0.8.1
 path.py==10.3.1
-ipython==5.3.0
+ipython==5.4.1 # pyup: <6.0.0
 ipdb==0.10.3
 extras==1.0.0
 python-mimeparse==1.6.0
@@ -27,13 +27,13 @@ testscenarios==0.5.0
 python-subunit==1.2.0
 requirements/src/lettuce-0.2.19ccnmtl-py2-none-any.whl
 rdflib==4.2.2
-selenium==2.53.6
+selenium==3.4.3
 statsd==3.2.1
 pep8==1.7.0
 pyflakes==1.5.0
 mccabe==0.6.1
 logilab-common==1.4.0
-pycodestyle==2.0
+pycodestyle==2.3.1
 enum34==1.1.6
 configparser==3.5.0
 flake8==3.3.0
@@ -53,7 +53,13 @@ ndg-httpsclient==0.4.2
 contextlib2==0.5.5
 rcssmin==1.0.6
 rjsmin==1.0.12
-requests==2.14.2
+
+chardet==3.0.4
+idna==2.5
+urllib3==1.21.1
+certifi==2017.4.17
+
+requests==2.17.3
 
 djangowind==1.0.0
 raven==6.1.0

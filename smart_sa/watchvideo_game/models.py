@@ -29,6 +29,7 @@ class WatchVideoGame3(WatchVideoGame1):
     def pages(self):
         return ('problem_solving_smart_sa_new_vo', )
 
+
 InstalledGames.register_game('video-soldiers',
                              'Soldiers and Snakes',
                              WatchVideoGame1())
