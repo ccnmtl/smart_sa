@@ -41,6 +41,7 @@ class ProblemSolvingGame(GameInterface):
     def variables(self, page_id=None):
         return ['problemsolving']
 
+
 InstalledGames.register_game(
     'problemsolving',
     'Problem Solving', ProblemSolvingGame())

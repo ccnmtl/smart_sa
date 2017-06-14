@@ -16,6 +16,7 @@ class PillGame(GameInterface):
     def variables(self, page_id=None):
         return ['pill_game']
 
+
 InstalledGames.register_game(
     'pills', 'Pill Game - Practice', PillGame('practice'))
 InstalledGames.register_game(

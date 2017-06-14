@@ -16,4 +16,5 @@ class IssueForm(forms.ModelForm):
 class IssueAdmin(admin.ModelAdmin):
     form = IssueForm
 
+
 admin.site.register(Issue, IssueAdmin)
