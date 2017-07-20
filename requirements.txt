@@ -7,7 +7,7 @@ cssselect==1.0.1
 lxml==3.8.0
 pyparsing==2.2.0
 tornado==4.5.1
-fuzzywuzzy==0.15.0
+fuzzywuzzy==0.15.1
 sure==1.4.6
 traitlets==4.3.2
 ipython_genutils==0.2.0
