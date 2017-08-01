@@ -1,4 +1,4 @@
-Django==1.11.3
+Django==1.11.4
 simplejson==3.11.1
 psycopg2==2.7.3
 coverage==4.4.1
