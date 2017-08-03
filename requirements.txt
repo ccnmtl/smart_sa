@@ -30,7 +30,7 @@ rdflib==4.2.2
 selenium==3.4.3
 statsd==3.2.1
 pep8==1.7.0
-pyflakes==1.5.0
+pyflakes==1.6.0
 mccabe==0.6.1
 logilab-common==1.4.1
 pycodestyle==2.3.1
