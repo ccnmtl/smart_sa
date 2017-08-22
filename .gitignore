@@ -19,3 +19,5 @@ data/
 reports
 ghostdriver.log
 node_modules
+media/CACHE
+package-lock.json

@@ -5,8 +5,10 @@
     var workform = null;
 
     function loadGoalTask() {
-        goal_state = new global.GameState({game: 'lifegoals',
-                                           el: 'div#defaulter'});
+        goal_state = new global.GameState({
+            game: 'lifegoals',
+            el: 'div#defaulter'});
+
         workform = MochiKit.DOM.getElement('lifegoals');
 
         var keys = goal_state.getKeys();
@@ -15,11 +17,12 @@
                 workform.elements[keys[i]].value = goal_state.getState(keys[i]);
             }
         }
+        /* eslint-disable scanjs-rules/call_connect */
         MochiKit.Signal.connect(workform, 'onchange', saveForm);
         MochiKit.Signal.connect(workform, 'onkeypress', saveForm);
         MochiKit.Signal.connect(workform, 'onkeyup', saveForm);
-
         MochiKit.Signal.connect(window, 'onunload', saveForm);
+        /* eslint-enable scanjs-rules/call_connect */
     }
     MochiKit.DOM.addLoadEvent(loadGoalTask);
 

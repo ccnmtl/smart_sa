@@ -1,6 +1,4 @@
 (function(jQuery) {
-    var global = this;
-
     var GameElement = Backbone.Model.extend({
         defaults: {
             name: '',
@@ -34,7 +32,7 @@
     var GameElementView = Backbone.View.extend({
         initialize: function(options) {
             _.bindAll(this, 'val', 'pos', 'setValue', 'getValue',
-                      'resetValue', 'getFraction', 'render');
+                    'resetValue', 'getFraction', 'render');
             this.model.bind('change:value', this.render);
             this.model.bind('change:visible', this.render);
 
@@ -51,13 +49,13 @@
             var offset = this.offset;
 
             this.model.set('start_offset',
-                           {x: position.left + offset.left,
-                            y: position.top + offset.top +
-                            this.model.get('vertical_range')});
+                {x: position.left + offset.left,
+                    y: position.top + offset.top +
+                this.model.get('vertical_range')});
             this.model.set('end_offset',
-                           {x: position.left + offset.left +
-                            this.model.get('horizontal_range'),
-                            y: position.top + offset.top});
+                {x: position.left + offset.left +
+                this.model.get('horizontal_range'),
+                    y: position.top + offset.top});
         },
 
         resetValue: function() {
@@ -93,7 +91,7 @@
         getFraction: function() {
             // the current value of the slider as a fraction of its max setting.
             var diff = this.model
-                .get('max_value') - this.model.get('min_value');
+            .get('max_value') - this.model.get('min_value');
             return (this.getValue() - this.model.get('min_value')) / diff;
         },
 
@@ -137,7 +135,7 @@
             var p = this.pos(value);
 
             jQuery(this.el).css({'left':  (p[0]) + 'px',
-                                 'top': (p[1]) + 'px'});
+                'top': (p[1]) + 'px'});
         }
     });
 
@@ -164,7 +162,7 @@
                 var width = jQuery(this.el).width();
                 var hide = floor - jQuery(this.el).offset().top;
                 jQuery(this.el)
-                    .css('clip', 'rect(0 ' + width + 'px ' + hide + 'px 0)');
+                .css('clip', 'rect(0 ' + width + 'px ' + hide + 'px 0)');
             }
         },
 
@@ -225,20 +223,20 @@
             var slider = jQuery(this.el).siblings('.slider')[0];
             var sliderPos = jQuery(slider).position();
             jQuery(slider).css({left: sliderPos.left + offset.left,
-                                top: sliderPos.top + offset.top});
+                top: sliderPos.top + offset.top});
 
             var label = jQuery(this.el).siblings('.slider_label')[0];
             var labelPos = jQuery(label).position();
             jQuery(label).css({left: labelPos.left + offset.left,
-                               top: labelPos.top + offset.top});
+                top: labelPos.top + offset.top});
 
             this.model.set('start_offset',
-                           {x: position.left + offset.left,
-                            y: position.top + offset.top + this.model
-                            .get('vertical_range')});
+                {x: position.left + offset.left,
+                    y: position.top + offset.top + this.model
+                        .get('vertical_range')});
             this.model.set('end_offset',
-                           {x: position.left + offset.left,
-                            y: position.top + offset.top});
+                {x: position.left + offset.left,
+                    y: position.top + offset.top});
         },
 
         render: function() {
@@ -285,15 +283,17 @@
 
         selectImage: function(value) {
             var media_path = jQuery('#static-url')
-                .val() + 'island_game/images/';
+            .val() + 'island_game/images/';
             var images = (this.model.get('gender') === 'M') ?
-                this.male_images : this.female_images;
+                    this.male_images : this.female_images;
 
             if (value === 0) {
+                // eslint-disable-next-line scanjs-rules/assign_to_src
                 this.el.src = media_path + images[0];
             } else {
                 var i = Math.ceil(value * images.length) - 1;
                 if (i >= 0 && i <= images.length) {
+                    // eslint-disable-next-line scanjs-rules/assign_to_src
                     this.el.src = media_path + images[i];
                 }
             }
@@ -320,14 +320,14 @@
         events: {},
         initialize: function(options) {
             _.bindAll(this, 'render', 'gameFloor',
-                      'addGameElement', 'waterLevel');
+                    'addGameElement', 'waterLevel');
             _.extend(this, Backbone.Events);
             this.on('render', this.render);
 
             this.model.set('beforeMedication',
-                           options.mode === 'before-medication');
+                    options.mode === 'before-medication');
             this.model.set('floor', jQuery(this.el).offset().top +
-                           jQuery(this.el).height());
+                    jQuery(this.el).height());
             this.model.bind('change', this.render);
 
             this.views = {};
@@ -385,8 +385,8 @@
                 jQuery('img#left').hide();
                 jQuery('span#island_view_label').html('BEFORE GOING ON ARVS');
                 jQuery('img#island')
-                    .attr('src', media_path +
-                          'island_game/images/island_part1.png');
+                .attr('src', media_path +
+                'island_game/images/island_part1.png');
 
                 this.views.adherence.hide();
                 this.views.infection.enable();
@@ -402,7 +402,7 @@
                 this.views.island.setValue(island_level);
 
                 var altitude = 0.5 + (
-                    this.views.island.getFraction() -
+                        this.views.island.getFraction() -
                         this.views.water.getFraction()) / 2;
                 this.views.figure1.update(altitude, this.views.island.top());
             } else {
@@ -410,8 +410,8 @@
                 jQuery('img#left').show();
                 jQuery('span#island_view_label').html('ON ARVS');
                 jQuery('img#island')
-                    .attr('src', media_path +
-                          'island_game/images/island_part2.png');
+                .attr('src', media_path +
+                'island_game/images/island_part2.png');
 
                 this.views.figure1.hide();
                 this.views.figure2.show();
@@ -437,7 +437,7 @@
     };
 
     jQuery(document).ready(function() {
-        var islandView = new IslandGameView({
+        new IslandGameView({
             model: new IslandGame({beforeMedication: true}),
             el: 'div#island_container',
             gender: jQuery('div#gender').html(),
