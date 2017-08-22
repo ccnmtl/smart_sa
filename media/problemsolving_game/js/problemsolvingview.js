@@ -22,13 +22,13 @@
         },
         isPlanEmpty: function() {
             return this.get('barriers').length === 0 &&
-                this.get('proposals').length === 0 &&
-                this.get('finalPlan').length === 0;
+            this.get('proposals').length === 0 &&
+            this.get('finalPlan').length === 0;
         },
         isPlanValid: function() {
             return this.get('barriers').length > 0 ||
-                this.get('proposals').length > 0 ||
-                this.get('finalPlan').length > 0;
+            this.get('proposals').length > 0 ||
+            this.get('finalPlan').length > 0;
         },
         clone: function(ap) {
             this.set('barriers', ap.get('barriers'));
@@ -80,7 +80,7 @@
             if (_.has(options, 'state') && options.state !== null) {
                 if (_.has(options.state, 'archive')) {
                     this.set('archive',
-                             new ActionPlanList(options.state.archive));
+                            new ActionPlanList(options.state.archive));
                 }
 
                 if (_.has(options.state, 'barriers')) {
@@ -177,7 +177,7 @@
 
                 elt = jQuery('#actionplan_form h4')[0];
                 jQuery('html, body')
-                    .animate({scrollTop: jQuery(elt).offset().top}, 1000);
+                .animate({scrollTop: jQuery(elt).offset().top}, 1000);
             } else {
                 jQuery('div.issue-selector').show();
                 elt = jQuery('#gamebox');
@@ -193,21 +193,21 @@
                 jQuery(this.el).addClass('focus');
 
                 jQuery('#issue_details div.issue-number')
-                    .html(this.model.get('ordinality'));
+                .html(this.model.get('ordinality'));
                 jQuery('#issue_details img.issue-image')
-                    .attr('src', this.model.get('image'));
+                .attr('src', this.model.get('image'));
                 jQuery('#issue_details div.issue-text')
-                    .html(this.model.get('text'));
+                .html(this.model.get('text'));
 
                 if (this.model.get('id') === 'other') {
                     jQuery('#issue_details div.issue-subtext textarea')
-                        .html(this.model.get('customtext'));
+                    .html(this.model.get('customtext'));
                     jQuery('#issue_details div.issue-subtext span').hide();
                     jQuery('#issue_details div.issue-subtext textarea').show();
                     jQuery('#issue_details div.issue-subtext textarea').focus();
                 } else {
                     jQuery('#issue_details div.issue-subtext span')
-                        .html(this.model.get('subtext')).show();
+                    .html(this.model.get('subtext')).show();
                     jQuery('#issue_details div.issue-subtext textarea').hide();
                 }
                 jQuery('div#example').html(this.model.get('example'));
@@ -252,6 +252,7 @@
         },
         render: function() {
             if (this.model.hasValidActionPlan()) {
+                // eslint-disable-next-line no-unsafe-innerhtml/no-unsafe-innerhtml
                 this.el.innerHTML = this.template(this.model.toJSON());
             } else {
                 this.el.innerHTML = '';
@@ -342,8 +343,8 @@
             var actionPlan = issue.get('actionPlan');
 
             actionPlan.set({'barriers': jQuery('textarea#barriers').val(),
-                            'proposals': jQuery('textarea#proposals').val(),
-                            'finalPlan': jQuery('textarea#finalPlan').val()});
+                'proposals': jQuery('textarea#proposals').val(),
+                'finalPlan': jQuery('textarea#finalPlan').val()});
             issue.set('editing', false);
             issue.save();
         },
@@ -376,17 +377,17 @@
         global.Intervention.saveState(function(result) {
             if (result.status !== 200) {
                 alert('An error occurred while saving ' +
-                      'your information. Please try again.');
+                'your information. Please try again.');
             }
         });
     };
 
     jQuery(document).ready(function() {
         global.problemSolvingState = new global
-            .GameState({game: 'problemsolving', el: 'div#defaulter'});
+        .GameState({game: 'problemsolving', el: 'div#defaulter'});
 
         var issues = new IssueList();
-        var issueListView = new IssueListView({
+        new IssueListView({
             issues: issues,
             el: 'div#gamebox'
         });
@@ -401,7 +402,7 @@
             issue.set('example', jQuery(this).children('div.example').html());
             issue.set('image', jQuery(this).children('div.image').html());
             issue.set('ordinality', jQuery(this)
-                      .children('div.ordinality').html());
+                    .children('div.ordinality').html());
             issues.add(issue);
         });
 

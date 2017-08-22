@@ -47,7 +47,7 @@
 
         initialize: function(options) {
             _.bindAll(this, 'render', 'renderDisclosure', 'renderSupport',
-                      'onClick', 'onChangeName');
+                    'onClick', 'onChangeName');
             this.parent = options.parent;
             this.model.bind('change:disclosure', this.renderDisclosure);
             this.model.bind('change:support', this.renderSupport);
@@ -57,7 +57,7 @@
             var srcElement = evt.srcElement || evt.target || evt.originalTarget;
             if (srcElement.value.length < 1) {
                 this.model.set({'name': srcElement.value, 'disclosure': false,
-                                'support': false});
+                    'support': false});
             } else {
                 this.model.set('name', srcElement.value);
             }
@@ -70,7 +70,7 @@
             }
 
             this.model.set(this.parent.edit_mode,
-                           !this.model.get(this.parent.edit_mode));
+                    !this.model.get(this.parent.edit_mode));
             this.model.save();
         },
 
@@ -104,23 +104,23 @@
         events: {
             'click div#toggle-support-selection': 'toggleSupportSelection',
             'click div#toggle-disclosure-selection':
-            'toggleDisclosureSelection',
+                'toggleDisclosureSelection',
             'click div#top-nav-lateral a': 'saveState',
             'click div#bottom-nav-lateral a': 'saveState'
         },
 
         initialize: function(options) {
             _.bindAll(this, 'toggleSupportSelection',
-                      'toggleDisclosureSelection', 'saveState', 'addPerson');
+                    'toggleDisclosureSelection', 'saveState', 'addPerson');
             this.collection = options.collection;
             this.collection.bind('add', this.addPerson);
         },
 
         addPerson: function(person) {
             new SupportPersonView({model: person,
-                                   el: jQuery('#' + person.get('key')),
-                                   parent: this})
-                .render();
+                el: jQuery('#' + person.get('key')),
+                parent: this})
+            .render();
         },
 
         toggleSupportSelection: function() {
@@ -151,8 +151,9 @@
             global.Intervention.saveState(function(result) {
                 if (result.responseText !== 'ok') {
                     alert('An error occurred while saving your ' +
-                          'information. Please try again.');
+                    'information. Please try again.');
                 } else {
+                    // eslint-disable-next-line scanjs-rules/assign_to_location
                     window.location = srcElement.href;
                 }
             });
@@ -168,17 +169,17 @@
         global.Intervention.saveState(function(result) {
             if (result.responseText !== 'ok') {
                 alert('An error occurred while saving your ' +
-                      'information. Please try again.');
+                'information. Please try again.');
             }
         });
     };
 
     jQuery(document).ready(function() {
         global.socialSupportState = new global.GameState({game: 'ssnmtree',
-                                                          el: 'div#defaulter'});
+            el: 'div#defaulter'});
 
         var collection = new SupportPersonList();
-        var ssnmTreeView = new SupportPersonListView({
+        new SupportPersonListView({
             collection: collection,
             el: 'div#contentcontainer'
         });

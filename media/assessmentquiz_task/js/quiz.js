@@ -15,13 +15,14 @@
     var MS = MochiKit.Signal;
     var ML = MochiKit.Logging;
     var MI = MochiKit.Iter;
-    var MB = MochiKit.Base;
 
     function loadGoalTask() {
         workform = MD.getElement('assessmentquiz');
+        /* eslint-disable scanjs-rules/call_connect */
         MS.connect(workform, 'onchange', enableRevealScore);
         MS.connect('reveal_score', 'onclick', revealScore);
         MS.connect(window, 'onunload', saveForm);
+        /* eslint-enable scanjs-rules/call_connect */
 
         section = workform.elements.section.value;
 
