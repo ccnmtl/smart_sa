@@ -79,8 +79,9 @@
         initialize: function(options) {
             if (_.has(options, 'state') && options.state !== null) {
                 if (_.has(options.state, 'archive')) {
-                    this.set('archive',
-                            new ActionPlanList(options.state.archive));
+                    this.set(
+                        'archive',
+                        new ActionPlanList(options.state.archive));
                 }
 
                 if (_.has(options.state, 'barriers')) {
@@ -177,7 +178,9 @@
 
                 elt = jQuery('#actionplan_form h4')[0];
                 jQuery('html, body')
-                .animate({scrollTop: jQuery(elt).offset().top}, 1000);
+                    .animate({
+                        scrollTop: jQuery(elt).offset().top
+                    }, 1000);
             } else {
                 jQuery('div.issue-selector').show();
                 elt = jQuery('#gamebox');
@@ -193,21 +196,21 @@
                 jQuery(this.el).addClass('focus');
 
                 jQuery('#issue_details div.issue-number')
-                .html(this.model.get('ordinality'));
+                    .html(this.model.get('ordinality'));
                 jQuery('#issue_details img.issue-image')
-                .attr('src', this.model.get('image'));
+                    .attr('src', this.model.get('image'));
                 jQuery('#issue_details div.issue-text')
-                .html(this.model.get('text'));
+                    .html(this.model.get('text'));
 
                 if (this.model.get('id') === 'other') {
                     jQuery('#issue_details div.issue-subtext textarea')
-                    .html(this.model.get('customtext'));
+                        .html(this.model.get('customtext'));
                     jQuery('#issue_details div.issue-subtext span').hide();
                     jQuery('#issue_details div.issue-subtext textarea').show();
                     jQuery('#issue_details div.issue-subtext textarea').focus();
                 } else {
                     jQuery('#issue_details div.issue-subtext span')
-                    .html(this.model.get('subtext')).show();
+                        .html(this.model.get('subtext')).show();
                     jQuery('#issue_details div.issue-subtext textarea').hide();
                 }
                 jQuery('div#example').html(this.model.get('example'));
@@ -273,9 +276,10 @@
         },
 
         initialize: function(options) {
-            _.bindAll(this, 'render', 'onAddIssue', 'onIssueNumber',
-                    'onPreviousIssue', 'onNextIssue', 'onActionPlan',
-                    'onCloseActionPlan', 'onCustomText');
+            _.bindAll(
+                this, 'render', 'onAddIssue', 'onIssueNumber',
+                'onPreviousIssue', 'onNextIssue', 'onActionPlan',
+                'onCloseActionPlan', 'onCustomText');
             _.extend(this, Backbone.Events);
 
             this.issues = options.issues;
@@ -383,8 +387,10 @@
     };
 
     jQuery(document).ready(function() {
-        global.problemSolvingState = new global
-        .GameState({game: 'problemsolving', el: 'div#defaulter'});
+        global.problemSolvingState = new global.GameState({
+            game: 'problemsolving',
+            el: 'div#defaulter'
+        });
 
         var issues = new IssueList();
         new IssueListView({
@@ -401,8 +407,8 @@
             issue.set('subtext', jQuery(this).children('div.subtext').html());
             issue.set('example', jQuery(this).children('div.example').html());
             issue.set('image', jQuery(this).children('div.image').html());
-            issue.set('ordinality', jQuery(this)
-                    .children('div.ordinality').html());
+            issue.set(
+                'ordinality', jQuery(this).children('div.ordinality').html());
             issues.add(issue);
         });
 

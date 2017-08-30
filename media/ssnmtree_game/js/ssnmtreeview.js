@@ -46,8 +46,9 @@
         },
 
         initialize: function(options) {
-            _.bindAll(this, 'render', 'renderDisclosure', 'renderSupport',
-                    'onClick', 'onChangeName');
+            _.bindAll(
+                this, 'render', 'renderDisclosure', 'renderSupport',
+                'onClick', 'onChangeName');
             this.parent = options.parent;
             this.model.bind('change:disclosure', this.renderDisclosure);
             this.model.bind('change:support', this.renderSupport);
@@ -69,8 +70,9 @@
                 return true; // do nothing
             }
 
-            this.model.set(this.parent.edit_mode,
-                    !this.model.get(this.parent.edit_mode));
+            this.model.set(
+                this.parent.edit_mode,
+                !this.model.get(this.parent.edit_mode));
             this.model.save();
         },
 
@@ -110,17 +112,19 @@
         },
 
         initialize: function(options) {
-            _.bindAll(this, 'toggleSupportSelection',
-                    'toggleDisclosureSelection', 'saveState', 'addPerson');
+            _.bindAll(
+                this, 'toggleSupportSelection',
+                'toggleDisclosureSelection', 'saveState', 'addPerson');
             this.collection = options.collection;
             this.collection.bind('add', this.addPerson);
         },
 
         addPerson: function(person) {
-            new SupportPersonView({model: person,
+            new SupportPersonView({
+                model: person,
                 el: jQuery('#' + person.get('key')),
-                parent: this})
-            .render();
+                parent: this
+            }).render();
         },
 
         toggleSupportSelection: function() {

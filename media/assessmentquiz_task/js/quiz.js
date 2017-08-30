@@ -58,8 +58,8 @@
                     if (window.hasAttr(form_elt, 'type')) {
                         if (form_elt.type !== 'checkbox') {
                             workform.elements[a]
-                                .checked = goal_state[section][a] === workform
-                                .elements[a].value;
+                                .checked = goal_state[section][a] ===
+                                workform.elements[a].value;
                         } else {
                             workform.elements[a].value = goal_state[section][a];
                         }
@@ -145,8 +145,9 @@
 
         var total = goal_state[section].total;
         ML.logDebug('showTotal', total);
-        var ranges = MI.list(MD.getElement('interpretation_range')
-                             .getElementsByTagName('li'));
+        var ranges = MI.list(
+            MD.getElement('interpretation_range')
+                .getElementsByTagName('li'));
         var i = ranges.length;
         var found = false;
         while (--i >= 0) {
