@@ -83,8 +83,9 @@
             'keyup .pill-text input': 'onChangeName'
         },
         initialize: function(options, render) {
-            _.bindAll(this, 'render', 'unrender', 'revertEffect',
-                    'onRemovePill', 'onEdit', 'onReadOnly', 'onChangeName');
+            _.bindAll(
+                this, 'render', 'unrender', 'revertEffect',
+                'onRemovePill', 'onEdit', 'onReadOnly', 'onChangeName');
             this.gameView = options.gameView;
             this.model.bind('destroy', this.unrender);
             this.template = _.template(jQuery('#individual-pill-view').html());
@@ -123,8 +124,10 @@
 
             global.dropped = false;
             return new (MochiKit.Visual.Move)(
-                    innerelement, {x: -left_offset,
-                        y: -top_offset, duration: dur});
+                innerelement, {
+                    x: -left_offset,
+                    y: -top_offset, duration: dur
+                });
         },
         onChangeName: function(evt) {
             var srcElement = evt.srcElement || evt.target || evt.originalTarget;
@@ -161,7 +164,7 @@
     var DroppedPillView = Backbone.View.extend({
         tagname: 'span',
         template: _.template(
-                ' <span data-id="<%= id %>" id="<%= viewId %>" ' +
+            ' <span data-id="<%= id %>" id="<%= viewId %>" ' +
                 'class="draggable trashable" ' +
                 'style="background-image: -webkit-gradient(' +
                 'radial, 65% 35%, 1, 50% 50%, 30, from(rgb' +
@@ -169,14 +172,14 @@
                 ' background-image: -moz-radial-gradient(65% ' +
                 '35% 45deg, circle , #ffffff 1%, <%= color %> 100%); ' +
                 ' z-index: 1000; opacity: 1;"> ' +
-        '</span>'),
+                '</span>'),
         initialize: function(options, render) {
             _.bindAll(this, 'render', 'unrender', 'revertEffect', 'as_dict');
             // If a draggable pill is deleted by the user
             this.model.bind('destroy', this.unrender);
 
             this.viewId = options.viewId || 'view_' + (Math.random() + '')
-            .substring(2, 6);
+                .substring(2, 6);
             this.bucket = options.bucket;
             this.left = options.left;
             this.top = options.top;
@@ -227,8 +230,9 @@
         },
 
         initialize: function(options) {
-            _.bindAll(this, 'onSelectTime', 'onTrashPill',
-                    'addPillView', 'dropPill', 'render', 'as_dict');
+            _.bindAll(
+                this, 'onSelectTime', 'onTrashPill',
+                'addPillView', 'dropPill', 'render', 'as_dict');
             _.extend(this, Backbone.Events);
             this.on('trashPill', this.onTrashPill);
             this.gameView = options.gameView;
@@ -236,10 +240,10 @@
 
             if (options.printContainer) {
                 this.printEl = jQuery(
-                '<div class="medication_reminder_bucket"></div>')[0];
+                    '<div class="medication_reminder_bucket"></div>')[0];
                 options.printContainer.append(this.printEl);
                 this.template = _.template(
-                        jQuery('#printable-bucket-template').html());
+                    jQuery('#printable-bucket-template').html());
             }
 
             if (options.selected) {
@@ -320,7 +324,7 @@
             var na = jQuery(srcElement).children('option:selected.na');
             if (na.length) {
                 jQuery(srcElement).parent()
-                .prev('.pill-bucket').addClass('disabled');
+                    .prev('.pill-bucket').addClass('disabled');
                 for (var viewId in this.pillViews) {
                     if (this.pillViews.hasOwnProperty(viewId)) {
                         this.pillViews[viewId].unrender();
@@ -328,7 +332,7 @@
                 }
             } else {
                 jQuery(srcElement).parent()
-                .prev('.pill-bucket').removeClass('disabled');
+                    .prev('.pill-bucket').removeClass('disabled');
             }
             this.render();
             this.gameView.trigger('save');
@@ -430,13 +434,13 @@
         saveState: function() {
             if (this.mode !== 'practice') {
                 global.pillRegimenState
-                .setState('pills', this.pills.as_array());
+                    .setState('pills', this.pills.as_array());
 
                 for (var bucket in this.buckets) {
                     if (this.buckets.hasOwnProperty(bucket)) {
                         var view = this.buckets[bucket];
                         global.pillRegimenState
-                        .setState(view.el.id, view.as_dict());
+                            .setState(view.el.id, view.as_dict());
                     }
                 }
 
@@ -458,8 +462,10 @@
         var mode = jQuery('#mode').html();
         var pills = new PillList();
 
-        global.pillRegimenState = new global.GameState(
-                {game: 'pill_game', el: 'div#defaulter'});
+        global.pillRegimenState = new global.GameState({
+            game: 'pill_game',
+            el: 'div#defaulter'
+        });
 
         var pillGameView = new PillGameView({
             mode: mode,
@@ -469,17 +475,21 @@
 
         if (mode === 'practice') {
             pills.add(
-                    new Pill({id: 'tdf',
-                        name: 'Tenofovir (TDF)<br />1 pill in the evening',
-                        mode: 'practice', color: 'red'}));
+                new Pill({
+                    id: 'tdf',
+                    name: 'Tenofovir (TDF)<br />1 pill in the evening',
+                    mode: 'practice', color: 'red'}));
             pills.add(
-                    new Pill({id: '3tc',
-                        name: 'Lamivudine (3TC)<br />1 pill in the evening',
-                        mode: 'practice', color: 'blue'}));
+                new Pill({
+                    id: '3tc',
+                    name: 'Lamivudine (3TC)<br />1 pill in the evening',
+                    mode: 'practice',
+                    color: 'blue'}));
             pills.add(
-                    new Pill({id: 'efavirenz',
-                        name: 'Efavirennz (EFV)<br />1 pill in the evening',
-                        mode: 'practice', color: 'green'}));
+                new Pill({
+                    id: 'efavirenz',
+                    name: 'Efavirennz (EFV)<br />1 pill in the evening',
+                    mode: 'practice', color: 'green'}));
         } else {
             var savedPills = global.pillRegimenState.getState('pills');
             for (var i = 0; savedPills && i < savedPills.length; i++) {
