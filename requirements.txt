@@ -63,7 +63,7 @@ requests==2.18.4
 
 djangowind==1.0.0
 raven==6.1.0
-django-statsd-mozilla==0.3.16
+django-statsd-mozilla==0.4.0
 django-smoketest==1.1.0
 django-debug-toolbar==1.8
 django-jenkins==0.110.0
