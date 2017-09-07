@@ -105,24 +105,6 @@ class InterventionViewTest(TestCase):
             {'name': 'test', 'id_number': 'wrong password'})
         self.assertEqual(resp.content, "id number does not match")
 
-    def test_practice_mode(self):
-        for i in Intervention.objects.all():
-            resp = self.client.get("/practice/%d/" % i.id, follow=True)
-            self.assertEqual(
-                "You are in Practice Mode. Changes will not be saved."
-                in resp.content,
-                True)
-        s = ClientSession.objects.all()[0]
-        resp = self.client.get(s.get_absolute_url())
-        self.assertEqual(
-            "You are in Practice Mode. Changes will not be saved."
-            in resp.content, True)
-        a = s.activity_set.all()[0]
-        resp = self.client.get(a.get_absolute_url())
-        self.assertEqual(
-            "You are in Practice Mode. Changes will not be saved."
-            in resp.content, True)
-
     def test_complete_session(self):
         resp = self.client.post(
             '/set_participant/', {'name': 'test', 'id_number': 'test'})
