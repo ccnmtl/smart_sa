@@ -23,7 +23,7 @@ setTimeout(logstatus, 0);
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-	<a href="/">Home</a> &rarr; Counsel &rarr; Working with <b>{{participant.display_name}}</b> 
+    <a href="/">Home</a> &rarr; <a href="/intervention/{{activity.clientsession.intervention.id}}/" >Sessions</a> 
 </div>
 {% endblock %}
 
@@ -34,9 +34,6 @@ setTimeout(logstatus, 0);
       <a class="complete" id="tab-home" href="/intervention/{{session.intervention.id}}/">Sessions</a>
 </div>
 {%endif%}  
-    {% if participant.is_practice %}
-    <div class="practice-mode">You are in Practice Mode. Changes will not be saved.</div>
-    {% endif %}
 {% endblock %}
 
 {% block content %}
