@@ -10,23 +10,28 @@
 {% block game_content %}
 
 {% ifequal game_context.video "video/problem_solving_smart_sa_new_vo.mp4" %}
+   <div class="video">
      <video src="{{MEDIA_URL}}video/problem_solving_xhosa.mp4" poster="" width="{{game_context.width}}" controls>
      </video>
+   </div>
 {% endifequal %}
 
 {% ifequal game_context.video "video/joseph_hope.mp4" %}
+   <div class="video">
      <video src="{{MEDIA_URL}}video/joseph_hope_xhosa.mp4" poster="" width="{{game_context.width}}" controls>
      </video>
+   </div>
 {% endifequal %}
 
 {% ifequal game_context.video "video/soldiers_snakes.mp4" %}
+   <div class="video">
      <video src="{{MEDIA_URL}}video/soldiers_snakes_xhosa.mp4" poster="" width="{{game_context.width}}" controls>
      </video>
+   </div>
 {% endifequal %}
 
-   <div class="video" style="position:relative;height:520px;width:545px;margin-left:50px;">
+   <div class="video">
      <video src="{{MEDIA_URL}}{{game_context.video}}" poster="" width="{{game_context.width}}" controls>
      </video>
-
    </div>
 {% endblock %}

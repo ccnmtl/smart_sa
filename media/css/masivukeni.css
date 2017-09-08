@@ -835,6 +835,11 @@ p
 	margin-top: 5px;
 }
 
+#gamebox .video
+{
+    margin: 0px 25px 30px 25px;
+}
+
 .game_instructions { margin: 0 0 20px 5px; }
 
 container-home
