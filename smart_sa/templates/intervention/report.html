@@ -14,12 +14,8 @@
 
 
 {% block content %}
-    <h1>Report for <b>{{participant.display_name}}</b></h1>
+    <h1>Report</h1>
     
-    {% if participant.is_practice %}
-        <div class="practice-mode">You are in Practice Mode. Changes will not be saved.</div>
-    {% endif %}
-
     {% if participant.sessionvisit_set.exists %}
         <h2>Sessions</h2>
         <ul>

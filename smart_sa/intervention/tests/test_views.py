@@ -67,10 +67,6 @@ class InterventionViewTest(TestCase):
         p = Participant.objects.first()
         resp = self.client.get(reverse('intervention-report', args=[p.pk]))
         self.assertEqual(resp.status_code, 200)
-        # the report hasn't really been designed yet, so there
-        # isn't much to check for that won't change a lot.
-        # but I guess we can at least check for the header for now.
-        self.assertTrue("Report for" in resp.content)
 
     def test_clear_participant(self):
         # make sure we have one logged in
