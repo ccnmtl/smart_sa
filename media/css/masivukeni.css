@@ -1050,6 +1050,10 @@ body.logged-in #home-remote { display: block; }
 	text-align: left;
 }
 
+#btn-get-started {
+    cursor: pointer;
+    margin: 2.5em 16em;
+}
 
 #endintervention {float: right; padding-right: 10px;} 	   
 
