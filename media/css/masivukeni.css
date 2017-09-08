@@ -1052,7 +1052,12 @@ body.logged-in #home-remote { display: block; }
 
 #btn-get-started {
     cursor: pointer;
-    margin: 2.5em 16em;
+    font-size: 1.5em;
+    font-weight: bold;
+    white-space: nowrap;
+    margin: 2.5em 7.5em;
+    padding: 10px;
+    color: #f6921e;
 }
 
 #endintervention {float: right; padding-right: 10px;} 	   
