@@ -28,7 +28,7 @@ setTimeout(logstatus, 0);
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-    <a href="/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">Home</a> &rarr; <a href="/intervention/{{activity.clientsession.intervention.id}}/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">Sessions</a> &rarr; <a href="/session/{{activity.clientsession.id}}/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">{{activity.clientsession.long_title}}</a> 
+    <a href="/" >Home</a> &rarr; <a href="/intervention/{{activity.clientsession.intervention.id}}/" >Sessions</a> &rarr; <a href="/session/{{activity.clientsession.id}}/">{{activity.clientsession.long_title}}</a> 
 </div>
 {% endblock %}
 
@@ -36,7 +36,7 @@ setTimeout(logstatus, 0);
 
 <div id="breadcrumb">
       <a class="complete" id="tab-home"
-      href="/intervention/{{activity.clientsession.intervention.id}}/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">Sessions</a>
+      href="/intervention/{{activity.clientsession.intervention.id}}/" >Sessions</a>
 	<div id="breadcrumb-text">
 		You are currently in: <span class="breadcrumb-text-current">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; Activity {{activity.index}}: {{ activity.long_title }}</span>
 	</div>
