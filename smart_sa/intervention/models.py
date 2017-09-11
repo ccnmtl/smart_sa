@@ -797,7 +797,7 @@ class Participant(models.Model):
 
     def display_name(self):
         if self.is_practice():
-            return "Practice Participant"
+            return "you"
         else:
             return self.name
 
