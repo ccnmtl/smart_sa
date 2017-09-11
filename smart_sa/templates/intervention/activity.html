@@ -28,7 +28,7 @@ setTimeout(logstatus, 0);
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
-    <a href="/" >Home</a> &rarr; <a href="/intervention/{{activity.clientsession.intervention.id}}/" >Sessions</a> &rarr; <a href="/session/{{activity.clientsession.id}}/">{{activity.clientsession.long_title}}</a> 
+    <a href="/">Home</a> &rarr; <a href="/intervention/{{activity.clientsession.intervention.id}}/" >Sessions</a> &rarr; <a href="/session/{{activity.clientsession.id}}">{{activity.clientsession.long_title}}</a> &rarr; {{activity.long_title}} 
 </div>
 {% endblock %}
 
