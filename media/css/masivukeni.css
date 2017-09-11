@@ -1056,6 +1056,9 @@ body.logged-in #home-remote { display: block; }
 }
 
 #btn-get-started {
+    background-color: #eaeaea;
+    border-radius: 5px;
+    border-color: #e4e3e3;
     cursor: pointer;
     font-size: 1.5em;
     font-weight: bold;
