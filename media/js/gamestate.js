@@ -31,4 +31,11 @@
         }
     });
 
+    jQuery('#breadcrumb-main a', '#breadcrumb a').on('click', function() {
+        if(document.completeactivity) {
+            document.completeactivity.next.value=this.href;
+            document.completeactivity.submit();
+            return false;
+        }
+    });
 }(jQuery));
