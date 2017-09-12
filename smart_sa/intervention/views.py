@@ -237,6 +237,13 @@ def view_participant(request, participant_id):
                            show_login_form=True))
 
 
+def view_participant_progress(request, participant_id):
+    p = get_object_or_404(Participant, id=participant_id)
+    return render(request, 'intervention/view_participant_progress.html',
+                    dict(participant=p,
+                        all_interventions=Intervention.objects.all()))
+
+
 @login_required
 def add_counselor(request):
     if request.method == 'POST':

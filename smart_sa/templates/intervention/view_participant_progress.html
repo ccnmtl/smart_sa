@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load participant_status %}
+
+{% block title %}Information for {{participant.name}}{% endblock %}
+
+{% block breadcrumb-main %}
+	<div id="breadcrumb-main">
+	<a href="/intervention/">Home</a> &rarr; <a href="/manage/">Administrate</a> &rarr; Information for {{participant.name}}
+	</div>
+{% endblock %}
+
+{% block content %}
+<h2>Information for {{participant.name}}</h2>
+
+<h4>Personal</h4>
+
+<table class="manage" cellspacing="0">
+<col style="width: 33%;"></col>
+<col></col>
+<tr>
+<th style="text-align: right;">Buddy Name:</th>
+<td style="text-align: left;">{{participant.buddy_name|default:"No buddy name has been given." }}</td>
+</tr>
+
+<tr>
+<th style="text-align: right;">Initial Referral for:</th>
+<td style="text-align: left;">
+<ul>
+  {% if participant.initial_referral_mental_health %}<li>mental health</li>{% endif %}
+  {% if participant.initial_referral_alcohol %}<li>alcohol</li>{% endif %}
+  {% if participant.initial_referral_drug_use %}<li>drug use</li>{% endif %}
+  {% if participant.initial_referral_other %}<li>other</li>{% endif %}
+</ul>
+</td>
+</tr>
+
+
+{% if participant.initial_referral_notes %}
+<tr>
+<th style="text-align: right;">
+Initial Referral Notes:
+</th>
+<td style="text-align: left;">
+{{participant.initial_referral_notes}}
+</td>
+</tr>
+{% endif %}
+
+{% if participant.defaulter %}
+
+<tr>
+<th style="text-align: right;">Defaulter Referral for:</th>
+<td style="text-align: left;">
+<ul>
+{% if participant.defaulter_referral_mental_health %}<li>mental health</li>{% endif %}
+{% if participant.defaulter_referral_alcohol %}<li>alcohol</li>{% endif %}
+{% if participant.defaulter_referral_drug_use %}<li>drug use</li>{% endif %}
+{% if participant.defaulter_referral_other %}<li>other</li>{% endif %}
+</ul>
+</td>
+</tr>
+
+{% if participant.defaulter_referral_notes %}
+<tr>
+<th style="text-align: right;">Defaulter Referral Notes:</th>
+<td style="text-align: left;">{{participant.defaulter_referral_notes}}</td>
+</tr>
+{% endif %}
+
+{% if participant.reasons_for_returning %}
+<tr>
+<th style="text-align: right;">Reasons For Returning:</th>
+<td style="text-align: left;">{{participant.reasons_for_returning}}</td>
+</tr>
+{% endif %}
+
+{% endif %}
+
+<tr>
+<th style="text-align: right;">Notes:</th>
+<td style="text-align: left;">
+{% if participant.clinical_notes %}
+{{participant.clinical_notes}}
+{% else %}
+No clinical notes have been entered.
+{% endif %}
+</td>
+</tr>
+
+<tr>
+<th style="text-align: right;">
+Questions and Concerns:
+</th>
+<td style="text-align: left;">
+{% for cn in participant.all_counselor_notes %}
+{% if cn.notes %}
+<b>Notes (from {{cn.counselor.username}}):</b> {{cn.notes}} 
+<br />
+<div style="border: 1px dotted #ccc; margin: 10px 100px 10px 100px;"></div>
+{% endif %}
+{% endfor %}
+</td>
+</tr>
+
+</table>
+
+<div style="margin: 40px 0px 40px 0px;">
+<a href="/manage/" class="action">Done</a>
+</div>
+
+
+<h4>Progress</h4>
+
+<table class="manage" cellspacing="0">
+<col style="width: 50%;"></col>
+<col></col>
+<tr>
+<th style="text-align: left; background-color: #666; color: #fff;">Sessions and Activities</th>
+<th style="background-color: #666; color: #fff;">Counselor</th>
+<th style="background-color: #666; color: #fff;">Complete/Incomplete</th>
+</tr>
+{% for intervention in all_interventions %}
+{% for session in intervention.clientsession_set.all %}
+<tr>
+<th style="text-align: left;">{{session.long_title}}</th>
+<th>{{cn.counselor.username}}</th>
+<th>{% get_participant_status participant session %}</th>
+</tr>
+{% for activity in session.activity_set.all %}
+{% get_participant_status participant activity as astatus %}
+{% if  astatus %}
+<tr>
+<td style="text-align: left;">{{activity.long_title}}</td>
+<td>{{cn.counselor.username}}</td>
+<td>{% get_participant_status participant activity %}</td>
+</tr>
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+</table>
+
+<div style="margin: 40px 0px 40px 0px;">
+<a href="/manage/" class="action">Done</a>
+</div>
+{% endblock %}
