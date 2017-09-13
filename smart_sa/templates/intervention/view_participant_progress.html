@@ -124,16 +124,16 @@ Questions and Concerns:
 <tr>
 <th style="text-align: left;">{{session.long_title}}</th>
 <th>{{cn.counselor.username}}</th>
-<th>{% get_participant_status participant session %}</th>
+<!--<th>{#  get_participant_status participant session #}</th>-->
+<th>{{ session.activity_set.all }}</th>
 </tr>
 {% for activity in session.activity_set.all %}
 {% get_participant_status participant activity as astatus %}
-{% if  astatus %}
+{% if astatus %}
 <tr>
 <td style="text-align: left;">{{activity.long_title}}</td>
-<td>{{cn.counselor.username}}</td>
-<td>{% get_participant_status participant activity %}</td>
 </tr>
+{% include "intervention/view_participant_activity_progress.html" %}
 {% endif %}
 {% endfor %}
 {% endfor %}

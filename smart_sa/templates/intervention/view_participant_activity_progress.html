@@ -1,0 +1,119 @@
+{% load participant_status %}
+
+{% block js %}
+<script>
+var game_variables = {{activity.variables|safe}};
+</script>
+
+{% if activity %}
+
+<script>
+var logstatus = function(e) {
+   var xmlHttp = new XMLHttpRequest();
+   var url = "visit/";
+   xmlHttp.open("GET", url, false);
+   xmlHttp.send(null);
+   setTimeout(logstatus, 1000 * 60);
+};
+setTimeout(logstatus, 0);
+</script>
+
+{% endif %}
+
+{% endblock %}
+
+{% block event_content %}
+
+    
+		
+		
+		<h3 id="activity{{activity.id}}" class="activitytitle">{{ activity.long_title }}</h3>
+		
+		{% if activity.instruction_set.count %}
+		
+		{% for instruction in activity.instruction_set.all %}
+		
+		{%if instruction.title %}
+		<h4>{{instruction.title}}</h4> 
+		{%endif%}
+		{%if instruction.image %}
+		<img id="activity{{activity.id}}" class="inlineimage" src="{{instruction.image.url}}" />
+		{%endif%}
+		
+		<!--  {%if instruction.style %}
+		<span class="instruction_style">{{instruction.style}}:</span> 
+		{%endif%}-->
+		<p class="{{instruction.style}}"> {{ instruction.instruction_text|safe }}</p>
+		{% endfor %}
+		{% else  %}
+		<p>No content instructions defined for this activity.</p>
+		{% endif %}
+		
+		{% if activity.collect_buddy_name %}
+		<h4>Buddy</h4>	
+		
+		Your Buddy: <input type="text" name="buddy_name" value="{{participant.buddy_name}}"/>
+		{% endif %}
+
+		{% if activity.collect_reasons_for_returning %}
+		<h4>Reasons For Returning</h4>	
+
+		<textarea name="reasons_for_returning" rows="5" cols="70">{{participant.reasons_for_returning}}</textarea>		
+		{% endif %}
+
+		{% if activity.collect_referral_info %}
+		<h4>Referral Information</h4>	
+		<h5>Referral given for:</h5>
+		{% if activity.clientsession.defaulter %}
+
+		  <p>
+		  <label><input type="checkbox" name="referral_mental_health" {% if participant.defaulter_referral_mental_health %} checked="checked" {% endif %} /> mental health</label>
+		  </p>
+		  
+		  <p>
+		  <label><input type="checkbox" name="referral_alcohol" {% if participant.defaulter_referral_alcohol %} checked="checked" {% endif %} /> alcohol</label>
+		  </p>
+		  
+		  <p>
+		  <label><input type="checkbox" name="referral_drug_use" {% if participant.defaulter_referral_drug_use %} checked="checked" {% endif %} /> drug use</label>
+		  </p>
+		  
+		  <p>
+		  <label><input type="checkbox" name="referral_other" {% if participant.defaulter_referral_other %} checked="checked" {% endif %} /> other</label>
+		  </p>
+
+		<h5>Additional notes about the referral(s):</h5>
+		<textarea name="referral_notes" rows="5" cols="70">{{participant.defaulter_referral_notes}}</textarea>
+		{% else %}
+
+		  <p>
+		  <label><input type="checkbox" name="referral_mental_health" {% if participant.initial_referral_mental_health %} checked="checked" {% endif %} /> mental health</label>
+		  </p>
+		  
+		  <p>
+		  <label><input type="checkbox" name="referral_alcohol" {% if participant.initial_referral_alcohol %} checked="checked" {% endif %} /> alcohol</label>
+		  </p>
+		  
+		  <p>
+		  <label><input type="checkbox" name="referral_drug_use" {% if participant.initial_referral_drug_use %} checked="checked" {% endif %} /> drug use</label>
+		  </p>
+		  
+		  <p>
+		  <label><input type="checkbox" name="referral_other" {% if participant.initial_referral_other %} checked="checked" {% endif %} /> other</label>
+		  </p>
+
+		<h5>Additional notes about the referral(s):</h5>
+		
+		<textarea name="referral_notes" rows="5" cols="70">{{participant.initial_referral_notes}}</textarea>
+		{% endif %}
+		{% endif %}
+		
+		{% if activity.collect_notes %}
+		<h4>Questions and Concerns</h4>	
+		
+		<textarea name="counselor_notes" rows="5" cols="70" id="counselor-notes" >{{counselor_notes}}</textarea>
+		{% endif %}
+	
+
+
+{% endblock %}
