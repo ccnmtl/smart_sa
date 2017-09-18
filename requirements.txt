@@ -44,7 +44,7 @@ python-dateutil==2.6.1
 pytz==2017.2
 django-stagingcontext==0.1.0
 sqlparse==0.2.3
-six==1.10.0
+six==1.11.0
 gunicorn==19.7.1
 boto==2.48.0
 pyasn1==0.3.4
