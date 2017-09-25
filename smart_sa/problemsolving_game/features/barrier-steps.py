@@ -11,7 +11,7 @@ def i_toggle_personal_challenge(step):
     try:
         i.click()
         time.sleep(1)
-    except:
+    except:  # nosec
         pass
 
 
@@ -21,7 +21,7 @@ def when_i_click_the_save_plan_button(step):
         'div#actionplan_form input[type="submit"]')
     try:
         elt.click()
-    except:
+    except:  # nosec
         pass
 
 
@@ -39,7 +39,7 @@ def i_select_barrier(step, barrier):
         if idx == barrier_idx:
             try:
                 val.click()
-            except:
+            except:  # nosec
                 pass
 
 
@@ -96,7 +96,7 @@ def i_navigate_direction(step, direction):
         i = world.firefox.find_element_by_css_selector('#next_issue')
     try:
         i.click()
-    except:
+    except:  # nosec
         pass
 
 

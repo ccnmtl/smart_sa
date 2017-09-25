@@ -35,7 +35,7 @@ def when_i_clear_the_circle(step):
 def when_i_name_the_circle_name(step, name):
     try:
         fruit = world.firefox.find_element_by_id("top1-fruit")
-    except:
+    except:  # nosec
         time.sleep(1)
         fruit = world.firefox.find_element_by_id("top1-fruit")
     elt = fruit.find_element_by_tag_name('input')
@@ -55,7 +55,7 @@ def when_i_click_the_circle(step):
 def then_the_circle_is_color(step, color):
     try:
         elt = world.firefox.find_element_by_id("top1-fruit")
-    except:
+    except:  # nosec
         time.sleep(3)
         elt = world.firefox.find_element_by_id("top1-fruit")
 
@@ -84,7 +84,7 @@ def then_the_circle_is_not_color(step, color):
             elt.find_element_by_css_selector("div.ripe.turned-on")
             elt.find_element_by_css_selector("div.circle.turned-on")
         assert False, "The circle is %s" % color
-    except:
+    except:  # nosec
         pass  # expected
 
 
