@@ -72,7 +72,7 @@ def there_is_not_an_add_pill_button(step):
         world.firefox.find_element_by_id('add-a-pill')
         assert False, (
             'The Add Pill button should not be displayed in this mode')
-    except:
+    except:  # nosec
         pass
 
 
@@ -271,7 +271,7 @@ def specify_timeslot_time_as_time(step, timeslot, time):
     select = Select(elt)
     try:
         select.select_by_visible_text(time)
-    except:
+    except:  # nosec
         pass
 
 

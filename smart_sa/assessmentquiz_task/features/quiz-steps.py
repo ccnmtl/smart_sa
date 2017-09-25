@@ -45,7 +45,7 @@ def find_score_by_headline(score, text):
         headline = score.find_element_by_css_selector("div.headline")
         if headline:
             found = headline.text.find(text) >= 0
-    except:
+    except:  # nosec
         pass
     return found
 
@@ -59,7 +59,7 @@ def verify_score(text):
             script = score.find_element_by_css_selector("div.script")
             if script:
                 found = script.text.find(text) >= 0
-        except:
+        except:  # nosec
             pass
 
     return found
@@ -70,7 +70,7 @@ def then_my_score_says_text(step, text):
     found = False
     try:
         found = verify_score(text)
-    except:
+    except:    # nosec
         time.sleep(2)
         found = verify_score(text)
 
