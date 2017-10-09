@@ -864,7 +864,6 @@ def list_uploads(request):
 
 
 @participant_required
-@login_required
 def log_session_visit(request, session_id):
     session = get_object_or_404(ClientSession, pk=session_id)
     participant = request.participant
@@ -875,7 +874,6 @@ def log_session_visit(request, session_id):
 
 
 @participant_required
-@login_required
 def log_activity_visit(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
     participant = request.participant
