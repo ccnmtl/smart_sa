@@ -27,7 +27,7 @@ testscenarios==0.5.0
 python-subunit==1.2.0
 requirements/src/lettuce-0.2.19ccnmtl-py2-none-any.whl
 rdflib==4.2.2
-selenium==3.5.0
+selenium==3.6.0
 statsd==3.2.1
 pep8==1.7.0
 pyflakes==1.6.0
