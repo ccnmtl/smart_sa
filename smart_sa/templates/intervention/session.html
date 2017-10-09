@@ -11,7 +11,7 @@
 var logstatus = function(e) {
    var xmlHttp = new XMLHttpRequest();
    var url = "visit/";
-   xmlHttp.open("GET", url);
+   xmlHttp.open("GET", url, false);
    xmlHttp.send(null);
    setTimeout(logstatus, 1000 * 60);
 };
