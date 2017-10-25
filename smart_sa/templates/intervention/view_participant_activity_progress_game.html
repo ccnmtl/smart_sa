@@ -1,0 +1,77 @@
+{% load compress %}
+
+{% load participant_status %}
+{% block js %}
+
+<script>
+var logstatus = function(e) {
+   var xmlHttp = new XMLHttpRequest();
+   var url = "/activity/{{game.activity.id}}/visit/";
+   xmlHttp.open("GET", url, false);
+   xmlHttp.send(null);
+   setTimeout(logstatus, 1000 * 60);
+};
+setTimeout(logstatus, 0);
+</script>
+
+
+<script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/MochiKit.js"></script>
+
+{% compress js %}
+   <script type="text/javascript" src="{{STATIC_URL}}js/static_auth/local_session.js"></script>    
+   <script type="text/javascript" src="{{STATIC_URL}}js/static_auth/intervention_storage.js"></script>    
+{% endcompress %}   
+
+   <!-- Delegate to the particular game which extra JS it needs -->
+   <script>
+     var game_variables = {{game.variables|safe}};
+     this.ss_game_state = {};
+     
+    {% for v in game_variables %}
+         {% if v.value %}
+             this.ss_game_state['{{v.key}}'] = {{v.value|safe}};
+         {% else %}
+             this.ss_game_state['{{v.key}}'] = {};
+         {% endif %}
+    {% endfor %}
+   </script>
+   {% block game_js %}{% endblock %}
+{% endblock %}
+
+{% block css %}
+   <!-- Delegate to the particular game extra CSS it needs -->
+   {% block game_css %}{% endblock %}
+{% endblock %}
+
+
+{% block content %}
+  
+  {% with game.activity.next as next_activity %}
+  {% with game.activity as prev_activity %}
+  {% with game.next_url as game_next_url %}
+  {% with game.previous_url as game_previous_url %}
+
+
+			
+			<h3 id="activity{{game.activity.id}}" class="activitytitle">{{ game.activity.long_title }}</h3>
+
+            {% compress js %}
+            <script type="text/javascript" src="{{STATIC_URL}}js/static_auth/local_session.js"></script>    
+            <script type="text/javascript" src="{{STATIC_URL}}js/static_auth/intervention_storage.js"></script>    
+            {% endcompress %}   
+
+			<p>
+			{{game.instructions|safe}}
+			</p>			
+			
+			<!-- START - Delegate HTML to the particular game -->
+			<div id="gamebox">
+			{% block game_content %}{% endblock %}
+			</div>
+			<!-- STOP Delegate HTML to the particular game -->
+
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+{% endblock %}

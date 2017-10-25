@@ -137,3 +137,8 @@ def participant_completed_all_sessions_in_intervention(parser, token):
         var_name = token.split_contents()[1:][3]
     return ParticipantCompletedAllSessionsInIntervention(
         participant, intervention, var_name)
+
+
+@register.simple_tag()
+def dump_object_vars(o):
+    return vars(o)

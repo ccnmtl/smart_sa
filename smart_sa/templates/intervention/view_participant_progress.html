@@ -110,7 +110,6 @@ Questions and Concerns:
 
 
 <h4>Progress</h4>
-
 <table class="manage" cellspacing="0">
 <col style="width: 50%;"></col>
 <col></col>
@@ -124,8 +123,7 @@ Questions and Concerns:
 <tr>
 <th style="text-align: left;">{{session.long_title}}</th>
 <th>{{cn.counselor.username}}</th>
-<!--<th>{#  get_participant_status participant session #}</th>-->
-<th>{{ session.activity_set.all }}</th>
+<th>{%  get_participant_status participant session %}</th>
 </tr>
 {% for activity in session.activity_set.all %}
 {% get_participant_status participant activity as astatus %}
@@ -133,10 +131,24 @@ Questions and Concerns:
 <tr>
 <td style="text-align: left;">{{activity.long_title}}</td>
 </tr>
-{% include "intervention/view_participant_activity_progress.html" %}
 {% endif %}
 {% endfor %}
 {% endfor %}
+{% endfor %}
+</table>
+
+{% for intervention in all_interventions %}
+    {% for session in intervention.clientsession_set.all %}
+        <h3>{{session.long_title}}</h3>
+        {% for activity in session.activity_set.all %}
+            {% get_participant_status participant activity as astatus %}
+            {% if astatus %}
+            <h4>{{activity.long_title}}</h4>
+            {% dump_object_vars participant %}
+            <!--{% include "intervention/view_participant_activity_progress.html" %}-->
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 {% endfor %}
 </table>
 
