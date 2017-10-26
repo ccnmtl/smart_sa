@@ -13,7 +13,8 @@ from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
 from django.core import serializers
-from django.core.exceptions import MultipleObjectsReturned
+from django.core.exceptions import MultipleObjectsReturned,\
+    ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.views.generic import TemplateView
 from zipfile import ZipFile
@@ -55,7 +56,7 @@ def get_participant(session):
     try:
         p = Participant.objects.get(id=participant_id)
         return p
-    except:
+    except ObjectDoesNotExist:
         return None
 
 
@@ -647,7 +648,7 @@ def save_game_state(request):
         json = loads(request.body)
         for k in json.keys():
             request.participant.save_game_var(k, dumps(json[k]))
-    except:
+    except ValueError:  # validation loads
         return HttpResponse("not ok")
     return HttpResponse("ok")
 

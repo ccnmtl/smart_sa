@@ -15,7 +15,7 @@ Facts
 from django.db import models
 from django.contrib.auth.models import User
 from smart_sa.intervention.installed_games import InstalledGames
-from django.core.exceptions import MultipleObjectsReturned
+from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 import re
 
 
@@ -418,7 +418,7 @@ class GamePage (models.Model):
         if ind > 1:
             try:
                 prev_id = str(self.get_previous_in_order().id)
-            except:
+            except ObjectDoesNotExist:
                 prev_id = ''
             pages = self.activity.pages()
             return '%s/%s' % (prev_id, pages[ind - 2])
@@ -432,7 +432,7 @@ class GamePage (models.Model):
         if len(pages) > ind:
             try:
                 id = str(self.get_next_in_order().id)
-            except:
+            except ObjectDoesNotExist:
                 id = ''
             return '%s/%s' % (id, pages[ind])
         else:
@@ -442,14 +442,14 @@ class GamePage (models.Model):
         "helper for prev nav in templates"
         try:
             return self.get_previous_in_order().title
-        except:
+        except ObjectDoesNotExist:
             return ''
 
     def next_title(self):
         "helper for next nav in templates"
         try:
             return self.get_next_in_order().title
-        except:
+        except ObjectDoesNotExist:
             return ''
 
     # GAME code, we LOVE delegation!
