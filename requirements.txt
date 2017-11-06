@@ -38,7 +38,7 @@ enum34==1.1.6
 configparser==3.5.0
 flake8==3.5.0
 logilab-astng==0.24.3
-editdistance==0.3.1
+editdistance==0.4
 pylint==1.7.4
 python-dateutil==2.6.1
 pytz==2017.3
