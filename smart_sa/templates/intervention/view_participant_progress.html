@@ -137,6 +137,31 @@ Questions and Concerns:
 {% endfor %}
 </table>
 
+<h2>Test</h2>
+{% if participant.sessionvisit_set.exists %}
+    <h2>Sessions</h2>
+    <ul>
+    {% for ps in participant.sessionvisit_set.all %}
+        {% dump_object_vars ps %}
+        <li>Session {{ps.session.index}}: {{ps.session.long_title}} [{{ps.logged}} minutes]</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No sessions visited</p>
+{% endif %}
+
+
+{% if participant.activityvisit_set.exists %}
+    <h2>Activities</h2>
+    <ul>
+        {% for ps in participant.activityvisit_set.all %}
+            <li>Session {{ps.activity.clientsession.index}}: Activity {{ps.activity.index}}: {{ps.activity.long_title}} [{{ps.logged}} minutes]</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No activities visited</p>
+{% endif %}
+
 {% for intervention in all_interventions %}
     {% for session in intervention.clientsession_set.all %}
         <h3>{{session.long_title}}</h3>

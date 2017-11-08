@@ -2,10 +2,12 @@ import csv
 from smart_sa.intervention.models import Backup
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from smart_sa.intervention.models import Participant, ClientSession, Activity, Intervention
 
 from smart_sa.dashboard.models import DEPLOYMENTS
 from smart_sa.dashboard.models import ClinicData
+from smart_sa.dashboard.models import Participant as dashboard_participant
 
 
 def index(request):
@@ -22,6 +24,13 @@ def index(request):
     else:
         return render(request, "dashboard/index.html",
                       dict(missing_deployments=missing_deployments))
+
+
+def participant(request, participant_id):
+    p = get_object_or_404(Participant, id=request.session['participant_id'])
+    return render(request, "dashboard/participant.html",
+                    dict(participant=dash_participant,
+                        all_interventions=Intervention.objects.all()))
 
 
 @login_required

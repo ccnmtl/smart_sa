@@ -19,6 +19,7 @@ from smart_sa.intervention.views import (
     testgen, set_participant, clear_participant, counselor_landing_page,
     manage_participants, add_participant, edit_participant,
     IndexView, InterventionReport, view_participant_progress,
+    current_participant_report
 )
 
 admin.autodiscover()
@@ -53,13 +54,15 @@ urlpatterns = [
     url(r'^manage/add_counselor/$', add_counselor),
     url(r'^manage/counselor/(?P<counselor_id>\d+)/edit/$', edit_counselor),
 
-    url(r'manage/report/$', report_index),
+    url(r'mnage/report/$', report_index),
     url(r'manage/report/download/$', participant_data_download),
     url(r'manage/restore_participants/$', restore_participants),
     url(r'manage/update_intervention_content/$', update_intervention_content),
 
     url(r'^practice/(?P<intervention_id>\d+)/$', start_practice_mode),
     url(r'^intervention/(?P<intervention_id>\d+)/$', intervention),
+    url(r'^intervention/participant-report$',
+        view_participant_progress),
     url(r'^intervention/(?P<pk>\d+)/report/$',
         InterventionReport.as_view(), name='intervention-report'),
     url(r'^session/(?P<session_id>\d+)/$', session),
@@ -88,7 +91,6 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^smoketest/', include('smoketest.urls')),
-    url(r'^dashboard/', include('smart_sa.dashboard.urls')),
 
     url('^$', IndexView.as_view()),
 ]

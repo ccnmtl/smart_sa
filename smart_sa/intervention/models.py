@@ -16,7 +16,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from smart_sa.intervention.installed_games import InstalledGames
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
+import json
 import re
+import pprint
 
 
 def dict_serialize(obj):
@@ -868,6 +870,236 @@ class Participant(models.Model):
         for gv in data['game_vars']:
             for key in gv.keys():
                 self.save_game_var(key, gv[key])
+
+    def get_completed_activities(self):
+        activities = []
+        for i in range(1, ClientSession.objects.count()):
+            activities.append(["Session %d: Activity %d: %s" % (
+                pa.activity.clientsession.index(),
+                pa.activity.index(), pa.activity.long_title)
+            for pa in self.participantactivity_set.all()
+            if pa.status == u'complete'
+            and pa.activity.clientsession.index() == i])
+
+        return activities
+
+    def session_duration(self, session):
+        """ approximate number of minutes participant spent
+        on a given session
+
+        since we just care about a total, not whether it was all
+        continuous or not, we can "cheat" and take advantage
+        of the fact that the front end logs every minute and just
+        count the number of relevant visit logs.
+
+        That can go wrong if they are flying through and visiting
+        more than one page a minute; we'd get a higher number from
+        the count than the actual total time. So we compare our
+        count to the absolute difference between the earliest and
+        latest timestamps we have and take the min.
+
+        This can still be inaccurate if they flew through parts
+        and then had gaps (computer shut off, logged out, etc)
+        in other parts. So a proper run through merging timestamps
+        that are less than a minute apart into runs would be ideal.
+        But this should get us pretty close without too much craziness.
+        Since the logging is pretty rough at best, this is probably
+        good enough, at least for now.
+        """
+        timestamps = self.relevant_timestamps(session)
+        simple_count = len(timestamps)
+
+        if simple_count < 2:
+            # zero or 1 timestamps logged, so this is as
+            # accurate as we can get
+            return simple_count
+
+        # otherwise, double check against absolute time interval
+        timestamps.sort()
+        earliest = timestamps[0]
+        latest = timestamps[-1]
+        delta = latest - earliest
+        if (delta.seconds / 60.0) < simple_count:
+            return delta.seconds / 60
+        else:
+            return simple_count
+
+    def relevant_timestamps(self, session):
+        """ all the timestamps for a session and activities in that session """
+        return (self.session_timestamps(session) +
+                self.session_activity_timestamps(session))
+
+    def session_timestamps(self, session):
+        sv_set = self.sessionvisit_set.all()
+        if not sv_set:
+            return []
+        return [sv.logged for sv in sv_set
+                if sv.session_id == session.id]
+
+    def session_activity_timestamps(self, session):
+        av_set = self.activityvisit_set.all()
+        if not av_set:
+            return []
+        return [av.logged for av in av_set
+            if av.activity.clientsession_id == session.id]
+
+    def completed_session_durations(self):
+        if self.num_completed_sessions() < 1:
+            return ""
+        durations = []
+        for s in range(1, self.max_completed_session_number() + 1):
+            durations.append(self.session_duration(s))
+        return ",".join([str(d) for d in durations])
+
+    def all_session_durations(self):
+        durations = []
+        for s in ClientSession.objects.all():
+            durations.append(self.session_duration(s))
+        return durations
+
+    def total_session_duration(self):
+        duration = 0
+        for t in self.all_session_durations():
+            duration += t
+
+        return duration
+
+    def game_vars(self, name):
+        data = {pgv.key: json.loads(pgv.value) for pgv in self.participantgamevar_set.all()}
+        if name in data:
+            return data[name]
+
+    def assessmentquiz_data(self):
+        return self.game_vars(u'assessmentquiz')
+
+    def mood_alcohol_drug_scores(self, session='regular'):
+        quiz_vars = self.assessmentquiz_data()
+
+        try:
+            mood = quiz_vars[session]['kten']['total']
+        except KeyError:
+            mood = ''
+
+        try:
+            alcohol = quiz_vars[session]['audit']['total']
+        except KeyError:
+            alcohol = ''
+
+        try:
+            drug = quiz_vars[session]['drugaudit']['total']
+        except KeyError:
+            drug = ''
+
+        return [mood, alcohol, drug]
+
+    def mood_score(self):
+        return self.mood_alcohol_drug_scores()[0]
+
+    def alcohol_score(self):
+        return self.mood_alcohol_drug_scores()[1]
+
+    def drug_score(self):
+        return self.mood_alcohol_drug_scores()[2]
+
+    def ssnmtree_data(self):
+        return self.game_vars(u'ssnmtree')
+
+    def _count_valid_keys(self, d, sub, test):
+        try:
+            count = 0
+            for key, value in d[sub].items():
+                if test(value):
+                    count += 1
+            return count
+        except KeyError:
+            return 0
+
+    def ssnmtree_total(self, session='regular'):
+        names = set()
+        data = self.ssnmtree_data()
+        if data is None:
+            return
+
+        for person in data[session]:
+            names.add(data[session][person]['name'])
+        return names
+
+    def ssnmtree_supporters(self, session='regular'):
+        names = set()
+        data = self.ssnmtree_data()
+        if data is None:
+            return
+
+        for person in data[session]:
+            if data[session][person]['support']:
+                names.add(data[session][person]['name'])
+        return names
+
+    def ssnmtree_confidants(self, session='regular'):
+        names = set()
+        data = self.ssnmtree_data()
+        if data is None:
+            return
+
+        for person in data[session]:
+            if data[session][person]['disclosure']:
+                names.add(data[session][person]['name'])
+        return names
+
+    def ssnmtree_supporters_and_confidants(self, session='regular'):
+        names = set()
+        data = self.ssnmtree_data()
+        if data is None:
+            return
+
+        for person in data[session]:
+            if data[session][person]['disclosure'] and\
+                            data[session][person]['support']:
+                names.add(data[session][person]['name'])
+        return names
+
+    def pillgame_data(self):
+        return self.game_vars(u'pill_game')
+
+    def medication_list(self, session='regular'):
+        data = self.pillgame_data()
+        try:
+            return ",".join([str(p['name']) for p in data[session]['pills']])
+        except KeyError:
+            return ""
+
+    def lifegoals_data(self):
+        return self.game_vars(u'lifegoals')
+
+    def problem_solving_data(self):
+        data = self.game_vars(u'problemsolving')
+        return data if data is not None else dict()
+
+    def barriers(self, session="regular"):
+        data = self.problem_solving_data()
+        try:
+            return ",".join(k for k, v in data[session].items()
+                            if 'barriers' in v and
+                            'proposals' in v and
+                            'finalPlan' in v)
+        except KeyError:
+            return ""
+
+    def barriers_with_plans(self, session="regular"):
+        data = self.problem_solving_data()
+        try:
+            return ",".join(k for k, v in data[session].items()
+                            if 'barriers' in v and
+                            'proposals' in v and
+                            'finalPlan' in v and
+                            (len(v['barriers']) > 0 or
+                             len(v['proposals']) > 0 or
+                             len(v['finalPlan']) > 0))
+        except KeyError:
+            return ""
+
+    def pprint(self):
+        return pprint.pformat(dir(self))
 
 
 class ParticipantSession(models.Model):

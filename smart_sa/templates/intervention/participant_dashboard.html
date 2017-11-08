@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load participant_status %}
+
+{% block content %}
+
+<h1>Participant Dashboard</h1>
+{% comment %}
+{{ participant.pprint|safe }}
+{% endcomment %}
+<h2>Today you worked on interventions for {{ participant.total_session_duration }} minutes.</h2>
+<ul>
+{% for session, t, activities in participant_session_durations  %}
+  {% if t > 0 %}
+    <li>{{ session }} minutes
+        <ul>
+            {% for activity in activities %}
+              <li>{{ activity }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+  {% endif %}
+{% endfor %}
+</ul>
+<hr>
+<h3>Questions and Concerns</h3><br/>
+{% for cn in participant.all_counselor_notes %}
+{% if cn.notes %}
+{{cn.notes}} <br />
+{% endif %}
+{% endfor %}
+
+<h3>My Support Tree</h3><br/>
+<strong>All Tree Members</strong><br/>
+<ul>
+{% for name in participant.ssnmtree_total %}
+<li>{{ name }}</li>
+{% endfor %}
+</ul>
+<strong>Supporters</strong><br/>
+<ul>
+{% for name in participant.ssnmtree_supporters %}
+<li>{{ name }}</li>
+{% endfor %}
+</ul>
+<strong>Confidants</strong><br/>
+<ul>
+{% for name in participant.ssnmtree_confidants %}
+<li>{{ name }}</li>
+{% endfor %}
+</ul>
+<strong>Supporters and Confidants</strong><br/>
+<ul>
+{% for name in participant.ssnmtree_supporters_and_confidants %}
+<li>{{ name }}</li>
+{% endfor %}
+</ul>
+
+<h3>Mood Screen Score</h3>
+{% if participant.mood_score < 20 %}
+  <strong>There is no significant distress.</strong>
+{% elif participant.mood_score >= 20 and participant.mood_score < 25 %}
+  <strong>Mild distress.</strong><br/>
+  <p>It seems like you are having some distress. Distress like this can affect how you feel (e.g., depression and/or anxiety) and can get in the way of getting things done, like taking your ARVs. There are people trained (e.g., psychologists, social workers, counselors) to talk to you and help you feel better. Would you like to talk with someone? If so, I can give you information at the end of our session today.</p>
+{% elif participant.mood_score >= 25 and participant.mood_score < 30 %}
+  <strong>Moderate distress.</strong><br/>
+  <p>It seems like you are experiencing some distress. Distress like this can affect how you feel (e.g., depression and/or anxiety) and can get in the way of accomplishing everyday things, like taking your ARVs. You don't have to feel this way. In fact, there are people trained (e.g., psychologists, social workers, counselors) to talk to you and help you feel better and not let your distress get in your way. At the end of the session today, I'm going to give you some information on whom to talk to.</p>
+{% elif participant.mood_score >= 30 and participant.mood_score < 51 %}
+  <strong>Severe distress.</strong><br/>
+  <p>It seems like you're really experiencing a lot of distress, which may be affecting your life. So much distress like this can affect how you feel (e.g., depression and/or anxiety) and can get in the way of accomplishing everyday things, like taking your ARVs. You don't have to feel this way. In fact, there are people trained (e.g., psychologists, social workers, counselors) to talk to you and help you feel better and not let your distress get in your way. At the end of the session today, I'm going to give you some information on whom to talk to.</p>
+{% endif %}
+
+<h3>Alcohol Screen Score</h3>
+{% if participant.alcohol_score < 8 %}
+  <strong>There are no issues.</strong>
+{% elif participant.alcohol_score >= 8 and participant.alcohol_score < 16 %}
+  <strong>Mild drinking issues.</strong>
+  <p>Drinking can interfere with your life, and lead to problems, like not taking your ARVS correctly. Have you ever thought about talking with someone about the problems drinking can cause?  Would you be interested in talking with someone who could help?  If so, I can give you information at the end of our session today.</p>
+
+{% elif participant.alcohol_score >= 16 and participant.alcohol_score < 20 %}
+  <strong>Moderate drinking issues.</strong>
+  <p>It seems like your drinking could be interfering with your life and health. Excessive drinking can lead to all sorts of problems, like not taking your ARVs correctly. At the end of our session today, I am going to give some information on whom you can talk to about your drinking to ensure it doesn't interfere with your life and get in the way of you staying healthy.</p>
+
+{% elif participant.alcohol_score >= 20 %}
+  <strong>Severe drinking issues.</strong>
+  <p>It seems like your drinking could really be causing some serious problems for you and be interfering with your life and health. Excessive drinking can also get in the way of you taking your ARVs and staying healthy. At the end of our session today, I am going to give some information about whom you can talk to about your drinking to ensure it doesn't interfere with your life and get in the way of you staying healthy.</p>
+{% endif %}
+
+<h3>Drug Screen Score</h3>
+{% if participant.drug_score > 0 %}
+  <p>It seems like your drug use could be causing some serious problems for you, which could get in the way of you taking your ARVs and staying healthy. At the end of our Masivukeni session, I am going to give some information about whom you can talk to about your drug use to ensure it doesn't interfere with your life and get in the way of you staying healthy.</p>
+{% else  %}
+  <p>There are no issues.</p>
+{% endif %}
+<h3>Reasons to Stay Healthy</h3>
+<ul>
+{% for reason in participant.lifegoals_data.regular %}
+  <li>{% get_index participant.lifegoals_data.regular reason %}</li>
+{% endfor %}
+</ul>
+
+<h3>Obsticals and Barriers</h3>
+<ul>
+{% with data=participant.problem_solving_data.defaulter %}
+{% for issue, reason in data.items %}
+<li>{% get_barrier_title issue %}</li>
+    <ul>
+        {% if reason.barriers %}
+        <li><strong>Barriers:</strong> {{ reason.barriers }}</li>
+        {% endif %}
+        
+        {% if reason.finalPlan %}
+        <li><strong>Plan:</strong> {{ reason.finalPlan }}</li>
+        {% endif %}
+
+        {% if reason.proposals %}
+        <li><strong>Proposals:</strong> {{ reason.proposals }}</li>
+        {% endif %}
+    </ul>
+</li>
+{% endfor %}
+{% endwith %}
+</ul>
+{% endblock %}
