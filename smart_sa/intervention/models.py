@@ -871,15 +871,21 @@ class Participant(models.Model):
             for key in gv.keys():
                 self.save_game_var(key, gv[key])
 
+    def activity_sort(self, string):
+        match = re.search(r"\d{1,3}", string)
+        return int(match.group()) if match else 0
+
     def get_completed_activities(self):
         activities = []
         for i in range(1, ClientSession.objects.count()):
-            activities.append(["Session %d: Activity %d: %s" % (
-                pa.activity.clientsession.index(),
+            activities.append(["Activity %d: %s" % (
                 pa.activity.index(), pa.activity.long_title)
-            for pa in self.participantactivity_set.all()
-            if pa.status == u'complete'
-            and pa.activity.clientsession.index() == i])
+                for pa in self.participantactivity_set.all()
+                if pa.status == u'complete' and
+                pa.activity.clientsession.index() == i])
+
+        for i in range(len(activities)):
+            activities[i].sort(key=self.activity_sort)
 
         return activities
 
@@ -967,7 +973,7 @@ class Participant(models.Model):
     def game_vars(self, name):
         data = {pgv.key: json.loads(pgv.value) for pgv in self.participantgamevar_set.all()}
         if name in data:
-            return data[name]
+           return data[name]
 
     def assessmentquiz_data(self):
         return self.game_vars(u'assessmentquiz')
@@ -977,23 +983,24 @@ class Participant(models.Model):
 
         try:
             mood = quiz_vars[session]['kten']['total']
-        except KeyError:
+        except (KeyError, TypeError):
             mood = ''
 
         try:
             alcohol = quiz_vars[session]['audit']['total']
-        except KeyError:
+        except (KeyError, TypeError):
             alcohol = ''
 
         try:
             drug = quiz_vars[session]['drugaudit']['total']
-        except KeyError:
+        except (KeyError, TypeError):
             drug = ''
 
         return [mood, alcohol, drug]
 
     def mood_score(self):
-        return self.mood_alcohol_drug_scores()[0]
+        mood_score = self.mood_alcohol_drug_scores()[0]
+        return mood_score if mood_score else None
 
     def alcohol_score(self):
         return self.mood_alcohol_drug_scores()[1]
