@@ -254,7 +254,7 @@ def view_participant_progress(request):
 
     # q_and_c = True if len(p.all_counselor_notes()) > 0 else False
     # support_tree = True if len(p.ssnmtree_total()) > 0 else False
-    # import pdb; pdb.set_trace()
+   # import pdb; pdb.set_trace()
 
     return render(request, "intervention/participant_dashboard.html",
                   dict(participant=p,

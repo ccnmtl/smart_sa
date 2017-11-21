@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
+{% block title %}Report{% endblock %}
 {% load participant_status %}
+
+{% block breadcrumb-main %}
+<div id="breadcrumb-main">
+    <a href="/">Home</a> &rarr; Sessions 
+</div>
+{% endblock %}
+
+{% block breadcrumb-session %}
+<div id="breadcrumb">
+	<a class="complete" href="/intervention/1" id="tab-home">Sessions</a> 
+	<a class="current" href="#" id="report-home">Report</a> 
+	</div>
+{% endblock %}
 
 {% block content %}
 <div id="participant-report">
-<h1>Report</h1>
-{% comment %}
-{{ participant.pprint|safe }}
-{% endcomment %}
-<h2>Today you worked on Masivukeni for {{ participant.total_session_duration }} minutes.</h2>
+<h2>Report</h2>
+
+<h3>Today you worked on Masivukeni for {{ participant.total_session_duration }} minutes.</h3>
 <ul>
 {% for session, t, activities in participant_session_durations  %}
   {% if t > 0 %}
@@ -22,7 +34,9 @@
 {% endfor %}
 </ul>
 
-{% if participant.all_councelor_notes %}
+{% if particiant.all_counselor_notes or participant.ssnmtree_total or participant.mood_score or participant.alcohol_score or participant.lifegoals_data.regular or participant.problem_solving_data.defaulter  %}
+
+{% if participant.all_counselor_notes %}
 <h4>Questions and Concerns</h4>
 <p>You entered these questions and concerns today.</p>
 {% for cn in participant.all_counselor_notes %}
@@ -135,5 +149,8 @@
 </ul>
 {% endif %}
 
+{% else %}
+<p>You have not entered any personal information yet.</p>
+{% endif %}
 </div>
 {% endblock %}
