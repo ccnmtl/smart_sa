@@ -55,6 +55,7 @@ setTimeout(logstatus, 0);
     {%if game %}
 <div id="breadcrumb">
       <a class="complete" id="tab-home" href="/intervention/{{game.activity.clientsession.intervention.id}}/">Sessions</a>
+	<a class="" href="/intervention/participant-report" id="report-home">Report</a> 
 	<div id="breadcrumb-text">
 		You are currently in: <span class="breadcrumb-text-current">Session {{game.activity.clientsession.index}}: {{game.activity.clientsession.long_title}} &rarr; Activity {{game.activity.index}}: {{ game.activity.long_title }}</span>
 	</div>
