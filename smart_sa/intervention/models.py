@@ -731,11 +731,11 @@ class Participant(models.Model):
                     logs.append(
                         dict(
                             warn="session title mismatch. might be a problem"))
-                SessionVisit.objects.create(
+                obj = SessionVisit.objects.create(
                     participant=p,
-                    session=session,
-                    logged=sv['timestamp'],
-                )
+                    session=session)
+                obj.logged = sv['timestamp']
+                obj.save()
         logs.append(dict(info="session visits restored"))
         return logs
 
@@ -757,11 +757,11 @@ class Participant(models.Model):
                             warn="activity title mismatch. might be a problem"
                         ))
 
-                ActivityVisit.objects.create(
+                obj = ActivityVisit.objects.create(
                     participant=p,
-                    activity=activity,
-                    logged=av['timestamp'],
-                )
+                    activity=activity)
+                obj.logged = av['timestamp']
+                obj.save()
         logs.append(dict(info="activity visits restored"))
         return logs
 
@@ -949,14 +949,6 @@ class Participant(models.Model):
         return [av.logged for av in av_set
             if av.activity.clientsession_id == session.id]
 
-    def completed_session_durations(self):
-        if self.num_completed_sessions() < 1:
-            return ""
-        durations = []
-        for s in range(1, self.max_completed_session_number() + 1):
-            durations.append(self.session_duration(s))
-        return ",".join([str(d) for d in durations])
-
     def all_session_durations(self):
         durations = []
         for s in ClientSession.objects.all():
@@ -1056,7 +1048,7 @@ class Participant(models.Model):
     def ssnmtree_supporters_and_confidants(self, session='regular'):
         names = set()
         data = self.ssnmtree_data()
-        if data is None:
+        if data is None or session not in data:
             return
 
         for person in data[session]:
@@ -1064,16 +1056,6 @@ class Participant(models.Model):
                             data[session][person]['support']:
                 names.add(data[session][person]['name'])
         return names
-
-    def pillgame_data(self):
-        return self.game_vars(u'pill_game')
-
-    def medication_list(self, session='regular'):
-        data = self.pillgame_data()
-        try:
-            return ",".join([str(p['name']) for p in data[session]['pills']])
-        except KeyError:
-            return ""
 
     def lifegoals_data(self):
         return self.game_vars(u'lifegoals')

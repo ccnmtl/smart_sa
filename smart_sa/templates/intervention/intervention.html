@@ -1,6 +1,8 @@
 {% extends "base.html" %}
-{% block title %}Sessions{% endblock %}
+{% load waffle_tags %}
 {% load participant_status %}
+
+{% block title %}Sessions{% endblock %}
 
 {% block breadcrumb-main %}
 <div id="breadcrumb-main">
@@ -11,7 +13,9 @@
 {% block breadcrumb-session %}
 <div id="breadcrumb">
 	<a class="complete current" href="#" id="tab-home">Sessions</a> 
+    {% flag "participant_report" %}
 	<a class="" href="/intervention/participant-report" id="report-home">Report</a> 
+    {% endflag %}
 	</div>
 {% endblock %}
 

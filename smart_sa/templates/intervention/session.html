@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load waffle_tags %}
 
 {% block title %}{{ session.long_title }}{% endblock %}
 
@@ -32,7 +33,9 @@ setTimeout(logstatus, 0);
 <div id="breadcrumb">
 	<form name="completesession" action="complete/" method="post"></form>
       <a class="complete" id="tab-home" href="/intervention/{{session.intervention.id}}/">Sessions</a>
+    {% flag "participant_report" %}
 	<a class="" href="/intervention/participant-report" id="report-home">Report</a> 
+    {% endflag %}
 </div>
 {%endif%}  
 {% endblock %}

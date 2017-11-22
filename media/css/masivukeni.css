@@ -1198,5 +1198,5 @@ background: -moz-linear-gradient(top,  #999,  #fff); /* for firefox 3.6+ */ }
 }
 
 #participant-report ul {
-    margin: 0.5em 0 0 1.5em;
+    margin: 0.5em 0 1.5em 0;
 }
