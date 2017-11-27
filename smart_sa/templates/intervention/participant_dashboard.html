@@ -78,13 +78,13 @@
   <strong>There is no significant distress.</strong>
 {% elif participant.mood_score >= 20 and participant.mood_score < 25 %}
   <strong>Mild distress.</strong><br/>
-  <p>It seems like you are having some distress. Distress like this can affect how you feel (e.g., depression and/or anxiety) and can get in the way of getting things done, like taking your ARVs. There are people trained (e.g., psychologists, social workers, counselors) to talk to you and help you feel better. Would you like to talk with someone? If so, I can give you information at the end of our session today.</p>
+  <p>It seems like you are having some distress. Distress like this can affect how you feel (e.g., depression and/or anxiety) and can get in the way of getting things done, like taking your ARVs. There are people trained (e.g., psychologists, social workers, counselors) to talk to you and help you feel better. You may want to see someone like this. You can get started by asking for a referral at your clinic.</p>
 {% elif participant.mood_score >= 25 and participant.mood_score < 30 %}
   <strong>Moderate distress.</strong><br/>
-  <p>It seems like you are experiencing some distress. Distress like this can affect how you feel (e.g., depression and/or anxiety) and can get in the way of accomplishing everyday things, like taking your ARVs. You don't have to feel this way. In fact, there are people trained (e.g., psychologists, social workers, counselors) to talk to you and help you feel better and not let your distress get in your way. At the end of the session today, I'm going to give you some information on whom to talk to.</p>
+  <p>It seems like you are experiencing some distress. Distress like this can affect how you feel (e.g., depression and/or anxiety) and can get in the way of accomplishing everyday things, like taking your ARVs. You don't have to feel this way. In fact, there are people trained (e.g., psychologists, social workers, counselors) to talk to you and help you feel better and not let your distress get in your way. You may want to see someone like this. You can get started by asking for a referral at your clinic.</p>
 {% elif participant.mood_score >= 30 and participant.mood_score < 51 %}
   <strong>Severe distress.</strong><br/>
-  <p>It seems like you're really experiencing a lot of distress, which may be affecting your life. So much distress like this can affect how you feel (e.g., depression and/or anxiety) and can get in the way of accomplishing everyday things, like taking your ARVs. You don't have to feel this way. In fact, there are people trained (e.g., psychologists, social workers, counselors) to talk to you and help you feel better and not let your distress get in your way. At the end of the session today, I'm going to give you some information on whom to talk to.</p>
+  <p>It seems like you're really experiencing a lot of distress, which may be affecting your life. So much distress like this can affect how you feel (e.g., depression and/or anxiety) and can get in the way of accomplishing everyday things, like taking your ARVs. You don't have to feel this way. In fact, there are people trained (e.g., psychologists, social workers, counselors) to talk to you and help you feel better and not let your distress get in your way. You may want to see someone like this. You can get started by asking for a referral at your clinic.</p>
 {% endif %}
 {% endif %}
 
@@ -95,15 +95,15 @@
   <strong>There are no issues.</strong>
 {% elif participant.alcohol_score >= 8 and participant.alcohol_score < 16 %}
   <strong>Mild drinking issues.</strong>
-  <p>Drinking can interfere with your life, and lead to problems, like not taking your ARVS correctly. Have you ever thought about talking with someone about the problems drinking can cause?  Would you be interested in talking with someone who could help?  If so, I can give you information at the end of our session today.</p>
+  <p>Drinking can interfere with your life, and lead to problems, like not taking your ARVS correctly. Have you ever thought about talking with someone about the problems drinking can cause?  If you are interested in talking with someone who could help, someone at your clinic can give you a referral.</p>
 
 {% elif participant.alcohol_score >= 16 and participant.alcohol_score < 20 %}
   <strong>Moderate drinking issues.</strong>
-  <p>It seems like your drinking could be interfering with your life and health. Excessive drinking can lead to all sorts of problems, like not taking your ARVs correctly. At the end of our session today, I am going to give some information on whom you can talk to about your drinking to ensure it doesn't interfere with your life and get in the way of you staying healthy.</p>
+  <p>It seems like your drinking could be interfering with your life and health. Excessive drinking can lead to all sorts of problems, like not taking your ARVs correctly. It would be a good idea to talk to someone about your drinking to ensure it doesn't interfere with your life. If you are interested in talking with someone who could help, someone at your clinic can give you a referral.</p>
 
 {% elif participant.alcohol_score >= 20 %}
   <strong>Severe drinking issues.</strong>
-  <p>It seems like your drinking could really be causing some serious problems for you and be interfering with your life and health. Excessive drinking can also get in the way of you taking your ARVs and staying healthy. At the end of our session today, I am going to give some information about whom you can talk to about your drinking to ensure it doesn't interfere with your life and get in the way of you staying healthy.</p>
+  <p>It seems like your drinking could really be causing some serious problems for you and be interfering with your life and health. Excessive drinking can also get in the way of you taking your ARVs and staying healthy. It would be a good idea to talk to someone about your drinking to ensure it doesn't interfere with your life. If you are interested in talking with someone who could help, someone at your clinic can give you a referral.</p>
 {% endif %}
 {% endif %}
 
@@ -111,7 +111,7 @@
 <h4>My Use of Drugs</h4>
 <p>You answered some questions to evaluate your use of drugs over the past month. This is the feedback you got:</p>
 {% if participant.drug_score > 0 %}
-  <p>It seems like your drug use could be causing some serious problems for you, which could get in the way of you taking your ARVs and staying healthy. At the end of our Masivukeni session, I am going to give some information about whom you can talk to about your drug use to ensure it doesn't interfere with your life and get in the way of you staying healthy.</p>
+  <p>It seems like your drug use could be causing some serious problems for you, which could get in the way of you taking your ARVs and staying healthy. It would be a good idea to talk to someone about your drug use to ensure it doesn't interfere with your life. If you are interested in talking with someone who could help, someone at your clinic can give you a referral.</p>
 {% else  %}
   <p>There are no issues.</p>
 {% endif %}
