@@ -47,8 +47,6 @@ urlpatterns = [
         edit_participant),
     url(r'^manage/participant/(?P<participant_id>\d+)/view/$',
         view_participant),
-    url(r'^manage/participant/(?P<participant_id>\d+)/progress/$',
-        view_participant_progress),
 
     url(r'^manage/add_counselor/$', add_counselor),
     url(r'^manage/counselor/(?P<counselor_id>\d+)/edit/$', edit_counselor),
