@@ -936,11 +936,10 @@ class Participant(models.Model):
                 self.session_activity_timestamps(session))
 
     def session_timestamps(self, session):
-        sv_set = self.sessionvisit_set.all()
-        if not sv_set:
+        sv_set = self.sessionvisit_set.filter(session_id=session.id)
+        if not sv_set.exists():
             return []
-        return [sv.logged for sv in sv_set
-                if sv.session_id == session.id]
+        return [sv.logged for sv in sv_set]
 
     def session_activity_timestamps(self, session):
         av_set = self.activityvisit_set.all()
@@ -992,8 +991,7 @@ class Participant(models.Model):
         return [mood, alcohol, drug]
 
     def mood_score(self):
-        mood_score = self.mood_alcohol_drug_scores()[0]
-        return mood_score if mood_score else None
+        return self.mood_alcohol_drug_scores()[0]
 
     def alcohol_score(self):
         return self.mood_alcohol_drug_scores()[1]
