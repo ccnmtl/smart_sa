@@ -1,5 +1,5 @@
 Django==1.11.7
-simplejson==3.12.0
+simplejson==3.13.2
 psycopg2==2.7.3.2
 coverage==4.4.2
 BeautifulSoup==3.2.1
