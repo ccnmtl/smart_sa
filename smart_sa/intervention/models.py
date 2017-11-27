@@ -947,7 +947,7 @@ class Participant(models.Model):
         if not av_set:
             return []
         return [av.logged for av in av_set
-            if av.activity.clientsession_id == session.id]
+                if av.activity.clientsession_id == session.id]
 
     def all_session_durations(self):
         durations = []
@@ -963,9 +963,10 @@ class Participant(models.Model):
         return duration
 
     def game_vars(self, name):
-        data = {pgv.key: json.loads(pgv.value) for pgv in self.participantgamevar_set.all()}
+        data = {pgv.key: json.loads(pgv.value) for pgv
+                in self.participantgamevar_set.all()}
         if name in data:
-           return data[name]
+            return data[name]
 
     def assessmentquiz_data(self):
         return self.game_vars(u'assessmentquiz')
@@ -1053,7 +1054,7 @@ class Participant(models.Model):
 
         for person in data[session]:
             if data[session][person]['disclosure'] and\
-                            data[session][person]['support']:
+                    data[session][person]['support']:
                 names.add(data[session][person]['name'])
         return names
 

@@ -18,8 +18,7 @@ from smart_sa.intervention.views import (
     update_intervention_content, delete_participant, set_deployment,
     testgen, set_participant, clear_participant, counselor_landing_page,
     manage_participants, add_participant, edit_participant,
-    IndexView, InterventionReport, view_participant_progress,
-    current_participant_report
+    IndexView, InterventionReport, view_participant_progress
 )
 
 admin.autodiscover()

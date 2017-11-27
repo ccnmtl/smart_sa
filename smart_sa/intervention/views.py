@@ -247,7 +247,7 @@ def view_participant_progress(request):
         session_title_duration.append(
             "{} - {}".format(s[i], session_durations[i]))
 
-    participant_session_durations = zip(
+    session_durations = zip(
         session_title_duration,
         session_durations,
         p.get_completed_activities())
@@ -256,8 +256,7 @@ def view_participant_progress(request):
                   dict(participant=p,
                        all_interventions=Intervention.objects.all(),
                        session_titles=s,
-                       participant_session_durations
-                           =participant_session_durations))
+                       participant_session_durations=session_durations))
 
 
 @login_required

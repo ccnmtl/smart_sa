@@ -368,7 +368,6 @@ class ParticipantModelTest(TestCase):
             'counselor_notes': [],
             'session_progress': [],
             'activity_progress': [],
-            'game_vars': [],
             u'session_visits': [
                 {u'session': u'Session 1: Session 1: Getting Started',
                  u'timestamp': u'2013-02-12 12:58:17.340000'},
