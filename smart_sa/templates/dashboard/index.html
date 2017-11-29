@@ -1,0 +1,136 @@
+{% extends 'base.html' %} {% block css %}
+<style type="text/css">
+th {
+    vertical-align: top;
+    border-bottom: 1px solid #999;
+    border-right: 1px solid #999;
+}
+
+td {
+    vertical-align: top;
+    border-bottom: 1px solid #999;
+    border-right: 1px solid #999;
+}
+</style>
+
+{% endblock %} {% block content %}
+<h1>Admin Data Dashboard</h1>
+
+{% if missing_deployments %}
+<h2>Missing Deployment Data</h2>
+<p>Please check to make sure you have uploaded backups for each
+    deployment</p>
+{% else %}
+<h2>Data Summary</h2>
+
+<p><a href="download/">Download CSV</a></p>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Clinic</th>
+            <th>Most recent data upload</th>
+            <th># participants</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for clinic in clinics %}
+        <tr>
+            <td>{{clinic.deployment}}</td>
+            <td>{{clinic.created}}</td>
+            <td>{{clinic.num_participants}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+<h2>Clinic Details</h2>
+
+{% for clinic in clinics %}
+<h3>{{clinic.deployment}}</h3>
+
+
+<table style="background-color: #fff">
+    <thead>
+        <tr>
+            <th>patient id</th>
+            <th>id number</th>
+            <th>gender</th>
+            <th>buddy?</th>
+            <th>Defaulter?<br />(A|D|M|O)</th>
+            <th># completed sessions</th>
+            <th># incomplete sessions</th>
+            <th># completed activities</th>
+            <th>most recent completed session and that session's
+                date</th>
+            <th>any skipped activities up through end of most
+                recent completed session (comma separated)</th>
+            <th>session durations for completed sessions (comma
+                separated)</th>
+            <th>session durations for all sessions (comma
+                separated)</th>
+            <th>mood, alcohol, drug scores (comma separated)</th>
+            <th>number of names on tree</th>
+            <th>number of names on tree marked with support</th>
+            <th>number of names of tree marked with status</th>
+            <th>number of names on tree marked with both support
+                and status</th>
+            <th>referral boxes checked<br />(A|D|M|O)</th>
+            <th>referral comments</th>
+            <th>your arvs: names of pills entered</th>
+
+            <th>Session durations for 4 and or 5</th>
+            <th>reasons for returning</th>
+            <th>s4/5 mood, alcohol, drug scores (comma separated)</th>
+            <th>s4/5 your arvs: names of pills (comma separated)</th>
+            <th>s4/5 number of names on tree</th>
+            <th>barriers selected (comma separated)</th>
+            <th>barriers with plans (comma separated)</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for participant in clinic.participants %}{% comment %}
+        <tr>
+            <td colspan="13"><pre>{{participant.pprint}}</pre></td>
+        </tr>{% endcomment %}
+        
+        <tr>
+            <td>{{participant.patient_id}}</td>
+            <td>{{participant.id_number}}</td>
+            <td>{{participant.gender}}</td>
+            <td>{{participant.has_buddy}}</td>
+            <td>{{participant.defaulter_status}}</td>
+            <td>{{participant.num_completed_sessions}}</td>
+            <td>{{participant.num_incomplete_sessions}}</td>
+            <td>{{participant.num_completed_activities}}</td>
+            <td>{{ participant.most_recently_completed_session }}<i>
+                <nobr>{{ participant.most_recently_completed_session_date|date:"M d, Y" }}</nobr>
+            </i></td>
+            <td>{{ participant.skipped_activities }}</td>
+            <td>{{ participant.completed_session_durations }}</td>
+            <td>{{ participant.all_session_durations }}</td>
+            <td>{{ participant.mood_alcohol_drug_scores }}</td>
+            <td>{{ participant.ssnmtree_total }}</td>
+            <td>{{ participant.ssnmtree_supporters }}</td>
+            <td>{{ participant.ssnmtree_confidants }}</td>
+            <td>{{ participant.ssnmtree_supporters_and_confidants }}</td>
+
+            <td>{{ participant.initial_referral_status }}</td>
+            <td>{{ participant.initial_referral_notes }}</td>
+            <td>{{ participant.medication_list }}</td>
+
+            <td>{{ participant.session_45_durations }}</td>
+            <td>{{ participant.reasons_for_returning }}</td>
+            <td>{{ participant.defaulter_mood_alcohol_drug_scores }}</td>
+            <td>{{ participant.defaulter_medication_list }}</td>
+            <td>{{ participant.defaulter_ssnmtree_total }}</td>
+            <td>{{ participant.defaulter_barriers }}</td>
+            <td>{{ participant.defaulter_barriers_with_plans }}</td>            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %} {% endif %} {% endblock %}

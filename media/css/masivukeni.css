@@ -246,9 +246,10 @@ h4
 	margin: 0px;
 	padding-top: 10px;
 	border-bottom: 1px solid #ccc;
+    display: flex;
 }
 
-#breadcrumb a#tab-home
+#breadcrumb a#tab-home, #breadcrumb a#report-home
 {
 	display: block;
 	width: 90px;
@@ -266,7 +267,7 @@ h4
 	margin: 0px 0px -1px 10px;
 }
 
-#breadcrumb a#tab-home:hover, #breadcrumb a.current#tab-home
+#breadcrumb a#tab-home:hover, #breadcrumb a.current#tab-home, #breadcrumb a#report-home:hover, #breadcrumb a.current#report-home
 {
 	display: block;
 	width: 90px;
@@ -302,7 +303,7 @@ a#endintervention
 	right: 233px;
 }
 
-#breadcrumb a#tab-home
+#breadcrumb a#tab-home, #breadcrumb a#report-home
 {
 	/*
 	background-color: #fcead7;
@@ -312,14 +313,15 @@ a#endintervention
 	color: #fff;
 }
 
-#breadcrumb a#tab-home:hover
+#breadcrumb a#tab-home:hover, #breadcrumb a#report-home:hover
+
 {
 	background-color: #fff;
 	color: #000;
 	border-bottom: 1px solid #fff;
 }
 
-#breadcrumb a.current#tab-home
+#breadcrumb a.current#tab-home, #breadcrumb a.current#report-home
 {
 	background-color: #fff;
 	color: #000;
@@ -351,7 +353,7 @@ h2#sessioninfo
 	display: block;
 	position: absolute;
 	left: 11px;
-	top: -2px;
+	top: -2pxt
 	font-size: 14px;
 	font-weight: bold;
 	color: #000;
@@ -1181,4 +1183,20 @@ background: -moz-linear-gradient(top,  #999,  #fff); /* for firefox 3.6+ */ }
 {
 	color: #f6921e;
 	background-color: #fff;
+}
+
+#participant-report h3 {
+    margin: 1.5em 0 0 0;
+}
+
+#participant-report h4 {
+    margin: 2em 0 0 0;
+}
+
+#participant-report h5 {
+    margin: 1.5em 0 0 0;
+}
+
+#participant-report ul {
+    margin: 0.5em 0 1.5em 0;
 }

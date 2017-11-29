@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load waffle_tags %}
+
 {% block title %}Sessions{% endblock %}
 
 {% block breadcrumb-main %}
@@ -8,6 +10,9 @@
     <div id="breadcrumb">
 	      <form name="completesession" action="complete/" method="post"></form>
         <a class="complete" id="tab-home" href="/intervention/{{intervention.id}}/">Sessions</a>
+        {% flag "participant_report" %}
+	    <a class="" href="/intervention/participant-report" id="report-home">Report</a> 
+        {% endflag %}
     </div>
 
 {% endblock %}

@@ -237,6 +237,28 @@ def view_participant(request, participant_id):
                            show_login_form=True))
 
 
+def view_participant_progress(request):
+    p = get_object_or_404(Participant, id=request.session['participant_id'])
+    s = [cs.long_title for cs in ClientSession.objects.all()]
+    session_durations = p.all_session_durations()
+
+    session_title_duration = []
+    for i in range(len(s)):
+        session_title_duration.append(
+            "{} - {}".format(s[i], session_durations[i]))
+
+    session_durations = zip(
+        session_title_duration,
+        session_durations,
+        p.get_completed_activities())
+
+    return render(request, "intervention/participant_dashboard.html",
+                  dict(participant=p,
+                       all_interventions=Intervention.objects.all(),
+                       session_titles=s,
+                       participant_session_durations=session_durations))
+
+
 @login_required
 def add_counselor(request):
     if request.method == 'POST':
@@ -462,6 +484,13 @@ class InterventionReport(TemplateView):
             participant=p,
             intervention=Intervention.objects.first(),
         )
+
+
+@participant_required
+def current_participant_report(request, intervention_id):
+    return render(request, 'intervention/report.html', dict(
+        participant=request.participant,
+        intervention=Intervention.objects.first(),))
 
 
 @participant_required
