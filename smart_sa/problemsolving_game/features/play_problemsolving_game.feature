@@ -6,15 +6,7 @@ Feature: Problem Solving Activity
         Using selenium
         
         # Find Activity
-        Given I am logged in as a counselor
-        Given participant "test" is a defaulter
-        When I access the url "/"
-        When I click the "Let's get started!" link
-        When I click the "Counsel" link
-        When I fill in "test" in the "name" form field
-        When I fill in "test" in the "id_number" form field
-        When I submit the "login-participant-form" form
-        Then I am on the Intervention page
+        Given I am a participant
         
         When I click on Session 4
         When I click on Activity 9
@@ -108,6 +100,7 @@ Feature: Problem Solving Activity
         There there is no right arrow
         
         When I click the Save Plan button
+        Then I wait 1 second
         Then there is no Action Plan form
         There there is an issue selector
         There there is a left arrow
@@ -130,6 +123,7 @@ Feature: Problem Solving Activity
         When I type "1" in "proposals"
         When I type "1" in "finalPlan"
         When I click the Save Plan button
+        Then I wait 1 second
         Then there is no Action Plan form
         Then barrier 3 has "complete"
         Then there is an Edit Plan button
@@ -174,6 +168,7 @@ Feature: Problem Solving Activity
         When I type "2" in "proposals"
         When I type "2" in "finalPlan"
         When I click the Save Plan button
+        Then I wait 1 second
         There there is no Action Plan form
         
         When I click the "Edit Plan" link
@@ -185,6 +180,7 @@ Feature: Problem Solving Activity
         Then "proposals" reads "12"
         Then "finalPlan" reads "12"
         When I click the Save Plan button
+        Then I wait 1 second
         There there is no Action Plan form
         There there is an issue selector
         There there is a left arrow

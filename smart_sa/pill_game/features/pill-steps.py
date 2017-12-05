@@ -2,11 +2,11 @@ import time
 from lettuce import world, step
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.select import Select
-from selenium.commmon.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException
 
 
 def find_pill(name):
-    a = world.firefox.find_elements_by_css_selector('div.pill')
+    a = world.browser.find_elements_by_css_selector('div.pill')
     for pill in a:
         span = pill.find_element_by_css_selector('div.pill-text span')
         if span.text.startswith(name):
@@ -19,9 +19,9 @@ def get_bucket(name):
     # Verify there's a dropped pill in bucket 1
     bucket = None
     if name == "daytime":
-        bucket = world.firefox.find_element_by_id("day")
+        bucket = world.browser.find_element_by_id("day")
     elif name == "evening":
-        bucket = world.firefox.find_element_by_id("night")
+        bucket = world.browser.find_element_by_id("night")
     return bucket
 
 
@@ -45,13 +45,13 @@ def i_can_edit_pill(step, pill):
 
 @step(u'There is a "([^"]*)" title')
 def there_is_a_group1_title(step, group1):
-    i = world.firefox.find_element_by_css_selector('#pill-list h4')
+    i = world.browser.find_element_by_css_selector('#pill-list h4')
     assert i.text == group1, i.text
 
 
 @step(u'There are (\d+) pills')
 def there_are_n_pills(step, n):
-    a = world.firefox.find_elements_by_css_selector('#pill-list div.pill')
+    a = world.browser.find_elements_by_css_selector('#pill-list div.pill')
     assert len(a) == int(n), "Expecting %s pills, but see %s" % (n, len(a))
 
 
@@ -70,7 +70,7 @@ def there_is_no_pill_named_name(step, name):
 @step(u'There is not an Add Pill button')
 def there_is_not_an_add_pill_button(step):
     try:
-        world.firefox.find_element_by_id('add-a-pill')
+        world.browser.find_element_by_id('add-a-pill')
         assert False, (
             'The Add Pill button should not be displayed in this mode')
     except NoSuchElementException:  # nosec
@@ -79,13 +79,13 @@ def there_is_not_an_add_pill_button(step):
 
 @step(u'There is an Add Pill button')
 def there_is_an_add_pill_button(step):
-    i = world.firefox.find_element_by_id('add-a-pill')
+    i = world.browser.find_element_by_id('add-a-pill')
     assert i is not None
 
 
 @step(u'I click Add Pill')
 def i_click_add_pill_button(step):
-    i = world.firefox.find_element_by_id('add-a-pill')
+    i = world.browser.find_element_by_id('add-a-pill')
     assert i is not None
     i.click()
 
@@ -105,14 +105,14 @@ def when_i_drop_pill_onto_time(step, pill, time):
     assert bucket is not None, (
         "Time slot must be specified as day or evening. "
         "No time slot called %s found" % time)
-    action_chains = ActionChains(world.firefox)
+    action_chains = ActionChains(world.browser)
     action_chains.drag_and_drop(draggable, bucket).perform()
 
 
 @step(u'When I drop pill (\d+) onto "([^"]*)"')
 def when_i_drop_pill_index_onto_time(step, index, time):
     idx = int(index) - 1
-    a = world.firefox.find_elements_by_css_selector('div.pill')
+    a = world.browser.find_elements_by_css_selector('div.pill')
     assert len(a) > idx, (
         "Can't find pill %s as there are only %s pills in the list" % (
             index, len(a)))
@@ -125,7 +125,7 @@ def when_i_drop_pill_index_onto_time(step, index, time):
     assert bucket is not None, (
         "Time slot must be specified as day or evening. "
         "No time slot called %s found" % time)
-    action_chains = ActionChains(world.firefox)
+    action_chains = ActionChains(world.browser)
     action_chains.drag_and_drop(draggable, bucket).perform()
 
 
@@ -208,7 +208,7 @@ def when_i_drag_pill_from_time1_to_time2(step, pill, time1, time2):
     for dropped in a:
         if (data_id == dropped.get_attribute("data-id")):
             # found it, now, drag it to the second bucket
-            action_chains = ActionChains(world.firefox)
+            action_chains = ActionChains(world.browser)
             action_chains.drag_and_drop(dropped, dest).perform()
             action = True
     assert action, (
@@ -231,7 +231,7 @@ def when_i_drag_pill_off_time(step, pill, time):
         "Source time slot must be specified as day or evening. "
         "No time slot called %s found" % time)
 
-    dest = world.firefox.find_element_by_id('pill-game-container')
+    dest = world.browser.find_element_by_id('pill-game-container')
     assert dest is not None, (
         "Destination time slot must be specified as day or evening. "
         "No time slot called %s found" % time)
@@ -246,7 +246,7 @@ def when_i_drag_pill_off_time(step, pill, time):
     for dropped in a:
         if (data_id == dropped.get_attribute("data-id")):
             # found it, now, drag it to the second bucket
-            action_chains = ActionChains(world.firefox)
+            action_chains = ActionChains(world.browser)
             action_chains.drag_and_drop(dropped, dest).perform()
             action = True
 
@@ -265,7 +265,7 @@ def specify_timeslot_time_as_time(step, timeslot, time):
         "Time slot must be specified as day or evening. "
         "No time slot called %s found" % timeslot)
 
-    elt = world.firefox.find_element_by_id(id)
+    elt = world.browser.find_element_by_id(id)
     assert elt is not None, "Select element not found %s" % id
 
     then_i_wait_count_second(step, 1)
@@ -287,7 +287,7 @@ def then_the_timeslot_time_is_time(step, timeslot, time):
         "Time slot must be specified as day or evening. "
         "No time slot called %s found" % timeslot)
 
-    elt = world.firefox.find_element_by_id(id)
+    elt = world.browser.find_element_by_id(id)
     assert elt is not None, "Select element not found %s" % id
 
     value = elt.get_attribute("value")
@@ -297,7 +297,7 @@ def then_the_timeslot_time_is_time(step, timeslot, time):
 
 @step(u"Then I'm asked to enter a pill name")
 def then_i_m_asked_to_enter_a_pill_name(step):
-    alert = world.firefox.switch_to_alert()
+    alert = world.browser.switch_to_alert()
     assert alert.text.startswith(
         "Please enter a name for this medication"), "Alert text valid"
     alert.accept()
@@ -305,7 +305,7 @@ def then_i_m_asked_to_enter_a_pill_name(step):
 
 @step(u"Then I'm told I can only enter 10 pills")
 def then_i_m_told_i_can_only_enter_10_pills(step):
-    alert = world.firefox.switch_to_alert()
+    alert = world.browser.switch_to_alert()
     assert alert.text.startswith("You can only enter 10 pills"), (
         "Alert text valid")
     alert.accept()
@@ -313,14 +313,14 @@ def then_i_m_told_i_can_only_enter_10_pills(step):
 
 @step(u"Then I dismiss second dialog")
 def then_i_dismiss_second_dialog(step):
-    alert = world.firefox.switch_to_alert()
+    alert = world.browser.switch_to_alert()
     alert.accept()
 
 
 @step(u'When I name pill (\d+) "([^"]*)"')
 def when_i_name_pill_index_name(step, index, name):
     idx = int(index) - 1
-    a = world.firefox.find_elements_by_css_selector('div.pill')
+    a = world.browser.find_elements_by_css_selector('div.pill')
     assert len(a) > idx, (
         "Can't find pill %s as there are only %s pills in the list" % (
             index, len(a)))
@@ -330,7 +330,7 @@ def when_i_name_pill_index_name(step, index, name):
     input.send_keys(name)
 
     # click outside the input box to force blur event
-    elt = world.firefox.find_element_by_id('pill-game-container')
+    elt = world.browser.find_element_by_id('pill-game-container')
     elt.click()
 
 
