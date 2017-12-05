@@ -2,6 +2,10 @@
 from settings_shared import *
 import os
 
+
+DEBUG = False
+TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -12,18 +16,39 @@ DATABASES = {
     }
 }
 
+
+BROWSER = 'Headless'
+# BROWSER = 'Firefox'
+# BROWSER = 'Chrome'
+
+LETTUCE_APPS = (
+    'smart_sa.intervention',
+    'smart_sa.assessmentquiz_task',
+    'smart_sa.ssnmtree_task',
+    'smart_sa.problemsolving_game',
+    'smart_sa.pill_game',
+    'smart_sa.lifegoal_task',
+    'smart_sa.ssnmtree_game',
+)
+
+LETTUCE_DJANGO_APP = ['lettuce.django']
+INSTALLED_APPS = INSTALLED_APPS + LETTUCE_DJANGO_APP
+
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.MD5PasswordHasher',
+)
+
+MIDDLEWARE_CLASSES.remove(
+    'django_statsd.middleware.GraphiteRequestTimingMiddleware')
+MIDDLEWARE_CLASSES.remove(
+    'django_statsd.middleware.GraphiteMiddleware')
+MIDDLEWARE_CLASSES.remove(
+    'impersonate.middleware.ImpersonateMiddleware')
+
+ALLOWED_HOSTS.append('127.0.0.1')
+
+
 # Running tests
-#
-# The database needs to exist & be current Prior to first run
-# sqlite3 test_masivukeni2.db
-# ./manage.py syncdb --settings=smart_sa.settings_test
-# ./manage.py migrate intervention --settings=smart_sa.settings_test
-# ./manage.py migrate --settings=smart_sa.settings_test
-# ./manage.py pull_from_prod --settings=smart_sa.settings_test
-# ./manage.py loaddata smart_sa/intervention/fixtures/counselors.json --settings=smart_sa.settings_test
-# ./manage.py loaddata smart_sa/intervention/fixtures/default_participants.json --settings=smart_sa.settings_test
-#
-# Subsequent runs
 # python manage.py --settings=settings_test harvest
 
 if os.environ.get('SELENIUM_BROWSER', False):

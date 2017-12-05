@@ -64,15 +64,6 @@ PROJECT_APPS = [
 EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
 SERVER_EMAIL = "masivukeni2@ccnmtl.columbia.edu"
 
-LETTUCE_APPS = (
-    'smart_sa.intervention',
-    'smart_sa.intervention.assessmentquiz_task',
-    'smart_sa.intervention.ssnmtree_task',
-    'smart_sa.problemsolving_game',
-    'smart_sa.pill_game',
-    'smart_sa.lifegoal_task',
-    'smart_sa.ssnmtree_game',
-)
 
 TEMPLATES[0]['OPTIONS']['context_processors'].append(  # noqa
     "smart_sa.intervention.views.inject_deployment",
