@@ -8,9 +8,11 @@ from django.test import client
 from lettuce import before, after, world, step
 from lettuce import django
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.desired_capabilities \
+    import DesiredCapabilities
 from selenium.webdriver.support import ui
-from selenium.webdriver.support.expected_conditions import visibility_of_element_located
+from selenium.webdriver.support.expected_conditions \
+    import visibility_of_element_located
 
 
 try:

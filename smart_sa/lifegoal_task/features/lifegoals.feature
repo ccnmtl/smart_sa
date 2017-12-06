@@ -13,6 +13,7 @@ Feature: Life goals
     Scenario: Fill in the steps and goal
         Using selenium
         Given I am a participant
+
         When I go to Activity 17 of Session 1
         When I click the "Next →" link
         Then there is a game
@@ -26,13 +27,12 @@ Feature: Life goals
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
         Then "Goal" is "jkl"
-        Then I wait 1 second
 
         # Verify state saved
         When I click the "Next →" link
         When I click the "← Back" link
-        Then I wait 1 second
 
+        Then I wait 1 second
         Then "Step 2" is "abc"
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
@@ -47,6 +47,7 @@ Feature: Life goals
         Then there is a game
 
         # Life goals for defaulter should be the same as regular
+        Then I wait 1 second
         Then "Step 2" is "abc"
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
@@ -59,10 +60,9 @@ Feature: Life goals
 
         # Verify state saved
         When I click the "Next →" link
-        Then I wait 1 second
         When I click the "← Back" link
-        Then I wait 1 second
 
+        Then I wait 1 second
         Then "Step 2" is "mno"
         Then "Step 3" is "pqr"
         Then "Step 4" is "stu"
@@ -75,8 +75,8 @@ Feature: Life goals
         When I click on Session 1
         Then I click on Activity 17
         When I click the "Next →" link
-        Then I wait 1 second
         Then there is a game
+        Then I wait 1 second
         Then "Step 2" is "abc"
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
