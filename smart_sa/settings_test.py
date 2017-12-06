@@ -27,7 +27,6 @@ LETTUCE_APPS = (
     'smart_sa.ssnmtree_task',
     'smart_sa.problemsolving_game',
     'smart_sa.pill_game',
-    'smart_sa.lifegoal_task',
     'smart_sa.ssnmtree_game',
 )
 
