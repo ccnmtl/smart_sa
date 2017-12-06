@@ -40,6 +40,7 @@ def when_i_enter_value_for_input(step, value, input):
 @step(u'Then "([^"]*)" is "([^"]*)"')
 def then_input_is_value(step, input, value):
     elt = get_input(input)
-    actual = elt.get_attribute("value")
-    assert actual == value, (
-        "Expected %s to equal %s. Actually is %s" % (input, value, actual))
+
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(text_to_be_present_in_element_value(
+        (By.CSS_SELECTOR, get_css_selector(input)), value))
