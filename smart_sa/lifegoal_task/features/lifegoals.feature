@@ -75,9 +75,11 @@ Feature: Life goals
         When I click on Session 1
         Then I click on Activity 17
         When I click the "Next →" link
+        Then I wait 1 second
         Then there is a game
         Then "Step 2" is "abc"
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
         Then "Goal" is "jkl"
+
         Finished using selenium
