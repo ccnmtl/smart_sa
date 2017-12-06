@@ -32,7 +32,7 @@ Feature: Life goals
         When I click the "Next →" link
         When I click the "← Back" link
 
-        Then I wait 1 second
+        Then I wait 2 seconds
         Then "Step 2" is "abc"
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
