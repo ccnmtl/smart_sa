@@ -7,7 +7,10 @@ from django.conf import settings
 from django.test import client
 from lettuce import before, after, world, step
 from lettuce import django
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.support import ui
+from selenium.webdriver.support.expected_conditions import visibility_of_element_located
 
 
 try:
@@ -356,32 +359,25 @@ def i_go_back(self):
 @step(u'I am a participant')
 def i_am_a_participant(step):
     if world.using_selenium:
-        step.behave_as("""
-        When I access the url "/"
-        When I click the "Use Masivukeni Online" link
-        Then I am on the Intervention page
-    """)
+        from smart_sa.intervention.models import Intervention
+        world.browser.get(django.django_url("/"))
+
+        wait = ui.WebDriverWait(world.browser, 5)
+        wait.until(
+            visibility_of_element_located((By.ID, 'btn-get-started')))
+
+        elt = world.browser.find_element_by_id('btn-get-started')
+        elt.click()
+
+        i = Intervention.objects.all()[0]
+        assert world.browser.current_url.endswith(
+            "/intervention/%d/" % i.id), world.browser.current_url
+        assert (world.browser.find_elements_by_tag_name('h2')[0].text
+                == "Sessions")
     else:
         from smart_sa.intervention.models import Participant
-        response = world.client.post(django.django_url('/set_participant/'), {'name': 'test', 'id_number': 'test'})
-        world.participant = Participant.objects.filter(name='test')[0]
-
-
-@step(u'I have logged in a participant')
-def i_have_logged_in_a_participant(step):
-    from smart_sa.intervention.models import Participant
-    if world.using_selenium:
-        step.behave_as("""
-        When I access the url "/"
-        When I click the "Let's get started!" link
-        When I click the "Counsel" link
-        When I fill in "test" in the "name" form field
-        When I fill in "test" in the "id_number" form field
-        When I submit the "login-participant-form" form
-        Then I am on the Intervention page
-    """)
-    else:
-        response = world.client.post(django.django_url('/set_participant/'), {'name': 'test', 'id_number': 'test'})
+        response = world.client.post(django.django_url('/set_participant/'),
+                                     {'name': 'test', 'id_number': 'test'})
         world.participant = Participant.objects.filter(name='test')[0]
 
 
