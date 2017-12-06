@@ -2,14 +2,7 @@ Feature: Mood Quiz
 
     Scenario: Mood
       Using selenium
-      Given I am logged in as a counselor
-      When I access the url "/"
-      When I click the "Let's get started!" link
-      When I click the "Counsel" link
-      When I fill in "test" in the "name" form field
-      When I fill in "test" in the "id_number" form field
-      When I submit the "login-participant-form" form
-      Then I am on the Intervention page
+      Given I am a participant
       When I click on Session 1
       Then I click on Activity 10
       When I click the "Next →" link
@@ -18,9 +11,9 @@ Feature: Mood Quiz
       Then there is a game
       Then there is an assessmentquiz
 
-      # fill out all the questions      
-      When I click the "What is My Score?" link
-      Then I'm asked to answer all the questions
+      # fill out all the questions - alerts do not work in headless mode
+      # When I click the "What is My Score?" link
+      # Then I'm asked to answer all the questions
       
       # no distress
       When I fill in all 1s in the quiz
@@ -55,14 +48,7 @@ Feature: Mood Quiz
       
     Scenario: Mood Defaulter - State is clear
       Using selenium
-      Given I am logged in as a counselor
-      When I access the url "/"
-      When I click the "Let's get started!" link
-      When I click the "Counsel" link
-      When I fill in "test" in the "name" form field
-      When I fill in "test" in the "id_number" form field
-      When I submit the "login-participant-form" form
-      Then I am on the Intervention page
+      Given I am a participant
       When I click on Session 1
       Then I click on Activity 10
       When I click the "Next →" link
@@ -83,10 +69,6 @@ Feature: Mood Quiz
       # assessment quiz defaulter - mood
       Then there is a game
       Then there is an assessmentquiz
-      
-      # no state here
-      When I click the "What is My Score?" link
-      Then I'm asked to answer all the questions
 
       Finished using selenium
        

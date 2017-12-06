@@ -1,12 +1,13 @@
 language: python
 sudo: false
+addons:
+  firefox: "52.5.0esr"
+env:
+  - TEST_SUITE=jenkins
+  - TEST_SUITE=harvest
 python:
   - "2.7"
-install:
-  - pip install -U pip wheel
-  - pip install -U setuptools
-  - pip install -r requirements.txt
+before_install:
+  - pip install --upgrade setuptools pip wheel
 script:
-  - make
-notifications:
-  slack: ccnmtl:GizSNscLWJLldjQrffB8mwgm
+  - make $TEST_SUITE

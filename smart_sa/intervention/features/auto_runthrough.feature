@@ -10,17 +10,7 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
 
     Scenario: Automated Run-Through
       Using selenium
-      Given I am logged in as a counselor
-      Given participant "test" is a defaulter
-      When I access the url "/"
-      When I click the "Let's get started!" link
-      When I click the "Counsel" link
-      When I fill in "test" in the "name" form field
-      When I fill in "test" in the "id_number" form field
-      When I submit the "login-participant-form" form
-      Then I am on the Intervention page
-
-
+      Given I am a participant
    
       ## SESSION 1
 

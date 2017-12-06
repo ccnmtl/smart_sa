@@ -25,7 +25,7 @@ fixtures==3.0.0
 testtools==2.3.0
 testscenarios==0.5.0
 python-subunit==1.2.0
-requirements/src/lettuce-0.2.19ccnmtl-py2-none-any.whl
+requirements/src/lettuce-0.2.25.ccnmtl-py2.py3-none-any.whl
 rdflib==4.2.2
 selenium==3.8.0
 statsd==3.2.1

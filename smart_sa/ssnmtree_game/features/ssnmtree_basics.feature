@@ -4,9 +4,7 @@ Feature: SSNMTree Basics
 
     Scenario: 1 - Fill in the tree & test state save
         Using selenium
-        Given I am logged in as a counselor
-        Given I have logged in a participant
-        Given participant "test" is a defaulter
+        Given I am a participant
         When I go to Activity 13 of Session 1
         When I click the "Next →" link
         Then there is a game
@@ -21,10 +19,7 @@ Feature: SSNMTree Basics
         
     Scenario: 2 - Test disclosure & support buttons
         Using selenium
-        # Disclosure
-        Given I am logged in as a counselor
-        Given I have logged in a participant
-        Given participant "test" is a defaulter
+        Given I am a participant
         When I go to Activity 13 of Session 1
         When I click the "Next →" link
         Then there is a game
@@ -74,9 +69,7 @@ Feature: SSNMTree Basics
         
     Scenario: 3 - Test Defaulter saving
         Using selenium
-        Given I am logged in as a counselor
-        Given I have logged in a participant
-        Given participant "test" is a defaulter
+        Given I am a participant
         When I go to Activity 13 of Session 1
         When I click the "Next →" link
         Then there is a game
@@ -129,11 +122,3 @@ Feature: SSNMTree Basics
         # There is a filled in SSNM Tree with "regular"  
         # Then the circle is "purple"      
         Finished using Selenium                
-        
-        
-            
-         
-    
-    
-    
-        

@@ -8,3 +8,5 @@ all: jenkins
 
 include *.mk
 
+harvest: $(PY_SENTINAL)
+	$(MANAGE) harvest --settings=$(APP).settings_test --failfast -v 3

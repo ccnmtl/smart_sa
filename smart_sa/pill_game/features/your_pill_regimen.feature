@@ -4,14 +4,7 @@ Feature: Your Pill Regimen
     Scenario: runthrough 
         # Find activity
         Using selenium
-        Given I am logged in as a counselor
-        When I access the url "/"
-        When I click the "Let's get started!" link
-        When I click the "Counsel" link
-        When I fill in "test" in the "name" form field
-        When I fill in "test" in the "id_number" form field
-        When I submit the "login-participant-form" form
-        Then I am on the Intervention page
+        Given I am a participant
         
         When I click on Session 3
         When I click on Activity 21

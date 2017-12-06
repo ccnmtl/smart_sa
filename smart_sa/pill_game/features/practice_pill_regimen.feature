@@ -3,14 +3,7 @@ Feature: Practice Pill Regimen
 
     Scenario: runthrough
         Using selenium
-        Given I am logged in as a counselor
-        When I access the url "/"
-        When I click the "Let's get started!" link
-        When I click the "Counsel" link
-        When I fill in "test" in the "name" form field
-        When I fill in "test" in the "id_number" form field
-        When I submit the "login-participant-form" form
-        Then I am on the Intervention page
+        Given I am a participant
         
         When I click on Session 1
         When I click on Activity 7
@@ -52,33 +45,9 @@ Feature: Practice Pill Regimen
         Then there are no pills in "evening"
         Then the "daytime" time is "00:00"
         Then the "evening" time is "12:00"
-        
-        # Drop disabled when "not available" is selected
-        When I specify "daytime" time as "Not taken during the day"
-        When I specify "evening" time as "Not taken during the day"
-        When I drop "Tenofovir (TDF)" onto "daytime"
-        Then there is 0 "Tenofovir (TDF)" in "daytime"
-        When I drop "Lamivudine (3TC)" onto "evening"
-        Then there is 0 "Lamivudine (3TC)" in "evening"
-        
-        # Pills are deleted when a time slot is disabled
-        Specify "daytime" time as "00:00"
-        Specify "evening" time as "12:00"
-        When I drop "Tenofovir (TDF)" onto "daytime"
-        Then there is 1 "Tenofovir (TDF)" in "daytime"
-        When I drop "Lamivudine (3TC)" onto "evening"
-        Then there is 1 "Lamivudine (3TC)" in "evening"
-        When I specify "daytime" time as "Not taken during the day"
-        When I specify "evening" time as "Not taken during the day"
-        Then there is 0 "Tenofovir (TDF)" in "daytime"
-        Then there is 0 "Lamivudine (3TC)" in "evening"
-        When I specify "daytime" time as "00:00"
-        When I specify "evening" time as "12:00"
-        
+
         # Drag pill off the bucket
         When I drop "Tenofovir (TDF)" onto "daytime"
         Then there is 1 "Tenofovir (TDF)" in "daytime"
-#        When I drag "Tenofovir (TDF)" off "daytime"
-#        Then there are no pills in "daytime"
         
         Finished using selenium
