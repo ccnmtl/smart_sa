@@ -28,7 +28,7 @@ python-subunit==1.2.0
 requirements/src/lettuce-0.2.25.ccnmtl-py2.py3-none-any.whl
 rdflib==4.2.2
 selenium==3.8.0
-statsd==3.2.1
+statsd==3.2.2
 pep8==1.7.1
 pyflakes==1.6.0
 mccabe==0.6.1
