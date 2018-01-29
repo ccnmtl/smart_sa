@@ -49,7 +49,7 @@ gunicorn==19.7.1
 boto==2.48.0
 pyasn1==0.4.2
 pyOpenSSL==17.5.0
-ndg-httpsclient==0.4.3
+ndg-httpsclient==0.4.4
 contextlib2==0.5.5
 rcssmin==1.0.6
 rjsmin==1.0.12
