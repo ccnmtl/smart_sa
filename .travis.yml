@@ -6,7 +6,6 @@ env:
   - TEST_SUITE=jenkins
   - TEST_SUITE=harvest
 python:
-  - "2.7"
   - "2.7.6"
 before_install:
   - pip install --upgrade setuptools pip wheel
