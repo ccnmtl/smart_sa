@@ -139,11 +139,11 @@
    {% endif %}
    
    {% if reason.finalPlan %}
-   <li><strong>What can help me overcome this challenge:</strong> {{ reason.finalPlan }}</li>
+   <li><strong>What can help me overcome this challenge:</strong>{{ reason.proposals }}</li>
    {% endif %}
 
    {% if reason.proposals %}
-   <li><strong>My plan:</strong> {{ reason.proposals }}</li>
+   <li><strong>My plan:</strong>{{ reason.finalPlan }}</li>
    {% endif %}
 </ul>
 {% endfor %}
