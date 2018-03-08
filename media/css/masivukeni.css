@@ -1070,6 +1070,17 @@ body.logged-in #home-remote { display: block; }
     color: #f6921e;
 }
 
+#btn-logout {
+    background-color: #eaeaea;
+    border-radius: 5px;
+    border-color: #e4e3e3;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #f6921e;
+}
+
 #endintervention {float: right; padding-right: 10px;} 	   
 
 table#gamenav
