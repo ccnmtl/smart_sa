@@ -135,14 +135,14 @@
 <h5>{% get_barrier_title issue %}</h5>
 <ul>
    {% if reason.barriers %}
-   <li><strong>Why this is a challenge for me:</strong> {{ reason.barriers }}</li>
+   <li><strong>Why this is a challenge for me:</strong>{{ reason.barriers }}</li>
    {% endif %}
    
-   {% if reason.finalPlan %}
+   {% if reason.proposals %}
    <li><strong>What can help me overcome this challenge:</strong>{{ reason.proposals }}</li>
    {% endif %}
 
-   {% if reason.proposals %}
+   {% if reason.finalPlan %}
    <li><strong>My plan:</strong>{{ reason.finalPlan }}</li>
    {% endif %}
 </ul>
