@@ -51,19 +51,19 @@
 {% if participant.ssnmtree_total %}
 <h4>My Support Tree</h4>
 <p>You thought about all the people in your life, and listed people who can help you and who already know your HIV Status.</p>
-<strong>People in my life</strong><br/>
+<strong>People in my life:</strong><br/>
 <ul>
 {% for name in participant.ssnmtree_total %}
 <li>{{ name }}</li>
 {% endfor %}
 </ul>
-<strong>People who can give me help</strong><br/>
+<strong>People who can give me help:</strong><br/>
 <ul>
 {% for name in participant.ssnmtree_supporters %}
 <li>{{ name }}</li>
 {% endfor %}
 </ul>
-<strong>People who know my status</strong><br/>
+<strong>People who know my status:</strong><br/>
 <ul>
 {% for name in participant.ssnmtree_confidants %}
 <li>{{ name }}</li>
@@ -119,7 +119,7 @@
 
 {% if participant.lifegoals_data.regular %}
 <h4>Reasons to Stay Healthy</h4>
-<p>You listed some reasons you want to stay healthy:</p>
+<p><strong>You listed some reasons you want to stay healthy:</strong></p>
 <ul>
 {% for reason in participant.lifegoals_data.regular %}
   <li>{% get_index participant.lifegoals_data.regular reason %}</li>
@@ -128,22 +128,22 @@
 {% endif %}
 
 {% if participant.problem_solving_data.defaulter %}
-<h4>Barriers to staying on my treatment</h4>
+<h4>Barriers to Staying on My Treatment</h4>
 <p>You looked at a list of reasons some people don't stay on their medication and picked the ones that feel like problems for you too. You also made a plan to solve some of these problems. Here are the barriers you picked and the plans you made:</p>
 {% with data=participant.problem_solving_data.defaulter %}
 {% for issue, reason in data.items %}
 <h5>{% get_barrier_title issue %}</h5>
 <ul>
    {% if reason.barriers %}
-   <li><strong>Why this is a challenge for me:</strong>{{ reason.barriers }}</li>
+   <li><strong>Why this is a challenge for me:</strong><ul><li>{{ reason.barriers }}</li></ul></li>
    {% endif %}
    
    {% if reason.proposals %}
-   <li><strong>What can help me overcome this challenge:</strong>{{ reason.proposals }}</li>
+   <li><strong>What can help me overcome this challenge:</strong><ul><li>{{ reason.proposals }}</li></ul></li>
    {% endif %}
 
    {% if reason.finalPlan %}
-   <li><strong>My plan:</strong>{{ reason.finalPlan }}</li>
+   <li><strong>My plan:</strong><ul><li>{{ reason.finalPlan }}</li></ul></li>
    {% endif %}
 </ul>
 {% endfor %}

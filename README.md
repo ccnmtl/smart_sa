@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ccnmtl/smart_sa.svg?branch=master)](https://travis-ci.org/ccnmtl/smart_sa)
+
 0. DETAILS/REQUIREMENTS/INSTALLATION
   #  Project Title: 
         Multimedia Social Support Intervention: 
