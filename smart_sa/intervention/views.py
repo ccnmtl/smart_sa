@@ -237,6 +237,7 @@ def view_participant(request, participant_id):
                            show_login_form=True))
 
 
+@login_required
 def view_participant_progress(request):
     p = get_object_or_404(Participant, id=request.session['participant_id'])
     s = [cs.long_title for cs in ClientSession.objects.all()]
