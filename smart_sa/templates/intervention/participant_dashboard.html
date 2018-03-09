@@ -151,6 +151,11 @@
 </ul>
 {% endif %}
 
+{% if participant.initial_referral_notes %}
+<h4>Addional Notes About the Referral(s)</h4>
+<p>{{ participant.initial_referral_notes }}</p>
+{% endif %}
+
 {% else %}
 <p>You have not entered any personal information yet.</p>
 {% endif %}
