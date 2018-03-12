@@ -253,6 +253,14 @@ def view_participant_progress(request):
         session_durations,
         p.get_completed_activities())
 
+    p.has_referral = False
+    if (p.initial_referral_alcohol or
+            p.initial_referral_drug_use or
+            p.initial_referral_mental_health or
+            p.initial_referral_other or
+            p.initial_referral_notes):
+        p.has_referral = True
+
     return render(request, "intervention/participant_dashboard.html",
                   dict(participant=p,
                        all_interventions=Intervention.objects.all(),
