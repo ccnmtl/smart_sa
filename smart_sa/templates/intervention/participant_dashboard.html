@@ -36,7 +36,7 @@
 {% endfor %}
 </ul>
 
-{% if particiant.all_counselor_notes or participant.ssnmtree_total or participant.mood_score or participant.alcohol_score or participant.lifegoals_data.regular or participant.problem_solving_data.defaulter  %}
+{% if particiant.all_counselor_notes or participant.ssnmtree_total or participant.mood_score or participant.alcohol_score or participant.lifegoals_data.regular or participant.problem_solving_data.defaulter or participant.buddy_name %}
 
 {% if participant.all_counselor_notes %}
 <h4>Questions and Concerns</h4>
@@ -46,6 +46,11 @@
 {{cn.notes}} <br />
 {% endif %}
 {% endfor %}
+{% endif %}
+
+{% if participant.buddy_name %}
+<h4>My Buddy</h4>
+My buddy is {{ participant.buddy_name }}
 {% endif %}
 
 {% if participant.ssnmtree_total %}
