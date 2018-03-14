@@ -36,7 +36,7 @@
 {% endfor %}
 </ul>
 
-{% if particiant.all_counselor_notes or participant.ssnmtree_total or participant.mood_score or participant.alcohol_score or participant.lifegoals_data.regular or participant.problem_solving_data.defaulter  %}
+{% if particiant.all_counselor_notes or participant.ssnmtree_total or participant.mood_score or participant.alcohol_score or participant.lifegoals_data.regular or participant.problem_solving_data.defaulter or participant.has_referral %}
 
 {% if participant.all_counselor_notes %}
 <h4>Questions and Concerns</h4>
@@ -151,9 +151,29 @@
 </ul>
 {% endif %}
 
-{% if participant.initial_referral_notes %}
-<h4>Addional Notes About the Referral(s)</h4>
-<p>{{ participant.initial_referral_notes }}</p>
+
+{% if participant.initial_referral_mental_health or participant.initial_referral_alcohol or participant.initial_referral_drug_use or participant.initial_referral_other %}
+    <h4>Referral Information</h4>
+    Referral given for:
+    <ol>
+    {% if participant.initial_referral_mental_health %}
+    <li>Mental health</li>
+    {% endif %}
+    {% if participant.initial_referral_alcohol %}
+    <li>Alcohol</li>
+    {% endif %}
+    {% if participant.initial_referral_drug_use %}
+    <li>Drug Use</li>
+    {% endif %}
+    {% if participant.initial_referral_other %}
+    <li>Other</li>
+    {% endif %}
+    </ol>
+    
+    {% if participant.initial_referral_notes %}
+    <h4>Addional Notes About the Referral(s)</h4>
+    <p>{{ participant.initial_referral_notes }}</p>
+    {% endif %}
 {% endif %}
 
 {% else %}
