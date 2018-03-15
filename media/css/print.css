@@ -36,9 +36,13 @@ body {
     margin-top: 10px;
 }
 
-#content {
+#content, #contentcontainer {
    padding: 0px 50px 50px 50px;
    margin: 0px;
+}
+
+#contentcontainer {
+   margin: 0px 50px;
 }
 
 #gamebox {
