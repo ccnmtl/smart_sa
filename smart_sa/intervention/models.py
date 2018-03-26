@@ -1002,6 +1002,56 @@ class Participant(models.Model):
     def ssnmtree_data(self):
         return self.game_vars(u'ssnmtree')
 
+    def get_pill_data(self):
+        try:
+            return json.loads(self.get_game_var('pill_game'))\
+                .get('regular', None)
+        except (TypeError):
+            return None
+
+    def get_pill_name(self, pill_id):
+        try:
+            pills = self.get_pill_data().get('pills')
+        except (AttributeError):
+            return None
+
+        pill_data = dict()
+        for pill in pills:
+            pill_data[pill.get('id')] = pill.get('name')
+
+        return pill_data.get(pill_id, None)
+
+    def get_day_pills(self):
+        try:
+            data = self.get_pill_data().get('day', None).get('views', None)
+            pill_ids = [i.get('pillId', None) for i in data]
+            return [self.get_pill_name(i) for i in pill_ids]
+        except (AttributeError):
+            return None
+
+    def get_day_pill_time(self):
+        """Note: this returns time as a string"""
+        try:
+            return self.get_pill_data().get('day', None).get('selected', None)
+        except (AttributeError):
+            return None
+
+    def get_night_pills(self):
+        try:
+            data = self.get_pill_data().get('night', None).get('views', None)
+            pill_ids = [i.get('pillId', None) for i in data]
+            return [self.get_pill_name(i) for i in pill_ids]
+        except (AttributeError):
+            return None
+
+    def get_night_pill_time(self):
+        """Note: this returns time as a string"""
+        try:
+            return self.get_pill_data().get('night', None)\
+                .get('selected', None)
+        except (AttributeError):
+            return None
+
     def _count_valid_keys(self, d, sub, test):
         try:
             count = 0

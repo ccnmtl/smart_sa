@@ -457,6 +457,32 @@ class ParticipantModelTest(TestCase):
         self.assertIsNone(self.p1.ssnmtree_data())
         self.assertIsNotNone(self.p2.ssnmtree_data())
 
+    def test_get_pill_data(self):
+        self.assertIsNone(self.p1.get_pill_data())
+        self.assertIsNotNone(self.p2.get_pill_data())
+
+    def test_get_pill_name(self):
+        self.assertIsNone(self.p1.get_pill_name('foo'))
+        self.assertIsNone(self.p1.get_pill_name('pill_8913'))
+        self.assertIsNone(self.p2.get_pill_name('foo'))
+        self.assertIsNotNone(self.p2.get_pill_name('pill_8913'))
+
+    def test_get_day_pills(self):
+        self.assertIsNone(self.p1.get_day_pills())
+        self.assertIsNotNone(self.p2.get_day_pills())
+
+    def test_get_day_pill_time(self):
+        self.assertIsNone(self.p1.get_day_pill_time())
+        self.assertIsNotNone(self.p2.get_day_pill_time())
+
+    def test_get_night_pills(self):
+        self.assertIsNone(self.p1.get_night_pills())
+        self.assertIsNotNone(self.p2.get_night_pills())
+
+    def test_get_night_pill_time(self):
+        self.assertIsNone(self.p1.get_night_pill_time())
+        self.assertIsNotNone(self.p2.get_night_pill_time())
+
     def test_assessmentquiz_data(self):
         self.assertIsNone(self.p1.assessmentquiz_data())
         self.assertIsNotNone(self.p2.assessmentquiz_data())

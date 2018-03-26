@@ -35,7 +35,7 @@
 {% endfor %}
 </ul>
 
-{% if particiant.all_counselor_notes or participant.ssnmtree_total or participant.mood_score or participant.alcohol_score or participant.lifegoals_data.regular or participant.problem_solving_data.defaulter or participant.has_referral or participant.buddy_name %}
+{% if particiant.all_counselor_notes or participant.ssnmtree_total or participant.mood_score or participant.alcohol_score or participant.lifegoals_data.regular or participant.problem_solving_data.defaulter or participant.has_referral or participant.buddy_name or participant.get_pill_data %}
 
 {% if participant.all_counselor_notes %}
 <h4>Questions and Concerns</h4>
@@ -179,6 +179,27 @@ My buddy is {{ participant.buddy_name }}
     <p>{{ participant.initial_referral_notes }}</p>
     {% endif %}
 {% endif %}
+
+{% if participant.get_pill_data %}
+  <h4>ARV Information</h4>
+  {% if participant.get_day_pills %}
+  <p>You have indicated that you take the following ARVs each morning at {{ participant.get_day_pill_time }}</p>
+  <ul>
+  {% for pill in participant.get_day_pills %}
+    <li>{{ pill }}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  {% if participant.get_night_pills %}
+  <p>You have indicated that you take the following ARVs each evening at {{ participant.get_night_pill_time }}</p>
+  <ul>
+  {% for pill in participant.get_night_pills %}
+    <li>{{ pill }}</li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+{% endif %}
+
 
 {% else %}
 <p>You have not entered any personal information yet.</p>
