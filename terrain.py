@@ -267,10 +267,13 @@ def i_am_on_the_intervention_page(step):
 def i_click_session(step, session_number):
     if not world.using_selenium:
         assert False, "this step needs to be implemented for the django test client"
-    try:
-        link = world.browser.find_element_by_id("session%s" % session_number)
-    except:
-        import pdb;pdb.set_trace()
+
+    the_id = "session%s" % session_number
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        visibility_of_element_located((By.ID, the_id)))
+
+    link = world.browser.find_element_by_id(the_id)
     link.click()
 
 
