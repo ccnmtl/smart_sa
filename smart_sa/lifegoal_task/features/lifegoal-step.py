@@ -1,3 +1,5 @@
+import time
+
 from lettuce import world, step
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import ui
@@ -30,10 +32,7 @@ def when_i_enter_value_for_input(step, value, input):
     elt.clear()
     for c in value:
         elt.send_keys(c)
-
-    wait = ui.WebDriverWait(world.browser, 5)
-    wait.until(text_to_be_present_in_element_value(
-        (By.CSS_SELECTOR, get_css_selector(input)), value))
+        time.sleep(1)
 
 
 @step(u'Then "([^"]*)" is "([^"]*)"')

@@ -29,10 +29,12 @@ Feature: Life goals
         Then "Goal" is "jkl"
 
         # Verify state saved
+        Then I wait 1 second
         When I click the "Next →" link
+        Then I wait 1 second
         When I click the "← Back" link
+        Then I wait 1 second
 
-        Then I wait 2 seconds
         Then "Step 2" is "abc"
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
@@ -47,7 +49,6 @@ Feature: Life goals
         Then there is a game
 
         # Life goals for defaulter should be the same as regular
-        Then I wait 1 second
         Then "Step 2" is "abc"
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
@@ -59,10 +60,12 @@ Feature: Life goals
         When I enter "vwx" for "Goal"
 
         # Verify state saved
-        When I click the "Next →" link
-        When I click the "← Back" link
-
         Then I wait 1 second
+        When I click the "Next →" link
+        Then I wait 1 second
+        When I click the "← Back" link
+        Then I wait 1 second
+
         Then "Step 2" is "mno"
         Then "Step 3" is "pqr"
         Then "Step 4" is "stu"
@@ -70,13 +73,14 @@ Feature: Life goals
 
         # Navigate back to the regular session
         # Data should remain unchanged
+        Then I wait 1 second
         When I click the "Sessions" link
         Then I am on the Intervention page
         When I click on Session 1
         Then I click on Activity 17
         When I click the "Next →" link
         Then there is a game
-        Then I wait 1 second
+
         Then "Step 2" is "abc"
         Then "Step 3" is "def"
         Then "Step 4" is "ghi"
