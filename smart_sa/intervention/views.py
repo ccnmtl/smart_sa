@@ -578,13 +578,12 @@ def complete_activity_post(request, activity):
         ParticipantActivity, activity=activity, participant=participant)
     pa.status = "complete"
     pa.save()
-    if (request.POST.get('counselor_notes', False) and
-            request.user.is_authenticated):
+    if (request.POST.get('counselor_notes', False)):
         session = activity.clientsession
         ps, created = get_or_create_first(
             ParticipantSession, session=session, participant=participant)
         note, created = get_or_create_first(
-            CounselorNote, participant=participant, counselor=request.user)
+            CounselorNote, participant=participant)
         note.notes = request.POST.get('counselor_notes', '')
         note.save()
     if request.POST.get('buddy_name', False):
@@ -635,10 +634,9 @@ def activity(request, activity_id):
         pa.status = "complete"
         pa.save()
     counselor_notes = ""
-    if request.user.is_authenticated:
-        cn, created = get_or_create_first(
-            CounselorNote, participant=participant, counselor=request.user)
-        counselor_notes = cn.notes
+    cn, created = get_or_create_first(
+        CounselorNote, participant=participant)
+    counselor_notes = cn.notes
     return render(request, 'intervention/activity.html',
                   dict(
                       activity=activity, participant=request.participant,

@@ -1165,7 +1165,7 @@ class ParticipantActivity(models.Model):
 class CounselorNote(models.Model):
     """ notes entered by a counselor on a participant"""
     participant = models.ForeignKey(Participant, null=True)
-    counselor = models.ForeignKey(User)
+    counselor = models.ForeignKey(User, null=True)
     notes = models.TextField(blank=True, null=True, default="")
 
     def __unicode__(self):

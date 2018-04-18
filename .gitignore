@@ -24,3 +24,4 @@ package-lock.json
 .ropeproject
 .swp
 local.mk
+geckodriver.log
