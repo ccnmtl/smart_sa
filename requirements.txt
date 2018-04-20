@@ -41,7 +41,7 @@ logilab-astng==0.24.3
 editdistance==0.4
 pylint==1.8.4
 python-dateutil==2.7.2
-pytz==2018.3
+pytz==2018.4
 django-stagingcontext==0.1.0
 sqlparse==0.2.4
 six==1.11.0
