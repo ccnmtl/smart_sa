@@ -18,15 +18,15 @@ Feature: Life goals
         When I click the "Next →" link
         Then there is a game
 
-        When I enter "abc" for "Step 2"
-        When I enter "def" for "Step 3"
-        When I enter "ghi" for "Step 4"
-        When I enter "jkl" for "Goal"
+        When I enter "a" for "Step 2"
+        When I enter "d" for "Step 3"
+        When I enter "g" for "Step 4"
+        When I enter "j" for "Goal"
 
-        Then "Step 2" is "abc"
-        Then "Step 3" is "def"
-        Then "Step 4" is "ghi"
-        Then "Goal" is "jkl"
+        Then "Step 2" is "a"
+        Then "Step 3" is "d"
+        Then "Step 4" is "g"
+        Then "Goal" is "j"
 
         # Verify state saved
         Then I wait 1 second
@@ -35,10 +35,10 @@ Feature: Life goals
         When I click the "← Back" link
         Then I wait 1 second
 
-        Then "Step 2" is "abc"
-        Then "Step 3" is "def"
-        Then "Step 4" is "ghi"
-        Then "Goal" is "jkl"
+        Then "Step 2" is "a"
+        Then "Step 3" is "d"
+        Then "Step 4" is "g"
+        Then "Goal" is "j"
 
         # Navigate to defaulter session
         When I click the "Sessions" link
@@ -49,10 +49,10 @@ Feature: Life goals
         Then there is a game
 
         # Life goals for defaulter should be the same as regular
-        Then "Step 2" is "abc"
-        Then "Step 3" is "def"
-        Then "Step 4" is "ghi"
-        Then "Goal" is "jkl"
+        Then "Step 2" is "a"
+        Then "Step 3" is "d"
+        Then "Step 4" is "g"
+        Then "Goal" is "j"
 
         When I enter "mno" for "Step 2"
         When I enter "pqr" for "Step 3"
@@ -66,10 +66,10 @@ Feature: Life goals
         When I click the "← Back" link
         Then I wait 1 second
 
-        Then "Step 2" is "mno"
-        Then "Step 3" is "pqr"
-        Then "Step 4" is "stu"
-        Then "Goal" is "vwx"
+        Then "Step 2" is "m"
+        Then "Step 3" is "p"
+        Then "Step 4" is "s"
+        Then "Goal" is "v"
 
         # Navigate back to the regular session
         # Data should remain unchanged
@@ -81,9 +81,9 @@ Feature: Life goals
         When I click the "Next →" link
         Then there is a game
 
-        Then "Step 2" is "abc"
-        Then "Step 3" is "def"
-        Then "Step 4" is "ghi"
-        Then "Goal" is "jkl"
+        Then "Step 2" is "a"
+        Then "Step 3" is "d"
+        Then "Step 4" is "g"
+        Then "Goal" is "j"
 
         Finished using selenium
