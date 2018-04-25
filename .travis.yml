@@ -5,6 +5,7 @@ addons:
 env:
   - TEST_SUITE=jenkins
   - TEST_SUITE=harvest
+  - TEST_SUITE=harvest2
 python:
   - "2.7.6"
 before_install:

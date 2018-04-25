@@ -215,6 +215,7 @@ def there_is_a_location_edit_form(step):
             found = True
     assert found
 
+
 @step(u'I click the "([^"]*)" link')
 def i_click_the_link(step, text):
     if not world.using_selenium:
@@ -232,7 +233,6 @@ def i_click_the_link(step, text):
             assert link.is_displayed()
             link.click()
         except NoSuchElementException:
-            world.browser.get_screenshot_as_file("/tmp/selenium.png")  # nosec
             assert False, text
 
 
@@ -257,9 +257,7 @@ def i_submit_the_form(step, id):
 def i_am_on_the_intervention_page(step):
     if not world.using_selenium:
         return
-    from smart_sa.intervention.models import Intervention
-    i = Intervention.objects.all()[0]
-    assert world.browser.current_url.endswith("/intervention/%d/" % i.id), world.browser.current_url
+    assert world.browser.current_url.find("/intervention/") > -1
     assert world.browser.find_elements_by_tag_name('h2')[0].text == "Sessions"
 
 
@@ -364,7 +362,6 @@ def i_go_back(self):
 @step(u'I am a participant')
 def i_am_a_participant(step):
     if world.using_selenium:
-        from smart_sa.intervention.models import Intervention
         world.browser.get(django.django_url("/"))
 
         wait = ui.WebDriverWait(world.browser, 5)
@@ -374,15 +371,13 @@ def i_am_a_participant(step):
         elt = world.browser.find_element_by_id('btn-get-started')
         elt.click()
 
-        i = Intervention.objects.all()[0]
-        assert world.browser.current_url.endswith(
-            "/intervention/%d/" % i.id), world.browser.current_url
+        assert world.browser.current_url.find("/intervention/") > -1
         assert (world.browser.find_elements_by_tag_name('h2')[0].text
                 == "Sessions")
     else:
         from smart_sa.intervention.models import Participant
-        response = world.client.post(django.django_url('/set_participant/'),
-                                     {'name': 'test', 'id_number': 'test'})
+        world.client.post(django.django_url('/set_participant/'),
+                          {'name': 'test', 'id_number': 'test'})
         world.participant = Participant.objects.filter(name='test')[0]
 
 
@@ -395,7 +390,7 @@ def participant_has_not_completed_any_sessions(step):
 @step(u'I go to Activity (\d+) of Session (\d+)')
 def i_go_to_session(step,activity_number,session_number):
     from smart_sa.intervention.models import Intervention
-    i = Intervention.objects.all()[0]
+    i = Intervention.objects.first()
     s = i.clientsession_set.all()[int(session_number) - 1]
     assert s.index() == int(session_number)
     a = s.activity_set.all()[int(activity_number) - 1]

@@ -1,6 +1,7 @@
+import time
+
 from lettuce import world, step
 from selenium.common.exceptions import NoSuchElementException
-import time
 
 
 @step('I fill in the SSNM Tree with "([^"]*)"')
@@ -46,10 +47,9 @@ def when_i_name_the_circle_name(step, name):
 
 @step(u'When I click the circle')
 def when_i_click_the_circle(step):
-    world.browser.find_element_by_id("top1-fruit")
-    elt = world.browser.find_element_by_css_selector("div.circle")
+    elt = world.browser.find_element_by_css_selector("#top1-fruit div.circle")
     assert elt is not None
-    elt.click()
+    world.browser.execute_script("arguments[0].click();", elt)
 
 
 @step(u'Then the circle is "([^"]*)"')
@@ -102,17 +102,13 @@ def when_i_click_the_name_button(step, name):
 
 @step(u'Then "([^"]*)" is selected')
 def then_button_is_selected(step, button):
-    elts = world.browser.find_elements_by_class_name("on")
-    if len(elts) != 1:
-        # import pdb; pdb.set_trace()
-        pass
-    assert len(elts) == 1, (
-        "There should only be one button selected. There are %s" % len(elts))
+    if button == 'disclosure':
+        q = '#toggle-disclosure-selection.on'
+    elif button == 'support':
+        q = '#toggle-support-selection.on'
 
-    if button == "disclosure":
-        assert elts[0].get_attribute("id") == "toggle-disclosure-selection"
-    elif button == "support":
-        assert elts[0].get_attribute("id") == "toggle-support-selection"
+    elt = world.browser.find_element_by_css_selector(q)
+    assert elt, 'disclosure button should be selected'
 
 
 @step(u'Then I wait (\d+) seconds')
