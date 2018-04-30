@@ -1,5 +1,5 @@
 Django==1.11.12 # pyup: <2.0
-simplejson==3.13.2
+simplejson==3.14.0
 psycopg2==2.7.4
 coverage==4.5.1
 BeautifulSoup==3.2.1
