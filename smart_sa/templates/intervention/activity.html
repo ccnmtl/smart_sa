@@ -38,9 +38,7 @@ setTimeout(logstatus, 0);
 <div id="breadcrumb">
       <a class="complete" id="tab-home"
       href="/intervention/{{activity.clientsession.intervention.id}}/" >Sessions</a>
-      {% flag "participant_report" %}
 	  <a class="" href="/intervention/participant-report" id="report-home">Report</a> 
-      {% endflag %}
 	<div id="breadcrumb-text">
 		You are currently in: <span class="breadcrumb-text-current">Session {{activity.clientsession.index}}: {{activity.clientsession.long_title}} &rarr; Activity {{activity.index}}: {{ activity.long_title }}</span>
 	</div>
