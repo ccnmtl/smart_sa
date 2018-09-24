@@ -16,7 +16,7 @@ ptyprocess==0.6.0
 pexpect==4.6.0
 pickleshare==0.7.4
 simplegeneric==0.8.1
-path.py==11.1.0
+path.py==11.3.0
 ipython==5.8.0 # pyup: <6.0.0
 ipdb==0.11
 extras==1.0.0
@@ -38,7 +38,7 @@ enum34==1.1.6
 configparser==3.5.0
 flake8==3.5.0
 logilab-astng==0.24.3
-editdistance==0.5
+editdistance==0.5.2
 pylint==1.9.3 # pyup: <2.0.0
 python-dateutil==2.7.3
 pytz==2018.5
