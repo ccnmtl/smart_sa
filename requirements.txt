@@ -45,7 +45,7 @@ pytz==2018.5
 django-stagingcontext==0.1.0
 sqlparse==0.2.4
 six==1.11.0
-gunicorn==19.8.1
+gunicorn==19.9.0
 boto==2.49.0
 pyasn1==0.4.4
 pyOpenSSL==18.0.0
