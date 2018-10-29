@@ -33,14 +33,14 @@ pep8==1.7.1
 pyflakes==2.0.0
 mccabe==0.6.1
 logilab-common==1.4.2
-pycodestyle==2.3.1 # pyup: <2.4.0
+pycodestyle==2.4.0
 enum34==1.1.6
 configparser==3.5.0
-flake8==3.5.0
+flake8==3.6.0
 logilab-astng==0.24.3
 editdistance==0.5.2
 pylint==1.9.3 # pyup: <2.0.0
-python-dateutil==2.7.3
+python-dateutil==2.7.5
 pytz==2018.7
 django-stagingcontext==0.1.0
 sqlparse==0.2.4
@@ -56,7 +56,7 @@ rjsmin==1.0.12
 
 chardet==3.0.4
 idna==2.7
-urllib3==1.23
+urllib3==1.24
 certifi==2018.10.15
 
 requests==2.20.0
@@ -79,7 +79,7 @@ django-smtp-ssl==1.0
 
 ccnmtlsettings==1.4.0
 
-pbr==4.3.0
+pbr==5.1.0
 PyYAML>=3.10.0 # MIT
 stevedore>=1.20.0 # Apache-2.0
 bandit==1.5.1
