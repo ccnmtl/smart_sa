@@ -59,7 +59,7 @@ idna==2.7
 urllib3==1.24.1
 certifi==2018.10.15
 
-requests==2.20.0
+requests==2.20.1
 
 djangowind==1.2.1
 raven==6.9.0
