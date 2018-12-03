@@ -34,7 +34,7 @@ pyflakes==2.0.0
 mccabe==0.6.1
 logilab-common==1.4.2
 pycodestyle==2.4.0
-enum34==1.1.6
+enum34==1.1.6; python_version < '3.4'
 configparser==3.5.0
 flake8==3.6.0
 logilab-astng==0.24.3
