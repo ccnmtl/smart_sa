@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.test import TestCase
 from django.test import client
 from smart_sa.intervention.models import (
@@ -84,7 +84,7 @@ class InterventionViewTest(TestCase):
     def test_login_nonexistant_participant(self):
         resp = self.client.post(
             '/set_participant/', {'name': 'notapatient', 'id_number': 'foo'})
-        self.assertEqual(resp.content, "no participant with that name")
+        self.assertContains(resp, "no participant with that name")
 
     def test_login_inactive_participant(self):
         p = Participant.objects.get(name='test')
@@ -92,14 +92,13 @@ class InterventionViewTest(TestCase):
         p.save()
         resp = self.client.post(
             '/set_participant/', {'name': 'test', 'id_number': 'test'})
-        self.assertEqual(
-            resp.content, "this participant is marked as inactive")
+        self.assertContains(resp, "this participant is marked as inactive")
 
     def test_login_participant_with_wrong_password(self):
         resp = self.client.post(
             '/set_participant/',
             {'name': 'test', 'id_number': 'wrong password'})
-        self.assertEqual(resp.content, "id number does not match")
+        self.assertContains(resp, "id number does not match")
 
     def test_complete_session(self):
         resp = self.client.post(
@@ -148,12 +147,12 @@ class InterventionAdminViewTest(TestCase):
         resp = self.client.get("/manage/participant/%d/view/" % t.id)
         self.assertEqual(resp.status_code, 200)
         # check that it asks for password
-        self.assertEqual("Please enter password" in resp.content, True)
+        self.assertContains(resp, "Please enter password")
         # make a POST request with password to actually see the page
         resp = self.client.post(
             "/manage/participant/%d/view/" % t.id, {'password': "test"})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual("Please enter password" in resp.content, False)
+        self.assertNotContains(resp, "Please enter password")
 
     # def test_edit_counselor(self):
     #     pass

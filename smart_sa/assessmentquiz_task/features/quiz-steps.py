@@ -11,7 +11,7 @@ def there_is_an_assessmentquiz(self):
         assert world.browser.find_element_by_id('assessmentquiz')
 
 
-@step('I fill in all (\d)s in the quiz')
+@step(r'I fill in all (\d)s in the quiz')
 def fill_in_quiz(self, value):
     if not world.using_selenium:
         assert False, ("this step needs to be implemented for "
@@ -22,7 +22,7 @@ def fill_in_quiz(self, value):
             i.click()
 
 
-@step('I answer (\d) for question ([0-9][0-9]?)')
+@step(r'I answer (\d) for question ([0-9][0-9]?)')
 def i_fill_in_value_for_question_number(step, value, number):
     name = "q%s" % number
     elts = world.browser.find_elements_by_name(name)

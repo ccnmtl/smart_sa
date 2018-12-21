@@ -1,4 +1,8 @@
+from __future__ import unicode_literals
+
 from django.test import TestCase
+from django.utils.encoding import smart_text
+
 from smart_sa.intervention.models import Activity
 from smart_sa.intervention.models import Backup
 from smart_sa.intervention.models import ClientSession
@@ -16,7 +20,7 @@ class InterventionModelTest(TestCase):
             general_instructions="this is for testing")
 
     def test_basics(self):
-        self.assertEqual(unicode(self.i), "test intervention")
+        self.assertEqual(smart_text(self.i), "test intervention")
         self.assertEqual(
             self.i.get_absolute_url().startswith("/intervention/"),
             True)
@@ -32,7 +36,7 @@ class InterventionModelTest(TestCase):
                                          general_instructions="number 2")
         # check round-trip
         i2.from_dict(d)
-        self.assertEqual(unicode(i2), "test intervention")
+        self.assertEqual(smart_text(i2), "test intervention")
         self.assertEqual(i2.intervention_id, "1")
         self.assertEqual(i2.general_instructions, "this is for testing")
 
@@ -52,7 +56,7 @@ class ClientSessionModelTest(TestCase):
 
     def test_basics(self):
         self.assertEqual(self.cs.intervention, self.i)
-        self.assertEqual(unicode(self.cs), "Test Session 1")
+        self.assertEqual(smart_text(self.cs), "Test Session 1")
         self.assertEqual(self.cs.get_absolute_url().startswith("/session/"),
                          True)
         self.assertEqual(self.cs.index(), 1)
@@ -71,7 +75,7 @@ class ClientSessionModelTest(TestCase):
             introductory_copy="Introductory Copy 2 Here",
             defaulter=True)
         cs2.from_dict(d)
-        self.assertEqual(unicode(cs2), "Test Session 1")
+        self.assertEqual(smart_text(cs2), "Test Session 1")
         self.assertEqual(cs2.long_title, "Test Session 1 Long Title")
         self.assertEqual(cs2.introductory_copy, "Introductory Copy Here")
         self.assertEqual(cs2.defaulter, False)
@@ -102,7 +106,7 @@ class ActivityModelTest(TestCase):
             collect_reasons_for_returning=False)
 
     def test_basics(self):
-        self.assertEqual(unicode(self.activity), "Activity 1")
+        self.assertEqual(smart_text(self.activity), "Activity 1")
         self.assertEqual(
             self.activity.get_absolute_url().startswith("/activity/"),
             True)
@@ -129,7 +133,7 @@ class ActivityModelTest(TestCase):
             collect_referral_info=True,
             collect_reasons_for_returning=True)
         a2.from_dict(d)
-        self.assertEqual(unicode(a2), "Activity 1")
+        self.assertEqual(smart_text(a2), "Activity 1")
         self.assertEqual(a2.long_title, "Activity 1 Long Title")
         self.assertEqual(a2.objective_copy,
                          "Objective Copy for Activity 1 Here")
@@ -208,24 +212,25 @@ class FullSerializationTest(TestCase):
         self.assertEquals(i.clientsession_set.count(),
                           i2.clientsession_set.count())
         for idx in range(i.clientsession_set.count()):
-            self.assertEquals(unicode(i.get_session_by_index(idx + 1)),
-                              unicode(i2.get_session_by_index(idx + 1)))
+            self.assertEquals(smart_text(i.get_session_by_index(idx + 1)),
+                              smart_text(i2.get_session_by_index(idx + 1)))
             s1 = i.get_session_by_index(idx + 1)
             s2 = i2.get_session_by_index(idx + 1)
 
-            self.assertEquals(unicode(s1.next()), unicode(s2.next()))
+            self.assertEquals(smart_text(s1.next()), smart_text(s2.next()))
 
             for aidx in range(s1.activity_set.count()):
                 a1 = s1.get_activity_by_index(idx + 1)
                 a2 = s2.get_activity_by_index(idx + 1)
-                self.assertEquals(unicode(a1), unicode(a2))
-                self.assertEquals(unicode(a1.next()), unicode(a2.next()))
-                self.assertEquals(unicode(a1.prev()), unicode(a2.prev()))
-                self.assertEquals(unicode(a1.index()), unicode(a2.index()))
-                self.assertEquals(unicode(a1.last_gamepage()),
-                                  unicode(a2.last_gamepage()))
-                self.assertEquals(unicode(a1.variables()),
-                                  unicode(a2.variables()))
+                self.assertEquals(smart_text(a1), smart_text(a2))
+                self.assertEquals(smart_text(a1.next()), smart_text(a2.next()))
+                self.assertEquals(smart_text(a1.prev()), smart_text(a2.prev()))
+                self.assertEquals(
+                    smart_text(a1.index()), smart_text(a2.index()))
+                self.assertEquals(smart_text(a1.last_gamepage()),
+                                  smart_text(a2.last_gamepage()))
+                self.assertEquals(smart_text(a1.variables()),
+                                  smart_text(a2.variables()))
 
                 a1.pages()
                 a2.pages()

@@ -29,7 +29,7 @@ class InstalledGamesLazySingleton:
             self.GAME_OBJECTS[game_code] = game_obj
 
         for p in game_obj.pages():
-            if re.findall('\W', p):
+            if re.findall(r'\W', p):
                 raise ("Game pages must have only word "
                        "(web friendly) characters.")
 

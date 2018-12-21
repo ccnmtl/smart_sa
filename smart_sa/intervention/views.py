@@ -16,11 +16,11 @@ from django.core import serializers
 from django.core.exceptions import MultipleObjectsReturned,\
     ObjectDoesNotExist
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.views.generic import TemplateView
 from zipfile import ZipFile
-from cStringIO import StringIO
+from io import BytesIO
 from json import dumps, loads
-from datetime import datetime
 from functools import wraps
 from django.utils.decorators import available_attrs
 from smart_sa.problemsolving_game.models import Issue
@@ -254,11 +254,12 @@ def view_participant_progress(request):
         p.get_completed_activities())
 
     p.has_referral = False
-    if (p.initial_referral_alcohol or
-            p.initial_referral_drug_use or
-            p.initial_referral_mental_health or
-            p.initial_referral_other or
-            p.initial_referral_notes):
+    if (
+            p.initial_referral_alcohol
+            or p.initial_referral_drug_use
+            or p.initial_referral_mental_health
+            or p.initial_referral_other
+            or p.initial_referral_notes):
         p.has_referral = True
 
     return render(request, "intervention/participant_dashboard.html",
@@ -300,7 +301,7 @@ def participant_data_download(request):
     resp = HttpResponse(json, content_type="application/json")
     clean_deployment_name = Deployment.objects.all()[0].name.lower().replace(
         " ", "_")
-    now = datetime.now()
+    now = timezone.now()
     datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (
         now.year, now.month, now.day, now.hour, now.minute, now.second)
     resp['Content-Disposition'] = (
@@ -323,7 +324,7 @@ def restore_participants(request):
     try:
         json_data = request.FILES['participants_data'].read()
         json = loads(json_data)
-    except Exception, e:
+    except Exception as e:
         logs.append(dict(error="invalid or corrupted data file: %s" % str(e)))
         return render(request, "intervention/restore_participants.html",
                       dict(logs=logs))
@@ -368,7 +369,7 @@ def add_counselors(json, request, logs):
                 date_joined=fields['date_joined'],
             )
             logs.append(dict(info="Counselor %s restored" % u.username))
-        except Exception, e:
+        except Exception as e:
             logs.append(dict(
                 warn="Could not restore counselor (%s): %s" % (
                     str(e), str(counselor_data))))
@@ -386,7 +387,7 @@ def update_participant(p, logs):
         np, plogs = Participant.from_json(p)
         logs.extend(plogs)
         logs.append(dict(info="Restored participant %s" % np.name))
-    except Exception, e:
+    except Exception as e:
         logs.append(dict(
             warn="Could not fully restore participant (%s): %s" % (
                 str(e), str(p))))
@@ -407,7 +408,7 @@ def update_intervention_content(request):
     # uploads = TODO_get_list_of_uploads_from_zip()
     uploads = []  # TODO: handle uploads
 
-    buffer = StringIO(zc)
+    buffer = BytesIO(zc)
     zipfile = ZipFile(buffer, "r")
 
     update_intervention_data_from_zipfile(zipfile)
@@ -842,7 +843,7 @@ def all_uploads():
 
 
 def content_zip(request):
-    buffer = StringIO()
+    buffer = BytesIO()
     zipfile = ZipFile(buffer, "w")
     zipfile.writestr("version.txt", "1")
     zipfile.writestr(
@@ -883,12 +884,12 @@ def content_sync(request):
 def zip_download(request):
     """ same as content_sync, but puts a timestamp into the filename to
     make it nicer for a user to download """
-    resp = HttpResponse(content_zip(request))
-    now = datetime.now()
+    resp = HttpResponse(content_zip(request), content_type='application/zip')
+    now = timezone.now()
     datestring = "%04d-%02d-%02dT%02d:%02d:%02d" % (
         now.year, now.month, now.day, now.hour, now.minute, now.second)
     resp['Content-Disposition'] = (
-        "attachment; filename=masivukeni-%s.zip" % datestring)
+        "attachment; filename=masivukeni-{}.zip".format(datestring))
     return resp
 
 

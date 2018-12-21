@@ -49,7 +49,7 @@ def there_is_a_group1_title(step, group1):
     assert i.text == group1, i.text
 
 
-@step(u'There are (\d+) pills')
+@step(r'There are (\d+) pills')
 def there_are_n_pills(step, n):
     a = world.browser.find_elements_by_css_selector('#pill-list div.pill')
     assert len(a) == int(n), "Expecting %s pills, but see %s" % (n, len(a))
@@ -109,7 +109,7 @@ def when_i_drop_pill_onto_time(step, pill, time):
     action_chains.drag_and_drop(draggable, bucket).perform()
 
 
-@step(u'When I drop pill (\d+) onto "([^"]*)"')
+@step(r'When I drop pill (\d+) onto "([^"]*)"')
 def when_i_drop_pill_index_onto_time(step, index, time):
     idx = int(index) - 1
     a = world.browser.find_elements_by_css_selector('div.pill')
@@ -129,7 +129,7 @@ def when_i_drop_pill_index_onto_time(step, index, time):
     action_chains.drag_and_drop(draggable, bucket).perform()
 
 
-@step(u'Then there is (\d+) "([^"]*)" in "([^"]*)"')
+@step(r'Then there is (\d+) "([^"]*)" in "([^"]*)"')
 def then_there_is_count_pill_in_time(step, count, pill, time):
     pill = find_pill(pill)
     assert pill is not None, "No pill named %s found. %s" % (pill, count)
@@ -168,7 +168,7 @@ def then_there_are_no_pills_in_timeslot(step, timeslot):
             bucket, len(a)))
 
 
-@step(u'Then there are (\d+) pills in "([^"]*)"')
+@step(r'Then there are (\d+) pills in "([^"]*)"')
 def then_there_are_count_pills_in_timeslot(step, count, timeslot):
     bucket = get_bucket(timeslot)
     assert bucket is not None, (
@@ -317,7 +317,7 @@ def then_i_dismiss_second_dialog(step):
     alert.accept()
 
 
-@step(u'When I name pill (\d+) "([^"]*)"')
+@step(r'When I name pill (\d+) "([^"]*)"')
 def when_i_name_pill_index_name(step, index, name):
     idx = int(index) - 1
     a = world.browser.find_elements_by_css_selector('div.pill')
@@ -334,7 +334,7 @@ def when_i_name_pill_index_name(step, index, name):
     elt.click()
 
 
-@step(u'Then I wait (\d+) second')
+@step(r'Then I wait (\d+) second')
 def then_i_wait_count_second(step, count):
     n = int(count)
     time.sleep(n)

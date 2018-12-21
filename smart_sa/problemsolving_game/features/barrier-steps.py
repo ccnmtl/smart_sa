@@ -26,7 +26,7 @@ def when_i_click_the_save_plan_button(step):
         pass
 
 
-@step(u'I select barrier (\d+)')
+@step(r'I select barrier (\d+)')
 def i_select_barrier(step, barrier):
     if not world.using_selenium:
         assert False, (
@@ -44,7 +44,7 @@ def i_select_barrier(step, barrier):
                 pass
 
 
-@step(u'Then barrier (\d+) has "([^"]*)"')
+@step(r'Then barrier (\d+) has "([^"]*)"')
 def then_barrier_number_has_state(step, number, state):
     if not world.using_selenium:
         assert False, (
@@ -61,7 +61,7 @@ def then_barrier_number_has_state(step, number, state):
             break
 
 
-@step(u'Then barrier (\d+) does not have "([^"]*)"')
+@step(r'Then barrier (\d+) does not have "([^"]*)"')
 def then_barrier_number_does_not_have_state(step, number, state):
     if not world.using_selenium:
         assert False, (

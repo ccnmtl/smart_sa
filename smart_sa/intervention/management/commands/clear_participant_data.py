@@ -15,13 +15,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if not settings.DEBUG:
-            print "this should never be run on production"
+            print("this should never be run on production")
             return
         if not options["participant"]:
-            print "Please specify the participant"
+            print("Please specify the participant")
             return
 
-        print "clearing participant data for [%s]" % options["participant"]
+        print("clearing participant data for [%s]" % options["participant"])
         participant = Participant.objects.get(name=options["participant"])
         participant.clear_all_data()
         participant.save()

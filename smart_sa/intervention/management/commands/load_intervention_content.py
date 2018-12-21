@@ -20,7 +20,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if not settings.DEBUG:
-            print "this should never be run on production"
+            print("this should never be run on production")
             return
 
         zipfile = ZipFile(os.path.join("data", "intervention.zip"), "r")
@@ -28,10 +28,10 @@ class Command(BaseCommand):
         # Load Intervention objects
         json = loads(zipfile.read("interventions.json"))
 
-        print "clearing intervention prod database content..."
+        print("clearing intervention prod database content...")
         Intervention.objects.all().delete()
 
-        print "importing prod database content..."
+        print("importing prod database content...")
         for i in json['interventions']:
             intervention = Intervention.objects.create(name="tmp")
             intervention.from_dict(i)
@@ -39,10 +39,10 @@ class Command(BaseCommand):
         # Load Problem Solving objects
         json = loads(zipfile.read("issues.json"))
 
-        print "clearing problemsolving database content..."
+        print("clearing problemsolving database content...")
         Issue.objects.all().delete()
 
-        print "importing problemsolving prod database content..."
+        print("importing problemsolving prod database content...")
         for i in json['issues']:
             issue = Issue.objects.create(name="tmp", ordinality=0)
             issue.from_dict(i)

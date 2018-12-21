@@ -1,2 +1,2 @@
 [flake8]
-ignore = F999
+extend-ignore = F999
