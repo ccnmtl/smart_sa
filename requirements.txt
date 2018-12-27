@@ -39,7 +39,7 @@ configparser==3.5.0
 flake8==3.6.0
 logilab-astng==0.24.3
 editdistance==0.5.2
-pylint==1.9.3 # pyup: <2.0.0
+pylint==1.9.4 # pyup: <2.0.0
 python-dateutil==2.7.5
 pytz==2018.7
 django-stagingcontext==0.1.0
