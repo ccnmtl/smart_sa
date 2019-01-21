@@ -48,7 +48,7 @@ six==1.12.0
 gunicorn==19.9.0
 boto==2.49.0
 pyasn1==0.4.5
-pyOpenSSL==18.0.0
+pyOpenSSL==19.0.0
 ndg-httpsclient==0.5.1
 contextlib2==0.5.5
 rcssmin==1.0.6
