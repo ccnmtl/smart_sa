@@ -11,4 +11,5 @@ python:
 before_install:
   - pip install --upgrade setuptools pip wheel
 script:
+  - make flake8
   - make $TEST_SUITE
