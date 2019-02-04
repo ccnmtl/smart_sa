@@ -217,7 +217,7 @@ def when_i_drag_pill_from_time1_to_time2(step, pill, time1, time2):
 
 @step(u'When I drag "([^"]*)" off "([^"]*)"')
 def when_i_drag_pill_off_time(step, pill, time):
-        # get the data id for this pill
+    # get the data id for this pill
     pill = find_pill(pill)
     assert pill is not None, "No pill named %s found." % (pill)
     draggable = pill.find_element_by_css_selector(
