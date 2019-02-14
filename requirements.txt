@@ -36,7 +36,7 @@ logilab-common==1.4.2
 pycodestyle==2.5.0
 enum34==1.1.6; python_version < '3.4'
 configparser==3.7.1
-flake8==3.6.0
+flake8==3.7.5
 logilab-astng==0.24.3
 editdistance==0.5.2
 pylint==1.9.4 # pyup: <2.0.0
