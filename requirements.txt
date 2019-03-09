@@ -57,7 +57,7 @@ rjsmin==1.0.12
 chardet==3.0.4
 idna==2.8
 urllib3==1.24.1
-certifi==2018.11.29
+certifi==2019.3.9
 
 requests==2.21.0
 
