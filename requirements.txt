@@ -43,7 +43,7 @@ pylint==1.9.4 # pyup: <2.0.0
 python-dateutil==2.8.0
 pytz==2018.9
 django-stagingcontext==0.1.0
-sqlparse==0.2.4
+sqlparse==0.3.0
 six==1.12.0
 gunicorn==19.9.0
 boto==2.49.0
