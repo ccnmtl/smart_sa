@@ -29,7 +29,7 @@
         var quizState = intervention.getGameVar('assessmentquiz', {});
         var userState = document
             .getElementById('defaulter') ? 'defaulter' : 'regular';
-        if (!quizState.hasOwnProperty(userState)) {
+        if (!Object.prototype.hasOwnProperty.call(quizState, userState)) {
             quizState[userState] = {};
         }
 
@@ -45,7 +45,7 @@
 
         if (window.hasAttr(goal_state, section)) {
             for (var a in goal_state[section]) {
-                if (goal_state[section].hasOwnProperty(a)) {
+                if (Object.prototype.hasOwnProperty.call(goal_state[section], a)) {
                     if (a === 'total') {
                         showTotal(goal_state[section][a]);
                         continue;
@@ -110,7 +110,7 @@
         });
         var all_done = true;
         for (var a in all_form_fields) {
-            if (all_form_fields.hasOwnProperty(a)) {
+            if (Object.prototype.hasOwnProperty.call(all_form_fields, a)) {
                 all_done &= all_form_fields[a];
             }
         }

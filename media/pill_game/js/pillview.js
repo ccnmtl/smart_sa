@@ -326,6 +326,7 @@
                 jQuery(srcElement).parent()
                     .prev('.pill-bucket').addClass('disabled');
                 for (var viewId in this.pillViews) {
+                    // eslint-disable-next-line no-prototype-builtins
                     if (this.pillViews.hasOwnProperty(viewId)) {
                         this.pillViews[viewId].unrender();
                     }
@@ -345,6 +346,7 @@
                     pills: {}
                 };
                 for (var viewId in this.pillViews) {
+                    // eslint-disable-next-line no-prototype-builtins
                     if (this.pillViews.hasOwnProperty(viewId)) {
                         var p = this.pillViews[viewId].model;
                         var name = p.get('name');
@@ -371,6 +373,7 @@
         as_dict: function() {
             var d = {id: this.el.id, views: []};
             for (var viewId in this.pillViews) {
+                // eslint-disable-next-line no-prototype-builtins
                 if (this.pillViews.hasOwnProperty(viewId)) {
                     d.views.push(this.pillViews[viewId].as_dict());
                 }
@@ -437,6 +440,7 @@
                     .setState('pills', this.pills.as_array());
 
                 for (var bucket in this.buckets) {
+                    // eslint-disable-next-line no-prototype-builtins
                     if (this.buckets.hasOwnProperty(bucket)) {
                         var view = this.buckets[bucket];
                         global.pillRegimenState
