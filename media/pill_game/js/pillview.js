@@ -326,8 +326,7 @@
                 jQuery(srcElement).parent()
                     .prev('.pill-bucket').addClass('disabled');
                 for (var viewId in this.pillViews) {
-                    // eslint-disable-next-line no-prototype-builtins
-                    if (this.pillViews.hasOwnProperty(viewId)) {
+                    if (Object.prototype.hasOwnProperty.call(this.pillViews, viewId)) {
                         this.pillViews[viewId].unrender();
                     }
                 }
@@ -346,8 +345,7 @@
                     pills: {}
                 };
                 for (var viewId in this.pillViews) {
-                    // eslint-disable-next-line no-prototype-builtins
-                    if (this.pillViews.hasOwnProperty(viewId)) {
+                    if (Object.prototype.hasOwnProperty.call(this.pillViews, viewId)) {
                         var p = this.pillViews[viewId].model;
                         var name = p.get('name');
                         if (!_.has(context.pills, name)) {
@@ -373,8 +371,7 @@
         as_dict: function() {
             var d = {id: this.el.id, views: []};
             for (var viewId in this.pillViews) {
-                // eslint-disable-next-line no-prototype-builtins
-                if (this.pillViews.hasOwnProperty(viewId)) {
+                if (Object.prototype.hasOwnProperty.call(this.pillViews, viewId)) {
                     d.views.push(this.pillViews[viewId].as_dict());
                 }
             }
@@ -440,8 +437,7 @@
                     .setState('pills', this.pills.as_array());
 
                 for (var bucket in this.buckets) {
-                    // eslint-disable-next-line no-prototype-builtins
-                    if (this.buckets.hasOwnProperty(bucket)) {
+                    if (Object.prototype.hasOwnProperty.call(this.buckets, bucket)) {
                         var view = this.buckets[bucket];
                         global.pillRegimenState
                             .setState(view.el.id, view.as_dict());
