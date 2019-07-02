@@ -4,7 +4,7 @@ psycopg2==2.8.2
 coverage==4.5.3
 BeautifulSoup==3.2.1
 cssselect==1.0.3
-lxml==4.3.3
+lxml==4.3.4
 pyparsing==2.4.0
 tornado==4.5.3 # pyup: <5.0
 fuzzywuzzy==0.17.0
