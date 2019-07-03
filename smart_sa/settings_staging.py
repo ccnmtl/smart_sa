@@ -1,5 +1,5 @@
 # flake8: noqa
-from settings_shared import *
+from smart_sa.settings_shared import *
 from ccnmtlsettings.staging import common
 
 locals().update(
@@ -33,6 +33,6 @@ SENTRY_SITE = 'masivukeni-staging'
 STATSD_PREFIX = 'masivukeni-staging'
 
 try:
-    from local_settings import *
+    from smart_sa.local_settings import *
 except ImportError:
     pass
