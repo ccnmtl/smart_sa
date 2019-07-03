@@ -58,7 +58,7 @@ idna==2.8
 urllib3==1.25.3
 certifi==2019.3.9
 
-requests==2.21.0
+requests==2.22.0
 
 djangowind==1.2.1
 raven==6.10.0
