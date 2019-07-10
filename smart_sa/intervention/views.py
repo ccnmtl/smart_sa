@@ -190,7 +190,7 @@ def edit_participant(request, participant_id):
         p.name = request.POST.get('name', '')
         p.patient_id = request.POST.get('patient_id', '')
         p.clinical_notes = request.POST.get('clinical_notes', '')
-        old_password = request.POST.get('password', '')
+        old_password = request.POST.get('password', '')  # nosec
         new_id_number = request.POST.get('new_id_number', '')
         if new_id_number != '' and old_password == p.id_number:
             p.id_number = new_id_number
