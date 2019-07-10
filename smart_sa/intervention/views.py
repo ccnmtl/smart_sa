@@ -210,7 +210,7 @@ def edit_counselor(request, counselor_id):
         u.username = request.POST.get('username', u.username)
         u.is_active = request.POST.get('status', False)
         new_password = request.POST.get('new_password', "")
-        if new_password != "":
+        if new_password != "":  # nosec
             u.set_password(new_password)
         u.save()
         return HttpResponseRedirect("/manage/")
