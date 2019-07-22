@@ -45,7 +45,7 @@ django-stagingcontext==0.1.0
 sqlparse==0.3.0
 six==1.12.0
 gunicorn==19.9.0
-futures==3.2.0; python_version < '3'
+futures==3.3.0; python_version < '3'
 s3transfer==0.2.1
 jmespath==0.9.4
 botocore==1.12.182
