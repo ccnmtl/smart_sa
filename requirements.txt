@@ -66,7 +66,7 @@ urllib3==1.25.6
 
 requests==2.22.0
 
-djangowind==1.2.1
+djangowind==1.2.2
 raven==6.10.0
 django-statsd-mozilla==0.4.0
 django-smoketest==1.1.0
