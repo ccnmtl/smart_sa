@@ -40,7 +40,7 @@ logilab-astng==0.24.3
 editdistance==0.5.3
 pylint==1.9.5 # pyup: <2.0.0
 python-dateutil==2.8.0
-pytz==2019.2
+pytz==2019.3
 django-stagingcontext==0.1.0
 sqlparse==0.3.0
 six==1.12.0
