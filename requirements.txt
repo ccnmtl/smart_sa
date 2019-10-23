@@ -54,7 +54,7 @@ urllib3==1.25.6
 pyasn1==0.4.7
 pyOpenSSL==19.0.0
 ndg-httpsclient==0.5.1
-contextlib2==0.6.0
+contextlib2==0.6.0.post1
 rcssmin==1.0.6
 rjsmin==1.0.12
 
