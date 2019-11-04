@@ -14,7 +14,7 @@ from django.core.exceptions import MultipleObjectsReturned
 from django.utils import simplejson
 from django.contrib.auth.models import User
 from zipfile import ZipFile
-from cStringIO import StringIO
+from io import StringIO
 from simplejson import dumps, loads
 from datetime import datetime
 import os

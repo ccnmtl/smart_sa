@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('logged', models.DateTimeField(auto_now_add=True, verbose_name=b'start timestamp')),
-                ('activity', models.ForeignKey(to='intervention.Activity')),
+                ('activity', models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Activity')),
             ],
             options={
             },
@@ -76,7 +76,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('notes', models.TextField(default=b'', null=True, blank=True)),
-                ('counselor', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('counselor', models.ForeignKey(on_delete=models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -100,7 +100,7 @@ class Migration(migrations.Migration):
                 ('subtitle', models.CharField(max_length=512, blank=True)),
                 ('description', models.TextField(blank=True)),
                 ('instructions', models.TextField(blank=True)),
-                ('activity', models.ForeignKey(blank=True, to='intervention.Activity', null=True)),
+                ('activity', models.ForeignKey(on_delete=models.deletion.CASCADE, blank=True, to='intervention.Activity', null=True)),
             ],
             options={
             },
@@ -118,7 +118,7 @@ class Migration(migrations.Migration):
                 ('notes', models.TextField(blank=True)),
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name=b'date created')),
                 ('modified', models.DateTimeField(auto_now=True, verbose_name=b'date modified')),
-                ('activity', models.ForeignKey(to='intervention.Activity')),
+                ('activity', models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Activity')),
             ],
             options={
             },
@@ -169,8 +169,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('status', models.CharField(default=b'incomplete', max_length=256)),
-                ('activity', models.ForeignKey(to='intervention.Activity')),
-                ('participant', models.ForeignKey(to='intervention.Participant')),
+                ('activity', models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Activity')),
+                ('participant', models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Participant')),
             ],
             options={
             },
@@ -182,7 +182,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('key', models.CharField(max_length=256)),
                 ('value', models.TextField(default=b'', null=True, blank=True)),
-                ('participant', models.ForeignKey(to='intervention.Participant')),
+                ('participant', models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Participant')),
             ],
             options={
             },
@@ -193,8 +193,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('status', models.CharField(default=b'incomplete', max_length=256)),
-                ('participant', models.ForeignKey(to='intervention.Participant')),
-                ('session', models.ForeignKey(to='intervention.ClientSession')),
+                ('participant', models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Participant')),
+                ('session', models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.ClientSession')),
             ],
             options={
             },
@@ -205,8 +205,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('logged', models.DateTimeField(auto_now_add=True, verbose_name=b'start timestamp')),
-                ('participant', models.ForeignKey(to='intervention.Participant')),
-                ('session', models.ForeignKey(to='intervention.ClientSession')),
+                ('participant', models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Participant')),
+                ('session', models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.ClientSession')),
             ],
             options={
             },
@@ -223,13 +223,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='counselornote',
             name='participant',
-            field=models.ForeignKey(to='intervention.Participant', null=True),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Participant', null=True),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='clientsession',
             name='intervention',
-            field=models.ForeignKey(to='intervention.Intervention'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Intervention'),
             preserve_default=True,
         ),
         migrations.AlterOrderWithRespectTo(
@@ -239,13 +239,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='activityvisit',
             name='participant',
-            field=models.ForeignKey(to='intervention.Participant'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.Participant'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='activity',
             name='clientsession',
-            field=models.ForeignKey(to='intervention.ClientSession'),
+            field=models.ForeignKey(on_delete=models.deletion.CASCADE, to='intervention.ClientSession'),
             preserve_default=True,
         ),
         migrations.AlterOrderWithRespectTo(

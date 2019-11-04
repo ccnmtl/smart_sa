@@ -20,10 +20,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if not settings.DEBUG:
-            print "this should never be run on production"
+            print("this should never be run on production")
             return
 
-        print "fetching content from prod..."
+        print("fetching content from prod...")
         r = requests.get(
             settings.PROD_BASE_URL + "intervention_admin/content_sync/")
         zc = r.text
@@ -38,7 +38,7 @@ class Command(BaseCommand):
         if options["dbonly"]:
             return
 
-        print "updating uploaded files..."
+        print("updating uploaded files...")
         base_len = len(settings.PROD_MEDIA_BASE_URL)
         for upload in uploads:
             relative_path = upload[base_len:]
@@ -51,5 +51,5 @@ class Command(BaseCommand):
             r = requests.get(upload)
             with open(os.path.join(settings.MEDIA_ROOT, relative_path),
                       "w") as f:
-                print "   writing %s to %s" % (upload, relative_path)
+                print("   writing %s to %s" % (upload, relative_path))
                 f.write(r.text)

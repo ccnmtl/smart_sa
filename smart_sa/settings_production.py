@@ -1,5 +1,5 @@
 # flake8: noqa
-from settings_shared import *
+from smart_sa.settings_shared import *
 from ccnmtlsettings.production import common
 
 locals().update(
@@ -30,6 +30,6 @@ INTERVENTION_BACKUP_HEXKEY = "d37fb81dff7672c76f4881a8f57c002403ba2ce5155dc4ac6b
 INTERVENTION_BACKUP_IV = "899f6762313185a9593480e6f015b0d5053464daa5ecadd00dc4e7e2984f028f"
 
 try:
-    from local_settings import *
+    from smart_sa.local_settings import *
 except ImportError:
     pass

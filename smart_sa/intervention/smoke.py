@@ -1,5 +1,5 @@
 from smoketest import SmokeTest
-from models import Activity
+from smart_sa.intervention.models import Activity
 
 
 class DBConnectivity(SmokeTest):

@@ -111,7 +111,7 @@ def then_button_is_selected(step, button):
     assert elt, 'disclosure button should be selected'
 
 
-@step(u'Then I wait (\d+) seconds')
+@step(r'Then I wait (\d+) seconds')
 def then_i_wait_count_seconds(step, count):
     n = int(count)
     time.sleep(n)

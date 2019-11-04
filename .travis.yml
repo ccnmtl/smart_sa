@@ -1,5 +1,4 @@
 language: python
-sudo: false
 addons:
   firefox: "52.5.0esr"
 env:

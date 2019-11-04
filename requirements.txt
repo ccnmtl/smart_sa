@@ -2,7 +2,6 @@ Django==1.11.26 # pyup: <2.0
 simplejson==3.16.0
 psycopg2==2.8.4
 coverage==4.5.4
-BeautifulSoup==3.2.1
 cssselect==1.1.0
 lxml==4.4.1
 pyparsing==2.4.2
@@ -38,13 +37,14 @@ configparser==4.0.2
 flake8==3.7.9
 logilab-astng==0.24.3
 editdistance==0.5.3
-pylint==1.9.5 # pyup: <2.0.0
+pylint==1.9.5  # pyup: <2.0
 python-dateutil==2.8.1
 pytz==2019.3
 django-stagingcontext==0.1.0
 sqlparse==0.3.0
 six==1.12.0
 gunicorn==19.9.0
+
 futures==3.3.0; python_version < '3'
 s3transfer==0.2.1
 jmespath==0.9.4

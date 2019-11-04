@@ -14,6 +14,7 @@ Facts
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.encoding import python_2_unicode_compatible, smart_text
 from smart_sa.intervention.installed_games import InstalledGames
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 import json
@@ -36,6 +37,7 @@ def dict_serialize(obj):
     return d
 
 
+@python_2_unicode_compatible
 class Intervention(models.Model):
     """SMART is an intervention--i.e. the top object"""
     name = models.CharField(max_length=200)
@@ -47,7 +49,7 @@ class Intervention(models.Model):
                               'general_instructions']
         children_dict_fields = [('clientsessions', 'clientsession_set')]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_absolute_url(self):
@@ -97,9 +99,10 @@ class Intervention(models.Model):
         return self.clientsession_set.all()[index - 1]
 
 
+@python_2_unicode_compatible
 class ClientSession (models.Model):
     """One day of activities for a client"""
-    intervention = models.ForeignKey(Intervention)
+    intervention = models.ForeignKey(Intervention, on_delete=models.CASCADE)
 
     short_title = models.CharField(max_length=512)
     long_title = models.CharField(max_length=512)
@@ -119,7 +122,7 @@ class ClientSession (models.Model):
                               ('modified', str), 'defaulter']
         children_dict_fields = [('activities', 'activity_set')]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.short_title
 
     def get_absolute_url(self):
@@ -201,6 +204,7 @@ class ClientSession (models.Model):
         return self.activity_set.all()[index - 1]
 
 
+@python_2_unicode_compatible
 class Activity(models.Model):
     """Contains one or more pairs of instructions, and zero or one game.
     This can comprise multiple pairs.
@@ -219,7 +223,7 @@ class Activity(models.Model):
             ('gamepages', 'gamepage_set'),
             ('instructions', 'instruction_set')]
 
-    clientsession = models.ForeignKey(ClientSession)
+    clientsession = models.ForeignKey(ClientSession, on_delete=models.CASCADE)
 
     short_title = models.CharField(max_length=512)
     long_title = models.CharField(max_length=512)
@@ -235,7 +239,7 @@ class Activity(models.Model):
     game = models.CharField(max_length=64, choices=InstalledGames,
                             blank=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.short_title
 
     def get_absolute_url(self):
@@ -384,10 +388,12 @@ class Activity(models.Model):
             return ""
 
 
+@python_2_unicode_compatible
 class GamePage (models.Model):
     """A javascript 'game' associated with an activity."""
     # make null possible so 'deleting' is possible but recoverable
-    activity = models.ForeignKey(Activity, blank=True, null=True)
+    activity = models.ForeignKey(Activity, blank=True, null=True,
+                                 on_delete=models.CASCADE)
 
     class Meta:
         order_with_respect_to = 'activity'
@@ -399,7 +405,7 @@ class GamePage (models.Model):
 
     page_id = None  # blessed by view with name of the page
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title or self.page_id or str(self.id)
 
     def index(self):
@@ -479,11 +485,12 @@ class GamePage (models.Model):
         self.save()
 
 
-class Instruction (models.Model):
+@python_2_unicode_compatible
+class Instruction(models.Model):
     """A unit of interaction between facilitator and client
     Multiple per activity
     """
-    activity = models.ForeignKey(Activity)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
 
     class Meta:
         order_with_respect_to = 'activity'
@@ -502,8 +509,8 @@ class Instruction (models.Model):
     created = models.DateTimeField('date created', auto_now_add=True)
     modified = models.DateTimeField('date modified', auto_now=True)
 
-    def __unicode__(self):
-        return unicode(self.id)
+    def __str__(self):
+        return smart_text(self.id)
 
     def index(self):
         "1-based index"
@@ -545,6 +552,7 @@ class Backup (models.Model):
                     created=str(self.created))
 
 
+@python_2_unicode_compatible
 class Participant(models.Model):
     """ participant in the system """
     name = models.CharField(max_length=256)
@@ -578,7 +586,7 @@ class Participant(models.Model):
     # clear out old ones
     created = models.DateTimeField(auto_now_add=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def to_json(self):
@@ -1140,45 +1148,50 @@ class Participant(models.Model):
         return pprint.pformat(dir(self))
 
 
+@python_2_unicode_compatible
 class ParticipantSession(models.Model):
     """ participant's progress on a session """
-    participant = models.ForeignKey(Participant)
-    session = models.ForeignKey(ClientSession)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+    session = models.ForeignKey(ClientSession, on_delete=models.CASCADE)
     status = models.CharField(max_length=256, default="incomplete")
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s -> %s [%s]" % (self.participant.name,
                                   self.session.long_title, self.status)
 
 
+@python_2_unicode_compatible
 class ParticipantActivity(models.Model):
     """ participant's progress on an activity """
-    participant = models.ForeignKey(Participant)
-    activity = models.ForeignKey(Activity)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     status = models.CharField(max_length=256, default="incomplete")
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s -> %s [%s]" % (self.participant.name,
                                   self.activity.long_title, self.status)
 
 
+@python_2_unicode_compatible
 class CounselorNote(models.Model):
     """ notes entered by a counselor on a participant"""
-    participant = models.ForeignKey(Participant, null=True)
-    counselor = models.ForeignKey(User, null=True)
+    participant = models.ForeignKey(Participant, null=True,
+                                    on_delete=models.CASCADE)
+    counselor = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     notes = models.TextField(blank=True, null=True, default="")
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s <-- %s" % (self.participant.name, self.counselor.username)
 
 
+@python_2_unicode_compatible
 class ParticipantGameVar(models.Model):
     """ One game variable for a Participant"""
-    participant = models.ForeignKey(Participant)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     key = models.CharField(max_length=256)
     value = models.TextField(default="", blank=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s -> %s" % (self.participant.name, self.key)
 
 
@@ -1200,12 +1213,12 @@ class Deployment(models.Model):
 
 
 class SessionVisit(models.Model):
-    participant = models.ForeignKey(Participant)
-    session = models.ForeignKey(ClientSession)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+    session = models.ForeignKey(ClientSession, on_delete=models.CASCADE)
     logged = models.DateTimeField('start timestamp', auto_now_add=True)
 
 
 class ActivityVisit(models.Model):
-    participant = models.ForeignKey(Participant)
-    activity = models.ForeignKey(Activity)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     logged = models.DateTimeField('start timestamp', auto_now_add=True)
