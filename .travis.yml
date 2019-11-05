@@ -1,6 +1,6 @@
 language: python
 addons:
-  firefox: "52.5.0esr"
+  firefox: "52.9.0esr"
 env:
   - TEST_SUITE=jenkins
   - TEST_SUITE=harvest
