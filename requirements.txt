@@ -63,13 +63,14 @@ rjsmin==1.0.12
 chardet==3.0.4
 idna==2.8
 
-certifi==2019.9.11
-urllib3==1.25.6
+certifi==2019.9.11  # sentry-sdk
+urllib3==1.25.6  # sentry-sdk
 
 requests==2.22.0
 
 djangowind==1.2.2
 raven==6.10.0
+sentry-sdk==0.13.2
 django-statsd-mozilla==0.4.0
 django-smoketest==1.1.0
 django-debug-toolbar==1.11 # pyup <2.0
