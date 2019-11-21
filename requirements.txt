@@ -1,5 +1,5 @@
 Django==1.11.26 # pyup: <2.0
-simplejson==3.16.0
+simplejson==3.17.0
 psycopg2==2.8.4
 coverage==4.5.4
 cssselect==1.1.0
@@ -54,7 +54,7 @@ boto3>=1.10.0,<1.11.0
 
 urllib3==1.25.7
 pyasn1==0.4.8
-pyOpenSSL==19.0.0
+pyOpenSSL==19.1.0
 ndg-httpsclient==0.5.1
 contextlib2==0.6.0.post1
 rcssmin==1.0.6
