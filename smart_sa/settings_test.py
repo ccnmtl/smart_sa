@@ -22,7 +22,6 @@ BROWSER = 'Headless'
 # BROWSER = 'Chrome'
 
 
-LETTUCE_DJANGO_APP = ['lettuce.django']
 ALOE_DJANGO_APP = ['aloe_django']
 INSTALLED_APPS = INSTALLED_APPS + ALOE_DJANGO_APP
 
