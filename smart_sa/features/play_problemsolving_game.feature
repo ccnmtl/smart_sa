@@ -3,8 +3,6 @@ Feature: Problem Solving Activity
     ## Barrier is currently in Session 4, Activity 9
 
     Scenario: Runthrough
-        
-        
         # Find Activity
         Given I am a participant
         
@@ -275,7 +273,3 @@ Feature: Problem Solving Activity
     #     Then barrier 19 has "marked"
     #     Then I can specify my issue
     #     My issue is "abc"
-        
-        
-        
-        

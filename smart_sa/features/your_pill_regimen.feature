@@ -118,6 +118,3 @@ Feature: Your Pill Regimen
         # Then there are 10 pills
         # When I click Add Pill
         # Then I'm told I can only enter 10 pills
-        
-              
-        

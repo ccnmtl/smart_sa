@@ -1,7 +1,6 @@
 Feature: Drug Quiz    
     
     Scenario: Drug Audit
-      
       Given I am a participant
       When I click on Session 1
       Then I click on Activity 12
@@ -46,5 +45,3 @@ Feature: Drug Quiz
       When I fill in all 3s in the quiz
       When I click the "What is My Score?" link
       Then my score says "serious problems"
-      
-      

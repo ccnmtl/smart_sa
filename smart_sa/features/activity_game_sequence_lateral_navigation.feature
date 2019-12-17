@@ -8,12 +8,10 @@ At the activity level (activity.html), can we:
 Clicking Next -> when the interactivity phase is complete advances the user to the next activity."
 
     Scenario: Activity With Game
-        
         Given I am a participant
         When I go to Activity 3 of Session 1
         Then there is a "Next →" nav button
         Then there is no "Use Masivukeni Online" nav button
-        
 
     Scenario: Going back
         # from Susan's comment on the PMT:
@@ -30,4 +28,3 @@ Clicking Next -> when the interactivity phase is complete advances the user to t
         Then there is a game
         Then I am not on an activity page
         Then I am on a game page
-        

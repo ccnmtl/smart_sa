@@ -9,16 +9,15 @@ curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feat
 Don't edit this feature file directly. Edit templates/intervention/testgen.html instead
 
     Scenario: Automated Run-Through
-      
       Given I am a participant
-   
+
       ## SESSION 1
 
       When I click on Session 1
       When I click on Activity 1
       Then I am on the "Session Objectives" Activity
       When I click on Complete Activity
-      
+
       When I click on the Session Home
       When I click on Activity 2
       Then I am on the "Welcome to Masivukeni!" Activity
@@ -531,7 +530,3 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       Then there is a game
       
       When I click on the Session Home
-      
-   
-
-      

@@ -2,7 +2,6 @@ Feature: Practice Pill Regimen
     ## The practice pill regimen is currently in Session 1, Activity 7
 
     Scenario: runthrough
-        
         Given I am a participant
         
         When I click on Session 1
@@ -49,5 +48,3 @@ Feature: Practice Pill Regimen
         # Drag pill off the bucket
         When I drop "Tenofovir (TDF)" onto "daytime"
         Then there is 1 "Tenofovir (TDF)" in "daytime"
-        
-        
