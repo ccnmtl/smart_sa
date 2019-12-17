@@ -5,8 +5,8 @@ import time
 
 from django.conf import settings
 from django.test import client
-from lettuce import before, after, world, step
-from lettuce import django
+from aloe import before, after, world, step
+from aloe_django import django_url
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities \
     import DesiredCapabilities
@@ -101,16 +101,16 @@ def clear_selenium(step):
 @step(r'I access the url "(.*)"')
 def access_url(step, url):
     if world.using_selenium:
-        world.browser.get(django.django_url(url))
+        world.browser.get(django_url(url))
     else:
-        response = world.client.get(django.django_url(url))
+        response = world.client.get(django_url(url))
         world.dom = html.fromstring(response.content)
 
 
 @step(u'I am not logged in')
 def i_am_not_logged_in(step):
     if world.using_selenium:
-        world.browser.get(django.django_url("/accounts/logout/"))
+        world.browser.get(django_url("/accounts/logout/"))
     else:
         world.client.logout()
 
@@ -118,9 +118,9 @@ def i_am_not_logged_in(step):
 @step(u'I access the management console')
 def i_access_the_management_console(step):
     if world.using_selenium:
-        world.browser.get(django.django_url("/manage/"))
+        world.browser.get(django_url("/manage/"))
     else:
-        response = world.client.get(django.django_url("/manage/"),follow=True)
+        response = world.client.get(django_url("/manage/"),follow=True)
         world.response = response
         world.dom = html.fromstring(response.content)
 
@@ -128,9 +128,9 @@ def i_access_the_management_console(step):
 @step(u'I access the counselor landing page')
 def i_access_the_counselor_landing_page(step):
     if world.using_selenium:
-        world.browser.get(django.django_url("/intervention/"))
+        world.browser.get(django_url("/intervention/"))
     else:
-        response = world.client.get(django.django_url("/intervention/"),follow=True)
+        response = world.client.get(django_url("/intervention/"),follow=True)
         world.response = response
         world.dom = html.fromstring(response.content)
 
@@ -153,8 +153,8 @@ def i_am_taken_to_the_index(step):
 @step(u'I am logged in as a counselor')
 def i_am_logged_in_as_a_counselor(step):
     if world.using_selenium:
-        world.browser.get(django.django_url("/accounts/logout/"))
-        world.browser.get(django.django_url("/accounts/login/?next=/intervention/"))
+        world.browser.get(django_url("/accounts/logout/"))
+        world.browser.get(django_url("/accounts/login/?next=/intervention/"))
         username_field = world.browser.find_element_by_id("id_username")
         password_field = world.browser.find_element_by_id("id_password")
         form = world.browser.find_element_by_id("login-form")
@@ -169,17 +169,17 @@ def i_am_logged_in_as_a_counselor(step):
 @step(u'I log out')
 def i_log_out(step):
     if world.using_selenium:
-        world.browser.get(django.django_url("/accounts/logout/"))
+        world.browser.get(django_url("/accounts/logout/"))
     else:
-        response = world.client.get(django.django_url("/accounts/logout/"),follow=True)
+        response = world.client.get(django_url("/accounts/logout/"),follow=True)
         world.response = response
         world.dom = html.fromstring(response.content)
 
 @step(u'I am logged in as an admin')
 def given_i_am_logged_in_as_an_admin(step):
     if world.using_selenium:
-        world.browser.get(django.django_url("/accounts/logout/"))
-        world.browser.get(django.django_url("/accounts/login/?next=/intervention/"))
+        world.browser.get(django_url("/accounts/logout/"))
+        world.browser.get(django_url("/accounts/login/?next=/intervention/"))
         username_field = world.browser.find_element_by_id("id_username")
         password_field = world.browser.find_element_by_id("id_password")
         form = world.browser.find_element_by_id("login-form")
@@ -223,7 +223,7 @@ def i_click_the_link(step, text):
             if a.text:
                 if text.strip().lower() in a.text.strip().lower():
                     href = a.attrib['href']
-                    response = world.client.get(django.django_url(href))
+                    response = world.client.get(django_url(href))
                     world.dom = html.fromstring(response.content)
                     return
         assert False, "could not find the '%s' link" % text
@@ -362,7 +362,7 @@ def i_go_back(self):
 @step(u'I am a participant')
 def i_am_a_participant(step):
     if world.using_selenium:
-        world.browser.get(django.django_url("/"))
+        world.browser.get(django_url("/"))
 
         wait = ui.WebDriverWait(world.browser, 5)
         wait.until(
@@ -376,7 +376,7 @@ def i_am_a_participant(step):
                 == "Sessions")
     else:
         from smart_sa.intervention.models import Participant
-        world.client.post(django.django_url('/set_participant/'),
+        world.client.post(django_url('/set_participant/'),
                           {'name': 'test', 'id_number': 'test'})
         world.participant = Participant.objects.filter(name='test')[0]
 
@@ -397,9 +397,9 @@ def i_go_to_session(step,activity_number,session_number):
     assert a.index() == int(activity_number)
 
     if world.using_selenium:
-        world.browser.get(django.django_url("/activity/%d/" % a.id))
+        world.browser.get(django_url("/activity/%d/" % a.id))
     else:
-        response = world.client.get(django.django_url("/activity/%d/" % a.id))
+        response = world.client.get(django_url("/activity/%d/" % a.id))
         world.dom = html.fromstring(response.content)
         world.response = response
 
@@ -410,7 +410,7 @@ def i_go_to_session(step,session_number):
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     assert s.index() == int(session_number)
-    response = world.client.get(django.django_url("/session/%d/" % s.id))
+    response = world.client.get(django_url("/session/%d/" % s.id))
     world.dom = html.fromstring(response.content)
     world.response = response
 
@@ -433,7 +433,7 @@ def the_participant_has_completed_activity_in_session_1(step,num_activities,sess
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in s.activity_set.all()[:int(num_activities)]:
-        r = world.client.post(django.django_url("/activity/%d/complete/" % a.id),{})
+        r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
 
 
 @step(u'the participant has completed all activities in session (\d+)')
@@ -442,7 +442,7 @@ def the_participant_has_completed_all_activities(step,session_number):
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in s.activity_set.all():
-        r = world.client.post(django.django_url("/activity/%d/complete/" % a.id),{})
+        r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
 
 
 @step(u'the participant has completed all activities except the first in session (\d+)')
@@ -451,7 +451,7 @@ def the_participant_has_completed_all_activities_except_the_first(step,session_n
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in list(s.activity_set.all())[1:]:
-        r = world.client.post(django.django_url("/activity/%d/complete/" % a.id),{})
+        r = world.client.post(django_url("/activity/%d/complete/" % a.id),{})
 
 
 @step(u'there is a "([^"]*)" button')

@@ -1,4 +1,4 @@
-from lettuce import world, step
+from aloe import world, step
 from selenium.common.exceptions import NoSuchElementException
 import time
 

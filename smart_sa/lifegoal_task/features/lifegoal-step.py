@@ -1,6 +1,6 @@
 import time
 
-from lettuce import world, step
+from aloe import world, step
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import ui
 from selenium.webdriver.support.expected_conditions import \
