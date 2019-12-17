@@ -14,7 +14,15 @@ fixtures==3.0.0
 testtools==2.3.0
 testscenarios==0.5.0
 python-subunit==1.3.0
-requirements/src/lettuce-0.2.25.ccnmtl-py2.py3-none-any.whl
+ansicolors==1.1.8
+colorama==0.4.3
+gherkin-official==4.1.3
+repoze.lru==0.7
+future==0.18.2; python_version < '3'
+aloe==0.1.19
+nose==1.3.7
+django-nose==1.4.6
+aloe-django==0.1.6
 selenium==3.141.0
 statsd==3.3.0
 pep8==1.7.1
