@@ -8,16 +8,6 @@ pyparsing==2.4.5
 tornado==4.5.3 # pyup: <5.0
 fuzzywuzzy==0.17.0
 sure==1.4.11
-traitlets==4.3.3
-ipython_genutils==0.2.0
-decorator==4.4.1
-ptyprocess==0.6.0
-pexpect==4.7.0
-pickleshare==0.7.5
-simplegeneric==0.8.1
-path.py==11.5.2 # pyup: <12
-ipython==5.8.0 # pyup: <6.0.0
-ipdb==0.12.3
 extras==1.0.0
 python-mimeparse==1.6.0
 fixtures==3.0.0
