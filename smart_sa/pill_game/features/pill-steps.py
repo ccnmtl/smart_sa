@@ -1,5 +1,5 @@
 import time
-from lettuce import world, step
+from aloe import world, step
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import NoSuchElementException

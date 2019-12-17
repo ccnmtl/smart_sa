@@ -1,7 +1,7 @@
 Feature: Mood Quiz
 
     Scenario: Mood
-      Using selenium
+      
       Given I am a participant
       When I click on Session 1
       Then I click on Activity 10
@@ -44,10 +44,10 @@ Feature: Mood Quiz
       When I click the "What is My Score?" link
       Then my score says "Severe distress" 
       
-      Finished using selenium
+      
       
     Scenario: Mood Defaulter - State is clear
-      Using selenium
+      
       Given I am a participant
       When I click on Session 1
       Then I click on Activity 10
@@ -70,7 +70,7 @@ Feature: Mood Quiz
       Then there is a game
       Then there is an assessmentquiz
 
-      Finished using selenium
+      
        
 
     

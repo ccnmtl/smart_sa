@@ -1,7 +1,7 @@
 Feature: Alcohol Quiz
 
     Scenario: Alcohol Audit
-      Using selenium
+      
       Given I am a participant
       When I click on Session 1
       Then I click on Activity 11
@@ -56,4 +56,4 @@ Feature: Alcohol Quiz
       When I click the "What is My Score?" link
       Then my score says "Severe drinking issues"
 
-      Finished using selenium
+      

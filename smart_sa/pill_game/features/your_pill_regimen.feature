@@ -3,7 +3,7 @@ Feature: Your Pill Regimen
 
     Scenario: runthrough 
         # Find activity
-        Using selenium
+        
         Given I am a participant
         
         When I click on Session 3
@@ -119,5 +119,5 @@ Feature: Your Pill Regimen
         # When I click Add Pill
         # Then I'm told I can only enter 10 pills
         
-        Finished using selenium      
+              
         

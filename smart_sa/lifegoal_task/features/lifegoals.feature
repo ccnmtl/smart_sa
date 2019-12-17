@@ -3,15 +3,15 @@ Feature: Life goals
 ## The life goal defaulter session is Session 4, Activity 10
 
     Scenario: Find the activity
-        Using selenium
+        
         Given I am a participant
         When I go to Activity 17 of Session 1
         When I click the "Next →" link
         Then there is a game
-        Finished using selenium
+        
 
     Scenario: Fill in the steps and goal
-        Using selenium
+        
         Given I am a participant
 
         When I go to Activity 17 of Session 1
@@ -86,4 +86,4 @@ Feature: Life goals
         Then "Step 4" is "g"
         Then "Goal" is "j"
 
-        Finished using selenium
+        

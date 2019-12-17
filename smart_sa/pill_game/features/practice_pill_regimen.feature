@@ -2,7 +2,7 @@ Feature: Practice Pill Regimen
     ## The practice pill regimen is currently in Session 1, Activity 7
 
     Scenario: runthrough
-        Using selenium
+        
         Given I am a participant
         
         When I click on Session 1
@@ -11,7 +11,7 @@ Feature: Practice Pill Regimen
         Then there is a game
         
         #Verify Practice Mode
-        Using selenium
+        
         There is a "Practice ARVs" title
         There is not an Add Pill button
         There are 3 pills
@@ -50,4 +50,4 @@ Feature: Practice Pill Regimen
         When I drop "Tenofovir (TDF)" onto "daytime"
         Then there is 1 "Tenofovir (TDF)" in "daytime"
         
-        Finished using selenium
+        

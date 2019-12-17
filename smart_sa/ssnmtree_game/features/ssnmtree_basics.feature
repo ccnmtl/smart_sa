@@ -3,7 +3,7 @@ Feature: SSNMTree Basics
 ## Defaulter Session 4, Activity 13
 
     Scenario: 1 - Fill in the tree & test state save
-        Using selenium
+        
         Given I am a participant
         When I go to Activity 13 of Session 1
         When I click the "Next →" link
@@ -17,10 +17,10 @@ Feature: SSNMTree Basics
         When I click the "← Back" link
         Then I wait 1 second
         There is a filled in SSNM Tree with "regular"
-        Finished using Selenium
+        
 
     Scenario: 2 - Test disclosure & support buttons
-        Using selenium
+        
         Given I am a participant
         When I go to Activity 13 of Session 1
         When I click the "Next →" link
@@ -69,4 +69,4 @@ Feature: SSNMTree Basics
         When I name the circle "regular"
         There is a filled in SSNM Tree with "regular"
 
-        Finished using Selenium
+        

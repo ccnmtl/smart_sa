@@ -3,7 +3,7 @@ Feature: Problem Solving Activity
     ## Barrier is currently in Session 4, Activity 9
 
     Scenario: Runthrough
-        Using selenium
+        
         
         # Find Activity
         Given I am a participant
@@ -277,5 +277,5 @@ Feature: Problem Solving Activity
     #     My issue is "abc"
         
         
-        Finished using selenium
+        
         

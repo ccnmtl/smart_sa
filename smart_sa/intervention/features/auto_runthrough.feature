@@ -9,7 +9,7 @@ curl http://localhost:8001/testgen/ > intervention/features/auto_runthrough.feat
 Don't edit this feature file directly. Edit templates/intervention/testgen.html instead
 
     Scenario: Automated Run-Through
-      Using selenium
+      
       Given I am a participant
    
       ## SESSION 1
@@ -534,4 +534,4 @@ Don't edit this feature file directly. Edit templates/intervention/testgen.html 
       
    
 
-      Finished using selenium
+      
