@@ -3,10 +3,10 @@ env:
   - TEST_SUITE=jenkins
   - TEST_SUITE=harvest
 addons:
-  chrome: latest
+  chrome: stable
   apt:
     packages:
-      - chromium-chromedriver: latest
+      - chromium-chromedriver
 python:
   - "2.7"
 before_script:
