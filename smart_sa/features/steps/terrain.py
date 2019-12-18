@@ -225,7 +225,7 @@ def i_click_activity(step, activity_number):
         link = wait.until(
             visibility_of_element_located((By.PARTIAL_LINK_TEXT, link_text)))
         link.click()
-    except Exception, e:
+    except Exception as e:
         assert False, str(e)
 
 
@@ -276,7 +276,7 @@ def there_is_a_game(self):
         wait.until(
             visibility_of_element_located((By.ID, 'gamebox')))
         assert world.browser.find_element_by_id('gamebox')
-    except Exception, e:
+    except Exception as e:
         assert False, str(e)
 
 
