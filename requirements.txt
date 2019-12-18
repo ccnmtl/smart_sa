@@ -5,7 +5,7 @@ coverage==4.5.4
 cssselect==1.1.0
 lxml==4.4.2
 pyparsing==2.4.5
-tornado==4.5.3 # pyup: <5.0
+tornado==6.0.3
 fuzzywuzzy==0.17.0
 sure==1.4.11
 extras==1.0.0
@@ -18,7 +18,6 @@ ansicolors==1.1.8
 colorama==0.4.3
 gherkin-official==4.1.3
 repoze.lru==0.7
-future==0.18.2; python_version < '3'
 aloe==0.1.19
 nose==1.3.7
 django-nose==1.4.6
@@ -28,22 +27,20 @@ statsd==3.3.0
 pep8==1.7.1
 pyflakes==2.1.1
 mccabe==0.6.1
-logilab-common==1.4.4 # pyup: < 1.5
+logilab-common==1.5.2
 pycodestyle==2.5.0
-enum34==1.1.6; python_version < '3.4'
 configparser==4.0.2
 flake8==3.7.9
 logilab-astng==0.24.3
 editdistance==0.5.3
-pylint==1.9.5  # pyup: <2.0
+pylint==2.4.4
 python-dateutil==2.8.1
 pytz==2019.3
 django-stagingcontext==0.1.0
 sqlparse==0.3.0
 six==1.13.0
-gunicorn==19.10.0  # pyup: <20.0.0
+gunicorn==20.0.4
 
-futures==3.3.0; python_version < '3'
 s3transfer==0.2.1
 jmespath==0.9.4
 
@@ -52,8 +49,6 @@ boto3>=1.10.0,<1.11.0
 
 urllib3==1.25.7
 pyasn1==0.4.8
-pyOpenSSL==19.1.0
-ndg-httpsclient==0.5.1
 contextlib2==0.6.0.post1
 rcssmin==1.0.6
 rjsmin==1.0.12
@@ -72,7 +67,7 @@ raven==6.10.0
 sentry-sdk==0.13.5
 django-statsd-mozilla==0.4.0
 django-smoketest==1.1.0
-django-debug-toolbar==1.11 # pyup: <2.0
+django-debug-toolbar==2.1
 django-jenkins==0.110.0
 django-markwhat==1.6.2
 django-appconf==1.0.3
@@ -91,6 +86,11 @@ PyYAML>=3.10.0 # MIT
 stevedore>=1.20.0 # Apache-2.0
 bandit==1.6.2
 
-typing==3.7.4.1; python_version < '3.5'
 entrypoints==0.3
-functools32==3.2.3-2; python_version < '3'
+
+cryptography==2.8
+idna==2.8
+urllib3==1.25.7
+cffi==1.13.2
+asn1crypto==1.2.0
+future==0.18.2
