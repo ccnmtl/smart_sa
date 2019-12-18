@@ -1,0 +1,4866 @@
+[
+{
+   "model": "sites.site",
+   "pk": 1,
+   "fields": {
+      "domain": "example.com",
+      "name": "example.com"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 1,
+   "fields": {
+      "name": "confused",
+      "text": "I\u2019m uncertain and confused about taking ARVs.",
+      "ordinality": 7,
+      "subtext": "<ul><li>I don\u2019t know enough about ARVs to feel comfortable taking them.</li><li>Everything I hear about ARVs is confusing me.</li></ul>",
+      "example": "<ul><li>Use these sessions to learn as much about ARVs as possible</li><li>Talk to the nurse about ARVs to learn more</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 2,
+   "fields": {
+      "name": "other_treatments",
+      "text": "There are other treatments that I think work better than ARVs.",
+      "ordinality": 14,
+      "subtext": "<ul><li>I'm using natural remedies that work better than ARVs.</li><li> I'm praying like my pastor says.</li></ul>",
+      "example": "<ul><li>Talk to the nurse about other medicines you are taking; taking them along with your ARVs may work even better.</li><li>Speak to a nurse, doctor, or counselor who is from your faith to hear what they think.</li><li>Use these sessions to help you better understand ARVs.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 3,
+   "fields": {
+      "name": "dontwantto",
+      "text": "I just don\u2019t want to take the ARVs.",
+      "ordinality": 17,
+      "subtext": "",
+      "example": "<ul><li>Share your feelings with a counselor or friend and try to find the cause.</li><li>Re-visit reasons for taking the medicine.</li><li>See a doctor, nurse, or other counselor.</li><li>Use these sessions to help you better understand ARVs.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 4,
+   "fields": {
+      "name": "alone",
+      "text": "I don\u2019t have people to support me.",
+      "ordinality": 1,
+      "subtext": "<ul><li>I have not disclosed my status to my family/partner.</li><li>Even though I have disclosed my status I still don't receive support.</li></ul>",
+      "example": "<ul><li>Consider people outside of your usual circle of family and friends, for example, someone at church.</li><li>Examine what support you do have and think about who can provide what kind of support for you.</li><li>Find someone you trust and are comfortable with to disclose to.</li></ul>\r\n"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 5,
+   "fields": {
+      "name": "notenoughfood",
+      "text": "I don\u2019t have enough food.",
+      "ordinality": 4,
+      "subtext": "I\u2019m told I have to take my ARVs on a full stomach.",
+      "example": "<ul><li>Use what food is available.</li><li>Look for cheap meals.</li><li>Ask your treatment partner, friend or relative for help with food.</li><li>Look for sources of free food, for example from church or charities.</li><li>Just take the medicine anyway, food is not really necessary.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 6,
+   "fields": {
+      "name": "hopeless",
+      "text": "When I feel sad or hopeless or too stressed out, I don\u2019t care about taking my ARVs.",
+      "ordinality": 15,
+      "subtext": "",
+      "example": "<ul><li>Share your feelings with a counselor or friend and try to find the cause.</li><li>Write down something that is important to you that is worth taking the ARVs for.</li> <li>Talk to a doctor, nurse or other counselor.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 7,
+   "fields": {
+      "name": "angrynurse",
+      "text": "If I don\u2019t take my pills, I am afraid to come back to the clinic.",
+      "ordinality": 6,
+      "subtext": "<ul><li>The sister will be cross with me.</li><li>The nurse or doctor will be cross with me.</li></ul>",
+      "example": "<ul><li>Talk to your counselor about what is getting in the way of you taking your ARVs.</li><li>Use these sessions to talk about what makes you uncomfortable at the clinic.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 8,
+   "fields": {
+      "name": "happy",
+      "text": "I feel so well now that I do not need to take the medicines.",
+      "ordinality": 8,
+      "subtext": "",
+      "example": "<ul><li>Use these sessions to understand how ARVs keep you healthy, and review what resistance is.  Feeling good means the ARVs are working for you, not that you should stop taking them.</li><li>Ask the counselor to talk about the difference between ARVs and other medicines like TB treatment.</ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 9,
+   "fields": {
+      "name": "other",
+      "text": "I have a different issue",
+      "ordinality": 19,
+      "subtext": "",
+      "example": ""
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 10,
+   "fields": {
+      "name": "otherpatients",
+      "text": "Other patients at the clinic might gossip about my HIV status.",
+      "ordinality": 3,
+      "subtext": "Too many people at the nearest clinic will find out about my status.",
+      "example": "<ul><li>During this session tell your counselor more about why you are worried about gossip.</li><li>Wait for your appointment in a section that is not only for HIV patients.</li><li>Bring a bag or sack to keep your medicine in so people won\u2019t see it when you leave the clinic.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 11,
+   "fields": {
+      "name": "sickwithcold",
+      "text": "I stop taking my medication when I have a cold, or flu, or other problems.",
+      "ordinality": 11,
+      "subtext": "",
+      "example": "<ul><li>Use these sessions to help you understand more about how HIV works and how resistance develops</li><li>Talk to your counselor or the nurse if you have side-effects, but continue taking ARVs.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 12,
+   "fields": {
+      "name": "disability_grant",
+      "text": "If I get healthy, I might lose my disability grant.",
+      "ordinality": 18,
+      "subtext": "",
+      "example": "<ul><li>Use these sessions to understand how HIV works and the importance of getting healthy as soon as you can.</li><li>Consider other means of support from treatment partner, friends or relatives.</li><ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 13,
+   "fields": {
+      "name": "treatment_fatigue",
+      "text": "I don\u2019t want to take ARVs forever.",
+      "ordinality": 16,
+      "subtext": "",
+      "example": "<ul><li>Find a time in the day where you have more energy to take the ARVs.</li><li>Talk to a counselor, social worker or psychologist about it.</li><li>Talk to your treatment buddy about it.</li><li>Use these sessions to better understand ARVs.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 14,
+   "fields": {
+      "name": "forgetful",
+      "text": "Sometimes I forget to take my pills.",
+      "ordinality": 12,
+      "subtext": "<ul><li>I just don't remember.</li><li> I forget when I'm working.</li><li>I forget when I'm drinking, or when I'm using drugs.</li></ul>",
+      "example": "<ul><li>Put a reminder on your phone or get a friend or relative to help you to remember.</li>\r\n<li>Put tablets where you can see them. </li><li>Use TV program/news times to help you remember.</li><li>Take the medication with you to work or when you go out.</li><li>Try taking the medication at a different time of day.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 15,
+   "fields": {
+      "name": "nonsense",
+      "text": "Sometimes my providers don't make much sense.",
+      "ordinality": 5,
+      "subtext": "My providers don't speak my language.",
+      "example": "<ul><li>Tell the doctor, nurse or counselor that you don't understand.</li><li>Try to bring a friend or relative with you who can translate.</li></ul>\r\n"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 16,
+   "fields": {
+      "name": "feelingill",
+      "text": "The medication makes me feel sick.",
+      "ordinality": 9,
+      "subtext": "Or I'm afraid the medication <i>will</i> make me feel sick.",
+      "example": "<ul><li>Use these sessions to discuss side-effects and feeling worse before feeling better.</li><li>Discuss your symptoms with the nurse or doctor.</li><li>Talk to the nurse about other medicines that might help you feel better.</li></ul>\r\n"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 17,
+   "fields": {
+      "name": "clinic",
+      "text": "Being at the clinic is too unpleasant.",
+      "ordinality": 13,
+      "subtext": "<ul><li>Early morning queuing is inconvenient and dangerous.</li><li>The wait is too long.</li><li>I'm not comfortable with the clinic staff.</li></ul>",
+      "example": "<ul><li>Don't queue up early, just come to the clinic near the time of your appointment.</li><li>Talk to the nurse about other times to come to the clinic.</li><li>Come prepared to wait; bring a lunchbox, book, etc.</li><li>Find out from the nurse or counselor if there are times or days when the clinic is less busy.</li><li>Use these sessions to talk about the things at the clinic that make you uncomfortable.</ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 18,
+   "fields": {
+      "name": "cantgettoclinic",
+      "text": "It is difficult to get to the clinic.",
+      "ordinality": 2,
+      "subtext": "<ul><li>I travel outside of Cape Town a lot.</li>\r\n<li>I\u2019m too sick to walk to the clinic.</li>\r\n<li>I don\u2019t have any transportation.</li>\r\n<li>I don\u2019t have child care.</li>\r\n<li>I can\u2019t take time off work.</li></ul>",
+      "example": "<ul><li>Try to attend clinic before travelling.</li><li>Speak to clinic staff about the trip so they can make arrangements.</li><li>Take enough medication with you to last for the whole trip.</li><li>Take your clinic card with you.</li><li>Find out in advance where the closest clinic is.</li>\r\n<li>Notify clinic staff that because you are sick you cannot get to the clinic, and try to make alternative arrangements (notify by telephone, or treatment buddy).</li>\r\n<li>Consider transferring to the clinic closest to home.</li>\r\n<li>Bring your children to the clinic or get a neighbor, friend or relative to look after the children.</li>\r\n<li>Consider disclosing to your employer.</li><li>\r\nTry to arrange your days off to coincide with clinic days.</li></ul>"
+   }
+},
+{
+   "model": "problemsolving_game.issue",
+   "pk": 19,
+   "fields": {
+      "name": "peopletellmenotto",
+      "text": "Other people tell me not to take the ARVs.",
+      "ordinality": 10,
+      "subtext": "<ul>\r\n<li>My priest told me I\u2019m cured.</li>\r\n<li>My healer tells me the ARVs are not as good as his medicine.</li>\r\n<li>My family and friends don't let me. </li>\r\n<li>My beliefs speak against the ARVs.</li>\r\n</ul>",
+      "example": "<ul><li>Tell your counselor your religious beliefs so that your counselor understands your point of view.</li>\r\n<li>Speak to a nurse, doctor, or counselor who is from your faith to hear what they think.</li><li>Use these sessions to better understand ARVs.</li></ul>\r\n"
+   }
+},
+{
+   "model": "intervention.intervention",
+   "pk": 1,
+   "fields": {
+      "name": "SMART SA",
+      "intervention_id": "1",
+      "general_instructions": ""
+   }
+},
+{
+   "model": "intervention.clientsession",
+   "pk": 1,
+   "fields": {
+      "intervention": 1,
+      "short_title": "1",
+      "long_title": "Session 1: Getting Started",
+      "introductory_copy": "",
+      "created": "2008-12-31T14:49:38.939",
+      "modified": "2017-12-04T14:34:44.492",
+      "defaulter": false,
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.clientsession",
+   "pk": 2,
+   "fields": {
+      "intervention": 1,
+      "short_title": "2",
+      "long_title": "Session 2: Learning About HIV Treatment",
+      "introductory_copy": "",
+      "created": "2009-01-06T11:01:23.999",
+      "modified": "2017-12-04T14:34:44.895",
+      "defaulter": false,
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.clientsession",
+   "pk": 3,
+   "fields": {
+      "intervention": 1,
+      "short_title": "3",
+      "long_title": "Session 3: Good Adherence and Healthy Living",
+      "introductory_copy": "",
+      "created": "2009-01-06T15:37:19.464",
+      "modified": "2017-12-04T14:34:45.163",
+      "defaulter": false,
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.clientsession",
+   "pk": 4,
+   "fields": {
+      "intervention": 1,
+      "short_title": "Defaulter 1",
+      "long_title": "ARV Adherence Follow-up 1",
+      "introductory_copy": "",
+      "created": "2011-12-07T10:28:18.457",
+      "modified": "2017-12-04T14:34:45.582",
+      "defaulter": true,
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.clientsession",
+   "pk": 5,
+   "fields": {
+      "intervention": 1,
+      "short_title": "Defaulter 2",
+      "long_title": "ARV Adherence Follow-up 2",
+      "introductory_copy": "",
+      "created": "2011-12-07T10:28:46.282",
+      "modified": "2017-12-04T14:34:46.110",
+      "defaulter": true,
+      "_order": 4
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 1,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Session Objectives",
+      "long_title": "Session Objectives",
+      "objective_copy": "<p>Session up to 45 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-16T10:47:06.618",
+      "modified": "2017-12-04T14:34:44.500",
+      "game": null,
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 2,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Welcome",
+      "long_title": "Welcome to Masivukeni!",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2008-12-31T14:49:49.638",
+      "modified": "2017-12-04T14:34:44.515",
+      "game": null,
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 3,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Today",
+      "long_title": "Today",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-12T13:24:57.842",
+      "modified": "2017-12-04T14:34:44.529",
+      "game": null,
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 4,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Working Together",
+      "long_title": "Working Together",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-15T16:10:55.294",
+      "modified": "2017-12-04T14:34:44.543",
+      "game": null,
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 5,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "What are ARVs",
+      "long_title": "What are ARVs",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-26T16:08:51.173",
+      "modified": "2017-12-04T14:34:44.556",
+      "game": null,
+      "_order": 4
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 6,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Getting to Know ARVs",
+      "long_title": "Getting to Know ARVs",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-29T15:41:46.349",
+      "modified": "2017-12-04T14:34:44.569",
+      "game": null,
+      "_order": 5
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 7,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Taking ARVs",
+      "long_title": "Taking ARVs",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-29T15:45:31.979",
+      "modified": "2017-12-04T14:34:44.585",
+      "game": "pills",
+      "_order": 6
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 8,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "ARV Concerns",
+      "long_title": "ARV Concerns",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-18T13:10:49.498",
+      "modified": "2017-12-04T14:34:44.603",
+      "game": null,
+      "_order": 7
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 9,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "How Are You?",
+      "long_title": "How Are You?",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-19T13:50:30.936",
+      "modified": "2017-12-04T14:34:44.683",
+      "game": null,
+      "_order": 8
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 10,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Mood Screen",
+      "long_title": "Mood Screen",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-01-06T09:48:32.917",
+      "modified": "2017-12-04T14:34:44.699",
+      "game": "assessmentquiz",
+      "_order": 9
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 11,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Alcohol Screen",
+      "long_title": "Alcohol Screen",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-25T09:42:27.393",
+      "modified": "2017-12-04T14:34:44.721",
+      "game": "assessmentquiz-audit",
+      "_order": 10
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 12,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Drug Screen",
+      "long_title": "Drug Screen",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-26T15:58:31.778",
+      "modified": "2017-12-04T14:34:44.744",
+      "game": "assessmentquiz-drug-audit",
+      "_order": 11
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 13,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Treatment Support",
+      "long_title": "Treatment Support",
+      "objective_copy": "<p>7 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-02-12T12:38:47.167",
+      "modified": "2017-12-04T14:34:44.768",
+      "game": "ssnmTree",
+      "_order": 12
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 14,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Disclosure is Important",
+      "long_title": "Disclosure is Important",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-19T15:34:53.518",
+      "modified": "2017-12-04T14:34:44.793",
+      "game": null,
+      "_order": 13
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 15,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Choosing a Buddy",
+      "long_title": "Choosing a Buddy",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-01-06T14:43:41.976",
+      "modified": "2017-12-04T14:34:44.816",
+      "game": "ssnmTree",
+      "_order": 14
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 16,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Next Steps with Buddy",
+      "long_title": "Next Steps with Buddy",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": true,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-12T13:29:00.111",
+      "modified": "2017-12-04T14:34:44.836",
+      "game": null,
+      "_order": 15
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 17,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "Reasons to Stay Healthy",
+      "long_title": "Reasons to Stay Healthy",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-03-17T08:59:38.575",
+      "modified": "2017-12-04T14:34:44.857",
+      "game": "lifegoals",
+      "_order": 16
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 18,
+   "fields": {
+      "clientsession": 1,
+      "short_title": "End Session",
+      "long_title": "End Session",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": true,
+      "collect_reasons_for_returning": false,
+      "created": "2009-01-06T14:44:02.362",
+      "modified": "2017-12-04T14:34:44.877",
+      "game": null,
+      "_order": 17
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 19,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "Session Objectives",
+      "long_title": "Session Objectives",
+      "objective_copy": "<p>Session up to 45 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-16T10:16:00.136",
+      "modified": "2017-12-04T14:34:44.903",
+      "game": null,
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 20,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "Welcome  Back",
+      "long_title": "Welcome",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-02-14T15:30:23.622",
+      "modified": "2017-12-04T14:34:44.916",
+      "game": null,
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 21,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "Supporting Each Other",
+      "long_title": "Supporting Each Other",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-13T16:01:42.641",
+      "modified": "2017-12-04T14:34:44.942",
+      "game": null,
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 22,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "Today",
+      "long_title": "Today",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-15T16:26:33.954",
+      "modified": "2017-12-04T14:34:44.956",
+      "game": null,
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 23,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "What is HIV",
+      "long_title": "What is HIV",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-29T13:55:14.968",
+      "modified": "2017-12-04T14:34:44.969",
+      "game": null,
+      "_order": 4
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 24,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "How HIV Works",
+      "long_title": "How HIV Works",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-13T10:21:03.100",
+      "modified": "2017-12-04T14:34:44.982",
+      "game": null,
+      "_order": 5
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 25,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "What HIV Does",
+      "long_title": "What HIV Does",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-03T17:04:12.241",
+      "modified": "2017-12-04T14:34:44.996",
+      "game": null,
+      "_order": 6
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 26,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "HIV Symptoms",
+      "long_title": "HIV Symptoms",
+      "objective_copy": "<p>7 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-20T09:57:14.881",
+      "modified": "2017-12-04T14:34:45.012",
+      "game": "island",
+      "_order": 7
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 27,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "ARVs and Adherence",
+      "long_title": "ARVs and Adherence",
+      "objective_copy": "<p>10 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-02-14T15:46:58.594",
+      "modified": "2017-12-04T14:34:45.047",
+      "game": "video-soldiers",
+      "_order": 8
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 28,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "How Adherence Works",
+      "long_title": "How Adherence Works",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-03T17:09:58.623",
+      "modified": "2017-12-04T14:34:45.086",
+      "game": "island-after-medication",
+      "_order": 9
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 29,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "Your Questions",
+      "long_title": "Your Questions",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-20T10:28:01.733",
+      "modified": "2017-12-04T14:34:45.107",
+      "game": null,
+      "_order": 10
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 30,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "Reasons to Stay Healthy",
+      "long_title": "Reasons to Stay Healthy",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-02-14T16:47:29.620",
+      "modified": "2017-12-04T14:34:45.124",
+      "game": "lifegoals",
+      "_order": 11
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 31,
+   "fields": {
+      "clientsession": 2,
+      "short_title": "End Session",
+      "long_title": "End Session",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-02-14T16:54:23.742",
+      "modified": "2017-12-04T14:34:45.144",
+      "game": null,
+      "_order": 12
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 32,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Session Objectives",
+      "long_title": "Session Objectives",
+      "objective_copy": "<p>Session up to 45 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-16T10:38:16.926",
+      "modified": "2017-12-04T14:34:45.171",
+      "game": null,
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 33,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Welcome",
+      "long_title": "Welcome to Session 3!",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-01-06T15:38:47.891",
+      "modified": "2017-12-04T14:34:45.183",
+      "game": null,
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 34,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Starting ARVs",
+      "long_title": "Starting ARVs",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-20T10:49:49.760",
+      "modified": "2017-12-04T14:34:45.197",
+      "game": null,
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 35,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Adherence is Crucial",
+      "long_title": "Adherence Is Crucial",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2011-12-06T14:36:07.853",
+      "modified": "2017-12-04T14:34:45.213",
+      "game": "video-joseph",
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 36,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Adherence Helpers",
+      "long_title": "Adherence Helpers",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-15T15:49:20.686",
+      "modified": "2017-12-04T14:34:45.234",
+      "game": null,
+      "_order": 4
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 37,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Adherence Challenges",
+      "long_title": "Adherence Challenges",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-03-18T11:17:34.185",
+      "modified": "2017-12-04T14:34:45.254",
+      "game": null,
+      "_order": 5
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 38,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "No Support",
+      "long_title": "No Support",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:49:17.970",
+      "modified": "2017-12-04T14:34:45.275",
+      "game": null,
+      "_order": 6
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 39,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Getting to Clinic",
+      "long_title": "Getting to Clinic",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:49:37.244",
+      "modified": "2017-12-04T14:34:45.295",
+      "game": null,
+      "_order": 7
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 40,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Confused",
+      "long_title": "Confused",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:49:48.434",
+      "modified": "2017-12-04T14:34:45.314",
+      "game": null,
+      "_order": 8
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 41,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Feeling Good",
+      "long_title": "Feeling Good",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:50:05.677",
+      "modified": "2017-12-04T14:34:45.332",
+      "game": null,
+      "_order": 9
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 42,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Forgetting",
+      "long_title": "Forgetting",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:50:22.934",
+      "modified": "2017-12-04T14:34:45.351",
+      "game": null,
+      "_order": 10
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 43,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Overcoming Challenges",
+      "long_title": "Overcoming Challenges",
+      "objective_copy": "<p>6 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-20T16:25:16.344",
+      "modified": "2017-12-04T14:34:45.377",
+      "game": "video-problem-solving",
+      "_order": 11
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 44,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Your Treatment Team",
+      "long_title": "Your Treatment Team",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-29T15:29:57.976",
+      "modified": "2017-12-04T14:34:45.397",
+      "game": null,
+      "_order": 12
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 45,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Healthy Living",
+      "long_title": "Healthy Living",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2011-12-06T14:43:02.558",
+      "modified": "2017-12-04T14:34:45.411",
+      "game": null,
+      "_order": 13
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 46,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Eat Well",
+      "long_title": "Eat Well",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T10:26:03.527",
+      "modified": "2017-12-04T14:34:45.425",
+      "game": null,
+      "_order": 14
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 47,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Exercise",
+      "long_title": "Exercise",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T10:26:22.332",
+      "modified": "2017-12-04T14:34:45.438",
+      "game": null,
+      "_order": 15
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 48,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Keep Safe",
+      "long_title": "Keep Safe",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T10:26:39.641",
+      "modified": "2017-12-04T14:34:45.453",
+      "game": null,
+      "_order": 16
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 49,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Find Help",
+      "long_title": "Find Help",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T10:26:54.665",
+      "modified": "2017-12-04T14:34:45.466",
+      "game": null,
+      "_order": 17
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 50,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Reasons to Stay Healthy",
+      "long_title": "Reasons to Stay Healthy",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-03-17T09:24:55.029",
+      "modified": "2017-12-04T14:34:45.484",
+      "game": "lifegoals",
+      "_order": 18
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 51,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Commitment to Health",
+      "long_title": "Commitment to Health",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-10T16:38:32.284",
+      "modified": "2017-12-04T14:34:45.505",
+      "game": null,
+      "_order": 19
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 52,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "Your ARVs",
+      "long_title": "Your ARVs",
+      "objective_copy": "<p>7 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-20T15:37:15.607",
+      "modified": "2017-12-04T14:34:45.520",
+      "game": "pills-my-regimen",
+      "_order": 20
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 53,
+   "fields": {
+      "clientsession": 3,
+      "short_title": "End Session",
+      "long_title": "End Session",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2009-02-02T12:25:27.671",
+      "modified": "2017-12-04T14:34:45.557",
+      "game": null,
+      "_order": 21
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 54,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "Session Objectives",
+      "long_title": "Session Objectives",
+      "objective_copy": "<p>Session up to 45 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-16T10:41:22.001",
+      "modified": "2017-12-04T14:34:45.589",
+      "game": null,
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 55,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "Welcome",
+      "long_title": "Welcome back",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": true,
+      "created": "2011-12-07T10:34:46.533",
+      "modified": "2017-12-04T14:34:45.603",
+      "game": null,
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 56,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "Mood Screening",
+      "long_title": "Mood Screening",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2011-12-07T10:35:23.886",
+      "modified": "2017-12-04T14:34:45.620",
+      "game": "assessmentquiz",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 57,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "Alcohol Screening",
+      "long_title": "Alcohol Screening",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-27T09:46:19.419",
+      "modified": "2017-12-04T14:34:45.644",
+      "game": "assessmentquiz-audit",
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 58,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "Drug Screening",
+      "long_title": "Drug Screening",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-27T09:46:55.380",
+      "modified": "2017-12-04T14:34:45.666",
+      "game": "assessmentquiz-drug-audit",
+      "_order": 4
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 59,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "Your ARVs",
+      "long_title": "Your ARVs",
+      "objective_copy": "<p>7 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2011-12-07T10:37:26.892",
+      "modified": "2017-12-04T14:34:45.689",
+      "game": "pills-my-regimen",
+      "_order": 5
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 60,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "HIV, ARVs, and Health",
+      "long_title": "HIV, ARVs, and Health",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2011-12-07T10:37:05.093",
+      "modified": "2017-12-04T14:34:45.721",
+      "game": null,
+      "_order": 6
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 61,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "Moving Forward",
+      "long_title": "Moving Forward",
+      "objective_copy": "<p>6 minutes</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2011-12-07T10:40:24.045",
+      "modified": "2017-12-04T14:34:45.737",
+      "game": "video-problem-solving",
+      "_order": 7
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 62,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "Overcoming Challenges",
+      "long_title": "Overcoming Challenges",
+      "objective_copy": "<p>10 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T14:55:58.221",
+      "modified": "2017-12-04T14:34:45.767",
+      "game": "problemsolving",
+      "_order": 8
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 63,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "Reasons to Stay Healthy",
+      "long_title": "Reasons to Stay Healthy",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2011-12-07T10:41:55.107",
+      "modified": "2017-12-04T14:34:45.790",
+      "game": "lifegoals",
+      "_order": 9
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 64,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "End Session",
+      "long_title": "End Session",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": true,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T15:17:26.830",
+      "modified": "2017-12-04T14:34:45.812",
+      "game": null,
+      "_order": 10
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 65,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: ARV Concerns",
+      "long_title": "OPTION: ARV Concerns",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-19T14:47:54.320",
+      "modified": "2017-12-04T14:34:45.834",
+      "game": null,
+      "_order": 11
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 66,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: Support Tree",
+      "long_title": "OPTION: Support Tree",
+      "objective_copy": "<p>7 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T15:41:25.388",
+      "modified": "2017-12-04T14:34:45.912",
+      "game": "ssnmTree",
+      "_order": 12
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 67,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: What is HIV",
+      "long_title": "OPTION: What is HIV",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T13:51:38.621",
+      "modified": "2017-12-04T14:34:45.934",
+      "game": null,
+      "_order": 13
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 68,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: How HIV Works",
+      "long_title": "OPTION: How HIV Works",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T13:52:07.830",
+      "modified": "2017-12-04T14:34:45.947",
+      "game": null,
+      "_order": 14
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 69,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: What HIV Does",
+      "long_title": "OPTION: What HIV Does",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T13:52:26.405",
+      "modified": "2017-12-04T14:34:45.961",
+      "game": null,
+      "_order": 15
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 70,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: HIV Symptoms",
+      "long_title": "OPTION: HIV Symptoms",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T13:57:13.239",
+      "modified": "2017-12-04T14:34:45.976",
+      "game": null,
+      "_order": 16
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 71,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: Island Activity (no ARVs)",
+      "long_title": "OPTION: Island Activity (no ARVs)",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:36:09.572",
+      "modified": "2017-12-04T14:34:45.998",
+      "game": "island",
+      "_order": 17
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 72,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: Snakes and Soldiers Video",
+      "long_title": "OPTION: Snakes and Soldiers Video",
+      "objective_copy": "<p>6 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:34:26.817",
+      "modified": "2017-12-04T14:34:46.021",
+      "game": "video-soldiers",
+      "_order": 18
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 73,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: Island Activity (on ARVs)",
+      "long_title": "OPTION: Island Activity (on ARVs)",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:36:26.787",
+      "modified": "2017-12-04T14:34:46.047",
+      "game": "island-after-medication",
+      "_order": 19
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 74,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: Joseph and Hope Video",
+      "long_title": "OPTION: Joseph and Hope Video",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:35:07.952",
+      "modified": "2017-12-04T14:34:46.070",
+      "game": "video-joseph",
+      "_order": 20
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 75,
+   "fields": {
+      "clientsession": 4,
+      "short_title": "OPTION: Moving Forward Video",
+      "long_title": "OPTION: Moving Forward Video",
+      "objective_copy": "<p>6 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:40:11.137",
+      "modified": "2017-12-04T14:34:46.091",
+      "game": "video-problem-solving",
+      "_order": 21
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 76,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "Session Objectives",
+      "long_title": "Session Objectives",
+      "objective_copy": "<p>Session up to 45 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-16T10:43:34.893",
+      "modified": "2017-12-04T14:34:46.117",
+      "game": null,
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 77,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "Welcome  Back",
+      "long_title": "Welcome  Back",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": true,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2011-12-07T10:48:16.785",
+      "modified": "2017-12-04T14:34:46.130",
+      "game": null,
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 78,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "Overcoming Challenges",
+      "long_title": "Overcoming Challenges",
+      "objective_copy": "<p>10 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2011-12-07T10:47:53.539",
+      "modified": "2017-12-04T14:34:46.147",
+      "game": "problemsolving",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 79,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "HIV, ARVs, and Health",
+      "long_title": "HIV, ARVs, and Health",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:23:41.731",
+      "modified": "2017-12-04T14:34:46.167",
+      "game": null,
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 80,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "End Session",
+      "long_title": "End Session",
+      "objective_copy": "<p>2 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:00:50.131",
+      "modified": "2017-12-04T14:34:46.182",
+      "game": null,
+      "_order": 4
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 81,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: ARV Concerns",
+      "long_title": "OPTION: ARV Concerns",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-19T14:48:28.312",
+      "modified": "2017-12-04T14:34:46.200",
+      "game": null,
+      "_order": 5
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 82,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: Your Regimen",
+      "long_title": "OPTION: Your Regimen",
+      "objective_copy": "<p>7 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:43:44.746",
+      "modified": "2017-12-04T14:34:46.278",
+      "game": "pills-my-regimen",
+      "_order": 6
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 83,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: Support Tree",
+      "long_title": "OPTION: Support Tree",
+      "objective_copy": "<p>7 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:43:25.049",
+      "modified": "2017-12-04T14:34:46.302",
+      "game": "ssnmTree",
+      "_order": 7
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 84,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: What is HIV",
+      "long_title": "OPTION: What is HIV",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:05:28.043",
+      "modified": "2017-12-04T14:34:46.322",
+      "game": null,
+      "_order": 8
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 85,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: How HIV Works",
+      "long_title": "OPTION: How HIV Works",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:05:43.601",
+      "modified": "2017-12-04T14:34:46.336",
+      "game": null,
+      "_order": 9
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 86,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: What HIV Does",
+      "long_title": "OPTION: What HIV Does",
+      "objective_copy": "<p>3 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:06:04.066",
+      "modified": "2017-12-04T14:34:46.349",
+      "game": null,
+      "_order": 10
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 87,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: HIV Symptoms",
+      "long_title": "OPTION: HIV Symptoms",
+      "objective_copy": "<p>1 minute</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:06:17.635",
+      "modified": "2017-12-04T14:34:46.363",
+      "game": null,
+      "_order": 11
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 88,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: Island Activity (no ARVs)",
+      "long_title": "OPTION: Island Activity (no ARVs)",
+      "objective_copy": "<p>7 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:42:49.029",
+      "modified": "2017-12-04T14:34:46.384",
+      "game": "island",
+      "_order": 12
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 89,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: Snakes and Soldiers Video",
+      "long_title": "OPTION: Snakes and Soldiers Video",
+      "objective_copy": "<p>6 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:42:11.672",
+      "modified": "2017-12-04T14:34:46.408",
+      "game": "video-soldiers",
+      "_order": 13
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 90,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: Island Activity (on ARVs)",
+      "long_title": "OPTION: Island Activity (on ARVs)",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:43:06.606",
+      "modified": "2017-12-04T14:34:46.432",
+      "game": "island-after-medication",
+      "_order": 14
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 91,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: Joseph and Hope Video",
+      "long_title": "OPTION: Joseph and Hope Video",
+      "objective_copy": "<p>5 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-03-28T16:42:30.123",
+      "modified": "2017-12-04T14:34:46.455",
+      "game": "video-joseph",
+      "_order": 15
+   }
+},
+{
+   "model": "intervention.activity",
+   "pk": 92,
+   "fields": {
+      "clientsession": 5,
+      "short_title": "OPTION: Moving Forward Video",
+      "long_title": "OPTION: Moving Forward Video",
+      "objective_copy": "<p>6 minutes</p>",
+      "collect_notes": false,
+      "collect_buddy_name": false,
+      "collect_referral_info": false,
+      "collect_reasons_for_returning": false,
+      "created": "2012-04-11T14:06:33.126",
+      "modified": "2017-12-04T14:34:46.477",
+      "game": "video-problem-solving",
+      "_order": 16
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 2,
+   "fields": {
+      "activity": 7,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 4,
+   "fields": {
+      "activity": 10,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 6,
+   "fields": {
+      "activity": 11,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 8,
+   "fields": {
+      "activity": 12,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 10,
+   "fields": {
+      "activity": 13,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 12,
+   "fields": {
+      "activity": 15,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 14,
+   "fields": {
+      "activity": 17,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 16,
+   "fields": {
+      "activity": 26,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 18,
+   "fields": {
+      "activity": 27,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 20,
+   "fields": {
+      "activity": 28,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 22,
+   "fields": {
+      "activity": 30,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 24,
+   "fields": {
+      "activity": 35,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 26,
+   "fields": {
+      "activity": 43,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 28,
+   "fields": {
+      "activity": 50,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 30,
+   "fields": {
+      "activity": 52,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 31,
+   "fields": {
+      "activity": 52,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 32,
+   "fields": {
+      "activity": 52,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 34,
+   "fields": {
+      "activity": 56,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 36,
+   "fields": {
+      "activity": 57,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 38,
+   "fields": {
+      "activity": 58,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 40,
+   "fields": {
+      "activity": 59,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 41,
+   "fields": {
+      "activity": 59,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 42,
+   "fields": {
+      "activity": 59,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 44,
+   "fields": {
+      "activity": 61,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 46,
+   "fields": {
+      "activity": 62,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 48,
+   "fields": {
+      "activity": 63,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 50,
+   "fields": {
+      "activity": 66,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 52,
+   "fields": {
+      "activity": 71,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 54,
+   "fields": {
+      "activity": 72,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 56,
+   "fields": {
+      "activity": 73,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 58,
+   "fields": {
+      "activity": 74,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 60,
+   "fields": {
+      "activity": 75,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 62,
+   "fields": {
+      "activity": 78,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 64,
+   "fields": {
+      "activity": 82,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 66,
+   "fields": {
+      "activity": 83,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 68,
+   "fields": {
+      "activity": 88,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 70,
+   "fields": {
+      "activity": 89,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 72,
+   "fields": {
+      "activity": 90,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 74,
+   "fields": {
+      "activity": 91,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.gamepage",
+   "pk": 76,
+   "fields": {
+      "activity": 92,
+      "title": "",
+      "subtitle": "",
+      "description": "",
+      "instructions": "",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 1,
+   "fields": {
+      "activity": 1,
+      "title": "",
+      "style": null,
+      "instruction_text": "<ol>\r\n<li>Provide an overview of Masivukeni</li>\r\n<li>Screen for mental health and substance use problems</li>\r\n<li>Introduce ARVs and what they are</li>\r\n<li>Discuss social support</li>\r\n<li>Choose a treatment support partner</li>\r\n<li>Answer any questions</li>\r\n</ol>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-16T10:48:04.165",
+      "modified": "2017-12-04T14:34:44.508",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 2,
+   "fields": {
+      "activity": 2,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>The goals of this ARV pre-treatment programme are to help you:</p>\r\n<ul>\r\n<li>Find support and get good clinical care</li>\r\n<li>Take your ARVs regularly</li>\r\n<li>Stay healthy</li>\r\n</ul>\r\n<p>Over the next few sessions, we will talk about:</p>\r\n<ul>\r\n<li>How HIV affects you</li>\r\n<li>What ARVs are and how they work</li>\r\n<li>The importance of good adherence</li>\r\n<li>How to develop and maintain good adherence</li>\r\n<li>How to stay healthy and keep your HIV under control</li>\r\n</ul>\r\n<p>Good adherence means taking ARVs everyday at the same time(s), and in the right way. It's one of the most important ways for you to stay healthy. Masivukeni will teach you why this is so important and teach you skills to stay adherent.&nbsp;</p>",
+      "image": "intervention_images/welcome2.png",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-01-06T14:26:56.574",
+      "modified": "2017-12-04T14:34:44.521",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 3,
+   "fields": {
+      "activity": 3,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>We are going to:</p>\r\n<ul>\r\n<li>Prepare you for your HIV treatment</li>\r\n<li>Ask questions about your mood and how you've been feeling lately</li>\r\n<li>Discuss the importance of having treatment support</li>\r\n<li>Discuss who in your life might be able to help you stay healthy</li>\r\n<li>Choose a treatment buddy</li>\r\n</ul>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-13T15:20:03.814",
+      "modified": "2017-12-04T14:34:44.536",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 4,
+   "fields": {
+      "activity": 4,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>Feel free to ask me about anything at any time.<br /><br />Most everything we discuss in these sessions is confidential. I cannot and will not discuss anything we talk about with anyone who is not part of the clinic team, unless you give me permission or an emergency situation arises. If we find that it could be helpful for you to talk to a social worker or other professional, I may recommend you do so.</p>\r\n<p>Do you have any questions so far?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-15T16:11:48.502",
+      "modified": "2017-12-04T14:34:44.550",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 5,
+   "fields": {
+      "activity": 5,
+      "title": "",
+      "style": null,
+      "instruction_text": "<ul>\r\n<li>ARVs are medicines for HIV</li>\r\n<li>ARVs help you stay healthy</li>\r\n<li>ARVs have to be taken at the same time every day and in the same way</li>\r\n<li>ARVs are for the rest of your life - there's no cure for HIV, but taking ARVs consistently for the rest of your life will help you stay healthy</li>\r\n</ul>",
+      "image": "intervention_images/gty_antiretroviral_pill_mw_110512_wg_1.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-26T16:11:48.469",
+      "modified": "2017-12-04T14:34:44.563",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 6,
+   "fields": {
+      "activity": 6,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p><span style=\"font-family: 'lucida sans unicode', 'lucida grande', sans-serif; font-size: 14px; line-height: 18px; text-align: justify;\">ARVs look like other pills you may have taken. Because of how they are manufactured, the color and shape may change from month to month. Therefore, it is important to know the names of your ARVs. ARVs usually consist of 3 medicines, but the number of pills you will take might be more or less than 3.</span></p>\r\n<p><span style=\"font-family: 'lucida sans unicode', 'lucida grande', sans-serif; font-size: 14px; line-height: 18px; text-align: justify;\">Usually, you will get a 30-day supply of ARVs. It's important to make sure you always have enough ARVs at any given time. Always have refills before you run out. Be sure to refill your ARVs at the pharmacy regularly and on time. You don't want to be without any ARVs!&nbsp;</span></p>\r\n<p style=\"font-size: 14px; text-align: justify; line-height: 18px; font-family: 'lucida sans unicode', 'lucida grande', sans-serif;\">The ARVs your doctor prescribes&nbsp;will depend on several things:</p>\r\n<ul style=\"font-size: 14px !important; font-family: 'lucida sans unicode', 'lucida grande', sans-serif;\">\r\n<li>Other illnesses you might also have, like TB</li>\r\n<li>Other medications you're taking</li>\r\n<li>Whether you are pregnant or plan on becoming pregnant</li>\r\n</ul>\r\n<p><span style=\"font-family: 'lucida sans unicode', 'lucida grande', sans-serif;\"><span style=\"font-size: 14px;\">Your doctor will discuss with you which ARVs will be best for you.</span></span></p>",
+      "image": "intervention_images/drugs-pills-cocktail-aids-hiv2.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-29T15:43:45.079",
+      "modified": "2017-12-04T14:34:44.576",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 7,
+   "fields": {
+      "activity": 7,
+      "title": "",
+      "style": null,
+      "instruction_text": "<ul>\r\n<li>ARVs must be taken at the same time(s) everyday</li>\r\n<li>You do not have to eat before taking your ARVs, but some people feel better when they do</li>\r\n<li>If you forget to take your ARVs, take them as soon as you remember</li>\r\n</ul>\r\n<p>The doctor may also prescribe other medicines for you with your ARVs (like TB medicine or Bactrim). It is important to continue taking these other medicine(s) along with your ARVs.</p>\r\n<p>If you are taking or plan to take other medicines the doctor has not prescribed (like traditional medicines) while you are on ARVs, it is important to discuss it with your doctor or nurse. They could be dangerous to use with ARVs and may make the&nbsp;ARVs stop working properly.</p>\r\n<p>Do you have any questions about this?</p>\r\n<p>Let's take a look at what an ARV regimen might look like for you.</p>",
+      "image": "intervention_images/Meds_with_clock.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-29T15:46:13.911",
+      "modified": "2017-12-04T14:34:44.596",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 8,
+   "fields": {
+      "activity": 8,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>There is a lot of information out there about ARVs and HIV treatments. You may have heard different things about ARVs on TV, from friends and family and even from your pastor. Some of it can be confusing. Let&rsquo;s discuss some common concerns people have about taking ARVs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:18:53.196",
+      "modified": "2017-12-04T14:34:44.610",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 9,
+   "fields": {
+      "activity": 8,
+      "title": "Taking ARVs will make me sick",
+      "style": null,
+      "instruction_text": "<p>It&rsquo;s true that for some people they feel worse right after starting ARVs. However, most people don&rsquo;t. Most people feel better soon. The ones who do feel worse only do for a short period. Soon, they too start feeling better and healthier.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:18:53.205",
+      "modified": "2017-12-04T14:34:44.617",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 10,
+   "fields": {
+      "activity": 8,
+      "title": "Taking ARVs will change my body",
+      "style": null,
+      "instruction_text": "<p>The most commonly used ARVs today will not change your body. Some of the older ones did change people&rsquo;s bodies, making them skinnier or changing their faces (e.g., lipodystrophy), but those ARVs are mostly no longer used. You most likely will not be taking those ARVs.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:18:53.208",
+      "modified": "2017-12-04T14:34:44.623",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 11,
+   "fields": {
+      "activity": 8,
+      "title": "ARVs can only be taken with food",
+      "style": null,
+      "instruction_text": "<p>ARVs can be taken without food on an empty stomach. You can take ARVs safely without food. A few people tolerate them better when taken with food.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:20:05.469",
+      "modified": "2017-12-04T14:34:44.630",
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 12,
+   "fields": {
+      "activity": 8,
+      "title": "Taking ARVs will make me hungry",
+      "style": null,
+      "instruction_text": "<p>There is a belief that for some people, ARVs make them hungrier. However, for most people, ARVs do not make them hungrier. You most likely will not feel hungrier because of your ARVs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:20:05.471",
+      "modified": "2017-12-04T14:34:44.636",
+      "_order": 4
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 13,
+   "fields": {
+      "activity": 8,
+      "title": "Praying will cure me of HIV",
+      "style": null,
+      "instruction_text": "<p>There is no cure for HIV. Taking ARVs will fight off the HIV. Praying and going to church are important aspects of a healthy lifestyle, but they will not cure you of HIV. You have to take the ARVs to fight off the virus and stay healthy. For many people, the combination of taking their ARV's regularly and praying at Church is the most successful way of beating HIV.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:20:05.478",
+      "modified": "2017-12-04T14:34:44.642",
+      "_order": 5
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 14,
+   "fields": {
+      "activity": 8,
+      "title": "Traditional medicine is just as good, if not better than ARVs",
+      "style": null,
+      "instruction_text": "<p>Traditional medicines can be good for many things, but only ARVs are made specifically to target and fight off HIV. Traditional medicines may help, but it is essential to always take your ARVs and talk to the nurse if you plan on taking traditional medicines with ARVs. Some traditional medicines do not mix well with ARVs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:21:10.441",
+      "modified": "2017-12-04T14:34:44.648",
+      "_order": 6
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 15,
+   "fields": {
+      "activity": 8,
+      "title": "My priest told me I\u2019m cured and that I don\u2019t need ARVs",
+      "style": null,
+      "instruction_text": "<p>Priests may have good ideas about how to help people live with HIV. However, there is no cure for HIV and ARVs are the only medicines designed specifically to target and fight the virus. I suggest you speak about your religious beliefs so that I can understand them better and talk to a nurse, doctor, or counselor who is from your faith to hear what they think.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:21:10.444",
+      "modified": "2017-12-04T14:34:44.653",
+      "_order": 7
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 16,
+   "fields": {
+      "activity": 8,
+      "title": "Taking ARVs goes against my beliefs",
+      "style": null,
+      "instruction_text": "<p>It's true that taking ARVs is difficult for many. The choice to take them is yours.&nbsp;You get to decide how you want to stay healthy and what healthy choices you would like to make. However, ARVs are helping millions of people all over South Africa and the world to stay healthy. They can help you stay healthy too. The choice is yours.&nbsp;I suggest you talk to a nurse, doctor, or counselor who shares your beliefs to hear what they think.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:21:10.447",
+      "modified": "2017-12-04T14:34:44.659",
+      "_order": 8
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 17,
+   "fields": {
+      "activity": 8,
+      "title": "People tell me not to take ARVs",
+      "style": null,
+      "instruction_text": "<p>This must be very frustrating and confusing for you. ARVs are designed to fight off HIV and make you healthier. If you take your ARVs regularly you stay healthy for the long term. You&rsquo;ll learn more about this as we work together.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:22:08.680",
+      "modified": "2017-12-04T14:34:44.665",
+      "_order": 9
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 18,
+   "fields": {
+      "activity": 8,
+      "title": "I can stop taking ARVs when I start to feel better",
+      "style": null,
+      "instruction_text": "<p>You have to always take ARVs. When you start feeling better, that means the ARVs are working. If you stop taking them, you will start to get sick again, and you may develop resistance. Always taking them at the right time will ensure that you stay healthy for the long term. You&rsquo;ll learn more about this as we work together.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:22:08.683",
+      "modified": "2017-12-04T14:34:44.671",
+      "_order": 10
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 19,
+   "fields": {
+      "activity": 8,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p><strong>Do you have any other concerns about starting ARVs?</strong></p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-18T16:22:08.686",
+      "modified": "2017-12-04T14:34:44.677",
+      "_order": 11
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 20,
+   "fields": {
+      "activity": 9,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>Before we go on, I'd like to know how you're doing and feeling about starting ARVs.&nbsp;</p>\r\n<ul>\r\n<li>Living with HIV can be challenging</li>\r\n<li>Learning that you now have to take ARVs for the rest of your life may feel overwhelming</li>\r\n</ul>\r\n<p>Do you have any concerns about taking ARVs and/or living with HIV? Or any other questions?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-19T13:51:01.950",
+      "modified": "2017-12-04T14:34:44.690",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 21,
+   "fields": {
+      "activity": 10,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>Sometimes how people feel can get in the way of how they take HIV medicines. So we ask everyone some questions about how they have been feeling lately and their mood. Now I&rsquo;m going to ask you how you have been feeling in the past month (30 days).</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-01-06T14:46:20.508",
+      "modified": "2017-12-04T14:34:44.712",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 22,
+   "fields": {
+      "activity": 11,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Alcohol use may also interfere with taking your HIV medicine, as well as affect many areas of health. Hence, it is important for us to ask everyone about their drinking. Now I&rsquo;m going to ask you some questions about your drinking. Please try to be as honest and as accurate as you can be.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-26T15:59:02.669",
+      "modified": "2017-12-04T14:34:44.735",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 23,
+   "fields": {
+      "activity": 12,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Because drug use can also interfere with taking your HIV medicine, we ask everyone about his or her drug use. Now I&rsquo;m going to ask you some questions about your drug use. Please try to be as honest and accurate as possible.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-26T15:59:16.049",
+      "modified": "2017-12-04T14:34:44.758",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 24,
+   "fields": {
+      "activity": 13,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>Living with HIV, staying healthy and having to take medicines every day can be challenging. Having support can make it a little easier. People in our lives can provide us with emotional support and they can also help us with specific things we need. &nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-02-12T12:39:38.460",
+      "modified": "2017-12-04T14:34:44.782",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 25,
+   "fields": {
+      "activity": 13,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>On the next page is a tree, which represents your life. The fruits on the tree represent the important people in your life. Let&rsquo;s fill in your tree with the people who are important to you, see who you've disclosed to, and see who can offer you practical support.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-12T12:48:53.834",
+      "modified": "2017-12-04T14:34:44.787",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 26,
+   "fields": {
+      "activity": 14,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>How do you feel about the number of people in your life that you have and have not disclosed to?</p>\r\n<p>Are there additional people you would like to disclose to?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-19T15:39:58.191",
+      "modified": "2017-12-04T14:34:44.800",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 27,
+   "fields": {
+      "activity": 14,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Would you like to talk more about how to disclose to other people?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-19T15:39:58.195",
+      "modified": "2017-12-04T14:34:44.807",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 28,
+   "fields": {
+      "activity": 15,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>We would like you to choose a treatment buddy who can finish this program with you.&nbsp;A treatment buddy is someone:</p>\r\n<ul>\r\n<li>You trust</li>\r\n<li>You are comfortable with</li>\r\n<li>Who is aware of your HIV status</li>\r\n<li>Who can help you stay healthy</li>\r\n</ul>\r\n<p>A treatment buddy can help you:</p>\r\n<ul>\r\n<li>Remember clinic appointments</li>\r\n<li>Take your medicines every time&nbsp;you are supposed to&nbsp;&nbsp;</li>\r\n<li>Get to the clinic</li>\r\n<li>Stay motivated to stay healthy</li>\r\n</ul>\r\n<p>Your buddy can be someone outside of your usual group of friends and family and can be someone else who is also positive.&nbsp;Are there other qualities you think a treatment buddy should have?</p>\r\n<p>Let's take a look at your tree again and talk about who you think would make a good treatment buddy.</p>",
+      "image": "intervention_images/thinking-t10044.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-01-06T14:54:48.616",
+      "modified": "2017-12-04T14:34:44.829",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 29,
+   "fields": {
+      "activity": 16,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>Now that you have selected your treatment buddy, let&rsquo;s talk about how  and when you will come back.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-12T13:29:26.308",
+      "modified": "2017-12-04T14:34:44.842",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 30,
+   "fields": {
+      "activity": 16,
+      "title": "",
+      "style": null,
+      "instruction_text": "",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-19T15:57:24.329",
+      "modified": "2017-12-04T14:34:44.848",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 31,
+   "fields": {
+      "activity": 17,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Before we end our session today, let's talk about your reasons to stay healthy. When you are healthier, you are more capable of accomplishing the things in life that are important to you.<br /><br />On the next page is a mountain. It's your mountain. The spaces on the mountain are for your goals. One way to think about this is to put long-term goals towards the top of the mountain and short-term goals towards the bottom. Staying healthy is a journey. As you improve and maintain your health, you are able to climb higher and higher on the mountain.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-03-17T09:06:35.318",
+      "modified": "2017-12-04T14:34:44.870",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 32,
+   "fields": {
+      "activity": 18,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Thank you so much for your participation today. Now we need to find a time for you to come back with your treatment buddy.&nbsp;</p>\r\n<p>At our next session we will talk about HIV and ARVs. Do you have any questions for now?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-01-06T14:57:02.742",
+      "modified": "2017-12-04T14:34:44.884",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 33,
+   "fields": {
+      "activity": 18,
+      "title": "Print",
+      "style": null,
+      "instruction_text": "<p>Would you like to print a copy of your tree or mountain?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-03-17T23:13:05.798",
+      "modified": "2017-12-04T14:34:44.889",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 34,
+   "fields": {
+      "activity": 19,
+      "title": "",
+      "style": null,
+      "instruction_text": "<ol>\r\n<li>Introduce support partner to Masivukeni</li>\r\n<li>Discuss the importance of a support partner in adherence</li>\r\n<li>Review what HIV is and how it works</li>\r\n<li>Review what ARVs are and how they work</li>\r\n</ol>\r\n<p>&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-16T10:17:33.084",
+      "modified": "2017-12-04T14:34:44.909",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 35,
+   "fields": {
+      "activity": 20,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Welcome back, it's nice to see you.</p>\r\n<p><strong>IF BUDDY PRESENT:&nbsp;</strong>Thank you for being a treatment buddy and coming today.</p>\r\n<p>We're here to work together to help you stay healthy. Together we will learn about:</p>\r\n<ul>\r\n<li>HIV</li>\r\n<li>ARVs</li>\r\n<li>Adherence</li>\r\n<li>How to stay healthy</li>\r\n<li>How to overcome challenges to adherence</li>\r\n</ul>",
+      "image": "intervention_images/welcome2_1.png",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-02-14T15:35:03.174",
+      "modified": "2017-12-04T14:34:44.924",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 36,
+   "fields": {
+      "activity": 20,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Please feel free to ask me questions about <strong>anything at anytime</strong>.</p>\r\n<p>Most everything we discuss in these sessions is confidential. I cannot and will not discuss anything we talk about with anyone who is not part of the clinic team, unless you give me permission or an emergency situation arises. If we find that it could be helpful for you to talk to a social worker or other professional, I may recommend we do so.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-03-17T16:40:24.230",
+      "modified": "2017-12-04T14:34:44.930",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 37,
+   "fields": {
+      "activity": 20,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Do you have any questions for me or about Masivukeni? Maybe you had a question about something we talked about last time?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-13T16:08:27.705",
+      "modified": "2017-12-04T14:34:44.935",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 38,
+   "fields": {
+      "activity": 21,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>There are many ways that people can help each other out, such as:</p>\r\n<ul>\r\n<li>Practical support (e.g., giving reminders to take ARVs, offering to pick something up from the store)&nbsp;</li>\r\n<li>Emotional support (e.g., talking about one's concerns and challenges)&nbsp;</li>\r\n</ul>\r\n<p>Offering support is part of your ongoing relationship with each other and there are many different ways to be supportive of each other in the myriad aspects of your lives.</p>",
+      "image": "intervention_images/support_1.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-13T16:03:37.408",
+      "modified": "2017-12-04T14:34:44.949",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 39,
+   "fields": {
+      "activity": 22,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>We're going to talk about:</p>\r\n<ul>\r\n<li>How HIV affects the&nbsp;<strong>IMMUNE SYSTEM</strong></li>\r\n<li>What <strong>ARVs</strong> are</li>\r\n<li>How <strong>ARVs</strong> work</li>\r\n<li>What <strong>ADHERENCE </strong>means</li>\r\n<li>Why <strong>ADHERENCE</strong>&nbsp;is so important</li>\r\n<li>What&nbsp;<strong>RESISTANCE</strong>&nbsp;is </li>\r\n<li>What motivates you to stay healthy</li>\r\n</ul>\r\n<p>We're going to be using a lot of terms today, but they will become familiar to you. Most importantly, I want you to understand what <strong>ARVs</strong> are, how they work, what <strong>RESISTANCE</strong> is, and why <strong>ADHERENCE</strong> is so important to you staying healthy.&nbsp;</p>\r\n<p>&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-15T16:30:10.396",
+      "modified": "2017-12-04T14:34:44.962",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 40,
+   "fields": {
+      "activity": 23,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p style=\"text-align: -webkit-auto;\"><span style=\"text-align: justify;\">The&nbsp;</span><span style=\"font-family: 'lucida sans unicode', 'lucida grande', sans-serif; font-size: 14px; line-height: 18px; text-align: justify;\">Human Immunodeficiency Virus (HIV) is a mean and tricky virus. When it infects you, it wants to take you over. To do it, HIV attacks and kills cells in your body that keep you healthy.&nbsp;</span></p>\r\n<p style=\"font-size: 14px; text-align: justify; line-height: 18px; font-family: 'lucida sans unicode', 'lucida grande', sans-serif;\">Because HIV is so nasty and tricky, it multiplies until there millions of the virus in your body. Without any defenses, soon the HIV will take over. You don't want to be in that position!</p>\r\n<p style=\"font-size: 14px; text-align: justify; line-height: 18px; font-family: 'lucida sans unicode', 'lucida grande', sans-serif;\"><span style=\"font-family: 'Lucida Sans Unicode', sans-serif;\">When your bloods are taken, doctors can do a <strong>viral load test</strong>.&nbsp;&nbsp;The less virus they find, the better! If you have an&nbsp;</span><strong style=\"font-family: 'Lucida Sans Unicode', sans-serif;\">undetectable</strong><span style=\"font-family: 'Lucida Sans Unicode', sans-serif;\">&nbsp;viral load, that means you are doing a good job of fighting off the virus. If you have a detectable viral load, that means there is a lot of virus still in you.</span></p>",
+      "image": "intervention_images/HIVReplication_1.gif",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-29T13:55:42.263",
+      "modified": "2017-12-04T14:34:44.976",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 41,
+   "fields": {
+      "activity": 24,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>The body fights off diseases with its immune system. Your immune system is made up of lots of special white blood cells, known as CD4 cells. CD4 cells are the &ldquo;soldiers&rdquo; of your immune system. CD4 cells attack and destroy all the bad things that enter your body, like germs, bacteria, infections, and viruses. Having lots of CD4 cells means you can fight off invaders and stay healthy.</p>\r\n<p>Over time, HIV weakens your immune system by killing off your CD4 cells. With few or no CD4 cells, your body cannot fight off invaders. With few or no CD4 cells, you can get sick really easily - you have no defenses against germs, viruses, and sickness.&nbsp;</p>\r\n<p>Doctors measure your immune system when they take your bloods. They can actually tell how many CD4 cells you have in your body by the <strong>CD4 cell count test</strong>. <strong>The more CD4 cells they find, the better!&nbsp;</strong>A healthy CD4 count is considered anything above 500. Doctors start to be concerned when your CD4 count goes below 500.</p>\r\n<p>When the CD4 count drops below 350, ARVs&nbsp;are usually recommended. That's why the clinic wants you to start ARVs now - your defenses are low and your body needs help to fight off the HIV.</p>\r\n<p>Do you know what your CD4 count is?</p>",
+      "image": "intervention_images/immuneanimation8.gif",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-13T10:22:10.764",
+      "modified": "2017-12-04T14:34:44.990",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 42,
+   "fields": {
+      "activity": 25,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>When your immune system is weak, you can develop many different symptoms. The symptoms of HIV can range from very minimal to very severe and life threatening.</p>",
+      "image": "intervention_images/xhosawoman-progression_1.gif",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-03T17:05:01.457",
+      "modified": "2017-12-04T14:34:45.002",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 43,
+   "fields": {
+      "activity": 26,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>When your immune system is weak because the HIV is killing off your CD4 soldier cells, you are more susceptible to lots of different illnesses. These illnesses are called opportunistic infections, or OIs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-20T10:10:11.290",
+      "modified": "2017-12-04T14:34:45.027",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 44,
+   "fields": {
+      "activity": 26,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>The sicker you are, the more likely you will get OIs, like:</p>\r\n<ul>\r\n<li>Thrush in the mouth</li>\r\n<li>Herpes Zoster (shingles)</li>\r\n<li>Nail infections</li>\r\n<li>TB</li>\r\n<li>Cancers, like Karposi's sarcoma (cancer of blood vessels) and lymphoma (cancer of glands)</li>\r\n<li>Pneumonias, like PCP (Pneumocystis carinii pneumonia)</li>\r\n<li>Cyrptococal meningitis</li>\r\n<li>Unusual diarrhoea, like cryptosporidium or isospora</li>\r\n<li>Thinking, remembering, and concentration problems</li>\r\n<li>HIV wasting (severe loss of weight)&nbsp;</li>\r\n</ul>",
+      "image": "intervention_images/diseases4up.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-03T16:24:12.085",
+      "modified": "2017-12-04T14:34:45.032",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 45,
+   "fields": {
+      "activity": 26,
+      "title": "Island Activity",
+      "style": null,
+      "instruction_text": "<p><span style=\"font-family: 'lucida sans unicode', 'lucida grande', sans-serif; font-size: 14px; line-height: 18px; text-align: justify;\">To see how viral load, CD4 count, and OIs work together, let's go to the Island Activity.</span></p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-03T17:05:51.121",
+      "modified": "2017-12-04T14:34:45.038",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 46,
+   "fields": {
+      "activity": 27,
+      "title": "What are ARVs?",
+      "style": "say",
+      "instruction_text": "<p>There is no cure for HIV. The medicines to treat HIV and keep you healthy are known as ARVs, or antiretrovirals. These are different from medicines used to treat OIs like TB medicines and bactrim.&nbsp;ARVs attack and fight off HIV to keep you healthy.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-02-14T15:49:46.245",
+      "modified": "2017-12-04T14:34:45.060",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 47,
+   "fields": {
+      "activity": 27,
+      "title": "What is Adherence?",
+      "style": "say",
+      "instruction_text": "<p>When you start taking ARVs, you need to take them every single day. You need to take the right pills, at the right time, every day. Adherence means taking your pills every day at the same time(s). It means you don't miss any pills or forget to take your ARVs. It's not easy, and you have to keep it up every month, and every year.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-15T16:47:39.218",
+      "modified": "2017-12-04T14:34:45.065",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 48,
+   "fields": {
+      "activity": 27,
+      "title": "What is Resistance?",
+      "style": "say",
+      "instruction_text": "<p>Resistance can be hard to understand. Basically, if you aren't adherent, the tricky HIV can change itself so that the ARVs can no longer fight it off. What once worked no longer does.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-15T16:49:31.327",
+      "modified": "2017-12-04T14:34:45.071",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 49,
+   "fields": {
+      "activity": 27,
+      "title": "Snakes and Soldiers Video",
+      "style": null,
+      "instruction_text": "<p>Let's watch a video to better understand adherence and resistance.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-20T14:54:28.084",
+      "modified": "2017-12-04T14:34:45.076",
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 50,
+   "fields": {
+      "activity": 28,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's go back to the Island Activity and see how adherence and ARVs work.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-03T17:11:41.158",
+      "modified": "2017-12-04T14:34:45.100",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 51,
+   "fields": {
+      "activity": 29,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p><span style=\"font-family: 'lucida sans unicode', 'lucida grande', sans-serif; font-size: 14px; line-height: 18px; text-align: justify;\">Do you have any questions about viral load, CD4 cells, and adherence to ARVs?</span></p>\r\n<p style=\"font-size: 14px; text-align: justify; line-height: 18px; font-family: 'lucida sans unicode', 'lucida grande', sans-serif;\">Remember:</p>\r\n<ul style=\"font-size: 14px !important; font-family: 'lucida sans unicode', 'lucida grande', sans-serif;\">\r\n<li>The more CD4 cells you have, the better</li>\r\n<li>The lower viral load you have, the better</li>\r\n<li>As your viral load goes down your CD4 cells go up</li>\r\n<li>Taking your ARVs regularly and correctly keeps your viral load down&nbsp;</li>\r\n<li>When the viral load is down, your CD4 cells come back, and you become healthier!</li>\r\n</ul>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-20T10:28:36.789",
+      "modified": "2017-12-04T14:34:45.114",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 52,
+   "fields": {
+      "activity": 30,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's remember that the reason why we're talking about all of this is to help you stay as healthy as possible. By staying healthy you get to do the things you want in life.</p>\r\n<p>Before we end today, I'd like us all to&nbsp;look at your reasons to stay healthy.&nbsp;I hope that&nbsp;this list will help remind you both why it is important to work together to stay healthy. If you would like, we can change, add or remove any of the reasons.</p>\r\n<p>&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2011-12-06T14:29:12.695",
+      "modified": "2017-12-04T14:34:45.138",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 53,
+   "fields": {
+      "activity": 31,
+      "title": "Next time",
+      "style": "say",
+      "instruction_text": "<p>Thank you so much for your participation today.&nbsp; I look forward to seeing you at our next session _[date/time]__&nbsp;</p>\r\n<p>Next time we&rsquo;ll look more closely at specific things that can help with adherence, as well as things that could get in the way, and we will teach you ways to overcome adherence challenges.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-02-14T17:18:53.994",
+      "modified": "2017-12-04T14:34:45.152",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 54,
+   "fields": {
+      "activity": 31,
+      "title": "Print",
+      "style": "say",
+      "instruction_text": "<p>Would you like to print a copy of the <strong>Island Activity</strong>&nbsp;or the <strong>reasons for staying healthy</strong> activity?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-03-17T23:15:12.265",
+      "modified": "2017-12-04T14:34:45.158",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 55,
+   "fields": {
+      "activity": 32,
+      "title": "",
+      "style": null,
+      "instruction_text": "<ol>\r\n<li>Review patient's ARVs [patient should have ARVs]</li>\r\n<li>Review why adherence is so important</li>\r\n<li>Discuss what helps with adherence&nbsp;</li>\r\n<li>Discuss what gets in the way of adherence</li>\r\n<li>Learn how to overcome adherence challenges</li>\r\n<li>Review ways to stay healthy</li>\r\n</ol>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-16T10:38:39.983",
+      "modified": "2017-12-04T14:34:45.178",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 56,
+   "fields": {
+      "activity": 33,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>Welcome back! It's great to see you again. &nbsp;Today we're going to talk about:</p>\r\n<ul>\r\n<li>What an ARV regimen looks like</li>\r\n<li>How you are supposed to take an ARV regimen</li>\r\n<li>What to anticipate when you start ARVs</li>\r\n<li>What helps with adherence</li>\r\n<li>What can interfere with adherence</li>\r\n<li>How to overcome challenges to adherence</li>\r\n<li>How to stay healthy</li>\r\n</ul>\r\n<p>Before we get started, do you have any questions for me? Maybe some questions came to mind since your last session.</p>\r\n<p>Okay, let's get started.</p>",
+      "image": "intervention_images/welcome2_2.png",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-01-06T15:40:15.477",
+      "modified": "2017-12-04T14:34:45.190",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 57,
+   "fields": {
+      "activity": 34,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>ARVs can keep you healthy and help you avoid other illnesses. Most people tolerate them well, begin to feel better and stay healthy for the long term.</p>\r\n<p>Some people experience side effects when they first start taking ARVs, but they usually last just a short time. Side effects can include nausea, headaches and fatigue.&nbsp;In rare circumstances, people can have more serious reactions to ARVs, such as&nbsp;rash, fever, and vomiting.</p>\r\n<p>Talk to the nurse and treatment team if you have:</p>\r\n<ul>\r\n<li>Any side effects</li>\r\n<li>Serious reactions</li>\r\n<li>Discomfort&nbsp;</li>\r\n</ul>\r\n<p>Some people may feel a little worse before they feel better. If you do feel worse after you start your ARVs, tell your treatment team as soon as possible, but don't stop taking your ARVs.</p>",
+      "image": "intervention_images/talking_to_provider.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-20T10:50:46.297",
+      "modified": "2017-12-04T14:34:45.204",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 58,
+   "fields": {
+      "activity": 35,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<div style=\"background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; margin: 8px;\">\r\n<p>Taking your ARVs every day, in the right way, at the same time can be challenging and everybody manages it differently.&nbsp;</p>\r\n<p>I would like to show you a video about Hope and Joseph. They are both infected with HIV and are just starting their ARV regimens.&nbsp;However, their experiences with the ARV medicines are very different.</p>\r\n<p>Let&rsquo;s watch.</p>\r\n<p>&nbsp;</p>\r\n</div>\r\n<p>&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2011-12-06T14:39:32.022",
+      "modified": "2017-12-04T14:34:45.228",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 59,
+   "fields": {
+      "activity": 36,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's talk about the video for a few minutes. What did Hope do that helped her with adherence and helped her stay healthy?&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-20T16:57:53.562",
+      "modified": "2017-12-04T14:34:45.241",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 60,
+   "fields": {
+      "activity": 36,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>There are things that can help you stay healthy and maintain good adherence. You may already be doing some of these, and for the ones you aren't already doing, keep them in mind for when you start your ARVs. They can help you stay healthy.</p>\r\n<ul>\r\n<li>Accepting the HIV diagnosis</li>\r\n<li>Having reminder tools</li>\r\n<li>Having family or friends provide support</li>\r\n<li>Seeing the positive effects of ARVs</li>\r\n<li>Talking with your provider about side effects and your health</li>\r\n<li>Disclosing your HIV status to others</li>\r\n</ul>\r\n<p>Are there other things you can think of that you already do that could help you stay adherent? Or other things you can think of that I haven't mentioned?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-20T10:52:59.307",
+      "modified": "2017-12-04T14:34:45.247",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 61,
+   "fields": {
+      "activity": 37,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>In the video, Hope did a good job of taking her ARVs and staying healthy. Joseph, however, had a hard time of it. What did he do that interfered with adherence? What could he have done better?</p>\r\n<p>There are also many things that can get in the way of trying to maintain good adherence and staying healthy, such as:</p>\r\n<ul>\r\n<li>Denying you have HIV</li>\r\n<li>Keeping your HIV status a secret from people who could offer you support</li>\r\n<li>Not getting help from family or friends</li>\r\n<li>Not caring about your treatment</li>\r\n<li>Not talking to your provider about side effects or when you're not feeling well</li>\r\n<li>Drinking lots of alcohol</li>\r\n<li>Using drugs</li>\r\n<li>Feeling sad and depressed</li>\r\n</ul>\r\n<p>Are there things you do now in your life that could get in the way of you being adherent and staying healthy?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-21T09:56:03.357",
+      "modified": "2017-12-04T14:34:45.262",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 62,
+   "fields": {
+      "activity": 37,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>There are ways to overcome these and other challenges. Let's take a look at several very common problems that interfere with ARV adherence and some practical solutions to them.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-21T09:56:03.424",
+      "modified": "2017-12-04T14:34:45.268",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 63,
+   "fields": {
+      "activity": 38,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>I don&rsquo;t have people to support me.</p>\r\n<div class=\"issue-text-container\">\r\n<div class=\"issue-subtext\">\r\n<ul>\r\n<li>I have not disclosed my status to my family/partner</li>\r\n<li>Even though I have disclosed my status I still don't receive support</li>\r\n</ul>\r\n</div>\r\n</div>",
+      "image": "intervention_images/alone.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:51:40.024",
+      "modified": "2017-12-04T14:34:45.282",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 64,
+   "fields": {
+      "activity": 38,
+      "title": "Moving Forward",
+      "style": null,
+      "instruction_text": "<ul>\r\n<li>Learn about the importance of disclosure and choose someone you trust and are comfortable with to disclose to.</li>\r\n<li>Examine what support you do have and evaluate who can provide what kind of support for you.</li>\r\n</ul>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:51:40.028",
+      "modified": "2017-12-04T14:34:45.288",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 65,
+   "fields": {
+      "activity": 39,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>It's difficult to get to the clinic</p>\r\n<div class=\"issue-text-container\">\r\n<div class=\"issue-subtext\">\r\n<ul>\r\n<li>You travel outside of Cape Town a lot</li>\r\n<li>You're too sick to walk to the clinic</li>\r\n<li>You don&rsquo;t have any transportation</li>\r\n<li>You don&rsquo;t have anyone to take care of your children while you're at the clinic</li>\r\n<li>You can&rsquo;t take time off work</li>\r\n</ul>\r\n</div>\r\n</div>",
+      "image": "intervention_images/cantgettoclinic.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:52:20.596",
+      "modified": "2017-12-04T14:34:45.302",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 66,
+   "fields": {
+      "activity": 39,
+      "title": "Moving Forward",
+      "style": null,
+      "instruction_text": "<ul>\r\n<li>Plan a visit to clinic before you travel</li>\r\n<li>Ask the doctor or nurse for a 2-month supply of ARVs if you will be away for a long time</li>\r\n<li>Take enough medication with you to last for your whole trip</li>\r\n<li>Take your clinic card with you on your trip and find out in advance where the closest clinic is</li>\r\n<li>Speak to the clinic staff about your trip so they can make arrangements</li>\r\n<li>Notify the clinic staff that due to sickness you cannot get to the clinic, and try to make alternative arrangements (notify by telephone or treatment buddy)</li>\r\n<li>Bring your children with you to the clinic</li>\r\n<li>Ask your treatment buddy/neighbor/friend/relative to look after your children while you attend clinic</li>\r\n<li>Consider disclosing your status to your employer</li>\r\n<li>Try to arrange days off to coincide with clinic days</li>\r\n<li>Arrange with the counselor to come at a specific time</li>\r\n<li>Try to attend the clinic on a less busy day</li>\r\n</ul>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:52:20.599",
+      "modified": "2017-12-04T14:34:45.307",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 67,
+   "fields": {
+      "activity": 40,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>You're uncertain and confused about taking ARVs because:</p>\r\n<ul>\r\n<li>Your priest told you that you are cured</li>\r\n<li>Your healer tells you ARVs are not as good as his medicine</li>\r\n<li>Your family and friends don't let you</li>\r\n<li>Your beliefs speak against the ARVs</li>\r\n<li>You don&rsquo;t know enough about ARVs to feel comfortable taking them</li>\r\n<li>Everything you hear about ARVs is confusing</li>\r\n</ul>\r\n<p>&nbsp;</p>",
+      "image": "intervention_images/barrier-forgetful.png",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T15:19:35.408",
+      "modified": "2017-12-04T14:34:45.321",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 68,
+   "fields": {
+      "activity": 40,
+      "title": "Moving Forward",
+      "style": null,
+      "instruction_text": "<ul>\r\n<li>Understand how HIV and ARVs work</li>\r\n<li>\"Take and believe\"</li>\r\n<li>\"Even ARVs are created by God\"</li>\r\n<li>Your health is in your hands - you have the right to decide what's best</li>\r\n</ul>\r\n<p>&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T15:22:14.213",
+      "modified": "2017-12-04T14:34:45.327",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 69,
+   "fields": {
+      "activity": 41,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>You feel so well that you stop taking your ARVs. You think you don't need them anymore.&nbsp;</p>",
+      "image": "intervention_images/barrier-happy.png",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T15:23:36.153",
+      "modified": "2017-12-04T14:34:45.340",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 70,
+   "fields": {
+      "activity": 41,
+      "title": "Moving Forward",
+      "style": null,
+      "instruction_text": "<ul>\r\n<li>Understand that the ARVs are helping you to feel well</li>\r\n<li>Continue to take ARVs even if you are feeling well</li>\r\n<li>You have to take ARVs every day, at the same time</li>\r\n</ul>\r\n<p>&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T15:25:17.468",
+      "modified": "2017-12-04T14:34:45.345",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 71,
+   "fields": {
+      "activity": 42,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Sometimes you forget to take your pills because:</p>\r\n<div class=\"issue-text-container\">\r\n<div class=\"issue-text\">\r\n<ul>\r\n<li>You can't remember - no matter how hard you try</li>\r\n<li>You're working</li>\r\n<li>You're drinking</li>\r\n<li>You're using drugs</li>\r\n<li>You're feeling sad, depressed, or hopeless</li>\r\n</ul>\r\n</div>\r\n</div>",
+      "image": "intervention_images/forgetful.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T15:27:21.233",
+      "modified": "2017-12-04T14:34:45.360",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 72,
+   "fields": {
+      "activity": 42,
+      "title": "Moving Forward",
+      "style": null,
+      "instruction_text": "<ul>\r\n<li>Put a reminder on your phone.</li>\r\n<li>Get your treatment buddy, friend or relative to remind you.</li>\r\n<li>Put the tablets where you can see them.</li>\r\n<li>Use a TV program like Generations as a reminder (always take them when you watch the evening news).</li>\r\n<li>Take your ARVs before you go to a party or out with friends.</li>\r\n<li>Talk to someone like your treatment buddy or a counselor<br />Get some help with your drinking and/or drug use.</li>\r\n</ul>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T15:27:21.236",
+      "modified": "2017-12-04T14:34:45.366",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 73,
+   "fields": {
+      "activity": 43,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Experiencing challenges to adherence and staying healthy can happen at any time. Though they may not ever happen to you, it is a good idea to be prepared, as your health may be in danger.&nbsp;</p>\r\n<p>Let's watch a short video that demonstrates how you &nbsp;can work together to stay healthy. You can use these skills to help overcome all kinds of challenges, but most importantly they can help you to stay healthy.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-21T09:58:59.938",
+      "modified": "2017-12-04T14:34:45.390",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 74,
+   "fields": {
+      "activity": 44,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Also, it is important to remember that you have a team of people at the clinic who are dedicated to your health care.&nbsp; This team includes:</p>\r\n<ul>\r\n<li>Nurse</li>\r\n<li>Doctor</li>\r\n<li>Pharmacist</li>\r\n<li>Counselor</li>\r\n<li>Patient Advocates</li>\r\n<li>Psychologist</li>\r\n</ul>\r\n<p>Is there anyone else?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-29T15:30:12.321",
+      "modified": "2017-12-04T14:34:45.405",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 75,
+   "fields": {
+      "activity": 45,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Staying healthy is more than just about taking your ARVs at the right time, in the right way and regularly. There are other important things you can do in addition to maintaining good adherence that will help you stay healthy.&nbsp;</p>\r\n<p>Healthy living can help you have:</p>\r\n<ul>\r\n<li>A stronger immune system and fewer OIs</li>\r\n<li>More energy</li>\r\n<li>A better mood</li>\r\n<li>Better relationships with friends and family</li>\r\n</ul>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-21T10:21:46.184",
+      "modified": "2017-12-04T14:34:45.418",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 76,
+   "fields": {
+      "activity": 46,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>&nbsp;</p>\r\n<ul>\r\n<li>Eat lots of veggies</li>\r\n<li>Eat whole grains, like brown bread and brown rice</li>\r\n<li>Grill, bake or steam food and avoid frying food</li>\r\n<li>Avoid fizzy/sugary drinks</li>\r\n<li>Drink plenty of water and go for fruit juices and rooibos</li>\r\n<li>Eat fresh foods and avoid processed foods</li>\r\n<li>Do not eat too much meat or foods cooked in oil</li>\r\n<li><strong>Limit your alcohol intake</strong></li>\r\n</ul>\r\n<p>&nbsp;</p>",
+      "image": "intervention_images/food_groups_2.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T10:27:25.734",
+      "modified": "2017-12-04T14:34:45.431",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 77,
+   "fields": {
+      "activity": 47,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Exercise regularly:</p>\r\n<ul>\r\n<li>Try walking for at least 30 minutes every day, like working to work or the clinic instead of taking transport</li>\r\n</ul>\r\n<p>Regular exercise will help you:</p>\r\n<ul>\r\n<li>Control weight</li>\r\n<li>Build muscles</li>\r\n<li>Strengthen your immune system</li>\r\n<li>Improve your mood</li>\r\n</ul>\r\n<p>&nbsp;</p>",
+      "image": "intervention_images/running_1.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T10:28:10.020",
+      "modified": "2017-12-04T14:34:45.446",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 78,
+   "fields": {
+      "activity": 48,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Because you're positive, you can still pass the virus on. It's also important to protect yourself from getting other STIs. STIs, including HIV, are most commonly transmitted via:</p>\r\n<ul>\r\n<li>Sex (vaginal, anal and oral)</li>\r\n<li>From mother to child during pregnancy, birth and breastfeeding</li>\r\n<li>Sharing needles</li>\r\n<li>Sharing circumcision equipment</li>\r\n</ul>\r\n<p>So, use condoms, keep your viral load undetectable, and don't share needles or circumcision equipment.</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>",
+      "image": "intervention_images/condoms_for_MSV.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T10:28:48.007",
+      "modified": "2017-12-04T14:34:45.459",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 79,
+   "fields": {
+      "activity": 49,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>If you're feeling overwhelmed, stressed out or in distress:</p>\r\n<ul>\r\n<li>Talk to a counselor</li>\r\n<li>Talk to your treatment support partner</li>\r\n<li>Talk to someone you trust</li>\r\n<li>Keep a diary</li>\r\n</ul>\r\n<p>&nbsp;</p>",
+      "image": "intervention_images/Chantal_and_Nomhle.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T10:29:38.391",
+      "modified": "2017-12-04T14:34:45.474",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 80,
+   "fields": {
+      "activity": 50,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>Let's take a look at your mountain and let's remember your reasons to stay healthy.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-03-17T09:29:49.003",
+      "modified": "2017-12-04T14:34:45.498",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 81,
+   "fields": {
+      "activity": 51,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>It's been great working with you. We've covered a lot about HIV, ARVs, adherence, and how to stay healthy. Staying healthy is a life-long commitment. You are not alone - there are thousands and thousands of people taking ARVs in the townships and millions on ARVs around the world.</p>\r\n<p>Remember:</p>\r\n<ul>\r\n<li>ARVs must be taken every day, at the same time, and in the same way</li>\r\n<li>You must always have enough ARVs&nbsp;</li>\r\n<li>Your buddy can remind you to take your ARVs, pick-up refills at the pharmacy, and make clinic appointments</li>\r\n<li>There are things you can help your buddy with too!</li>\r\n<li>If you encounter challenges, we're here to help</li>\r\n<li>Your nurses and clinic staff are here for you</li>\r\n</ul>\r\n<p>&nbsp;</p>",
+      "image": "intervention_images/handshake-complete.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-10T16:39:05.713",
+      "modified": "2017-12-04T14:34:45.511",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 82,
+   "fields": {
+      "activity": 52,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's see which ARVs you were prescribed and talk about how and when to take them.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-20T15:43:48.192",
+      "modified": "2017-12-04T14:34:45.545",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 83,
+   "fields": {
+      "activity": 52,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T10:40:14.565",
+      "modified": "2017-12-04T14:34:45.551",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 84,
+   "fields": {
+      "activity": 53,
+      "title": "",
+      "style": "say",
+      "instruction_text": "<p>Thank you so much for your participation. We hope you have found these sessions helpful. Do you have any remaining questions? Remember, if you have questions later, you can always go to the clinic staff for support.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-02-14T17:54:10.547",
+      "modified": "2017-12-04T14:34:45.565",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 85,
+   "fields": {
+      "activity": 53,
+      "title": "Medication Diary",
+      "style": null,
+      "instruction_text": "<p>Here is a diary that will help you register your pills, remind you to take them and help you keep your clinic appointments.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-05-23T15:30:25.809",
+      "modified": "2017-12-04T14:34:45.570",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 86,
+   "fields": {
+      "activity": 53,
+      "title": "Print",
+      "style": null,
+      "instruction_text": "<p>Would you like a copy of any of the activities?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2009-03-18T14:59:50.025",
+      "modified": "2017-12-04T14:34:45.576",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 87,
+   "fields": {
+      "activity": 54,
+      "title": "",
+      "style": null,
+      "instruction_text": "<ol>\r\n<li>Identify why patient is back</li>\r\n<li>Screen for mental health and substance use</li>\r\n<li>Review importance of adherence</li>\r\n<li>Review ARV regimen</li>\r\n<li>Review social support and whether buddy is still helping</li>\r\n<li>Review adherence challenges</li>\r\n<li>Review problem solving</li>\r\n<li>Review activities as needed &nbsp;</li>\r\n</ol>\r\n<p>&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-16T10:41:55.428",
+      "modified": "2017-12-04T14:34:45.596",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 88,
+   "fields": {
+      "activity": 55,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>It's nice to see you again.&nbsp;</p>\r\n<ul>\r\n<li>How have you been?&nbsp;</li>\r\n<li>How has it been going with your treatment buddy?</li>\r\n</ul>\r\n<p>Can you tell me a little bit about your understanding of why you're back?</p>\r\n<p><strong>PLEASE INDICATE REASONS FOR RETURNING IN NOTE FIELD</strong></p>",
+      "image": "intervention_images/welcome2_3.png",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-27T09:42:09.920",
+      "modified": "2017-12-04T14:34:45.611",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 89,
+   "fields": {
+      "activity": 56,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p><span style=\"font-family: 'lucida sans unicode', 'lucida grande', sans-serif; font-size: 14px; line-height: 18px; text-align: justify;\">Sometimes how people feel can get in the way of how they take HIV medicines. So we ask everyone some questions about how they have been feeling lately and their mood. Now I&rsquo;m going to ask you how you have been feeling in the past month (30 days).</span></p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-27T09:52:17.732",
+      "modified": "2017-12-04T14:34:45.634",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 90,
+   "fields": {
+      "activity": 57,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Alcohol use may also interfere with taking your HIV medicine, as well as affect many areas of health. Hence, it is important for us to ask everyone about their drinking. Now I&rsquo;m going to ask you some questions about your drinking. Please try to be as honest and as accurate as you can be.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-27T09:52:32.465",
+      "modified": "2017-12-04T14:34:45.657",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 91,
+   "fields": {
+      "activity": 58,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Because drug use can also interfere with taking your HIV medicine, we ask everyone about his or her drug use. Now I&rsquo;m going to ask you some questions about your drug use. Please try to be as honest and accurate as possible.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-27T09:52:45.987",
+      "modified": "2017-12-04T14:34:45.680",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 92,
+   "fields": {
+      "activity": 59,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's review your ARVs. We can see if they are the same or if they've changed. If changes have been made, we can update it here.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-27T10:01:20.161",
+      "modified": "2017-12-04T14:34:45.714",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 93,
+   "fields": {
+      "activity": 60,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Last time we met, we talked about:</p>\r\n<ul>\r\n<li>How HIV affects your immune system</li>\r\n<li>How ARVs work</li>\r\n<li>How ARVs must be taken at the same time(s) every day and in the same way</li>\r\n<li>What good adherence is</li>\r\n<li>The importance of treatment support</li>\r\n</ul>\r\n<p>If you remember, last time we:</p>\r\n<ul>\r\n<li>Watched the Snakes and Soldiers video&nbsp;</li>\r\n<li>Watched the video about Hope and Joseph</li>\r\n<li>Talked about your support tree</li>\r\n<li>Did the Island Activity</li>\r\n</ul>\r\n<p>We can review any of these topics and/or visit any one of the activities now. &nbsp;</p>\r\n<p><strong>GO TO WHICHEVER ACTIVITY IS NEEDED</strong></p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-27T09:55:57.876",
+      "modified": "2017-12-04T14:34:45.728",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 94,
+   "fields": {
+      "activity": 61,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Experiencing challenges to adherence and staying healthy can happen at any time. Though they may not ever happen to you, it is a good idea to be prepared, as your health may be in danger.</p>\r\n<p>Last time you were here we watched a video that demonstrates how you &nbsp;can work together with your buddy to stay healthy. You can use these skills to help overcome all kinds of challenges, but most importantly they can help you help stay healthy.&nbsp; Let's take a look at this video again.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-27T10:04:17.574",
+      "modified": "2017-12-04T14:34:45.751",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 95,
+   "fields": {
+      "activity": 61,
+      "title": "",
+      "style": null,
+      "instruction_text": "",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-27T10:14:58.629",
+      "modified": "2017-12-04T14:34:45.757",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 96,
+   "fields": {
+      "activity": 62,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's take a look at some common things that can get in the way of people taking their ARVs. Let me know if any of them have &nbsp;been a problem for you. If not, we can talk about what has been challenging for you.&nbsp; When we are done looking at common challenges, we'll choose the most important challenge(s) for you and make a plan(s) to move forward.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T14:56:51.282",
+      "modified": "2017-12-04T14:34:45.780",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 97,
+   "fields": {
+      "activity": 63,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's remember that the reason why we're talking about all of this is  to help you stay as healthy as possible. By staying healthy you get to  do the things you want in life.</p>\r\n<p>Before we end today's session, I'd like us all to&nbsp;look at the list of  reasons you made last time that keep you motivated to stay  healthy.&nbsp;Would you like to change your&nbsp;list in any way?</p>\r\n<p>I hope that&nbsp;this list will help remind you both why it is important to work together to stay healthy.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T15:17:08.095",
+      "modified": "2017-12-04T14:34:45.806",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 98,
+   "fields": {
+      "activity": 64,
+      "title": "Next Time",
+      "style": null,
+      "instruction_text": "<p>Thank you so much for your participation today. I look forward to seeing you and your treatment buddy at our next session. Let's find a time when you both can come back. &nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T15:17:53.097",
+      "modified": "2017-12-04T14:34:45.820",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 99,
+   "fields": {
+      "activity": 64,
+      "title": "Print",
+      "style": null,
+      "instruction_text": "<p>Would you like to print a copy of your tree or mountain?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T15:18:04.921",
+      "modified": "2017-12-04T14:34:45.827",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 100,
+   "fields": {
+      "activity": 65,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>There is a lot of information out there about ARVs and HIV treatments. You may have heard different things about ARVs on TV, from friends and family and even from your pastor. Some of it can be confusing. Let&rsquo;s discuss some common concerns people have about taking ARVs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:52:18.947",
+      "modified": "2017-12-04T14:34:45.841",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 101,
+   "fields": {
+      "activity": 65,
+      "title": "Taking ARVs will make me sick",
+      "style": null,
+      "instruction_text": "<p>It&rsquo;s true that for some people they feel worse right after starting ARVs. However, most people don&rsquo;t. Most people feel better soon. The ones who do feel worse only do for a short period. Soon, they too start feeling better and healthier.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:52:18.950",
+      "modified": "2017-12-04T14:34:45.847",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 102,
+   "fields": {
+      "activity": 65,
+      "title": "Taking ARVs will change my body",
+      "style": null,
+      "instruction_text": "<p>The most commonly used ARVs today will not change your body. Some of the older ones did change people&rsquo;s bodies making them skinnier or changing their faces (e.g., lipodystrophy), but those ARVs are mostly no longer used. You most likely will not be taking those ARVs.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:52:18.953",
+      "modified": "2017-12-04T14:34:45.853",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 103,
+   "fields": {
+      "activity": 65,
+      "title": "ARVs can only be taken with food",
+      "style": null,
+      "instruction_text": "<p>ARVs can be taken without food on an empty stomach. You can take ARVs safely without food. A few people tolerate them better when taken with food.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:52:44.311",
+      "modified": "2017-12-04T14:34:45.858",
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 104,
+   "fields": {
+      "activity": 65,
+      "title": "Taking ARVs will make me hungry",
+      "style": null,
+      "instruction_text": "<p>There is a belief that for some people, ARVs make them hungrier. However, for most people, ARVs do not make them hungrier. You most likely will not feel hungrier because of your ARVs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:52:44.314",
+      "modified": "2017-12-04T14:34:45.864",
+      "_order": 4
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 105,
+   "fields": {
+      "activity": 65,
+      "title": "Praying will cure me of HIV",
+      "style": null,
+      "instruction_text": "<p>There is no cure for HIV. Taking ARVs will fight off the HIV. Praying and going to church are important aspects of a healthy lifestyle, but they will not cure you of HIV. You have to take the ARVs to fight off the virus and stay healthy. For many people, the combination of taking their ARV's regularly and praying at Church is the most successful way of beating HIV.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:52:44.317",
+      "modified": "2017-12-04T14:34:45.870",
+      "_order": 5
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 106,
+   "fields": {
+      "activity": 65,
+      "title": "Traditional medicine is just as good, if not better than ARVs",
+      "style": null,
+      "instruction_text": "<p>Traditional medicines can be good for many things, but only ARVs are made specifically to target and fight off HIV. Traditional medicines may help, but it is essential to always take your ARVs and talk to the nurse if you plan on taking traditional medicines with ARVs. Some traditional medicines do not mix well with ARVs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:53:01.251",
+      "modified": "2017-12-04T14:34:45.875",
+      "_order": 6
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 107,
+   "fields": {
+      "activity": 65,
+      "title": "My priest told me I\u2019m cured and that I don\u2019t need ARVs",
+      "style": null,
+      "instruction_text": "<p>Priests may have good ideas about how to help people live with HIV. However, there is no cure for HIV and ARVs are the only medicines designed specifically to target and fight the virus. Why don't you talk about your religious beliefs so that your counselor can understand them better.&nbsp; You can talk to a nurse, doctor or counselor who is from your faith to hear what they think.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:53:01.254",
+      "modified": "2017-12-04T14:34:45.881",
+      "_order": 7
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 108,
+   "fields": {
+      "activity": 65,
+      "title": "Taking ARVs goes against my beliefs",
+      "style": null,
+      "instruction_text": "<p>It's true that taking ARVs is difficult for many. The choice to take them is yours.&nbsp;You get to decide how you want to stay healthy and what healthy choices you would like to make. However, ARVs are helping millions of people all over South Africa and the world to stay healthy. They can help you stay healthy too. The choice is yours. Talk to a nurse, doctor, or counselor who shares your beliefs to hear what they think.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:53:01.256",
+      "modified": "2017-12-04T14:34:45.886",
+      "_order": 8
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 109,
+   "fields": {
+      "activity": 65,
+      "title": "People tell me not to take ARVs",
+      "style": null,
+      "instruction_text": "<p>This must be very frustrating and confusing for you. ARVs are designed to fight off HIV and make you healthier. If you take your ARVs regularly you stay healthy for the long term. You&rsquo;ll learn more about this as we work together.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:54:44.091",
+      "modified": "2017-12-04T14:34:45.891",
+      "_order": 9
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 110,
+   "fields": {
+      "activity": 65,
+      "title": "I can stop taking ARVs when I start to feel better",
+      "style": null,
+      "instruction_text": "<p>You have to always take ARVs. When you start feeling better, that means the ARVs are working. If you stop taking them, you will start to get sick again, and you may develop resistance. Always taking them at the right time will ensure that you stay healthy for the long term. You&rsquo;ll learn more about this as we work together.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:54:44.098",
+      "modified": "2017-12-04T14:34:45.897",
+      "_order": 10
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 111,
+   "fields": {
+      "activity": 65,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p><strong>Do you have any other concerns about starting ARVs?</strong></p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:54:44.102",
+      "modified": "2017-12-04T14:34:45.903",
+      "_order": 11
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 112,
+   "fields": {
+      "activity": 66,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>We would like you to bring your treatment partner back next time. Is the person you chose last time still your treatment buddy? Is there someone else you would rather bring next time?</p>\r\n<p>Because support is so important to your health, let's review your tree.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T15:45:15.875",
+      "modified": "2017-12-04T14:34:45.927",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 113,
+   "fields": {
+      "activity": 67,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p style=\"text-align: -webkit-auto;\"><span style=\"text-align: justify;\">The&nbsp;</span><span style=\"font-family: 'lucida sans unicode', 'lucida grande', sans-serif; font-size: 14px; line-height: 18px; text-align: justify;\">Human Immunodeficiency Virus (HIV) is a mean and tricky virus. When it infects you, it wants to take you over. To do it, HIV attacks and kills cells in your body that keep you healthy.&nbsp;</span></p>\r\n<p style=\"font-size: 14px; text-align: justify; line-height: 18px; font-family: 'lucida sans unicode', 'lucida grande', sans-serif;\">Because HIV is so nasty and tricky, it multiplies until there could be millions of different HIV viruses in your body. Without any defenses, soon the HIV will take over. You don't want to be in that position!</p>\r\n<p style=\"font-size: 14px; text-align: justify; line-height: 18px; font-family: 'lucida sans unicode', 'lucida grande', sans-serif;\"><span style=\"font-family: 'Lucida Sans Unicode', sans-serif;\">When your bloods are taken, doctors can do a&nbsp;<strong>viral load test</strong>.&nbsp;&nbsp;The less virus they find, the better! If you have an&nbsp;</span><strong style=\"font-family: 'Lucida Sans Unicode', sans-serif;\">undetectable</strong><span style=\"font-family: 'Lucida Sans Unicode', sans-serif;\">&nbsp;viral load, that means you are doing a good job of fighting off the virus. If you have a detectable viral load, that means there is a lot of virus still in you.</span></p>",
+      "image": "intervention_images/HIVReplication_2.gif",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T13:54:25.669",
+      "modified": "2017-12-04T14:34:45.941",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 114,
+   "fields": {
+      "activity": 68,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>The body fights off diseases with its immune system. Your immune system is made up of lots of special white blood cells, known as CD4 cells. CD4 cells are the &ldquo;soldiers&rdquo; of your immune system. CD4 cells attack and destroy all the bad things that enter your body, like germs, bacteria, infections, and viruses. Having lots of CD4 cells means you can fight off invaders and stay healthy.</p>\r\n<p>Over time, HIV weakens your immune system by killing off your CD4 cells. With few or no CD4 cells, your body cannot fight off invaders. With few or no CD4 cells, you can get sick really easily - you have no defenses against germs, viruses, and sickness.&nbsp;</p>\r\n<p>Doctors measure your immune system when they take your bloods. They can actually tell how many CD4 cells you have in your body by the&nbsp;<strong>CD4 cell count test</strong>.&nbsp;<strong>The more CD4 cells they find, the better!&nbsp;</strong>A healthy CD4 count is considered anything above 500. Doctors start to be concerned when your CD4 count goes below 500.</p>\r\n<p>When the CD4 count drops below 350, ARVs&nbsp;are usually recommended. That's why the clinic wants you to start ARVs - your defenses are low and your body needs help to fight off the HIV.</p>\r\n<p>Do you know what your CD4 count is?</p>",
+      "image": "intervention_images/immuneanimation8_1.gif",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T13:55:27.082",
+      "modified": "2017-12-04T14:34:45.955",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 115,
+   "fields": {
+      "activity": 69,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>When your immune system is weak, you can develop many different symptoms.&nbsp;The symptoms of HIV can range from very minimal to very severe and life threatening.</p>",
+      "image": "intervention_images/What_HIV_Does.gif",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T13:56:15.174",
+      "modified": "2017-12-04T14:34:45.969",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 116,
+   "fields": {
+      "activity": 70,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>When your immune system is weak because the HIV is killing off your CD4 soldier cells, you are more susceptible to lots of different illnesses. These illnesses are called opportunistic infections, or OIs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T13:57:45.301",
+      "modified": "2017-12-04T14:34:45.983",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 117,
+   "fields": {
+      "activity": 70,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>The sicker you are, the more likely you will get OIs, like:</p>\r\n<ul>\r\n<li>Thrush in the mouth</li>\r\n<li>Herpes Zoster (shingles)</li>\r\n<li>Nail infections</li>\r\n<li>TB</li>\r\n<li>Cancers, like Karposi's sarcoma (cancer of blood vessels) and lymphoma (cancer of glands)</li>\r\n<li>Pneumonias, like PCP (Pneumocystis carinii pneumonia)</li>\r\n<li>Cyrptococal meningitis</li>\r\n<li>Unusual diarrhoea, like cryptosporidium or isospora</li>\r\n<li>Thinking, remembering, and concentration problems</li>\r\n<li>HIV wasting (severe loss of weight)&nbsp;</li>\r\n</ul>",
+      "image": "intervention_images/diseases4up_1.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T13:57:45.304",
+      "modified": "2017-12-04T14:34:45.989",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 118,
+   "fields": {
+      "activity": 71,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>To see how the relationship between your CD4 cells, viral load and health works, let's go to the Island Activity.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:38:31.740",
+      "modified": "2017-12-04T14:34:46.012",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 119,
+   "fields": {
+      "activity": 72,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's watch a video to help you better understand adherence and how ARVs fight HIV.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:37:31.529",
+      "modified": "2017-12-04T14:34:46.037",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 120,
+   "fields": {
+      "activity": 73,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's go to the Island Activity and see how adherence affects your immune system and health.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:39:03.167",
+      "modified": "2017-12-04T14:34:46.061",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 121,
+   "fields": {
+      "activity": 74,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Taking your ARVs everyday, in the right way, at the same time can be challenging and everybody manages it differently.&nbsp;</p>\r\n<p>I would like to show you a video about Hope and Joseph. They are both infected with HIV and are just starting their ARV regimens.&nbsp;However, their experiences with the ARV medicines are very different.</p>\r\n<p>Let&rsquo;s watch.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-23T16:28:55.296",
+      "modified": "2017-12-04T14:34:46.084",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 122,
+   "fields": {
+      "activity": 75,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Experiencing challenges to adherence and staying healthy can happen at anytime. Though they may not ever happen to you, it is a good idea to be prepared, as your health may be in danger.&nbsp;</p>\r\n<p>Let's watch a short video that demonstrates how you &nbsp;can work together to stay healthy. You can use these skills to help overcome all kinds of challenges, but most importantly they can help you stay healthy.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:40:55.066",
+      "modified": "2017-12-04T14:34:46.104",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 123,
+   "fields": {
+      "activity": 76,
+      "title": "",
+      "style": null,
+      "instruction_text": "<ol>\r\n<li>Review adherence challenges</li>\r\n<li>Make or revise challenge plans as needed</li>\r\n<li>Review activities as needed &nbsp;</li>\r\n</ol>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-16T10:43:49.237",
+      "modified": "2017-12-04T14:34:46.123",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 124,
+   "fields": {
+      "activity": 77,
+      "title": "Welcome Back",
+      "style": null,
+      "instruction_text": "<p>It's nice to see you again. We went over a lot last time. Did you have any questions from before?</p>\r\n<p>Today, I'd like us to look more at your adherence challenges and review anything else you like.&nbsp;</p>\r\n<p>Do you have any questions from last time?</p>",
+      "image": "intervention_images/welcome2_4.png",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:01:20.470",
+      "modified": "2017-12-04T14:34:46.137",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 125,
+   "fields": {
+      "activity": 78,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Last time you were here, we made a plan to overcome a challenge. Let's take a look at the plan and talk about how it went.&nbsp; Then we'll either make another plan for that challenge or pick a new challenge(s) to work on. </p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:04:52.835",
+      "modified": "2017-12-04T14:34:46.160",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 126,
+   "fields": {
+      "activity": 79,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>What else can we talk about to help you stay healthy?</p>\r\n<ul>\r\n<li>How HIV affects your immune system</li>\r\n<li>How ARVs work</li>\r\n<li>How ARVs must be taken at the same time(s) every day and in the same way</li>\r\n<li>What good adherence is</li>\r\n<li>The importance of treatment support</li>\r\n</ul>\r\n<p>What activities can we do to help you stay healthy?</p>\r\n<ul>\r\n<li>Snakes and Soldiers video&nbsp;</li>\r\n<li>Hope and Joseph video</li>\r\n<li>Your support tree</li>\r\n<li>Island Activities</li>\r\n<li>Moving Forward video</li>\r\n<li>Review your ARVs</li>\r\n</ul>\r\n<p>We can review any of these topics and/or visit any one of the activities now. &nbsp;</p>\r\n<p><strong>GO TO WHICHEVER ACTIVITY IS NEEDED</strong></p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:26:35.824",
+      "modified": "2017-12-04T14:34:46.175",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 127,
+   "fields": {
+      "activity": 80,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's talk about coming back again.&nbsp;</p>\r\n<p><strong>IF PATIENT DOES NOT WANT TO COME BACK AGAIN:</strong></p>\r\n<p>It's been great working with you. We've covered a lot about HIV, ARVs, adherence, and how to stay healthy. Staying healthy is a life-long commitment. You are not alone - there are thousands and thousands of people taking ARVs in the townships and millions on ARVs around the world.</p>\r\n<p>Remember:</p>\r\n<ul>\r\n<li>ARVs must be taken every day, at the same time, and in the same way</li>\r\n<li>You must always have enough ARVs&nbsp;</li>\r\n<li>Your buddy can remind you to take your ARVs, pick-up refills at the pharmacy, and make clinic appointments</li>\r\n<li>There are things you can help your buddy with too!</li>\r\n<li>If you encounter challenges, we're here to help</li>\r\n<li>Your nurses and clinic staff are here for you</li>\r\n</ul>",
+      "image": "intervention_images/handshake-complete_1.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:06:24.553",
+      "modified": "2017-12-04T14:34:46.189",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 128,
+   "fields": {
+      "activity": 80,
+      "title": "Print",
+      "style": null,
+      "instruction_text": "<p>Would you like to take home a copy of an activity you did today?</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T13:41:00.064",
+      "modified": "2017-12-04T14:34:46.194",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 129,
+   "fields": {
+      "activity": 81,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>There is a lot of information out there about ARVs and HIV treatments. You may have heard different things about ARVs on TV, from friends and family and even from your pastor. Some of it can be confusing. Let&rsquo;s discuss some common concerns people have about taking ARVs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:49:05.272",
+      "modified": "2017-12-04T14:34:46.207",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 130,
+   "fields": {
+      "activity": 81,
+      "title": "Taking ARVs will make me sick",
+      "style": null,
+      "instruction_text": "<p>It&rsquo;s true that for some people they feel worse right after starting ARVs. However, most people don&rsquo;t. Most people feel better soon. The ones who do feel worse only do for a short period. Soon, they too start feeling better and healthier.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:49:05.279",
+      "modified": "2017-12-04T14:34:46.213",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 131,
+   "fields": {
+      "activity": 81,
+      "title": "Taking ARVs will change my body",
+      "style": null,
+      "instruction_text": "<p>The most commonly used ARVs today will not change your body. Some of the older ones did change people&rsquo;s bodies making them skinnier or changing their faces (e.g., lipodystrophy), but those ARVs are mostly no longer used. You most likely will not be taking those ARVs.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:49:05.282",
+      "modified": "2017-12-04T14:34:46.218",
+      "_order": 2
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 132,
+   "fields": {
+      "activity": 81,
+      "title": "ARVs can only be taken with food",
+      "style": null,
+      "instruction_text": "<p>ARVs can be taken without food on an empty stomach. You can take ARVs safely without food. A few people tolerate them better when taken with food.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:49:24.369",
+      "modified": "2017-12-04T14:34:46.224",
+      "_order": 3
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 133,
+   "fields": {
+      "activity": 81,
+      "title": "Taking ARVs will make me hungry",
+      "style": null,
+      "instruction_text": "<p>There is a belief that for some people, ARVs make them hungrier. However, for most people, ARVs do not make them hungrier. You most likely will not feel hungrier because of your ARVs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:49:24.375",
+      "modified": "2017-12-04T14:34:46.230",
+      "_order": 4
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 134,
+   "fields": {
+      "activity": 81,
+      "title": "Praying will cure me of HIV",
+      "style": null,
+      "instruction_text": "<p>There is no cure for HIV. Taking ARVs will fight off the HIV. Praying and going to church are importnat aspects of a healthy lifestyle, but they will not cure you of HIV. You have to take the ARVs to fight off the virus and stay healthy. For many people, the combination of taking their ARV's regularly and praying at Church is the most successful way of beating HIV.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:49:24.381",
+      "modified": "2017-12-04T14:34:46.235",
+      "_order": 5
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 135,
+   "fields": {
+      "activity": 81,
+      "title": "Traditional medicine is just as good, if not better than ARVs",
+      "style": null,
+      "instruction_text": "<p>Traditional medicines can be good for many things, but only ARVs are made specifically to target and fight off HIV. Traditional medicines may help, but it is essential to always take your ARVs and talk to the nurse if you plan on taking traditional medicines with ARVs. Some traditional medicines do not mix well with ARVs.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:49:48.118",
+      "modified": "2017-12-04T14:34:46.240",
+      "_order": 6
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 136,
+   "fields": {
+      "activity": 81,
+      "title": "My priest told me I\u2019m cured and that I don\u2019t need ARVs",
+      "style": null,
+      "instruction_text": "<p>Priests may have good ideas about how to help people live with HIV. However, there is no cure for HIV and ARVs are the only medicines designed specifically to target and fight the virus. I suggest you speak about your religious beliefs so that I can understand them better and talk to a nurse, doctor, or counselor who is from your faith to hear what they think.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:49:48.122",
+      "modified": "2017-12-04T14:34:46.246",
+      "_order": 7
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 137,
+   "fields": {
+      "activity": 81,
+      "title": "Taking ARVs goes against my beliefs",
+      "style": null,
+      "instruction_text": "<p>It's true that taking ARVs is difficult for many. The choice to take them is yours.&nbsp;You get to decide how you want to stay healthy and what healthy choices you would like to make. However, ARVs are helping millions of people all over South Africa and the world to stay healthy. They can help you stay healthy too. The choice is yours.&nbsp;I suggest you talk to a nurse, doctor, or counselor who shares your beliefs to hear what they think.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:49:48.136",
+      "modified": "2017-12-04T14:34:46.252",
+      "_order": 8
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 138,
+   "fields": {
+      "activity": 81,
+      "title": "People tell me not to take ARVs",
+      "style": null,
+      "instruction_text": "<p>This must be very frustrating and confusing for you. ARVs are designed to fight off HIV and make you healthier. If you take your ARVs regularly you stay healthy for the long term. You&rsquo;ll learn more about this as we work together.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:51:31.453",
+      "modified": "2017-12-04T14:34:46.258",
+      "_order": 9
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 139,
+   "fields": {
+      "activity": 81,
+      "title": "I can stop taking ARVs when I start to feel better",
+      "style": null,
+      "instruction_text": "<p>You have to always take ARVs. When you start feeling better, that means the ARVs are working. If you stop taking them, you will start to get sick again, and you may develop resistance. Always taking them at the right time will ensure that you stay healthy for the long term. You will learn more about this as we work together.&nbsp;</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:51:31.456",
+      "modified": "2017-12-04T14:34:46.263",
+      "_order": 10
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 140,
+   "fields": {
+      "activity": 81,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p><strong>Do you have any other concerns about starting ARVs?</strong></p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-19T14:51:31.459",
+      "modified": "2017-12-04T14:34:46.269",
+      "_order": 11
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 141,
+   "fields": {
+      "activity": 82,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's review your ARV regimen.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:46:48.168",
+      "modified": "2017-12-04T14:34:46.292",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 142,
+   "fields": {
+      "activity": 83,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's review your support tree to see who in your life knows about your  HIV status and who can offer you practical and emotional support.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:44:48.654",
+      "modified": "2017-12-04T14:34:46.316",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 143,
+   "fields": {
+      "activity": 84,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p><span style=\"text-align: justify;\">The&nbsp;</span><span style=\"font-family: 'lucida sans unicode', 'lucida grande', sans-serif; font-size: 14px; line-height: 18px; text-align: justify;\">Human Immunodeficiency Virus (HIV) is a mean and tricky virus. When it infects you, it wants to take you over. To do it, HIV attacks and kills cells in your body that keep you healthy.&nbsp;</span></p>",
+      "image": "intervention_images/HIVReplication_3.gif",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:11:06.729",
+      "modified": "2017-12-04T14:34:46.329",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 144,
+   "fields": {
+      "activity": 85,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>The body fights off diseases with its immune system. Your immune system is made up of lots of special white blood cells, known as CD4 cells. CD4 cells are the &ldquo;soldiers&rdquo; of your immune system. CD4 cells attack and destroy all the bad things that enter your body, like germs, bacteria, infections, and viruses. Having lots of CD4 cells means you can fight off invaders and stay healthy.</p>\r\n<p>Over time, HIV weakens your immune system by killing off your CD4 cells. With few or no CD4 cells, your body cannot fight off invaders. With few or no CD4 cells, you can get sick really easily - you have no defenses against germs, viruses, and sickness.&nbsp;</p>\r\n<p>Doctors measure your immune system when they take your bloods. They can actually tell how many CD4 cells you have in your body by the&nbsp;<strong>CD4 cell count test</strong>.&nbsp;<strong>The more CD4 cells they find, the better!&nbsp;</strong>A healthy CD4 count is considered anything above 500. Doctors start to be concerned when your CD4 count goes below 500.</p>\r\n<p>When the CD4 count drops below 350, ARVs&nbsp;are usually recommended. That's why the clinic wants you to start ARVs - your defenses are low and your body needs help to fight off the HIV.</p>\r\n<p>Do you know what your CD4 count is?</p>",
+      "image": "intervention_images/immuneanimation8_2.gif",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:11:19.670",
+      "modified": "2017-12-04T14:34:46.343",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 145,
+   "fields": {
+      "activity": 86,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>When your immune system is weak, you can develop many different symptoms.&nbsp;The symptoms of HIV can range from very minimal to very severe and life threatening.</p>",
+      "image": "intervention_images/What_HIV_Does_1.gif",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:11:54.460",
+      "modified": "2017-12-04T14:34:46.356",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 146,
+   "fields": {
+      "activity": 87,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>When your immune system is weak because the HIV is killing off your CD4 soldier cells, you are more susceptible to lots of different illnesses. These illnesses are called opportunistic infections, or OIs. </p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:12:26.984",
+      "modified": "2017-12-04T14:34:46.370",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 147,
+   "fields": {
+      "activity": 87,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>The sicker you are, the more likely you will get OIs, like:</p>\r\n<ul>\r\n<li>Thrush in the mouth</li>\r\n<li>Herpes Zoster (shingles)</li>\r\n<li>Nail infections</li>\r\n<li>TB</li>\r\n<li>Cancers, like Karposi's sarcoma (cancer of blood vessels) and lymphoma (cancer of glands)</li>\r\n<li>Pneumonias, like PCP (Pneumocystis carinii pneumonia)</li>\r\n<li>Cyrptococal meningitis</li>\r\n<li>Unusual diarrhoea, like cryptosporidium or isospora</li>\r\n<li>Thinking, remembering, and concentration problems</li>\r\n<li>HIV wasting (severe loss of weight)&nbsp;</li>\r\n</ul>",
+      "image": "intervention_images/diseases4up_2.jpg",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:12:26.987",
+      "modified": "2017-12-04T14:34:46.375",
+      "_order": 1
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 148,
+   "fields": {
+      "activity": 88,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>To see how the relationship between your CD4 cells, viral load, and health, let's go to the Island Activity.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:44:19.259",
+      "modified": "2017-12-04T14:34:46.398",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 149,
+   "fields": {
+      "activity": 89,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's watch a video to help you better understand adherence and how ARVs fight HIV.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:43:58.106",
+      "modified": "2017-12-04T14:34:46.422",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 150,
+   "fields": {
+      "activity": 90,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's go to the Island Activity and see how adherence affects your immune system and health.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:44:33.677",
+      "modified": "2017-12-04T14:34:46.445",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 151,
+   "fields": {
+      "activity": 91,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>Let's watch a video about Joseph and Hope. They are both  infected with HIV and are initiating ARVs. Their experiences with taking their ARVs are very different.</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-03-28T16:46:24.557",
+      "modified": "2017-12-04T14:34:46.468",
+      "_order": 0
+   }
+},
+{
+   "model": "intervention.instruction",
+   "pk": 152,
+   "fields": {
+      "activity": 92,
+      "title": "",
+      "style": null,
+      "instruction_text": "<p>\r\n<p>Experiencing challenges to adherence and staying healthy can happen at anytime. Though they may not ever happen to you, it is a good idea to be prepared, as your health may be in danger.&nbsp;</p>\r\n<p>Let's watch a short video that demonstrates how you &nbsp;can work together to stay healthy. You can use these skills to help overcome all kinds of challenges, but most importantly they can help you help stay healthy.</p>\r\n</p>",
+      "image": "",
+      "help_copy": "",
+      "notes": "",
+      "created": "2012-04-11T14:15:05.398",
+      "modified": "2017-12-04T14:34:46.491",
+      "_order": 0
+   }
+}
+]

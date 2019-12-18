@@ -1,0 +1,117 @@
+{% extends "intervention/game.html" %}
+{% load compress %}
+
+{% block game_css %}
+{% compress css %}
+    <link href="{{STATIC_URL}}ssnmtree_game/css/ssnmtree.css" rel="stylesheet" type="text/css" />
+    <link href="{{STATIC_URL}}ssnmtree_game/css/ssnmtree.print.css" rel="stylesheet" type="text/css" media="print" />
+{% endcompress %}
+{% endblock %}
+
+{% block game_js %}
+{% compress js %}
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/gamestate.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}ssnmtree_game/js/ssnmtreeview.js"></script>
+{% endcompress %}
+{% endblock %}
+
+{% block game_content %}
+    <div style="position:relative;height:465px;width:545px">
+        <div id="game-mode" data-game-mode="{{game_context.mode}}"></div>
+        <img class="bare-tree" src="{{STATIC_URL}}ssnmtree_game/images/bare_tree.png" />
+        <div id="fruittree">
+            <!-- ** DO NOT DISTURB: 
+	           programming depends on ids,classes,and structure-->
+
+            <!-- LEFT corner ups -->
+            <div id="top1-fruit" class="fruit leftup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="middle2-fruit" class="fruit leftup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="middle4-fruit" class="fruit leftup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="bottom3-fruit" class="fruit leftup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+
+            <!-- RIGHT corner ups -->
+            <div id="top2-fruit" class="fruit rightup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="top3-fruit" class="fruit rightup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="middle1-fruit" class="fruit rightup">
+	            <input type="text" value="" />
+	            <div class="circle"></div>	 
+	            <div class="ripe"></div>
+            </div>
+            <div id="middle3-fruit" class="fruit rightup">
+	           <input type="text" value="" />
+	           <div class="circle"></div>	 
+	           <div class="ripe"></div>
+            </div>
+            <div id="bottom1-fruit" class="fruit rightup">
+    	        <input type="text" value="" />
+    	        <div class="circle"></div>	 
+    	        <div class="ripe"></div>
+            </div>
+            <div id="bottom2-fruit" class="fruit rightup">
+    	        <input type="text" value="" />
+    	        <div class="circle"></div>	 
+                <div class="ripe"></div>
+            </div>
+        </div>
+        <div id="fruittree-toggles">
+            <div id="toggle-disclosure-selection" class="toggle-button on">Disclosure</div>
+            <div id="toggle-support-selection" class="toggle-button off">Support</div>
+        </div>
+    </div>
+    
+    {% if game.activity.clientsession.defaulter %}
+        <div id="defaulter" style="display: none">True</div>
+    {% endif %}
+    
+    <div class="fruit-key">
+        <h4>What does the fruit tell me?</h4>
+        <div class="fruit-key-item">
+            <img src="{{STATIC_URL}}ssnmtree_game/images/fruit_key_yellow.jpg"/>
+            <h5>Yellow Fruit</h5>
+            <div>This is a person I know.</div>
+        </div>
+        <div class="fruit-key-item">
+            <img src="{{STATIC_URL}}ssnmtree_game/images/fruit_key_gold.jpg"/>
+            <h5>Gold Fruit</h5>
+            <div>This is a person who knows my HIV status.</div>
+        </div>
+        <div class="fruit-key-item">
+            <img src="{{STATIC_URL}}ssnmtree_game/images/fruit_key_purple.jpg"/>
+            <h5>Purple Fruit</h5>
+            <div>This is a person who can give me practical support.</div>
+        </div>
+        <div class="fruit-key-item">
+            <img src="{{STATIC_URL}}ssnmtree_game/images/fruit_key_purple_gold.jpg"/>
+            <h5>Purple &amp; Gold Fruit</h5>
+            <div>This is a person who knows my HIV status and who can give me practical support.</div>
+        </div>
+    </div>
+    
+{% endblock %}
