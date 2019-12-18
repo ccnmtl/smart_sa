@@ -9,6 +9,7 @@ Clicking Next -> when the interactivity phase is complete advances the user to t
 
     Scenario: Activity With Game
         Given I am a participant
+        Given I clear the privacy notice
         When I go to Activity 3 of Session 1
         Then there is a "Next →" nav button
         Then there is no "Use Masivukeni Online" nav button
@@ -23,6 +24,7 @@ Clicking Next -> when the interactivity phase is complete advances the user to t
         # Actual: http://masivukeni2.ccnmtl.columbia.edu/activity/15/
         
         Given I am a participant
+        Given I clear the privacy notice
         When I go to Activity 8 of Session 1
         When I click the "Back" link
         Then there is a game

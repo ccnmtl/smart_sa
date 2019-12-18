@@ -1,12 +1,17 @@
 language: python
-addons:
-  firefox: "52.9.0esr"
 env:
   - TEST_SUITE=jenkins
   - TEST_SUITE=harvest
-  - TEST_SUITE=harvest2
+addons:
+  chrome: latest
+  apt:
+    packages:
+      - chromium-chromedriver: latest
 python:
   - "2.7"
+before_script:
+  # include ChromeDriver in PATH
+  - ln --symbolic /usr/lib/chromium-browser/chromedriver "${HOME}/bin/chromedriver"
 before_install:
   - pip install --upgrade setuptools pip wheel
 script:

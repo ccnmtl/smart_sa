@@ -3,7 +3,8 @@ Feature: Practice Pill Regimen
 
     Scenario: runthrough
         Given I am a participant
-        
+        Given I clear the privacy notice
+
         When I click on Session 1
         When I click on Activity 7
         When I click the "Next →" link
@@ -11,13 +12,13 @@ Feature: Practice Pill Regimen
         
         #Verify Practice Mode
         
-        There is a "Practice ARVs" title
-        There is not an Add Pill button
-        There are 3 pills
-        There is a pill named "Tenofovir (TDF)"
-        There is a pill named "Lamivudine (3TC)"
-        There is a pill named "Efavirennz (EFV)"
-        I cannot edit "Tenofovir (TDF)"
+        Then there is a "Practice ARVs" title
+        Then there is not an Add Pill button
+        Then there are 3 pills
+        Then there is a pill named "Tenofovir (TDF)"
+        Then there is a pill named "Lamivudine (3TC)"
+        Then there is a pill named "Efavirennz (EFV)"
+        Then I cannot edit "Tenofovir (TDF)"
         
         # Specify pill dosage time
         When I specify "daytime" time as "06:00"

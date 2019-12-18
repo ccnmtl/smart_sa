@@ -1,37 +1,47 @@
 # -*- coding: utf-8 -*-
+import logging
 import time
 
 from aloe import before, after, world, step
 from aloe_django import django_url
 from django.conf import settings
 from django.test import client
+from lxml import html  # nosec
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException, \
+    WebDriverException, TimeoutException
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.remote.utils import LOGGER
 from selenium.webdriver.support import ui
 
 from selenium.webdriver.support.expected_conditions \
-    import visibility_of_element_located, element_to_be_clickable
+    import visibility_of_element_located
 
-
-from lxml import html
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 @before.all
 def setup_browser():
+    LOGGER.setLevel(logging.WARNING)
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+
     world.browser = None
     headless = getattr(settings, 'HEADLESS', True)
     browser = getattr(settings, 'BROWSER', 'Chrome')
     if browser == 'Firefox':
-        ff_options = FirefoxOptions
+        ff_profile = FirefoxProfile()
+        ff_profile.set_preference("webdriver_enable_native_events", False)
+        ff_options = FirefoxOptions()
         if headless:
-            ff_options.headless = True
-        world.browser = webdriver.Firefox(options=ff_options)
+            ff_options.add_argument("--headless")
+        world.browser = webdriver.Firefox(
+            firefox_options=ff_options, firefox_profile=ff_profile)
     elif browser == 'Chrome':
         chrome_options = ChromeOptions()
         if headless:
             chrome_options.add_argument("--headless")
+            chrome_options.add_argument('--no-sandbox')
         world.browser = webdriver.Chrome(chrome_options=chrome_options)
 
     world.client = client.Client()
@@ -42,7 +52,10 @@ def setup_browser():
 
 @after.all
 def teardown_browser():
-    world.browser.quit()
+    try:
+        world.browser.quit()
+    except WebDriverException:
+        pass
 
 
 @before.each_example
@@ -83,7 +96,7 @@ def i_am_taken_to_a_login_screen(step):
 @step(u'I am taken to the index')
 def i_am_taken_to_the_index(step):
     assert len(world.response.redirect_chain) > 0
-    (url,status) = world.response.redirect_chain[0]
+    (url, status) = world.response.redirect_chain[0]
     assert status == 302, status
     assert "http://testserver/" == url, "URL redirected to was %s" % (url,)
 
@@ -98,8 +111,10 @@ def i_am_logged_in_as_a_counselor(step):
     username_field.send_keys("testcounselor")
     password_field.send_keys("test")
     form.submit()
-    assert world.browser.current_url.endswith("/intervention/"), world.browser.current_url
-    assert "testcounselor" in world.browser.page_source, world.browser.page_source
+    assert world.browser.current_url.endswith("/intervention/"), \
+        world.browser.current_url
+    assert "testcounselor" in world.browser.page_source, \
+        world.browser.page_source
 
 
 @step(u'I log out')
@@ -117,7 +132,8 @@ def given_i_am_logged_in_as_an_admin(step):
     username_field.send_keys("testadmin")
     password_field.send_keys("test")
     form.submit()
-    assert world.browser.current_url.endswith("/intervention/"), world.browser.current_url
+    assert world.browser.current_url.endswith("/intervention/"), \
+        world.browser.current_url
     assert "testadmin" in world.browser.page_source, world.browser.page_source
 
 
@@ -129,6 +145,7 @@ def there_is_not_a_link(step, text):
             found = True
     assert not found
 
+
 @step(u'there is an? "([^"]*)" link')
 def there_is_a_link(step, text):
     found = False
@@ -136,6 +153,7 @@ def there_is_a_link(step, text):
         if a.text and a.text.strip() == text:
             found = True
     assert found
+
 
 @step(u'there is a location edit form')
 def there_is_a_location_edit_form(step):
@@ -148,12 +166,10 @@ def there_is_a_location_edit_form(step):
 
 @step(u'I click the "([^"]*)" link')
 def i_click_the_link(step, text):
-    try:
-        link = world.browser.find_element_by_partial_link_text(text)
-        assert link.is_displayed()
-        link.click()
-    except NoSuchElementException:
-        assert False, text
+    wait = ui.WebDriverWait(world.browser, 5)
+    link = wait.until(
+        visibility_of_element_located((By.PARTIAL_LINK_TEXT, text)))
+    link.click()
 
 
 @step(u'I fill in "([^"]*)" in the "([^"]*)" form field')
@@ -162,8 +178,8 @@ def i_fill_in_the_form_field(step, value, field_name):
 
 
 @step(u'I submit the "([^"]*)" form')
-def i_submit_the_form(step, id):
-    world.browser.find_element_by_id(id).submit()
+def i_submit_the_form(step, the_id):
+    world.browser.find_element_by_id(the_id).submit()
 
 
 @step(u'I am on the Intervention page')
@@ -172,42 +188,44 @@ def i_am_on_the_intervention_page(step):
     assert world.browser.find_elements_by_tag_name('h2')[0].text == "Sessions"
 
 
-@step(u'I click on Session (\d+)')
+@step(u'I click on Session (\d+)')  # noqa
 def i_click_session(step, session_number):
     the_id = "session%s" % session_number
     wait = ui.WebDriverWait(world.browser, 5)
-    wait.until(
+    link = wait.until(
         visibility_of_element_located((By.ID, the_id)))
-
-    link = world.browser.find_element_by_id(the_id)
     link.click()
 
 
 @step(u'I click on the Session Home')
 def i_click_on_the_session_home(step):
     try:
-        link = world.browser.find_elements_by_css_selector(
-            "h2#sessioninfo a")[0]
+        selector = "h2#sessioninfo a"
+        wait = ui.WebDriverWait(world.browser, 1)
+        link = wait.until(
+            visibility_of_element_located((By.CSS_SELECTOR, selector)))
         link.click()
-    except:
-        # if we can't find the sessioninfo element,
-        # it just means that we're already there
-        pass
+    except TimeoutException:
+        pass  # we're likely already on the page
 
 
-@step(u'I click on Activity (\d+)')
+@step(u'I am on the Session Home')
+def i_am_on_the_session_home(step):
+    selector = 'h2.session-home'
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        visibility_of_element_located((By.CSS_SELECTOR, selector)))
+
+
+@step(u'I click on Activity (\d+)')  # noqa
 def i_click_activity(step, activity_number):
     try:
         link_text = "Activity %s:" % activity_number
         wait = ui.WebDriverWait(world.browser, 5)
-        wait.until(
+        link = wait.until(
             visibility_of_element_located((By.PARTIAL_LINK_TEXT, link_text)))
-        wait.until(
-            element_to_be_clickable((By.PARTIAL_LINK_TEXT, link_text)))
-        link = world.browser.find_element_by_partial_link_text(link_text)
         link.click()
     except Exception, e:
-        time.sleep(30)
         assert False, str(e)
 
 
@@ -216,26 +234,26 @@ def i_click_on_complete_activity(step):
     try:
         link = world.browser.find_element_by_partial_link_text("Next →")
         link.click()
-    except:
+    except:  # noqa
         link = world.browser.find_element_by_partial_link_text("Wrap Up")
         link.click()
 
 
-@step(u'I am on the Session (\d+) page')
+@step(u'I am on the Session (\d+) page')  # noqa
 def i_am_on_the_session_page(step, session_id):
     try:
         h2 = world.browser.find_elements_by_tag_name('h2')[0]
-    except:
+    except:  # noqa
         time.sleep(1)
         h2 = world.browser.find_elements_by_tag_name('h2')[0]
     assert h2.text.startswith("Session %s:" % session_id)
 
 
-@step(u'I am on the Activity (\d+) page')
-def i_am_on_the_activity_page(step,activity_id):
+@step(u'I am on the Activity (\d+) page')  # noqa
+def i_am_on_the_activity_page(step, activity_id):
     try:
         breadcrumb = world.browser.find_element_by_id("breadcrumb-text")
-    except:
+    except:  # noqa
         time.sleep(1)
         breadcrumb = world.browser.find_element_by_id("breadcrumb-text")
     assert "Activity %s:" % activity_id in breadcrumb.text, breadcrumb.text
@@ -243,12 +261,15 @@ def i_am_on_the_activity_page(step,activity_id):
 
 @step(u'Then I am on the "([^"]*)" Activity')
 def i_am_on_the_activity_with_title(step, title):
-    current_activity = world.browser.find_elements_by_css_selector("h3")[0]
+    selector = 'h3'
+    wait = ui.WebDriverWait(world.browser, 5)
+    elt = wait.until(
+        visibility_of_element_located((By.CSS_SELECTOR, selector)))
     title = title.replace("  ", " ")
-    assert current_activity.text == title, current_activity.text
+    assert elt.text == title, elt.text
 
 
-@step('there is a game')
+@step(u'there is a game')
 def there_is_a_game(self):
     try:
         wait = ui.WebDriverWait(world.browser, 5)
@@ -256,11 +277,10 @@ def there_is_a_game(self):
             visibility_of_element_located((By.ID, 'gamebox')))
         assert world.browser.find_element_by_id('gamebox')
     except Exception, e:
-        time.sleep(30)
         assert False, str(e)
 
 
-@step('I go back')
+@step(u'I go back')
 def i_go_back(self):
     """ need to back out of games currently"""
     world.browser.back()
@@ -270,11 +290,10 @@ def i_go_back(self):
 def i_clear_the_privacy_notice(step):
     try:
         wait = ui.WebDriverWait(world.browser, 1)
-        wait.until(
+        elt = wait.until(
             visibility_of_element_located((By.ID, 'cu-privacy-notice-icon')))
-        elt = world.browser.find_element_by_id('cu-privacy-notice-icon')
         elt.click()
-    except:
+    except:  # noqa
         pass  # Might have already been cleared
 
 
@@ -285,10 +304,8 @@ def i_am_a_participant(step):
     world.browser.get_screenshot_as_file("/tmp/selenium.png")  # nosec
 
     wait = ui.WebDriverWait(world.browser, 5)
-    wait.until(
+    elt = wait.until(
         visibility_of_element_located((By.ID, 'btn-get-started')))
-
-    elt = world.browser.find_element_by_id('btn-get-started')
     elt.click()
 
     assert world.browser.current_url.find("/intervention/") > -1,\
@@ -303,7 +320,7 @@ def participant_has_not_completed_any_sessions(step):
     world.participant.participantactivity_set.all().delete()
 
 
-@step(u'I go to Activity (\d+) of Session (\d+)')
+@step(u'I go to Activity (\d+) of Session (\d+)')  # noqa
 def i_go_to_activity_or_session(step, activity_number, session_number):
     from smart_sa.intervention.models import Intervention
     i = Intervention.objects.first()
@@ -315,8 +332,8 @@ def i_go_to_activity_or_session(step, activity_number, session_number):
     world.browser.get(django_url(step, "/activity/%d/" % a.id))
 
 
-@step(u'I go to Session (\d+)')
-def i_go_to_session(step,session_number):
+@step(u'I go to Session (\d+)')  # noqa
+def i_go_to_session(step, session_number):
     from smart_sa.intervention.models import Intervention
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
@@ -335,9 +352,9 @@ def there_is_no_button(step, label):
     assert not found
 
 
-@step(u'the participant has completed (\d+) activit[y|ies] in session (\d+)')
+@step(u'the participant has completed (\d+) activit[y|ies] in session (\d+)')  # noqa
 def the_participant_has_completed_activity_in_session_1(
-        step, num_activities,session_number):
+        step, num_activities, session_number):
     from smart_sa.intervention.models import Intervention
     world.participant.participantsession_set.all().delete()
     world.participant.participantactivity_set.all().delete()
@@ -345,20 +362,20 @@ def the_participant_has_completed_activity_in_session_1(
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in s.activity_set.all()[:int(num_activities)]:
         url = django_url(step, "/activity/%d/complete/" % a.id)
-        world.client.post(url,{})
+        world.client.post(url, {})
 
 
-@step(u'the participant has completed all activities in session (\d+)')
+@step(u'the participant has completed all activities in session (\d+)')  # noqa
 def the_participant_has_completed_all_activities(step, session_number):
     from smart_sa.intervention.models import Intervention
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in s.activity_set.all():
-        r = world.client.post(
-            django_url(step, "/activity/%d/complete/" % a.id),{})
+        world.client.post(
+            django_url(step, "/activity/%d/complete/" % a.id), {})
 
 
-@step(u'the participant has completed all activities except the first in session (\d+)')
+@step(u'the participant has completed all activities except the first in session (\d+)')   # noqa
 def the_participant_has_completed_all_activities_except_the_first(
         step, session_number):
     from smart_sa.intervention.models import Intervention
@@ -366,7 +383,7 @@ def the_participant_has_completed_all_activities_except_the_first(
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in list(s.activity_set.all())[1:]:
         world.client.post(
-            django_url(step, "/activity/%d/complete/" % a.id),{})
+            django_url(step, "/activity/%d/complete/" % a.id), {})
 
 
 @step(u'there is a "([^"]*)" button')
@@ -394,8 +411,8 @@ def there_is_no_navbutton(step, label):
         pass  # expected
 
 
-@step(u'I wait for (\d+) seconds')
-def wait(step,seconds):
+@step(u'I wait for (\d+) seconds')  # noqa
+def wait(step, seconds):
     time.sleep(int(seconds))
 
 
@@ -420,14 +437,14 @@ def i_am_on_a_game_page(step):
 
 
 @step(u'Participant "([^"]*)" is a defaulter')
-def participant_is_a_defaulter(step,participant_name):
+def participant_is_a_defaulter(step, participant_name):
     from smart_sa.intervention.models import Participant
     p = Participant.objects.get(name=participant_name)
     p.defaulter = True
     p.save()
 
 
-@step(u'Then I wait (\d+) second')
+@step(u'Then I wait (\d+) second')  # noqa
 def then_i_wait_count_second(step, count):
     n = int(count)
     time.sleep(n)

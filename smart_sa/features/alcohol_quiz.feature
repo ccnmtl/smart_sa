@@ -3,6 +3,7 @@ Feature: Alcohol Quiz
     Scenario: Alcohol Audit
       
       Given I am a participant
+      Given I clear the privacy notice
       When I click on Session 1
       Then I click on Activity 11
       When I click the "Next →" link

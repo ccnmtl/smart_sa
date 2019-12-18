@@ -3,22 +3,24 @@ from smart_sa.settings_shared import *
 import os
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
+
+HEADLESS = True
+# BROWSER = 'Firefox'
+BROWSER = 'Chrome'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'lettuce.db',
-        'OPTIONS': {
-            'timeout': 30
-        }
+        'NAME': ':memory:',
+        'HOST': '',
+        'PORT': '',
+        'USER': '',
+        'PASSWORD': '',
+        'ATOMIC_REQUESTS': True,
     }
 }
-
-HEADLESS = True
-BROWSER = 'Firefox'
-# BROWSER = 'Chrome'
 
 
 ALOE_DJANGO_APP = ['aloe_django']

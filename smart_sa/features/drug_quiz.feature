@@ -2,6 +2,7 @@ Feature: Drug Quiz
     
     Scenario: Drug Audit
       Given I am a participant
+      Given I clear the privacy notice
       When I click on Session 1
       Then I click on Activity 12
       When I click the "Next →" link

@@ -2,7 +2,7 @@ import time
 
 from aloe import world, step
 from selenium.common.exceptions import NoSuchElementException, \
-    WebDriverException, TimeoutException
+    TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import ui
@@ -162,7 +162,6 @@ def then_there_is_no_action_plan_form(step):
             invisibility_of_element_located((By.ID, 'actionplan_form')))
         time.sleep(1)
     except TimeoutException:
-        time.sleep(30)
         pass
 
 

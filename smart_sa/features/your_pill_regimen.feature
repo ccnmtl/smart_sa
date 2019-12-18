@@ -5,16 +5,17 @@ Feature: Your Pill Regimen
         # Find activity
         
         Given I am a participant
-        
+        Given I clear the privacy notice
+
         When I click on Session 3
         When I click on Activity 21
         When I click the "Next" link
         Then there is a game
         
         # Verify Real Mode
-        There is a "Medication List" title
-        There is an Add Pill button
-        There are 0 pills
+        Then there is a "Medication List" title
+        Then there is an Add Pill button
+        Then there are 0 pills
         When I click Add Pill
         Then there are 1 pills
         When I drop pill 1 onto "daytime"

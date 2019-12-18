@@ -4,12 +4,15 @@ Feature: Life goals
 
     Scenario: Find the activity
         Given I am a participant
+        Given I clear the privacy notice
+
         When I go to Activity 17 of Session 1
         When I click the "Next →" link
         Then there is a game
 
     Scenario: Fill in the steps and goal
         Given I am a participant
+        Given I clear the privacy notice
 
         When I go to Activity 17 of Session 1
         When I click the "Next →" link
