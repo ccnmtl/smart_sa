@@ -4,11 +4,8 @@ from aloe import world, step
 from selenium.common.exceptions import NoSuchElementException
 
 
-@step('I fill in the SSNM Tree with "([^"]*)"')
+@step(r'I fill in the SSNM Tree with "([^"]*)"')
 def fill_in_ssnmtree(self, text):
-    if not world.using_selenium:
-        assert False, (
-            "this step needs to be implemented for the django test client")
     for i in world.browser.find_elements_by_tag_name('input'):
         if i.get_attribute('type') == 'text':
             i.clear()
@@ -17,13 +14,11 @@ def fill_in_ssnmtree(self, text):
         assert i.get_attribute("value") == text
 
 
-@step('there is a filled in SSNM Tree with "([^"]*)"')
+@step(r'There is a filled in SSNM Tree with "([^"]*)"')
 def filled_in_ssnmtree(self, text):
-    if not world.using_selenium:
-        assert False, (
-            "this step needs to be implemented for the django test client")
-    all_filled = True
-    assert all_filled
+    for i in world.browser.find_elements_by_tag_name('input'):
+        if i.get_attribute('type') == 'text':
+            assert i.get_attribute('value') == text
 
 
 @step(u'When I clear the circle')
@@ -33,7 +28,7 @@ def when_i_clear_the_circle(step):
     elt.clear()
 
 
-@step(u'When I name the circle "([^"]*)"')
+@step(r'When I name the circle "([^"]*)"')
 def when_i_name_the_circle_name(step, name):
     try:
         fruit = world.browser.find_element_by_id("top1-fruit")
@@ -52,7 +47,7 @@ def when_i_click_the_circle(step):
     world.browser.execute_script("arguments[0].click();", elt)
 
 
-@step(u'Then the circle is "([^"]*)"')
+@step(r'Then the circle is "([^"]*)"')
 def then_the_circle_is_color(step, color):
     try:
         elt = world.browser.find_element_by_id("top1-fruit")
@@ -72,7 +67,7 @@ def then_the_circle_is_color(step, color):
         pass
 
 
-@step(u'Then the circle is not "([^"]*)"')
+@step(r'Then the circle is not "([^"]*)"')
 def then_the_circle_is_not_color(step, color):
     elt = world.browser.find_element_by_id("top1-fruit")
     assert elt is not None
@@ -89,7 +84,7 @@ def then_the_circle_is_not_color(step, color):
         pass  # expected
 
 
-@step(u'When I click the "([^"]*)" button')
+@step(r'When I click the "([^"]*)" button')
 def when_i_click_the_name_button(step, name):
     elt = None
     if name == "disclosure":
@@ -100,7 +95,7 @@ def when_i_click_the_name_button(step, name):
     elt.click()
 
 
-@step(u'Then "([^"]*)" is selected')
+@step(r'Then "([^"]*)" is selected')
 def then_button_is_selected(step, button):
     if button == 'disclosure':
         q = '#toggle-disclosure-selection.on'

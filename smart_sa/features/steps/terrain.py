@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
 import time
 
 from aloe import before, after, world, step
@@ -9,45 +8,33 @@ from django.test import client
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import ui
 
-from selenium.webdriver.common.desired_capabilities \
-    import DesiredCapabilities
 from selenium.webdriver.support.expected_conditions \
-    import visibility_of_element_located
+    import visibility_of_element_located, element_to_be_clickable
 
 
-try:
-    from lxml import html
-    from selenium import webdriver
-    from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
-    from selenium.common.exceptions import NoSuchElementException
-    from selenium.webdriver.common.keys import Keys
-    import selenium
-except:
-    pass
-
+from lxml import html
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 @before.all
 def setup_browser():
     world.browser = None
-    browser = getattr(settings, 'BROWSER', "Headless")
+    headless = getattr(settings, 'HEADLESS', True)
+    browser = getattr(settings, 'BROWSER', 'Chrome')
     if browser == 'Firefox':
-        ff_profile = FirefoxProfile()
-        ff_profile.set_preference("webdriver_enable_native_events", False)
-        world.browser = webdriver.Firefox(ff_profile)
+        ff_options = FirefoxOptions
+        if headless:
+            ff_options.headless = True
+        world.browser = webdriver.Firefox(options=ff_options)
     elif browser == 'Chrome':
-        world.browser = webdriver.Chrome()
-    elif browser == "Headless":
-        ua = ('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) '
-              'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 '
-              'Safari/537.36')
-
-        dcap = dict(DesiredCapabilities.PHANTOMJS)
-        dcap["phantomjs.page.settings.userAgent"] = ua
-        dcap['handlesAlerts'] = True
-        world.browser = webdriver.PhantomJS(desired_capabilities=dcap)
+        chrome_options = ChromeOptions()
+        if headless:
+            chrome_options.add_argument("--headless")
+        world.browser = webdriver.Chrome(chrome_options=chrome_options)
 
     world.client = client.Client()
-    world.using_selenium = False
 
     world.browser.set_window_position(0, 0)
     world.browser.set_window_size(1024, 768)
@@ -58,81 +45,31 @@ def teardown_browser():
     world.browser.quit()
 
 
-@before.all
-def setup_database():
-    # make sure we have a fresh test database
-    os.system("rm -f lettuce.db")
-    os.system("cp test_data/test.db lettuce.db")
-
-
-@after.all
-def teardown_database():
-    print("teardown_database") # os.system("rm -f lettuce.db")
-
-
-@before.each_feature
-def clear_participant_data(self):
-    from smart_sa.intervention.models import Participant
-
-    for p in ['test', ]:
-        try:
-            participant = Participant.objects.get(name=p)
-            participant.clear_all_data()
-            participant.save()
-        except Participant.DoesNotExist:
-            pass
-
-
-@step(u'Using selenium')
-def using_selenium(step):
-    world.using_selenium = True
-
-
-@step(u'Finished using selenium')
-def finished_selenium(step):
-    world.using_selenium = False
-
-
-@before.each_feature
-def clear_selenium(step):
-    world.using_selenium = False
+@before.each_example
+def setup_database(scenario, outline, steps):
+    from django.core import management
+    management.call_command(
+        'loaddata', 'smart_sa/intervention/fixtures/selenium.json')
 
 
 @step(r'I access the url "(.*)"')
 def access_url(step, url):
-    if world.using_selenium:
-        world.browser.get(django_url(step, url))
-    else:
-        response = world.client.get(django_url(step, url))
-        world.dom = html.fromstring(response.content)
+    world.browser.get(django_url(step, url))
 
 
 @step(u'I am not logged in')
 def i_am_not_logged_in(step):
-    if world.using_selenium:
-        world.browser.get(django_url(step, "/accounts/logout/"))
-    else:
-        world.client.logout()
+    world.browser.get(django_url(step, "/accounts/logout/"))
 
 
 @step(u'I access the management console')
 def i_access_the_management_console(step):
-    if world.using_selenium:
-        world.browser.get(django_url(step, "/manage/"))
-    else:
-        response = world.client.get(django_url(step, "/manage/"),follow=True)
-        world.response = response
-        world.dom = html.fromstring(response.content)
+    world.browser.get(django_url(step, "/manage/"))
 
 
 @step(u'I access the counselor landing page')
 def i_access_the_counselor_landing_page(step):
-    if world.using_selenium:
-        world.browser.get(django_url(step, "/intervention/"))
-    else:
-        response = world.client.get(django_url(step, "/intervention/"),follow=True)
-        world.response = response
-        world.dom = html.fromstring(response.content)
+    world.browser.get(django_url(step, "/intervention/"))
 
 
 @step(u'I am taken to a login screen')
@@ -141,6 +78,7 @@ def i_am_taken_to_a_login_screen(step):
     (url, status) = world.response.redirect_chain[0]
     assert status == 302, status
     assert "/login/" in url, "URL redirected to was %s" % url
+
 
 @step(u'I am taken to the index')
 def i_am_taken_to_the_index(step):
@@ -152,44 +90,36 @@ def i_am_taken_to_the_index(step):
 
 @step(u'I am logged in as a counselor')
 def i_am_logged_in_as_a_counselor(step):
-    if world.using_selenium:
-        world.browser.get(django_url(step, "/accounts/logout/"))
-        world.browser.get(django_url(step, "/accounts/login/?next=/intervention/"))
-        username_field = world.browser.find_element_by_id("id_username")
-        password_field = world.browser.find_element_by_id("id_password")
-        form = world.browser.find_element_by_id("login-form")
-        username_field.send_keys("testcounselor")
-        password_field.send_keys("test")
-        form.submit()
-        assert world.browser.current_url.endswith("/intervention/"), world.browser.current_url
-        assert "testcounselor" in world.browser.page_source, world.browser.page_source
-    else:
-        world.client.login(username='testcounselor',password='test')
+    world.browser.get(django_url(step, "/accounts/logout/"))
+    world.browser.get(django_url(step, "/accounts/login/?next=/intervention/"))
+    username_field = world.browser.find_element_by_id("id_username")
+    password_field = world.browser.find_element_by_id("id_password")
+    form = world.browser.find_element_by_id("login-form")
+    username_field.send_keys("testcounselor")
+    password_field.send_keys("test")
+    form.submit()
+    assert world.browser.current_url.endswith("/intervention/"), world.browser.current_url
+    assert "testcounselor" in world.browser.page_source, world.browser.page_source
+
 
 @step(u'I log out')
 def i_log_out(step):
-    if world.using_selenium:
-        world.browser.get(django_url(step, "/accounts/logout/"))
-    else:
-        response = world.client.get(django_url(step, "/accounts/logout/"),follow=True)
-        world.response = response
-        world.dom = html.fromstring(response.content)
+    world.browser.get(django_url(step, "/accounts/logout/"))
+
 
 @step(u'I am logged in as an admin')
 def given_i_am_logged_in_as_an_admin(step):
-    if world.using_selenium:
-        world.browser.get(django_url(step, "/accounts/logout/"))
-        world.browser.get(django_url(step, "/accounts/login/?next=/intervention/"))
-        username_field = world.browser.find_element_by_id("id_username")
-        password_field = world.browser.find_element_by_id("id_password")
-        form = world.browser.find_element_by_id("login-form")
-        username_field.send_keys("testadmin")
-        password_field.send_keys("test")
-        form.submit()
-        assert world.browser.current_url.endswith("/intervention/"), world.browser.current_url
-        assert "testadmin" in world.browser.page_source, world.browser.page_source
-    else:
-        world.client.login(username='testadmin',password='test')
+    world.browser.get(django_url(step, "/accounts/logout/"))
+    world.browser.get(django_url(step, "/accounts/login/?next=/intervention/"))
+    username_field = world.browser.find_element_by_id("id_username")
+    password_field = world.browser.find_element_by_id("id_password")
+    form = world.browser.find_element_by_id("login-form")
+    username_field.send_keys("testadmin")
+    password_field.send_keys("test")
+    form.submit()
+    assert world.browser.current_url.endswith("/intervention/"), world.browser.current_url
+    assert "testadmin" in world.browser.page_source, world.browser.page_source
+
 
 @step(u'there is not an? "([^"]*)" link')
 def there_is_not_a_link(step, text):
@@ -218,54 +148,32 @@ def there_is_a_location_edit_form(step):
 
 @step(u'I click the "([^"]*)" link')
 def i_click_the_link(step, text):
-    if not world.using_selenium:
-        for a in world.dom.cssselect("a"):
-            if a.text:
-                if text.strip().lower() in a.text.strip().lower():
-                    href = a.attrib['href']
-                    response = world.client.get(django_url(step, href))
-                    world.dom = html.fromstring(response.content)
-                    return
-        assert False, "could not find the '%s' link" % text
-    else:
-        try:
-            link = world.browser.find_element_by_partial_link_text(text)
-            assert link.is_displayed()
-            link.click()
-        except NoSuchElementException:
-            assert False, text
+    try:
+        link = world.browser.find_element_by_partial_link_text(text)
+        assert link.is_displayed()
+        link.click()
+    except NoSuchElementException:
+        assert False, text
 
 
 @step(u'I fill in "([^"]*)" in the "([^"]*)" form field')
 def i_fill_in_the_form_field(step, value, field_name):
-    # note: relies on input having id set, not just name
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
-
     world.browser.find_element_by_id(field_name).send_keys(value)
 
 
 @step(u'I submit the "([^"]*)" form')
 def i_submit_the_form(step, id):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
-
     world.browser.find_element_by_id(id).submit()
 
 
 @step(u'I am on the Intervention page')
 def i_am_on_the_intervention_page(step):
-    if not world.using_selenium:
-        return
     assert world.browser.current_url.find("/intervention/") > -1
     assert world.browser.find_elements_by_tag_name('h2')[0].text == "Sessions"
 
 
 @step(u'I click on Session (\d+)')
 def i_click_session(step, session_number):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
-
     the_id = "session%s" % session_number
     wait = ui.WebDriverWait(world.browser, 5)
     wait.until(
@@ -277,31 +185,34 @@ def i_click_session(step, session_number):
 
 @step(u'I click on the Session Home')
 def i_click_on_the_session_home(step):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
     try:
-        link = world.browser.find_elements_by_css_selector("h2#sessioninfo a")[0]
+        link = world.browser.find_elements_by_css_selector(
+            "h2#sessioninfo a")[0]
         link.click()
     except:
-        # if we can't find the sessioninfo element, it just means that we're already there
+        # if we can't find the sessioninfo element,
+        # it just means that we're already there
         pass
 
 
 @step(u'I click on Activity (\d+)')
 def i_click_activity(step, activity_number):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
     try:
-        link = world.browser.find_element_by_partial_link_text("Activity %s:" % activity_number)
+        link_text = "Activity %s:" % activity_number
+        wait = ui.WebDriverWait(world.browser, 5)
+        wait.until(
+            visibility_of_element_located((By.PARTIAL_LINK_TEXT, link_text)))
+        wait.until(
+            element_to_be_clickable((By.PARTIAL_LINK_TEXT, link_text)))
+        link = world.browser.find_element_by_partial_link_text(link_text)
         link.click()
     except Exception, e:
+        time.sleep(30)
         assert False, str(e)
 
 
 @step(u'I click on Complete Activity')
 def i_click_on_complete_activity(step):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
     try:
         link = world.browser.find_element_by_partial_link_text("Next →")
         link.click()
@@ -311,9 +222,7 @@ def i_click_on_complete_activity(step):
 
 
 @step(u'I am on the Session (\d+) page')
-def i_am_on_the_session_page(step,session_id):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
+def i_am_on_the_session_page(step, session_id):
     try:
         h2 = world.browser.find_elements_by_tag_name('h2')[0]
     except:
@@ -324,8 +233,6 @@ def i_am_on_the_session_page(step,session_id):
 
 @step(u'I am on the Activity (\d+) page')
 def i_am_on_the_activity_page(step,activity_id):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
     try:
         breadcrumb = world.browser.find_element_by_id("breadcrumb-text")
     except:
@@ -336,49 +243,58 @@ def i_am_on_the_activity_page(step,activity_id):
 
 @step(u'Then I am on the "([^"]*)" Activity')
 def i_am_on_the_activity_with_title(step, title):
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
     current_activity = world.browser.find_elements_by_css_selector("h3")[0]
-    title = title.replace("  "," ")
+    title = title.replace("  ", " ")
     assert current_activity.text == title, current_activity.text
 
 
 @step('there is a game')
 def there_is_a_game(self):
-    if not world.using_selenium:
-        assert len(world.dom.cssselect('#gamebox')) > 0
-    else:
+    try:
+        wait = ui.WebDriverWait(world.browser, 5)
+        wait.until(
+            visibility_of_element_located((By.ID, 'gamebox')))
         assert world.browser.find_element_by_id('gamebox')
+    except Exception, e:
+        time.sleep(30)
+        assert False, str(e)
 
 
 @step('I go back')
 def i_go_back(self):
     """ need to back out of games currently"""
-    if not world.using_selenium:
-        assert False, "this step needs to be implemented for the django test client"
     world.browser.back()
+
+
+@step(u'I clear the privacy notice')
+def i_clear_the_privacy_notice(step):
+    try:
+        wait = ui.WebDriverWait(world.browser, 1)
+        wait.until(
+            visibility_of_element_located((By.ID, 'cu-privacy-notice-icon')))
+        elt = world.browser.find_element_by_id('cu-privacy-notice-icon')
+        elt.click()
+    except:
+        pass  # Might have already been cleared
 
 
 @step(u'I am a participant')
 def i_am_a_participant(step):
-    if world.using_selenium:
-        world.browser.get(django_url(step, "/"))
+    world.browser.get(django_url(step, "/"))
 
-        wait = ui.WebDriverWait(world.browser, 5)
-        wait.until(
-            visibility_of_element_located((By.ID, 'btn-get-started')))
+    world.browser.get_screenshot_as_file("/tmp/selenium.png")  # nosec
 
-        elt = world.browser.find_element_by_id('btn-get-started')
-        elt.click()
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        visibility_of_element_located((By.ID, 'btn-get-started')))
 
-        assert world.browser.current_url.find("/intervention/") > -1
-        assert (world.browser.find_elements_by_tag_name('h2')[0].text
-                == "Sessions")
-    else:
-        from smart_sa.intervention.models import Participant
-        world.client.post(django_url(step, '/set_participant/'),
-                          {'name': 'test', 'id_number': 'test'})
-        world.participant = Participant.objects.filter(name='test')[0]
+    elt = world.browser.find_element_by_id('btn-get-started')
+    elt.click()
+
+    assert world.browser.current_url.find("/intervention/") > -1,\
+        world.browser.current_url
+    assert (world.browser.find_elements_by_tag_name('h2')[0].text
+            == "Sessions")
 
 
 @step(u'the participant has not completed any sessions')
@@ -388,7 +304,7 @@ def participant_has_not_completed_any_sessions(step):
 
 
 @step(u'I go to Activity (\d+) of Session (\d+)')
-def i_go_to_session(step,activity_number,session_number):
+def i_go_to_activity_or_session(step, activity_number, session_number):
     from smart_sa.intervention.models import Intervention
     i = Intervention.objects.first()
     s = i.clientsession_set.all()[int(session_number) - 1]
@@ -396,12 +312,7 @@ def i_go_to_session(step,activity_number,session_number):
     a = s.activity_set.all()[int(activity_number) - 1]
     assert a.index() == int(activity_number)
 
-    if world.using_selenium:
-        world.browser.get(django_url(step, "/activity/%d/" % a.id))
-    else:
-        response = world.client.get(django_url(step, "/activity/%d/" % a.id))
-        world.dom = html.fromstring(response.content)
-        world.response = response
+    world.browser.get(django_url(step, "/activity/%d/" % a.id))
 
 
 @step(u'I go to Session (\d+)')
@@ -418,7 +329,6 @@ def i_go_to_session(step,session_number):
 @step(u'there is no "([^"]*)" button')
 def there_is_no_button(step, label):
     found = False
-    n = len(world.dom.cssselect('a.action'))
     for a in world.dom.cssselect('a.action'):
         if a.text.strip().lower() == label.strip().lower():
             found = True
@@ -426,38 +336,43 @@ def there_is_no_button(step, label):
 
 
 @step(u'the participant has completed (\d+) activit[y|ies] in session (\d+)')
-def the_participant_has_completed_activity_in_session_1(step,num_activities,session_number):
+def the_participant_has_completed_activity_in_session_1(
+        step, num_activities,session_number):
     from smart_sa.intervention.models import Intervention
     world.participant.participantsession_set.all().delete()
     world.participant.participantactivity_set.all().delete()
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in s.activity_set.all()[:int(num_activities)]:
-        r = world.client.post(django_url(step, "/activity/%d/complete/" % a.id),{})
+        url = django_url(step, "/activity/%d/complete/" % a.id)
+        world.client.post(url,{})
 
 
 @step(u'the participant has completed all activities in session (\d+)')
-def the_participant_has_completed_all_activities(step,session_number):
+def the_participant_has_completed_all_activities(step, session_number):
     from smart_sa.intervention.models import Intervention
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in s.activity_set.all():
-        r = world.client.post(django_url(step, "/activity/%d/complete/" % a.id),{})
+        r = world.client.post(
+            django_url(step, "/activity/%d/complete/" % a.id),{})
 
 
 @step(u'the participant has completed all activities except the first in session (\d+)')
-def the_participant_has_completed_all_activities_except_the_first(step,session_number):
+def the_participant_has_completed_all_activities_except_the_first(
+        step, session_number):
     from smart_sa.intervention.models import Intervention
     i = Intervention.objects.all()[0]
     s = i.clientsession_set.all()[int(session_number) - 1]
     for a in list(s.activity_set.all())[1:]:
-        r = world.client.post(django_url(step, "/activity/%d/complete/" % a.id),{})
+        world.client.post(
+            django_url(step, "/activity/%d/complete/" % a.id),{})
 
 
 @step(u'there is a "([^"]*)" button')
 def then_there_is_button(step, label):
     found = False
-    n = len(world.dom.cssselect('a.action'))
+    len(world.dom.cssselect('a.action'))
     for a in world.dom.cssselect('a.action'):
         if a.text.strip().lower() == label.strip().lower():
             found = True
@@ -516,3 +431,8 @@ def participant_is_a_defaulter(step,participant_name):
 def then_i_wait_count_second(step, count):
     n = int(count)
     time.sleep(n)
+
+
+@step(u'I see a filled in SSNM Tree with "([^"]*)"')
+def filled_in_ssnmtree(self, text):
+    assert True

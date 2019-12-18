@@ -1,37 +1,44 @@
-from aloe import world, step
-from selenium.common.exceptions import NoSuchElementException
 import time
+
+from aloe import world, step
+from selenium.common.exceptions import NoSuchElementException, \
+    WebDriverException, TimeoutException
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import ui
+
+from selenium.webdriver.support.expected_conditions \
+    import visibility_of_element_located, element_to_be_clickable, \
+    invisibility_of_element_located
 
 
 @step(u'I toggle personal challenge')
 def i_toggle_personal_challenge(step):
-    if not world.using_selenium:
-        assert False, (
-            "this step needs to be implemented for the django test client")
-    i = world.browser.find_element_by_css_selector('input[type="checkbox"]')
-    try:
-        i.click()
-        time.sleep(1)
-    except NoSuchElementException:
-        pass
+    selector = '.iphone-toggle-buttons input[type="checkbox"] + span'
+
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        element_to_be_clickable((By.CSS_SELECTOR, selector)))
+
+    i = world.browser.find_element_by_css_selector(selector)
+    i.click()
 
 
 @step(u'When I click the Save Plan button')
 def when_i_click_the_save_plan_button(step):
-    elt = world.browser.find_element_by_css_selector(
-        'div#actionplan_form input[type="submit"]')
-    try:
-        elt.click()
-    except NoSuchElementException:
-        pass
+    selector = 'div#actionplan_form input[type="submit"]'
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        visibility_of_element_located((By.CSS_SELECTOR, selector)))
+
+    elt = world.browser.find_element_by_css_selector(selector)
+
+    ActionChains(world.browser).move_to_element(elt).perform()
+    elt.click()
 
 
 @step(r'I select barrier (\d+)')
 def i_select_barrier(step, barrier):
-    if not world.using_selenium:
-        assert False, (
-            "this step needs to be implemented for the django test client")
-
     barrier_idx = int(barrier) - 1  # Assumes 1 based indexing
     elts = world.browser.find_elements_by_css_selector(
         'div.issue-selector div.issue-number')
@@ -46,10 +53,6 @@ def i_select_barrier(step, barrier):
 
 @step(r'Then barrier (\d+) has "([^"]*)"')
 def then_barrier_number_has_state(step, number, state):
-    if not world.using_selenium:
-        assert False, (
-            "this step needs to be implemented for the django test client")
-
     barrier_idx = int(number) - 1
     elts = world.browser.find_elements_by_css_selector(
         'div.issue-selector div.issue-number')
@@ -63,10 +66,6 @@ def then_barrier_number_has_state(step, number, state):
 
 @step(r'Then barrier (\d+) does not have "([^"]*)"')
 def then_barrier_number_does_not_have_state(step, number, state):
-    if not world.using_selenium:
-        assert False, (
-            "this step needs to be implemented for the django test client")
-
     barrier_idx = int(number) - 1
     elts = world.browser.find_elements_by_css_selector(
         'div.issue-selector div.issue-number')
@@ -79,14 +78,16 @@ def then_barrier_number_does_not_have_state(step, number, state):
 
 @step(u'there is no issue selector')
 def there_is_no_issue_selector(step):
-    i = world.browser.find_element_by_id('issue-selector')
-    assert not i.is_displayed(), "Issue selector should be invisible now"
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        invisibility_of_element_located((By.ID, 'issue-selector')))
 
 
 @step(u'there is an issue selector')
 def there_is_an_issue_selector(step):
-    i = world.browser.find_element_by_id('issue-selector')
-    assert i.is_displayed(), "Issue selector should be visible now"
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        visibility_of_element_located((By.ID, 'issue-selector')))
 
 
 @step(u'i navigate "([^"]*)"')
@@ -115,49 +116,62 @@ def there_is_a_left_arrow(step):
 
 @step(u'there is no right arrow')
 def there_is_no_right_arrow(step):
-    i = world.browser.find_element_by_css_selector('#next_issue img')
-    assert not i.is_displayed(), "right arrow should be invisible now"
+    selector = '#next_issue img'
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        invisibility_of_element_located((By.CSS_SELECTOR, selector)))
 
 
 @step(u'there is a right arrow')
 def there_is_a_right_arrow(step):
-    i = world.browser.find_element_by_css_selector('#next_issue img')
-    assert i.is_displayed(), "right arrow should be visible now"
+    selector = '#next_issue img'
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        visibility_of_element_located((By.CSS_SELECTOR, selector)))
 
 
 @step(u'there is no action plan button')
 def there_is_no_action_plan_button(step):
-    i = world.browser.find_element_by_css_selector('#actionplan a')
-    assert not i.is_displayed(), "Make Plan should be invisible now"
+    selector = '#actionplan a'
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        invisibility_of_element_located((By.CSS_SELECTOR, selector)))
 
 
 @step(u'Then there is a Make Plan button')
 def then_there_is_a_make_plan_button(step):
-    i = world.browser.find_element_by_css_selector('#actionplan a')
-    assert i.is_displayed(), "element #actionplan a is visible"
-    assert i.text == "Make Plan", i.text
+    selector = '#actionplan a'
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        visibility_of_element_located((By.CSS_SELECTOR, selector)))
 
 
 @step(u'Then there is an Edit Plan button')
 def then_there_is_an_edit_plan_button(step):
-    i = world.browser.find_element_by_css_selector('#actionplan a')
-    assert i.is_displayed(), "element #actionplan a is visible"
-    assert i.text == "Edit Plan", i.text
+    selector = '#actionplan a'
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        visibility_of_element_located((By.CSS_SELECTOR, selector)))
 
 
 @step(u'there is no Action Plan form')
 def then_there_is_no_action_plan_form(step):
-    time.sleep(1)
-    elt = world.browser.find_element_by_id('actionplan_form')
-    assert not elt.is_displayed(), (
-        "element #actionplan_form should not be visible")
+    try:
+        wait = ui.WebDriverWait(world.browser, 5)
+        wait.until(
+            invisibility_of_element_located((By.ID, 'actionplan_form')))
+        time.sleep(1)
+    except TimeoutException:
+        time.sleep(30)
+        pass
 
 
 @step(u'Then there is an Action Plan form')
 def then_there_is_an_action_plan_form(step):
-    elt = world.browser.find_element_by_id('actionplan_form')
-    assert elt.is_displayed(), (
-        "element #actionplan_form should be visible")
+    wait = ui.WebDriverWait(world.browser, 5)
+    wait.until(
+        visibility_of_element_located((By.ID, 'actionplan_form')))
+    time.sleep(1)
 
 
 @step(u'When I type "([^"]*)" in "([^"]*)"')
