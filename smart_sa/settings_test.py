@@ -3,7 +3,7 @@ from smart_sa.settings_shared import *
 import os
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
 DATABASES = {
@@ -11,14 +11,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'lettuce.db',
         'OPTIONS': {
-            'timeout': 30,
+            'timeout': 30
         }
     }
 }
 
-
-BROWSER = 'Headless'
-# BROWSER = 'Firefox'
+HEADLESS = True
+BROWSER = 'Firefox'
 # BROWSER = 'Chrome'
 
 
