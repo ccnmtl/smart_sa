@@ -18,7 +18,7 @@ DATABASES = {
         'PORT': '',
         'USER': '',
         'PASSWORD': '',
-        'ATOMIC_REQUESTS': True,
+        'ATOMIC_REQUESTS': False
     }
 }
 
