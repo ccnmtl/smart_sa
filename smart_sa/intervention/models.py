@@ -934,7 +934,7 @@ class Participant(models.Model):
         latest = timestamps[-1]
         delta = latest - earliest
         if (delta.seconds / 60.0) < simple_count:
-            return delta.seconds / 60
+            return int(delta.seconds / 60)
         else:
             return simple_count
 

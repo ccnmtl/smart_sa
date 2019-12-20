@@ -8,7 +8,7 @@ addons:
     packages:
       - chromium-chromedriver
 python:
-  - "2.7"
+  - "3.6"
 before_script:
   # include ChromeDriver in PATH
   - ln --symbolic /usr/lib/chromium-browser/chromedriver "${HOME}/bin/chromedriver"
