@@ -1,12 +1,13 @@
 Feature: Mood Quiz
 
     Scenario: Mood
-      Using selenium
       Given I am a participant
+      Given I clear the privacy notice
+
       When I click on Session 1
       Then I click on Activity 10
       When I click the "Next →" link
-      
+
       # assessment quiz part 1 - mood
       Then there is a game
       Then there is an assessmentquiz
@@ -14,12 +15,12 @@ Feature: Mood Quiz
       # fill out all the questions - alerts do not work in headless mode
       # When I click the "What is My Score?" link
       # Then I'm asked to answer all the questions
-      
+
       # no distress
       When I fill in all 1s in the quiz
       When I click the "What is My Score?" link
       Then my score says "no significant distress"
-      
+
       # state saved
       When I click the "Next →" link
       When I click the "← Back" link
@@ -43,12 +44,12 @@ Feature: Mood Quiz
       When I fill in all 3s in the quiz
       When I click the "What is My Score?" link
       Then my score says "Severe distress" 
-      
-      Finished using selenium
-      
+
+
     Scenario: Mood Defaulter - State is clear
-      Using selenium
       Given I am a participant
+      Given I clear the privacy notice
+
       When I click on Session 1
       Then I click on Activity 10
       When I click the "Next →" link
@@ -69,9 +70,3 @@ Feature: Mood Quiz
       # assessment quiz defaulter - mood
       Then there is a game
       Then there is an assessmentquiz
-
-      Finished using selenium
-       
-
-    
-    

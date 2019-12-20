@@ -3,11 +3,10 @@ Feature: Problem Solving Activity
     ## Barrier is currently in Session 4, Activity 9
 
     Scenario: Runthrough
-        Using selenium
-        
         # Find Activity
         Given I am a participant
-        
+        Given I clear the privacy notice
+
         When I click on Session 4
         When I click on Activity 9
         When I click the "Next" link
@@ -24,29 +23,29 @@ Feature: Problem Solving Activity
         
         When I select barrier 1
         Then barrier 1 has "focus"
-        There there is no left arrow
-        There there is a right arrow
+        Then there is no left arrow
+        Then there is a right arrow
         
         When I navigate "right"
         Then barrier 2 has "focus"
-        There there is a left arrow
-        There there is a right arrow
+        Then there is a left arrow
+        Then there is a right arrow
         
         When I navigate "left"
         Then barrier 1 has "focus"
-        There there is no left arrow
-        There there is a right arrow
+        Then there is no left arrow
+        Then there is a right arrow
         
         # Assuming 17 issues
         When I select barrier 19
-        There there is a left arrow
-        There there is no right arrow
+        Then there is a left arrow
+        Then there is no right arrow
               
     # Personal Challenge on, navigate, off
         
         When I select barrier 1
         Then barrier 1 has "focus"
-        There is no action plan button
+        Then there is no action plan button
         When I toggle personal challenge
         Then barrier 1 has "marked"
         Then there is a Make Plan button
@@ -62,7 +61,7 @@ Feature: Problem Solving Activity
         When I select barrier 3
         Then barrier 3 has "focus"
         Then barrier 3 does not have "marked"
-        There is no action plan button
+        Then there is no action plan button
         
         When I toggle personal challenge
         Then barrier 3 has "marked"
@@ -70,16 +69,16 @@ Feature: Problem Solving Activity
         
         When I click the "Make Plan" link
         Then there is an Action Plan form
-        There there is no issue selector
-        There there is no left arrow
-        There there is no right arrow
+        Then there is no issue selector
+        Then there is no left arrow
+        Then there is no right arrow
         
         # Unmarking the barrier should close the form 
         When I toggle personal challenge
         Then there is no Action Plan form
-        There there is an issue selector
-        There there is a left arrow
-        There there is a right arrow
+        Then there is an issue selector
+        Then there is a left arrow
+        Then there is a right arrow
         Then barrier 3 does not have "marked"
         
      # Action plan displayed, then closed through save
@@ -87,7 +86,7 @@ Feature: Problem Solving Activity
         When I select barrier 3
         Then barrier 3 has "focus"
         Then barrier 3 does not have "marked"
-        There is no action plan button
+        Then there is no action plan button
         
         When I toggle personal challenge
         Then barrier 3 has "marked"
@@ -95,16 +94,15 @@ Feature: Problem Solving Activity
         
         When I click the "Make Plan" link
         Then there is an Action Plan form
-        There there is no issue selector
-        There there is no left arrow
-        There there is no right arrow
+        Then there is no issue selector
+        Then there is no left arrow
+        Then there is no right arrow
         
         When I click the Save Plan button
-        Then I wait 1 second
         Then there is no Action Plan form
-        There there is an issue selector
-        There there is a left arrow
-        There there is a right arrow
+        Then there is an issue selector
+        Then there is a left arrow
+        Then there is a right arrow
         Then barrier 3 has "marked"
         
     # Action Plan Complete, then toggled off while editing
@@ -115,9 +113,9 @@ Feature: Problem Solving Activity
         
         When I click the "Make Plan" link
         Then there is an Action Plan form
-        There there is no issue selector
-        There there is no left arrow
-        There there is no right arrow
+        Then there is no issue selector
+        Then there is no left arrow
+        Then there is no right arrow
         
         When I type "1" in "barriers"
         When I type "1" in "proposals"
@@ -156,9 +154,9 @@ Feature: Problem Solving Activity
         
         When I click the "Edit Plan" link
         Then there is an Action Plan form
-        There there is no issue selector
-        There there is no left arrow
-        There there is no right arrow
+        Then there is no issue selector
+        Then there is no left arrow
+        Then there is no right arrow
         Then "barriers" reads "1"
         Then "proposals" reads "1"
         Then "finalPlan" reads "1"
@@ -169,22 +167,22 @@ Feature: Problem Solving Activity
         When I type "2" in "finalPlan"
         When I click the Save Plan button
         Then I wait 1 second
-        There there is no Action Plan form
+        Then there is no Action Plan form
         
         When I click the "Edit Plan" link
         Then there is an Action Plan form
-        There there is no issue selector
-        There there is no left arrow
-        There there is no right arrow
+        Then there is no issue selector
+        Then there is no left arrow
+        Then there is no right arrow
         Then "barriers" reads "12"
         Then "proposals" reads "12"
         Then "finalPlan" reads "12"
         When I click the Save Plan button
         Then I wait 1 second
-        There there is no Action Plan form
-        There there is an issue selector
-        There there is a left arrow
-        There there is a right arrow
+        Then there is no Action Plan form
+        Then there is an issue selector
+        Then there is a left arrow
+        Then there is a right arrow
         
     # Testing out multiple barrier plan selection.
         
@@ -195,9 +193,9 @@ Feature: Problem Solving Activity
         
     #     When I click the "Make Plan" link
     #     Then there is an Action Plan form
-    #     There there is no issue selector
-    #     There there is no left arrow
-    #     There there is no right arrow
+    #     Then there is no issue selector
+    #     Then there is no left arrow
+    #     Then there is no right arrow
         
     #     When I type "abc" in "barriers"
     #     When I type "def" in "proposals"
@@ -213,9 +211,9 @@ Feature: Problem Solving Activity
         
     #     When I click the "Edit Plan" link
     #     Then there is an Action Plan form
-    #     There there is no issue selector
-    #     There there is no left arrow
-    #     There there is no right arrow
+    #     Then there is no issue selector
+    #     Then there is no left arrow
+    #     Then there is no right arrow
     #     Then "barriers" reads "12"
     #     Then "proposals" reads "12"
     #     Then "finalPlan" reads "12"
@@ -225,16 +223,16 @@ Feature: Problem Solving Activity
     #     Then barrier 1 has "focus"
     #     Then barrier 1 has "complete"
     #     Then there is no Action Plan form
-    #     There there is an issue selector
-    #     There there is no left arrow
-    #     There there is a right arrow
+    #     Then there is an issue selector
+    #     Then there is no left arrow
+    #     Then there is a right arrow
     #     Then there is an Edit Plan button
         
     #     When I click the "Edit Plan" link
     #     Then there is an Action Plan form
-    #     There there is no issue selector
-    #     There there is no left arrow
-    #     There there is no right arrow
+    #     Then there is no issue selector
+    #     Then there is no left arrow
+    #     Then there is no right arrow
     #     Then "barriers" reads "abc"
     #     Then "proposals" reads "def"
     #     Then "finalPlan" reads "ghi"
@@ -275,7 +273,3 @@ Feature: Problem Solving Activity
     #     Then barrier 19 has "marked"
     #     Then I can specify my issue
     #     My issue is "abc"
-        
-        
-        Finished using selenium
-        

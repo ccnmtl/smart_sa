@@ -1,8 +1,9 @@
 Feature: Alcohol Quiz
 
     Scenario: Alcohol Audit
-      Using selenium
+      
       Given I am a participant
+      Given I clear the privacy notice
       When I click on Session 1
       Then I click on Activity 11
       When I click the "Next →" link
@@ -56,4 +57,4 @@ Feature: Alcohol Quiz
       When I click the "What is My Score?" link
       Then my score says "Severe drinking issues"
 
-      Finished using selenium
+      

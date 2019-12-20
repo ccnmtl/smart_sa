@@ -1,8 +1,8 @@
 Feature: Drug Quiz    
     
     Scenario: Drug Audit
-      Using selenium
       Given I am a participant
+      Given I clear the privacy notice
       When I click on Session 1
       Then I click on Activity 12
       When I click the "Next →" link
@@ -46,5 +46,3 @@ Feature: Drug Quiz
       When I fill in all 3s in the quiz
       When I click the "What is My Score?" link
       Then my score says "serious problems"
-      
-      Finished using selenium

@@ -8,12 +8,11 @@ At the activity level (activity.html), can we:
 Clicking Next -> when the interactivity phase is complete advances the user to the next activity."
 
     Scenario: Activity With Game
-        Using selenium
         Given I am a participant
+        Given I clear the privacy notice
         When I go to Activity 3 of Session 1
         Then there is a "Next →" nav button
         Then there is no "Use Masivukeni Online" nav button
-        Finished using selenium
 
     Scenario: Going back
         # from Susan's comment on the PMT:
@@ -23,11 +22,11 @@ Clicking Next -> when the interactivity phase is complete advances the user to t
         # Then click the "Previous" button.
         # Expected: http://masivukeni2.ccnmtl.columbia.edu/task/109/addnames/
         # Actual: http://masivukeni2.ccnmtl.columbia.edu/activity/15/
-        Using selenium
+        
         Given I am a participant
+        Given I clear the privacy notice
         When I go to Activity 8 of Session 1
         When I click the "Back" link
         Then there is a game
         Then I am not on an activity page
         Then I am on a game page
-        Finished using selenium
