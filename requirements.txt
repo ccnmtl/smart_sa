@@ -5,7 +5,7 @@ coverage==5.0.3
 cssselect==1.1.0
 lxml==4.5.0
 pyparsing==2.4.6
-tornado==6.0.3
+tornado==6.0.4
 fuzzywuzzy==0.18.0
 sure==1.4.11
 extras==1.0.0
