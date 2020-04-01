@@ -1,4 +1,4 @@
-Django==2.2.11 # pyup: < 3
+Django==2.2.12 # pyup: < 3
 simplejson==3.17.0
 psycopg2==2.8.4
 coverage==5.0.4
