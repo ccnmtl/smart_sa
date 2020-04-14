@@ -1,6 +1,6 @@
 Django==2.2.12 # pyup: < 3
 simplejson==3.17.0
-psycopg2==2.8.4
+psycopg2==2.8.5
 coverage==5.0.4
 cssselect==1.1.0
 lxml==4.5.0
