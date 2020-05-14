@@ -28,7 +28,7 @@ pep8==1.7.1
 pyflakes==2.2.0
 mccabe==0.6.1
 logilab-common==1.6.3
-pycodestyle==2.5.0
+pycodestyle==2.6.0
 configparser==5.0.0
 flake8==3.7.9
 logilab-astng==0.24.3
@@ -42,7 +42,7 @@ six==1.14.0
 gunicorn==20.0.4
 
 s3transfer==0.3.3
-jmespath==0.9.5
+jmespath==0.10.0
 
 botocore>=1.15.0,<1.17.0
 boto3>=1.12.0,<1.14.0
@@ -64,7 +64,7 @@ requests==2.23.0
 
 djangowind==1.2.3
 raven==6.10.0
-sentry-sdk==0.14.3
+sentry-sdk==0.14.4
 django-statsd-mozilla==0.4.0
 django-smoketest==1.1.0
 django-debug-toolbar==2.2

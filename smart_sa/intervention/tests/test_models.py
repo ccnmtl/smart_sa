@@ -256,8 +256,8 @@ class FullSerializationTest(TestCase):
         for p in Participant.objects.all():
             d = p.to_json()
             p2, logs = Participant.from_json(d)
-            for l in logs:
-                self.assertEquals('info' in l, True)
+            for log in logs:
+                self.assertEquals('info' in log, True)
             self.assertEquals(logs[0], {'info': 'participant created'})
             self.assertEquals(p.name, p2.name)
             self.assertEquals(p.display_name(), p2.display_name())
