@@ -1,4 +1,5 @@
 language: python
+dist: bionic
 env:
   - TEST_SUITE=jenkins
   - TEST_SUITE=harvest
