@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ccnmtl/smart_sa.svg?branch=master)](https://travis-ci.org/ccnmtl/smart_sa) [![Greenkeeper badge](https://badges.greenkeeper.io/ccnmtl/smart_sa.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/ccnmtl/smart_sa.svg?branch=master)](https://travis-ci.org/ccnmtl/smart_sa)
 
 0. DETAILS/REQUIREMENTS/INSTALLATION
   #  Project Title: 
