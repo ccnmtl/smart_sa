@@ -291,7 +291,7 @@ def i_clear_the_privacy_notice(step):
     try:
         wait = ui.WebDriverWait(world.browser, 1)
         elt = wait.until(
-            visibility_of_element_located((By.ID, 'cu-privacy-notice-icon')))
+            visibility_of_element_located((By.ID, 'cu-privacy-notice-button')))
         elt.click()
     except:  # noqa
         pass  # Might have already been cleared

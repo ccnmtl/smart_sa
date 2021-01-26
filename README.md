@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ccnmtl/smart_sa.svg?branch=master)](https://travis-ci.org/ccnmtl/smart_sa)
+[![Actions Status](https://github.com/ccnmtl/smart_sa/workflows/build-and-test/badge.svg)](https://github.com/ccnmtl/smart_sa/actions)
 
 0. DETAILS/REQUIREMENTS/INSTALLATION
   #  Project Title: 
