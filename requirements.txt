@@ -64,7 +64,9 @@ urllib3==1.25.9  # sentry-sdk
 
 requests==2.23.0
 
-djangowind==1.2.3
+python-cas==1.5.0
+requirements/src/django_cas_ng-4.2.2ctl-py2.py3-none-any.whl
+
 raven==6.10.0
 sentry-sdk==0.14.4
 django-statsd-mozilla==0.4.0

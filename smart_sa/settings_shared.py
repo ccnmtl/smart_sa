@@ -38,6 +38,7 @@ INTERVENTION_BACKUP_IV = (
     "209b8b7cea877f069df46a0994af20c36d86bbcd33cb4b79bde43dee55fc9c85")
 
 INSTALLED_APPS += [  # noqa
+    'django_cas_ng',
     'smart_sa.assessmentquiz_task',
     'smart_sa.lifegoal_task',
     'smart_sa.pill_game',
@@ -46,6 +47,17 @@ INSTALLED_APPS += [  # noqa
     'smart_sa.watchvideo_game',
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
+]
+
+INSTALLED_APPS.remove('djangowind') # noqa
+
+MIDDLEWARE += [ # noqa
+    'django_cas_ng.middleware.CASMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'django_cas_ng.backends.CASBackend'
 ]
 
 STATSD_PREFIX = 'masivukeni'
@@ -65,13 +77,40 @@ EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
 SERVER_EMAIL = "masivukeni2@ccnmtl.columbia.edu"
 
 
-TEMPLATES[0]['OPTIONS']['context_processors'].append(  # noqa
-    "smart_sa.intervention.views.inject_deployment",
-)
-
 PROD_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/"
 PROD_MEDIA_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/multimedia/"
 
 DISABLE_OFFLINE = False
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+CAS_SERVER_URL = 'https://cas.columbia.edu/cas/'
+CAS_VERSION = '3'
+CAS_ADMIN_REDIRECT = False
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(base, "templates"),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+                'stagingcontext.staging_processor',
+                'gacontext.ga_processor',
+                'django.template.context_processors.csrf',
+                "smart_sa.intervention.views.inject_deployment",
+            ],
+        },
+    },
+]
