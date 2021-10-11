@@ -255,7 +255,6 @@
         },
         render: function() {
             if (this.model.hasValidActionPlan()) {
-                // eslint-disable-next-line no-unsafe-innerhtml/no-unsafe-innerhtml
                 this.el.innerHTML = this.template(this.model.toJSON());
             } else {
                 this.el.innerHTML = '';

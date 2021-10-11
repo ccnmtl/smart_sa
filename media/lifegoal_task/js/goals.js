@@ -17,12 +17,10 @@
                 workform.elements[keys[i]].value = goal_state.getState(keys[i]);
             }
         }
-        /* eslint-disable scanjs-rules/call_connect */
         MochiKit.Signal.connect(workform, 'onchange', saveForm);
         MochiKit.Signal.connect(workform, 'onkeypress', saveForm);
         MochiKit.Signal.connect(workform, 'onkeyup', saveForm);
         MochiKit.Signal.connect(window, 'onunload', saveForm);
-        /* eslint-enable scanjs-rules/call_connect */
     }
     MochiKit.DOM.addLoadEvent(loadGoalTask);
 

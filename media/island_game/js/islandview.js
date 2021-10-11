@@ -291,12 +291,10 @@
                 this.male_images : this.female_images;
 
             if (value === 0) {
-                // eslint-disable-next-line scanjs-rules/assign_to_src
                 this.el.src = media_path + images[0];
             } else {
                 var i = Math.ceil(value * images.length) - 1;
                 if (i >= 0 && i <= images.length) {
-                    // eslint-disable-next-line scanjs-rules/assign_to_src
                     this.el.src = media_path + images[i];
                 }
             }

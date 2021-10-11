@@ -157,7 +157,6 @@
                     alert('An error occurred while saving your ' +
                     'information. Please try again.');
                 } else {
-                    // eslint-disable-next-line scanjs-rules/assign_to_location
                     window.location = srcElement.href;
                 }
             });
