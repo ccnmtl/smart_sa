@@ -95,7 +95,6 @@
             jQuery(this.el).find('.pill-text input').focus();
         },
         render: function() {
-            // eslint-disable-next-line no-unsafe-innerhtml/no-unsafe-innerhtml
             this.el.innerHTML = this.template(this.model.toJSON());
 
             if (this.model.get('name').length > 0) {
@@ -192,7 +191,6 @@
             json.top = this.top;
             json.viewId = this.viewId;
 
-            // eslint-disable-next-line no-unsafe-innerhtml/no-unsafe-innerhtml
             this.el.innerHTML = this.template(json);
             jQuery(this.el).css({position: 'absolute',
                 left: this.left, top: this.top});
@@ -355,7 +353,6 @@
                     }
                 }
                 if (_.size(context.pills) > 0) {
-                    // eslint-disable-next-line no-unsafe-innerhtml/no-unsafe-innerhtml
                     this.printEl.innerHTML = this.template(context);
                 } else {
                     this.printEl.innerHTML = '';
