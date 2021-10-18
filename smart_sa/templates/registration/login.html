@@ -2,7 +2,7 @@
 {% block title %}Log In{% endblock %}
 {% block content %}
 
-	<h2>Log In</h2>
+    <h2>Log In</h2>
 
 {% if form.has_errors %}
 <p class="error">Your user id and password didn't match. Please try again.</p>
@@ -10,43 +10,39 @@
 
 <div id="login-box">
 
-	<div class="login-panel" id="login-all">
-	
-		<form class="login" method="post" action="." id="login-form">
-		<div class="formtitle">All Users</div>
-		{% if form.has_errors %}
-		<p>Your username and password didn't match. Please try again.</p>
-		{% endif %}
-		<div class="formrow">
-		<label for="id_username">User ID</label><input type="text" name="username" id="id_username" />
-		</div>
-		<div class="formrow">
-		<label for="id_password">Password</label><input type="password" name="password" id="id_password" />
-		</div>
-		<div class="formrow">
-		<input type="submit" value="Log In" id="login-button" />
-		<input type="hidden" name="next" value="{{ next }}" />
-		</div>
-		</form>
-	
-	</div>
+    <div class="login-panel" id="login-all">
+        <form class="login" method="post" action="." id="login-form">{% csrf_token %}
+        <div class="formtitle">All Users</div>
+        {% if form.has_errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+        <div class="formrow">
+        <label for="id_username">User ID</label><input type="text" name="username" id="id_username" />
+        </div>
+        <div class="formrow">
+        <label for="id_password">Password</label><input type="password" name="password" id="id_password" />
+        </div>
+        <div class="formrow">
+        <input type="submit" value="Log In" id="login-button" />
+        <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+        </form>
+    </div>
 
 {% if deployment.is_online %}
+    <div class="login-panel" id="login-cu">
+        <form class="login cu" method="get" action="/cas/login">
+            <input type="hidden" name="next" value="{{next|default:'/'}}" />
+            <div class="formtitle">Columbia University Users</div>
+            <div class="formrow">
+            Access Masivukeni using your UNI.
+            </div>
+            <div class="formrow">
+            <input type="submit" value="Log In" />
+            </div>
+        </form>
 
-	<div class="login-panel" id="login-cu">
-	
-		<form class="login cu" method="get" action="{{CAS_BASE}}cas/login">
-		<div class="formtitle">Columbia University Users</div>
-		<div class="formrow">
-		Access Masivukeni using your UNI.
-		</div>
-		<div class="formrow">
-		<input type="submit" value="Log In" />
-		<input type="hidden" name="destination" value="http{% if request.is_secure %}s{% endif %}://{{ request.get_host }}/accounts/caslogin/?next={{next|default:'/intervention/'}}" />
-		</div>
-		</form>
-	
-	</div>
+    </div>
 {% endif %}
 
 </div>

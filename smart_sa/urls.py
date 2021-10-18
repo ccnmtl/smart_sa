@@ -1,12 +1,13 @@
 import os.path
-
+from django.urls import path
 import django.contrib.auth.views
 import django.views.static
 
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
-from django.contrib.auth.views import LogoutView
+from django_cas_ng import views as cas_views
+
 
 from smart_sa.intervention.views import (
     game, log_activity_visit, save_game_state, intervention_admin,
@@ -27,8 +28,12 @@ admin.autodiscover()
 site_media_root = os.path.join(os.path.dirname(__file__), "../media")
 
 urlpatterns = [
-    url(r'^accounts/logout/$', LogoutView.as_view(next_page='/')),
-    url(r'^accounts/', include('djangowind.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    path('cas/login', cas_views.LoginView.as_view(),
+         name='cas_ng_login'),
+    path('cas/logout', cas_views.LogoutView.as_view(),
+         name='cas_ng_logout'),
+
     url(r'^site_media/(?P<path>.*)$',
         django.views.static.serve, {'document_root': site_media_root}),
     url(r'^multimedia/(?P<path>.*)$',

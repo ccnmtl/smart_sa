@@ -59,7 +59,7 @@ gtag('config', '{{GA_TAG}}', { 'anonymize_ip': true });
 		<li>
 		{% if user.is_authenticated %}
                 <a class="loginlogout loginlogout-remote" href="/accounts/logout/" onclick="if(confirm('Are you sure that you would like to delete all data from this session?')){if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}} else {return false}"><button id="btn-logout">Clear My Data</button></a>
-                <a class="loginlogout loginlogout-remote" href="/accounts/logout/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}"><button id="btn-logout">Log Out</button></a>
+                <a class="loginlogout loginlogout-remote" href="/accounts/logout/?next=/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}"><button id="btn-logout">Log Out</button></a>
 		{% else %}
 		{% endif %}
 		</ul>
