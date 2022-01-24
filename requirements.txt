@@ -4,7 +4,7 @@ psycopg2==2.8.5
 coverage==5.1
 cssselect==1.1.0
 lxml==4.6.5
-pyparsing==2.4.7
+pyparsing==3.0.7
 tornado==6.0.4
 fuzzywuzzy==0.18.0
 sure==1.4.11
