@@ -31,7 +31,7 @@ logilab-common==1.6.3
 pycodestyle==2.6.0
 configparser==5.0.0
 importlib-metadata==1.6.0  # for flake8
-zipp==3.1.0  # for flake8
+zipp==3.7.0  # for flake8
 flake8==3.8.1
 astroid==2.4.1
 editdistance==0.5.3
