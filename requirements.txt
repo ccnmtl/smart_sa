@@ -18,7 +18,7 @@ ansicolors==1.1.8
 colorama==0.4.3
 gherkin-official==4.1.3
 repoze.lru==0.7
-aloe==0.1.19
+aloe==0.2.0
 nose==1.3.7
 django-nose==1.4.6
 aloe-django==0.1.6
@@ -40,7 +40,7 @@ python-dateutil==2.8.1
 pytz==2021.3
 django-stagingcontext==0.1.0
 sqlparse==0.4.2
-six==1.14.0
+six==1.16.0
 gunicorn==20.1.0
 
 s3transfer==0.3.3
@@ -62,7 +62,7 @@ certifi==2020.4.5.1  # sentry-sdk
 urllib3==1.26.5  # sentry-sdk
 
 
-requests==2.23.0
+requests==2.27.1
 
 python-cas==1.5.0
 requirements/src/django_cas_ng-4.2.2ctl-py2.py3-none-any.whl
