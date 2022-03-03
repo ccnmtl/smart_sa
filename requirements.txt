@@ -53,7 +53,7 @@ urllib3==1.26.5
 pyasn1==0.4.8
 contextlib2==0.6.0.post1
 rcssmin==1.0.6
-rjsmin==1.0.12
+rjsmin==1.2.0
 
 chardet==3.0.4
 idna==2.9
