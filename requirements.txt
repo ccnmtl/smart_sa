@@ -30,7 +30,7 @@ mccabe==0.7.0
 logilab-common==1.6.3
 pycodestyle==2.6.0
 configparser==5.0.0
-importlib-metadata==4.11.2  # for flake8
+importlib-metadata<4.11  # for flake8
 zipp==3.1.0  # for flake8
 flake8==3.8.1
 astroid==2.4.1
