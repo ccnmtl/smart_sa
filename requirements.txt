@@ -18,7 +18,7 @@ ansicolors==1.1.8
 colorama==0.4.3
 gherkin-official==4.1.3
 repoze.lru==0.7
-aloe==0.1.19
+aloe==0.2.0
 nose==1.3.7
 django-nose==1.4.6
 aloe-django==0.2.0
