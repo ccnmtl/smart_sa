@@ -1,7 +1,7 @@
 Django>=2.2.13,<3
 simplejson==3.17.0
 psycopg2==2.9.3
-coverage==5.1
+coverage<6.3
 cssselect==1.1.0
 lxml==4.6.5
 pyparsing==3.0.7
@@ -18,10 +18,10 @@ ansicolors==1.1.8
 colorama==0.4.3
 gherkin-official==4.1.3
 repoze.lru==0.7
-aloe==0.1.19
+aloe==0.2.0
 nose==1.3.7
 django-nose==1.4.6
-aloe-django==0.1.6
+aloe-django==0.2.0
 selenium==3.141.0
 statsd==3.3.0
 pep8==1.7.1
@@ -34,7 +34,7 @@ importlib-metadata==1.6.0  # for flake8
 zipp==3.1.0  # for flake8
 flake8==3.8.1
 astroid==2.4.1
-editdistance==0.5.3
+editdistance==0.6.0
 pylint==2.5.2
 python-dateutil==2.8.1
 pytz==2021.3
@@ -46,7 +46,7 @@ gunicorn==20.1.0
 s3transfer==0.3.3
 jmespath==0.10.0
 
-botocore>=1.15.0,<1.24.0
+botocore>=1.15.0,<1.25.0
 boto3>=1.12.0,<1.14.0
 
 urllib3==1.26.5
@@ -56,9 +56,9 @@ rcssmin==1.1.0
 rjsmin==1.2.0
 
 chardet==4.0.0
-idna==2.9
+idna==3.3
 
-certifi==2020.4.5.1  # sentry-sdk
+certifi==2021.10.8  # sentry-sdk
 urllib3==1.26.5  # sentry-sdk
 
 
@@ -70,7 +70,7 @@ requirements/src/django_cas_ng-4.2.2ctl-py2.py3-none-any.whl
 raven==6.10.0
 sentry-sdk==1.5.3
 django-statsd-mozilla==0.4.0
-django-smoketest==1.1.0
+django-smoketest==1.2.0
 django-debug-toolbar==2.2.1
 
 django-markwhat==1.6.2
@@ -93,7 +93,7 @@ bandit==1.6.2
 entrypoints==0.3
 
 cryptography==36.0.1
-idna==2.9
+idna==3.3
 urllib3==1.26.5
 cffi==1.14.0
 asn1crypto==1.3.0
