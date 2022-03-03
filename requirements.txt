@@ -1,7 +1,7 @@
 Django>=2.2.13,<3
 simplejson==3.17.0
 psycopg2==2.9.3
-coverage==5.1
+coverage==6.3.2
 cssselect==1.1.0
 lxml==4.6.5
 pyparsing==3.0.7
@@ -40,7 +40,7 @@ python-dateutil==2.8.1
 pytz==2021.3
 django-stagingcontext==0.1.0
 sqlparse==0.4.2
-six==1.14.0
+six==1.16.0
 gunicorn==20.1.0
 
 s3transfer==0.3.3
@@ -62,7 +62,7 @@ certifi==2020.4.5.1  # sentry-sdk
 urllib3==1.26.5  # sentry-sdk
 
 
-requests==2.23.0
+requests==2.27.1
 
 python-cas==1.5.0
 requirements/src/django_cas_ng-4.2.2ctl-py2.py3-none-any.whl
