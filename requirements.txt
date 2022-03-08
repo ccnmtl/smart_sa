@@ -3,11 +3,11 @@ simplejson==3.17.0
 psycopg2==2.9.3
 coverage<6.3
 cssselect==1.1.0
-lxml==4.6.5
+lxml==4.8.0
 pyparsing==3.0.7
 tornado==6.1
 fuzzywuzzy==0.18.0
-sure==1.4.11
+sure==2.0.0
 extras==1.0.0
 python-mimeparse==1.6.0
 fixtures==3.0.0
@@ -36,7 +36,7 @@ zipp==3.1.0  # for flake8
 flake8==3.8.1
 astroid==2.4.1
 editdistance==0.6.0
-pylint==2.5.2
+pylint==2.12.2
 python-dateutil==2.8.1
 pytz==2021.3
 django-stagingcontext==0.1.0
