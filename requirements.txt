@@ -31,7 +31,7 @@ logilab-common==1.6.3
 pycodestyle==2.6.0
 configparser==5.2.0
 typing_extensions==4.1.1
-importlib-metadata<4.11  # for flake8
+importlib-metadata<4.12  # for flake8
 zipp==3.1.0  # for flake8
 flake8==3.8.1
 astroid==2.4.1
@@ -52,7 +52,7 @@ boto3>=1.12.0,<1.14.0
 
 urllib3==1.26.5
 pyasn1==0.4.8
-contextlib2==0.6.0.post1
+contextlib2==21.6.0
 rcssmin==1.1.0
 rjsmin==1.2.0
 
@@ -65,7 +65,7 @@ urllib3==1.26.5  # sentry-sdk
 
 requests==2.27.1
 
-python-cas==1.5.0
+python-cas==1.6.0
 requirements/src/django_cas_ng-4.2.2ctl-py2.py3-none-any.whl
 
 raven==6.10.0
