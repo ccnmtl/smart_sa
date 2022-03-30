@@ -2,11 +2,11 @@ name: build-and-test
 on: [push, workflow_dispatch]
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
-        python-version: [3.6]
-        node-version: [12.x]
+        python-version: [3.8]
+        node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
       - name: Build with Makefile
