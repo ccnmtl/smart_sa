@@ -1,9 +1,7 @@
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from smart_sa.intervention.installed_games import InstalledGames, GameInterface
 
 
-@python_2_unicode_compatible
 class Issue(models.Model):
     name = models.CharField(max_length=100)
     text = models.CharField(max_length=500)
