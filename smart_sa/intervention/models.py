@@ -14,7 +14,7 @@ Facts
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.encoding import python_2_unicode_compatible, smart_text
+from django.utils.encoding import smart_text
 from smart_sa.intervention.installed_games import InstalledGames
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 import json
@@ -37,7 +37,6 @@ def dict_serialize(obj):
     return d
 
 
-@python_2_unicode_compatible
 class Intervention(models.Model):
     """SMART is an intervention--i.e. the top object"""
     name = models.CharField(max_length=200)
@@ -99,7 +98,6 @@ class Intervention(models.Model):
         return self.clientsession_set.all()[index - 1]
 
 
-@python_2_unicode_compatible
 class ClientSession (models.Model):
     """One day of activities for a client"""
     intervention = models.ForeignKey(Intervention, on_delete=models.CASCADE)
@@ -204,7 +202,6 @@ class ClientSession (models.Model):
         return self.activity_set.all()[index - 1]
 
 
-@python_2_unicode_compatible
 class Activity(models.Model):
     """Contains one or more pairs of instructions, and zero or one game.
     This can comprise multiple pairs.
@@ -388,7 +385,6 @@ class Activity(models.Model):
             return ""
 
 
-@python_2_unicode_compatible
 class GamePage (models.Model):
     """A javascript 'game' associated with an activity."""
     # make null possible so 'deleting' is possible but recoverable
@@ -485,7 +481,6 @@ class GamePage (models.Model):
         self.save()
 
 
-@python_2_unicode_compatible
 class Instruction(models.Model):
     """A unit of interaction between facilitator and client
     Multiple per activity
@@ -552,7 +547,6 @@ class Backup (models.Model):
                     created=str(self.created))
 
 
-@python_2_unicode_compatible
 class Participant(models.Model):
     """ participant in the system """
     name = models.CharField(max_length=256)
@@ -1148,7 +1142,6 @@ class Participant(models.Model):
         return pprint.pformat(dir(self))
 
 
-@python_2_unicode_compatible
 class ParticipantSession(models.Model):
     """ participant's progress on a session """
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
@@ -1160,7 +1153,6 @@ class ParticipantSession(models.Model):
                                   self.session.long_title, self.status)
 
 
-@python_2_unicode_compatible
 class ParticipantActivity(models.Model):
     """ participant's progress on an activity """
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
@@ -1172,7 +1164,6 @@ class ParticipantActivity(models.Model):
                                   self.activity.long_title, self.status)
 
 
-@python_2_unicode_compatible
 class CounselorNote(models.Model):
     """ notes entered by a counselor on a participant"""
     participant = models.ForeignKey(Participant, null=True,
@@ -1184,7 +1175,6 @@ class CounselorNote(models.Model):
         return "%s <-- %s" % (self.participant.name, self.counselor.username)
 
 
-@python_2_unicode_compatible
 class ParticipantGameVar(models.Model):
     """ One game variable for a Participant"""
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
