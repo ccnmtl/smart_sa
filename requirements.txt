@@ -93,7 +93,7 @@ bandit==1.7.1
 
 entrypoints==0.4
 
-cryptography==36.0.1
+cryptography==37.0.1
 idna==3.3
 urllib3==1.26.5
 cffi==1.15.0
