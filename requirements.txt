@@ -56,7 +56,7 @@ contextlib2==21.6.0
 rcssmin==1.1.0
 rjsmin==1.2.0
 
-chardet==4.0.0
+chardet==5.0.0
 idna==3.3
 
 certifi==2022.6.15  # sentry-sdk
