@@ -14,7 +14,7 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from selenium.webdriver.remote.utils import LOGGER
+from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.webdriver.support import ui
 
 from selenium.webdriver.support.expected_conditions \
