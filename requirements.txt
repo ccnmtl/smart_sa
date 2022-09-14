@@ -57,7 +57,7 @@ rcssmin==1.1.0
 rjsmin==1.2.0
 
 chardet==5.0.0
-idna==3.3
+idna==3.4
 
 certifi==2022.6.15  # sentry-sdk
 urllib3==1.26.5  # sentry-sdk
@@ -94,7 +94,7 @@ bandit==1.7.1
 entrypoints==0.4
 
 cryptography==38.0.0
-idna==3.3
+idna==3.4
 urllib3==1.26.5
 cffi==1.15.0
 asn1crypto==1.5.0
