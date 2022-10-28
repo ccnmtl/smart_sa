@@ -2,7 +2,7 @@ Django>=3.2.14,<4
 simplejson==3.17.0
 psycopg2==2.9.3
 coverage<6.6
-cssselect==1.1.0
+cssselect==1.2.0
 lxml==4.9.1
 pyparsing==3.0.7
 tornado==6.2
