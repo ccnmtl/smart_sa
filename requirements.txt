@@ -59,7 +59,7 @@ rjsmin==1.2.0
 chardet==5.1.0
 idna==3.4
 
-certifi==2022.9.14  # sentry-sdk
+certifi==2022.12.7  # sentry-sdk
 urllib3==1.26.5  # sentry-sdk
 
 
