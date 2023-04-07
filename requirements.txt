@@ -1,5 +1,5 @@
 Django>=3.2.14,<4
-simplejson==3.18.0
+simplejson==3.19.1
 psycopg2==2.9.3
 coverage<7.3
 cssselect==1.2.0
