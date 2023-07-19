@@ -42,7 +42,7 @@ pytz==2023.3
 django-stagingcontext==0.1.0
 sqlparse==0.4.4
 six==1.16.0
-gunicorn==21.0.1
+gunicorn==21.1.0
 
 s3transfer==0.6.0
 jmespath==1.0.0
