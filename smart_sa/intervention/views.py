@@ -13,7 +13,7 @@ from django.forms.models import inlineformset_factory
 from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
 from django.core import serializers
-from django.core.exceptions import MultipleObjectsReturned,\
+from django.core.exceptions import MultipleObjectsReturned, \
     ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.utils import timezone
