@@ -308,7 +308,7 @@ def i_am_a_participant(step):
         visibility_of_element_located((By.ID, 'btn-get-started')))
     elt.click()
 
-    assert world.browser.current_url.find("/intervention/") > -1,\
+    assert world.browser.current_url.find("/intervention/") > -1, \
         world.browser.current_url
     assert (world.browser.find_elements_by_tag_name('h2')[0].text
             == "Sessions")
