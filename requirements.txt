@@ -50,7 +50,7 @@ jmespath==1.0.0
 botocore>=1.15.0,<1.32.0
 boto3>=1.12.0,<1.29.0
 
-urllib3==1.26.5
+urllib3==2.0.6
 pyasn1==0.5.0
 contextlib2==21.6.0
 rcssmin==1.1.0
@@ -60,7 +60,7 @@ chardet==5.2.0
 idna==3.4
 
 certifi==2023.7.22  # sentry-sdk
-urllib3==1.26.5  # sentry-sdk
+urllib3==2.0.6  # sentry-sdk
 
 
 requests==2.31.0
@@ -94,7 +94,7 @@ entrypoints==0.4
 
 cryptography==41.0.4
 idna==3.4
-urllib3==1.26.5
+urllib3==2.0.6
 cffi==1.16.0
 asn1crypto==1.5.0
 future==0.18.3
