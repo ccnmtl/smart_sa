@@ -27,7 +27,7 @@ statsd==4.0.1
 pep8==1.7.1
 pyflakes==3.1.0
 mccabe==0.7.0
-logilab-common==1.10.0
+logilab-common==1.11.0
 pycodestyle==2.11.0
 configparser==6.0.0
 typing_extensions==4.8.0
