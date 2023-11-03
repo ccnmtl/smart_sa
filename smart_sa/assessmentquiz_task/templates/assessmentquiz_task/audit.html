@@ -1,17 +1,12 @@
 {% extends "intervention/game.html" %}
-{% load compress %}
 
 {% block game_js %}
-{% compress js %}
   <script type="text/javascript" src="{{STATIC_URL}}assessmentquiz_task/js/quiz.js"></script> 
-{% endcompress %}
 {% endblock %}
 
 {% block game_css %}
-{% compress css %}
   <link href="{{STATIC_URL}}assessmentquiz_task/css/assessmentquiz_task.css" rel="stylesheet" type="text/css" />
   <link href="{{STATIC_URL}}assessmentquiz_task/css/assessmentquiz_task.print.css" rel="stylesheet" type="text/css" media="print"  />
-{% endcompress %}
 {% endblock %}
 
 {% block game_content %}

@@ -1,8 +1,6 @@
 {% extends "intervention/game.html" %}
-{% load compress %}
 
 {% block game_js %}
-{% compress js %}
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/backbone/backbone-min.js"></script>
@@ -10,7 +8,6 @@
     <script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/DragAndDrop.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/gamestate.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}pill_game/js/pillview.js"></script> 
-{% endcompress %}    
     <script type="text/template" id="printable-bucket-template">
         <div>
             At <%= time %> take:
@@ -37,10 +34,8 @@
 {% endblock %}
 
 {% block game_css %}
-{% compress css %}
     <link rel="stylesheet" href="{{STATIC_URL}}pill_game/css/pill.css" type="text/css" />
     <link rel="stylesheet" href="{{STATIC_URL}}pill_game/css/pill.print.css" type="text/css" media="print" />
-{% endcompress %}
 {% endblock %}
 
 
