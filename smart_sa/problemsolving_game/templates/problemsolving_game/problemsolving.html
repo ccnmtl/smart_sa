@@ -1,22 +1,17 @@
 {% extends "intervention/game.html" %}
-{% load compress %}
 
 {% block game_css %}
-{% compress css %}
   <link href="{{STATIC_URL}}problemsolving_game/css/problemsolving.css" rel="stylesheet" type="text/css" />
   <link href="{{STATIC_URL}}problemsolving_game/css/problemsolving.print.css" rel="stylesheet" type="text/css" media="print" />
-{% endcompress %}
 {% endblock %}
 
 
 {% block game_js %}
-{% compress js %}
     <script type="text/javascript" src="{{STATIC_URL}}js/jquery/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/underscore/underscore-min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/backbone/backbone-min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/gamestate.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}problemsolving_game/js/problemsolvingview.js"></script>
-{% endcompress %}
     <script type="text/template" id="printable-template">
         <div class="issue-text-printable">
             <h5>Challenge</h5>

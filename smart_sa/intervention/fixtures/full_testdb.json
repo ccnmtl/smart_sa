@@ -5129,33 +5129,7 @@
             "content_type": 8
         }
     }, 
-    {
-        "pk": 37, 
-        "model": "auth.permission", 
-        "fields": {
-            "codename": "add_activity", 
-            "name": "Can add activity", 
-            "content_type": 13
-        }
-    }, 
-    {
-        "pk": 38, 
-        "model": "auth.permission", 
-        "fields": {
-            "codename": "change_activity", 
-            "name": "Can change activity", 
-            "content_type": 13
-        }
-    }, 
-    {
-        "pk": 39, 
-        "model": "auth.permission", 
-        "fields": {
-            "codename": "delete_activity", 
-            "name": "Can delete activity", 
-            "content_type": 13
-        }
-    }, 
+
     {
         "pk": 34, 
         "model": "auth.permission", 
