@@ -8,7 +8,7 @@ jobs:
         python-version: [3.8]
         node-version: [20.x]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build with Makefile
         run: make jenkins
       - name: Run Integration Tests
