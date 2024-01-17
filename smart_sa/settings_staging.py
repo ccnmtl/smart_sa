@@ -1,6 +1,6 @@
 from django.conf import settings
 from smart_sa.settings_shared import *  # noqa: F403
-from ccnmtlsettings.staging import common
+from ctlsettings.staging import common
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -11,6 +11,7 @@ locals().update(
         STATIC_ROOT=STATIC_ROOT,  # noqa: F405
         INSTALLED_APPS=INSTALLED_APPS,  # noqa: F405
         cloudfront="d3bl3pmxkh3k0q",
+        s3prefix='ccnmtl',
     ))
 
 MEDIA_ROOT = '/var/www/masivukeni/uploads/'

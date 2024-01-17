@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-{% load waffle_tags %}
 
-{% load compress %}
 {% block title %}{{ game.activity.long_title }}{% endblock %}
 
 {% load participant_status %}
@@ -21,10 +19,8 @@ setTimeout(logstatus, 0);
 
 <script type="text/javascript" src="{{STATIC_URL}}js/mochikit/MochiKit/MochiKit.js"></script>
 
-{% compress js %}
    <script type="text/javascript" src="{{STATIC_URL}}js/static_auth/local_session.js"></script>    
    <script type="text/javascript" src="{{STATIC_URL}}js/static_auth/intervention_storage.js"></script>    
-{% endcompress %}   
 
    <!-- Delegate to the particular game which extra JS it needs -->
    <script>

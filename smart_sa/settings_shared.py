@@ -1,7 +1,7 @@
 # Django settings for smart_sa clone - masivukeni2
 import os.path
 import sys
-from ccnmtlsettings.shared import common
+from ctlsettings.shared import common
 
 project = 'smart_sa'
 base = os.path.dirname(__file__)
@@ -38,7 +38,6 @@ INTERVENTION_BACKUP_IV = (
     "209b8b7cea877f069df46a0994af20c36d86bbcd33cb4b79bde43dee55fc9c85")
 
 INSTALLED_APPS += [  # noqa
-    'django_cas_ng',
     'smart_sa.assessmentquiz_task',
     'smart_sa.lifegoal_task',
     'smart_sa.pill_game',
@@ -47,17 +46,6 @@ INSTALLED_APPS += [  # noqa
     'smart_sa.watchvideo_game',
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
-]
-
-INSTALLED_APPS.remove('djangowind') # noqa
-
-MIDDLEWARE += [ # noqa
-    'django_cas_ng.middleware.CASMiddleware',
-]
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'django_cas_ng.backends.CASBackend'
 ]
 
 STATSD_PREFIX = 'masivukeni'
@@ -83,19 +71,6 @@ PROD_MEDIA_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/multimedia/"
 DISABLE_OFFLINE = False
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-CAS_SERVER_URL = 'https://cas.columbia.edu/cas/'
-CAS_VERSION = '3'
-CAS_ADMIN_REDIRECT = False
-
-# Translate CUIT's CAS user attributes to the Django user model.
-# https://cuit.columbia.edu/content/cas-3-ticket-validation-response
-CAS_APPLY_ATTRIBUTES_TO_USER = True
-CAS_RENAME_ATTRIBUTES = {
-    'givenName': 'first_name',
-    'lastName': 'last_name',
-    'mail': 'email',
-}
 
 TEMPLATES = [
     {
