@@ -22,7 +22,7 @@ aloe==0.2.0
 pynose==1.4.8
 django-nose==1.4.7
 aloe-django==0.2.0
-selenium==3.141.0
+selenium==4.17.0
 statsd==4.0.1
 pep8==1.7.1
 pyflakes==3.2.0
