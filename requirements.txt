@@ -19,7 +19,7 @@ colorama==0.4.3
 gherkin-official==4.1.3
 repoze.lru==0.7
 aloe==0.2.0
-pynose==1.4.8
+pynose==1.5.0
 django-nose==1.4.7
 aloe-django==0.2.0
 selenium==3.141.0
