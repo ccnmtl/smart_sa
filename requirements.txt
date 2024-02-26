@@ -36,7 +36,7 @@ zipp==3.17.0  # for flake8
 flake8==7.0.0
 astroid==3.0.0
 editdistance==0.8.1
-pylint==3.0.0
+pylint==3.1.0
 python-dateutil==2.8.1
 pytz==2024.1
 django-stagingcontext==0.1.0
