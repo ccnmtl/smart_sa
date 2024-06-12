@@ -32,7 +32,7 @@ pycodestyle==2.11.0
 configparser==7.0.0
 typing_extensions==4.12.2
 importlib-metadata<7.2  # for flake8
-zipp==3.18.0  # for flake8
+zipp==3.19.2  # for flake8
 flake8==7.0.0
 astroid==3.2.0
 editdistance==0.8.1
