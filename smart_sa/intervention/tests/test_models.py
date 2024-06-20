@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.test import TestCase
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 
 from smart_sa.intervention.models import Activity
 from smart_sa.intervention.models import Backup
@@ -20,7 +20,7 @@ class InterventionModelTest(TestCase):
             general_instructions="this is for testing")
 
     def test_basics(self):
-        self.assertEqual(smart_text(self.i), "test intervention")
+        self.assertEqual(smart_str(self.i), "test intervention")
         self.assertEqual(
             self.i.get_absolute_url().startswith("/intervention/"),
             True)
@@ -36,7 +36,7 @@ class InterventionModelTest(TestCase):
                                          general_instructions="number 2")
         # check round-trip
         i2.from_dict(d)
-        self.assertEqual(smart_text(i2), "test intervention")
+        self.assertEqual(smart_str(i2), "test intervention")
         self.assertEqual(i2.intervention_id, "1")
         self.assertEqual(i2.general_instructions, "this is for testing")
 
@@ -56,7 +56,7 @@ class ClientSessionModelTest(TestCase):
 
     def test_basics(self):
         self.assertEqual(self.cs.intervention, self.i)
-        self.assertEqual(smart_text(self.cs), "Test Session 1")
+        self.assertEqual(smart_str(self.cs), "Test Session 1")
         self.assertEqual(self.cs.get_absolute_url().startswith("/session/"),
                          True)
         self.assertEqual(self.cs.index(), 1)
@@ -75,7 +75,7 @@ class ClientSessionModelTest(TestCase):
             introductory_copy="Introductory Copy 2 Here",
             defaulter=True)
         cs2.from_dict(d)
-        self.assertEqual(smart_text(cs2), "Test Session 1")
+        self.assertEqual(smart_str(cs2), "Test Session 1")
         self.assertEqual(cs2.long_title, "Test Session 1 Long Title")
         self.assertEqual(cs2.introductory_copy, "Introductory Copy Here")
         self.assertEqual(cs2.defaulter, False)
@@ -106,7 +106,7 @@ class ActivityModelTest(TestCase):
             collect_reasons_for_returning=False)
 
     def test_basics(self):
-        self.assertEqual(smart_text(self.activity), "Activity 1")
+        self.assertEqual(smart_str(self.activity), "Activity 1")
         self.assertEqual(
             self.activity.get_absolute_url().startswith("/activity/"),
             True)
@@ -133,7 +133,7 @@ class ActivityModelTest(TestCase):
             collect_referral_info=True,
             collect_reasons_for_returning=True)
         a2.from_dict(d)
-        self.assertEqual(smart_text(a2), "Activity 1")
+        self.assertEqual(smart_str(a2), "Activity 1")
         self.assertEqual(a2.long_title, "Activity 1 Long Title")
         self.assertEqual(a2.objective_copy,
                          "Objective Copy for Activity 1 Here")
@@ -209,28 +209,28 @@ class FullSerializationTest(TestCase):
         i2 = Intervention.objects.create(name="i2")
         i2.from_dict(d)
 
-        self.assertEquals(i.clientsession_set.count(),
-                          i2.clientsession_set.count())
+        self.assertEqual(i.clientsession_set.count(),
+                         i2.clientsession_set.count())
         for idx in range(i.clientsession_set.count()):
-            self.assertEquals(smart_text(i.get_session_by_index(idx + 1)),
-                              smart_text(i2.get_session_by_index(idx + 1)))
+            self.assertEqual(smart_str(i.get_session_by_index(idx + 1)),
+                             smart_str(i2.get_session_by_index(idx + 1)))
             s1 = i.get_session_by_index(idx + 1)
             s2 = i2.get_session_by_index(idx + 1)
 
-            self.assertEquals(smart_text(s1.next()), smart_text(s2.next()))
+            self.assertEqual(smart_str(s1.next()), smart_str(s2.next()))
 
             for aidx in range(s1.activity_set.count()):
                 a1 = s1.get_activity_by_index(idx + 1)
                 a2 = s2.get_activity_by_index(idx + 1)
-                self.assertEquals(smart_text(a1), smart_text(a2))
-                self.assertEquals(smart_text(a1.next()), smart_text(a2.next()))
-                self.assertEquals(smart_text(a1.prev()), smart_text(a2.prev()))
-                self.assertEquals(
-                    smart_text(a1.index()), smart_text(a2.index()))
-                self.assertEquals(smart_text(a1.last_gamepage()),
-                                  smart_text(a2.last_gamepage()))
-                self.assertEquals(smart_text(a1.variables()),
-                                  smart_text(a2.variables()))
+                self.assertEqual(smart_str(a1), smart_str(a2))
+                self.assertEqual(smart_str(a1.next()), smart_str(a2.next()))
+                self.assertEqual(smart_str(a1.prev()), smart_str(a2.prev()))
+                self.assertEqual(
+                    smart_str(a1.index()), smart_str(a2.index()))
+                self.assertEqual(smart_str(a1.last_gamepage()),
+                                 smart_str(a2.last_gamepage()))
+                self.assertEqual(smart_str(a1.variables()),
+                                 smart_str(a2.variables()))
 
                 a1.pages()
                 a2.pages()
@@ -241,26 +241,26 @@ class FullSerializationTest(TestCase):
                                       len(a1.pages()))):
                     p1 = a1.gamepage_set.all()[pidx]
                     p2 = a2.gamepage_set.all()[pidx]
-                    self.assertEquals(p1.index(), p2.index())
-                    self.assertEquals(p1.page_name(), p2.page_name())
-                    self.assertEquals(p1.prev_title(), p2.prev_title())
-                    self.assertEquals(p1.next_title(), p2.next_title())
-                    self.assertEquals(str(p1.variables()), str(p2.variables()))
+                    self.assertEqual(p1.index(), p2.index())
+                    self.assertEqual(p1.page_name(), p2.page_name())
+                    self.assertEqual(p1.prev_title(), p2.prev_title())
+                    self.assertEqual(p1.next_title(), p2.next_title())
+                    self.assertEqual(str(p1.variables()), str(p2.variables()))
 
                 for iidx in range(a1.instruction_set.count()):
                     ii1 = a1.instruction_set.all()[iidx]
                     ii2 = a2.instruction_set.all()[iidx]
-                    self.assertEquals(ii1.index(), ii2.index())
+                    self.assertEqual(ii1.index(), ii2.index())
 
     def test_participant_serialization(self):
         for p in Participant.objects.all():
             d = p.to_json()
             p2, logs = Participant.from_json(d)
             for log in logs:
-                self.assertEquals('info' in log, True)
-            self.assertEquals(logs[0], {'info': 'participant created'})
-            self.assertEquals(p.name, p2.name)
-            self.assertEquals(p.display_name(), p2.display_name())
+                self.assertEqual('info' in log, True)
+            self.assertEqual(logs[0], {'info': 'participant created'})
+            self.assertEqual(p.name, p2.name)
+            self.assertEqual(p.display_name(), p2.display_name())
 
 
 class GamePageModelTest(TestCase):
@@ -450,13 +450,13 @@ class ParticipantModelTest(TestCase):
         assert self.p1.gender == 'F'
 
     def test_relevant_timestamps(self):
-        self.assertEquals(len(self.p1.relevant_timestamps(self.cs)), 10)
+        self.assertEqual(len(self.p1.relevant_timestamps(self.cs)), 10)
 
     def test_session_duration(self):
-        self.assertEquals(self.p1.session_duration(self.cs), 8)
+        self.assertEqual(self.p1.session_duration(self.cs), 8)
 
     def test_ll_session_durations(self):
-        self.assertEquals(self.p1.all_session_durations(), [8])
+        self.assertEqual(self.p1.all_session_durations(), [8])
 
     def test_ssnmtree_data(self):
         self.assertIsNone(self.p1.ssnmtree_data())
@@ -497,38 +497,38 @@ class ParticipantModelTest(TestCase):
         self.assertIsNotNone(self.p2.lifegoals_data())
 
     def test_assessmentquiz_scores(self):
-        self.assertEquals(self.p2.mood_alcohol_drug_scores(),
-                          [18, '', ''])
+        self.assertEqual(self.p2.mood_alcohol_drug_scores(),
+                         [18, '', ''])
 
     def test_ssnmtree_count(self):
         self.assertIsNone(self.p1.ssnmtree_total())
         self.assertIsNone(self.p1.ssnmtree_total('defaulter'))
-        self.assertEquals(len(self.p2.ssnmtree_total()), 6)
-        self.assertEquals(len(self.p2.ssnmtree_total('defaulter')), 6)
+        self.assertEqual(len(self.p2.ssnmtree_total()), 6)
+        self.assertEqual(len(self.p2.ssnmtree_total('defaulter')), 6)
 
     def test_ssnmtree_supporters(self):
         self.assertIsNone(self.p1.ssnmtree_supporters())
         self.assertIsNone(self.p1.ssnmtree_supporters('defaulter'))
-        self.assertEquals(len(self.p2.ssnmtree_supporters()), 3)
-        self.assertEquals(len(self.p2.ssnmtree_supporters('defaulter')), 4)
+        self.assertEqual(len(self.p2.ssnmtree_supporters()), 3)
+        self.assertEqual(len(self.p2.ssnmtree_supporters('defaulter')), 4)
 
     def test_ssnmtree_confidants(self):
         self.assertIsNone(self.p1.ssnmtree_confidants())
         self.assertIsNone(self.p1.ssnmtree_confidants('defaulter'))
-        self.assertEquals(len(self.p2.ssnmtree_confidants()), 3)
-        self.assertEquals(len(self.p2.ssnmtree_confidants('defaulter')), 3)
+        self.assertEqual(len(self.p2.ssnmtree_confidants()), 3)
+        self.assertEqual(len(self.p2.ssnmtree_confidants('defaulter')), 3)
 
     def test_ssnmtree_supporters_and_confidants(self):
         self.assertIsNone(self.p1.ssnmtree_supporters_and_confidants())
         self.assertIsNone(
             self.p1.ssnmtree_supporters_and_confidants('defaulter'))
-        self.assertEquals(len(self.p2.ssnmtree_supporters_and_confidants()), 2)
-        self.assertEquals(
+        self.assertEqual(len(self.p2.ssnmtree_supporters_and_confidants()), 2)
+        self.assertEqual(
             len(self.p2.ssnmtree_supporters_and_confidants('defaulter')), 3)
 
     def test_barriers(self):
-        self.assertEquals(self.p1.barriers(), "")
-        self.assertEquals(self.p2.barriers(), "")
+        self.assertEqual(self.p1.barriers(), "")
+        self.assertEqual(self.p2.barriers(), "")
 
 
 class ParticipantSessionModelTest(TestCase):
@@ -554,5 +554,5 @@ class BackupModelTest(TestCase):
 
     def test_as_dict(self):
         d = self.b.as_dict()
-        self.assertEquals(d['deployment'], self.b.deployment)
-        self.assertEquals(d['json_data'], self.b.json_data)
+        self.assertEqual(d['deployment'], self.b.deployment)
+        self.assertEqual(d['json_data'], self.b.json_data)

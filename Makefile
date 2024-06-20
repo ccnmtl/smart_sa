@@ -8,6 +8,3 @@ FLAKE8_IGNORE=W605,W504
 all: jenkins
 
 include *.mk
-
-harvest: $(PY_SENTINAL)
-	$(MANAGE) harvest --settings=$(APP).settings_test --failfast -v 3

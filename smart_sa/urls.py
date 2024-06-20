@@ -3,7 +3,8 @@ from django.urls import path
 import django.contrib.auth.views
 import django.views.static
 
-from django.conf.urls import include, url
+from django.conf.urls import include
+from django.urls import re_path
 from django.contrib import admin
 from django.conf import settings
 from django_cas_ng import views as cas_views
@@ -28,77 +29,81 @@ admin.autodiscover()
 site_media_root = os.path.join(os.path.dirname(__file__), "../media")
 
 urlpatterns = [
-    url(r'^accounts/', include('django.contrib.auth.urls')),
+    re_path(r'^accounts/', include('django.contrib.auth.urls')),
     path('cas/login', cas_views.LoginView.as_view(),
          name='cas_ng_login'),
     path('cas/logout', cas_views.LogoutView.as_view(),
          name='cas_ng_logout'),
 
-    url(r'^site_media/(?P<path>.*)$',
-        django.views.static.serve, {'document_root': site_media_root}),
-    url(r'^multimedia/(?P<path>.*)$',
-        django.views.static.serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^site_media/(?P<path>.*)$',
+            django.views.static.serve, {'document_root': site_media_root}),
+    re_path(r'^multimedia/(?P<path>.*)$',
+            django.views.static.serve, {'document_root': settings.MEDIA_ROOT}),
 
-    url(r'^testgen/$', testgen),
-    url(r'^set_participant/$', set_participant),
-    url(r'^clear_participant/$', clear_participant),
-    url(r'^set_deployment/$', set_deployment),
-    url(r'^intervention/$', counselor_landing_page),
-    url(r'^manage/$', manage_participants),
-    url(r'^manage/add_participant/$', add_participant),
-    url(r'^manage/participant/(?P<participant_id>\d+)/delete/$',
-        delete_participant),
-    url(r'^manage/participant/(?P<participant_id>\d+)/edit/$',
-        edit_participant),
-    url(r'^manage/participant/(?P<participant_id>\d+)/view/$',
-        view_participant),
+    re_path(r'^testgen/$', testgen),
+    re_path(r'^set_participant/$', set_participant),
+    re_path(r'^clear_participant/$', clear_participant),
+    re_path(r'^set_deployment/$', set_deployment),
+    re_path(r'^intervention/$', counselor_landing_page),
+    re_path(r'^manage/$', manage_participants),
+    re_path(r'^manage/add_participant/$', add_participant),
+    re_path(r'^manage/participant/(?P<participant_id>\d+)/delete/$',
+            delete_participant),
+    re_path(r'^manage/participant/(?P<participant_id>\d+)/edit/$',
+            edit_participant),
+    re_path(r'^manage/participant/(?P<participant_id>\d+)/view/$',
+            view_participant),
 
-    url(r'^manage/add_counselor/$', add_counselor),
-    url(r'^manage/counselor/(?P<counselor_id>\d+)/edit/$', edit_counselor),
+    re_path(r'^manage/add_counselor/$', add_counselor),
+    re_path(r'^manage/counselor/(?P<counselor_id>\d+)/edit/$', edit_counselor),
 
-    url(r'mnage/report/$', report_index),
-    url(r'manage/report/download/$', participant_data_download),
-    url(r'manage/restore_participants/$', restore_participants),
-    url(r'manage/update_intervention_content/$', update_intervention_content),
+    re_path(r'mnage/report/$', report_index),
+    re_path(r'manage/report/download/$', participant_data_download),
+    re_path(r'manage/restore_participants/$', restore_participants),
+    re_path(r'manage/update_intervention_content/$',
+            update_intervention_content),
 
-    url(r'^practice/(?P<intervention_id>\d+)/$', start_practice_mode),
-    url(r'^intervention/(?P<intervention_id>\d+)/$', intervention),
-    url(r'^intervention/participant-report$',
-        view_participant_progress),
-    url(r'^intervention/(?P<pk>\d+)/report/$',
-        InterventionReport.as_view(), name='intervention-report'),
-    url(r'^session/(?P<session_id>\d+)/$', session),
-    url(r'^session/(?P<session_id>\d+)/complete/$', complete_session),
-    url(r'^session/(?P<session_id>\d+)/visit/$', log_session_visit),
-    url(r'^activity/(?P<activity_id>\d+)/$', activity),
-    url(r'^activity/(?P<activity_id>\d+)/complete/$', complete_activity),
-    url(r'^activity/(?P<activity_id>\d+)/visit/$', log_activity_visit),
-    url(r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$', game),
-    url(r'^save_game_state/$', save_game_state),
+    re_path(r'^practice/(?P<intervention_id>\d+)/$', start_practice_mode),
+    re_path(r'^intervention/(?P<intervention_id>\d+)/$', intervention),
+    re_path(r'^intervention/participant-report$',
+            view_participant_progress),
+    re_path(r'^intervention/(?P<pk>\d+)/report/$',
+            InterventionReport.as_view(), name='intervention-report'),
+    re_path(r'^session/(?P<session_id>\d+)/$', session),
+    re_path(r'^session/(?P<session_id>\d+)/complete/$', complete_session),
+    re_path(r'^session/(?P<session_id>\d+)/visit/$', log_session_visit),
+    re_path(r'^activity/(?P<activity_id>\d+)/$', activity),
+    re_path(r'^activity/(?P<activity_id>\d+)/complete/$', complete_activity),
+    re_path(r'^activity/(?P<activity_id>\d+)/visit/$', log_activity_visit),
+    re_path(r'^task/(?P<game_id>\d+)/(?P<page_id>\w+)/$', game),
+    re_path(r'^save_game_state/$', save_game_state),
 
     ########
     # ADMIN view
     ########
-    url(r'^intervention_admin/(?P<intervention_id>\d+)/$', intervention_admin),
-    url(r'^intervention_admin/session/(?P<session_id>\d+)/$', session_admin),
+    re_path(r'^intervention_admin/(?P<intervention_id>\d+)/$',
+            intervention_admin),
+    re_path(r'^intervention_admin/session/(?P<session_id>\d+)/$',
+            session_admin),
     # page 12
-    url(r'^intervention_admin/activity/(?P<activity_id>\d+)/$',
-        activity_admin),
+    re_path(r'^intervention_admin/activity/(?P<activity_id>\d+)/$',
+            activity_admin),
     # page 12
-    url(r'^intervention_admin/task/(?P<activity_id>\d+)/$', gamepage_admin),
+    re_path(r'^intervention_admin/task/(?P<activity_id>\d+)/$',
+            gamepage_admin),
 
-    url(r'^intervention_admin/content_sync/$', content_sync),
-    url(r'^intervention_admin/zip_download/$', zip_download),
-    url(r'^intervention_admin/list_uploads/$', list_uploads),
+    re_path(r'^intervention_admin/content_sync/$', content_sync),
+    re_path(r'^intervention_admin/zip_download/$', zip_download),
+    re_path(r'^intervention_admin/list_uploads/$', list_uploads),
 
-    url(r'^admin/', admin.site.urls),
-    url(r'^smoketest/', include('smoketest.urls')),
+    re_path(r'^admin/', admin.site.urls),
+    re_path(r'^smoketest/', include('smoketest.urls')),
 
-    url('^$', IndexView.as_view()),
+    re_path('^$', IndexView.as_view()),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        re_path(r'^__debug__/', include(debug_toolbar.urls)),
     ]

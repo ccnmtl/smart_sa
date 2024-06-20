@@ -48,12 +48,12 @@
     
     <div id="pill-game-container">
         <div id="pill-list">
-            {% ifequal game_context.mode "practice" %}
+            {% if game_context.mode == "practice" %}
                 <h4>Practice ARVs</h4>
             {% else %}
                 <h4>Medication List</h4>
                 <div><a id="add-a-pill" class="add-a-pill" href="#">Add a Pill</a></div>
-            {% endifequal %}
+            {% endif %}
         </div>
         
         <div class="pill pill-template">

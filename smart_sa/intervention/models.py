@@ -14,7 +14,7 @@ Facts
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.encoding import smart_text
+from django.utils.encoding import smart_str
 from smart_sa.intervention.installed_games import InstalledGames
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 import json
@@ -505,7 +505,7 @@ class Instruction(models.Model):
     modified = models.DateTimeField('date modified', auto_now=True)
 
     def __str__(self):
-        return smart_text(self.id)
+        return smart_str(self.id)
 
     def index(self):
         "1-based index"

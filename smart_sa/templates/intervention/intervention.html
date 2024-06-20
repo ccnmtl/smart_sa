@@ -46,7 +46,7 @@
 	   <li><a id="session{{session.index }}" 
 		  class="session 
 			 {% get_participant_status participant session %}
-			 {% ifequal session.id next_session.id %}hilite{%else%}default{% endifequal %}" 
+			 {% if session.id == next_session.id %}hilite{%else%}default{% endif %}" 
 		  href="/session/{{session.id}}/">
 	     {{ session.long_title }}
 	    </a></li>

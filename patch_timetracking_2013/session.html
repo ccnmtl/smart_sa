@@ -63,7 +63,7 @@ setTimeout(logstatus, 0);
 	  <ul class="primary">
         {% for s in session.intervention.clientsession_set.all %}
 	{% if not s.defaulter or participant.defaulter %}
-	   <li><a id="session{{s.index }}" class="session {% get_participant_status participant s %} {% ifequal session.id s.id %}current{% endifequal %} {% ifequal s.id next_session.id %}hilite{%else%}default{% endifequal %}" href="/session/{{s.id }}/">
+	   <li><a id="session{{s.index }}" class="session {% get_participant_status participant s %} {% if session.id == s.id %}current{% endif %} {% if s.id == next_session.id %}hilite{%else%}default{% endif %}" href="/session/{{s.id }}/">
 	     {{ s.long_title }}
 	    </a></li>
 	{% endif %}
@@ -71,7 +71,7 @@ setTimeout(logstatus, 0);
 	  </ul>
 	  <ul class="secondary">
         {% for activity in activities %}
-	   <li><a id="activity{{activity.index }}" class="activity {% get_participant_status participant activity %} {% ifequal activity.id next_activity.id %}hilite{%else%}default{% endifequal %}" href="/activity/{{activity.id }}/">
+	   <li><a id="activity{{activity.index }}" class="activity {% get_participant_status participant activity %} {% if activity.id == next_activity.id %}hilite{%else%}default{% endif %}" href="/activity/{{activity.id }}/">
 	     Activity {{forloop.counter}}: {{ activity.short_title }}</a>
 	     {% if activity.game %}<span class="task">+Task</span>{% endif %}
            </li>

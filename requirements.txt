@@ -1,6 +1,7 @@
-Django>=3.2.14,<4
+Django>=4.2.13,<5
+Markdown==3.6
 simplejson==3.19.1
-psycopg2==2.9.9
+psycopg==3.1.19
 coverage<7.6
 cssselect==1.2.0
 lxml==5.2.0
@@ -18,10 +19,8 @@ ansicolors==1.1.8
 colorama==0.4.3
 gherkin-official==4.1.3
 repoze.lru==0.7
-aloe==0.2.0
 pynose==1.5.0
 django-nose==1.4.7
-aloe-django==0.2.0
 selenium==3.141.0
 statsd==4.0.1
 pep8==1.7.1
@@ -70,7 +69,6 @@ django-statsd-mozilla==0.4.0
 django-smoketest==1.2.0
 django-debug-toolbar==4.4.2
 
-django-markwhat==1.6.2
 django-appconf==1.0.4
 django-storages==1.14.2
 django-impersonate==1.9.1
@@ -80,7 +78,7 @@ django-smtp-ssl==1.0
 ctlsettings==0.3.1
 
 pbr==6.0.0
-PyYAML>=3.10.0 # MIT
+PyYAML==6.0.1 # MIT
 stevedore>=1.20.0 # Apache-2.0
 bandit==1.7.1
 
@@ -94,3 +92,9 @@ asn1crypto==1.5.0
 
 asgiref==3.8.1
 future==1.0.0
+
+backports.zoneinfo;python_version<"3.9"
+webencodings==0.5.1 # django-markdownify
+tinycss2==1.3.0 # django-markdownify
+bleach==6.1.0 # django-markdownify
+django-markdownify==0.9.5
