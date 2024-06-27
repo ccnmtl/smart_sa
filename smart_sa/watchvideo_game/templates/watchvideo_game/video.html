@@ -9,18 +9,18 @@
 
 {% block game_content %}
 
-{% ifequal game_context.video "video/problem_solving_smart_sa_new_vo.mp4" %}
+{% if game_context.video == "video/problem_solving_smart_sa_new_vo.mp4" %}
 <iframe width="560" height="315" src="https://www.youtube.com/embed/btSeOPLknRo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/><br/>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/tOMrjABH6Lc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-{% endifequal %}
+{% endif %}
 
-{% ifequal game_context.video "video/joseph_hope.mp4" %}
+{% if game_context.video == "video/joseph_hope.mp4" %}
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ETwTkPM3sto" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/><br/>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_bqfk3lZj2A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-{% endifequal %}
+{% endif %}
 
-{% ifequal game_context.video "video/soldiers_snakes.mp4" %}
+{% if game_context.video == "video/soldiers_snakes.mp4" %}
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ik5eaqv190A" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br/><br/>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MB5uPjFFed4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-{% endifequal %}
+{% endif %}
 {% endblock %}

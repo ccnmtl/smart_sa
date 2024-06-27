@@ -46,6 +46,7 @@ INSTALLED_APPS += [  # noqa
     'smart_sa.watchvideo_game',
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
+    'markdownify.apps.MarkdownifyConfig',
 ]
 
 STATSD_PREFIX = 'masivukeni'

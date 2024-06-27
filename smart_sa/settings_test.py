@@ -23,8 +23,6 @@ DATABASES = {
 }
 
 
-ALOE_DJANGO_APP = ['aloe_django']
-INSTALLED_APPS = INSTALLED_APPS + ALOE_DJANGO_APP
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.MD5PasswordHasher',
@@ -41,9 +39,6 @@ SESSION_COOKIE_SECURE = False
 
 ALLOWED_HOSTS.append('127.0.0.1')
 
-
-# Running tests
-# python manage.py --settings=settings_test harvest
 
 if os.environ.get('SELENIUM_BROWSER', False):
     # it's handy to be able to set this from an
