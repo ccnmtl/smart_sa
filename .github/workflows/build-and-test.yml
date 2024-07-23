@@ -9,5 +9,7 @@ jobs:
         node-version: [20.x]
     steps:
       - uses: actions/checkout@v4
+      - name: Run eslint
+        run: make eslint
       - name: Build with Makefile
         run: make jenkins
