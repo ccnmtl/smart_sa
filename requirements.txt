@@ -4,7 +4,7 @@ simplejson==3.19.1
 psycopg==3.2.1
 coverage<7.7
 cssselect==1.2.0
-lxml==5.2.0
+lxml==5.3.0
 pyparsing==3.1.0
 tornado==6.4.1
 fuzzywuzzy==0.18.0
