@@ -16,17 +16,6 @@ locals().update(
 
 MEDIA_ROOT = '/var/www/masivukeni/uploads/'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'masivukeni2',
-        'HOST': '',
-        'PORT': 6432,
-        'USER': '',
-        'PASSWORD': '',
-        }
-}
-
 AWS_STORAGE_BUCKET_NAME = "ccnmtl-masivukeni-static-stage"
 
 INTERVENTION_BACKUP_HEXKEY = "d37fb81dff7672c76f4881a8f57c002403ba2ce5155dc4ac6b68a2d9caa51d88"  # noqa: E501
