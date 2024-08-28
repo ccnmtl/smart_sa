@@ -18,7 +18,7 @@ MEDIA_ROOT = '/var/www/masivukeni/uploads/'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'masivukeni2',
         'HOST': '',
         'PORT': 6432,
