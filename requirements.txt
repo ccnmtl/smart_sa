@@ -52,7 +52,7 @@ pyasn1==0.6.0
 contextlib2==21.6.0
 
 chardet==5.2.0
-idna==3.7
+idna==3.8
 
 certifi==2024.7.4  # sentry-sdk
 urllib3==2.2.2  # sentry-sdk
@@ -84,7 +84,7 @@ bandit==1.7.1
 entrypoints==0.4
 
 cryptography==43.0.0
-idna==3.7
+idna==3.8
 
 cffi==1.17.0
 asn1crypto==1.5.0
