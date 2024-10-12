@@ -1,29 +1,31 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-        
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
 
-	<title>Masivukeni: {% block title %}{% endblock %}</title>
+    <title>Masivukeni: {% block title %}{% endblock %}</title>
 
-	<link href="{{STATIC_URL}}css/masivukeni.css" rel="stylesheet" type="text/css" />
+    <link href="{{STATIC_URL}}css/masivukeni.css" rel="stylesheet" type="text/css" />
     <link href="{{STATIC_URL}}css/print.css" rel="stylesheet" media="print" />
 
-	{% block css %}{% endblock %}
-	{% block js %}{% endblock %}
-	{% block feeds %}{% endblock %}
+    {% include "ctlsettings/sentry_js.html" %}
+
+    {% block css %}{% endblock %}
+    {% block js %}{% endblock %}
+    {% block feeds %}{% endblock %}
     <link rel="stylesheet" href="https://search.sites.columbia.edu/cu-privacy-notice/cu-privacy-notice.css" />
     <script src="https://search.sites.columbia.edu/cu-privacy-notice/cu-privacy-notice.js"></script>
-    
+
     {% if GA_CODE %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{GA_CODE}}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-  		function gtag(){dataLayer.push(arguments);}
-  		gtag('js', new Date());
-		gtag('config', '{{GA_CODE}}', { 'anonymize_ip': true });
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{GA_CODE}}', { 'anonymize_ip': true });
     </script>
     {% endif %}
 </head>
@@ -33,56 +35,56 @@
 
   <div id="container">
 
-	<div id="header">
-	
-		<h1>
-		{% if user.is_authenticated %}
-		<a href="/" id="masivukeni-home"  onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">Masivukeni</a> 
-		{% else %}
-		<a href="/" id="masivukeni-home">Masivukeni</a> 
-		{% endif %}
-		</h1>
-		
+    <div id="header">
+
+        <h1>
+        {% if user.is_authenticated %}
+        <a href="/" id="masivukeni-home"  onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}">Masivukeni</a>
+        {% else %}
+        <a href="/" id="masivukeni-home">Masivukeni</a>
+        {% endif %}
+        </h1>
+
         <img class="logo" src="{{STATIC_URL}}images/logo_masivukeni.png">
-        
-		<div id="nav-header">
-		
-		<ul>
-		
-		{% block editcontentnav %}{% endblock %}
-		
-		<li>
-		{% if user.is_authenticated %}
+
+        <div id="nav-header">
+
+        <ul>
+
+        {% block editcontentnav %}{% endblock %}
+
+        <li>
+        {% if user.is_authenticated %}
                 <a class="loginlogout loginlogout-remote" href="/accounts/logout/" onclick="if(confirm('Are you sure that you would like to delete all data from this session?')){if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}} else {return false}"><button id="btn-logout">Clear My Data</button></a>
                 <a class="loginlogout loginlogout-remote" href="/accounts/logout/?next=/" onclick="if(document.completeactivity){document.completeactivity.next.value=this.href;document.completeactivity.submit();return false}"><button id="btn-logout">Log Out</button></a>
-		{% else %}
-		{% endif %}
-		</ul>
-		
-		</div>
-		
-	</div>
+        {% else %}
+        {% endif %}
+        </ul>
 
-	{% block breadcrumb-main %}
-	{% endblock %}
-	
-	{% block breadcrumb-session %}
-	{% endblock %}
-  	
+        </div>
+
+    </div>
+
+    {% block breadcrumb-main %}
+    {% endblock %}
+
+    {% block breadcrumb-session %}
+    {% endblock %}
+
     <div id="contentcontainer">
-	{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
     </div>
 
     <div id="footer">
-		{% if deployment.is_online %}
-		<a href="/">About</a>
-		|
-		<a href="/credits/">Credits</a>
-		|
-		<a href="mailto:ccnmtl-masivukeni@columbia.edu">Contact</a>
-		{% endif %}
-		{% block footer %}{% endblock %}
-	</div>
+        {% if deployment.is_online %}
+        <a href="/">About</a>
+        |
+        <a href="/credits/">Credits</a>
+        |
+        <a href="mailto:ccnmtl-masivukeni@columbia.edu">Contact</a>
+        {% endif %}
+        {% block footer %}{% endblock %}
+    </div>
 
   </div>
 
