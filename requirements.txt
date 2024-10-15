@@ -73,7 +73,7 @@ django-impersonate==1.9.1
 django-ga-context==0.1.0
 django-smtp-ssl==1.0
 
-ctlsettings==0.4.1
+ctlsettings==0.4.2
 
 pbr==6.1.0
 PyYAML==6.0.1 # MIT
