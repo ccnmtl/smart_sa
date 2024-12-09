@@ -39,7 +39,7 @@ python-dateutil==2.9.0.post0
 pytz==2024.2
 django-stagingcontext==0.1.0
 sqlparse==0.5.0
-six==1.16.0
+six==1.17.0
 gunicorn==23.0.0
 
 s3transfer==0.10.0
