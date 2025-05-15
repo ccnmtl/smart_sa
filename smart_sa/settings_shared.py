@@ -63,11 +63,11 @@ PROJECT_APPS = [
 ]
 
 EMAIL_SUBJECT_PREFIX = "[masivukeni2] "
-SERVER_EMAIL = "masivukeni2@ccnmtl.columbia.edu"
+SERVER_EMAIL = "masivukeni2@mail.ctl.columbia.edu"
 
 
-PROD_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/"
-PROD_MEDIA_BASE_URL = "https://masivukeni2.ccnmtl.columbia.edu/multimedia/"
+PROD_BASE_URL = "https://masivukeni2.ctl.columbia.edu/"
+PROD_MEDIA_BASE_URL = "https://masivukeni2.ctl.columbia.edu/multimedia/"
 
 DISABLE_OFFLINE = False
 
