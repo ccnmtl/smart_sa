@@ -59,7 +59,7 @@ certifi==2025.4.26  # sentry-sdk
 urllib3==2.4.0  # sentry-sdk
 
 
-requests==2.32.1
+requests==2.32.4
 python-cas==1.6.0
 django-cas-ng==5.0.0
 
