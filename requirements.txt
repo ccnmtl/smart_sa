@@ -24,7 +24,7 @@ django-nose==1.4.7
 selenium==4.33.0
 statsd==4.0.1
 pep8==1.7.1
-pyflakes==3.3.1
+pyflakes==3.4.0
 mccabe==0.7.0
 logilab-common==2.1.0
 pycodestyle==2.13.0
