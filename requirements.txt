@@ -89,7 +89,7 @@ idna==3.10
 cffi==1.17.0
 asn1crypto==1.5.0
 
-asgiref==3.8.1
+asgiref==3.9.1
 future==1.0.0
 
 backports.zoneinfo;python_version<"3.9"
