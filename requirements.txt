@@ -3,7 +3,7 @@ Markdown==3.8
 
 simplejson==3.20.1
 psycopg==3.2.1
-coverage<7.10
+coverage<7.11
 cssselect==1.3.0
 lxml==6.0.0
 pyparsing==3.2.1
