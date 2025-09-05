@@ -1,5 +1,5 @@
 Django>=4.2.13,<6
-Markdown==3.8
+Markdown==3.9
 
 simplejson==3.20.1
 psycopg==3.2.1
