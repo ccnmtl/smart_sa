@@ -33,7 +33,7 @@ typing_extensions==4.15.0
 importlib-metadata<8.8  # for flake8
 zipp==3.23.0  # for flake8
 flake8==7.3.0
-astroid==3.3.8
+astroid==4.0.0
 editdistance==0.8.1
 pylint==3.3.4
 python-dateutil==2.9.0.post0
