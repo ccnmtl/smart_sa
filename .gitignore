@@ -15,7 +15,6 @@ lettuce.db
 uploads/
 data/
 .#*
-.coverage
 reports
 ghostdriver.log
 node_modules
