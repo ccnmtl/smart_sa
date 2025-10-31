@@ -47,6 +47,11 @@ INSTALLED_APPS += [  # noqa
     'smart_sa.problemsolving_game',
     'smart_sa.intervention',
     'markdownify.apps.MarkdownifyConfig',
+    'debug_toolbar',
+]
+
+MIDDLEWARE += [  # noqa
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 STATSD_PREFIX = 'masivukeni'
