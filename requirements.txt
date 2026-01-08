@@ -55,7 +55,7 @@ chardet==5.2.0
 idna==3.11
 
 certifi==2026.1.4  # sentry-sdk
-urllib3==2.6.0  # sentry-sdk
+urllib3==2.6.3  # sentry-sdk
 
 
 requests==2.32.4
