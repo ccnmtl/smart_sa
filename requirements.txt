@@ -20,7 +20,7 @@ colorama==0.4.3
 repoze.lru==0.7
 pynose==1.5.0
 django-nose==1.4.7
-selenium==4.39.0
+selenium==4.40.0
 statsd==4.0.1
 pep8==1.7.1
 pyflakes==3.4.0
