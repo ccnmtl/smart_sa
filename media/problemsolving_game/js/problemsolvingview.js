@@ -183,6 +183,7 @@
                     }, 1000);
             } else {
                 jQuery('div.issue-selector').show();
+                // eslint-disable-next-line no-useless-assignment
                 elt = jQuery('#gamebox');
                 jQuery('html, body').animate({scrollTop: 0}, 0, function() {
                     jQuery('#actionplan_form').hide('fast');

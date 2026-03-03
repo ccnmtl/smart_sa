@@ -101,6 +101,7 @@
         val: function(x, y) {
             // returns the value, with respect to the slider,
             // of a pair of mouse coordinates.
+            // eslint-disable-next-line no-useless-assignment
             var v = 0;
             var unit = this.model.unit();
             if (unit.x !== 0) {
