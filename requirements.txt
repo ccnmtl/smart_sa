@@ -6,7 +6,7 @@ psycopg==3.3.0
 cssselect==1.4.0
 lxml==6.0.0
 pyparsing==3.3.1
-tornado==6.5.1
+tornado==6.5.5
 fuzzywuzzy==0.18.0
 sure==2.0.0
 extras==1.0.0
