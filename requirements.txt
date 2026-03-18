@@ -48,7 +48,7 @@ jmespath==1.1.0
 boto3>=1.12.0,<1.43.0
 botocore>=1.15.0,<1.42.0
 
-pyasn1==0.6.0
+pyasn1==0.6.3
 contextlib2==21.6.0
 
 chardet==7.2.0
