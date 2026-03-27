@@ -51,7 +51,7 @@ botocore>=1.15.0,<1.42.0
 pyasn1==0.6.3
 contextlib2==21.6.0
 
-chardet==7.3.0
+chardet==7.4.0.post1
 idna==3.11
 
 certifi==2026.2.25  # sentry-sdk
