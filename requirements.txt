@@ -17,7 +17,7 @@ testscenarios==0.6
 python-subunit==1.4.0
 ansicolors==1.1.8
 colorama==0.4.3
-repoze.lru==0.7
+repoze.lru==0.8
 pynose==1.5.0
 django-nose==1.4.7
 selenium==4.44.0
