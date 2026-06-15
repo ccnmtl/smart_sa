@@ -82,7 +82,7 @@ bandit==1.7.1
 
 entrypoints==0.4
 
-cryptography==48.0.0
+cryptography==49.0.0
 idna==3.18
 
 cffi==2.0.0
