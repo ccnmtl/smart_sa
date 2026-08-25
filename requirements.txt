@@ -32,9 +32,7 @@ typing_extensions==4.16.0
 importlib-metadata<9.1  # for flake8
 zipp==4.1.0  # for flake8
 flake8==7.3.0
-astroid==4.3.0
 editdistance==0.8.1
-pylint==4.0.0
 python-dateutil==2.9.0.post0
 pytz==2026.3.post1
 django-stagingcontext==0.1.0
