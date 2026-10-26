@@ -33,7 +33,7 @@ importlib-metadata<9.1  # for flake8
 zipp==4.1.0  # for flake8
 flake8==7.4.1
 editdistance==0.8.1
-python-dateutil==2.9.0.post0
+python-dateutil==3.0.0
 pytz==2026.5
 django-stagingcontext==0.1.0
 sqlparse==0.6.0
