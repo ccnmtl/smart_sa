@@ -31,7 +31,7 @@ configparser==7.3.0
 typing_extensions==4.16.0
 importlib-metadata<10.2  # for flake8
 zipp==4.1.0  # for flake8
-flake8==7.4.1
+flake8==7.5.0
 editdistance==0.8.1
 python-dateutil==3.0.0
 pytz==2026.5
