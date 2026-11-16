@@ -1,7 +1,7 @@
 Django>=6.1.2,<7
 Markdown==3.11
 
-simplejson==4.2.0
+simplejson==4.3.0
 psycopg==3.3.0
 cssselect==1.6.0
 lxml==6.1.0
